@@ -1,0 +1,121 @@
+From L.C.L.Kats at tudelft.nl  Fri May 28 18:08:09 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Fri, 28 May 2010 18:08:09 +0200
+Subject: [Stratego Announce] The Spoofax Language Workbench and Stratego for
+	Java
+Message-ID: <201005281608.o4SG8Abv022615@smtp1.infopact.nl>
+
+Hi list,
+
+It's been a while since we had a big announcement here, but there have been many exciting recent developments that we would like share with you.
+
+=== Stratego and SDF for Java ===
+
+Stratego and SDF have now gained new Java implementations in the form of STRJ and JSGLR (both available from strategoxt.org). STRJ generates Java code from Stratego programs, and JSGLR is a Java-based parser for SDF parse tables. While JSGLR existed for a while, it is now considered mature enough for interactive use. These implementations won't necessarily replace the existing C-based versions, but their portability can make them attractive alternatives.
+
+=== Building languages and transformations in Eclipse with Spoofax ===
+
+We're pleased to announce the 0.5 release of the Spoofax language workbench, an Eclipse plugin that integrates Java versions of Stratego and SDF into Eclipse. Spoofax can be used to develop new languages and transformations based on SDF and Stratego in the Eclipse environment.
+
+IDE support has become essential for developers to be productive with programming languages. Spoofax provides IDE support for Stratego and SDF for developers of languages and transformations. It can show the abstract syntax of code fragments, apply transformations to any input, etc. It also aids in the development of IDE support for new languages: from the first version of an SDF grammar, an editor can be instantiated for the language and used *side-by-side* with the definition in Eclipse. Using Stratego, the editor can be enhanced with transformations and semantic editor services such as reference resolving and content completion.
+
+Spoofax can be downloaded from http://www.spoofax.org and includes Stratego and SDF. When installed in Eclipse, the plugin provides a "New project" wizard that creates a new skeleton project illustrating some of the Spoofax features. The website also includes a tour (http://strategoxt.org/Spoofax/Tour) further showcasing the features of the workbench. For migrating C-based Stratego projects to Spoofax, please read the FAQ at http://strategoxt.org/Spoofax/FAQ or just post here or on the #stratego IRC channel in case of other questions. 
+
+An overview of the architecture of Spoofax and how Spoofax can be used in the development of new languages and IDE services is given in the paper The Spoofax Language Workbench: Rules for Declarative Specification of Languages and IDEs by myself and Eelco Visser, accepted for publication at SPLASH/OOPSLA 2010 (http://researchr.org/publication/KatsVisser2010). Further documentation can be found on the Spoofax website.
+
+cheers,
+
+Lennart
+
+
+From E.Visser at tudelft.nl  Mon May 31 15:07:24 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 31 May 2010 15:07:24 +0200
+Subject: [Stratego Announce] The Spoofax Language Workbench and Stratego for
+	Java
+In-Reply-To: <201005281608.o4SG8Abv022615@smtp1.infopact.nl>
+References: <201005281608.o4SG8Abv022615@smtp1.infopact.nl>
+Message-ID: <AANLkTilisZbsFOIURi-aG21XmVc_8xutwoleRVqxeIY9@mail.gmail.com>
+
+Hi list,
+
+It's been a while since we had a big announcement here, but there have
+been many exciting recent developments that we would like share with
+you.
+
+=== Stratego and SDF for Java ===
+
+Stratego and SDF have now gained new Java implementations in the form
+of STRJ and JSGLR (both available from strategoxt.org). STRJ generates
+Java code from Stratego programs, and JSGLR is a Java-based parser for
+SDF parse tables. While JSGLR existed for a while, it is now
+considered mature enough for interactive use. These implementations
+won't necessarily replace the existing C-based versions, but their
+portability can make them attractive alternatives.
+
+=== Building languages and transformations in Eclipse with Spoofax ===
+
+We're pleased to announce the 0.5 release of the Spoofax language
+workbench, an Eclipse plugin that integrates Java versions of Stratego
+and SDF into Eclipse. Spoofax can be used to develop new languages and
+transformations based on SDF and Stratego in the Eclipse environment.
+
+IDE support has become essential for developers to be productive with
+programming languages. Spoofax provides IDE support for Stratego and
+SDF for developers of languages and transformations. It can show the
+abstract syntax of code fragments, apply transformations to any input,
+etc. It also aids in the development of IDE support for new languages:
+from the first version of an SDF grammar, an editor can be
+instantiated for the language and used *side-by-side* with the
+definition in Eclipse. Using Stratego, the editor can be enhanced with
+transformations and semantic editor services such as reference
+resolving and content completion.
+
+Spoofax can be downloaded from http://www.spoofax.org and includes
+Stratego and SDF. When installed in Eclipse, the plugin provides a
+"New project" wizard that creates a new skeleton project illustrating
+some of the Spoofax features. The website also includes a tour
+(http://strategoxt.org/Spoofax/Tour) further showcasing the features
+of the workbench. For migrating C-based Stratego projects to Spoofax,
+please read the FAQ at http://strategoxt.org/Spoofax/FAQ or just post
+here or on the #stratego IRC channel in case of other questions.
+
+An overview of the architecture of Spoofax and how Spoofax can be used
+in the development of new languages and IDE services is given in the
+paper The Spoofax Language Workbench: Rules for Declarative
+Specification of Languages and IDEs by myself and Eelco Visser,
+accepted for publication at SPLASH/OOPSLA 2010
+(http://researchr.org/publication/KatsVisser2010). Further
+documentation can be found on the Spoofax website.
+
+cheers,
+
+Lennart
+
+From L.C.L.Kats at tudelft.nl  Thu Dec 16 19:12:25 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 16 Dec 2010 19:12:25 +0100
+Subject: [Stratego Announce] Spoofax 0.6
+Message-ID: <201012161812.oBGICQFZ020026@mc-smtp1.infopact.nl>
+
+Hi list,
+
+We just released Spoofax 0.6.0! This is mainly a bugfix release; a detailed changelog can be found below:
+
+http://yellowgrass.org/tag/Spoofax/0.6.0
+
+Some highlights:
+
+- Interfacing with Java is now easier (Spoofax/210)
+- Syntactic content completions are now context-sensitive (Spoofax/223)
+- The ESV editor now does some analyses based on the SDF syntax
+- Improved syntax highlighting for the Stratego editor
+- Many bug fixes
+
+More info on the website at http://www.spoofax.org/.
+
+cheers,
+
+Lennart
+
+

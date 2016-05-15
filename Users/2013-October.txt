@@ -1,0 +1,569 @@
+From E.Visser at tudelft.nl  Sat Oct  5 00:37:25 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 5 Oct 2013 00:37:25 +0200
+Subject: [Stratego Users] Where to download Stratego/XT packages?
+In-Reply-To: <CAO51=GT9qxNPX=7+hhmcguTySGSumGutvOQyK8GmgbiDWTD+TA@mail.gmail.com>
+References: <CAO51=GT9qxNPX=7+hhmcguTySGSumGutvOQyK8GmgbiDWTD+TA@mail.gmail.com>
+Message-ID: <CAFaCHU32e0JT8sQw=xO-Q4SgJKxVLEW9K=3CPGPqraGCzVpsAQ@mail.gmail.com>
+
+Hi Zhaohui Yang,
+
+I found the ftp site for downloading stratego packages are not available
+> now. Is there any other places I can download those packages?
+>
+> It would also be greatly appreciated if anyone send me those packages
+> through email. I would need those "One-click installation using Nix",
+> better also with source code packages.
+>
+
+We have made the ftp site available via http:
+
+http://ftp.strategoxt.org/
+
+(And it will soon be available again via the ftp protocol as well.)
+
+I don't know if that is useful for use with Nix. But at least you should be
+able to download the packages.
+
+Note that the latest version of Stratego is available as part of the
+Spoofax Language Workbench, providing an Eclipse editor for Stratego:
+
+http://spoofax.org
+
+cheers,
+
+-- Eelco
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131005/43e7b9e4/attachment.html>
+
+From kralikba at msn.com  Mon Oct 14 22:20:43 2013
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Mon, 14 Oct 2013 22:20:43 +0200
+Subject: [Stratego Users] nightly not working?
+Message-ID: <DUB404-EAS2295A30015F8CF4CCE8101BD01A0@phx.gbl>
+
+Hi,
+
+ 
+
+I've just updated to spoofax's nightly build and things seem to have stopped
+working.
+
+"Spoofax editor project" does not show up in the "New Project" window.
+
+Trying to (re)build an existing project yields the following error:
+
+ 
+
+        [echo] Could not load the Spoofax plugin loading classes.
+
+        [echo] Make sure it is on the class path.
+
+        [echo] In Eclipse, make sure the Ant builder is configured properly:
+
+        [echo] right-click on build.main.xml, go to Run as, Ant build...,
+JRE tab,
+
+        [echo] and ensure Run in the same JRE as the workspace is selected
+
+        [echo] alternatively, build the project using Build Project in the
+Project menu
+
+ 
+
+Is this expected behaviour?
+
+ 
+
+Regards
+
+Barnab?s
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131014/86e83838/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Mon Oct 14 22:28:28 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Mon, 14 Oct 2013 20:28:28 +0000
+Subject: [Stratego Users] nightly not working?
+In-Reply-To: <DUB404-EAS2295A30015F8CF4CCE8101BD01A0@phx.gbl>
+References: <DUB404-EAS2295A30015F8CF4CCE8101BD01A0@phx.gbl>
+Message-ID: <0320CD21-2B55-42A4-AB59-E3928B820A04@tudelft.nl>
+
+This happens because your Eclipse does not run on Java 7, which is a requirement for unstable and nightly.
+
+-- Guido Wachsmuth
+
+On Oct 14, 2013, at 22:20 , Kr?lik Barnab?s <kralikba at msn.com<mailto:kralikba at msn.com>>
+ wrote:
+
+Hi,
+
+I?ve just updated to spoofax?s nightly build and things seem to have stopped working.
+?Spoofax editor project? does not show up in the ?New Project? window.
+Trying to (re)build an existing project yields the following error:
+
+        [echo] Could not load the Spoofax plugin loading classes.
+        [echo] Make sure it is on the class path.
+        [echo] In Eclipse, make sure the Ant builder is configured properly:
+        [echo] right-click on build.main.xml, go to Run as, Ant build..., JRE tab,
+        [echo] and ensure Run in the same JRE as the workspace is selected
+        [echo] alternatively, build the project using Build Project in the Project menu
+
+Is this expected behaviour?
+
+Regards
+Barnab?s
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131014/faf1fc23/attachment.html>
+
+From kralikba at msn.com  Wed Oct 16 12:03:05 2013
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Wed, 16 Oct 2013 12:03:05 +0200
+Subject: [Stratego Users] nightly not working?
+In-Reply-To: <0320CD21-2B55-42A4-AB59-E3928B820A04@tudelft.nl>
+References: <DUB404-EAS2295A30015F8CF4CCE8101BD01A0@phx.gbl>
+	<0320CD21-2B55-42A4-AB59-E3928B820A04@tudelft.nl>
+Message-ID: <DUB406-EAS275915B49C682D94E1F5958D0040@phx.gbl>
+
+Thanks. My bad, I was convinced I had Java 7 but now that you say, java
+-version tells otherwise.
+
+ 
+
+Barnab?s Kr?lik
+
+ 
+
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Guido Wachsmuth - EWI
+Sent: Monday, October 14, 2013 10:28 PM
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] nightly not working?
+
+ 
+
+This happens because your Eclipse does not run on Java 7, which is a
+requirement for unstable and nightly. 
+
+ 
+
+-- Guido Wachsmuth
+
+ 
+
+On Oct 14, 2013, at 22:20 , Kr?lik Barnab?s <kralikba at msn.com
+<mailto:kralikba at msn.com> >
+
+ wrote:
+
+
+
+
+
+Hi,
+
+ 
+
+I've just updated to spoofax's nightly build and things seem to have stopped
+working.
+
+"Spoofax editor project" does not show up in the "New Project" window.
+
+Trying to (re)build an existing project yields the following error:
+
+ 
+
+        [echo] Could not load the Spoofax plugin loading classes.
+
+        [echo] Make sure it is on the class path.
+
+        [echo] In Eclipse, make sure the Ant builder is configured properly:
+
+        [echo] right-click on build.main.xml, go to Run as, Ant build...,
+JRE tab,
+
+        [echo] and ensure Run in the same JRE as the workspace is selected
+
+        [echo] alternatively, build the project using Build Project in the
+Project menu
+
+ 
+
+Is this expected behaviour?
+
+ 
+
+Regards
+
+Barnab?s
+
+_______________________________________________
+Users mailing list
+ <mailto:Users at strategoxt.org> Users at strategoxt.org
+ <https://mailman.st.ewi.tudelft.nl/listinfo/users>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131016/fe4a6ffa/attachment.html>
+
+From bgh.list.reader at gmail.com  Thu Oct 17 03:40:24 2013
+From: bgh.list.reader at gmail.com (Brandon Hill)
+Date: Wed, 16 Oct 2013 18:40:24 -0700
+Subject: [Stratego Users] Type checking
+Message-ID: <CAEdnT78+hRkcEeBDyx_fMvDuCWzqAtPHOHmdFX4WoB1_cm_RQQ@mail.gmail.com>
+
+I understand that the type-checking system is evolving, but is there any
+documentation for what exists today?  The example projects all have a
+types.str file but I can't find any documentation showing how NaBL or any
+other parts of Spoofax call the rules defined there.  A basic explanation
+of how and when things are called would be helpful.  I suspect such an
+explanation would also need to touch a bit on the task system as well.
+
+Thanks,
+Brandon
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131016/d9d97c77/attachment.html>
+
+From E.Visser at tudelft.nl  Wed Oct 23 09:30:08 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 23 Oct 2013 09:30:08 +0200
+Subject: [Stratego Users] Type checking
+In-Reply-To: <CAEdnT78+hRkcEeBDyx_fMvDuCWzqAtPHOHmdFX4WoB1_cm_RQQ@mail.gmail.com>
+References: <CAEdnT78+hRkcEeBDyx_fMvDuCWzqAtPHOHmdFX4WoB1_cm_RQQ@mail.gmail.com>
+Message-ID: <CAFaCHU1SSJPAOjkJv5zu9mLkU7Sdu-0mgPsg+sLPp5ODoLnhzw@mail.gmail.com>
+
+Hi Brandon,
+
+I understand that the type-checking system is evolving, but is there any
+> documentation for what exists today?  The example projects all have a
+> types.str file but I can't find any documentation showing how NaBL or any
+> other parts of Spoofax call the rules defined there.  A basic explanation
+> of how and when things are called would be helpful.  I suspect such an
+> explanation would also need to touch a bit on the task system as well.
+>
+
+As demonstrated on Monday, we have a prototype type system DSL that we are
+including in the nightly build now. We will be demonstrating this at SPLASH
+next Tuesday (10:30) and are otherwise also available to demonstrate this
+at SPLASH. The implementation is based on the Spoofax Task Engine (see our
+SLE talk on Monday) and should be fairly solid. But we still have to
+evaluate coverage on larger languages and performance on larger
+programs/projects. On small/simple DSLs the current prototype is probably
+already sufficient.
+
+And yes, we will write some documentation as well.
+
+cheers,
+
+-- Eelco
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131023/bd828dd3/attachment.html>
+
+From daniele.gianni at gmail.com  Sun Oct 27 22:10:39 2013
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Sun, 27 Oct 2013 22:10:39 +0100
+Subject: [Stratego Users] *** Extended deadline *** CfP: 4th International
+ Workshop on Model-driven Approaches for Simulation Engineering part of the
+ Symposium on Theory of Modeling and Simulation (SCS SpringSim 2014)
+Message-ID: <CAOCNFM5vBgL+TiYanX4F_-n21muV0WhzRLz50aj2Ojj_JD444w@mail.gmail.com>
+
+(Please accept our apologies if you receive multiple copies of this CFP)
+
+#################################################################
+ CALL FOR PAPERS
+
+                 4th International Workshop on
+        Model-driven Approaches for Simulation Engineering
+    part of the Symposium on Theory of Modeling and Simulation
+                     (SCS SpringSim 2014)
+
+
+#################################################################
+
+April 13-16, 2014, Tampa, FL (USA)
+http://www.sel.uniroma2.it/Mod4Sim14
+
+#################################################################
+# Papers Due: *** November 22, 2013 *** extended
+# Accepted papers will be published in the conference proceedings
+# and archived in the ACM Digital Library.
+#################################################################
+
+The workshop aims to bring together experts in model-based, model-driven
+and software engineering with experts in simulation methods and simulation
+practitioners, with the objective to advance the state of the art in
+model-driven simulation engineering.
+
+Model-driven engineering approaches provide considerable advantages to
+software systems engineering activities through the provision of consistent
+and coherent models at different abstraction levels. As these models are in
+a machine readable form, model-driven engineering approaches can also
+support the exploitation of computing capabilities for model reuse,
+programming code generation, and model checking, for example.
+
+The definition of a simulation model, its software implementation and its
+execution platform form what is known as simulation engineering. As
+simulation systems are mainly based on software, these systems can
+similarly benefit from model-driven approaches to support automatic
+software generation, enhance software quality, and reduce costs,
+development effort and time-to-market.
+
+Similarly to systems and software engineering, simulation engineering can
+exploit the capabilities of model-driven approaches by increasing the
+abstraction level in simulation model specifications and by automating the
+derivation of simulator code. Further advantages can be gained by using
+modeling languages, such as UML and SysML ? but not exclusively those. For
+example, modeling languages can be used for descriptive modeling (to
+describe the system to be simulated), for analytical modeling (to specify
+analytically the simulation of the same system), and for implementation
+modeling (to define the respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore) and
+distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms (discrete
+event simulation, multi-agent simulation, sketch-based * simulation, etc.)
+* model-driven methods and tools for performance engineering of simulation
+systems
+* simulation tools for model-driven software performance engineering
+* model-driven technologies for simulation verification and validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* Executable UML
+* Executable Architectures
+* SysML / Modelica integration
+* Simulation Model Portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider scope and
+welcomes contributions offering original perspectives on model-driven
+engineering of simulation systems.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+We invite paper submissions in three forms:
+
+1. Full paper (max 8 pages), describing innovative research results. These
+papers are eligible for the best paper award and may be invited for an
+extended version in a special issue of the SCS SIMULATION journal.
+2. Work-in-progress paper (max 6 pages), describing novel research ideas
+and promising work that have not yet been fully evaluated.
+3. Short paper (max 6 pages), describing industrial and hands-on experience
+on any relevant area (i.e. military, government, space, etc.).
+
+All the papers must be submitted through the SCS conference management
+systems (http://www.softconf.com/scs/DEVS14/) and select the Mod4Sim track.
+The submissions must be in PDF format and conform to the SCS conference
+template (Word template is available at
+http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc,
+guidelines are available at
+http://www.scs.org/PDFs/formattingkit.pdf). All the submitted papers must
+be original and not submitted else where. Submitted papers will be peer
+reviewed with respect to their quality, originality and relevance. The
+authors of the accepted papers must register in advance for inclusion of
+their paper in the conference proceedings. Authors of accepted papers will
+be invited to update their papers basing on the reviews, before providing
+the camera ready.
+
+All accepted papers will be included in the conference proceedings and
+archived in both the ACM Digital Library and IEEE Digital Library.
+
+Authors may contact the organizers for expression of interest and content
+appropriateness at any time.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+ * Submission Deadline: November 22, 2013 (extended)
+ * Decision to paper authors: January 5, 2014
+ * Camera ready due: February 2, 2014
+ * Conference dates: April 13-16, 2014 (to be confirmed within the
+SpringSim schedule)
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Daniele Gianni ? University Guglielmo Marconi, Italy
+* Arnaud Cuccuru ? CEA/LIST, France
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Steffen Becker - University of Paderborn, Germany
+* Paolo Bocciarelli - University of Rome TorVergata, Italy
+* David Chen - University of Bordeaux I, France
+* Andrea D'Ambrogio - University of Rome TorVergata, Italy
+* Cristian Englert - Serco, The Netherlands
+* Huascar Espinoza - ESI-Tecnalia, Spain
+* Paul A. Fishwick - University of Florida, USA
+* Sebastien Gerard - CEA/LIST, France
+* Carlos Juiz - University of Balearic Islands, Spain
+* Cristiano Leorato - RHEA, The Netherlands
+* Steve McKeever - Uppsala University, Sweden
+* Halit Oguzt?z?n - Middle East Technical University, Turkey
+* Chris Paredis - Georgia Institute of Technology, USA
+* Nicolas Rouquette - NASA/JPL, USA
+* Volker Schaus - DLR, Germany
+* Sara Tucci - CEA/LIST, France
+* Andreas Tolk - SimIS, USA
+* Anthony Walsh - European Space Agency, Germany
+* Heming Zhang - Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni and Arnaud Cuccuru (workshop co-chairs)
+Emails: danielegmail-mod4sim at yahoo.it and arnaud.cuccuru at cea.fr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131027/494f5a84/attachment.html>
+
+From sescobar at dsic.upv.es  Sun Oct 27 21:36:49 2013
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Sun, 27 Oct 2013 15:36:49 -0500
+Subject: [Stratego Users] WRLA 2014 Call for papers
+References: <BAC3EA92-6E19-4B50-9668-F3D512F29C15@dsic.upv.es>
+Message-ID: <4A8779CE-1034-4858-8DD4-95D129BB1A3F@dsic.upv.es>
+
+10th International Workshop on Rewriting Logic and its Applications
+
+WRLA 2014
+Grenoble, France, April 5th and 6th, 2014
+http://www.dsic.upv.es/workshops/wrla2014/
+
+The workshop will be held in conjunction with
+ETAPS 2014
+17th European Joint Conferences on Theory and Practice of Software
+April 5-13, 2014
+http://www.etaps.org/2014
+
+AIMS AND SCOPE
+
+Rewriting logic (RL) is a natural model of computation and an 
+expressive semantic framework for concurrency, parallelism, 
+communication, and interaction. It can be used for specifying 
+a wide range of systems and languages in various application 
+fields. It also has good properties as a metalogical framework 
+for representing logics. In recent years, several languages 
+based on RL (ASF+SDF, CafeOBJ, ELAN, Maude) have been designed 
+and implemented. The aim of the workshop is to bring together 
+researchers with a common interest in RL and its applications, 
+and to give them the opportunity to present their recent works, 
+discuss future research directions, and exchange ideas.
+
+The topics of the workshop comprise, but are not limited to,
+- foundations and models of RL;
+- languages based on RL, including implementation issues;
+- RL as a logical framework;
+- RL as a semantic framework, including applications of RL to
+  - object-oriented systems,
+  - concurrent and/or parallel systems,
+  - interactive, distributed, open ended and mobile systems,
+  - specification of languages and systems;
+- use of RL to provide rigorous support for model-based software 
+ engineering;
+- formalisms related to RL, including
+  - real-time and probabilistic extensions of RL,
+  - rewriting approaches to behavioral specifications,
+  - tile logic;
+- verification techniques for RL specifications, including
+  - equational and coherence methods,
+  - verification of properties expressed in first-order, 
+    higher-order, modal and temporal logics,
+  - narrowing-based analysis and verification;
+- comparisons of RL with existing formalisms having analogous aims;
+- application of RL to specification and analysis of
+  - distributed systems,
+  - physical systems.
+
+IMPORTANT DATES
+
+Submission deadline          December 30th 2013
+Author notification          February 2nd 2014
+Version informal proceedings February 14th 2014
+
+SUBMISSIONS
+
+The final program of the workshop will include regular papers, 
+tool papers, and work-in-progress presentations. The program 
+will also contain invited talks to be determined by the 
+program committee. Papers must contain original contributions, 
+be clearly written, include appropriate references, and 
+comparison with related work. They must be unpublished and 
+not submitted simultaneously for publication elsewhere. 
+Tool papers present a new tool, a new tool component, or 
+novel extensions to an existing tool. They should provide a 
+short description of the theoretical foundations with 
+relevant citations, emphasize the design and implementation,
+and give a clear account of the tool's functionality. The
+described tools must be publicly available via the web.
+All submissions should be formatted according to the 
+guidelines for Springer LNCS papers, and should be submitted 
+electronically using EasyChair.
+
+Regular papers and work-in-progress should not exceed 
+15 pages including references. Tool papers can have a 
+maximum of 6 pages including references and may have 
+an appendix of up to 4 additional pages with 
+usage details and tool demonstration.
+
+PROCEEDINGS
+
+All submissions will be evaluated by the Program Committee. 
+Regular papers, tool papers, and work-in-progress that 
+are accepted will be presented at the workshop and 
+included in the proceedings, which will be available
+during the workshop. Regular papers, tool papers, and 
+invited presentations will also be published in a volume 
+in Springer's Lecture Notes in Computer Science 
+(LNCS) series to be distributed after the workshop. 
+
+Depending on the number and the quality of the contributions, 
+we will consider the preparation of a special issue in some 
+scientific journal in the field with extended versions of a 
+selection of the papers of the workshop.
+
+CONTACT INFORMATION
+
+For more information, please contact the organizers
+sescobar at dsic.upv.es
+or visit the workshop web page
+http://www.dsic.upv.es/workshops/wrla2014/
+
+

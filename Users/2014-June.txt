@@ -1,0 +1,2094 @@
+From soren.rasmussen at aggiemail.usu.edu  Sat Jun  7 01:05:04 2014
+From: soren.rasmussen at aggiemail.usu.edu (Soren Rasmussen)
+Date: Fri, 6 Jun 2014 16:05:04 -0700
+Subject: [Stratego Users] Pretty Printing Question
+Message-ID: <CANCtH-1+K5SoNJT1vD+2VOxX+oD8YQw5rBWdtwGV=Vs45_LcTA@mail.gmail.com>
+
+Hi,
+I'm trying to get a handle on the pretty printing rules. I'm matching
+a term with two arguments and I don't want to print the second
+argument. Is there a way to edit the .pp file so that the printer
+doesn't have to print the second argument?
+Thanks! -Soren
+
+From eelcovis at gmail.com  Sat Jun  7 07:33:18 2014
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Fri, 6 Jun 2014 22:33:18 -0700
+Subject: [Stratego Users] Pretty Printing Question
+In-Reply-To: <CANCtH-1+K5SoNJT1vD+2VOxX+oD8YQw5rBWdtwGV=Vs45_LcTA@mail.gmail.com>
+References: <CANCtH-1+K5SoNJT1vD+2VOxX+oD8YQw5rBWdtwGV=Vs45_LcTA@mail.gmail.com>
+Message-ID: <3145C22E-19BA-4623-BE0E-3F6FC47169EC@gmail.com>
+
+You can leave out the_2 from the rhs of the rule. 
+
+-- Eelco
+http://eelcovisser.org
+
+
+> On 6 Jun 2014, at 16:05, Soren Rasmussen <soren.rasmussen at aggiemail.usu.edu> wrote:
+> 
+> Hi,
+> I'm trying to get a handle on the pretty printing rules. I'm matching
+> a term with two arguments and I don't want to print the second
+> argument. Is there a way to edit the .pp file so that the printer
+> doesn't have to print the second argument?
+> Thanks! -Soren
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From soren.rasmussen at aggiemail.usu.edu  Mon Jun  9 17:31:05 2014
+From: soren.rasmussen at aggiemail.usu.edu (Soren Rasmussen)
+Date: Mon, 9 Jun 2014 08:31:05 -0700
+Subject: [Stratego Users] Users Digest, Vol 64, Issue 1
+In-Reply-To: <mailman.1.1402135202.16367.users@strategoxt.org>
+References: <mailman.1.1402135202.16367.users@strategoxt.org>
+Message-ID: <CANCtH-02hVkF+LvSUQ-2MXkbd8Wzt+vKCDR=CJkiuSzYvRizkA@mail.gmail.com>
+
+Thanks for your reply, we're using strategoxt v0.17 and leaving out
+the_2 from the rhs of the rule causes a problem with arity and it
+crashes. If there is no way to do this while pretty printing we can
+also do this with the rewrite rules.
+-Soren
+
+On Sat, Jun 7, 2014 at 3:00 AM,  <users-request at strategoxt.org> wrote:
+> Send Users mailing list submissions to
+>         users at strategoxt.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+>         users-request at strategoxt.org
+>
+> You can reach the person managing the list at
+>         users-owner at strategoxt.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Pretty Printing Question (Soren Rasmussen)
+>    2. Re: Pretty Printing Question (Eelco Visser)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Fri, 6 Jun 2014 16:05:04 -0700
+> From: Soren Rasmussen <soren.rasmussen at aggiemail.usu.edu>
+> To: users at strategoxt.org
+> Subject: [Stratego Users] Pretty Printing Question
+> Message-ID:
+>         <CANCtH-1+K5SoNJT1vD+2VOxX+oD8YQw5rBWdtwGV=Vs45_LcTA at mail.gmail.com>
+> Content-Type: text/plain; charset=UTF-8
+>
+> Hi,
+> I'm trying to get a handle on the pretty printing rules. I'm matching
+> a term with two arguments and I don't want to print the second
+> argument. Is there a way to edit the .pp file so that the printer
+> doesn't have to print the second argument?
+> Thanks! -Soren
+>
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Fri, 6 Jun 2014 22:33:18 -0700
+> From: Eelco Visser <eelcovis at gmail.com>
+> To: Stratego/XT Users <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Pretty Printing Question
+> Message-ID: <3145C22E-19BA-4623-BE0E-3F6FC47169EC at gmail.com>
+> Content-Type: text/plain;       charset=us-ascii
+>
+> You can leave out the_2 from the rhs of the rule.
+>
+> -- Eelco
+> http://eelcovisser.org
+>
+>
+>> On 6 Jun 2014, at 16:05, Soren Rasmussen <soren.rasmussen at aggiemail.usu.edu> wrote:
+>>
+>> Hi,
+>> I'm trying to get a handle on the pretty printing rules. I'm matching
+>> a term with two arguments and I don't want to print the second
+>> argument. Is there a way to edit the .pp file so that the printer
+>> doesn't have to print the second argument?
+>> Thanks! -Soren
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> ------------------------------
+>
+> Subject: Digest Footer
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> ------------------------------
+>
+> End of Users Digest, Vol 64, Issue 1
+> ************************************
+
+From E.Visser at tudelft.nl  Tue Jun 10 01:48:19 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 10 Jun 2014 01:48:19 +0200
+Subject: [Stratego Users] Users Digest, Vol 64, Issue 1
+In-Reply-To: <CANCtH-02hVkF+LvSUQ-2MXkbd8Wzt+vKCDR=CJkiuSzYvRizkA@mail.gmail.com>
+References: <mailman.1.1402135202.16367.users@strategoxt.org>
+ <CANCtH-02hVkF+LvSUQ-2MXkbd8Wzt+vKCDR=CJkiuSzYvRizkA@mail.gmail.com>
+Message-ID: <CAFaCHU1O3xVXFE27WpE9ZNV+u1o8yjwSV58VjewOc=HX21nLQw@mail.gmail.com>
+
+Hi Soren,
+
+An alternative approach: rewrite the term to use a new constructor with
+only one argument.
+
+The general guideline is to not use pretty-printing to realize
+transformations.
+
+cheers,
+
+-- Eelco
+
+
+On Mon, Jun 9, 2014 at 5:31 PM, Soren Rasmussen <
+soren.rasmussen at aggiemail.usu.edu> wrote:
+
+> Thanks for your reply, we're using strategoxt v0.17 and leaving out
+> the_2 from the rhs of the rule causes a problem with arity and it
+> crashes. If there is no way to do this while pretty printing we can
+> also do this with the rewrite rules.
+> -Soren
+>
+> On Sat, Jun 7, 2014 at 3:00 AM,  <users-request at strategoxt.org> wrote:
+> > Send Users mailing list submissions to
+> >         users at strategoxt.org
+> >
+> > To subscribe or unsubscribe via the World Wide Web, visit
+> >         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> > or, via email, send a message with subject or body 'help' to
+> >         users-request at strategoxt.org
+> >
+> > You can reach the person managing the list at
+> >         users-owner at strategoxt.org
+> >
+> > When replying, please edit your Subject line so it is more specific
+> > than "Re: Contents of Users digest..."
+> >
+> >
+> > Today's Topics:
+> >
+> >    1. Pretty Printing Question (Soren Rasmussen)
+> >    2. Re: Pretty Printing Question (Eelco Visser)
+> >
+> >
+> > ----------------------------------------------------------------------
+> >
+> > Message: 1
+> > Date: Fri, 6 Jun 2014 16:05:04 -0700
+> > From: Soren Rasmussen <soren.rasmussen at aggiemail.usu.edu>
+> > To: users at strategoxt.org
+> > Subject: [Stratego Users] Pretty Printing Question
+> > Message-ID:
+> >         <CANCtH-1+K5SoNJT1vD+2VOxX+oD8YQw5rBWdtwGV=
+> Vs45_LcTA at mail.gmail.com>
+> > Content-Type: text/plain; charset=UTF-8
+> >
+> > Hi,
+> > I'm trying to get a handle on the pretty printing rules. I'm matching
+> > a term with two arguments and I don't want to print the second
+> > argument. Is there a way to edit the .pp file so that the printer
+> > doesn't have to print the second argument?
+> > Thanks! -Soren
+> >
+> >
+> > ------------------------------
+> >
+> > Message: 2
+> > Date: Fri, 6 Jun 2014 22:33:18 -0700
+> > From: Eelco Visser <eelcovis at gmail.com>
+> > To: Stratego/XT Users <users at strategoxt.org>
+> > Subject: Re: [Stratego Users] Pretty Printing Question
+> > Message-ID: <3145C22E-19BA-4623-BE0E-3F6FC47169EC at gmail.com>
+> > Content-Type: text/plain;       charset=us-ascii
+> >
+> > You can leave out the_2 from the rhs of the rule.
+> >
+> > -- Eelco
+> > http://eelcovisser.org
+> >
+> >
+> >> On 6 Jun 2014, at 16:05, Soren Rasmussen <
+> soren.rasmussen at aggiemail.usu.edu> wrote:
+> >>
+> >> Hi,
+> >> I'm trying to get a handle on the pretty printing rules. I'm matching
+> >> a term with two arguments and I don't want to print the second
+> >> argument. Is there a way to edit the .pp file so that the printer
+> >> doesn't have to print the second argument?
+> >> Thanks! -Soren
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >
+> > ------------------------------
+> >
+> > Subject: Digest Footer
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > ------------------------------
+> >
+> > End of Users Digest, Vol 64, Issue 1
+> > ************************************
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140610/5f68de7e/attachment.html>
+
+From n.a.sculthorpe at swansea.ac.uk  Wed Jun 11 16:31:05 2014
+From: n.a.sculthorpe at swansea.ac.uk (Neil Sculthorpe)
+Date: Wed, 11 Jun 2014 15:31:05 +0100
+Subject: [Stratego Users] Invoking Spoofax Stratego transformations from the
+	command-line
+Message-ID: <53986829.2080103@swansea.ac.uk>
+
+Hi
+
+I'm having a problem running Stratego from the command line that I'm
+hoping someone can help me with.
+
+I have a Spoofax Editor Project that parses a source language file, and
+then performs Stratego transformations to generate code in a target
+language.  Currently this is run by selecting an option in the
+"Generation" menu when viewing a source file.  I'd like to be able to
+invoke this transformation from the command line, so that I can write a
+script to process large numbers of files.
+
+I've tried following the instructions here:
+
+http://strategoxt.org/Spoofax/CommandLine
+
+That is:
+
+(1)  I modified my "build.main.xml" and "editor/cl.esv" files ("cl" is
+the source language name).
+
+(2)  In "trans/cl.str", I added "libstratego-xtc" to my imports, and
+added a main function as suggested:
+
+> rules
+>   main-cl =
+>   xtc-input-wrap(
+>     // Read input
+>     ?FILE(input);
+>     prim("SSL_EXT_enable_origins");
+>     ast                             := <parse-cl-file> input;
+>
+>     // Analyze
+>     (ast', errors, warnings, notes) := <editor-analyze> (ast, input, ".");
+>     // ...
+>     
+>     // Compile
+>     (output, contents)              := <generate-fct> (ast', [], ast,
+> input, ".");
+>     
+>     // Write to disk
+>     handle := <fopen> (output, "w");
+>     <fputs> (contents, handle);
+>     fclose
+>   <+
+>     // Report any errors
+>     prim("SSL_stacktrace_get_all_frame_names"); report-failure
+>   )
+
+The instructions didn't specifiy whether "main-cl" should be labelled as
+"rules" or something else; but I guessed so.  This function parses and
+resolves successfully in the editor with no errors or warnings.  ("fct"
+is the target language)
+
+(3)  I then cleaned and rebuilt the project (successfully).  Inside
+Eclipse, generation is still working from the menu.
+
+(4)  In the top-level directory in the project I ran:
+
+> java -cp include/cl.jar:include/cl-java:strategoxt.jar run main-cl
+
+Which produces the error:
+
+> Definition 'main-cl' not found
+
+Any ideas? 
+
+Additionally, I'm not sure how to specify an input file at the command
+line (nor what the command "?FILE(input)" does).
+
+
+I'm running unstable Spoofax 1.2.0.0-s41649 in Eclipse Kepler Service
+Release 2.
+
+
+Thanks for any help,
+Neil
+
+
+
+
+From v.vergu at gmail.com  Thu Jun 12 10:56:36 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 12 Jun 2014 10:56:36 +0200
+Subject: [Stratego Users] Invoking Spoofax Stratego transformations from
+	the command-line
+In-Reply-To: <53986829.2080103@swansea.ac.uk>
+References: <53986829.2080103@swansea.ac.uk>
+Message-ID: <8DC2A070-6C7B-41B8-9579-906C7BA0722E@gmail.com>
+
+Hi Neil,
+
+The approach you followed below is superseded by usage of a runtime library called Spoofax Sunshine. Documentation about using Sunshine is available at https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md.
+
+Regards,
+
+Vlad
+
+
+On 11 Jun 2014, at 16:31, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+
+> Hi
+> 
+> I'm having a problem running Stratego from the command line that I'm
+> hoping someone can help me with.
+> 
+> I have a Spoofax Editor Project that parses a source language file, and
+> then performs Stratego transformations to generate code in a target
+> language.  Currently this is run by selecting an option in the
+> "Generation" menu when viewing a source file.  I'd like to be able to
+> invoke this transformation from the command line, so that I can write a
+> script to process large numbers of files.
+> 
+> I've tried following the instructions here:
+> 
+> http://strategoxt.org/Spoofax/CommandLine
+> 
+> That is:
+> 
+> (1)  I modified my "build.main.xml" and "editor/cl.esv" files ("cl" is
+> the source language name).
+> 
+> (2)  In "trans/cl.str", I added "libstratego-xtc" to my imports, and
+> added a main function as suggested:
+> 
+>> rules
+>>  main-cl =
+>>  xtc-input-wrap(
+>>    // Read input
+>>    ?FILE(input);
+>>    prim("SSL_EXT_enable_origins");
+>>    ast                             := <parse-cl-file> input;
+>> 
+>>    // Analyze
+>>    (ast', errors, warnings, notes) := <editor-analyze> (ast, input, ".");
+>>    // ...
+>> 
+>>    // Compile
+>>    (output, contents)              := <generate-fct> (ast', [], ast,
+>> input, ".");
+>> 
+>>    // Write to disk
+>>    handle := <fopen> (output, "w");
+>>    <fputs> (contents, handle);
+>>    fclose
+>>  <+
+>>    // Report any errors
+>>    prim("SSL_stacktrace_get_all_frame_names"); report-failure
+>>  )
+> 
+> The instructions didn't specifiy whether "main-cl" should be labelled as
+> "rules" or something else; but I guessed so.  This function parses and
+> resolves successfully in the editor with no errors or warnings.  ("fct"
+> is the target language)
+> 
+> (3)  I then cleaned and rebuilt the project (successfully).  Inside
+> Eclipse, generation is still working from the menu.
+> 
+> (4)  In the top-level directory in the project I ran:
+> 
+>> java -cp include/cl.jar:include/cl-java:strategoxt.jar run main-cl
+> 
+> Which produces the error:
+> 
+>> Definition 'main-cl' not found
+> 
+> Any ideas? 
+> 
+> Additionally, I'm not sure how to specify an input file at the command
+> line (nor what the command "?FILE(input)" does).
+> 
+> 
+> I'm running unstable Spoofax 1.2.0.0-s41649 in Eclipse Kepler Service
+> Release 2.
+> 
+> 
+> Thanks for any help,
+> Neil
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From n.a.sculthorpe at swansea.ac.uk  Thu Jun 12 15:58:49 2014
+From: n.a.sculthorpe at swansea.ac.uk (Neil Sculthorpe)
+Date: Thu, 12 Jun 2014 14:58:49 +0100
+Subject: [Stratego Users] Invoking Spoofax Stratego transformations from
+ the command-line
+In-Reply-To: <8DC2A070-6C7B-41B8-9579-906C7BA0722E@gmail.com>
+References: <53986829.2080103@swansea.ac.uk>
+ <8DC2A070-6C7B-41B8-9579-906C7BA0722E@gmail.com>
+Message-ID: <5399B219.2080201@swansea.ac.uk>
+
+Thanks Vlad.
+
+I'm now trying the Sunshine instructions, but am getting stuck here too.
+
+I've downloaded Spoofax Sunshine 1.0.2.  The usage instructions refer to
+a "sunshine.jar", whereas the downloaded file is "spoofax-sunshine.jar",
+but I'm assuming its the same thing.
+
+When I try to run it, either with a manual or automatic language, I get
+the error:
+
+"Error: Could not find or load main class Main"
+
+The (automatic language) invocation I'm using, in the top-level
+directory of the Spoofax Editor Project, is:
+
+> java -cp spoofax-sunshine.jar Main --auto-lang include --project test
+--builder "Generate Funcons" --build-on OL-Test/OL-Test1.ml
+
+where the directory "test" contains the test source language files, and
+"test/OL-Test/OL-Test1.ml" contains one such source file (let me know if
+I have misunderstood the instructions here).
+
+
+Thanks for any suggestions,
+Neil
+
+On 12/06/14 09:56, Vlad Vergu wrote:
+> Hi Neil,
+>
+> The approach you followed below is superseded by usage of a runtime library called Spoofax Sunshine. Documentation about using Sunshine is available at https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md.
+>
+> Regards,
+>
+> Vlad
+>
+>
+> On 11 Jun 2014, at 16:31, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+>
+>> Hi
+>>
+>> I'm having a problem running Stratego from the command line that I'm
+>> hoping someone can help me with.
+>>
+>> I have a Spoofax Editor Project that parses a source language file, and
+>> then performs Stratego transformations to generate code in a target
+>> language.  Currently this is run by selecting an option in the
+>> "Generation" menu when viewing a source file.  I'd like to be able to
+>> invoke this transformation from the command line, so that I can write a
+>> script to process large numbers of files.
+>>
+>> I've tried following the instructions here:
+>>
+>> http://strategoxt.org/Spoofax/CommandLine
+>>
+>> That is:
+>>
+>> (1)  I modified my "build.main.xml" and "editor/cl.esv" files ("cl" is
+>> the source language name).
+>>
+>> (2)  In "trans/cl.str", I added "libstratego-xtc" to my imports, and
+>> added a main function as suggested:
+>>
+>>> rules
+>>>  main-cl =
+>>>  xtc-input-wrap(
+>>>    // Read input
+>>>    ?FILE(input);
+>>>    prim("SSL_EXT_enable_origins");
+>>>    ast                             := <parse-cl-file> input;
+>>>
+>>>    // Analyze
+>>>    (ast', errors, warnings, notes) := <editor-analyze> (ast, input, ".");
+>>>    // ...
+>>>
+>>>    // Compile
+>>>    (output, contents)              := <generate-fct> (ast', [], ast,
+>>> input, ".");
+>>>
+>>>    // Write to disk
+>>>    handle := <fopen> (output, "w");
+>>>    <fputs> (contents, handle);
+>>>    fclose
+>>>  <+
+>>>    // Report any errors
+>>>    prim("SSL_stacktrace_get_all_frame_names"); report-failure
+>>>  )
+>> The instructions didn't specifiy whether "main-cl" should be labelled as
+>> "rules" or something else; but I guessed so.  This function parses and
+>> resolves successfully in the editor with no errors or warnings.  ("fct"
+>> is the target language)
+>>
+>> (3)  I then cleaned and rebuilt the project (successfully).  Inside
+>> Eclipse, generation is still working from the menu.
+>>
+>> (4)  In the top-level directory in the project I ran:
+>>
+>>> java -cp include/cl.jar:include/cl-java:strategoxt.jar run main-cl
+>> Which produces the error:
+>>
+>>> Definition 'main-cl' not found
+>> Any ideas? 
+>>
+>> Additionally, I'm not sure how to specify an input file at the command
+>> line (nor what the command "?FILE(input)" does).
+>>
+>>
+>> I'm running unstable Spoofax 1.2.0.0-s41649 in Eclipse Kepler Service
+>> Release 2.
+>>
+>>
+>> Thanks for any help,
+>> Neil
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From v.vergu at gmail.com  Thu Jun 12 16:53:28 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 12 Jun 2014 16:53:28 +0200
+Subject: [Stratego Users] Invoking Spoofax Stratego transformations from
+	the command-line
+In-Reply-To: <5399B219.2080201@swansea.ac.uk>
+References: <53986829.2080103@swansea.ac.uk>
+ <8DC2A070-6C7B-41B8-9579-906C7BA0722E@gmail.com>
+ <5399B219.2080201@swansea.ac.uk>
+Message-ID: <68AD701D-BFAB-439B-B925-B068715D1149@gmail.com>
+
+Hi Neil,
+
+There were a few errors on the documentation page. The invocation of Sunshine should start with:
+
+> java -jar spoofax-sunshine.jar --auto-lang ....
+
+
+My apologies for the confusing instructions, i've updated them.
+
+Please note that your call to Sunshine should be something like:
+
+> java -cp spoofax-sunshine.jar Main --auto-lang ./include --project test --builder "Generate Funcons" --build-on OL-Test/OL-Test1.ml --non-incremental
+
+
+The non-incremental flag insures that your transformation will be applied at every invocation (useful during development).
+
+Regards,
+
+Vlad
+
+On 12 Jun 2014, at 15:58, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+
+> Thanks Vlad.
+> 
+> I'm now trying the Sunshine instructions, but am getting stuck here too.
+> 
+> I've downloaded Spoofax Sunshine 1.0.2.  The usage instructions refer to
+> a "sunshine.jar", whereas the downloaded file is "spoofax-sunshine.jar",
+> but I'm assuming its the same thing.
+> 
+> When I try to run it, either with a manual or automatic language, I get
+> the error:
+> 
+> "Error: Could not find or load main class Main"
+> 
+> The (automatic language) invocation I'm using, in the top-level
+> directory of the Spoofax Editor Project, is:
+> 
+>> java -cp spoofax-sunshine.jar Main --auto-lang include --project test
+> --builder "Generate Funcons" --build-on OL-Test/OL-Test1.ml
+> 
+> where the directory "test" contains the test source language files, and
+> "test/OL-Test/OL-Test1.ml" contains one such source file (let me know if
+> I have misunderstood the instructions here).
+> 
+> 
+> Thanks for any suggestions,
+> Neil
+> 
+> On 12/06/14 09:56, Vlad Vergu wrote:
+>> Hi Neil,
+>> 
+>> The approach you followed below is superseded by usage of a runtime library called Spoofax Sunshine. Documentation about using Sunshine is available at https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md.
+>> 
+>> Regards,
+>> 
+>> Vlad
+>> 
+>> 
+>> On 11 Jun 2014, at 16:31, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+>> 
+>>> Hi
+>>> 
+>>> I'm having a problem running Stratego from the command line that I'm
+>>> hoping someone can help me with.
+>>> 
+>>> I have a Spoofax Editor Project that parses a source language file, and
+>>> then performs Stratego transformations to generate code in a target
+>>> language.  Currently this is run by selecting an option in the
+>>> "Generation" menu when viewing a source file.  I'd like to be able to
+>>> invoke this transformation from the command line, so that I can write a
+>>> script to process large numbers of files.
+>>> 
+>>> I've tried following the instructions here:
+>>> 
+>>> http://strategoxt.org/Spoofax/CommandLine
+>>> 
+>>> That is:
+>>> 
+>>> (1)  I modified my "build.main.xml" and "editor/cl.esv" files ("cl" is
+>>> the source language name).
+>>> 
+>>> (2)  In "trans/cl.str", I added "libstratego-xtc" to my imports, and
+>>> added a main function as suggested:
+>>> 
+>>>> rules
+>>>> main-cl =
+>>>> xtc-input-wrap(
+>>>>   // Read input
+>>>>   ?FILE(input);
+>>>>   prim("SSL_EXT_enable_origins");
+>>>>   ast                             := <parse-cl-file> input;
+>>>> 
+>>>>   // Analyze
+>>>>   (ast', errors, warnings, notes) := <editor-analyze> (ast, input, ".");
+>>>>   // ...
+>>>> 
+>>>>   // Compile
+>>>>   (output, contents)              := <generate-fct> (ast', [], ast,
+>>>> input, ".");
+>>>> 
+>>>>   // Write to disk
+>>>>   handle := <fopen> (output, "w");
+>>>>   <fputs> (contents, handle);
+>>>>   fclose
+>>>> <+
+>>>>   // Report any errors
+>>>>   prim("SSL_stacktrace_get_all_frame_names"); report-failure
+>>>> )
+>>> The instructions didn't specifiy whether "main-cl" should be labelled as
+>>> "rules" or something else; but I guessed so.  This function parses and
+>>> resolves successfully in the editor with no errors or warnings.  ("fct"
+>>> is the target language)
+>>> 
+>>> (3)  I then cleaned and rebuilt the project (successfully).  Inside
+>>> Eclipse, generation is still working from the menu.
+>>> 
+>>> (4)  In the top-level directory in the project I ran:
+>>> 
+>>>> java -cp include/cl.jar:include/cl-java:strategoxt.jar run main-cl
+>>> Which produces the error:
+>>> 
+>>>> Definition 'main-cl' not found
+>>> Any ideas? 
+>>> 
+>>> Additionally, I'm not sure how to specify an input file at the command
+>>> line (nor what the command "?FILE(input)" does).
+>>> 
+>>> 
+>>> I'm running unstable Spoofax 1.2.0.0-s41649 in Eclipse Kepler Service
+>>> Release 2.
+>>> 
+>>> 
+>>> Thanks for any help,
+>>> Neil
+>>> 
+>>> 
+>>> 
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From n.a.sculthorpe at swansea.ac.uk  Fri Jun 13 19:07:58 2014
+From: n.a.sculthorpe at swansea.ac.uk (Neil Sculthorpe)
+Date: Fri, 13 Jun 2014 18:07:58 +0100
+Subject: [Stratego Users] Invoking Spoofax Stratego transformations from
+ the command-line
+In-Reply-To: <68AD701D-BFAB-439B-B925-B068715D1149@gmail.com>
+References: <53986829.2080103@swansea.ac.uk>
+ <8DC2A070-6C7B-41B8-9579-906C7BA0722E@gmail.com>
+ <5399B219.2080201@swansea.ac.uk>
+ <68AD701D-BFAB-439B-B925-B068715D1149@gmail.com>
+Message-ID: <539B2FEE.3030401@swansea.ac.uk>
+
+Thanks Vlad, it's working now.  There are a few issues though.
+
+(1)  I had to use Sunshine v1.0.1 as Sunshine v1.0.2 isn't working for
+me.  It gives the following stack trace:
+> Exception in thread "main" java.lang.UnsupportedClassVersionError:
+> org/metaborg/sunshine/drivers/Main : Unsupported major.minor version 52.0
+>     at java.lang.ClassLoader.defineClass1(Native Method)
+>     at java.lang.ClassLoader.defineClass(ClassLoader.java:800)
+>     at
+> java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+>     at java.net.URLClassLoader.defineClass(URLClassLoader.java:449)
+>     at java.net.URLClassLoader.access$100(URLClassLoader.java:71)
+>     at java.net.URLClassLoader$1.run(URLClassLoader.java:361)
+>     at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+>     at java.security.AccessController.doPrivileged(Native Method)
+>     at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+>     at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+>     at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+>     at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+>     at
+> sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:482)
+
+(2)  Is there a way to suppress all the TRACE output?
+
+(3)  Is there a way to restrict it to only loading only 1 source file? 
+By setting the --project to a specific directory I can narrow it down to
+that folder, but how can I prevent it loading all files in that folder? 
+I tried using --filter, but that seemed to also exclude the file I
+wanted to transform, even though I gave it that filename as an
+argument.  E.g.
+
+-- build-on TestFile.ml --filter TestFile.ml
+
+
+Neil
+
+On 12/06/14 15:53, Vlad Vergu wrote:
+> Hi Neil,
+>
+> There were a few errors on the documentation page. The invocation of Sunshine should start with:
+>
+>> java -jar spoofax-sunshine.jar --auto-lang ....
+>
+> My apologies for the confusing instructions, i've updated them.
+>
+> Please note that your call to Sunshine should be something like:
+>
+>> java -cp spoofax-sunshine.jar Main --auto-lang ./include --project test --builder "Generate Funcons" --build-on OL-Test/OL-Test1.ml --non-incremental
+>
+> The non-incremental flag insures that your transformation will be applied at every invocation (useful during development).
+>
+> Regards,
+>
+> Vlad
+>
+> On 12 Jun 2014, at 15:58, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+>
+>> Thanks Vlad.
+>>
+>> I'm now trying the Sunshine instructions, but am getting stuck here too.
+>>
+>> I've downloaded Spoofax Sunshine 1.0.2.  The usage instructions refer to
+>> a "sunshine.jar", whereas the downloaded file is "spoofax-sunshine.jar",
+>> but I'm assuming its the same thing.
+>>
+>> When I try to run it, either with a manual or automatic language, I get
+>> the error:
+>>
+>> "Error: Could not find or load main class Main"
+>>
+>> The (automatic language) invocation I'm using, in the top-level
+>> directory of the Spoofax Editor Project, is:
+>>
+>>> java -cp spoofax-sunshine.jar Main --auto-lang include --project test
+>> --builder "Generate Funcons" --build-on OL-Test/OL-Test1.ml
+>>
+>> where the directory "test" contains the test source language files, and
+>> "test/OL-Test/OL-Test1.ml" contains one such source file (let me know if
+>> I have misunderstood the instructions here).
+>>
+>>
+>> Thanks for any suggestions,
+>> Neil
+>>
+>> On 12/06/14 09:56, Vlad Vergu wrote:
+>>> Hi Neil,
+>>>
+>>> The approach you followed below is superseded by usage of a runtime library called Spoofax Sunshine. Documentation about using Sunshine is available at https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md.
+>>>
+>>> Regards,
+>>>
+>>> Vlad
+>>>
+>>>
+>>> On 11 Jun 2014, at 16:31, Neil Sculthorpe <n.a.sculthorpe at swansea.ac.uk> wrote:
+>>>
+>>>> Hi
+>>>>
+>>>> I'm having a problem running Stratego from the command line that I'm
+>>>> hoping someone can help me with.
+>>>>
+>>>> I have a Spoofax Editor Project that parses a source language file, and
+>>>> then performs Stratego transformations to generate code in a target
+>>>> language.  Currently this is run by selecting an option in the
+>>>> "Generation" menu when viewing a source file.  I'd like to be able to
+>>>> invoke this transformation from the command line, so that I can write a
+>>>> script to process large numbers of files.
+>>>>
+>>>> I've tried following the instructions here:
+>>>>
+>>>> http://strategoxt.org/Spoofax/CommandLine
+>>>>
+>>>> That is:
+>>>>
+>>>> (1)  I modified my "build.main.xml" and "editor/cl.esv" files ("cl" is
+>>>> the source language name).
+>>>>
+>>>> (2)  In "trans/cl.str", I added "libstratego-xtc" to my imports, and
+>>>> added a main function as suggested:
+>>>>
+>>>>> rules
+>>>>> main-cl =
+>>>>> xtc-input-wrap(
+>>>>>   // Read input
+>>>>>   ?FILE(input);
+>>>>>   prim("SSL_EXT_enable_origins");
+>>>>>   ast                             := <parse-cl-file> input;
+>>>>>
+>>>>>   // Analyze
+>>>>>   (ast', errors, warnings, notes) := <editor-analyze> (ast, input, ".");
+>>>>>   // ...
+>>>>>
+>>>>>   // Compile
+>>>>>   (output, contents)              := <generate-fct> (ast', [], ast,
+>>>>> input, ".");
+>>>>>
+>>>>>   // Write to disk
+>>>>>   handle := <fopen> (output, "w");
+>>>>>   <fputs> (contents, handle);
+>>>>>   fclose
+>>>>> <+
+>>>>>   // Report any errors
+>>>>>   prim("SSL_stacktrace_get_all_frame_names"); report-failure
+>>>>> )
+>>>> The instructions didn't specifiy whether "main-cl" should be labelled as
+>>>> "rules" or something else; but I guessed so.  This function parses and
+>>>> resolves successfully in the editor with no errors or warnings.  ("fct"
+>>>> is the target language)
+>>>>
+>>>> (3)  I then cleaned and rebuilt the project (successfully).  Inside
+>>>> Eclipse, generation is still working from the menu.
+>>>>
+>>>> (4)  In the top-level directory in the project I ran:
+>>>>
+>>>>> java -cp include/cl.jar:include/cl-java:strategoxt.jar run main-cl
+>>>> Which produces the error:
+>>>>
+>>>>> Definition 'main-cl' not found
+>>>> Any ideas? 
+>>>>
+>>>> Additionally, I'm not sure how to specify an input file at the command
+>>>> line (nor what the command "?FILE(input)" does).
+>>>>
+>>>>
+>>>> I'm running unstable Spoofax 1.2.0.0-s41649 in Eclipse Kepler Service
+>>>> Release 2.
+>>>>
+>>>>
+>>>> Thanks for any help,
+>>>> Neil
+>>>>
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From E.Visser at tudelft.nl  Sun Jun 15 22:47:50 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 15 Jun 2014 22:47:50 +0200
+Subject: [Stratego Users] Fwd: [aosd-announce] Call for Papers:
+	Modularity'15 Research Results
+In-Reply-To: <CALadeQS6OP_kHZQGDWiTA7m22-0QTbhui06oW=h00G9YHnH=CA@mail.gmail.com>
+References: <CALadeQS6OP_kHZQGDWiTA7m22-0QTbhui06oW=h00G9YHnH=CA@mail.gmail.com>
+Message-ID: <CAFaCHU34iVU8rnhEBBfD0y7-OxAJV-6V2bHYwLPZ=0Pq60B9aA@mail.gmail.com>
+
+ Call for Papers: Modularity '15 Research Results
+         March 16-19, 2015, Ft. Collins, Colorado, USA
+
+First round due date: August 4, 2014. Second round due date: October 10,
+2014.
+
+Modularity is a key property for scalability of software processes,
+including debugging, maintenance, reasoning, and testing. Modularity
+influences system diversity, dependability, performance, evolution, the
+structure and the dynamics of the organizations that produce systems, human
+understanding and management of systems, and ultimately system value. Yet
+the nature of and possibilities for modularity, limits to modularity, the
+mechanisms needed to achieve it in given forms, and its costs, benefits,
+and tradeoffs remain poorly understood. Significant advances in modularity
+thus are possible and promise to yield breakthroughs in our ability to
+conceive, design, develop, validate, integrate, and evolve modern
+information systems and their underlying software artifacts.
+
+Modularity at the semantic as well as the syntactic level is a key enabler
+for the expression of high quality software systems. One of the most
+important techniques for complexity reduction is abstraction. Novel
+concepts and abstraction mechanisms, including but not limited to
+aspect-oriented techniques, are a focus point for improvements in the
+support for modularity. The scope of this effort covers all perspectives on
+software systems in all their life-cycle phases, for instance application
+domain analysis, programming language constructs, formal proofs of system
+properties, program state visualization in debuggers, performance
+improvements in compiler algorithms, etc. As the premier international
+conference on modularity, Modularity'15 continues to advance our
+understanding of these issues and the expressive power of known techniques.
+
+The Modularity'15 conference invites full, scholarly papers of the highest
+quality on new ideas and results. Papers are expected to contribute
+significant new research results with rigorous and substantial validation
+of specific technical claims, based on scientifically sound reflections on
+experience, analysis, experimentation, or formal models. Compelling new
+ideas are especially welcome, which means that the requirements in the
+areas of validation and maturity are higher for papers that contribute more
+incremental results.
+
+Modularity'15 is deeply committed to publishing works of the highest
+caliber. To this aim, two separate paper submission deadlines and review
+stages are offered. A paper accepted in any round will be published in the
+proceedings and presented at the conference. Promising papers submitted in
+the first round that are not accepted may be invited to be revised and
+resubmitted for review by the same reviewers in the second round. Authors
+of such invited resubmissions are asked to also submit a letter explaining
+the revisions made to the paper to address the reviewers' concerns. While
+there is no guarantee that an invited resubmission will be accepted, this
+procedure (similar to major revisions requested by journals) is designed to
+help authors of promising work get their papers into the conference.
+Submission to both rounds is open for all, and authors who submit to the
+first round may of course choose to resubmit a revised version in the
+second round without such an invitation, in which case new reviewers may be
+appointed. Finally, the same paper cannot be simultaneously submitted to
+other conferences or journals. In case of doubt, please contact the Program
+Chair.
+
+Research Topics
+
+Modularity'15 is looking for papers in all areas of software modularity.
+Topics of interest include, but are not limited to, the following:
+
+* Varieties of modularity: Context orientation; feature orientation;
+generative programming; aspect orientation; software product lines; traits;
+families of classes; meta-programming and reflection; components;
+view-based development.
+
+* Programming languages: Support for modular abstraction in: language
+design; verification, specification, and static program analysis;
+compilation, interpretation, and runtime support; formal languages and
+calculi; execution environments and dynamic weaving; dynamic languages;
+domain-specific languages.
+
+* Software design and engineering: Requirements and domain engineering;
+architecture; synthesis; evolution; metrics and evaluation; empirical
+studies of existing software; economics; testing and verification;
+semantics; composition and interference; traceability; methodologies;
+patterns.
+
+* Tools: Crosscutting views; refactoring; evolution and reverse
+engineering; aspect mining; support for new language constructs.
+
+* Applications: Data-intensive computing; distributed and concurrent
+systems; middleware; service- oriented computing systems; cyber-physical
+systems; networking; cloud computing; pervasive computing; runtime
+verification; computer systems performance; system health monitoring;
+enforcement of non-functional properties.
+
+* Complex systems: Works that explore and establish connections across
+disciplinary boundaries, bridging to such areas as biology, economics,
+education, infrastructure such as buildings or transport systems, and more.
+
+* Composition. Component-based software engineering; Composition and
+adaptation techniques; Composition algebras, calculi, and type systems;
+Model-driven composition; Dynamic composition and reconfiguration;
+Large-scale component-based systems; Cloud, service-oriented architectures;
+Business process orchestration; Visual composition environments;
+Performance optimization of composite systems.
+
+
+Important Dates
+
+* First round:
+Submission: August 4, 2014 (23:59 Baker Island / UTC-12)
+Notification: September 14, 2014
+
+* Second round:
+Submission: October 10, 2014 (23:59 Baker Island / UTC-12)
+Notification: December 7, 2014
+
+* Camera ready: February 15, 2015
+
+Submission Guidelines
+
+Modularity'15 is deeply committed to eliciting works of the highest
+caliber. To this aim, two separate paper submission deadlines and review
+stages are offered. A paper accepted in any round will be published in the
+proceedings and presented at the conference. Promising papers submitted in
+the first round that are not accepted may be invited to be revised and
+resubmitted for review by the same reviewers in the second round. Authors
+of such invited resubmissions are asked to also submit a letter explaining
+the revisions made to the paper to address the reviewers' concerns. While
+there is no guarantee that an invited resubmission will be accepted, this
+procedure (similar to major revisions requested by journals) is designed to
+help authors of promising work get their papers into the conference.
+Submission to both rounds is open for all, and authors who submit to the
+first round may of course choose to resubmit a revised version in the
+second round without such an invitation, in which case new reviewers may be
+appointed. Finally, the same paper cannot be simultaneously submitted to
+other conferences or journals. In case of doubt, please get in touch with
+the Program Chair.
+All submissions must conform to both the ACM Policy on Prior Publication
+and Simultaneous Submissions and the SIGPLAN Republication Policy.
+
+Papers are to be submitted electronically to CyberChair.
+
+Please use http://cyberchairpro.borbala.net/modularitypapers/submit/ to
+submit your paper. Submissions should use the SIGPLAN Proceedings Format
+using 9 point font. Please include page numbers in your submission as this
+will be helpful for the reviewers and also for you when reading their
+reviews. (If your submission is written using LaTeX, please set the
+preprint option in the LaTeX \documentclass command to generate page
+numbers.) Please also ensure that your submission is legible when printed
+on a black and white printer. In particular, please check that colors
+remain distinct and font sizes are legible.
+
+To ensure that papers stay focused on their core contributions, the main
+part of the paper should be no longer than 12 pages. There is a 4 page
+limit for appendices, and, therefore, for the overall submission must be
+less than 16 pages. If the paper is accepted, the final submission will be
+limited to 16 pages, including appendices.
+
+However, it is the responsibility of the authors to keep the reviewers
+interested and motivated to read their submission. Reviewers are under no
+obligation to read all or even a substantial portion of a paper if they do
+not find the initial part of the paper compelling. The committee will not
+accept a paper if it is unclear that the paper will fit in the
+Modularity'15 Proceedings.
+
+All submitted papers are peer-reviewed. Accepted papers from all tracks
+will appear in the Modularity'15 Proceedings in the ACM Digital Library.
+Submissions will be judged on the potential impact of the ideas and the
+quality of the presentation.
+
+Program Committee Chair
+Gary T. Leavens, University of Central Florida, USA (leavens at cs.ucf.edu)
+
+Program Committee
+
+Don Batory, University of Texas at Austin
+Eric Bodden, Fraunhofer SIT and TU Darmstadt
+Paulo Borba, Federal University of Pernambuco
+Walter Cazzola, Universit? degli Studi di Milano
+Cynthia Disenfeld, Technion -- Israel Institute of Technology
+Robert Dyer, Bowling Green State University
+Erik Ernst, Aarhus University
+Matthew Flatt, University of Utah
+Michael Haupt, Oracle Labs
+Marieke Huisman, University of Twente
+Cristina Lopes, University of California Irvine
+Tiziana Margaria, University of Potsdam
+Linda Northrop, Software Engineering Institute
+Nate Nystrom, University of Lugano
+Bruno C. d. S. Oliveira, The University of Hong Kong
+Awais Rashid, Lancaster University
+Henrique Reb?lo, Federal University of Pernambuco
+Martin Rinard, Massachusetts Institute of Technology
+Norbert Siegmund, University of Passau
+Murali Sitaraman, Clemson University
+Kevin Sullivan, University of Virginia
+
+External Review Committee
+
+Marsha Chechik, University of Toronto
+Steven Edwards, Virginia Tech.
+Dan Grossman, University of Washington
+G?rel Hedin, Lund University
+Mira Mezini, TU Darmstadt
+Peter M?ller, ETH Zurich
+Hridesh Rajan, Iowa State University
+Clemens Szyperski, Microsoft Research
+?ric Tanter, University of Chile
+Eelco Visser, Delft University of Technology
+
+For additional information, clarification, or answers to questions please
+contact the Program Committee Chair.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140615/43663787/attachment.html>
+
+From E.Visser at tudelft.nl  Wed Jun 25 10:00:08 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 25 Jun 2014 10:00:08 +0200
+Subject: [Stratego Users] Fwd: SPLASH 2014 CALL FOR WORKSHOP PAPERS AND
+	PARTICIPATION
+In-Reply-To: <CFCFACBA.CC71%canslow@ucalgary.ca>
+References: <CFCFACBA.CC71%canslow@ucalgary.ca>
+Message-ID: <CAFaCHU1pocU6FK+y08TPRJiJk4t_THZHRYKhpx8ZKPyEsA-L2A@mail.gmail.com>
+
+**************************************************************
+SPLASH?14 CALL FOR WORKSHOP PAPERS AND PARTICIPATION 14
+
+ACM Conference on Systems, Programming, Languages, and Applications:
+Software for Humanity (SPLASH'14)
+Indianapolis, Indiana
+October 20-24, 2014
+http://www.splashcon.org
+**************************************************************
+
+SPLASH'14 workshops address a rich variety of well-known and newly emerging
+research areas and provide a creative and collaborative environment to
+discuss and solve challenge problems with attendees from industry and
+research organizations from all over the world. Submission deadlines vary
+from workshop to workshop.  Some workshops will be published in the ACM
+Digital Library. The current SPLASH'14 workshops program is listed below
+and the abstracts at the end.
+14
+**************************************************************
+
+CURRENT WORKSHOP PROGRAM
+
+AGERE! - 4th Int. SIGPLAN Workshop on Programming based on  Actors, Agents,
+and Decentralized Control
+http://soft.vub.ac.be/AGERE14
+Submission: August 3, 2014 (full paper), September 15, 2014
+(position/work-in-progress papers and demo)
+
+Second Workshop on Domain-Specific Language Design and Implementation
+(DSLDI)
+http://2014.splashcon.org/track/dsldi2014
+Submission: August 27, 2014
+
+DSM - Domain-Specific Modeling workshop, DSM'14
+http://www.dsmforum.org/events/DSM14
+Submission: August 15, 2014
+
+ETX - Eclipse Technology eXchange 2014
+http://2014.splashcon.org/track/etx2014
+Submission: Abstract: July 25th, 2014 paper: Aug 1st, 2014
+
+MobileDeLi - Mobile Development Lifecycle
+http://sysrun.haifa.il.ibm.com/hrl/mobiledeli2014/index.shtml
+Submission: July 15, 2014
+
+PLATEAU - Fifth Workshop on Evaluation and Usability of Programming
+Languages and Tools
+http://2014.splashcon.org/track/plateau2014
+Submissions: Aug 1, 2014
+
+PROMOTO - Second Workshop on Programming for Mobile and Touch
+http://research.microsoft.com/promoto2014
+Submission deadline: August 18, 2014
+
+PSP - The First International Workshop on Privacy and Security in
+Programming
+http://www.indiana.edu/~psp2014/
+Submissions: August 6, 2014
+
+REBLS - Workshop on the Interface between Language Engineering and
+Synthetic Biology
+www.rebls-ws.com
+Submission:  August 25, 2014
+
+TD - Workshop on Technical Debt
+Technical Debt in a World of Big Data and Big Teams
+http://manclswx.com/workshops/splash14
+Submission: August 26, 2014.
+
+
+FOR MORE INFORMATION
+
+For additional information, clarification, early feedback, or answers to
+questions, please contact the Workshop Organizers of your favorite
+workshops, or the Workshops Chairs, Stephanie Balzer and Du Li, at
+workshops at splashcon.org
+
+
+**************************************************************
+
+ANNEX: WORKSHOP ABSTRACTS AND DATES
+
+**************************************************************
+4th Int. SIGPLAN Workshop on Programming based on  Actors, Agents, and
+Decentralized Control
+http://soft.vub.ac.be/AGERE14
+
+- Deadlines: submission and notification
+Full-paper (for ACM DL):  3 Aug, 2014(deadline), 31 Aug, 2014(notification)
+Position/work-in-progress papers and demo: 7 Sept, 2014(deadline), 17 Sept,
+2014(deadline)
+
+- Organizers:
+Elisa Gonzalez Boix, Vrije Universiteit Brussel, Belgium
+Philipp Haller, Typesafe, Switzerland
+Alessandro Ricci, University of Bologna, Italy
+Carlos Varela,  Rensselaer Polytechnic Institute, US
+
+- Abstract
+
+The AGERE! workshop is aimed at focusing on programming systems, languages
+and applications based on actors, active/concurrent objects, agents and ?
+more generally ? high-level programming paradigms promoting a mindset of
+decentralized control in solving problems and developing software. The
+workshop is designed to cover both the theory and the practice of design
+and programming, bringing together researchers working on models, languages
+and technologies, and practitioners developing real-world systems and
+applications.
+
+**************************************************************
+Second Workshop on Domain-Specific Language Design and Implementation
+(DSLDI)
+http://2014.splashcon.org/track/dsldi2014
+
+- Deadlines: submission and notification
+Submission of talk proposals: August 27, 2014
+Notification: September 12, 2014
+
+Organizers:
+Sebastian Erdweg, TU Darmstadt
+Adam Welc, Oracle Labs
+
+- Abstract
+If designed and implemented well, domain-specific languages (DSLs) combine
+the
+best features of general-purpose programming languages (e.g., performance)
+with
+high productivity (e.g., ease of programming). The goal of the DSLDI
+workshop
+is to bring together researchers and practitioners interested in sharing
+ideas
+on how DSLs should be designed, implemented, supported by tools, and
+applied in
+realistic application contexts. We are both interested in discovering how
+already known domains such as graph processing or machine learning can be
+best
+supported by DSLs, but also in exploring new domains that could be targeted
+by
+DSLs. More generally, we are interested in building a community that can
+drive
+forward the development of modern DSLs.
+
+We solicit talk proposals in the form of short abstracts (max. 2 pages). A
+good
+talk proposal describes an interesting position, demonstration, or early
+achievement. The submissions will be reviewed on relevance and clarity, and
+used
+to plan the mostly interactive sessions of the workshop day. Publication of
+accepted abstracts and slides on the website is voluntary.
+
+**************************************************************
+
+DSM 2014 - Domain-Specific Modeling workshop, DSM'14
+http://www.dsmforum.org/events/DSM14/
+
+- Deadlines: submission and notification
+Initial submission: August 15, 2014
+Author Notification: September 12, 2014
+
+- Names and affiliations of organizers
+Jonathan Sprinkle, University of Arizona
+Matti Rossi, Aalto University School of Business
+Jeff Gray, University of Alabama
+Juha-Pekka Tolvanen, MetaCase
+
+- Abstract
+An upward shift in abstraction leads to a corresponding increase in
+productivity. In the past this has occurred when programming languages have
+evolved towards a higher level of abstraction. Today, domain-specific
+modeling languages provide a viable solution for continuing to raise the
+level of abstraction beyond coding, making development faster and easier. In
+domain-specific modeling (DSM) the models are constructed using concepts
+that
+represent things in the application domain, not concepts of a given
+programming language. The modeling language follows the domain abstractions
+and semantics, allowing developers to perceive them-selves as working
+directly with domain concepts. Together with frameworks and platforms, DSM
+can automate a large portion of software production. Some possible topics
+for
+submission to the workshop include:
+- Industry/academic experience reports
+- Creation of metamodel-based languages
+- Novel approaches for code generation from domain-specific models
+- Evolution of languages
+- Metamodeling frameworks and languages
+- Tools for supporting DSMs
+
+**************************************************************
+
+Eclipse Technology eXchange (ETX) 2014
+http://2014.splashcon.org/track/etx2014
+
+- Deadlines: submission and notification
+Paper Registration Deadline: July 25th, 2014
+Paper Submission Deadline: Aug 1st, 2014
+Author Notification: Sept 5th, 2014
+
+- Organizers
+Jan S. Rellermeyer   IBM Research, USA
+Tim Verbelen   Ghent University, Belgium
+
+- Abstract
+The Eclipse platform was originally designed for building an integrated
+development environment for object-oriented applications. Over the years it
+has developed into a vibrant ecosystem of platforms, toolkits, libraries,
+modeling frameworks, and tools that
+support various languages and programming styles.
+The goal of the ETX workshop is to bring together researchers and
+practitioners to exchange ideas about potential new uses of Eclipse and how
+Eclipse technology can be leveraged, improved, and/or extended for research
+and education.
+
+Topics include, but are not limited to, the use of Eclipse for:
+- Integrated Development Environment (IDE)
+- Supporting the software development process
+- Debugging and testing
+- Supporting design, requirements, and specifications
+- Modeling environments and frameworks
+- Aspect-oriented programming
+- Program analysis and transformation
+- Computer-based learning
+- Software engineering education
+- Teaching foundations of object-oriented programming
+- Courseware
+- Rich client application
+- OSGi
+- Applications on the Internet of Things
+- Programming for and in the Cloud
+- Supporting the development of Android applications
+
+Submitted papers should have a maximum of six pages and use the ACM SIGPLAN
+Proceedings Format, 10 point font. Proceedings will be included in the ACM
+Digital Library. To have their work included in the ACM Digital Library,
+authors will need to sign the ACM Copyright Form.
+
+**************************************************************
+
+Mobile Development Lifecycle (MobileDeLi 14)
+http://sysrun.haifa.il.ibm.com/hrl/mobiledeli2014/index.shtml
+
+- Deadlines: submission and notification
+Submission: July 15, 2014
+Notification: August 18th, 2014
+
+- Organizers:
+Aharon Abadi, IBM Research - Haifa
+Danny Dig School of EECS at Oregon State University
+Eli Tilevich Virginia Tech Blacksburg, VA, USA
+
+- Abstract:
+Mobile application usage and development is experiencing exponential
+growth. According to Gartner, by 2016 more than 300 billion applications
+will be downloaded annually. The mobile domain presents new challenges to
+software engineering. Mobile platforms are rapidly changing, including
+diverse capabilities as GPS, sensors, and input modes. Applications must be
+omni-channel and work on all platforms. Activated on mobile platforms,
+modern applications must be elastic and scale on demand according to the
+hardware abilities. Applications often need to support and use third-party
+services. Therefore, during development, security and authorization
+processes for the dataflow must be applied. Bring your own device (BYOD)
+policies bring new security data leaks challenges. Developing such
+applications requires suitable practices and tools e.g., architecture
+techniques that relate to the complexity at hand; improved refactoring
+tools for hybrid applications using dynamic languages and polyglot
+development and applications; and testing techniques for applications that
+run on different devices. This workshop aims at establishing a community of
+researchers and practitioners to share their work and lead further research
+in the mobile development area.
+
+**************************************************************
+
+Fifth Workshop on Evaluation and Usability of Programming Languages
+and Tools (PLATEAU)
+http://2014.splashcon.org/track/plateau2014
+
+- Deadlines: submission and notification
+Submissions: Aug 1, 2014
+Notification: Aug 22, 2014
+
+- Organizers
+Thomas LaToza (University of California, Irvine)
+Josh Sunshine (Carnegie Mellon University)
+Craig Anslow (University of Calgary)
+
+-Abstract
+Programming languages exist to enable programmers to develop software
+effectively. But how efficiently programmers can write software
+depends on the usability of the languages and tools that they develop
+with. The aim of this workshop is to discuss methods, metrics and
+techniques for evaluating the usability of languages and language
+tools. PLATEAU encourages submissions of three types of papers.
+Research papers (up to 8 pages) and position papers (up to 2 pages)
+report on work or ideas related to the workshop themes. New this year
+are hypotheses papers (up to 4 pages). Hypotheses papers explicitly
+identify beliefs of the research community or software industry about
+how a programming language, programming language feature, or
+programming language tool affects programming practice.
+
+**************************************************************
+
+Second Workshop on Programming for Mobile and Touch (PROMOTO 2014)
+http://research.microsoft.com/promoto2014
+
+- Deadlines: submission and notification
+Submission deadline: August 18, 2014
+Notification deadline: September 12, 2014
+
+- Organizers
+Judith Bishop, Microsoft Research
+Nikolai Tillmann, Microsoft Research
+Arno Puder, San Francisco State University
+
+- Abstract
+Today, easy-to-use mobile devices like smartphones and tablets are becoming
+more prevalent than traditional PCs and laptops. New programming languages
+are emerging to enable programmers to develop software easily -- leveraging
+the exciting advances in existing hardware, and providing abstractions that
+fit the capabilities of target platforms with multiple sensors, touch and
+cloud capabilities. PROMOTO brings together researchers who have been
+exploring new programming paradigms, embracing the new realities of always
+connected, touch-enabled mobile devices. PROMOTO 2014 would like to invite
+contributions covering technical aspects of cross-platform computing, cloud
+computing, social applications and security. The challenges of new types of
+devices, and the introduction of mobile in the classroom are very
+important. Submissions for this event are invited in the general area of
+mobile and touch-oriented programming languages and programming
+environments, and teaching of programming for mobile devices.
+
+**************************************************************
+
+The First International Workshop on Privacy and Security in Programming
+(PSP)
+http://www.indiana.edu/~psp2014/
+
+- Deadlines: submission and notification
+Submissions: August 6, 2014
+Notification: September 6, 2014
+
+- Organizers
+Tyrone Grandison, Proficiency Labs
+Michael Maximilien, IBM Cloud Labs
+Raquel L Hill, Indiana University
+
+- Abstract:
+The development of secure software requires the specification and
+communication of functional and nonfunctional security and privacy
+requirements, the utilization of secure and privacy-preserving programming
+language constructs and the application of secure and privacy-preserving
+coding best practices. Currently, firms focused on developing code that is
+both secure and privacy-preserving will employ at most two of these
+techniques. Unfortunately, this leads to software with the appearance of
+being safe (i.e. secure and privacy-preserving code), but that offers very
+little real protection. You can have a secure design, but if there are no
+supporting language constructs then the systems won?t be safe. If the
+programmer does not know the secure coding principles and is unaware of
+privacy engineering methodology, then the resulting software will not be
+safe. Additionally, privacy engineering is a relatively new area and
+researchers are trying to determine how to characterize privacy
+requirements.
+
+The specification of these requirements is an inter-disciplinary
+undertaking; involving experts in law, business, and computer science.
+
+By getting experts in security, privacy, requirements engineering,
+programming languages, formal methods, privacy engineering and secure
+coding into the same space, it is hoped that the community can bridge the
+gap between the design and the implementation of safe code.
+
+This workshop seeks to enable the development of safe software systems by
+getting the people of these currently isolated fields to start talking,
+working together and addressing this very difficult issue.
+
+**************************************************************
+
+Reactive and Event-based Languages & Systems (REBLS)
+www.rebls-ws.com
+
+- Deadlines: submission and notification
+Submission deadline:  August 25, 2014
+Notification: September 8, 2014
+
+- Organizers:
+Wolfgang De Meuter, Vrije Universiteit Brussel
+Guido Salvaneschi, Technical University of Darmstadt
+Patrick Eugster, Purdue University
+Lukasz Ziarek, University at Buffalo
+
+- Abstract:
+Reactive programming and event-based programming are two closely
+related programming styles that are becoming ever more important with
+the advent of advanced HPC technology and the ever increasing
+requirement for our applications to run on the web or on collaborating
+mobile devices. A number of publications on middleware and language
+design ? so-called reactive and event-based languages and systems
+(REBLS) ? have already seen the light, but the field still raises
+several questions. For example, the interaction with mainstream
+language concepts is poorly understood, implementation technology is
+in its infancy and modularity mechanisms are almost totally lacking.
+Moreover, large applications are still to be developed and patterns
+and tools for developing reactive applications is an area that is
+vastly unexplored.
+This workshop will gather researchers in reactive and event-based
+languages and systems. The goal of the workshop is to exchange new
+technical research results and to define better the field by coming up
+with taxonomies and overviews of the existing work. We welcome all
+submissions on reactive programming, aspect- and event-oriented
+systems, including but not limited to: language design,
+implementation, runtime systems, program analysis, software metrics,
+patterns and benchmarks.
+
+**************************************************************
+
+TD - Workshop on Technical Debt
+Technical Debt in a World of Big Data and Big Teams
+http://manclswx.com/workshops/splash14
+
+-Deadlines:
+Submission deadline is August 26, 2014.
+
+-Organizers:
+Dennis Mancl, Alcatel-Lucent
+Bill Opdyke, JPMorgan Chase
+Steve Fraser, independent
+
+-Abstract:
+Technical debt is an unavoidable part of software development in today's
+fast-paced market, but it is ignored by many of the people who should care
+about it most.
+
+In large systems, a portion of the accumulating technical debt is just
+"sloppy design" caused by schedule pressure and other project forces.  But
+the most important part of technical debt is directly related to project
+size and data complexity.  How much technical debt is about large
+development teams and geographical distribution?  How do current "big data"
+techniques (Hadoop, NoSQL, parallel algorithms, MapReduce) relate to
+technical debt issues?
+
+This workshop explores strategies for understanding the impact of technical
+debt. If we believe that technical debt is an important issue in long-term
+software product development, do we have ways to keep the technical debt
+from causing development gridlock?  The workshop discusses some approaches
+to taking on technical debt from systems large and small.
+
+See the results of the SPLASH 2013 technical debt workshop for more
+background:  http://www.manclswx.com/workshops/splash13.
+
+----------------
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140625/047627b9/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Thu Jun 26 10:54:44 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 26 Jun 2014 10:54:44 +0200
+Subject: [Stratego Users] Fwd: [aosd-announce] Modularity '15 - Call for
+	Contributions
+In-Reply-To: <CAAc4OL3Sg9UjdPUTbnhmreOFczg6H8Sj3zWYMTUj2ieBE__hbg@mail.gmail.com>
+References: <CAAc4OL3Sg9UjdPUTbnhmreOFczg6H8Sj3zWYMTUj2ieBE__hbg@mail.gmail.com>
+Message-ID: <CAFaCHU11+Lc4_mDvk5e+_giBH+yB30A1BBn8cQCCBjS7GNunHg@mail.gmail.com>
+
+*** MODULARITY '15 ***
+
+14th International Conference on Modularity
+March 16-19, 2015
+Ft. Collins, Colorado, USA
+*http://aosd.net/2015/ <http://aosd.net/2015/>*
+
+
+*** CALL FOR CONTRIBUTIONS ***
+
+* Research Results track
+  *http://aosd.net/2015/rrtrack <http://aosd.net/2015/rrtrack>*
+  August 4, 2014 (first round) - Paper submission
+  October 10, 2014 (second round)  - Paper submission
+
+* Modularity Visions track
+  *http://aosd.net/2015/mvtrack <http://aosd.net/2015/mvtrack>*
+  October. 3, 2014 - Abstract submission
+  October. 10, 2014 - Paper submission
+
+
+========================================================================
+*** RESEARCH RESULTS TRACK ***
+
+Modularity is a key property for scalability of software processes,
+including debugging, maintenance, reasoning, and testing. Modularity
+influences system diversity, dependability, performance, evolution, the
+structure and the dynamics of the organizations that produce systems, human
+understanding and management of systems, and ultimately system value. Yet
+the nature of and possibilities for modularity, limits to modularity, the
+mechanisms needed to achieve it in given forms, and its costs, benefits,
+and tradeoffs remain poorly understood. Significant advances in modularity
+thus are possible and promise to yield breakthroughs in our ability to
+conceive, design, develop, validate, integrate, and evolve modern
+information systems and their underlying software artifacts.
+
+Modularity at the semantic as well as the syntactic level is a key enabler
+for the expression of high quality software systems. One of the most
+important techniques for complexity reduction is abstraction. Novel
+concepts and abstraction mechanisms, including but not limited to
+aspect-oriented techniques, are a focus point for improvements in the
+support for modularity. The scope of this effort covers all perspectives on
+software systems in all their life-cycle phases, for instance application
+domain analysis, programming language constructs, formal proofs of system
+properties, program state visualization in debuggers, performance
+improvements in compiler algorithms, etc. As the premier international
+conference on modularity, Modularity'15 continues to advance our
+understanding of these issues and the expressive power of known techniques.
+
+The Modularity'15 conference invites full, scholarly papers of the highest
+quality on new ideas and results. Papers are expected to contribute
+significant new research results with rigorous and substantial validation
+of specific technical claims, based on scientifically sound reflections on
+experience, analysis, experimentation, or formal models. Compelling new
+ideas are especially welcome, which means that the requirements in the
+areas of validation and maturity are higher for papers that contribute more
+incremental results.
+
+Modularity'15 is deeply committed to publishing works of the highest
+caliber. To this aim, two separate paper submission deadlines and review
+stages are offered. A paper accepted in any round will be published in the
+proceedings and presented at the conference. Promising papers submitted in
+the first round that are not accepted may be invited to be revised and
+resubmitted for review by the same reviewers in the second round. Authors
+of such invited resubmissions are asked to also submit a letter explaining
+the revisions made to the paper to address the reviewers' concerns. While
+there is no guarantee that an invited resubmission will be accepted, this
+procedure (similar to major revisions requested by journals) is designed to
+help authors of promising work get their papers into the conference.
+Submission to both rounds is open for all, and authors who submit to the
+first round may of course choose to resubmit a revised version in the
+second round without such an invitation, in which case new reviewers may be
+appointed. Finally, the same paper cannot be simultaneously submitted to
+other conferences or journals. In case of doubt, please contact the Program
+Chair.
+
+Research Topics
+
+Modularity'15 is looking for papers in all areas of software modularity.
+Topics of interest include, but are not limited to, the following:
+
+* Varieties of modularity: Context orientation; feature orientation;
+generative programming; aspect orientation; software product lines; traits;
+families of classes; meta-programming and reflection; components;
+view-based development.
+
+* Programming languages: Support for modular abstraction in: language
+design; verification, specification, and static program analysis;
+compilation, interpretation, and runtime support; formal languages and
+calculi; execution environments and dynamic weaving; dynamic languages;
+domain-specific languages.
+
+* Software design and engineering: Requirements and domain engineering;
+architecture; synthesis; evolution; metrics and evaluation; empirical
+studies of existing software; economics; testing and verification;
+semantics; composition and interference; traceability; methodologies;
+patterns.
+
+* Tools: Crosscutting views; refactoring; evolution and reverse
+engineering; aspect mining; support for new language constructs.
+
+* Applications: Data-intensive computing; distributed and concurrent
+systems; middleware; service- oriented computing systems; cyber-physical
+systems; networking; cloud computing; pervasive computing; runtime
+verification; computer systems performance; system health monitoring;
+enforcement of non-functional properties.
+
+* Complex systems: Works that explore and establish connections across
+disciplinary boundaries, bridging to such areas as biology, economics,
+education, infrastructure such as buildings or transport systems, and more.
+
+* Composition: Component-based software engineering; Composition and
+adaptation techniques; Composition algebras, calculi, and type systems;
+Model-driven composition; Dynamic composition and reconfiguration;
+Large-scale component-based systems; Cloud, service-oriented architectures;
+Business process orchestration; Visual composition environments;
+Performance optimization of composite systems.
+
+
+Important Dates
+
+* First round:
+Submission: August 4, 2014 (23:59 Baker Island / UTC-12)
+Notification: September 14, 2014
+
+* Second round:
+Submission: October 10, 2014 (23:59 Baker Island / UTC-12)
+Notification: December 7, 2014
+
+* Camera ready: February 15, 2015
+
+Submission Guidelines
+
+Modularity'15 is deeply committed to eliciting works of the highest
+caliber. To this aim, two separate paper submission deadlines and review
+stages are offered. A paper accepted in any round will be published in the
+proceedings and presented at the conference. Promising papers submitted in
+the first round that are not accepted may be invited to be revised and
+resubmitted for review by the same reviewers in the second round. Authors
+of such invited resubmissions are asked to also submit a letter explaining
+the revisions made to the paper to address the reviewers' concerns. While
+there is no guarantee that an invited resubmission will be accepted, this
+procedure (similar to major revisions requested by journals) is designed to
+help authors of promising work get their papers into the conference.
+Submission to both rounds is open for all, and authors who submit to the
+first round may of course choose to resubmit a revised version in the
+second round without such an invitation, in which case new reviewers may be
+appointed. Finally, the same paper cannot be simultaneously submitted to
+other conferences or journals. In case of doubt, please get in touch with
+the Program Chair.
+All submissions must conform to both the ACM Policy on Prior Publication
+and Simultaneous Submissions and the SIGPLAN Republication Policy.
+
+Papers are to be submitted electronically to CyberChair.
+
+Please use http://cyberchairpro.borbala.net/modularitypapers/submit/ to
+submit your paper. Submissions should use the SIGPLAN Proceedings Format
+using 9 point font. Please include page numbers in your submission as this
+will be helpful for the reviewers and also for you when reading their
+reviews. (If your submission is written using LaTeX, please set the
+preprint option in the LaTeX \documentclass command to generate page
+numbers.) Please also ensure that your submission is legible when printed
+on a black and white printer. In particular, please check that colors
+remain distinct and font sizes are legible.
+
+To ensure that papers stay focused on their core contributions, the main
+part of the paper should be no longer than 12 pages. There is a 4 page
+limit for references and appendices, and, therefore, for the overall
+submission must be less than 16 pages. If the paper is accepted, the final
+submission will be limited to 16 pages, including references and appendices.
+
+However, it is the responsibility of the authors to keep the reviewers
+interested and motivated to read their submission. Reviewers are under no
+obligation to read all or even a substantial portion of a paper if they do
+not find the initial part of the paper compelling. The committee will not
+accept a paper if it is unclear that the paper will fit in the
+Modularity'15 Proceedings.
+
+All submitted papers are peer-reviewed. Accepted papers from all tracks
+will appear in the Modularity'15 Proceedings in the ACM Digital Library.
+Submissions will be judged on the potential impact of the ideas and the
+quality of the presentation.
+
+Program Committee Chair
+Gary T. Leavens, University of Central Florida, USA (leavens at cs.ucf.edu)
+
+Program Committee
+
+Don Batory, University of Texas at Austin
+Eric Bodden, Fraunhofer SIT and TU Darmstadt
+Paulo Borba, Federal University of Pernambuco
+Walter Cazzola, Universit? degli Studi di Milano
+Cynthia Disenfeld, Technion -- Israel Institute of Technology
+Robert Dyer, Bowling Green State University
+Erik Ernst, Aarhus University
+Matthew Flatt, University of Utah
+Michael Haupt, Oracle Labs
+Marieke Huisman, University of Twente
+Cristina Lopes, University of California Irvine
+Tiziana Margaria, University of Potsdam
+Linda Northrop, Software Engineering Institute
+Nate Nystrom, University of Lugano
+Bruno C. d. S. Oliveira, The University of Hong Kong
+Awais Rashid, Lancaster University
+Henrique Reb?lo, Federal University of Pernambuco
+Martin Rinard, Massachusetts Institute of Technology
+Norbert Siegmund, University of Passau
+Murali Sitaraman, Clemson University
+Kevin Sullivan, University of Virginia
+
+External Review Committee
+
+Marsha Chechik, University of Toronto
+Steven Edwards, Virginia Tech.
+Dan Grossman, University of Washington
+G?rel Hedin, Lund University
+Mira Mezini, TU Darmstadt
+Peter M?ller, ETH Zurich
+Hridesh Rajan, Iowa State University
+Clemens Szyperski, Microsoft Research
+?ric Tanter, University of Chile
+Eelco Visser, Delft University of Technology
+
+For additional information, clarification, or answers to questions please
+contact the Program Committee Chair.
+
+
+========================================================================
+*** MODULARITY VISIONS TRACK ***
+
+Modularity properties are key determinants of quality in information
+systems, software, and system production processes. Modularity influences
+system diversity, dependability, performance, evolution, the structure and
+the dynamics of the organizations that produce systems, human understanding
+and management of systems, and ultimately system value.
+
+Yet the nature of and possibilities for modularity, limits to modularity,
+the mechanisms needed to achieve it in given forms, and its costs and
+benefits remain poorly understood. Significant advances in modularity thus
+are possible and promise to yield breakthroughs in our ability to conceive,
+design, develop, validate, integrate, deploy, operate, and evolve modern
+information systems and their underlying software artifacts.
+
+The Modularity Visions track of Modularity'15 is looking for papers
+presenting compelling insights into modularity in information systems,
+including its nature, forms, mechanisms, consequences, limits, costs, and
+benefits. Modularity Vision papers can also present proposals for future
+work. The scope of Modularity Visions is broad and open to submissions from
+all areas of computer science.
+
+Modularity Visions papers must supply some degree of validation because
+mere speculation is not a good basis for progress. However, Modularity
+Visions accepts less rigorous methods of validation such as compelling
+arguments, exploratory implementations, and substantial examples. The use
+of worked-out prototypes to support new ideas is strongly encouraged.
+
+Selection Process
+
+Modularity Visions papers are peer-reviewed. Accepted papers will appear in
+the Modularity'15 Proceedings in the ACM Digital Library. Submissions will
+be judged on the potential impact of the ideas and the quality of the
+presentation.
+
+Modularity Visions will follow a single-phase review process in which
+papers are assessed using the criteria stated above. (Note that this
+process is different from the two-rounds process of the Research Results
+track.)
+
+Important Dates
+
+      Abstracts due: October 3, 2014
+      Papers due: October 10, 2014
+      Notification: December 7, 2014
+      Camera ready version due: February 15, 2015
+
+Submission Guidelines
+
+Modularity Visions submissions must conform to both the ACM Policy on Prior
+Publication and Simultaneous Submissions and the SIGPLAN Republication
+Policy.
+
+Papers are to be submitted electronically to EasyChair.
+
+Submissions should use the SIGPLAN Proceedings Format using 9 point font.
+Please include page numbers in your submission as this will be helpful for
+the reviewers and also for you when reading their reviews. (If your
+submission is written using LaTeX, please set the preprint option in the
+LaTeX \documentclass command to generate page numbers.) Please also ensure
+that your submission is legible when printed on a black and white printer.
+In particular, please check that colors remain distinct and font sizes are
+legible.
+
+To ensure that papers stay focused on their core contributions, the main
+part of the paper should be no longer than 12 pages. There is no page limit
+for appendices, and, therefore, for the overall submission. If the paper is
+accepted, the final submission will be limited to 16 pages, including
+appendices.
+
+It is the responsibility of the authors to keep the reviewers interested
+and motivated to read their submission. Reviewers are under no obligation
+to read all or even a substantial portion of a paper if they do not find
+the initial part of the paper compelling. The committee will not accept a
+paper if it is unclear that the paper will fit in the Modularity'15
+Proceedings.
+
+Program Committee Chair
+
+Eelco Visser, Delft University of Technology, The Netherlands.
+
+Program Committee
+
+to be announced.
+
+For More Information
+
+For additional information, clarification, or answers to questions please
+contact the Program Committee Chair, Eelco Visser, at
+modularity-visions at aosd.net.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140626/6cdf778b/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Sun Jun 29 23:56:19 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 29 Jun 2014 23:56:19 +0200
+Subject: [Stratego Users] Fwd: [LWB] SPLASH Workshop: Domain-Specific
+	Language Design and Implementation
+In-Reply-To: <CAOzQwNNrk=ftt4yVNDS9GZgYBbZci7A78jKHeNjY0MRox6R57Q@mail.gmail.com>
+References: <CAOzQwNNrk=ftt4yVNDS9GZgYBbZci7A78jKHeNjY0MRox6R57Q@mail.gmail.com>
+Message-ID: <CAFaCHU2ua1JtEhgqb-Z+yv1oUGRN5-ddB0Jzz-yj8R+Qw7EYjQ@mail.gmail.com>
+
+[Apologies for multiple copies]
+
+*********************************************************************
+CALL FOR TALK PROPOSALS
+
+DSLDI 2014
+
+Second Workshop on
+Domain-Specific Language Design and Implementation
+
+October 20/21, 2014
+Portlan, USA
+Co-located with SPLASH/OOPSLA
+
+http://2014.splashcon.org/track/dsldi2014
+*********************************************************************
+
+
+If designed and implemented well, domain-specific languages (DSLs)
+combine the best features of general-purpose programming languages
+(e.g., performance) with high productivity (e.g., ease of
+programming).
+
+*** Workshop Goal ***
+
+The goal of the DSLDI workshop is to bring together researchers and
+practitioners interested in sharing ideas on how DSLs should be
+designed, implemented, supported by tools, and applied in realistic
+application contexts. We are both interested in discovering how
+already known domains such as graph processing or machine learning can
+be best supported by DSLs, but also in exploring new domains that
+could be targeted by DSLs. More generally, we are interested in
+building a community that can drive forward the development of modern
+DSLs.
+
+*** Workshop Format ***
+
+DSLDI is a single-day workshop and will consist of a series of short
+talks whose main goal is to trigger exchange of opinion and
+discussions. The talks should be on the topics within DSLDI's area of
+interest, which include but are not limited to the following ones:
+
+* DSL implementation techniques, including compiler-level and
+  runtime-level solutions
+* utilization of domain knowledge for driving optimizations of DSL
+  implementations
+* utilizing DSLs for managing parallelism and hardware heterogeneity
+* DSL performance and scalability studies
+* DSL tools, such as DSL editors and editor plugins, debuggers,
+  refactoring tools, etc.
+* applications of DSLs to existing as well as emerging domains, for
+  example graph processing, image processing, machine learning,
+  analytics, robotics, etc.
+* practitioners reports, for example descriptions of DSL deployment in
+  a real-life production setting
+
+*** Call for Submissions ***
+
+We solicit talk proposals in the form of short abstracts (max. 2
+pages). A good talk proposal describes an interesting position,
+demonstration, or early achievement. The submissions will be reviewed
+on relevance and clarity, and used to plan the mostly interactive
+sessions of the workshop day. Publication of accepted abstracts and
+slides on the website is voluntary.
+
+* Workshop: October 19 or 20, 2014
+* Deadline for talk proposals: August 27, 2014
+* Notification: September 12, 2014
+* Submission website: https://www.easychair.org/conferences/?conf=dsldi2014
+
+*** Workshop Organization ***
+
+Organizers
+
+* Sebastian Erdweg, TU Darmstadt, Germany
+* Adam Welc, Oracle Labs, USA
+
+Program committee
+
+* Martin Erwig, Oregon State University, USA
+* Matthew Flatt, University of Utah, USA
+* Klaus Ostermann, University of Marburg, Germany
+* Tiark Rompf, EPFL/Oracle Labs, Switzerland
+* Tijs van der Storm, CWI, Netherlands
+* Juha-Pekka Tolvanen, University of Jyv?skyl?/Metacase, Finland
+* Emina Torlak, University of California, Berkeley, USA
+* Laurence Tratt, King's College London, UK
+* Markus V?lter, itemis/independent, Germany
+* Guido Wachsmuth, TU Delft, Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140629/46e36376/attachment.html>
+

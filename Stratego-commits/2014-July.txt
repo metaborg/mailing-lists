@@ -1,0 +1,893 @@
+From oskarvanrest at gmail.com  Thu Jul 10 23:47:37 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Thu, 10 Jul 2014 21:47:37 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26215 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140710214737.16722.40916@wendy.ewi.tudelft.nl>
+
+Author: OskarVanRest
+Date: Thu Jul 10 21:47:35 2014
+New Revision: 26215
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26215&sc=1
+
+Log:
+Removed EMF Compare 2.x update site, as EMF Compare 2.x now comes with Eclipse.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Thu Jun 19 08:32:58 2014	(r26214)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Thu Jul 10 21:47:35 2014	(r26215)
+@@ -72,8 +72,8 @@
+       url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-standard-kepler-SR1-linux-gtk.tar.gz ;
+       sha256 = "0f8zsx2ljwssiflrkpbw887hf3p9j3ln5lz45v6m20ysyd0fmvx5";
+     };
+-    updatesites = [ "http://download.eclipse.org/releases/kepler" "http://download.eclipse.org/modeling/emf/compare/updates/milestones/3.0/S201403111515" ];
+-    installIUs = [ "org.eclipse.gmf.sdk.feature.group" "org.eclipse.emf.compare.feature.group" ];
++    updatesites = [ "http://download.eclipse.org/releases/kepler" ];
++    installIUs = [ "org.eclipse.gmf.sdk.feature.group" ];
+   }; 
+ 
+   eclipseTest = eclipseFun {
+@@ -82,7 +82,7 @@
+       url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-standard-kepler-SR1-linux-gtk.tar.gz ;
+       sha256 = "0f8zsx2ljwssiflrkpbw887hf3p9j3ln5lz45v6m20ysyd0fmvx5";
+     };
+-    updatesites = [ "file://${jobs.build}/site" "http://download.eclipse.org/releases/kepler" "http://download.eclipse.org/modeling/emf/compare/updates/milestones/3.0/S201403111515" ];
++    updatesites = [ "file://${jobs.build}/site" "http://download.eclipse.org/releases/kepler" ];
+     installIUs = [ "org.strategoxt.imp.feature.group" "org.spoofax.modelware.gmf.feature.feature.group" ];
+     dontInstall = true;
+   }; 
+@@ -208,7 +208,7 @@
+       name = "spoofax-imp-generator-s${spoofaxRev}";
+       inherit (jobs) src;
+ 
+-      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.javafront ecj openjdk ];
++      buildInputs = with pkgs; [strategoPackages.sdf ecj openjdk ];
+ 
+       preConfigure = ''
+         cd org.strategoxt.imp.generator
+@@ -216,17 +216,12 @@
+       '';
+ 
+       postUnpack = ''
+-        echo ${pkgs.strategoPackages.strategoxt}
+-        echo ${pkgs.strategoPackages.sdf}
+-        echo ${pkgs.strategoPackages.javafront}
+       '';
+ 
+       antTargets = [ "install" ];
+       antProperties = [
+-	{ name = "sdf2bundle"; value = pkgs.strategoPackages.sdf; }
+-        { name = "strategoxt"; value = "${pkgs.strategoPackages.strategoxt}/share"; }
+-        { name = "sdf"; value = pkgs.strategoPackages.sdf; }
+-        { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
++        { name = "nativepath"; value = "${pkgs.strategoPackages.sdf}/bin/"; }
++        { name = "strategoxt-distrib"; value = (pkgs.lib.concatStrings [ strj ]); }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+       antBuildInputs = [ pkgs.ecj strj ];
+@@ -423,7 +418,7 @@
+ <plugin>
+     <groupId>org.eclipse.tycho</groupId>
+     <artifactId>tycho-packaging-plugin</artifactId>
+-    <version>0.19.0</version>
++    <version>0.20.0</version>
+     <configuration>
+         <strictBinIncludes>false</strictBinIncludes>
+     </configuration>
+@@ -432,7 +427,7 @@
+ <plugin>
+     <groupId>org.eclipse.tycho</groupId>
+     <artifactId>tycho-compiler-plugin</artifactId>
+-    <version>0.19.0</version>
++    <version>0.20.0</version>
+     <configuration>
+         <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
+     </configuration>
+@@ -440,7 +435,13 @@
+ 
+ </plugins>
+ </pluginManagement>
+-</build></project>' >> pom.xml
++</build>
++
++<properties>
++  <tycho-version>0.20.0</tycho-version>
++</properties>
++
++</project>' >> pom.xml
+ 
+         mvn integration-test ${mvnFlags} -e
+       '';
+@@ -456,7 +457,7 @@
+       '';
+ 
+        __noChroot = true;
+-       meta.maintainers = ["lclkats at gmail.com" "m.dejonge at tudelft.nl" "rob.vermaas at gmail.com" "karltk at strategoxt.org" "g.h.wachsmuth at tudelft.nl" "gabrielkonat at gmail.com" "v.vergu at gmail.com"];
++       meta.maintainers = ["lclkats at gmail.com" "m.dejonge at tudelft.nl" "rob.vermaas at gmail.com" "karltk at strategoxt.org" "g.h.wachsmuth at tudelft.nl" "gabrielkonat at gmail.com" "v.vergu at gmail.com" "oskarvanrest at gmail.com"];
+      } ;   
+   } ;
+ 
+
+From gabrielkonat at gmail.com  Thu Jul 24 20:19:53 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 24 Jul 2014 18:19:53 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26216 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140724181953.14072.17358@buildfarm.st.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Thu Jul 24 18:19:52 2014
+New Revision: 26216
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26216&sc=1
+
+Log:
+Use latest Tycho version, and set some more sensible defaults in parent POM.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jul 10 21:47:35 2014	(r26215)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jul 24 18:19:52 2014	(r26216)
+@@ -415,22 +415,51 @@
+ echo '
+ <pluginManagement>
+ <plugins>
++
++<plugin>
++  <groupId>org.apache.maven.plugins</groupId>
++  <artifactId>maven-compiler-plugin</artifactId>
++  <version>3.1</version>
++  <configuration>
++    <source>''${java-version}</source>
++    <target>''${java-version}</target>
++    <debug>true</debug>
++  </configuration>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-maven-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <extensions>true</extensions>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-packaging-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <configuration>
++      <strictBinIncludes>false</strictBinIncludes>
++  </configuration>
++</plugin>
++
+ <plugin>
+-    <groupId>org.eclipse.tycho</groupId>
+-    <artifactId>tycho-packaging-plugin</artifactId>
+-    <version>0.20.0</version>
+-    <configuration>
+-        <strictBinIncludes>false</strictBinIncludes>
+-    </configuration>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-compiler-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <configuration>
++    <compilerArgument>-warn:-discouraged,forbidden,deprication,raw,unchecked,typeHiding,serial,unusedImport</compilerArgument>
++    <compilerArgument>-err:-forbidden</compilerArgument>
++    <source>''${java-version}</source>
++    <target>''${java-version}</target>
++    <debug>true</debug>
++  </configuration>
+ </plugin>
+ 
+ <plugin>
+-    <groupId>org.eclipse.tycho</groupId>
+-    <artifactId>tycho-compiler-plugin</artifactId>
+-    <version>0.20.0</version>
+-    <configuration>
+-        <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
+-    </configuration>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>target-platform-configuration</artifactId>
++  <version>''${tycho-version}</version>
+ </plugin>
+ 
+ </plugins>
+@@ -438,7 +467,9 @@
+ </build>
+ 
+ <properties>
+-  <tycho-version>0.20.0</tycho-version>
++  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++  <tycho-version>0.21.0</tycho-version>
++  <java-version>1.7</java-version>
+ </properties>
+ 
+ </project>' >> pom.xml
+
+From gabrielkonat at gmail.com  Tue Jul 29 00:47:21 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Mon, 28 Jul 2014 22:47:21 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26217 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140728224721.44165.92016@buildfarm.st.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Mon Jul 28 22:47:17 2014
+New Revision: 26217
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26217&sc=1
+
+Log:
+Update release expression
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-release.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-release.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-release.nix	Thu Jul 24 18:19:52 2014	(r26216)
++++ hydra/jobs/spoofax-git/spoofax-release.nix	Mon Jul 28 22:47:17 2014	(r26217)
+@@ -1,15 +1,16 @@
+ {
+   nixpkgs ? ../../../nixpkgs
++
+ , jsglr ? { outPath = ../../../jsglr ; revCount = 9999; }
+ , mbexec ? { outPath = ../../../mb-exec ; revCount = 9999; }
+ , mbexecdeps ? { outPath = ../../../mb-exec-deps ; revCount = 9999; }
+ , mbrep ? { outPath = ../../../mb-rep ; revCount = 9999; }
+ , nabl ? { outPath = ../../../nabl ; revCount = 9999; }
++, ts ? { outPath = ../../../ts ; revCount = 9999; }
+ , sdf ? { outPath = ../../../sdf ; revCount = 9999; }
+ , esv ? { outPath = ../../../esv ; revCount = 9999; }
+ , aster ? { outPath = ../../../aster ; revCount = 9999; }
+ , box ? { outPath = ../../../box ; revCount = 9999; }
+-, spx ? { outPath = ../../../spx ; revCount = 9999; }
+ , rtg ? { outPath = ../../../rtg ; revCount = 9999; }
+ , stratego ? { outPath = ../../../stratego ; revCount = 9999; }
+ , spt ? { outPath = ../../../spt ; revCount = 9999; }
+@@ -17,36 +18,50 @@
+ , spoofax ? { outPath = ../../../spoofax ; revCount = 9999; }
+ , spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
+ , spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
+-, spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
++, imppatched ? { outPath = ../../../imp-patched ; revCount = 9999; }
++, lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
++, metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
++, modelware ? { outPath = ../../../modelware ; revCount = 9999; }
++
++, strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
++, strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
++, javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
+-, lpgRuntime ? { outPath = ../../../lpg.runtime.java ; revCount = 9999; }
+-, strategoxt ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+-, hydraConfig ? { outPath = ../../.; revCount = 9999; }
++, hydraConfig ? { outPath = ../../. ; revCount = 9999; }
+ 
++, shrike ? { outPath = ../../../com.ibm.wala.shrike ; revCount = 9999; }
+ }:
+-let 
++let
+   plus = a : b : ( builtins.add a b );
+   sumrev = xs : pkgs.lib.foldl plus 0 xs ;
+   
+-  spoofaxRev = toString (sumrev [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount spx.revCount rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount spoofaxdebug.revCount spoofaxdeploy.revCount spoofaximppatches.revCount strategoxt.revCount]) ;
++  spoofaxRev = toString (sumrev 
++      [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount
++        nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount  
++        rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount 
++        spoofaxdebug.revCount spoofaxdeploy.revCount imppatched.revCount strategoxt.revCount strategoxtCVersion.revCount
++        metaborgRuntime.revCount javaFront.revCount]) ;
+ 
+   pkgs = import nixpkgs { config.allowUnfree = true; system = "i686-linux"; };
+ 
+-  orgEclipseImp = pkgs.fetchsvn {
+-    url = http://dev.eclipse.org/svnroot/technology/org.eclipse.imp/trunk;
+-    rev = 22255;
+-    sha256 = "0mknky2wpqvpcaqnz1l6wh6p1p8zjmd299hlf1nnwm91paiqmm85";
+-  };
+-
+   jline = pkgs.fetchurl {
+     url = http://spoofax.org/mirror/extras/jline-1.0.jar;
+     sha256 = "6d35823d5ae86ea4c71bc653747d1234c1587662882a76738d2881fb409394ab";
+   };
+ 
+-  shrike = pkgs.fetchsvn {
+-    url = https://wala.svn.sourceforge.net/svnroot/wala/trunk/com.ibm.wala.shrike;
+-    rev = 3073;
+-    sha256 = "0y13i31xlhian5glk4cahbzxg4mky4q61qzc5g03qkg4d67k12zd";
++  guava = pkgs.fetchurl {
++    url = http://search.maven.org/remotecontent?filepath=com/google/guava/guava/14.0.1/guava-14.0.1.jar;
++    sha256 = "d69df3331840605ef0e5fe4add60f2d28e870e3820937ea29f713d2035d9ab97";
++  };
++  
++  functional-java = pkgs.fetchurl {
++    url = http://functionaljava.googlecode.com/svn/artifacts/3.0/functionaljava.jar;
++    sha256 = "091C45B841A763FC7F922A64415ACF03069A1360F9F44CBC38BA43C750323884";
++  };
++
++  junit-benchmarks = pkgs.fetchurl {
++    url = http://labs.carrotsearch.com/download/junit-benchmarks/0.6.0/junit-benchmarks-0.6.0.zip;
++    sha256 = "07f189bd06e4294b329b4e3b0c7f54ce8236bba0393991a212a94cbb39ecd5b1";
+   };
+ 
+   eclipseFun = import ../../eclipse.nix pkgs ; 
+@@ -54,52 +69,58 @@
+   eclipse = eclipseFun {
+     name = "eclipse-plain";
+     src =  pkgs.fetchurl {
+-      url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk.tar.gz ;
+-      sha256 = "0s48rjaswi8m5gan1zlqvfwb4l06x5nslkq41wpkrbyj9ka8gh4x";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-standard-kepler-SR1-linux-gtk.tar.gz ;
++      sha256 = "0f8zsx2ljwssiflrkpbw887hf3p9j3ln5lz45v6m20ysyd0fmvx5";
+     };
++    updatesites = [ "http://download.eclipse.org/releases/kepler" "http://download.eclipse.org/modeling/emf/compare/updates/milestones/3.0/S201403111515" ];
++    installIUs = [ "org.eclipse.gmf.sdk.feature.group" "org.eclipse.emf.compare.feature.group" ];
+   }; 
+ 
+   eclipseTest = eclipseFun {
+     name = "eclipse-spoofax-install-test";
+     src =  pkgs.fetchurl {
+-      url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk.tar.gz ;
+-      sha256 = "0s48rjaswi8m5gan1zlqvfwb4l06x5nslkq41wpkrbyj9ka8gh4x";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-standard-kepler-SR1-linux-gtk.tar.gz ;
++      sha256 = "0f8zsx2ljwssiflrkpbw887hf3p9j3ln5lz45v6m20ysyd0fmvx5";
+     };
+-    updatesites = [ "file://${jobs.build}/site" ];
+-    installIUs = [ "org.strategoxt.imp.feature.group" ];
++    updatesites = [ "file://${jobs.build}/site" "http://download.eclipse.org/releases/kepler" "http://download.eclipse.org/modeling/emf/compare/updates/milestones/3.0/S201403111515" ];
++    installIUs = [ "org.strategoxt.imp.feature.group" "org.spoofax.modelware.gmf.feature.feature.group" ];
+     dontInstall = true;
+   }; 
+ 
+-  strcJava = (import ../strc-java.nix {
+-    inherit nixpkgs hydraConfig;
+-    strcJavaCheckout = strategoxt;
+-  }).build { system = "i686-linux"; };
+-    
++  strategoxtNixExpr = pkgs.lib.concatStrings [strategoxt.outPath "/strategoxt/strategoxt-java-bootstrap.nix" ] ;
++
++  strj = (import strategoxtNixExpr {
++    inherit nixpkgs javaFront;
++    strategoxtJava = strategoxt;
++  }).bootstrap1;
++
+   jobs = with pkgs.lib; {
+     tests.install = eclipseTest;
+     src = pkgs.stdenv.mkDerivation {
+       name = "spoofax-imp-src-s${spoofaxRev}";
+ 
++
++      buildInputs = with pkgs; [ unzip ];
++
+       buildCommand = ''
+         ensureDir $out
+         cd $out
+             
+         header "Preparing org.eclipse.imp"
+     
+-        for d in ${orgEclipseImp}/org.eclipse.imp.cheatsheets \
+-                 ${orgEclipseImp}/org.eclipse.imp.java.hosted \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg.ide \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg.metatooling \
+-                 ${orgEclipseImp}/org.eclipse.imp.metatooling \
+-                 ${orgEclipseImp}/org.eclipse.imp.preferences \
+-                 ${orgEclipseImp}/org.eclipse.imp.prefspecs \
+-                 ${orgEclipseImp}/org.eclipse.imp.presentation \
+-                 ${orgEclipseImp}/org.eclipse.imp.runtime \
+-                 ${orgEclipseImp}/org.eclipse.imp.smapi \
+-                 ${orgEclipseImp}/org.eclipse.imp.smapifier \
+-                 ${orgEclipseImp}/org.eclipse.imp.xform \
+-                 ${mbexec}/org.spoofax.compiler \
++        for d in ${imppatched}/org.eclipse.imp.cheatsheets \
++                 ${imppatched}/org.eclipse.imp.java.hosted \
++                 ${imppatched}/org.eclipse.imp.lpg \
++                 ${imppatched}/org.eclipse.imp.lpg.ide \
++                 ${imppatched}/org.eclipse.imp.lpg.metatooling \
++                 ${imppatched}/org.eclipse.imp.metatooling \
++                 ${imppatched}/org.eclipse.imp.preferences \
++                 ${imppatched}/org.eclipse.imp.prefspecs \
++                 ${imppatched}/org.eclipse.imp.presentation \
++                 ${imppatched}/org.eclipse.imp.runtime \
++                 ${imppatched}/org.eclipse.imp.smapi \
++                 ${imppatched}/org.eclipse.imp.smapifier \
++                 ${imppatched}/org.eclipse.imp.xform \
+                  ${mbexec}/org.spoofax.interpreter.core \
+                  ${mbexec}/org.spoofax.interpreter \
+                  ${mbexec}/org.spoofax.interpreter.ui \
+@@ -109,6 +130,9 @@
+                  ${mbexec}/org.spoofax.interpreter.adapter.ecj \
+                  ${mbexec}/org.spoofax.interpreter.library.eclipse \
+                  ${mbexec}/org.spoofax.interpreter.library.java \
++                 ${mbexecdeps}/org.spoofax.interpreter.externaldeps \
++                 ${metaborgRuntime}/org.metaborg.runtime.task \
++                 ${metaborgRuntime}/org.metaborg.meta.lang.analysis \
+                  ${mbrep}/org.spoofax.interpreter.library.index \
+                  ${mbrep}/org.spoofax.aterm \
+                  ${mbrep}/org.spoofax.terms \
+@@ -122,11 +146,8 @@
+                  ${esv}/org.strategoxt.imp.editors.editorservice \
+                  ${box}/org.strategoxt.imp.editors.pp \
+                  ${rtg}/org.strategoxt.imp.editors.rtg \
+-                 ${spx}/org.strategoxt.imp.editors.spoofax \
+-                 ${spx}/org.spoofax.interpreter.library.language \
+-                 ${spx}/org.strategoxt.imp.editors.spoofax.configuration \
+-                 ${spx}/org.strategoxt.imp.spoofax.generator \
+-                 ${nabl}/org.strategoxt.imp.names \
++                 ${nabl}/org.metaborg.meta.lang.nabl \
++                 ${ts}/org.metaborg.meta.lang.ts \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+                  ${spoofax}/org.strategoxt.imp.generator \
+@@ -134,7 +155,6 @@
+                  ${spoofax}/org.strategoxt.imp.nativebundle \
+                  ${spoofax}/org.strategoxt.imp.runtime \
+                  ${spoofax}/org.strategoxt.imp.runtime.sidebyside.main \
+-                 ${spoofax}/org.strategoxt.imp.runtime.sidebyside.legacy \
+                  ${spoofax}/org.strategoxt.imp.runtime.sidebyside.latest \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.core \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.core \
+@@ -142,7 +162,12 @@
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.test \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.transformer \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.ui \
++                 ${modelware}/org.spoofax.modelware.emf \
++                 ${modelware}/org.spoofax.modelware.gmf \
++                 ${modelware}/patched-plugins/ca.ecliptical.gmf.ant \
+                  ${spoofaxdeploy}/org.strategoxt.imp.feature \
++                 ${spoofaxdeploy}/org.spoofax.modelware.emf.feature \
++                 ${spoofaxdeploy}/org.spoofax.modelware.gmf.feature \
+                  ${spoofaxdeploy}/org.strategoxt.imp.updatesite
+         do
+           header "Copying $d"
+@@ -152,7 +177,13 @@
+ 
+         cp -R ${shrike} com.ibm.wala.shrike
+         cp -R ${lpgRuntime} lpg.runtime.java
+-        cp -R ${strategoxt}/strategoxt-java-backend org.strategoxt.strj
++        cp -R ${strategoxt}/strategoxt/stratego-libraries/java-backend org.strategoxt.strj
++        
++        chmod -R +w .
++        ensureDir org.spoofax.interpreter.externaldeps/lib
++        cp ${guava} org.spoofax.interpreter.externaldeps/lib/guava.jar
++        cp ${functional-java} org.spoofax.interpreter.externaldeps/lib/functionaljava.jar
++        unzip ${junit-benchmarks} -d org.spoofax.interpreter.externaldeps/lib/
+             
+         chmod -R +w .
+         rm -rf \
+@@ -164,23 +195,52 @@
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.updatesite/site.xml
+         sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.strategoxt.imp.feature/feature.xml
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.feature/feature.xml
+-
+-        header "Patching org.eclipse.imp using ${spoofaximppatches}/org.eclipse.imp/org.eclipse.imp.runtime.patch"
+-        patch -p0 < ${spoofaximppatches}/org.eclipse.imp/org.eclipse.imp.runtime.patch
+-        stopNest
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.emf.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.emf.feature/feature.xml
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.gmf.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.gmf.feature/feature.xml
+                     
+         stopNest
+       '';
+     };
+ 
++    generator = pkgs.releaseTools.antBuild {
++      name = "spoofax-imp-generator-s${spoofaxRev}";
++      inherit (jobs) src;
++
++      buildInputs = with pkgs; [strategoPackages.sdf ecj openjdk ];
++
++      preConfigure = ''
++        cd org.strategoxt.imp.generator
++        ulimit -s unlimited
++      '';
++
++      postUnpack = ''
++      '';
++
++      antTargets = [ "install" ];
++      antProperties = [
++        { name = "nativepath"; value = "${pkgs.strategoPackages.sdf}/bin/"; }
++        { name = "strategoxt-distrib"; value = (pkgs.lib.concatStrings [ strj ]); }
++        { name = "install-prefix"; value = "$out/dist"; }
++      ];
++      antBuildInputs = [ pkgs.ecj strj ];
++
++      ANT_OPTS="-Xss16m -Xmx1024m -server -XX:+UseParallelGC -XX:MaxPermSize=256m";
++
++      dontInstall = true;
++    };
++
++
+     build = pkgs.stdenv.mkDerivation rec {
+       name = "spoofax-imp-s${spoofaxRev}";
+       inherit (jobs) src;
+-          
+-      buildInputs = with pkgs; [ maven3 strcJava pkgconfig which ecj openjdk apacheAntOpenJDK];
+-      mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=/tmp/m3";
++      inherit (jobs) generator;
++
++      buildInputs = with pkgs; [ maven3 strj pkgconfig which ecj openjdk strategoPackages.sdf ];
++      mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+ 
+-      M2_REPO="/tmp/m3";
++      M2_REPO="tmp/m3";
+       MAVEN_OPTS="-Xss8m -Xmx1024m";
+       STRATEGOXT=pkgs.strategoPackages.strategoxt;
+       JAVA_FRONT=pkgs.strategoPackages.javafront;
+@@ -189,18 +249,21 @@
+       buildPhase = ''
+         ulimit -s unlimited
+ 
++        # local tmp directory
++        mkdir tmp
++
+         #hack
+         mkdir -p plugins
+         export eclipsefakehome=`pwd`
+-            
+-        mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
+ 
+-        mkdir -p org.strategoxt.imp.generator/src-gen/org/strategoxt/imp/generator
++        mvn org.eclipse.tycho:tycho-pomgenerator-plugin:generate-poms ${mvnFlags}            
++
+         mkdir -p org.strategoxt.strj/java
+-        cp ${strcJava}/share/strc-java/strategoxt.jar org.strategoxt.strj/java/
++        cp ${strj}/share/strategoxt/strategoxt/strategoxt.jar org.strategoxt.strj/java/
++
++        header "Copying back org.strategoxt.imp.generator"
++        cp -r ${generator}/dist org.strategoxt.imp.generator/
+ 
+-        header "Building org.strategoxt.imp.generator"
+-        make -C org.strategoxt.imp.generator all
+         stopNest
+ 
+         for e in */build.generated.xml
+@@ -209,104 +272,104 @@
+           if [[ -f $POM ]] ; then
+              sed -i 's|</project>||' $POM
+              echo '
+-  <build>
+-    <plugins>
+- <plugin>
+-    <groupId>org.apache.maven.plugins</groupId>
+-    <artifactId>maven-antrun-plugin</artifactId>
+-    <dependencies>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>aster</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/lib/aster.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>strategoxt</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.strj/java/strategoxt.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>sdf2imp</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/lib/sdf2imp.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>make_permissive.jar</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/lib/make_permissive.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>com.sun</groupId>
+-            <artifactId>tools</artifactId>
+-            <version>1.4.2</version>
+-            <scope>system</scope>
+-            <systemPath>''${java.home}/../lib/tools.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>ecj</groupId>
+-            <artifactId>ecj</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>jline</groupId>
+-            <artifactId>jline</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.spoofax.interpreter.library.jline/lib/jline-1.0.jar</systemPath>
+-        </dependency>
+-    </dependencies>
+-    <executions>
+-       <execution>
+-               <id>generate-sources</id>
+-               <phase>generate-sources</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="externaljarx" refid="maven.compile.classpath"/>
+-                          <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/lib/"/>
+-                          <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+-                          <property name="eclipse.home" value="${eclipse}/eclipse"/>
+-                          <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+-                          <ant antfile="build.main.xml" inheritRefs="true">
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-       <execution>
+-               <id>process-classes</id>
+-               <phase>process-classes</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/lib/"/>
+-                          <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+-                          <property name="eclipse.home" value="${eclipse}/eclipse"/>
+-                          <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+-                          <ant antfile="build.main.xml" inheritRefs="true">
+-                            <target name="java.jar"/> 
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-    </executions>
+-  </plugin>
+-    </plugins>
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <dependencies>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>aster</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/aster.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>strategoxt</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.strj/java/strategoxt.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>sdf2imp</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/sdf2imp.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>make_permissive.jar</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/make_permissive.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>com.sun</groupId>
++              <artifactId>tools</artifactId>
++              <version>1.4.2</version>
++              <scope>system</scope>
++              <systemPath>''${java.home}/../lib/tools.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>ecj</groupId>
++              <artifactId>ecj</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>${pkgs.ecj}/share/java/ecj.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>jline</groupId>
++              <artifactId>jline</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.spoofax.interpreter.library.jline/lib/jline-1.0.jar</systemPath>
++          </dependency>
++      </dependencies>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="externaljarx" refid="maven.compile.classpath"/>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++         <execution>
++           <id>process-classes</id>
++           <phase>process-classes</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                  <target name="java.jar"/> 
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
+ </build></project>' >>$POM
+           fi
+         done
+@@ -317,37 +380,100 @@
+           if [[ -f $POM ]] ; then
+              sed -i 's|</project>||' $POM
+              echo '
+-  <build>
+-    <plugins>
+- <plugin>
+-    <groupId>org.apache.maven.plugins</groupId>
+-    <artifactId>maven-antrun-plugin</artifactId>
+-    <executions>
+-       <execution>
+-               <id>generate-sources</id>
+-               <phase>generate-sources</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="strategoxt.dir" value="${STRATEGOXT}"/>
+-                          <property name="sdf.dir" value="${SDF}"/>
+-                          <ant antfile="build.ant.xml" inheritRefs="true">
+-                              <target name="bundle-ctree" />
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-    </executions>
+-  </plugin>
+-    </plugins>
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="strategoxt.dir" value="${STRATEGOXT}"/>
++                <property name="sdf.dir" value="${SDF}"/>
++                <ant antfile="build.ant.xml" inheritRefs="true">
++                  <target name="bundle-ctree" />
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
+ </build></project>' >>$POM
+           fi
+         done
+ 
+-        mvn package ${mvnFlags} -e
++sed -i 's|</build>||' pom.xml
++sed -i 's|</project>||' pom.xml
++echo '
++<pluginManagement>
++<plugins>
++
++<plugin>
++  <groupId>org.apache.maven.plugins</groupId>
++  <artifactId>maven-compiler-plugin</artifactId>
++  <version>3.1</version>
++  <configuration>
++    <source>''${java-version}</source>
++    <target>''${java-version}</target>
++    <debug>true</debug>
++  </configuration>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-maven-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <extensions>true</extensions>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-packaging-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <configuration>
++      <strictBinIncludes>false</strictBinIncludes>
++  </configuration>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>tycho-compiler-plugin</artifactId>
++  <version>''${tycho-version}</version>
++  <configuration>
++    <compilerArgument>-warn:-discouraged,forbidden,deprication,raw,unchecked,typeHiding,serial,unusedImport</compilerArgument>
++    <compilerArgument>-err:-forbidden</compilerArgument>
++    <source>''${java-version}</source>
++    <target>''${java-version}</target>
++    <debug>true</debug>
++  </configuration>
++</plugin>
++
++<plugin>
++  <groupId>org.eclipse.tycho</groupId>
++  <artifactId>target-platform-configuration</artifactId>
++  <version>''${tycho-version}</version>
++</plugin>
++
++</plugins>
++</pluginManagement>
++</build>
++
++<properties>
++  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++  <tycho-version>0.21.0</tycho-version>
++  <java-version>1.7</java-version>
++</properties>
++
++</project>' >> pom.xml
++
+         mvn integration-test ${mvnFlags} -e
+       '';
+           
+@@ -362,7 +488,7 @@
+       '';
+ 
+        __noChroot = true;
+-       meta.maintainers = ["lclkats at gmail.com" "m.dejonge at tudelft.nl" "rob.vermaas at gmail.com" "karltk at strategoxt.org" "g.h.wachsmuth at tudelft.nl" "gabrielkonat at gmail.com" "v.vergu at gmail.com"];
++       meta.maintainers = ["lclkats at gmail.com" "m.dejonge at tudelft.nl" "rob.vermaas at gmail.com" "karltk at strategoxt.org" "g.h.wachsmuth at tudelft.nl" "gabrielkonat at gmail.com" "v.vergu at gmail.com" "oskarvanrest at gmail.com"];
+      } ;   
+   } ;
+ 
+

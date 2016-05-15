@@ -1,0 +1,1580 @@
+From jianliang.j at gmail.com  Thu Jul 11 03:51:59 2013
+From: jianliang.j at gmail.com (=?UTF-8?B?6JKL5bu65Lqu?=)
+Date: Thu, 11 Jul 2013 09:51:59 +0800
+Subject: [Stratego Users] Spoofax version problem
+Message-ID: <CAB4JRkdG_A+LPAAUmFYnhier4prYX+3PH=axMeSkS8_mLb08jg@mail.gmail.com>
+
+Hi,
+   I want to rebuild one program transformation tools which is implemented
+with the help of Spoofax. But it reports errors when I import the project.
+The project owner said it might be Spoofax's version is not compatible with
+the project developed. And I want to know does Spoofax v1.1.0 can import
+programs developed with v0.6.0 or v1.0.0 ?
+
+-- 
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130711/2b5c7638/attachment.html>
+
+From baburadw at haverford.edu  Mon Jul 15 23:32:51 2013
+From: baburadw at haverford.edu (Besan Abu Radwan)
+Date: Mon, 15 Jul 2013 17:32:51 -0400
+Subject: [Stratego Users] Beginners Question on First Spoofax Example
+Message-ID: <CAFAsWy=gv6SyJXx-KkgWFc+sCcXPH-xCSpZk5o0xzxVmEmQVEw@mail.gmail.com>
+
+Dear Readers of the Spoofax Mailing List,
+
+My name is Besan A. Radwan, I am a research assistant for Professor Dave
+Wonnacott at Haverford College this summer. One of the projects that I have
+been working on with Professor Wonnacott is trying to work on getting a
+language transformation software fully running so that we can use it as an
+teaching tool in the upcoming year. Professor Wonnacott came across Spoofax
+and felt it would be a very good fit from the description. We have been
+working trying to get Spoofax fully running in time for the upcoming school
+year, however we have been running into a few problems which are listed
+below. Any guidance would be much appreciated!
+
+I am running eclipse version 3.7.2 on my University's Macintosh, version
+10.8.4. I have installed Spoofax version 1.1 around the end of May this
+year.
+I have read the 10 day Spoofax tutorials as well as the manual (the one in
+chapters).
+I have been running into a few problems regarding the Software and do
+not know if it is my lack of familiarity with the tool or a bug.
+
+My first problem is trying to run an example from the manual (
+http://hydra.nixos.org/build/5372152/download/1/manual/chunk-chapter/tutorial-sdf.html
+).
+
+What I did was (after installing Spoofax) was create a new project using
+the wizard in the new workspace. After this step I copy pasted the
+following from the above website(section 6.5.1.1):
+
+module Exp
+exports
+  context-free start-symbols Exp
+  sorts Id IntConst Exp
+
+  lexical syntax
+    [\ \t\n]  -> LAYOUT
+    [a-zA-Z]+ -> Id
+    [0-9]+    -> IntConst
+
+  context-free syntax
+    Id        -> Exp {cons("Var")}
+    IntConst  -> Exp {cons("Int")}
+
+    Exp "*"  Exp -> Exp  {left, cons("Mul")}
+    Exp "/"  Exp -> Exp  {left, cons("Div")}
+    Exp "%"  Exp -> Exp  {left, cons("Mod")}
+
+    Exp "+"  Exp -> Exp  {left, cons("Plus")}
+    Exp "-"  Exp -> Exp  {left, cons("Minus")}
+
+  context-free priorities
+    {left:
+      Exp "*"  Exp -> Exp
+      Exp "/"  Exp -> Exp
+      Exp "%"  Exp -> Exp
+    }
+  > {left:
+      Exp "+"  Exp -> Exp
+      Exp "-"  Exp -> Exp
+    }
+
+
+and replace it with the place that was meant to have the context free
+grammar: Test1.sdf in the syntax folder (the language is called Test1).
+
+After this, I copied the following (6.5.1.2):
+
+testsuite Expressions
+topsort Exp
+
+test simple int literal
+  "5" -> Int("5")
+
+test simple addition
+  "2 + 3" -> Plus(Int("2"), Int("3"))
+
+test addition is left associative
+  "1 + 2 + 3" -> Plus(Plus(Int("1"), Int("2")), Int("3"))
+
+test
+  "1 + 2 + 3" succeeds
+
+test multiplication has higher priority than addition
+  "1 + 2 * 3" -> Plus(Int("1"), Mul(Int("2"), Int("3")))
+
+test
+  "x" -> Var("x")
+
+test
+  "x1" -> Var("x1")
+
+test
+  "x1" fails
+
+test
+  "1 * 2 * 3" -> Mul(Int("1"), Mul(Int("2"), Int("3")))
+
+and pasted it into the example test-suite file: test-example.spt in a
+folder called Example.
+
+I came across many errors, the first of which being that I could not change
+the start symbol to be Exp instead of start. I changed this in the file
+Test1.main.esv in the editor folder (again the language is called Test1).
+In addition, it did not recognize any of the 6.5.1.2 example and said it
+failed to parse on the 2nd and 3rd example of the test above. When I
+proceeded to delete those examples it gave an error about failing to parse
+the next two examples and so on.
+
+The errors showed up as a red x in eclipse at random times. I.e. sometimes
+I would click transform and errors would appear, and other times the errors
+would just appear after I opened up a random file that was part of the
+project.
+
+Again, any guidance about how to tackle these problems would be much
+appreciated. We are hoping to use this Software in the upcoming year to
+teach students about compilers, transformations, and general language
+properties.
+
+Best,
+Besan A. Radwan
+
+-- 
+Besan Abu Radwan
+Haverford College, Class of 2014
+baburadw at haverford.edu; (703)-677-4228
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130715/b67c6e1a/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Mon Jul 15 23:44:59 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Mon, 15 Jul 2013 21:44:59 +0000
+Subject: [Stratego Users] Beginners Question on First Spoofax Example
+In-Reply-To: <CAFAsWy=gv6SyJXx-KkgWFc+sCcXPH-xCSpZk5o0xzxVmEmQVEw@mail.gmail.com>
+References: <CAFAsWy=gv6SyJXx-KkgWFc+sCcXPH-xCSpZk5o0xzxVmEmQVEw@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C42409254D3@SRV366.tudelft.net>
+
+Dear Besan,
+
+I think there are two issues here. First, did you build the project after editing the grammar and the main.esv file? Second, you use an old way to describe test cases, which is no longer supported. Have a look on the first days of the Spoofax in 10 days section, where we explain the new way to do this. Also, have a look on the cited paper there. Your test suite should look more like this:
+
+module example
+language YourLanguageName
+start symbol Exp
+
+test simple int literal [[5]] parse to Int("5")
+?
+
+Hope this helps, Guido Wachsmuth
+
+
+
+On Jul 15, 2013, at 23:32 , Besan Abu Radwan <baburadw at haverford.edu<mailto:baburadw at haverford.edu>>
+ wrote:
+
+Dear Readers of the Spoofax Mailing List,
+
+My name is Besan A. Radwan, I am a research assistant for Professor Dave Wonnacott at Haverford College this summer. One of the projects that I have been working on with Professor Wonnacott is trying to work on getting a language transformation software fully running so that we can use it as an teaching tool in the upcoming year. Professor Wonnacott came across Spoofax and felt it would be a very good fit from the description. We have been working trying to get Spoofax fully running in time for the upcoming school year, however we have been running into a few problems which are listed below. Any guidance would be much appreciated!
+
+I am running eclipse version 3.7.2 on my University's Macintosh, version
+10.8.4. I have installed Spoofax version 1.1 around the end of May this year.
+I have read the 10 day Spoofax tutorials as well as the manual (the one in chapters).
+I have been running into a few problems regarding the Software and do
+not know if it is my lack of familiarity with the tool or a bug.
+
+My first problem is trying to run an example from the manual (http://hydra.nixos.org/build/5372152/download/1/manual/chunk-chapter/tutorial-sdf.html).
+
+What I did was (after installing Spoofax) was create a new project using the wizard in the new workspace. After this step I copy pasted the following from the above website(section 6.5.1.1):
+
+
+module Exp
+exports
+  context-free start-symbols Exp
+  sorts Id IntConst Exp
+
+  lexical syntax
+    [\ \t\n]  -> LAYOUT
+    [a-zA-Z]+ -> Id
+    [0-9]+    -> IntConst
+
+  context-free syntax
+    Id        -> Exp {cons("Var")}
+    IntConst  -> Exp {cons("Int")}
+
+    Exp "*"  Exp -> Exp  {left, cons("Mul")}
+    Exp "/"  Exp -> Exp  {left, cons("Div")}
+    Exp "%"  Exp -> Exp  {left, cons("Mod")}
+
+    Exp "+"  Exp -> Exp  {left, cons("Plus")}
+    Exp "-"  Exp -> Exp  {left, cons("Minus")}
+
+  context-free priorities
+    {left:
+      Exp "*"  Exp -> Exp
+      Exp "/"  Exp -> Exp
+      Exp "%"  Exp -> Exp
+    }
+  > {left:
+      Exp "+"  Exp -> Exp
+      Exp "-"  Exp -> Exp
+    }
+
+and replace it with the place that was meant to have the context free grammar: Test1.sdf in the syntax folder (the language is called Test1).
+
+After this, I copied the following (6.5.1.2):
+
+
+testsuite Expressions
+topsort Exp
+
+test simple int literal
+  "5" -> Int("5")
+
+test simple addition
+  "2 + 3" -> Plus(Int("2"), Int("3"))
+
+test addition is left associative
+  "1 + 2 + 3" -> Plus(Plus(Int("1"), Int("2")), Int("3"))
+
+test
+  "1 + 2 + 3" succeeds
+
+test multiplication has higher priority than addition
+  "1 + 2 * 3" -> Plus(Int("1"), Mul(Int("2"), Int("3")))
+
+test
+  "x" -> Var("x")
+
+test
+  "x1" -> Var("x1")
+
+test
+  "x1" fails
+
+test
+  "1 * 2 * 3" -> Mul(Int("1"), Mul(Int("2"), Int("3")))
+
+
+and pasted it into the example test-suite file: test-example.spt in a folder called Example.
+
+I came across many errors, the first of which being that I could not change the start symbol to be Exp instead of start. I changed this in the file Test1.main.esv in the editor folder (again the language is called Test1). In addition, it did not recognize any of the 6.5.1.2 example and said it failed to parse on the 2nd and 3rd example of the test above. When I proceeded to delete those examples it gave an error about failing to parse the next two examples and so on.
+
+The errors showed up as a red x in eclipse at random times. I.e. sometimes I would click transform and errors would appear, and other times the errors would just appear after I opened up a random file that was part of the project.
+
+Again, any guidance about how to tackle these problems would be much appreciated. We are hoping to use this Software in the upcoming year to teach students about compilers, transformations, and general language properties.
+
+Best,
+Besan A. Radwan
+
+--
+Besan Abu Radwan
+Haverford College, Class of 2014
+baburadw at haverford.edu<mailto:baburadw at haverford.edu>; (703)-677-4228
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130715/8db799be/attachment.html>
+
+From alessandro.rossini at sintef.no  Tue Jul 16 16:46:05 2013
+From: alessandro.rossini at sintef.no (Alessandro Rossini)
+Date: Tue, 16 Jul 2013 14:46:05 +0000
+Subject: [Stratego Users] Documentation
+Message-ID: <124A5496-AAC2-4D00-8EA7-D702C5B57160@sintef.no>
+
+Dear all,
+
+Here at SINTEF, we are developing the Simulators that Write Themselves project, which aims at providing a DSL-based simulator system. In this project, we are considering using Spoofax for defining the syntax of the DSL as well as the corresponding transformation to C++ (and possibly other languages). Unfortunately, we are having some difficulties in navigating through the documentation of Spoofax.
+
+First, the documentation is scattered across several domains, i.e.:
+
+metaborg.org
+spoofax.org
+stratego-language.org
+strategoxt.org
+syntax-definition.org
+
+Second, part of the documentation is not accessible, e.g., the quick introduction to SDF at:
+
+ftp://ftp.stratego-language.org/pub/stratego/docs/sdfintro.pdf
+
+as well as the days 8, 9, and 10 of the tutorial Spoofax in 10 days at:
+
+http://strategoxt.org/CC/WebHome
+
+These issues with the documentation can be quite intimidating.
+
+Could you please fix these two documents? Also, could you please tell us if you are planning to port all the documentation to metaborg.org as it seems?
+
+Best regards from Oslo,
+Alessandro Rossini
+Research Scientist, SINTEF, Oslo, Norway
+http://alessandrorossini.org
+
+
+
+From sirinath at sakrio.com  Sat Jul 20 17:33:16 2013
+From: sirinath at sakrio.com (Suminda Dharmasena)
+Date: Sat, 20 Jul 2013 21:03:16 +0530
+Subject: [Stratego Users] LLVM Language Front End With IDE Support
+Message-ID: <CAAfFNYH4gnaeRwYzbV8QzPwfhpA9eYxAfqgOgyaVPdhMt+xMgw@mail.gmail.com>
+
+Hi,
+
+I am wondering if code development team can support seamless targeting LLVM
+back end with IDE support in Eclipse and NetBeans.
+
+Suminda
+--
+Suminda Sirinath Salpitikorala Dharmasena, B.Sc. Comp. & I.S. (Hon.) Lond.,
+P.G.Dip. Ind. Maths. J'Pura, MIEEE, MACM, CEO Sakr??! ? *Address*: 6G ? 1st
+Lane ? Pagoda Road ? Nugegoda 10250 ? Sri Lanka. ? *Mobile*
+: +94-(0)711007945 ? *Tele*: +94-(0)11-5 864614 / 5 875614 / 2 825908 ? *Web
+*: http://www.sakrio.com ?
+
+This email is subjected to the email Terms of Use and Disclaimer:
+http://www.sakrio.com/email-legal. Please read this first.
+--
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130720/c76724ac/attachment.html>
+
+From jianliang.j at gmail.com  Tue Jul 23 15:38:20 2013
+From: jianliang.j at gmail.com (=?UTF-8?B?6JKL5bu65Lqu?=)
+Date: Tue, 23 Jul 2013 21:38:20 +0800
+Subject: [Stratego Users] How to locate error causes
+Message-ID: <CAB4JRkcu4eKQ7+M55JPP7q_c3UsR9TMLjPURxnERfzA2ZZ6fdw@mail.gmail.com>
+
+Dear Stratext-Users:
+
+I try to transform DSL to another language. Parsing the source file into
+ATerm is OK. But rewriting fails.
+And I try to find out where the error is. Rule "genPcd" is defined. And to
+my knowledge, pp_java and so
+on may be related to tools such as *ast2abox* and *abox2text*. So How can I
+locate errors ?
+
+PS: This DSL transformer is developed with libjava-front and
+libaspectj-front. To be specific, This DSL
+extends Java and is transformed to AspectJ with the help of Spoofax.
+
+Best Wishes
+
+Console output attached:
+-------------------------------------------
+EventCJ: rewriting failed, trace:
+generate_java_0_0
+to_java_0_0
+map_1_0
+map_1_0
+genPcd_0_3
+pp_java_string_0_0
+pp_java5_to_string_0_0
+box2text_string_0_1
+abox2text_0_1
+abox2text_1_2
+abox2text_list_1_2
+[ EventCJ | critical ] Internal error: with clause failed unexpectedly in
+rule 'generate-java'
+
+ (CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),[],CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),"test/SwitchPositionDevice.ecj","E:/zzzzz/eventcj-src-pkg/eventcj-src-pkg/eventcj")
+org.spoofax.interpreter.core.InterpreterException: Exception during
+evaluation
+at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:117)
+at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+at
+org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+at org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:193)
+at
+org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+at
+org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+at
+org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+at
+org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+at
+org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+at
+org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.spoofax.interpreter.core.InterpreterErrorExit: Internal
+error: with clause failed unexpectedly in rule 'generate-java'
+1
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:194)
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:183)
+at
+org.strategoxt.lang.InteropSDefT$StrategyBody.evaluate(InteropSDefT.java:245)
+at org.strategoxt.lang.InteropSDefT$StrategyBody.eval(InteropSDefT.java:238)
+at org.spoofax.interpreter.stratego.Strategy.evaluate(Strategy.java:76)
+at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:109)
+... 11 more
+Caused by: org.strategoxt.lang.StrategoErrorExit: Internal error: with
+clause failed unexpectedly in rule 'generate-java'
+1
+at
+org.strategoxt.lang.compat.report_failure_compat_1_0.invoke(report_failure_compat_1_0.java:53)
+at
+org.strategoxt.stratego_lib.report_with_failure_0_2.invoke(report_with_failure_0_2.java)
+at org.strategoxt.lang.Strategy.invokeDynamic(Strategy.java:32)
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:192)
+... 16 more
+
+-- 
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130723/ec364bdd/attachment-0001.html>
+
+From invitation at ira.uka.de  Thu Jul 25 17:57:37 2013
+From: invitation at ira.uka.de (ASE2013)
+Date: Thu, 25 Jul 2013 17:57:37 +0200
+Subject: [Stratego Users] CFP: ASE 2013 Workshops
+Message-ID: <51F14AF1.6010905@ira.uka.de>
+
+
+
+
+                        - ASE 2013 WORKSHOPS -
+
+         * JPF * RERS * MALIR-SE * SoftMine * MOMPES * TRANSFER *
+
+28th IEEE/ACM International Conference on Automated Software Engineering
+
+             November 11-15, 2013, Silicon Valley, California
+
+                        (http://ase2013.org)
+
+
+
+========================================================================
+
+                        JOINT CALL FOR PAPERS
+
+SUBMISSION DEADLINES:
+
+   * The Java Pathfinder Workshop 2013
+
+       Abstract:                  Jul 28
+       Full Paper:                Aug 01
+
+   * RERS: Rigorous Examination of Reactive Systems Workshop
+
+       Training Phase:   May 21 - Jun 30
+       Challenge Phase:  Jul 05 - Sep 30
+
+   * MALIR-SE: First International Workshop on Machine Learning and
+     Information Retrieval for Software Engineering
+
+       Abstract:                  Aug 01
+       Full Paper:                Aug 06
+
+   * SoftMine: The Second International Workshop on Software Mining
+
+       Full Paper:                Aug 08
+
+   * MOMPES: 9th International Workshop on Model-based Methodologies for
+     Pervasive and Embedded Software
+
+       Full Paper:                Aug 08
+
+   * TRANSFER: The International Workshop on Transfer Learning in
+     Software Engineering
+
+       Full Paper:                Aug 18
+
+
+MORE INFORMATION:
+
+   * Web: http://ase2013.org/workshops.html
+   * Email: ase2013workshops at easychair.org
+
+========================================================================
+
+
+                   - Java Path Finder Workshop -
+         (http://ti.arc.nasa.gov/events/jpf-workshop-2013)
+
+
+CALL FOR SUBMISSIONS:
+
+We solicit submissions for existing research, applications, work in
+progress, and position papers on topics related to JPF or its
+extensions. If the underlying research idea has been published in
+another venue the paper needs to clarify the novel aspects that are
+being presented in the paper. We also solicit comparative analysis
+papers that evaluate algorithms in JPF or its extensions with relevant
+tools. The goal of the workshop is to encourage the flow of ideas
+relevant to JPF. The papers should be at most 5 pages long in the ACM
+Proceedings format.
+
+Accepted papers will be published in the ACM digital library.
+
+PROGRAM CHAIRS:
+
+    Peter Mehlitz, NASA Ames
+    Neha Rungta, NASA Ames
+    Willem Visser, U. Stellenbosch
+
+
+========================================================================
+
+
+                             - RERS -
+          Rigorous Examination of Reactive Systems Workshop
+                    (http://rers-challenge.org)
+
+
+
+The RERS Challenge series aims at a systematic investigation,
+evaluation, comparison, combination and improvement of any kind of
+methods for the analysis and validation of reactive systems, be they
+static, dynamic, black box or white box. Its second edition, the (RERS
+Challenge 2012), focused on ECA systems, a popular class of reactive
+systems, which comprises in particular Web services, decision support
+systems, and programmable logical controllers (PLCs). Besides their
+industrial relevance, ECA systems where chosen as they are on the one
+hand fully 'white-box': the full Java/C code will be available, but one
+the other hand have a black-box character: being simply one huge loop of
+guarded commands, the ECA code structure essentially reveals nothing
+about the implemented functionality. This property was meant to also
+address competitors who base their validation on execution rather than
+source code analysis.
+
+The RERS Challenge 2013 builds on last year's experience. It involves
+more complex code/data structures in order to attract source code
+analyzers, and it explicitly addresses execution-based analyses by
+providing black box and grey box scenarios. In particular the latter
+scenarios are challenging as they profit most from the combination of
+source code and execution-based analyses. We therefore hope to encourage
+people working on areas as diverse as
+
+* program analysis and verification,
+* symbolic execution,
+* software model checking,
+* statistical model checking,
+* model-based testing,
+* inference of invariants,
+* automata learning,
+* run-time verification,
+* monitoring,
+
+to not only apply there 'home' methods, but to investigate how their
+methods can be improved by combining them with others.
+
+CHALLENGE PROBLEMS:
+
+The RERS Challenge 2013 will provide a wealth of Benchmark problems of
+increasing complexity, the more involved of which will probably be
+beyond any individual state-of-the-art method or tool. A large set of
+Benchmarks will be synthesized to exhibit chosen properties, and then
+enhanced in an automated process to cover dedicated dimensions of
+difficulty, including:
+
+1. conceptual complexity of the exhibited properties (reachability,
+    safety, liveness),
+2. size of the systems (from a few hundred lines of code to millions
+    of them), and
+3. language features (arrays, indirect addressing, floating point
+    arithmetics, virtual method calls, recursion).
+
+Automatically generated problems will be presented
+
+* white box: i.e. in Java and C,
+* black box: as executables, not meant to be textually analyzed,
+* grey box: a mixture thereof.
+
+The challenge rules are essentially free style in order include as many
+participants as possible. They have a numeric part, which allows for a
+clear ranking in terms of number of correctly answered questions, and a
+textual part, where competitors are supposed to describe the approach.
+This part will be evaluated by the RERS committee. Details about the
+ranking or evaluation method can be found here.
+
+There are five price categories: white box, black box, grey box, overall
+and for the best approach taken (which must not necessarily have scored
+highest). In addition we will distribute achievement certificates for
+solutions passing a specific threshold.
+
+REWARDS:
+
+There will be an overall price and price for each kind, as well as a
+price for the best conceptual contribution in form of a gift certificate
+for Springer books sponsored by Springer. In addition there will be
+certificates for the first three in each category, and achievement
+certificates for every team passing the required threshold.
+
+The teams with the best solutions in their categories will be invited
+for a STTT Special Section summarizing the results of the challenge,
+and, in particular, presenting the most advanced solutions.
+
+PARTICIPATION AND SUBMISSION:
+
+Please refer to the website for further instructions:
+
+    http://rers-challenge.org/index.php
+
+
+PC CHAIRS:
+
+    Corina Pasareanu, NASA Ames, USA
+    Bernhard Steffen, Techinische Universitaet Dortmund, Germany
+
+ORGANISATION CHAIR:
+
+    Falk Howar, NASA Ames, USA
+
+PROGRAM COMMITTEE:
+
+    Hasan Ibne Akram, Techinische Universitaet Dortmund, Germany
+    Dirk Beyer, University of Passau, Germany
+    Corina Pasareanu, NASA Ames, USA
+    Bernhard Steffen, Techinische Universitaet Dortmund, Germany
+    Markus Schordan, Lawrence Livermore National Laboratory, CA, USA
+    Jaco van de Pol, University of Twente, The Netherlands
+    Siccor Verwer, Radboud University Nijmegen, The Netherlands
+    ......
+    More PC members to be added!
+
+
+========================================================================
+
+
+                             - MALIR-SE -
+                    First International Workshop on
+   Machine Learning and Information Retrieval for Software Engineering
+                  (http://factrace.net/malir-se2013)
+
+
+
+The workshop aims at providing a forum for discussions about the
+adoption of Machine Learning and Information Retrieval in software
+maintenance and evolution, that is a forum to establish a roadmap about
+the state-of-the-art as well as about future directions of the research
+in these topics.
+
+The workshop topics include all those concerning Machine Learning and
+Information Retrieval in software evolution; in particular but not
+limiting to:
+
+* Using and defining Machine Learning and Information Retrieval
+   techniques in all the phases of the software maintenance and evolution
+
+* Evaluating and comparing Machine Learning and Information Retrieval
+   techniques and tools
+
+* New trends in adopting Machine Learning and Information Retrieval
+
+* Combining Machine Learning and Information Retrieval techniques for
+   software maintenance and evolution
+
+* Exploring new needs in software evolution for applying Machine
+   Learning and Information Retrieval
+
+* Reporting lessons learned in applying Machine Learning and Information
+   Retrieval
+
+* Identifying strengths and weaknesses of Machine Learning and
+   Information Retrieval techniques
+
+* Systematic reviews and surveys about the state-of-the-art practices
+   for the application of Machine Learning and Information Retrieval
+   techniques
+
+We plan for having a one-day discussion-oriented workshop. In
+particular, we would like to include four types of sessions:
+
+* Short position statements from authors of the accepted papers (10/15
+   minutes) followed by preliminary discussion moderated by the
+   organizers. We will give guidelines about structuring the position
+   statements
+
+* A short plenary session to define discussion themes from both the
+   workshop theme and the interests of the participants, and split
+   participants in breakout working groups
+
+* A final plenary session at the end of the workshop will feature
+   outcomes of the working groups, and outlook on next steps, including
+   collaboration opportunities between academia and industry, and shared
+   publications
+
+
+PAPER SELECTION CRITERIA AND MECHANISM
+
+We welcome submissions by two types: (i) technical and (ii) industrial
+papers. All the papers have to be related to the topics of interest as
+listed above.
+
+Technical Papers
+
+Technical papers (max 4 pages in the IEEE format). Full papers describe
+new, ongoing and concluded research works in the field of interest for
+the workshop. For example, a full paper might describe how machine
+learning can be applied to analyze software artifacts during software
+evolution tasks. Again, a full paper can describe case studies and
+experiments in which Information Retrieval techniques have been applied
+in real contexts.
+
+Industrial Papers
+
+Industrial papers (max 4 pages in the IEEE format). This kind of paper
+should present experiences in the use of Machine Learning and
+Information retrieval in software industry. For example, an industrial
+paper might describe how machine learning techniques are applied and
+empirically assessed to predict the effort to perform maintenance
+operations. With respect to Information Retrieval techniques, an
+industrial paper could present how these techniques have been applied
+for the recovery of traceability links among software artifacts in the
+contact of impact analysis.
+
+All papers submitted to the workshop will be peer-reviewed by three
+members of the Program Committee. Acceptance will be primarily based on
+originality, contribution to the area, ability to generate discussion,
+quality of the paper and of the research, research completeness and
+maturity. Only original papers not submitted to journals or other
+conferences will be considered.
+
+Submit papers through EasyChair:
+
+    https://www.easychair.org/conferences/?conf=malirsease2013
+
+
+ORGANIZING COMMITTEE
+
+    Giuseppe Scanniello, Universita degli Studi della Basilicata, Italy
+    Alessandro Marchetto, Fondazione Bruno Kessler, Italy
+    Nasir Ali, Ecole Polytechnique de Montreal, Canada
+    David Lo, Singapore Management University, Singapore
+    Collin McMillan, School of Computer Science, University of Notre Dame
+
+PROGRAM COMMITTEE
+
+    Andrian Marcus, Wayne State University, USA
+    Bram Adams, Ecole Polytechnique de Montreal, Canada
+    Denys Poshyvanyk, The College of William and Mary
+    Fabrizio Silvestri, ISTI, CNR, Italy
+    Giuliano Antoniol, Ecole Polytechnique de Montreal, Canada
+    Hongyu Zhang, Tsinghua University, China
+    John Hosking, University of Auckland, New Zealand
+    Jonathan I. Maletic, Kent State University, USA
+    Sunghun Kim, Hong Kong University of Science and Technology
+    Tim Menzies, West Virginia University, USA
+    Yann-Gael Gueheneuc, Ecole Polytechnique de Montreal, Canada
+    Rainer Koschke, Universitaet Bremen, Ge
+    Michele Lanza, University of Lugano, Switzerland
+
+
+========================================================================
+
+
+                             - SoftMine -
+         The Second International Workshop on Software Mining
+            (http://lamda.nju.edu.cn/conf/softwaremining13)
+
+
+
+The workshop calls for research papers reporting original investigation
+results, real-world applications and system development experience in
+all aspects of software mining. The topics of the SoftwareMining-2013
+submissions may roughly fall into four major aspects, including 1) Data
+mining foundations for software analytics, 2) Software mining
+techniques, 2) Mining practices on various types of software-related
+data, and 3) Applications of data mining to facilitate specialized tasks
+in software engineering. Topics of interest include but are not limited
+to:
+
+A. Data mining foundations for software analytics
+   A1. Emerging machine learning methods for software analytics
+   A2. Predictive/descriptive modeling techniques for software analytics
+   A3. Novel frequent pattern mining techniques for software analytics
+   A4. Evolutionary computing techniques for software analytics
+B. Software mining techniques
+   B1. Software mining models and techniques
+   B2. Robust and highly scalable algorithms for mining large scale
+       software system
+   B3. Understanding and visualizing software mining results
+   B4. Noise-tolerant software mining
+   B5. Privacy preserving software mining
+C. Mining specific software data
+   C1. Mining software specifications
+   C2. Mining source code
+   C3. Mining execution traces and logs
+   C4. Mining change patterns and trends
+   C5. Mining bug and crash reports
+   C6. Mining natural language artifacts in software data
+   C7. Mining developer-related artifacts
+D. Software mining in specialized tasks
+   D1. Mining for software defect identification and characterization
+   D2. Mining for software testing and debugging
+   D3. Mining for cost/effort estimation
+   D4. Mining for software development and reuse
+   D5. Mining for resource allocation
+   D6. Mining for process control
+
+
+PUBLICATION AND PAPER SUBMISSION:
+
+Each submission should be no more than 8 pages total in length,
+consisting of title, authors' names, postal and email addresses, an up
+to 200-words abstract, up to 5 keywords, and a body with all contents,
+figures, tables, and references. The format should be kept the same as
+the ASE main track format. Additional information about formatting and
+style files is available online at:
+
+    http://www.conference-publishing.com/Instructions.php?Event=ASE13
+
+All manuscripts must be submitted electronically in a single PDF file
+using the conference management tool. Please make sure that any special
+fonts used are included in the submitted documents. Detailed
+instructions will be available soon on the SoftwareMining-2013 website:
+
+    http://lamda.nju.edu.cn/conf/softwaremining13
+
+For accepted papers, authors are required to prepare their final
+submissions for the workshop proceedings according to the reviewers'
+suggestions.
+
+
+CO-CHAIRS:
+
+    Ming Li, Nanjing University, China
+    Hongyu Zhang, Tsinghua University, China
+    David Lo, Singapore Management University, Singapore
+
+PROGRAM COMMITTEE:
+
+    Mithun Acharya, ABB Research, USA
+    Hong Cheng, The Chinese University of Hong Kong, China
+    Jens Grabowski, University of Gottingen, Germany
+    Shi Han, Microsoft Research Asia, China
+    Steffen Herbold, University of Gottingen, Germany
+    Lingxiao Jiang, Singapore Management University, Singapore
+    Sunghun Kim, Hong Kong University of Science and Technology, China
+    Jian-Guang Lou, Microsoft Research Asia, China
+    Leonardo Mariani, University of Milan Bicocca, Italy
+    Tim Menzies, West Virginia University, USA
+    Leandro L. Minku, University of Birmingham, UK
+    Tien N. Nguyen, Iowa State University, USA
+    Lin Tan, University of Waterloo, Canada
+    Min-Ling Zhang, Southeast University, China
+    Xiangyu Zhang, Purdue University, USA
+    Zhengyu Zhang, Institute of Software of CAS, China
+    Thomas Zimmermann, Microsoft Research, USA
+
+
+========================================================================
+
+
+                              - MOMPES -
+                     9th International Workshop on
+      Model-based Methodologies for  Pervasive and Embedded Software
+                (http://www3.di.uminho.pt/mompes/2013)
+
+
+
+We are seeking for research papers and experience reports (max. 20
+pages), as well as short and position papers (max. 6 pages). Submissions
+must conform to the ACM SEN formatting guidelines and should be
+submitted via EasyChair:
+
+    http://www.easychair.org/conferences/?conf=mompes2013
+
+Submissions will be selected based on the relevance to the workshop
+topics and the suitability to trigger interesting discussions. Each
+paper will be reviewed by at least 3 members of the Programme Committee.
+
+The workshop will have a strong emphasis on interaction among the
+participants. Hence, we intend to use a combination of (1) paper
+presentations with discussions on paper topics in the morning and (2) an
+interactive session in the afternoon.
+
+Accepted papers will be published in an ACM SIG newsletter. By
+submitting, authors are granting permission for ACM to publish in print
+and digital formats for the newsletter and the ACM archive. The authors
+retain copyright as is the case with any ACM newsletter publication of
+original material. The statement "Copyright is held by author." should
+appear on the first page of each paper.
+
+Download the full CfP in PDF format:
+
+    http://www3.di.uminho.pt/mompes/2013/2013-MOMPES-CfP.pdf
+
+
+ORGANIZING COMMITTEE:
+
+    Joao M. Fernandes, U Minho, PT
+    Goetz Botterweck, LERO and U Limerick, IE
+    Julia Rubin, IBM Research, Haifa, IL
+    Rita Suzana Maciel, UF Bahia, BR
+
+PROGRAMME COMMITTEE:
+
+    Robert Baillargeon, SODIUS, US
+    Leandro Buss Becker, UF Santa Catarina, BR
+    Gaelle Calvary, U Joseph Fourier, FR
+    Holger Giese, HPI Potsdam, DE
+    Luis Gomes, UN Lisboa, PT
+    Timo D. Hamalainen, TU Tampere, FI
+    Chris Hankin, Imperial College, UK
+    Luis Lamb, UFRGS, BR
+    Pedro Jose Marron, U Duisburg-Essen, DE
+    Elvinia Riccobene, U Milano, IT
+    Pablo Sanchez, U Malaga, ES
+    Oleg Sokolsky, U Pennsylvania, US
+    Olaf Spinczyk, U Dortmund, DE
+    Jonathan Sprinkle, U Arizona, US
+
+
+========================================================================
+
+
+                           - TRANSFER -
+                    The International Workshop on
+              Transfer Learning in Software Engineering
+                 (http://promisedata.org/transfer/13)
+
+
+
+Why is generality so hard to find in software engineering? Do such
+general principles exist (and we just have not found them yet)? Or are
+we doomed to a perpetual revision of all our coding and management
+practices for each new project? On this issue, we can identify two
+feuding schools of thought. Globalists and localists use different
+strategies for learning best practices. Globalists learn lessons once
+from all data then reuse those lessons at multiple sites, whereas
+localists learn best practices many times from local data and use them
+only at a single site (which implies that project managers must devote
+their scant resources to a "local lessons team" that pursues best local
+practices).
+
+This workshop will focus on the following issue: Whose strategy is best
+for finding project-specific best practices: the globalists or the
+localists? Or perhaps it is best to combine both approaches. It is
+certainly important to learn best practices from past projects. However,
+it is just as important to know how to transfer and adapt that
+experience to current projects. No project is exactly like previous
+projects -- hence, the trick is to find which parts of the past are most
+relevant and can be transferred into the current project.
+
+TOPICS
+
+Topics of interest are theoretical foundations and practical approaches
+related, but not limited, to the integration of the transfer learning
+and software engineering. While our focus in on automatic methods, we
+are also interested in hybrid human/computer methods.
+
+PAPER SUBMISSION
+
+We invite submissions in either of the following forms:
+
+* Research papers presenting novel approaches with new research results
+   (maximum 8 pages including references).
+
+* Position papers describing new ideas not yet fully developed or
+   preliminary tool support (maximum 4 pages including references).
+
+Submitted papers must be written in English, should not have been
+submitted for review or published elsewhere, and must conform to the ACM
+SIG proceedings templates. Submissions are accepted via Easy Chair.
+Submit your paper here:
+
+   https://www.easychair.org/conferences/?conf=transfer13
+
+
+PROCEEDINGS & SPECIAL ISSUE
+
+Accepted papers will be published in the workshop proceedings and
+available electronically via ACM Digital Library within its
+International Conference Proceedings Series. Authors of best papers will
+be invited to submit a revised and extended version of their papers to a
+journal special issue.
+
+GENERAL CHAIR
+
+    Tim Menzies, West Virginia University, USA
+
+PROGRAM CHAIRS
+
+    Leandro Minku, The University of Birmingham, UK
+    Ye Yang, Chinese Academy of Sciences, China
+
+PROGRAM COMMITTEE
+
+    Ayse Bener, Ryerson University
+    David Bowes, University of Hertfordshire
+    Filomena Ferrucci, University of Salerno
+    Harald Gall, University of Zurich
+    Gregory Gay, University of Minnesota
+    Tracy Hall, Brunel University
+    Jacky Keung, City University of Hong Kong
+    Ekrem Kocaguneli, West Virginia University
+    Chris Lokan, University of New South Wales
+    Tim Menzies, West Virginia University
+    Leandro Minku, The University of Birmingham
+    Brendan Murphy, Microsoft Research
+    Sinno Jialin Pan, Institute for Infocomm Research
+    Federica Sarro, University College London
+    Burak Turhan, University of Oulu
+    Ye Yang, Chinese Academy of Sciences
+    Qiang Yang, Hong Kong University of Science and Technology
+
+PUBLICATIONS CHAIR
+
+    Fayola Peters, West Virginia University, USA
+
+PUBLICITY AND SOCIAL MEDIA CHAIR
+
+    Zhimin He, Chinese Academy of Sciences, China
+
+WEBMASTER
+
+    Leandro Minku, The University of Birmingham, UK
+
+
+From Lai.Wei at rice.edu  Fri Jul 26 04:24:35 2013
+From: Lai.Wei at rice.edu (Lai Wei)
+Date: Thu, 25 Jul 2013 21:24:35 -0500
+Subject: [Stratego Users] An error when trying to use concrete syntax in
+	spoofax 1.1
+Message-ID: <CAN8kabPYCxdu2X541nj3HKNztCPOnBD-34nsLBP_zb4Lk+UB1Q@mail.gmail.com>
+
+Hi,
+
+    I followed instructions in thread
+https://mailman.st.ewi.tudelft.nl/pipermail/users/2010-June/000193.html  to
+set up concrete syntax for my small DSL. After I edited the
+*build.main.xml*file, named my main sdf file as
+*Stratego-Test*, and downloaded StrategoMix module, the project builds
+successfully, and I can find the file* Stratego-Test.tbl* in the *include *
+directory.
+
+    However, things get wrong when I created *generate.meta* file. After I
+created this file and put
+*Meta([Syntax("Stratego-Test")])* in the file, the following error occured:
+
+*stratego.jvm.helper:*
+*        [java] [ Main | error ]
+E:/WorkSpaces/Stratego/general/test/trans/generate.str: Syntax error near
+unexpected character 'o' at line 1, column 2*
+*        [java] parse error in
+E:/WorkSpaces/Stratego/general/test/trans/generate.str*
+
+
+If the file *generate.meta* contains nothing, the project would build
+successfully while throwing the following warning:
+
+*stratego.jvm.helper:*
+*        [java] [ Main | warning ] Meta data for file
+E:/WorkSpaces/Stratego/general/test/trans/generate.str not well-formed :*
+*        [java]           ?*
+
+
+The file *generate.str* is as follows:
+
+*module generate*
+*
+*
+*imports*
+*  libstratego-lib*
+*  libstratego-gpp*
+*  libstratego-aterm*
+*  include/Test*
+*  lib/editor-common.generated*
+*  lib/compilation-library.generated*
+*
+*
+*rules*
+
+
+I have no idea why this error occurs, anyone have the answer?
+
+Thank you!
+
+-- 
+
+Sincerely yours,
+Lai Wei,
+Ph.D. Studuent,
+Department of Computer Science,
+Rice University,
+Houston, TX, USA
+Email: Lai.Wei at rice.edu
+Website: http://laiwei.weebly.com/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130725/afb4a13a/attachment-0001.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 05:49:37 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 03:49:37 +0000
+Subject: [Stratego Users] How to locate error causes
+In-Reply-To: <CAB4JRkcu4eKQ7+M55JPP7q_c3UsR9TMLjPURxnERfzA2ZZ6fdw@mail.gmail.com>
+References: <CAB4JRkcu4eKQ7+M55JPP7q_c3UsR9TMLjPURxnERfzA2ZZ6fdw@mail.gmail.com>
+Message-ID: <2BD7F9EC-4E21-4789-9BFE-E7BE8349A632@tudelft.nl>
+
+Hi.
+
+The trace tells you that pretty-printing fails. Typically, this is caused by an erroneous AST, which contains terms which cannot be handled by the pretty-printer. To find such terms, you can use the following code:
+
+        output := <the-pp-strategy> input
+  <+ <bottomup(try(not(is-string) ; not(is-list) ; not(the-pp-strategy) ; debug(!"cannot pp "))); fail> input
+
+Make sure to replace the-pp-strategy with your actual pretty-printing strategy. The second line performs a bottomup traversal and tries to find terms which cannot be pretty-printed and reports those terms to the console (debug).
+
+I also created question for this on Yellowgrass: http://yellowgrass.org/question/Spoofax/28
+
+-- Guido Wachsmuth
+
+On Jul 23, 2013, at 15:38 , ??? <jianliang.j at gmail.com<mailto:jianliang.j at gmail.com>> wrote:
+
+Dear Stratext-Users:
+
+I try to transform DSL to another language. Parsing the source file into ATerm is OK. But rewriting fails.
+And I try to find out where the error is. Rule "genPcd" is defined. And to my knowledge, pp_java and so
+on may be related to tools such as ast2abox and abox2text. So How can I locate errors ?
+
+PS: This DSL transformer is developed with libjava-front and libaspectj-front. To be specific, This DSL
+extends Java and is transformed to AspectJ with the help of Spoofax.
+
+Best Wishes
+
+Console output attached:
+-------------------------------------------
+EventCJ: rewriting failed, trace:
+generate_java_0_0
+to_java_0_0
+map_1_0
+map_1_0
+genPcd_0_3
+pp_java_string_0_0
+pp_java5_to_string_0_0
+box2text_string_0_1
+abox2text_0_1
+abox2text_1_2
+abox2text_list_1_2
+[ EventCJ | critical ] Internal error: with clause failed unexpectedly in rule 'generate-java'
+           (CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),[],CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),"test/SwitchPositionDevice.ecj","E:/zzzzz/eventcj-src-pkg/eventcj-src-pkg/eventcj")
+org.spoofax.interpreter.core.InterpreterException: Exception during evaluation
+at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:117)
+at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+at org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+at org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:193)
+at org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+at org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+at org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+at org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+at org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+at org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.spoofax.interpreter.core.InterpreterErrorExit: Internal error: with clause failed unexpectedly in rule 'generate-java'
+1
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:194)
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:183)
+at org.strategoxt.lang.InteropSDefT$StrategyBody.evaluate(InteropSDefT.java:245)
+at org.strategoxt.lang.InteropSDefT$StrategyBody.eval(InteropSDefT.java:238)
+at org.spoofax.interpreter.stratego.Strategy.evaluate(Strategy.java:76)
+at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:109)
+... 11 more
+Caused by: org.strategoxt.lang.StrategoErrorExit: Internal error: with clause failed unexpectedly in rule 'generate-java'
+1
+at org.strategoxt.lang.compat.report_failure_compat_1_0.invoke(report_failure_compat_1_0.java:53)
+at org.strategoxt.stratego_lib.report_with_failure_0_2.invoke(report_with_failure_0_2.java)
+at org.strategoxt.lang.Strategy.invokeDynamic(Strategy.java:32)
+at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:192)
+... 16 more
+
+--
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130731/47cbc974/attachment-0001.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 05:53:35 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 03:53:35 +0000
+Subject: [Stratego Users] LLVM Language Front End With IDE Support
+In-Reply-To: <CAAfFNYH4gnaeRwYzbV8QzPwfhpA9eYxAfqgOgyaVPdhMt+xMgw@mail.gmail.com>
+References: <CAAfFNYH4gnaeRwYzbV8QzPwfhpA9eYxAfqgOgyaVPdhMt+xMgw@mail.gmail.com>
+Message-ID: <3EAF1D0C-A239-42C3-A5BC-E2D320CE70BC@tudelft.nl>
+
+Hi Suminda,
+
+you can use Spoofax to develop a LLVM backend with IDE support in Eclipse, but not in NetBeans. We have some plans to develop such a backend ourselves, but this has no high priority. If you like to start such an effort, I am willing to help and contribute.
+
+-- Guido Wachsmuth
+
+On Jul 20, 2013, at 17:33 , Suminda Dharmasena <sirinath at sakrio.com<mailto:sirinath at sakrio.com>> wrote:
+
+Hi,
+
+I am wondering if code development team can support seamless targeting LLVM back end with IDE support in Eclipse and NetBeans.
+
+Suminda
+--
+Suminda Sirinath Salpitikorala Dharmasena, B.Sc. Comp. & I.S. (Hon.) Lond., P.G.Dip. Ind. Maths. J'Pura, MIEEE, MACM, CEO Sakr??! ? Address: 6G ? 1st Lane ? Pagoda Road ? Nugegoda 10250 ? Sri Lanka. ? Mobile: +94-(0)711007945 ? Tele: +94-(0)11-5 864614 / 5 875614 / 2 825908 ? Web: http://www.sakrio.com<http://www.sakrio.com/> ?
+
+This email is subjected to the email Terms of Use and Disclaimer: http://www.sakrio.com/email-legal. Please read this first.
+--
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130731/a8bc1ce4/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 06:07:39 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 04:07:39 +0000
+Subject: [Stratego Users] Documentation
+In-Reply-To: <124A5496-AAC2-4D00-8EA7-D702C5B57160@sintef.no>
+References: <124A5496-AAC2-4D00-8EA7-D702C5B57160@sintef.no>
+Message-ID: <A2796333-31AE-4046-B520-BEAF3B0F1C4B@tudelft.nl>
+
+Dear Alessandro,
+
+we are aware of these issues and your are right, we are planning to consolidate all documentation at metaborg.org. We will work on this for the next edition of my course on Compiler Construction at Delft University of Technology, which starts in September. 
+
+> ftp://ftp.stratego-language.org/pub/stratego/docs/sdfintro.pdf
+
+I have no idea what was the original document there, but I point my students to the following two pages:
+
+	http://homepages.cwi.nl/~daybuild/daily-books/syntax/1-syntax-analysis/syntax-analysis.html
+	http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.html
+
+> as well as the days 8, 9, and 10 of the tutorial Spoofax in 10 days at:
+> 
+> http://strategoxt.org/CC/WebHome
+
+These pages are hidden in metaborg.org, but lack navigation. A new version of the exercises will become available in September. For now, I put the old text on github:
+
+	https://github.com/guwac/compiler-construction/tree/master/assignments/milestone3-codegen
+
+-- Guido Wachsmuth
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 06:10:09 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 04:10:09 +0000
+Subject: [Stratego Users] Spoofax version problem
+In-Reply-To: <CAB4JRkdG_A+LPAAUmFYnhier4prYX+3PH=axMeSkS8_mLb08jg@mail.gmail.com>
+References: <CAB4JRkdG_A+LPAAUmFYnhier4prYX+3PH=axMeSkS8_mLb08jg@mail.gmail.com>
+Message-ID: <7CA6AD68-C20F-4D81-8825-FAA4391F0DF9@tudelft.nl>
+
+Hi,
+
+can you provide more information? Which tool do you like to rebuild? What are the errors?
+
+-- Guido Wachsmuth
+
+On Jul 11, 2013, at 03:51 , ??? <jianliang.j at gmail.com<mailto:jianliang.j at gmail.com>> wrote:
+
+Hi,
+   I want to rebuild one program transformation tools which is implemented with the help of Spoofax. But it reports errors when I import the project. The project owner said it might be Spoofax's version is not compatible with the project developed. And I want to know does Spoofax v1.1.0 can import programs developed with v0.6.0 or v1.0.0 ?
+
+--
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130731/94763ddf/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 06:12:16 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 04:12:16 +0000
+Subject: [Stratego Users] Cryptic JSGLR error
+	-	java.lang.IllegalStateException: Unkown node type
+In-Reply-To: <BAY175-DS46A25B50972F9B5D8E7FBD0BA0@phx.gbl>
+References: <BAY175-DS46A25B50972F9B5D8E7FBD0BA0@phx.gbl>
+Message-ID: <871B17F8-6EBD-4772-8DC8-B4A05B9D4E0B@tudelft.nl>
+
+Hi,
+
+can you identify the rule(s) which cause(s) this behaviour? Can you provide us with these rules?
+
+-- Guido Wachsmuth
+
+On May 7, 2013, at 21:25 , Kr?lik Barnab?s <kralikba at msn.com<mailto:kralikba at msn.com>> wrote:
+
+Hi,
+
+I?m constantly getting this error when trying to analyse my source file based on an sdf generated from a tmpl file. I?m using nightly on Oracle JRE 7 u4, x64, under Windows.
+
+Am I doing something wrong? Is this really an internal error? Or a known compatibility bug?
+
+Thanks
+Barnab?s
+
+ps. here is the complete stack trace:
+java.lang.IllegalStateException: Unkown node type
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeAmb(TreeBuilder.java:421)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:308)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:279)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:304)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:279)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:304)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:279)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:304)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:304)
+                at org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java:304)
+                at org.spoofax.jsglr.client.imploder.TopdownTreeBuilder.buildTree(TopdownTreeBuilder.java:28)
+                at org.spoofax.jsglr.client.imploder.TreeBuilder.buildTree(TreeBuilder.java:161)
+                at org.spoofax.jsglr.client.Disambiguator.yieldTree(Disambiguator.java:338)
+                at org.spoofax.jsglr.client.Disambiguator.yieldTreeTop(Disambiguator.java:351)
+                at org.spoofax.jsglr.client.Disambiguator.applyFilters(Disambiguator.java:291)
+                at org.spoofax.jsglr.client.Disambiguator.applyFilters(Disambiguator.java:255)
+                at org.spoofax.jsglr.client.SGLR.sglrParse(SGLR.java:570)
+                at org.spoofax.jsglr.client.SGLR.parse(SGLR.java:510)
+                at org.spoofax.jsglr.client.SGLR.parse(SGLR.java:313)
+                at org.strategoxt.imp.runtime.parser.JSGLRI.doParse(JSGLRI.java:170)
+                at org.strategoxt.imp.runtime.parser.AbstractSGLRI.parse(AbstractSGLRI.java:113)
+                at org.strategoxt.imp.runtime.parser.SGLRParseController.doParse(SGLRParseController.java:370)
+                at org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:298)
+                at org.strategoxt.imp.runtime.services.StrategoObserverBackgroundUpdateJob.analyzeFile(StrategoObserverBackgroundUpdateJob.java:112)
+                at org.strategoxt.imp.runtime.services.StrategoObserverBackgroundUpdateJob.analyze(StrategoObserverBackgroundUpdateJob.java:64)
+                at org.strategoxt.imp.runtime.services.StrategoAnalysisQueue$UpdateJob.run(StrategoAnalysisQueue.java:83)
+                at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130731/5077c14d/attachment-0001.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 06:23:32 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 04:23:32 +0000
+Subject: [Stratego Users] Stack Overflow
+In-Reply-To: <CAAzr2JNcaE_Qxr49Hx20oxKuM9-24eEgEfHHCdyaGGBKGJBuJQ@mail.gmail.com>
+References: <CAAzr2JNcaE_Qxr49Hx20oxKuM9-24eEgEfHHCdyaGGBKGJBuJQ@mail.gmail.com>
+Message-ID: <4929BA6C-30BE-4DD4-9E98-4D4C6E3082F2@tudelft.nl>
+
+Hi Anderson,
+
+your grammar is highly ambiguous, which probably causes the stack overflow. I assume the following rules are for binary expressions?
+
+                Expression PONTO Expression  ->           Expression
+{cons("PontoExpression")}
+
+                Expression VIRGULA Expression              ->
+Expression {cons("VirgulaExpression")}
+
+You should rephrase them like this:
+
+context-free syntax
+
+Exp "+" Exp -> Exp {left} %% you can also use right or non-assoc here
+Exp "-" Exp -> Exp {left}
+Exp "*" Exp -> Exp {left}
+Exp "/" Exp -> Exp {left}
+
+And add priorities:
+
+context-free priorities
+
+{left:
+        Exp "*" Exp -> Exp
+        Exp "/" Exp -> Exp
+        }
+        > {left:
+        Exp "+" Exp -> Exp
+        Exp "-" Exp -> Exp
+        }
+
+There are more ambiguities in your grammar, but this should help already.
+
+-- Guido Wachsmuth
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130731/8b6dd281/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Jul 31 06:37:58 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 31 Jul 2013 04:37:58 +0000
+Subject: [Stratego Users] SDF/NaBL: a stylistic question
+In-Reply-To: <5174DBC0.7010405@gmail.com>
+References: <5171634C.70302@gmail.com>
+	<39465ABECE3CBC4EA3A3DDC99D576C423FEBF60F@srv365.tudelft.net>
+	<5174DBC0.7010405@gmail.com>
+Message-ID: <07117881-42CA-40F5-8E92-1770D1157912@tudelft.nl>
+
+Hi Scott,
+
+the next version of NaBL arrived in Spoofax nightly. It provides support for resolving overloaded names and gives you incremental name and type analysis for free. We will use this version in my course on Compiler Construction at Delft University of Technology, which starts in September (the corresponding lab will be mid October).  Let me know if you like to try nightly or wait for the more stable October version.
+
+-- Guido Wachsmuth
+
+On Apr 22, 2013, at 08:42 , Scott Finnie <scott.finnie at gmail.com> wrote:
+
+> Hi Guido, thanks for the comprehensive response.
+> 
+>> Similar things are needed for resolving overloaded methods. However, this is only supported in the next version of
+>> NaBL (which we are working on).
+> 
+> 
+> Relations are defined outside classes.  However I could use a de-sugaring transform to move them inside classes as an interim step.  Depends how long it'll be before the next version of NaBL :-)
+> 
+>> Regarding your question if this might be easier represented as a plain list, I don't think a list encodes enough
+>> information explicitly. The 1st element is a class reference, remaining elements are relationships. This makes all
+>> analyses hard to specify, since you need to distinguish a list which actually starts with a class reference from
+>> lists of remaining relationships. With constructors, you can easily distinguish both cases. I think you benefit
+>> from this not only in your analysis, but also in all other transformations (e.g. code generation).
+> 
+> Yes, you're right.  I was thinking initially of simple checks while developing the grammar.  But I would have come across this later.
+> 
+> - Scott.
+> 
+> 
+> 
+> On 19/04/13 19:03, Guido Wachsmuth - EWI wrote:
+>> Hi Scott,
+>> 
+>> your example is similar to field and method access in Java, right? In this case, b and c do not refer to a class, but to a field in a class. The same, I think, applies to b and c in your example, which are relationship names.
+>> 
+>> If I am right, your rules should read like this:
+>> 
+>> 	NavExpr(c):
+>> 		refers to Class c
+>> 
+>> 	NavExpr(context, rel):
+>> 		refers to Relationship rel in Class c
+>> 		where context has type ClassType(c)
+>> 
+>> This should go along with rules for definition sites:
+>> 
+>> 	Class(c, rel*):
+>> 		defines Class c of type ClassType(c)
+>> 		scopes Relationship
+>> 
+>> 	Rel(rel, target):
+>> 		defines Relationship rel of type target
+>> 
+>> These rules assume that relations are defined inside a class and that target is a class type, represented as ClassType(c). You also need type rules to get this working:
+>> 
+>> 	type-of: NavExpr(c)        -> <lookup-type> c
+>> 	type-of: NavExpr(_, rel) -> <lookup-type> rel
+>> 
+>> When you define relations outside of classes, you need a type-restricted refers-rule:
+>> 
+>> 	NavExpr(c):
+>> 		refers to Class c
+>> 
+>> 	NavExpr(context, rel):
+>> 		refers to Relationship rel of type (source-type, _)
+>> 		where context has type source-type
+>> 
+>>  	Class(c, rel*):
+>> 		defines Class c of type ClassType(c)
+>> 	
+>> 	Rel(rel, source, target):
+>> 		defines Relationship rel of type (source, target)
+>> 
+>> Similar things are needed for resolving overloaded methods. However, this is only supported in the next version of NaBL (which we are working on).
+>> 
+>> Regarding your question if this might be easier represented as a plain list, I don't think a list encodes enough information explicitly. The 1st element is a class reference, remaining elements are relationships. This makes all analyses hard to specify, since you need to distinguish a list which actually starts with a class reference from lists of remaining relationships. With constructors, you can easily distinguish both cases. I think you benefit from this not only in your analysis, but also in all other transformations (e.g. code generation).
+>> 
+>> -- Guido Wachsmuth
+>> 
+>> 
+>> On Apr 19, 2013, at 17:31 , Scott Finnie <scott.finnie at gmail.com> wrote:
+>> 
+>>> Hello all
+>>> 
+>>> Building a language using Spoofax and have a question on the best way to implement the following.  Any suggestions appreciated.
+>>> 
+>>> Background
+>>> ----------
+>>> The language supports classes and relationships (think e.g. UML). So for example:
+>>> 
+>>> [Class A] ------------- [Class B] --------------- [Class C]
+>>> 
+>>> I need to be able to specify navigations across relationships, for example:
+>>> 
+>>> - a.b.c would navigate from a through b to c (instances of A, B, C respectively).
+>>> 
+>>> Question
+>>> --------
+>>> The question is: how best to represent the navigation expression in SDF?  I can see two choices:
+>>> 
+>>> Option 1:
+>>>    {ID "."}+         -> NavExpr {"NavExpr"}
+>>> 
+>>>  Option 2:
+>>>    ID                -> NavExpr {"NavExpr"}
+>>>    NavExpr "." ID    -> NavExpr {"NavExpr"}
+>>> 
+>>> The former is simpler, both in grammar and resultant parse tree. However: I'm not sure how to construct name resolution in NaBL for it.  The second is less simple (syntax + AST), but I can write NaBL expressions as follows:
+>>> 
+>>> NavExpr(x) :
+>>>    refers to Class x
+>>> 
+>>> NavExpr(_, x):
+>>>    refers to Class x
+>>> 
+>>> So: is there a way to construct NaBL for option 1?  If so, is either option better (for some definition of "better"?).
+>>> 
+>>> Thanks,
+>>> Scott.
+>>> 
+>>> 
+>>> 
+>>> 
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+

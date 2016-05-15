@@ -1,0 +1,581 @@
+From spider.vz at gmail.com  Tue May  3 02:07:33 2011
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Tue, 3 May 2011 02:07:33 +0200
+Subject: [Stratego Users] 2011 GTTSE/SLE Students' Workshop: Call for
+	extended abstracts
+Message-ID: <BANLkTi=wAxNN41B1--b5R+=Hq-azMi50Lw@mail.gmail.com>
+
+   * * *   2011 GTTSE/SLE Students' Workshop    * * *
+
+             July 5, 2011 Braga, Portugal
+
+     http://gttse.wikidot.com/2011:students-workshop
+             http://planet-sl.org/sle2011/
+
+The co-location of SLE and GTTSE provides us the opportunity to
+combine their respective Doctoral Symposium and Participants' Workshop
+to form the GTTSE/SLE Students' Workshop.  The students' workshop
+features presentations by the GTTSE and SLE participants: PhD
+students, PostDocs, practitioners, and other members of the computer
+science community.  All registered participants are asked to submit an
+extended abstract in one of two forms:
+
+1. Committed junior researchers may leverage the workshop as a means
+to present their relevant research and to receive feedback from senior
+researchers in the field.  Submissions of this form should be an
+extended abstract of 2 pages in Springer LNCS style as a presentation
+proposal for the workshop.  This may describe new ideas or early
+results, but there are no formal specifications as to the abstracts
+content.
+
+2. In addition, doctoral students may use the workshop as a way to get
+feedback on their proposed doctoral research plan.  Students should
+submit a 4 page (LNCS style, excluding references) abstract based on
+the following outline:
+- Problem Description and Motivation.
+- Brief Overview of Related Work, highlighting the gap the work aims
+  to fill.
+- Proposed Solution, a high-level overview and any hypotheses
+  that you have formulated.
+- Research Method, describing how you will validate or refute your
+  hypotheses.
+It is understood that students at different stages of their research
+will be able to make more or less detailed and stabilized
+contributions to each of these sections. Therefore, we provide this
+outline as more of a guide than a strict requirement. Nonetheless, we
+encourage even early-stage PhD students to consider using this
+outline.
+
+
+Selection process for the SLE/GTTSE Students' Workshop
+
+The organizers will select proposals, with assistance as needed from
+the GTTSE scientific committee and the SLE program committee, for an
+interesting program.  There are always more presentation proposals
+than there are slots in the workshop. There are likely to be 10?15
+slots for presentations with 10?15 minutes each. The organizers will
+select a compelling set of presentation topics. This selection process
+is supposed to be informal and must not be confused with any sort of
+peer review or selective review.  In particular, no formal feedback is
+returned to the authors of the 2 page abstracts. Authors are merely
+notified of the selection's outcome.  Authors of 4 page doctoral
+research plans will receive informal feedback from reviewers chosen
+from the GTTSE scientific committee and SLE program committee.
+Authors who are not selected and who still wish to present some of
+their material may exhibit (and present) a poster at GTTSE.
+
+All reasonable submissions are distributed in printed form at the
+workshop. The abstracts will not be published online. The titles of
+selected presentations appear online though. Presenters may also
+voluntarily submit their slides for inclusion on the website.
+
+
+The GTTSE/SLE Students' Workshop will feature an award sponsored by
+SIG (The Software Improvement Group), to be given to the best
+presentation at the workshop. The awardee will be determined by a
+committee of senior attendees that is assembled by the organizers.
+
+
+Why present at and participate in the workshop?
+
+Each presenter benefits by means of the feedback from the renowned
+tutorial speakers and other participants. Presentation at the workshop
+may also spark off new collaborations. The school and conference, as a
+whole, also benefits from the workshop because the presentations
+constitute a blend of the current research interests in the GTTSE and
+SLE communities.
+
+
+Submission
+
+The submission deadline is May 27, 2011.  This coincides with the end
+of Early Registration for both GTTSE and SLE.  Abstracts must be
+submitted via EasyChair.  See the event web pages (above) for
+submission details.
+
+
+Notes on the GTTSE post-proceedings
+
+After the school, all GTTSE participants (i.e., presenters,
+non-presenters, and non-submitters to the workshop) are encouraged to
+submit a contribution for inclusion into the post-proceedings. These
+contributions are properly reviewed and selection for the
+post-proceedings is competitive. Successful contributions have to meet
+high originality and quality standards. Compared to the usual
+peer-reviewed venue, GTTSE is particularly prepared to provide gentle
+and detailed feedback to PhD students. Submissions to the
+post-proceedings can have up to 15 pages. A designated call for
+contributions to the post-proceedings is distributed after the school.
+
+
+Event co-chairs:
+Joost Visser, Software Improvement Group, The Netherlands
+Eric Van Wyk, University of Minnesota, United States
+
+
+From spider.vz at gmail.com  Tue May 10 18:04:41 2011
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Tue, 10 May 2011 18:04:41 +0200
+Subject: [Stratego Users] GTTSE 2011: Call for Participation
+Message-ID: <BANLkTi=r0U5nXqKxgVm3n3KeSBdDQjaGow@mail.gmail.com>
+
+GTTSE 2011, 3?9 July, 2011, Braga, Portugal
+
+4th International Summer School on Generative and Transformational
+Techniques in Software Engineering
+
+http://gttse.wikidot.com/
+
+
+SCIENTIFIC PROGRAM SUMMARY
+
+    8 Long Tutorials
+    8 Short Tutorials
+    Participants Workshop
+
+REGISTRATION DEADLINE:
+
+    May 27 (early registration)
+    June 17 (late registration)
+
+SCOPE AND FORMAT
+
+The summer school brings together PhD students, lecturers, technology
+presenters, as well as other researchers and practitioners who are
+interested in the generation and the transformation of programs, data,
+software models, data models, meta-models, documentation, and entire
+software systems. This concerns many areas of software engineering:
+software reverse and re-engineering, model-driven approaches,
+automated software engineering, generic language technology,
+aspect-oriented programming, feature-oriented development, compiler
+construction, to name a few. These areas differ with regard to the
+specific sorts of meta-models (or grammars, schemas, formats etc.)
+that underlie the involved artifacts, and with regard to the specific
+techniques that are employed for the generation and the transformation
+of the artifacts. The tutorials are given by renowned representatives
+of complementary approaches and problem domains. Each tutorial
+combines foundations, methods, examples, and tool support. The program
+of the summer school also features invited technology presentations,
+which present setups for generative and transformational techniques.
+These presentations complement each other in terms of the chosen
+application domains, case studies, and the underlying concepts. The
+program of the school also features a participants workshop. All
+summer school material will be collected in proceedings that are
+handed out to the participants. Formal proceedings will be compiled
+after the summer school, where all contributions are subjected to
+additional reviewing.
+
+The formal proceedings of the previous three instances of the summer
+school (2005, 2007 and 2009) were published as volumes 4143, 5235 and
+6491 in the Lecture Notes in Computer Science series of
+Springer-Verlag.
+
+LONG TUTORIALS
+
+    Compilation in the 21st century?Too Real for Comfort
+        Darius Blasband (RainCode, Belgium)
+
+    Tips & Tricks for Communication in CS: Reviews, Papers and Talks
+        Olivier Danvy (Aarhus University, Denmark)
+
+    Test Automation: An Empirical Perspective
+        Arie van Deursen (Delft University of Technology, The Netherlands)
+
+    Variation Programming with the Choice Calculus
+        Martin Erwig (Oregon State University, USA)
+
+    Exposing and Exploiting Program Analyses in an IDE
+        Robert Fuhrer (IBM Research, USA)
+
+    Model Management in the Wild: Foundations & Applications
+        Richard Paige (University of York, UK)
+
+    Methods and Tools for Analyzing Software Evolution
+        Eleni Stroulia (University of Alberta, Canada)
+
+    Bidirectional by Necessity
+        James F. Terwilliger (Microsoft Corporation, USA)
+
+SHORT TUTORIALS
+
+    Requirements for Self-adaptation
+        Nelly Bencomo (INRIA, France)
+
+    Dynamic Program Analysis for Database Reverse Engineering
+        Anthony Cleve (University of Namur, Belgium)
+
+    Tooling Research
+        Tudor Girba (netstyle.ch GmbH, Switzerland)
+
+    Model-based Language Engineering
+        Florian Heidenreich (Technische Universit?t Dresden, Germany)
+        Christian Wende (Technische Universit?t Dresden, Germany)
+
+    Re(verse)engineering
+        Tim Janssen (Cornerstone, Netherlands)
+
+    Feature-oriented Software Development (FOSD)
+        Christian K?stner (Philipps University Marburg, Germany)
+        Sven Apel (University of Passau, Germany)
+
+    Managing the Evolution of F/OSS with Model-Driven Techniques
+        Alfonso Pierantonio (University of L?Aquila, Italy)
+        Davide Di Ruscio (University of L?Aquila, Italy)
+
+    Language & IDE Development, Modularization and Composition with MPS
+        Markus V?lter (independent/itemis, Germany)
+
+ORGANIZATION COMMITTEE
+
+    Ralf L?mmel (Universit?t Koblenz-Landau, Germany)
+    Jo?o Saraiva (Universidade do Minho, Portugal)
+    Joost Visser (Software Improvement Group, The Netherlands)
+
+ADDITIONAL INFORMATION
+
+For additional information on the program, venue, and other details of
+the summer school, please consult the web page:
+
+http://gttse.wikidot.com/
+
+Or engage in direct contact with:
+
+    J?come Cunha (Universidade do Minho, Portugal) ? local
+arrangements and registration
+    Vadim Zaytsev (Centrum Wiskunde & Informatica, The Netherlands) ?
+publicity chair
+
+
+From E.Visser at tudelft.nl  Wed May 18 20:28:08 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 18 May 2011 20:28:08 +0200
+Subject: [Stratego Users] Fwd: [TOOLS10] TOOLS 2011 Federated Conferences:
+	Call for Participation
+In-Reply-To: <4DD3EDF6.6000007@inf.uc3m.es>
+References: <4DD3EDF6.6000007@inf.uc3m.es>
+Message-ID: <BANLkTimnq5su2JkA43XB17Z3NogrNghzUg@mail.gmail.com>
+
+? ?*** CALL FOR PARTICIPATION ***
+
+? ?TOOLS 2011 Federated Conferences
+? ?Zurich, Switzerland, 27 June-1 July 2011
+? ?http://tools.ethz.ch
+
+
+? ? The TOOLS series of conferences focus on state-of-the-art
+? ? approaches to Software Development. This will be the fourth
+? ? year that TOOLS happens as a federated event, bringing
+? ? together four major annual conferences: TOOLS Europe 2011,
+? ? ICMT 2011 (Model Transformations), SC 2011 (Software
+? ? Composition) and TAP 2011 (Test and Proofs).
+
+? ? The 2011 edition also counts on 8 satellite Workshops that
+? ? will be held in conjunction with the main conferences, making
+? ? TOOLS the premier forum for academic and industrial researches
+? ? working on areas related to modern Software Development.
+
+? ? We hereby invite you to participate in the TOOLS 2011 conferences
+? ? in Zurich, where most major players and researchers on object,
+? ? component and model technologies will meet.
+
+? ? Online registration is opened on the conference web site:
+
+? ? ? ? ? ? ? ? ? ? ?http://tools.ethz.ch
+
+? ?The deadline for early registration is May 24th.
+
+INVITED SPEAKERS, http://tools.ethz.ch/tools2011/invited_speakers.htm
+
+? ?* Oscar Nierstrasz, University of Bern, Switzerland
+? ?* Frank Tip, IBM Research, USA
+? ?* Alexander Egyed, Johannes Kepler University, Austria
+? ?* Patrice Godefroid, Microsoft Research
+? ?* Marie-Claude Gaudel, Universit? de Paris-Sud, France
+? ?* Klaus Ostermann, Philipps University of Marburg, Germany
+
+PROGRAMME, VENUE, TRAVEL INFORMATION
+
+? ? A solid and innovative technical program has been prepared
+? ? with some joint sessions between the four conferences.
+? ? Check it out at http://tools.ethz.ch/tools2011/program.htm
+
+? ? TOOLS 2011 takes place at ETH Zurich which is located in
+? ? the heart of Zurich, Switzerland's largest city. Travel
+? ? and accommodation information is available at
+? ? http://tools.ethz.ch/tools2011/venue.htm
+
+ASSOCIATED WORKSHOPS, http://tools.ethz.ch/tools2011/workshops.htm
+
+? ?* AMMSE: Algebraic Methods in Model-Based Software Engineering
+? ?* DYLA: Fifth Workshop on Dynamic Languages and Applications
+? ?* IWMCP: International Workshop on Model Comparison in Practice
+? ?* MtATL: 3rd International Workshop on Model Transformations with ATL
+? ?* NETC: Eiffel technology and community: the next generation
+? ?* OCL: International Workshop on OCL and Textual Modelling
+? ?* RAM-SE: 8th Workshop on Reflection, AOP and Meta-Data for Software
+Evolution
+? ?* TTC: Transformation Tool Contest
+
+Enquiries should be addressed to se-tools at lists.inf.ethz.ch
+
+We look forward to seeing you in Zurich in June!
+_______________________________________________
+tools10 mailing list
+tools10 at lcc.uma.es
+http://sol10.lcc.uma.es/mailman/listinfo/tools10
+
+
+From gvidal at dsic.upv.es  Thu May 26 13:37:43 2011
+From: gvidal at dsic.upv.es (German Vidal)
+Date: Thu, 26 May 2011 13:37:43 +0200
+Subject: [Stratego Users] LOPSTR 2011 - call for participation
+References: <50E811D6-00B9-4A4C-BB63-CBBE50A4F707@dsic.upv.es>
+Message-ID: <A998A037-E9C9-498F-802A-34B47F21A4D1@dsic.upv.es>
+
+(our apologies if you receive multiple copies of this message)
+
+============================================================
+
+                      CALL FOR PARTICIPATION
+
+               21th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2011
+
+             http://users.dsic.upv.es/~lopstr11/
+            Odense, Denmark, July 18-20, 2011
+     (co-located with PPDP 2011, AAIP 2011 and WFLP 2011)
+
+============================================================
+
+
+ONLINE REGISTRATION IS OPEN:
+
+  http://www.imada.sdu.dk/~petersk/OLP/registration.html
+
+EARLY REGISTRATION DEADLINE:
+
+  May 30, 2011  (next Monday!)
+
+The aim of the LOPSTR series is to stimulate and promote
+international research and collaboration on logic-based program
+development. LOPSTR is open to contributions in logic-based
+program development in any language paradigm. LOPSTR has a
+reputation for being a lively, friendly forum for presenting
+and discussing work in progress. Formal proceedings are
+produced only after the symposium so that authors can
+incorporate this feedback in the published papers.
+
+SYMPOSIUM PROGRAM (tentative):
+
+Monday, July 18, 2011:
+
+14:00 - 15:00: Session 1
+
+* Thomas Stroeder, Peter Schneider-Kamp, J?rgen Giesl, Fabian Emmes  
+and Carsten Fuhs.
+  A Linear Operational Semantics for Termination and Complexity  
+Analysis of ISO Prolog
+* Olivier Namet, Maribel Fernandez and Helene Kirchner.
+  A Strategy Language for Graph Rewriting
+
+Coffee break
+
+15:30 - 17:30: Session 2
+
+* Paulo Moura.
+  Meta-Predicate Semantics
+* Jose F. Morales, Manuel Hermenegildo and R?my Haemmerl?.
+  Modular Extensions for Modular (Logic) Languages
+* Nik Sultana.
+  A prototype refactoring tool based on a mechanically-verified core
+* C?line Dandois and Wim Vanhoof.
+  Clones in logic programs and how to detect them
+
+Tuesday, July 19, 2011:
+
+09:00 - 10:00: LOPSTR Invited Talk
+
+* John Gallagher. <TBA>
+
+Coffee break
+
+10:30 - 12:30: Session 3
+
+* Wim Vanhoof.
+  On the partial deduction of non-ground meta-interpreters
+* Fabio Fioravanti, Alberto Pettorossi, Maurizio Proietti and Valerio  
+Senni.
+  Using Real Relaxations During Program Specialization
+* Hirohisa Seki.
+  Proving Properties of Co-logic Programs by Unfold/Fold Transformations
+* Rafael Caballero, Adrian Riesco, Alberto Verdejo and Narciso Marti- 
+Oliet.
+  Simplifying Questions in Maude Declarative Debugger by Transforming  
+Proof Trees
+
+Lunch break
+
+14:00 - 15:00: Session 4
+
+* Giovanni Bacci, Marco Comini, Marco A. Feli? and Alicia Villanueva.
+  Automatic Synthesis of Specifications for Curry Programs
+* Jesus Almendros-Jimenez, Rafael Caballero, Yolanda Garc?a-Ruiz and  
+Fernando Saenz-Perez.
+  A Declarative Embedding of XQuery in a Functional-Logic Language
+
+Coffee break
+
+15:30 - 17:30: Session 5
+
+* Elvira Albert, Miguel Gomez-Zamalloa and Jos? Miguel Rojas Siles.
+  Resource-driven CLP-based Test Case Generation
+* Soichiro Hidaka, Zhenjiang Hu, Kazuhiro Inaba, Hiroyuki Kato,  
+Kazutaka Matsuda, Keisuke Nakano and Isao Sasano.
+  Marker-directed optimization of UnCAL graph transformations
+* Sneyers and Daniel De Schreye.
+  Probabilistic Termination of CHRiSM Programs
+* Paolo Pilozzi and Daniel De Schreye.
+  Improved termination analysis of CHR using self-sustainability  
+analysis
+
+Wednesday, July 20, 2011:
+
+9:00 - 10:00: PPDP/LOPSTR Invited Talk
+
+* Fritz Henglein.
+  <TBA>
+
+Coffee break
+
+10:30 - 11:30: PPDP/LOPSTR Invited Talk
+
+* Vitaly Lagoon.
+  The Challenges of Constraint-Based Test Generation
+
+Coffee break
+
+11:30 - 12:30: Session 6:
+
+* Pedro Cabalar and Stephane Demri.
+  Automata-based Computation of Temporal Equilibrium Models
+* Demeyer and Wim Vanhoof.
+  Proper Granularity for Atomic Sections in Concurrent Programs
+
+Lunch and Excursion
+============================================================
+
+
+
+
+From vladimir.iorio at gmail.com  Sun May 29 14:21:11 2011
+From: vladimir.iorio at gmail.com (Vladimir Di Iorio)
+Date: Sun, 29 May 2011 09:21:11 -0300
+Subject: [Stratego Users] AspectJ-front
+Message-ID: <BANLkTimdrvYfssU2svu0Kjqy+ay3UL+DdA@mail.gmail.com>
+
+Dear sirs,
+
+in the AspectJ-front web page, a binary distribution for Microsoft Windows
+is announced, but I could not find it. Is it available?
+
+
+Yours faithfully,
+
+Vladimir Oliveira Di Iorio
+Universidade Federal de Vi?osa - Brazil
+
+
+From alex.kraas at gmx.de  Sun May 29 22:28:48 2011
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Sun, 29 May 2011 22:28:48 +0200
+Subject: [Stratego Users] Spoofax - Mapping the AST to Ecore model
+Message-ID: <A7EF234A5E8E4562AD6C6C9BA9056AE2@testsystem>
+
+Dear developers of Spoofax,
+
+I want to map a generated abstract syntax tree of Spoofax to an Ecore metamodel so that I can use it with other Eclipse-MDT tools. For this purpose, I am considering to extend the AST specific Java classes of Spoofax. Please, could you tell me which classes of the source code implement the AST-specific functionalities.
+
+Best regards,
+Alexander Kraas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110529/a431b0af/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Tue May 31 00:04:08 2011
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth)
+Date: Tue, 31 May 2011 00:04:08 +0200
+Subject: [Stratego Users] Spoofax - Mapping the AST to Ecore model
+In-Reply-To: <A7EF234A5E8E4562AD6C6C9BA9056AE2@testsystem>
+References: <A7EF234A5E8E4562AD6C6C9BA9056AE2@testsystem>
+Message-ID: <C9270CEC-E00F-47A8-B258-D4444CF7935C@tudelft.nl>
+
+Hi Alexander,
+
+there is already some support for that outside of Spoofax. There is an SGLR parser which returns a model compliant to a generic AST metamodel or to a specific metamodel generated from an SDF grammar. A second solution combines an SGLR parser with a Stratego interpreter. It returns a model compliant to a generic ATerm metamodel or to a specific metamodel generated from Stratego signatures.
+Here you can find the corresponding repositories:
+
+	https://svn.strategoxt.org/repos/StrategoXT/text2model/trunk/org.spoofax.text2model			(needed for both bridges)
+	https://svn.strategoxt.org/repos/StrategoXT/text2model/trunk/org.spoofax.text2model.early 	(SGLR parser returning models)
+	https://svn.strategoxt.org/repos/StrategoXT/text2model/trunk/org.spoofax.text2model.late 		(SGLR parser + Stratego Interpreter returning models)
+
+We still need to integrate this into Spoofax. I will discuss this with Lennart. Maybe you can tell us a bit more about your use case/requirements.
+
+Regards, Guido
+
+On 29 May 2011, at 22:28, Alexander Kraas wrote:
+
+> Dear developers of Spoofax,
+>  
+> I want to map a generated abstract syntax tree of Spoofax to an Ecore metamodel so that I can use it with other Eclipse-MDT tools. For this purpose, I am considering to extend the AST specific Java classes of Spoofax. Please, could you tell me which classes of the source code implement the AST-specific functionalities.
+>  
+> Best regards,
+> Alexander Kraas
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110531/01e111a0/attachment.html>
+
+From torres.giorgio at gmail.com  Tue May 31 18:45:40 2011
+From: torres.giorgio at gmail.com (Giorgio Torres)
+Date: Tue, 31 May 2011 13:45:40 -0300
+Subject: [Stratego Users] Problem to Extend Java SDF grammar with Spoofax
+In-Reply-To: <BANLkTimo7S-ivthpozdyVspeHgEegsbX9A@mail.gmail.com>
+References: <BANLkTimo7S-ivthpozdyVspeHgEegsbX9A@mail.gmail.com>
+Message-ID: <BANLkTimz1Ma7pN-vtx=wXSoMpztYV_x8fQ@mail.gmail.com>
+
+Hi guys, I am working with grammar extention and I have to extend java
+grammar to accept others production (e.g. from a language of mine), and
+launch it inside an eclipse editor. That's
+why i'm using spoofax, so I can generate an eclipse editor, with at least
+the highlighting facility and syntax correction, to my extended language.
+The problem i'm facing is that i'm trying to import Java-15/Main Java's SDF
+declaration in my language SDF grammar, but the binder reclaims that the
+imported module does no match with
+the filename.
+
+I've already read the FAQ at Spoofax/Stratego site, but i found nothing.
+
+I hope someone here could help with this issue!
+
+Thanks.
+
+
+-- 
+Giorgio Pr?mola F. G. Torres
+Graduando em Ci?ncia da Computa??o
+Universidade Federal de Vi?osa
+
+<http://www.facebook.com/giorgio.torres>
+<http://br.linkedin.com/in/giorgiotorres>
+  <http://www.twitter.com/gprimola>
+<http://www.flickr.com/photos/bygior>
+<http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110531/6603ce64/attachment.html>
+

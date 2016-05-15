@@ -1,0 +1,185 @@
+From oskarvanrest at gmail.com  Tue Jun  4 20:17:06 2013
+From: oskarvanrest at gmail.com (Oskar)
+Date: Tue, 4 Jun 2013 11:17:06 -0700
+Subject: [Stratego Users] What does 'origin-track-forced' really do?
+In-Reply-To: <CAEXdecnH2csAfki=pkvjKe7oUYnx7Ogr62sy6vQUaBE1Kg83vw@mail.gmail.com>
+References: <CAEXdecnH2csAfki=pkvjKe7oUYnx7Ogr62sy6vQUaBE1Kg83vw@mail.gmail.com>
+Message-ID: <CAOyetXQxyE90MtUSTWhc7frg6wrC-PuW14Xuj+h1HgSDoBQBng@mail.gmail.com>
+
+Hi Manu,
+
+I answered your question here: http://yellowgrass.org/question/Spoofax/27
+
+Regards,
+Oskar
+
+
+On 19 November 2012 11:48, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+
+> I have not found any documentation for the strategy origin-track-forced.
+> Other origin-XXX are self explaning, but origin-track-forced let me with a
+> lot of suppositions?
+>
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130604/c29ee1d8/attachment.html>
+
+From hilalks at gmail.com  Wed Jun  5 07:34:49 2013
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Wed, 5 Jun 2013 08:34:49 +0300
+Subject: [Stratego Users] Spoofax Web Site
+Message-ID: <CACLuXbL9HiWgAcLpmDL1xq5rn47hw4U3NPdDTreCk4kyb4odBQ@mail.gmail.com>
+
+Hello,
+
+http://www.strategoxt.org/Spoofax web site does not response.
+
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130605/9421ca6f/attachment.html>
+
+From rob.vermaas at gmail.com  Wed Jun  5 09:29:10 2013
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Wed, 5 Jun 2013 09:29:10 +0200
+Subject: [Stratego Users] Spoofax Web Site
+In-Reply-To: <CACLuXbL9HiWgAcLpmDL1xq5rn47hw4U3NPdDTreCk4kyb4odBQ@mail.gmail.com>
+References: <CACLuXbL9HiWgAcLpmDL1xq5rn47hw4U3NPdDTreCk4kyb4odBQ@mail.gmail.com>
+Message-ID: <CAJuVCXuAS=Xw3DRBhZ8qDDexfT5L8Tp4-UXNnNBV_E8FmLSY2A@mail.gmail.com>
+
+Hi Hilal,
+
+we hope to get the machine up in the next 2 hours.
+
+Cheers,
+Rob
+
+
+On Wed, Jun 5, 2013 at 7:34 AM, Hilal Kevser <hilalks at gmail.com> wrote:
+
+> Hello,
+>
+> http://www.strategoxt.org/Spoofax web site does not response.
+>
+> Hilal
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130605/5d27aa6a/attachment.html>
+
+From guillaume.durand at steria.com  Wed Jun 26 15:19:21 2013
+From: guillaume.durand at steria.com (Guillaume DURAND)
+Date: Wed, 26 Jun 2013 13:19:21 +0000
+Subject: [Stratego Users] [Strategoxt]MetaModele JAVA
+Message-ID: <E104F9918E43A4449FDD4348EAA63F795978D756@AMXPRD0711MB600.eurprd07.prod.outlook.com>
+
+Hello,
+
+I want to know is what a meta-model JAVA exist in strategoxt?
+
+Best regards,
+
+Guillaume
+
+
+This email and any attachments may contain confidential information and intellectual property (including copyright material). It is only for the use of the addressee(s) in accordance with any instructions contained within it. If you are not the addressee, you are prohibited from copying, forwarding, disclosing, saving or otherwise using it in any way. If you receive this email in error, please immediately advise the sender and delete it. Steria may monitor the content of emails within its network to ensure compliance with its policies and procedures. Emails are susceptible to alteration and their integrity (including origin) cannot be assured. Steria shall not be liable for any modification to a message, or for messages falsely sent.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130626/6565d927/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Jun 27 10:53:40 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 27 Jun 2013 10:53:40 +0200
+Subject: [Stratego Users] [Strategoxt]MetaModele JAVA
+In-Reply-To: <E104F9918E43A4449FDD4348EAA63F795978D756@AMXPRD0711MB600.eurprd07.prod.outlook.com>
+References: <E104F9918E43A4449FDD4348EAA63F795978D756@AMXPRD0711MB600.eurprd07.prod.outlook.com>
+Message-ID: <CAFaCHU0fJcQHaGdM8xqgRS5jqvh_Z8J4Pfsj10BJLYWcDP8-CQ@mail.gmail.com>
+
+Hi Guillaume,
+
+I want to know is what a meta-model JAVA exist in strategoxt?
+>
+
+The JavaFront package provides an SDF2 definition of Java (5 I think).
+
+cheers,
+
+-- Eelco
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130627/91d5b4a6/attachment.html>
+
+From v.vergu at gmail.com  Thu Jun 27 17:12:11 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 08:12:11 -0700
+Subject: [Stratego Users] [Strategoxt]MetaModele JAVA
+In-Reply-To: <CAFaCHU0fJcQHaGdM8xqgRS5jqvh_Z8J4Pfsj10BJLYWcDP8-CQ@mail.gmail.com>
+References: <E104F9918E43A4449FDD4348EAA63F795978D756@AMXPRD0711MB600.eurprd07.prod.outlook.com>
+	<CAFaCHU0fJcQHaGdM8xqgRS5jqvh_Z8J4Pfsj10BJLYWcDP8-CQ@mail.gmail.com>
+Message-ID: <A12ABDF8-8659-4CE3-8D11-121A92053575@gmail.com>
+
+Hi Guillaume, 
+
+The JavaFront package that Eelco mentioned is hosted at https://github.com/metaborg/java-front. The spoofax branch includes a project set-up as a Spoofax project if interested. The java-bootstrap branch is easy to build with just Java tools:
+
+$ wget http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download/2/strategoxt.jar
+$ ANT_OPTS="-Xss8m -Xmx1g" ant -lib strategoxt.jar build install
+
+You can then copy the things you need from the dist folder into your project.
+
+Regards,
+
+Vlad
+
+On Jun 27, 2013, at 1:53 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Guillaume,
+> 
+> I want to know is what a meta-model JAVA exist in strategoxt?
+>  
+> The JavaFront package provides an SDF2 definition of Java (5 I think). 
+> 
+> cheers,
+> 
+> -- Eelco
+> 
+> Professor of Computer Science at Delft University of Technology
+> 
+> Email: e.visser at tudelft.nl
+> Web: http://eelcovisser.org  
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130627/7e004584/attachment.html>
+

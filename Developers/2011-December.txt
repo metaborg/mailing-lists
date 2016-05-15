@@ -1,0 +1,379 @@
+From karltk at strategoxt.org  Tue Dec 20 22:17:44 2011
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Tue, 20 Dec 2011 22:17:44 +0100
+Subject: [Stratego Developers] SSL_filesize
+Message-ID: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+
+Hi,
+
+I notice you added SSL_filesize at some point. I want to extend it to
+work with already opened files, and I am also adding fseek and ftell
+now.
+
+I see that you use reals for reporting the filesize because of the
+limitations of ints. Despite the limitation, I want to change this to
+int, and rather throw an exception if the file size is >2GB. Do you
+know where the SSL_filesize is used? Do we need >2GB support at the
+moment? At some point, we must add longs as a primitive term type
+anyway.
+
+-- Karl T
+
+From tobivollebregt at gmail.com  Wed Dec 21 09:41:46 2011
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 21 Dec 2011 09:41:46 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+Message-ID: <CAOPyLrEn=OCEj9Cws5z-OVp8JbaisscVStnhgRsNH-1jM+82ug@mail.gmail.com>
+
+Hi Karl,
+
+As far as I know, only I have been using it, and I don't use it now -
+I only used it (or rather, my original java strategy that did the same
+thing) at some point to limit files to convert to those with a decent
+size.
+
+So if it's up to me you can change it to int, I definitely don't need
+>2GB support.
+
+Tobi
+
+On 20 December 2011 22:17, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+> Hi,
+>
+> I notice you added SSL_filesize at some point. I want to extend it to
+> work with already opened files, and I am also adding fseek and ftell
+> now.
+>
+> I see that you use reals for reporting the filesize because of the
+> limitations of ints. Despite the limitation, I want to change this to
+> int, and rather throw an exception if the file size is >2GB. Do you
+> know where the SSL_filesize is used? Do we need >2GB support at the
+> moment? At some point, we must add longs as a primitive term type
+> anyway.
+>
+> -- Karl T
+
+From zefhemel at gmail.com  Wed Dec 21 09:44:52 2011
+From: zefhemel at gmail.com (Zef Hemel)
+Date: Wed, 21 Dec 2011 09:44:52 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+Message-ID: <BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+
+Uhm, why not use a 'long'? 
+
+-- Zef 
+
+On Tuesday, December 20, 2011 at 22:17 , Karl Trygve Kalleberg wrote:
+
+> Hi,
+> 
+> I notice you added SSL_filesize at some point. I want to extend it to
+> work with already opened files, and I am also adding fseek and ftell
+> now.
+> 
+> I see that you use reals for reporting the filesize because of the
+> limitations of ints. Despite the limitation, I want to change this to
+> int, and rather throw an exception if the file size is >2GB. Do you
+> know where the SSL_filesize is used? Do we need >2GB support at the
+> moment? At some point, we must add longs as a primitive term type
+> anyway.
+> 
+> -- Karl T
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org (mailto:Developers at strategoxt.org)
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+
+
+
+From tobivollebregt at gmail.com  Wed Dec 21 09:50:32 2011
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 21 Dec 2011 09:50:32 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+Message-ID: <CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+
+We don't have a 'long' term type in Stratego at the moment, unfortunately.
+
+Tobi
+
+On 21 December 2011 09:44, Zef Hemel <zefhemel at gmail.com> wrote:
+> Uhm, why not use a 'long'?
+>
+> -- Zef
+>
+> On Tuesday, December 20, 2011 at 22:17 , Karl Trygve Kalleberg wrote:
+>
+>> Hi,
+>>
+>> I notice you added SSL_filesize at some point. I want to extend it to
+>> work with already opened files, and I am also adding fseek and ftell
+>> now.
+>>
+>> I see that you use reals for reporting the filesize because of the
+>> limitations of ints. Despite the limitation, I want to change this to
+>> int, and rather throw an exception if the file size is >2GB. Do you
+>> know where the SSL_filesize is used? Do we need >2GB support at the
+>> moment? At some point, we must add longs as a primitive term type
+>> anyway.
+>>
+>> -- Karl T
+>> _______________________________________________
+>> Developers mailing list
+>> Developers at strategoxt.org (mailto:Developers at strategoxt.org)
+>> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>
+>
+
+From E.Visser at tudelft.nl  Wed Dec 21 10:25:09 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Dec 2011 10:25:09 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+	<CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+Message-ID: <CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+
+> We don't have a 'long' term type in Stratego at the moment, unfortunately.
+
+Why not add it?
+
+-- Eelco
+
+> Tobi
+>
+> On 21 December 2011 09:44, Zef Hemel <zefhemel at gmail.com> wrote:
+>> Uhm, why not use a 'long'?
+>>
+>> -- Zef
+>>
+>> On Tuesday, December 20, 2011 at 22:17 , Karl Trygve Kalleberg wrote:
+>>
+>>> Hi,
+>>>
+>>> I notice you added SSL_filesize at some point. I want to extend it to
+>>> work with already opened files, and I am also adding fseek and ftell
+>>> now.
+>>>
+>>> I see that you use reals for reporting the filesize because of the
+>>> limitations of ints. Despite the limitation, I want to change this to
+>>> int, and rather throw an exception if the file size is >2GB. Do you
+>>> know where the SSL_filesize is used? Do we need >2GB support at the
+>>> moment? At some point, we must add longs as a primitive term type
+>>> anyway.
+>>>
+>>> -- Karl T
+>>> _______________________________________________
+>>> Developers mailing list
+>>> Developers at strategoxt.org (mailto:Developers at strategoxt.org)
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>>
+>>
+>>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From karltk at strategoxt.org  Wed Dec 21 11:07:48 2011
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Wed, 21 Dec 2011 11:07:48 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+	<CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+	<CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+Message-ID: <CAGxSwVV94wE8QZHNh77AaXk+8Tzm_22DFX_O5Lm3dpdS7NpVmw@mail.gmail.com>
+
+> Why not add it?
+
+That's indeed planned. It's not entirely straightforward, but when we
+figure out how to do it with the least amount of problems, we will.
+
+-- Karl T
+
+From tobivollebregt at gmail.com  Wed Dec 21 11:53:34 2011
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 21 Dec 2011 11:53:34 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAGxSwVV94wE8QZHNh77AaXk+8Tzm_22DFX_O5Lm3dpdS7NpVmw@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+	<CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+	<CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+	<CAGxSwVV94wE8QZHNh77AaXk+8Tzm_22DFX_O5Lm3dpdS7NpVmw@mail.gmail.com>
+Message-ID: <CAOPyLrH_k1Z1F60UNjDzA1A9P0=sZFhYZreumEaRaWKyBJ89SQ@mail.gmail.com>
+
+I think it is worth to see if we can solve this in a way that lifts
+Stratego to a bit higher level than that of assembler-like
+type-suffixed arithmetic operations, e.g. the current addi, addr,
+muli, mulr, and future addl, mull for longs... (I know there are
+variants without type-suffix.)
+More specific, consider how a language like Python does this: there
+integers are just that: mathematical integers, not bound by
+artificial, arbitrary platform limitations (i.e., max 32 bits).
+Implementation-wise it actually *are* 32 bit integers as long as this
+fits, and otherwise they become BigIntegers. The point is that this is
+completely transparent to the developer.
+So here is my suggestion: instead of adding a separate primitive term
+type for longs with the accompanying primitives, let's make integers
+unbounded by transparently converting between BigInteger and int in
+the primitives that operate on integers.
+
+Obviously a 'long' term type could be added too, but that should _only
+be an optimization_ for numbers that happen to be in the range 2^31 to
+2^63 or -2^31 to -2^63.
+
+Tobi
+On 21 December 2011 11:07, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+>> Why not add it?>> That's indeed planned. It's not entirely straightforward, but when we> figure out how to do it with the least amount of problems, we will.>> -- Karl T
+
+From E.Visser at tudelft.nl  Wed Dec 21 12:48:07 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Dec 2011 12:48:07 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAOPyLrH_k1Z1F60UNjDzA1A9P0=sZFhYZreumEaRaWKyBJ89SQ@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+	<CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+	<CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+	<CAGxSwVV94wE8QZHNh77AaXk+8Tzm_22DFX_O5Lm3dpdS7NpVmw@mail.gmail.com>
+	<CAOPyLrH_k1Z1F60UNjDzA1A9P0=sZFhYZreumEaRaWKyBJ89SQ@mail.gmail.com>
+Message-ID: <CAFaCHU2i3Z0YwOEwHjMbTArg70Pfs_t+aJGpGhntKRfc4qwd3A@mail.gmail.com>
+
+Sounds good to me.
+
+-- Eelco
+
+On Wed, Dec 21, 2011 at 11:53 AM, Tobi Vollebregt
+<tobivollebregt at gmail.com> wrote:
+> I think it is worth to see if we can solve this in a way that lifts
+> Stratego to a bit higher level than that of assembler-like
+> type-suffixed arithmetic operations, e.g. the current addi, addr,
+> muli, mulr, and future addl, mull for longs... (I know there are
+> variants without type-suffix.)
+> More specific, consider how a language like Python does this: there
+> integers are just that: mathematical integers, not bound by
+> artificial, arbitrary platform limitations (i.e., max 32 bits).
+> Implementation-wise it actually *are* 32 bit integers as long as this
+> fits, and otherwise they become BigIntegers. The point is that this is
+> completely transparent to the developer.
+> So here is my suggestion: instead of adding a separate primitive term
+> type for longs with the accompanying primitives, let's make integers
+> unbounded by transparently converting between BigInteger and int in
+> the primitives that operate on integers.
+>
+> Obviously a 'long' term type could be added too, but that should _only
+> be an optimization_ for numbers that happen to be in the range 2^31 to
+> 2^63 or -2^31 to -2^63.
+>
+> Tobi
+> On 21 December 2011 11:07, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+>>> Why not add it?>> That's indeed planned. It's not entirely straightforward, but when we> figure out how to do it with the least amount of problems, we will.>> -- Karl T
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From tobivollebregt at gmail.com  Thu Dec 22 10:42:32 2011
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Thu, 22 Dec 2011 10:42:32 +0100
+Subject: [Stratego Developers] SSL_filesize
+In-Reply-To: <CAFaCHU2i3Z0YwOEwHjMbTArg70Pfs_t+aJGpGhntKRfc4qwd3A@mail.gmail.com>
+References: <CAGxSwVU0AES7_GdU_7GHzZUQt+aC91fjEDW35GeHtmeL0yv7=Q@mail.gmail.com>
+	<BE80BC375F4D4F6FAC7CB204D6FDBE37@gmail.com>
+	<CAOPyLrEnbEMjptfSZa4CsEN74u-KrRE0EpRvTY+UKcYD405j6g@mail.gmail.com>
+	<CAFaCHU0rKLpacxRSPyFJ4557FOXtdHEim=yxnMPA+w0Fdwoa=w@mail.gmail.com>
+	<CAGxSwVV94wE8QZHNh77AaXk+8Tzm_22DFX_O5Lm3dpdS7NpVmw@mail.gmail.com>
+	<CAOPyLrH_k1Z1F60UNjDzA1A9P0=sZFhYZreumEaRaWKyBJ89SQ@mail.gmail.com>
+	<CAFaCHU2i3Z0YwOEwHjMbTArg70Pfs_t+aJGpGhntKRfc4qwd3A@mail.gmail.com>
+Message-ID: <CAOPyLrHqJdTRipdCX=B=Dioqx1Naf_6o_HzEKiP-P1BPd-RwXA@mail.gmail.com>
+
+Hi,
+
+After lunch yesterday we decided that this would be a decent long term
+solution. We also figured a decent intermediate solution would be to
+bump IStrategoInt to long internally, as the 4 byte overhead on an
+integer that is wrapped in an object would be negligible. Last but not
+least we figured that none of us actually need any of this at the
+moment, so for now we'll just have SSL_filesize fail/warn/throw on
+files larger than 2 GB, and return an integer otherwise.
+
+Tobi
+
+On 21 December 2011 12:48, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Sounds good to me.
+>
+> -- Eelco
+>
+> On Wed, Dec 21, 2011 at 11:53 AM, Tobi Vollebregt
+> <tobivollebregt at gmail.com> wrote:
+>> I think it is worth to see if we can solve this in a way that lifts
+>> Stratego to a bit higher level than that of assembler-like
+>> type-suffixed arithmetic operations, e.g. the current addi, addr,
+>> muli, mulr, and future addl, mull for longs... (I know there are
+>> variants without type-suffix.)
+>> More specific, consider how a language like Python does this: there
+>> integers are just that: mathematical integers, not bound by
+>> artificial, arbitrary platform limitations (i.e., max 32 bits).
+>> Implementation-wise it actually *are* 32 bit integers as long as this
+>> fits, and otherwise they become BigIntegers. The point is that this is
+>> completely transparent to the developer.
+>> So here is my suggestion: instead of adding a separate primitive term
+>> type for longs with the accompanying primitives, let's make integers
+>> unbounded by transparently converting between BigInteger and int in
+>> the primitives that operate on integers.
+>>
+>> Obviously a 'long' term type could be added too, but that should _only
+>> be an optimization_ for numbers that happen to be in the range 2^31 to
+>> 2^63 or -2^31 to -2^63.
+>>
+>> Tobi
+>> On 21 December 2011 11:07, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+>>>> Why not add it?>> That's indeed planned. It's not entirely straightforward, but when we> figure out how to do it with the least amount of problems, we will.>> -- Karl T
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group: ? ? ? ? ?Software Language Design and Engineering
+> Email: ? ? ? ? ?e.visser at tudelft.nl
+> Homepage: ? http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+

@@ -1,0 +1,368 @@
+From E.Visser at tudelft.nl  Wed Aug 12 18:37:54 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 12 Aug 2009 18:37:54 +0200
+Subject: [Stratego Developers] fyi: java-front for Ubuntu/Debian point
+	to wrong package
+In-Reply-To: <30992e5d0908120829rd5ef78awa0bd5e7a3cc29125@mail.gmail.com>
+References: <30992e5d0908120829rd5ef78awa0bd5e7a3cc29125@mail.gmail.com>
+Message-ID: <ed55b7d90908120937kedf0d4etfe50fd64107054c@mail.gmail.com>
+
+Thanks for the report. cc'ing to the developers at strategoxt.org list
+
+-- Eelco
+
+On Wed, Aug 12, 2009 at 5:29 PM, Pinku Surana<suranap at gmail.com> wrote:
+> On this page:?http://strategoxt.org/Stratego/JavaFrontRelease09
+> The links for Debian and Ubuntu point to strategoxt-utils, which don't
+> contain parse-java. The other distributions point to java-front. I used
+> alien to convert the rpm to deb.
+>
+
+
+
+-- 
+http://eelcovisser.org
+
+
+From suranap at gmail.com  Wed Aug 12 21:41:05 2009
+From: suranap at gmail.com (Pinku Surana)
+Date: Wed, 12 Aug 2009 15:41:05 -0400
+Subject: [Stratego Developers] Stack smashing error when compiling dryad
+Message-ID: <30992e5d0908121241w7b94bd51gf4ebc88547615e56@mail.gmail.com>
+
+Attempting to build dryad from source, got this error: "*** stack smashing
+detected ***: /usr/bin/strc terminated". I'm new to stratego, so I'm not
+sure what's going on.
+
+I'm using Ubuntu 9.04, gcc 4.3.3, dryad-0.2pre18756, java-front_0.9,
+strategoxt_0.17, sdf2-bundle_2.4, aterm_2.5. For java_front, I used alien to
+convert Fedora 9's rpm into a deb file.
+Full error dump:
+
+Making all in lib
+make[1]: Entering directory `dryad-0.2pre18756/lib'
+[ strc | info ] Compiling '../lib/dryad.str'
+[ strc | warning ] Nullary constructor Public used without parentheses
+[ strc | warning ] Nullary constructor Final used without parentheses
+[ strc | warning ] Nullary constructor Int used without parentheses
+[ strc | warning ] Nullary constructor TempFiles used without parentheses
+[ strc | warning ] Nullary constructor TempFiles used without parentheses
+[ strc | warning ] Nullary constructor TypeCloneable used without
+parentheses
+[ strc | warning ] Nullary constructor TypeObject used without parentheses
+[ strc | warning ] Nullary constructor TypeObject used without parentheses
+[ strc | warning ] Nullary constructor Plus used without parentheses
+*** stack smashing detected ***: /usr/bin/strc terminated
+======= Backtrace: =========
+/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x48)[0x40600da8]
+/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x0)[0x40600d60]
+/usr/lib/libstratego-lib-native.so[0x40456814]
+/usr/lib/libstratego-lib-native.so[0x40453875]
+/usr/lib/libstratego-lib.so(checksum_0_0+0x50)[0x403eb940]
+/usr/lib/libstrc.so(get_stamp_0_0+0xa2)[0x40165d52]
+/usr/lib/libstrc.so(SplitDynamicRule_1_0+0x1d2)[0x40166402]
+/usr/lib/libstrc.so(SplitDynamicRule_0_0+0xc4e)[0x401676ce]
+/usr/lib/libstrc.so[0x40167a53]
+/usr/lib/libstratego-lib.so[0x403e8a7c]
+/usr/lib/libstratego-runtime.so(SRTS_one+0x8e)[0x4045a7be]
+/usr/lib/libstratego-lib.so[0x403e8ac6]
+/usr/lib/libstratego-lib.so(oncetd_1_0+0x7b)[0x403e8b5b]
+/usr/lib/libstrc.so[0x400dc8b5]
+/usr/lib/libstrc.so(lift_dynamic_rule_0_0+0x75)[0x400dc965]
+/usr/lib/libstrc.so[0x40143493]
+/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+/usr/lib/libstrc.so[0x40108fd1]
+/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+/usr/lib/libstrc.so[0x40108f1f]
+/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+/usr/lib/libstrc.so(lift_dynamic_rule_from_def_0_0+0xad)[0x40108d0d]
+/usr/lib/libstrc.so(lift_dynamic_rule_from_def_foo_0_0+0x6f)[0x40108ddf]
+/usr/lib/libstratego-lib.so(repeat_1_0+0x57)[0x403749a7]
+/usr/lib/libstrc.so[0x40063821]
+/usr/lib/libstratego-lib.so[0x403a610c]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+/usr/lib/libstratego-lib.so[0x403a6185]
+======= Memory map: ========
+08048000-0804a000 r-xp 00000000 08:11 403035     /usr/bin/strc
+0804a000-0804b000 r--p 00001000 08:11 403035     /usr/bin/strc
+0804b000-0804c000 rw-p 00002000 08:11 403035     /usr/bin/strc
+0804c000-0808c000 rw-p 0804c000 00:00 0
+08926000-0925e000 rw-p 08926000 00:00 0          [heap]
+40000000-4001c000 r-xp 00000000 08:01 220499     /lib/ld-2.9.so
+4001c000-4001d000 r--p 0001b000 08:01 220499     /lib/ld-2.9.so
+4001d000-4001e000 rw-p 0001c000 08:01 220499     /lib/ld-2.9.so
+4001e000-4001f000 r-xp 4001e000 00:00 0          [vdso]
+4001f000-40021000 rw-p 4001f000 00:00 0
+40021000-401ed000 r-xp 00000000 08:11 240284     /usr/lib/libstrc.so
+401ed000-401ee000 r--p 001cc000 08:11 240284     /usr/lib/libstrc.so
+401ee000-40223000 rw-p 001cd000 08:11 240284     /usr/lib/libstrc.so
+40223000-40227000 rw-p 40223000 00:00 0
+40227000-4023b000 r-xp 00000000 08:11 241170     /usr/lib/libstratego-gpp.so
+4023b000-4023c000 r--p 00013000 08:11 241170     /usr/lib/libstratego-gpp.so
+4023c000-40243000 rw-p 00014000 08:11 241170     /usr/lib/libstratego-gpp.so
+40243000-40245000 rw-p 40243000 00:00 0
+40245000-40276000 r-xp 00000000 08:11 240956     /usr/lib/libstratego-rtg.so
+40276000-40277000 r--p 00030000 08:11 240956     /usr/lib/libstratego-rtg.so
+40277000-4027c000 rw-p 00031000 08:11 240956     /usr/lib/libstratego-rtg.so
+4027c000-402b2000 r-xp 00000000 08:11 240860
+/usr/lib/libstratego-sglr.so
+402b2000-402b3000 r--p 00036000 08:11 240860
+/usr/lib/libstratego-sglr.so
+402b3000-402b4000 rw-p 00037000 08:11 240860
+/usr/lib/libstratego-sglr.so
+402b4000-40320000 r-xp 00000000 08:11 241194     /usr/lib/libjustsglr.so
+40320000-40321000 r--p 0006b000 08:11 241194     /usr/lib/libjustsglr.so
+40321000-40323000 rw-p 0006c000 08:11 241194     /usr/lib/libjustsglr.so
+40323000-40328000 rw-p 40323000 00:00 0
+40328000-40337000 r-xp 00000000 08:11 241203     /usr/lib/libc-pp.so
+40337000-40338000 r--p 0000e000 08:11 241203     /usr/lib/libc-pp.so
+40338000-40339000 rw-p 0000f000 08:11 241203     /usr/lib/libc-pp.so
+40339000-40347000 r-xp 00000000 08:11 240288     /usr/lib/libstratego-xtc.so
+40347000-40348000 r--p 0000d000 08:11 240288     /usr/lib/libstratego-xtc.so
+40348000-40349000 rw-p 0000e000 08:11 240288     /usr/lib/libstratego-xtc.so
+40349000-4034a000 rw-p 40349000 00:00 0
+4034a000-4044a000 r-xp 00000000 08:11 240968     /usr/lib/libstratego-lib.so
+4044a000-4044b000 r--p 000ff000 08:11 240968     /usr/lib/libstratego-lib.so
+4044b000-4044c000 rw-p 00100000 08:11 240968     /usr/lib/libstratego-lib.so
+4044c000-4044d000 rw-p 4044c000 00:00 0
+4044d000-40457000 r-xp 00000000 08:11 240979
+/usr/lib/libstratego-lib-native.so
+40457000-40458000 r--p 00009000 08:11 240979
+/usr/lib/libstratego-lib-native.so
+40458000-40459000 rw-p 0000a000 08:11 2409make[1]: *** [libdryad.c] Aborted
+make[1]: Leaving directory `dryad-0.2pre18756/lib'
+make: *** [all-recursive] Error 1
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20090812/86847b0b/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Aug 13 11:56:36 2009
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 13 Aug 2009 11:56:36 +0200
+Subject: [Stratego Developers] Stack smashing error when compiling dryad
+In-Reply-To: <30992e5d0908121241w7b94bd51gf4ebc88547615e56@mail.gmail.co
+ m>
+References: <30992e5d0908121241w7b94bd51gf4ebc88547615e56@mail.gmail.com>
+Message-ID: <200908130956.n7D9ubWs028436@smtp1.infopact.nl>
+
+Hi Pinku,
+
+This is a known problem. I was under the impression that this was fixed for the 0.17 release that can be downloaded right now (Rob: or was the fix released only for the Ubuntu version?). Perhaps you instead need to download the Ubuntu version from http://strategoxt.org/Stratego/StrategoDownload. Alternatively, you can also try one of the 0.18 pre-releases from http://hydra.nixos.org/project/strategoxt.
+
+hth,
+
+Lennart Kats
+
+@ 21:41 12-8-2009, Pinku Surana wrote:
+>Attempting to build dryad from source, got this error: "*** stack smashing detected ***: /usr/bin/strc terminated". I'm new to stratego, so I'm not sure what's going on. 
+>
+>I'm using Ubuntu 9.04, gcc 4.3.3, dryad-0.2pre18756, java-front_0.9, strategoxt_0.17, sdf2-bundle_2.4, aterm_2.5. For java_front, I used alien to convert Fedora 9's rpm into a deb file. 
+>
+>Full error dump:
+>
+>Making all in lib
+>make[1]: Entering directory `dryad-0.2pre18756/lib'
+>[ strc | info ] Compiling '../lib/dryad.str'
+>[ strc | warning ] Nullary constructor Public used without parentheses
+>[ strc | warning ] Nullary constructor Final used without parentheses
+>[ strc | warning ] Nullary constructor Int used without parentheses
+>[ strc | warning ] Nullary constructor TempFiles used without parentheses
+>[ strc | warning ] Nullary constructor TempFiles used without parentheses
+>[ strc | warning ] Nullary constructor TypeCloneable used without parentheses
+>[ strc | warning ] Nullary constructor TypeObject used without parentheses
+>[ strc | warning ] Nullary constructor TypeObject used without parentheses
+>[ strc | warning ] Nullary constructor Plus used without parentheses
+>*** stack smashing detected ***: /usr/bin/strc terminated
+>======= Backtrace: =========
+>/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x48)[0x40600da8]
+>/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x0)[0x40600d60]
+>/usr/lib/libstratego-lib-native.so[0x40456814]
+>/usr/lib/libstratego-lib-native.so[0x40453875]
+>/usr/lib/libstratego-lib.so(checksum_0_0+0x50)[0x403eb940]
+>/usr/lib/libstrc.so(get_stamp_0_0+0xa2)[0x40165d52]
+>/usr/lib/libstrc.so(SplitDynamicRule_1_0+0x1d2)[0x40166402]
+>/usr/lib/libstrc.so(SplitDynamicRule_0_0+0xc4e)[0x401676ce]
+>/usr/lib/libstrc.so[0x40167a53]
+>/usr/lib/libstratego-lib.so[0x403e8a7c]
+>/usr/lib/libstratego-runtime.so(SRTS_one+0x8e)[0x4045a7be]
+>/usr/lib/libstratego-lib.so[0x403e8ac6]
+>/usr/lib/libstratego-lib.so(oncetd_1_0+0x7b)[0x403e8b5b]
+>/usr/lib/libstrc.so[0x400dc8b5]
+>/usr/lib/libstrc.so(lift_dynamic_rule_0_0+0x75)[0x400dc965]
+>/usr/lib/libstrc.so[0x40143493]
+>/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+>/usr/lib/libstrc.so[0x40108fd1]
+>/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+>/usr/lib/libstrc.so[0x40108f1f]
+>/usr/lib/libstratego-lib.so(dr_scope_1_1+0xc4)[0x40419ea4]
+>/usr/lib/libstrc.so(lift_dynamic_rule_from_def_0_0+0xad)[0x40108d0d]
+>/usr/lib/libstrc.so(lift_dynamic_rule_from_def_foo_0_0+0x6f)[0x40108ddf]
+>/usr/lib/libstratego-lib.so(repeat_1_0+0x57)[0x403749a7]
+>/usr/lib/libstrc.so[0x40063821]
+>/usr/lib/libstratego-lib.so[0x403a610c]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>/usr/lib/libstratego-lib.so[0x403a6185]
+>======= Memory map: ========
+>08048000-0804a000 r-xp 00000000 08:11 403035     /usr/bin/strc
+>0804a000-0804b000 r--p 00001000 08:11 403035     /usr/bin/strc
+>0804b000-0804c000 rw-p 00002000 08:11 403035     /usr/bin/strc
+>0804c000-0808c000 rw-p 0804c000 00:00 0 
+>08926000-0925e000 rw-p 08926000 00:00 0          [heap]
+>40000000-4001c000 r-xp 00000000 08:01 220499     /lib/<http://ld-2.9.so>ld-2.9.so
+>4001c000-4001d000 r--p 0001b000 08:01 220499     /lib/<http://ld-2.9.so>ld-2.9.so
+>4001d000-4001e000 rw-p 0001c000 08:01 220499     /lib/<http://ld-2.9.so>ld-2.9.so
+>4001e000-4001f000 r-xp 4001e000 00:00 0          [vdso]
+>4001f000-40021000 rw-p 4001f000 00:00 0 
+>40021000-401ed000 r-xp 00000000 08:11 240284     /usr/lib/libstrc.so
+>401ed000-401ee000 r--p 001cc000 08:11 240284     /usr/lib/libstrc.so
+>401ee000-40223000 rw-p 001cd000 08:11 240284     /usr/lib/libstrc.so
+>40223000-40227000 rw-p 40223000 00:00 0 
+>40227000-4023b000 r-xp 00000000 08:11 241170     /usr/lib/libstratego-gpp.so
+>4023b000-4023c000 r--p 00013000 08:11 241170     /usr/lib/libstratego-gpp.so
+>4023c000-40243000 rw-p 00014000 08:11 241170     /usr/lib/libstratego-gpp.so
+>40243000-40245000 rw-p 40243000 00:00 0 
+>40245000-40276000 r-xp 00000000 08:11 240956     /usr/lib/libstratego-rtg.so
+>40276000-40277000 r--p 00030000 08:11 240956     /usr/lib/libstratego-rtg.so
+>40277000-4027c000 rw-p 00031000 08:11 240956     /usr/lib/libstratego-rtg.so
+>4027c000-402b2000 r-xp 00000000 08:11 240860     /usr/lib/libstratego-sglr.so
+>402b2000-402b3000 r--p 00036000 08:11 240860     /usr/lib/libstratego-sglr.so
+>402b3000-402b4000 rw-p 00037000 08:11 240860     /usr/lib/libstratego-sglr.so
+>402b4000-40320000 r-xp 00000000 08:11 241194     /usr/lib/libjustsglr.so
+>40320000-40321000 r--p 0006b000 08:11 241194     /usr/lib/libjustsglr.so
+>40321000-40323000 rw-p 0006c000 08:11 241194     /usr/lib/libjustsglr.so
+>40323000-40328000 rw-p 40323000 00:00 0 
+>40328000-40337000 r-xp 00000000 08:11 241203     /usr/lib/libc-pp.so
+>40337000-40338000 r--p 0000e000 08:11 241203     /usr/lib/libc-pp.so
+>40338000-40339000 rw-p 0000f000 08:11 241203     /usr/lib/libc-pp.so
+>40339000-40347000 r-xp 00000000 08:11 240288     /usr/lib/libstratego-xtc.so
+>40347000-40348000 r--p 0000d000 08:11 240288     /usr/lib/libstratego-xtc.so
+>40348000-40349000 rw-p 0000e000 08:11 240288     /usr/lib/libstratego-xtc.so
+>40349000-4034a000 rw-p 40349000 00:00 0 
+>4034a000-4044a000 r-xp 00000000 08:11 240968     /usr/lib/libstratego-lib.so
+>4044a000-4044b000 r--p 000ff000 08:11 240968     /usr/lib/libstratego-lib.so
+>4044b000-4044c000 rw-p 00100000 08:11 240968     /usr/lib/libstratego-lib.so
+>4044c000-4044d000 rw-p 4044c000 00:00 0 
+>4044d000-40457000 r-xp 00000000 08:11 240979     /usr/lib/libstratego-lib-native.so
+>40457000-40458000 r--p 00009000 08:11 240979     /usr/lib/libstratego-lib-native.so
+>40458000-40459000 rw-p 0000a000 08:11 2409make[1]: *** [libdryad.c] Aborted
+>make[1]: Leaving directory `dryad-0.2pre18756/lib'
+>make: *** [all-recursive] Error 1
+>
+>_______________________________________________
+>Developers mailing list
+>Developers at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+
+From rob.vermaas at gmail.com  Sun Aug 30 11:06:34 2009
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Sun, 30 Aug 2009 11:06:34 +0200
+Subject: [Stratego Developers] fyi: java-front for Ubuntu/Debian point
+	to wrong package
+In-Reply-To: <ed55b7d90908120937kedf0d4etfe50fd64107054c@mail.gmail.com>
+References: <30992e5d0908120829rd5ef78awa0bd5e7a3cc29125@mail.gmail.com>
+	<ed55b7d90908120937kedf0d4etfe50fd64107054c@mail.gmail.com>
+Message-ID: <5a9e75b10908300206u5606147bx65cae0769fa75650@mail.gmail.com>
+
+Copy and pasting does have it's disadvantages... Fixed.
+
+gr,
+Rob
+
+2009/8/12 Eelco Visser <E.Visser at tudelft.nl>
+
+> Thanks for the report. cc'ing to the developers at strategoxt.org list
+>
+> -- Eelco
+>
+> On Wed, Aug 12, 2009 at 5:29 PM, Pinku Surana<suranap at gmail.com> wrote:
+> > On this page: http://strategoxt.org/Stratego/JavaFrontRelease09
+> > The links for Debian and Ubuntu point to strategoxt-utils, which don't
+> > contain parse-java. The other distributions point to java-front. I used
+> > alien to convert the rpm to deb.
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20090830/38c35033/attachment.html 
+

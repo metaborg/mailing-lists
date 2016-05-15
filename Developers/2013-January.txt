@@ -1,0 +1,400 @@
+From E.Visser at tudelft.nl  Wed Jan  9 21:46:40 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 9 Jan 2013 21:46:40 +0100
+Subject: [Stratego Developers] Spoofax + Stratego/XT roadmap
+Message-ID: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+
+Dear Spoofax / Stratego users,
+
+We are starting a new cycle of development on the Spoofax Language
+Workbench. To start that process we have cleaned up the issue list on
+the YellowGrass issue tracker. In the cleaning operation we have
+closed a number of issues that seemed fixed or irrelevant. The latter
+issues we have tagged aboned:
+
+   http://yellowgrass.org/tag/Spoofax/abandoned
+
+If you disagree with closing any of these issues you can propose to reopen them.
+
+Next we have created a new roadmap covering development in the next
+couple of months:
+
+   http://yellowgrass.org/roadmap/Spoofax
+
+Spoofax release 1.1 will include the version of the new Name Binding
+Language that is the current unstable release (which has been in wide
+use) and a large number of bug fixes and improvements with respect to
+the Spoofax 1.0 release. The NBL version in this release may still
+have some limitations, but we strive to make its syntax as stable as
+possible.
+
+Spoofax release 1.2 will include a new, more complete, implementation
+of NBL-based name resolution. We also aim to integrate Sebastian
+Erdweg's extension of JSGLR with layout sensitive parsing in this
+release.
+
+This release should provide a stable base for users. After this we
+will start attacking a number of larger operations, including
+maintenance and refactoring operations, which should provide the basis
+for further research and innovation.
+
+If there are important issues that you think should be addressed
+please submit them to YellowGrass and/or vote for existing issues on
+YellowGrass. (You can vote for an issue using the thumbs-up icon on an
+issue page.) While we cannot guarantee anything, we will pay more
+attention to issues with lots of votes.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From karltk at gmail.com  Thu Jan 10 15:43:22 2013
+From: karltk at gmail.com (Karl Trygve Kalleberg)
+Date: Thu, 10 Jan 2013 15:43:22 +0100
+Subject: [Stratego Developers] Move NBL to Stratego/XT
+In-Reply-To: <20C7B8B7-378C-414E-932E-B0CDFCD288BC@informatik.uni-marburg.de>
+References: <CAFaCHU2kbky_vGhH8bzp26GPWmEpS5uvqernjCPQAtLx4-G94Q@mail.gmail.com>
+	<20C7B8B7-378C-414E-932E-B0CDFCD288BC@informatik.uni-marburg.de>
+Message-ID: <CAGxSwVXpS0cuQLvoVudeo7fbH0nR+ESEnfh8hSXvE-PwxyVkBg@mail.gmail.com>
+
+> While doing so many things, I think we should also redesign the module system of SDF and Stratego. I struggled many times with the transitive imports, which prevent encapsulation and open the door to accidental name clashes far across module boundaries. I guess a redesign of the module system could be part of step 7 of the plan below.
+>
+> Personally, I like the style of the Haskell module system, which features:
+>   non-transitive imports, exclusion (hiding) of some declarations when importing , import declarations with qualified names or rename them locally, partial exports, reexporting of other modules
+> The last feature is particularly important and used to bundle multiple components as if they were defined in a single module.
+> Details can be found in the Haskell report: http://www.haskell.org/onlinereport/haskell2010/haskellch5.html
+>
+> I could imagine a variant of the Haskell module system to be very useful for scoping SDF nonterminals and Stratego rules/strategies more precisely. And then I would like separate compilation :-)
+
+Funny how this idea seems to show up again every few years...
+
+For the record, I (still) I think it's a good one, and perhaps this
+time it will actually happen:)
+
+There's been talk of applying NBL to the Stratego compiler itself,
+eventually. I suppose a module system would be a likely fallout of
+this application, since the NBL would (presumabl) make namespaces a
+lot easier to implement.
+
+-- Karl T
+
+
+From E.Visser at tudelft.nl  Thu Jan 10 17:11:34 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 10 Jan 2013 17:11:34 +0100
+Subject: [Stratego Developers] Move NBL to Stratego/XT
+In-Reply-To: <CAGxSwVXpS0cuQLvoVudeo7fbH0nR+ESEnfh8hSXvE-PwxyVkBg@mail.gmail.com>
+References: <CAFaCHU2kbky_vGhH8bzp26GPWmEpS5uvqernjCPQAtLx4-G94Q@mail.gmail.com>
+	<20C7B8B7-378C-414E-932E-B0CDFCD288BC@informatik.uni-marburg.de>
+	<CAGxSwVXpS0cuQLvoVudeo7fbH0nR+ESEnfh8hSXvE-PwxyVkBg@mail.gmail.com>
+Message-ID: <CAFaCHU0xeC9TnEkkS1he5qVYXOB=RCMHRP5HUzwzDqRFfs_hOQ@mail.gmail.com>
+
+Karl wrote:
+
+> There's been talk of applying NBL to the Stratego compiler itself,
+> eventually. I suppose a module system would be a likely fallout of
+> this application, since the NBL would (presumabl) make namespaces a
+> lot easier to implement.
+
+Indeed, that is the plan. NBL will make it significantly easier to
+implement the analysis, and will make the analysis incremental. We are
+exploring generic strategies for _incremental_ compilation. Getting
+these analyses for free from NBL will make experimenting with designs
+of module systems much easier as well.
+
+There are at least two phases in step 7. First, reimplementing SDF and
+Stratego with NBL for name analysis so that we can replace the current
+implementation with better analysis and faster compilation. Then
+redesigning the languages. Note that backwards compatibility is always
+a painful aspect of such redesigns. Breaking it should not be taken
+lightly. And bootstrapping ...
+
+-- Eelco
+
+On Thu, Jan 10, 2013 at 3:43 PM, Karl Trygve Kalleberg <karltk at gmail.com> wrote:
+>> While doing so many things, I think we should also redesign the module system of SDF and Stratego. I struggled many times with the transitive imports, which prevent encapsulation and open the door to accidental name clashes far across module boundaries. I guess a redesign of the module system could be part of step 7 of the plan below.
+>>
+>> Personally, I like the style of the Haskell module system, which features:
+>>   non-transitive imports, exclusion (hiding) of some declarations when importing , import declarations with qualified names or rename them locally, partial exports, reexporting of other modules
+>> The last feature is particularly important and used to bundle multiple components as if they were defined in a single module.
+>> Details can be found in the Haskell report: http://www.haskell.org/onlinereport/haskell2010/haskellch5.html
+>>
+>> I could imagine a variant of the Haskell module system to be very useful for scoping SDF nonterminals and Stratego rules/strategies more precisely. And then I would like separate compilation :-)
+>
+> Funny how this idea seems to show up again every few years...
+>
+> For the record, I (still) I think it's a good one, and perhaps this
+> time it will actually happen:)
+>
+> There's been talk of applying NBL to the Stratego compiler itself,
+> eventually. I suppose a module system would be a likely fallout of
+> this application, since the NBL would (presumabl) make namespaces a
+> lot easier to implement.
+>
+> -- Karl T
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From v.vergu at gmail.com  Sat Jan 12 01:02:32 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Sat, 12 Jan 2013 01:02:32 +0100
+Subject: [Stratego Developers] request to validate migration to GitHub
+Message-ID: <7F9E1667-E5A2-48E1-88C2-017F7219268E@gmail.com>
+
+Dear developers,
+
+I've been trying to migrate the StrategoXT tooling (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) and the Java backend (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) from SVN to Git (GitHub). As part of the migration i've brought the Java backend back and StrategoXT back into a single repository; this in preparation for bootstrapping.
+
+I have a preliminary migrated repository available at https://github.com/metaborg/strategoxt. Please do not commit anything to it, all changes will be lost as I will delete and recreate the repository for the final migration. 
+
+My kind request to all of you is to review the contents of this repository, in particular its history, branches and tags and let me know if you find something that's broken, incorrect or missing as result of the migration. Branches and tags corresponding to StrategoXT and Java backend are prefixed with strategoxt/ and strj/, respectively. A web interface for browsing the SVN repository is available at https://svn.strategoxt.org/websvn/StrategoXT/. 
+
+In absence of any reports/complaints by Monday c.o.b i'll assume everything is fine and i'll migrate the latest revision from SVN. I will then announce the switchover to GitHub on this mailing list and the corresponding SVN locations will be locked for commits.
+
+Thank you for your assistance.
+
+Regards,
+
+Vlad
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130112/cfcc2171/attachment.html>
+
+From v.vergu at gmail.com  Sun Jan 13 17:51:40 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Sun, 13 Jan 2013 17:51:40 +0100
+Subject: [Stratego Developers] request to validate migration to GitHub
+In-Reply-To: <CAOipTui3y7Xu5TUpRAp2VUqbh=V0LmjTyR_2W1wcwO8dzg2J+g@mail.gmail.com>
+References: <7F9E1667-E5A2-48E1-88C2-017F7219268E@gmail.com>
+	<CAOipTui3y7Xu5TUpRAp2VUqbh=V0LmjTyR_2W1wcwO8dzg2J+g@mail.gmail.com>
+Message-ID: <7C9A9157-1B97-4E2D-ABDC-B6D65863F3AC@gmail.com>
+
+Hi Gabri?l,
+> The Spoofax libraries jar is on github: https://github.com/metaborg/strategoxt/commits/master/strategoxt-java-backend/java/spoofax-libs.jar. The build farm currently needs this to build though, we may be able to purge it later?
+Indeed. When we figure out a solution for the binaries we can filter them out of the repository.
+> No .gitignore files, can the converter convert these from SVN ignores? There's also an svn-ignore file: https://github.com/metaborg/strategoxt/blob/master/svn-ignore.
+The conversion tool can't do this, but perhaps manually committing a .gitignore later will suffice.
+> Tags are branches
+That's a good one. Thanks.
+> Some strategoxt branches contain the stratego-java-backend, but the strj branches are just the stratego-java-backend files themself? I guess this is intended but just making sure.
+This is a side effect of merging the two repositories. Strategoxt-java-backend was initially part of the strategoxt repository but later moved out. Therefore some branches contain only one of them depending on when they got created. I don't see a simple solution to this though.
+
+Thanks,
+
+Vlad
+
+> On 12 January 2013 01:02, Vlad Vergu <v.vergu at gmail.com> wrote:
+> Dear developers,
+> 
+> I've been trying to migrate the StrategoXT tooling (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) and the Java backend (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) from SVN to Git (GitHub). As part of the migration i've brought the Java backend back and StrategoXT back into a single repository; this in preparation for bootstrapping.
+> 
+> I have a preliminary migrated repository available at https://github.com/metaborg/strategoxt. Please do not commit anything to it, all changes will be lost as I will delete and recreate the repository for the final migration. 
+> 
+> My kind request to all of you is to review the contents of this repository, in particular its history, branches and tags and let me know if you find something that's broken, incorrect or missing as result of the migration. Branches and tags corresponding to StrategoXT and Java backend are prefixed with strategoxt/ and strj/, respectively. A web interface for browsing the SVN repository is available at https://svn.strategoxt.org/websvn/StrategoXT/. 
+> 
+> In absence of any reports/complaints by Monday c.o.b i'll assume everything is fine and i'll migrate the latest revision from SVN. I will then announce the switchover to GitHub on this mailing list and the corresponding SVN locations will be locked for commits.
+> 
+> Thank you for your assistance.
+> 
+> Regards,
+> 
+> Vlad
+> 
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> 
+> 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130113/7b94cb32/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Jan 14 11:49:03 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 14 Jan 2013 11:49:03 +0100
+Subject: [Stratego Developers] Spoofax + Stratego/XT roadmap
+In-Reply-To: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+References: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+Message-ID: <CAFaCHU26sZCtq+22ZQj79uXZO0k2SkSvi_wUircMcxWFiQW0Cg@mail.gmail.com>
+
+Hi,
+
+To follow up on the earlier announcement, we have set the fairly sharp
+date of February 8, 2013 for finishing the Spoofax 1.1 release:
+
+   http://yellowgrass.org/tag/Spoofax/1.1
+
+If you see any issues that you can contribute to, your help would be
+most appreciated; please get in touch to coordinate.
+
+cheers,
+
+-- Eelco
+
+On Wed, Jan 9, 2013 at 9:46 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Dear Spoofax / Stratego users,
+>
+> We are starting a new cycle of development on the Spoofax Language
+> Workbench. To start that process we have cleaned up the issue list on
+> the YellowGrass issue tracker. In the cleaning operation we have
+> closed a number of issues that seemed fixed or irrelevant. The latter
+> issues we have tagged aboned:
+>
+>    http://yellowgrass.org/tag/Spoofax/abandoned
+>
+> If you disagree with closing any of these issues you can propose to reopen them.
+>
+> Next we have created a new roadmap covering development in the next
+> couple of months:
+>
+>    http://yellowgrass.org/roadmap/Spoofax
+>
+> Spoofax release 1.1 will include the version of the new Name Binding
+> Language that is the current unstable release (which has been in wide
+> use) and a large number of bug fixes and improvements with respect to
+> the Spoofax 1.0 release. The NBL version in this release may still
+> have some limitations, but we strive to make its syntax as stable as
+> possible.
+>
+> Spoofax release 1.2 will include a new, more complete, implementation
+> of NBL-based name resolution. We also aim to integrate Sebastian
+> Erdweg's extension of JSGLR with layout sensitive parsing in this
+> release.
+>
+> This release should provide a stable base for users. After this we
+> will start attacking a number of larger operations, including
+> maintenance and refactoring operations, which should provide the basis
+> for further research and innovation.
+>
+> If there are important issues that you think should be addressed
+> please submit them to YellowGrass and/or vote for existing issues on
+> YellowGrass. (You can vote for an issue using the thumbs-up icon on an
+> issue page.) While we cannot guarantee anything, we will pay more
+> attention to issues with lots of votes.
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From E.Visser at tudelft.nl  Tue Jan 15 14:57:03 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 15 Jan 2013 14:57:03 +0100
+Subject: [Stratego Developers] YellowGrass Q&A
+Message-ID: <CAFaCHU1R=wRUR2hQ0Yade73mkcMhy1CNnc=1KkeLsS8EL0eMKw@mail.gmail.com>
+
+Dear Spoofax Users,
+
+As of today, YellowGrass, the issue tracker we use for the Spoofax project
+
+   http://yellowgrass.org/project/Spoofax
+
+now also has an experimental (!) Questions and Answers section for projects:
+
+   http://yellowgrass.org/questions/Spoofax
+
+This section can be used to post those issues that are really
+questions about application of Spoofax. The extension is fairly basic
+and will be extended in the future. But it should already be useable.
+
+Looking forward to your questions,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From v.vergu at gmail.com  Tue Jan 15 15:53:25 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Tue, 15 Jan 2013 15:53:25 +0100
+Subject: [Stratego Developers] codebases migrated to GitHub
+In-Reply-To: <7F9E1667-E5A2-48E1-88C2-017F7219268E@gmail.com>
+References: <7F9E1667-E5A2-48E1-88C2-017F7219268E@gmail.com>
+Message-ID: <6032A8B3-4ABB-4CA7-ADC6-2964B6B3155B@gmail.com>
+
+Dear Stratego Developers,
+
+The Stratego/XT project together with the Java backend are as of this morning hosted on GitHub at:
+
+https://github.com/metaborg/strategoxt
+
+The CI jobs (at hydra.nixos.org) are being updated as we speak.
+
+Both codebases are left at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/ and https://svn.strategoxt.org/repos/StrategoXT/strategoxt-java-backend/ for historical reasons only; please do not commit there as changes will not be migrated to Git. If you have local uncommitted changes you should manually patch the master branch of the Git repository.
+
+See you on GitHub!
+
+Vlad
+
+On Jan 12, 2013, at 1:02 AM, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Dear developers,
+> 
+> I've been trying to migrate the StrategoXT tooling (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) and the Java backend (currently located at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/) from SVN to Git (GitHub). As part of the migration i've brought the Java backend back and StrategoXT back into a single repository; this in preparation for bootstrapping.
+> 
+> I have a preliminary migrated repository available at https://github.com/metaborg/strategoxt. Please do not commit anything to it, all changes will be lost as I will delete and recreate the repository for the final migration. 
+> 
+> My kind request to all of you is to review the contents of this repository, in particular its history, branches and tags and let me know if you find something that's broken, incorrect or missing as result of the migration. Branches and tags corresponding to StrategoXT and Java backend are prefixed with strategoxt/ and strj/, respectively. A web interface for browsing the SVN repository is available at https://svn.strategoxt.org/websvn/StrategoXT/. 
+> 
+> In absence of any reports/complaints by Monday c.o.b i'll assume everything is fine and i'll migrate the latest revision from SVN. I will then announce the switchover to GitHub on this mailing list and the corresponding SVN locations will be locked for commits.
+> 
+> Thank you for your assistance.
+> 
+> Regards,
+> 
+> Vlad
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130115/1a5a1d27/attachment.html>
+

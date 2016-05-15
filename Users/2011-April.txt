@@ -1,0 +1,1380 @@
+From gre at ecs.soton.ac.uk  Fri Apr  8 12:22:47 2011
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 8 Apr 2011 11:22:47 +0100
+Subject: [Stratego Users] building statically linked stratego programs
+Message-ID: <BANLkTimuK9PvTm3=U-es5k-diuJtGRQqKw@mail.gmail.com>
+
+Hi guys,
+
+I'm trying to build a stratego program with statically linked
+libraries, but the linker is complaining:
+
+/usr/bin/ld: attempted static link of dynamic object
+`/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+sglr.so'
+
+I'm using strategoxt installed from Nix. Is there a strategoxt package
+that uses statically linked libraries that I can use? I have tried
+building the strategoxt source distribution manually using:
+./configure --disable-shared make LDFLAGS='-static -all-static'
+
+but also have problems there .
+Cheers , Rob
+-- 
+Dr Giorgios Robert Economopoulos School of Electronics and Computer
+Science University of Southampton Southampton SO 17 1 BJ United
+Kingdom Phone : + 44 ( 0 ) 238 059 3123
+
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+
+From E.Visser at tudelft.nl  Fri Apr  8 12:52:18 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 8 Apr 2011 12:52:18 +0200
+Subject: [Stratego Users] building statically linked stratego programs
+In-Reply-To: <BANLkTimuK9PvTm3=U-es5k-diuJtGRQqKw@mail.gmail.com>
+References: <BANLkTimuK9PvTm3=U-es5k-diuJtGRQqKw@mail.gmail.com>
+Message-ID: <BANLkTinAdoZW5EjuBPVPqup6OqBknGfspw@mail.gmail.com>
+
+Hi Rob,
+
+Have you tried Stratego/Java? With strj you'd avoid all the libtools
+misery. (I guess you may get classpath issues in return, but my
+impression is that it should be a friendlier environment.)
+
+-- Eelco
+
+On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <gre at ecs.soton.ac.uk> wrote:
+> Hi guys,
+>
+> I'm trying to build a stratego program with statically linked
+> libraries, but the linker is complaining:
+>
+> /usr/bin/ld: attempted static link of dynamic object
+> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+> sglr.so'
+>
+> I'm using strategoxt installed from Nix. Is there a strategoxt package
+> that uses statically linked libraries that I can use? I have tried
+> building the strategoxt source distribution manually using:
+> ./configure --disable-shared make LDFLAGS='-static -all-static'
+>
+> but also have problems there .
+> Cheers , Rob
+> --
+> Dr Giorgios Robert Economopoulos School of Electronics and Computer
+> Science University of Southampton Southampton SO 17 1 BJ United
+> Kingdom Phone : + 44 ( 0 ) 238 059 3123
+>
+>
+> --
+> Dr Giorgios Robert Economopoulos
+> School of Electronics and Computer Science
+> University of Southampton
+> Southampton
+> SO17 1BJ
+> United Kingdom
+>
+> Phone: +44 (0)238 059 3123
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From gre at ecs.soton.ac.uk  Fri Apr  8 19:51:49 2011
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 8 Apr 2011 18:51:49 +0100
+Subject: [Stratego Users] building statically linked stratego programs
+In-Reply-To: <BANLkTinAdoZW5EjuBPVPqup6OqBknGfspw@mail.gmail.com>
+References: <BANLkTimuK9PvTm3=U-es5k-diuJtGRQqKw@mail.gmail.com>
+	<BANLkTinAdoZW5EjuBPVPqup6OqBknGfspw@mail.gmail.com>
+Message-ID: <BANLkTik7srjAnFST5AP8-VMt18PjobfDXA@mail.gmail.com>
+
+After several attempts today, I managed to use strj to compile my stratego
+program, but now I get the following error when I try running the compiled
+Java:
+
+$java -cp classes/:jars/strategoxt.jar merge_claims -i
+../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+../tests/fortes/benchmarks/EUREKA_.trm
+
+Fatal error at
+io_merge_claims_0_0
+io_stream_wrap_4_0
+ option_wrap_5_0
+io_stream_1_0
+do_main_0_0
+ parse_C_stream_0_0
+Exception in thread "main" org.strategoxt.lang.StrategoException: Primitive
+not defined: STRSGLR_open_parse_table
+ at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+at
+org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+ at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+ at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+ at org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+at
+org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+ at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+ at merge_claims.main(merge_claims.java:278)
+
+
+However, this problem might be caused by the way that I compiled the
+generated Java. When I tried compiling the Java generated by strj I got the
+following error:
+
+$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+
+merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+
+plus another 12 similar errors...
+
+
+I didn't manage to get it working by fiddling with the classpath, but I did
+eventually get it to compile by add the following "import" to the Java
+generated by strj:
+
+import org.strategoxt.stratego_sglr.*;
+
+
+This clearly isn't the way to do this! Does anyone have any ideas on how to
+get it working?
+
+Cheers,
+Rob
+
+On 8 April 2011 11:52, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Rob,
+>
+> Have you tried Stratego/Java? With strj you'd avoid all the libtools
+> misery. (I guess you may get classpath issues in return, but my
+> impression is that it should be a friendlier environment.)
+>
+> -- Eelco
+>
+> On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <gre at ecs.soton.ac.uk>
+> wrote:
+> > Hi guys,
+> >
+> > I'm trying to build a stratego program with statically linked
+> > libraries, but the linker is complaining:
+> >
+> > /usr/bin/ld: attempted static link of dynamic object
+> >
+> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+> > sglr.so'
+> >
+> > I'm using strategoxt installed from Nix. Is there a strategoxt package
+> > that uses statically linked libraries that I can use? I have tried
+> > building the strategoxt source distribution manually using:
+> > ./configure --disable-shared make LDFLAGS='-static -all-static'
+> >
+> > but also have problems there .
+> > Cheers , Rob
+> > --
+> > Dr Giorgios Robert Economopoulos School of Electronics and Computer
+> > Science University of Southampton Southampton SO 17 1 BJ United
+> > Kingdom Phone : + 44 ( 0 ) 238 059 3123
+> >
+> >
+> > --
+> > Dr Giorgios Robert Economopoulos
+> > School of Electronics and Computer Science
+> > University of Southampton
+> > Southampton
+> > SO17 1BJ
+> > United Kingdom
+> >
+> > Phone: +44 (0)238 059 3123
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110408/f9c7767d/attachment.html>
+
+From L.C.L.Kats at tudelft.nl  Sun Apr 10 01:21:07 2011
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sun, 10 Apr 2011 01:21:07 +0200
+Subject: [Stratego Users] building statically linked stratego  programs
+Message-ID: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+
+Hi Rob,
+
+You can specify what libraries to use with the -la option, just as with the C compiler, e.g. '-la stratego-sglr' to import the stratego-sglr library. Alternatively, -la also accepts a package name, but you can use the Stratego short names for them as well.
+
+If you add this option I think it'll also fix your "primitive not defined" problem, which probably happens because the library is never properly initialized (it's only imported with your manual change to the generated code).
+
+I suppose the reason that it *did* work before with the C version may be some kind of transitive import phenonemon. Perhaps you imported something like libstrc without also explicitly importing libstratego-sglr before? I think the Java version doesn't allow implicit library imports like that.
+
+cheers,
+
+Lennart
+
+@ 07:51 PM 4/8/2011, Rob Economopoulos wrote:
+>After several attempts today, I managed to use strj to compile my stratego program, but now I get the following error when I try running the compiled Java:
+>
+>$java -cp classes/:jars/strategoxt.jar merge_claims -i ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o ../tests/fortes/benchmarks/EUREKA_.trm
+>
+>Fatal error at
+>io_merge_claims_0_0
+>io_stream_wrap_4_0
+>option_wrap_5_0
+>io_stream_1_0
+>do_main_0_0
+>parse_C_stream_0_0
+>Exception in thread "main" org.strategoxt.lang.StrategoException: Primitive not defined: STRSGLR_open_parse_table
+>at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>at org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+>at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+>at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+>at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+>at org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+>at org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+>at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+>at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+>at merge_claims.main(merge_claims.java:278)
+>
+>
+>However, this problem might be caused by the way that I compiled the generated Java. When I tried compiling the Java generated by strj I got the following error:
+>
+>$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+>
+>merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+>        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+>
+>plus another 12 similar errors...
+>
+>
+>I didn't manage to get it working by fiddling with the classpath, but I did eventually get it to compile by add the following "import" to the Java generated by strj:
+>
+>import org.strategoxt.stratego_sglr.*;
+>
+>
+>This clearly isn't the way to do this! Does anyone have any ideas on how to get it working?
+>
+>Cheers,
+>Rob
+>
+>On 8 April 2011 11:52, Eelco Visser <<mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:  
+>Hi Rob,
+>Have you tried Stratego/Java? With strj you'd avoid all the libtools 
+>misery. (I guess you may get classpath issues in return, but my 
+>impression is that it should be a friendlier environment.) 
+>-- Eelco
+>On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <<mailto:gre at ecs.soton.ac.uk>gre at ecs.soton.ac.uk> wrote: 
+>> Hi guys, 
+>> 
+>> I'm trying to build a stratego program with statically linked 
+>> libraries, but the linker is complaining: 
+>> 
+>> /usr/bin/ld: attempted static link of dynamic object 
+>> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego- 
+>> sglr.so' 
+>> 
+>> I'm using strategoxt installed from Nix. Is there a strategoxt package 
+>> that uses statically linked libraries that I can use? I have tried 
+>> building the strategoxt source distribution manually using: 
+>> ./configure --disable-shared make LDFLAGS='-static -all-static' 
+>> 
+>> but also have problems there . 
+>> Cheers , Rob 
+>> -- 
+>> Dr Giorgios Robert Economopoulos School of Electronics and Computer 
+>> Science University of Southampton Southampton SO 17 1 BJ United 
+>> Kingdom Phone : + 44 ( 0 ) 238 059 3123 
+>> 
+>> 
+>> -- 
+>> Dr Giorgios Robert Economopoulos 
+>> School of Electronics and Computer Science 
+>> University of Southampton 
+>> Southampton 
+>> SO17 1BJ 
+>> United Kingdom 
+>> 
+>> Phone: +44 (0)238 059 3123 
+>> _______________________________________________ 
+>> Users mailing list 
+>> <mailto:Users at strategoxt.org>Users at strategoxt.org 
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users 
+>>
+>
+>
+>--
+>Associate Professor at Delft University of Technology
+>Group:          Software Language Design and Engineering 
+>Email:          <mailto:e.visser at tudelft.nl>e.visser at tudelft.nl 
+>Homepage:   <http://eelcovisser.org>http://eelcovisser.org 
+>Publications: <http://researchr.org/profile/eelcovisser>http://researchr.org/profile/eelcovisser 
+>News:           <http://twitter.com/eelcovisser>http://twitter.com/eelcovisser
+>_______________________________________________ 
+>Users mailing list 
+><mailto:Users at strategoxt.org>Users at strategoxt.org 
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>-- 
+>Dr Giorgios Robert Economopoulos
+>School of Electronics and Computer Science
+>University of Southampton
+>Southampton
+>SO17 1BJ
+>United Kingdom
+>
+>Phone: +44 (0)238 059 3123
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From gre at ecs.soton.ac.uk  Mon Apr 11 10:44:45 2011
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Mon, 11 Apr 2011 09:44:45 +0100
+Subject: [Stratego Users] building statically linked stratego programs
+In-Reply-To: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+References: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+Message-ID: <BANLkTinwsVzUW6fw4X8FxJrdiBNEfisJsA@mail.gmail.com>
+
+Thanks Lennart! Ok, so I'm almost there, I think. I'm specifying the
+libraries with the -la option, but now when I run the java I get the
+following error:
+
+$java -cp classes/:jars/strategoxt.jar merge_claims -i
+../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+../tests/fortes/benchmarks/EUREKA_.trm
+
+Fatal error at
+io_merge_claims_0_0
+io_stream_wrap_4_0
+ option_wrap_5_0
+io_stream_1_0
+do_main_0_0
+ parse_C_stream_0_0
+Exception in thread "main" org.strategoxt.lang.StrategoException: Exception
+in execution of primitive 'SSL_get_constructor'
+ at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+ at
+org.strategoxt.lang.compat.override.jsglr_parser_compat.open_parse_table_0_0_override.invoke(open_parse_table_0_0_override.java)
+at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20762)
+ at merge_claims$do_main_0_0.invoke(merge_claims.java:20651)
+at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+ at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+at org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+ at
+org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20540)
+ at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+at merge_claims.main(merge_claims.java:288)
+Caused by: org.strategoxt.lang.StrategoException: merge_claims: Could not
+find imported term file Default-C-With-CPP.tbl
+at org.strategoxt.lang.ImportTerm.openStream(ImportTerm.java)
+ at org.strategoxt.lang.ImportTerm.init(ImportTerm.java)
+at org.spoofax.terms.LazyTerm.getWrapped(LazyTerm.java:30)
+ at org.spoofax.terms.LazyTerm.getTermType(LazyTerm.java:55)
+at
+org.spoofax.interpreter.library.ssl.SSL_get_constructor.call(SSL_get_constructor.java:30)
+ ... 12 more
+
+I'm using the -I option of strj to specify the included directories. Is
+there anything else I should be doing?
+
+
+On 10 April 2011 00:21, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Rob,
+>
+> You can specify what libraries to use with the -la option, just as with the
+> C compiler, e.g. '-la stratego-sglr' to import the stratego-sglr library.
+> Alternatively, -la also accepts a package name, but you can use the Stratego
+> short names for them as well.
+>
+> If you add this option I think it'll also fix your "primitive not defined"
+> problem, which probably happens because the library is never properly
+> initialized (it's only imported with your manual change to the generated
+> code).
+>
+> I suppose the reason that it *did* work before with the C version may be
+> some kind of transitive import phenonemon. Perhaps you imported something
+> like libstrc without also explicitly importing libstratego-sglr before? I
+> think the Java version doesn't allow implicit library imports like that.
+>
+> cheers,
+>
+> Lennart
+>
+> @ 07:51 PM 4/8/2011, Rob Economopoulos wrote:
+> >After several attempts today, I managed to use strj to compile my stratego
+> program, but now I get the following error when I try running the compiled
+> Java:
+> >
+> >$java -cp classes/:jars/strategoxt.jar merge_claims -i
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+> ../tests/fortes/benchmarks/EUREKA_.trm
+> >
+> >Fatal error at
+> >io_merge_claims_0_0
+> >io_stream_wrap_4_0
+> >option_wrap_5_0
+> >io_stream_1_0
+> >do_main_0_0
+> >parse_C_stream_0_0
+> >Exception in thread "main" org.strategoxt.lang.StrategoException:
+> Primitive not defined: STRSGLR_open_parse_table
+> >at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+> >at
+> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+> >at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+> >at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+> >at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+> >at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+> >at
+> org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+> >at
+> org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+> >at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+> >at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+> >at merge_claims.main(merge_claims.java:278)
+> >
+> >
+> >However, this problem might be caused by the way that I compiled the
+> generated Java. When I tried compiling the Java generated by strj I got the
+> following error:
+> >
+> >$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+> >
+> >merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+> >        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+> >
+> >plus another 12 similar errors...
+> >
+> >
+> >I didn't manage to get it working by fiddling with the classpath, but I
+> did eventually get it to compile by add the following "import" to the Java
+> generated by strj:
+> >
+> >import org.strategoxt.stratego_sglr.*;
+> >
+> >
+> >This clearly isn't the way to do this! Does anyone have any ideas on how
+> to get it working?
+> >
+> >Cheers,
+> >Rob
+> >
+> >On 8 April 2011 11:52, Eelco Visser <<mailto:E.Visser at tudelft.nl>
+> E.Visser at tudelft.nl> wrote:
+> >Hi Rob,
+> >Have you tried Stratego/Java? With strj you'd avoid all the libtools
+> >misery. (I guess you may get classpath issues in return, but my
+> >impression is that it should be a friendlier environment.)
+> >-- Eelco
+> >On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <<mailto:
+> gre at ecs.soton.ac.uk>gre at ecs.soton.ac.uk> wrote:
+> >> Hi guys,
+> >>
+> >> I'm trying to build a stratego program with statically linked
+> >> libraries, but the linker is complaining:
+> >>
+> >> /usr/bin/ld: attempted static link of dynamic object
+> >>
+> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+> >> sglr.so'
+> >>
+> >> I'm using strategoxt installed from Nix. Is there a strategoxt package
+> >> that uses statically linked libraries that I can use? I have tried
+> >> building the strategoxt source distribution manually using:
+> >> ./configure --disable-shared make LDFLAGS='-static -all-static'
+> >>
+> >> but also have problems there .
+> >> Cheers , Rob
+> >> --
+> >> Dr Giorgios Robert Economopoulos School of Electronics and Computer
+> >> Science University of Southampton Southampton SO 17 1 BJ United
+> >> Kingdom Phone : + 44 ( 0 ) 238 059 3123
+> >>
+> >>
+> >> --
+> >> Dr Giorgios Robert Economopoulos
+> >> School of Electronics and Computer Science
+> >> University of Southampton
+> >> Southampton
+> >> SO17 1BJ
+> >> United Kingdom
+> >>
+> >> Phone: +44 (0)238 059 3123
+> >> _______________________________________________
+> >> Users mailing list
+> >> <mailto:Users at strategoxt.org>Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >--
+> >Associate Professor at Delft University of Technology
+> >Group:          Software Language Design and Engineering
+> >Email:          <mailto:e.visser at tudelft.nl>e.visser at tudelft.nl
+> >Homepage:   <http://eelcovisser.org>http://eelcovisser.org
+> >Publications: <http://researchr.org/profile/eelcovisser>
+> http://researchr.org/profile/eelcovisser
+> >News:           <http://twitter.com/eelcovisser>
+> http://twitter.com/eelcovisser
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >
+> >
+> >--
+> >Dr Giorgios Robert Economopoulos
+> >School of Electronics and Computer Science
+> >University of Southampton
+> >Southampton
+> >SO17 1BJ
+> >United Kingdom
+> >
+> >Phone: +44 (0)238 059 3123
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110411/eb5b8892/attachment.html>
+
+From L.C.L.Kats at tudelft.nl  Tue Apr 12 10:52:21 2011
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Tue, 12 Apr 2011 10:52:21 +0200
+Subject: [Stratego Users] building statically linked stratego  programs
+In-Reply-To: <BANLkTinwsVzUW6fw4X8FxJrdiBNEfisJsA@mail.gmail.com>
+References: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+	<BANLkTinwsVzUW6fw4X8FxJrdiBNEfisJsA@mail.gmail.com>
+Message-ID: <201104120852.p3C8qLXi013761@mc-smtp1.infopact.nl>
+
+Hi Rob,
+
+Looking at the exception trace, it can't find the Default-C-With-CPP.tbl file. This file should be somewhere in the compiler output directory, but I suppose it's not in the classes/ dir?
+
+Lennart
+
+@ 10:44 AM 4/11/2011, U wrote:
+>Thanks Lennart! Ok, so I'm almost there, I think. I'm specifying the libraries with the -la option, but now when I run the java I get the following error:
+>
+>$java -cp classes/:jars/strategoxt.jar merge_claims -i ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o ../tests/fortes/benchmarks/EUREKA_.trm
+>
+>[...]
+>Caused by: org.strategoxt.lang.StrategoException: merge_claims: Could not find imported term file Default-C-With-CPP.tbl
+>at org.strategoxt.lang.ImportTerm.openStream(ImportTerm.java)
+>at org.strategoxt.lang.ImportTerm.init(ImportTerm.java)
+>at org.spoofax.terms.LazyTerm.getWrapped(LazyTerm.java:30)
+>at org.spoofax.terms.LazyTerm.getTermType(LazyTerm.java:55)
+>at org.spoofax.interpreter.library.ssl.SSL_get_constructor.call(SSL_get_constructor.java:30)
+>... 12 more
+>
+>I'm using the -I option of strj to specify the included directories. Is there anything else I should be doing?
+>
+>
+>On 10 April 2011 00:21, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+>Hi Rob,
+>
+>You can specify what libraries to use with the -la option, just as with the C compiler, e.g. '-la stratego-sglr' to import the stratego-sglr library. Alternatively, -la also accepts a package name, but you can use the Stratego short names for them as well.
+>
+>If you add this option I think it'll also fix your "primitive not defined" problem, which probably happens because the library is never properly initialized (it's only imported with your manual change to the generated code).
+>
+>I suppose the reason that it *did* work before with the C version may be some kind of transitive import phenonemon. Perhaps you imported something like libstrc without also explicitly importing libstratego-sglr before? I think the Java version doesn't allow implicit library imports like that.
+>
+>cheers,
+>
+>Lennart
+>
+>@ 07:51 PM 4/8/2011, Rob Economopoulos wrote:
+>>After several attempts today, I managed to use strj to compile my stratego program, but now I get the following error when I try running the compiled Java:
+>>
+>>$java -cp classes/:jars/strategoxt.jar merge_claims -i ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o ../tests/fortes/benchmarks/EUREKA_.trm
+>>
+>>Fatal error at
+>>io_merge_claims_0_0
+>>io_stream_wrap_4_0
+>>option_wrap_5_0
+>>io_stream_1_0
+>>do_main_0_0
+>>parse_C_stream_0_0
+>>Exception in thread "main" org.strategoxt.lang.StrategoException: Primitive not defined: STRSGLR_open_parse_table
+>>at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>>at org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>>at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+>>at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+>>at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+>>at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+>>at org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+>>at org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+>>at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+>>at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+>>at merge_claims.main(merge_claims.java:278)
+>>
+>>
+>>However, this problem might be caused by the way that I compiled the generated Java. When I tried compiling the Java generated by strj I got the following error:
+>>
+>>$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+>>
+>>merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+>>        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+>>
+>>plus another 12 similar errors...
+>>
+>>
+>>I didn't manage to get it working by fiddling with the classpath, but I did eventually get it to compile by add the following "import" to the Java generated by strj:
+>>
+>>import org.strategoxt.stratego_sglr.*;
+>>
+>>
+>>This clearly isn't the way to do this! Does anyone have any ideas on how to get it working?
+>>
+>>Cheers,
+>>Rob
+>>
+>>On 8 April 2011 11:52, Eelco Visser <<mailto:E.Visser at tudelft.nl><mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:
+>>Hi Rob,
+>>Have you tried Stratego/Java? With strj you'd avoid all the libtools
+>>misery. (I guess you may get classpath issues in return, but my
+>>impression is that it should be a friendlier environment.)
+>>-- Eelco
+>>On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <<mailto:gre at ecs.soton.ac.uk><mailto:gre at ecs.soton.ac.uk>gre at ecs.soton.ac.uk> wrote:
+>>> Hi guys,
+>>>
+>>> I'm trying to build a stratego program with statically linked
+>>> libraries, but the linker is complaining:
+>>>
+>>> /usr/bin/ld: attempted static link of dynamic object
+>>> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+>>> sglr.so'
+>>>
+>>> I'm using strategoxt installed from Nix. Is there a strategoxt package
+>>> that uses statically linked libraries that I can use? I have tried
+>>> building the strategoxt source distribution manually using:
+>>> ./configure --disable-shared make LDFLAGS='-static -all-static'
+>>>
+>>> but also have problems there .
+>>> Cheers , Rob
+>>> --
+>>> Dr Giorgios Robert Economopoulos School of Electronics and Computer
+>>> Science University of Southampton Southampton SO 17 1 BJ United
+>>> Kingdom Phone : + 44 ( 0 ) 238 059 3123
+>>>
+>>>
+>>> --
+>>> Dr Giorgios Robert Economopoulos
+>>> School of Electronics and Computer Science
+>>> University of Southampton
+>>> Southampton
+>>> SO17 1BJ
+>>> United Kingdom
+>>>
+>>> Phone: +44 (0)238 059 3123
+>>> _______________________________________________
+>>> Users mailing list
+>>> <mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>>--
+>>Associate Professor at Delft University of Technology
+>>Group:          Software Language Design and Engineering
+>>Email:          <mailto:e.visser at tudelft.nl><mailto:e.visser at tudelft.nl>e.visser at tudelft.nl
+>>Homepage:   <<http://eelcovisser.org>http://eelcovisser.org>http://eelcovisser.org
+>>Publications: <<http://researchr.org/profile/eelcovisser>http://researchr.org/profile/eelcovisser>http://researchr.org/profile/eelcovisser
+>>News:           <<http://twitter.com/eelcovisser>http://twitter.com/eelcovisser>http://twitter.com/eelcovisser
+>>_______________________________________________
+>>Users mailing list
+>><mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>Users at strategoxt.org
+>>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>>
+>>--
+>>Dr Giorgios Robert Economopoulos
+>>School of Electronics and Computer Science
+>>University of Southampton
+>>Southampton
+>>SO17 1BJ
+>>United Kingdom
+>>
+>>Phone: +44 (0)238 059 3123
+>>
+>>_______________________________________________
+>>Users mailing list
+>><mailto:Users at strategoxt.org>Users at strategoxt.org
+>>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>_______________________________________________
+>Users mailing list
+><mailto:Users at strategoxt.org>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>-- 
+>Dr Giorgios Robert Economopoulos
+>School of Electronics and Computer Science
+>University of Southampton
+>Southampton
+>SO17 1BJ
+>United Kingdom
+>
+>Phone: +44 (0)238 059 3123
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From gre at ecs.soton.ac.uk  Tue Apr 12 11:48:04 2011
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Tue, 12 Apr 2011 10:48:04 +0100
+Subject: [Stratego Users] building statically linked stratego programs
+In-Reply-To: <201104120852.p3C8qLXi013761@mc-smtp1.infopact.nl>
+References: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+	<BANLkTinwsVzUW6fw4X8FxJrdiBNEfisJsA@mail.gmail.com>
+	<201104120852.p3C8qLXi013761@mc-smtp1.infopact.nl>
+Message-ID: <BANLkTi=RTLrOrJHx=DGsBrZH9AnV5=6keg@mail.gmail.com>
+
+Thanks again.
+
+Now I'm getting:
+
+[ merge_claims | critical ] Old-style asfix position annotation not
+supported on this platform; use asfix-anno-location instead
+           "../tests/fortes/benchmarks/EUREKA_bf20_det.c"
+
+when I run the compiled java. I was using the asfix-anno-position-info
+strategy, but I still get the error when I comment it out.
+
+On 12 April 2011 09:52, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Rob,
+>
+> Looking at the exception trace, it can't find the Default-C-With-CPP.tbl
+> file. This file should be somewhere in the compiler output directory, but I
+> suppose it's not in the classes/ dir?
+>
+> Lennart
+>
+> @ 10:44 AM 4/11/2011, U wrote:
+> >Thanks Lennart! Ok, so I'm almost there, I think. I'm specifying the
+> libraries with the -la option, but now when I run the java I get the
+> following error:
+> >
+> >$java -cp classes/:jars/strategoxt.jar merge_claims -i
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+> ../tests/fortes/benchmarks/EUREKA_.trm
+> >
+> >[...]
+> >Caused by: org.strategoxt.lang.StrategoException: merge_claims: Could not
+> find imported term file Default-C-With-CPP.tbl
+> >at org.strategoxt.lang.ImportTerm.openStream(ImportTerm.java)
+> >at org.strategoxt.lang.ImportTerm.init(ImportTerm.java)
+> >at org.spoofax.terms.LazyTerm.getWrapped(LazyTerm.java:30)
+> >at org.spoofax.terms.LazyTerm.getTermType(LazyTerm.java:55)
+> >at
+> org.spoofax.interpreter.library.ssl.SSL_get_constructor.call(SSL_get_constructor.java:30)
+> >... 12 more
+> >
+> >I'm using the -I option of strj to specify the included directories. Is
+> there anything else I should be doing?
+> >
+> >
+> >On 10 April 2011 00:21, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>
+> L.C.L.Kats at tudelft.nl> wrote:
+> >Hi Rob,
+> >
+> >You can specify what libraries to use with the -la option, just as with
+> the C compiler, e.g. '-la stratego-sglr' to import the stratego-sglr
+> library. Alternatively, -la also accepts a package name, but you can use the
+> Stratego short names for them as well.
+> >
+> >If you add this option I think it'll also fix your "primitive not defined"
+> problem, which probably happens because the library is never properly
+> initialized (it's only imported with your manual change to the generated
+> code).
+> >
+> >I suppose the reason that it *did* work before with the C version may be
+> some kind of transitive import phenonemon. Perhaps you imported something
+> like libstrc without also explicitly importing libstratego-sglr before? I
+> think the Java version doesn't allow implicit library imports like that.
+> >
+> >cheers,
+> >
+> >Lennart
+> >
+> >@ 07:51 PM 4/8/2011, Rob Economopoulos wrote:
+> >>After several attempts today, I managed to use strj to compile my
+> stratego program, but now I get the following error when I try running the
+> compiled Java:
+> >>
+> >>$java -cp classes/:jars/strategoxt.jar merge_claims -i
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+> ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+> ../tests/fortes/benchmarks/EUREKA_.trm
+> >>
+> >>Fatal error at
+> >>io_merge_claims_0_0
+> >>io_stream_wrap_4_0
+> >>option_wrap_5_0
+> >>io_stream_1_0
+> >>do_main_0_0
+> >>parse_C_stream_0_0
+> >>Exception in thread "main" org.strategoxt.lang.StrategoException:
+> Primitive not defined: STRSGLR_open_parse_table
+> >>at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+> >>at
+> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+> >>at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+> >>at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+> >>at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+> >>at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+> >>at
+> org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+> >>at
+> org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+> >>at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+> >>at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+> >>at merge_claims.main(merge_claims.java:278)
+> >>
+> >>
+> >>However, this problem might be caused by the way that I compiled the
+> generated Java. When I tried compiling the Java generated by strj I got the
+> following error:
+> >>
+> >>$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+> >>
+> >>merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+> >>        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+> >>
+> >>plus another 12 similar errors...
+> >>
+> >>
+> >>I didn't manage to get it working by fiddling with the classpath, but I
+> did eventually get it to compile by add the following "import" to the Java
+> generated by strj:
+> >>
+> >>import org.strategoxt.stratego_sglr.*;
+> >>
+> >>
+> >>This clearly isn't the way to do this! Does anyone have any ideas on how
+> to get it working?
+> >>
+> >>Cheers,
+> >>Rob
+> >>
+> >>On 8 April 2011 11:52, Eelco Visser <<mailto:E.Visser at tudelft.nl
+> ><mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:
+> >>Hi Rob,
+> >>Have you tried Stratego/Java? With strj you'd avoid all the libtools
+> >>misery. (I guess you may get classpath issues in return, but my
+> >>impression is that it should be a friendlier environment.)
+> >>-- Eelco
+> >>On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <<mailto:
+> gre at ecs.soton.ac.uk><mailto:gre at ecs.soton.ac.uk>gre at ecs.soton.ac.uk>
+> wrote:
+> >>> Hi guys,
+> >>>
+> >>> I'm trying to build a stratego program with statically linked
+> >>> libraries, but the linker is complaining:
+> >>>
+> >>> /usr/bin/ld: attempted static link of dynamic object
+> >>>
+> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+> >>> sglr.so'
+> >>>
+> >>> I'm using strategoxt installed from Nix. Is there a strategoxt package
+> >>> that uses statically linked libraries that I can use? I have tried
+> >>> building the strategoxt source distribution manually using:
+> >>> ./configure --disable-shared make LDFLAGS='-static -all-static'
+> >>>
+> >>> but also have problems there .
+> >>> Cheers , Rob
+> >>> --
+> >>> Dr Giorgios Robert Economopoulos School of Electronics and Computer
+> >>> Science University of Southampton Southampton SO 17 1 BJ United
+> >>> Kingdom Phone : + 44 ( 0 ) 238 059 3123
+> >>>
+> >>>
+> >>> --
+> >>> Dr Giorgios Robert Economopoulos
+> >>> School of Electronics and Computer Science
+> >>> University of Southampton
+> >>> Southampton
+> >>> SO17 1BJ
+> >>> United Kingdom
+> >>>
+> >>> Phone: +44 (0)238 059 3123
+> >>> _______________________________________________
+> >>> Users mailing list
+> >>> <mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>
+> Users at strategoxt.org
+> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>>
+> >>
+> >>
+> >>--
+> >>Associate Professor at Delft University of Technology
+> >>Group:          Software Language Design and Engineering
+> >>Email:          <mailto:e.visser at tudelft.nl><mailto:e.visser at tudelft.nl>
+> e.visser at tudelft.nl
+> >>Homepage:   <<http://eelcovisser.org>http://eelcovisser.org>
+> http://eelcovisser.org
+> >>Publications: <<http://researchr.org/profile/eelcovisser>
+> http://researchr.org/profile/eelcovisser>
+> http://researchr.org/profile/eelcovisser
+> >>News:           <<http://twitter.com/eelcovisser>
+> http://twitter.com/eelcovisser>http://twitter.com/eelcovisser
+> >>_______________________________________________
+> >>Users mailing list
+> >><mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>
+> Users at strategoxt.org
+> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >>
+> >>
+> >>
+> >>--
+> >>Dr Giorgios Robert Economopoulos
+> >>School of Electronics and Computer Science
+> >>University of Southampton
+> >>Southampton
+> >>SO17 1BJ
+> >>United Kingdom
+> >>
+> >>Phone: +44 (0)238 059 3123
+> >>
+> >>_______________________________________________
+> >>Users mailing list
+> >><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >
+> >
+> >--
+> >Dr Giorgios Robert Economopoulos
+> >School of Electronics and Computer Science
+> >University of Southampton
+> >Southampton
+> >SO17 1BJ
+> >United Kingdom
+> >
+> >Phone: +44 (0)238 059 3123
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110412/b881fe0f/attachment-0001.html>
+
+From gre at ecs.soton.ac.uk  Tue Apr 12 12:06:55 2011
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Tue, 12 Apr 2011 11:06:55 +0100
+Subject: [Stratego Users] building statically linked stratego programs
+In-Reply-To: <BANLkTi=RTLrOrJHx=DGsBrZH9AnV5=6keg@mail.gmail.com>
+References: <201104092121.p39LL9h0004058@mc-smtp1.infopact.nl>
+	<BANLkTinwsVzUW6fw4X8FxJrdiBNEfisJsA@mail.gmail.com>
+	<201104120852.p3C8qLXi013761@mc-smtp1.infopact.nl>
+	<BANLkTi=RTLrOrJHx=DGsBrZH9AnV5=6keg@mail.gmail.com>
+Message-ID: <BANLkTimiM3t_MWJjw-s-dV0=HnMmiwiv+g@mail.gmail.com>
+
+Ok, sorry, ignore the last post. Was just caused by some files not being
+updated.
+
+On 12 April 2011 10:48, Rob Economopoulos <gre at ecs.soton.ac.uk> wrote:
+
+> Thanks again.
+>
+> Now I'm getting:
+>
+> [ merge_claims | critical ] Old-style asfix position annotation not
+> supported on this platform; use asfix-anno-location instead
+>             "../tests/fortes/benchmarks/EUREKA_bf20_det.c"
+>
+> when I run the compiled java. I was using the asfix-anno-position-info
+> strategy, but I still get the error when I comment it out.
+>
+> On 12 April 2011 09:52, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+>
+>> Hi Rob,
+>>
+>> Looking at the exception trace, it can't find the Default-C-With-CPP.tbl
+>> file. This file should be somewhere in the compiler output directory, but I
+>> suppose it's not in the classes/ dir?
+>>
+>> Lennart
+>>
+>> @ 10:44 AM 4/11/2011, U wrote:
+>> >Thanks Lennart! Ok, so I'm almost there, I think. I'm specifying the
+>> libraries with the -la option, but now when I run the java I get the
+>> following error:
+>> >
+>> >$java -cp classes/:jars/strategoxt.jar merge_claims -i
+>> ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+>> ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+>> ../tests/fortes/benchmarks/EUREKA_.trm
+>> >
+>> >[...]
+>> >Caused by: org.strategoxt.lang.StrategoException: merge_claims: Could not
+>> find imported term file Default-C-With-CPP.tbl
+>> >at org.strategoxt.lang.ImportTerm.openStream(ImportTerm.java)
+>> >at org.strategoxt.lang.ImportTerm.init(ImportTerm.java)
+>> >at org.spoofax.terms.LazyTerm.getWrapped(LazyTerm.java:30)
+>> >at org.spoofax.terms.LazyTerm.getTermType(LazyTerm.java:55)
+>> >at
+>> org.spoofax.interpreter.library.ssl.SSL_get_constructor.call(SSL_get_constructor.java:30)
+>> >... 12 more
+>> >
+>> >I'm using the -I option of strj to specify the included directories. Is
+>> there anything else I should be doing?
+>> >
+>> >
+>> >On 10 April 2011 00:21, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>
+>> L.C.L.Kats at tudelft.nl> wrote:
+>> >Hi Rob,
+>> >
+>> >You can specify what libraries to use with the -la option, just as with
+>> the C compiler, e.g. '-la stratego-sglr' to import the stratego-sglr
+>> library. Alternatively, -la also accepts a package name, but you can use the
+>> Stratego short names for them as well.
+>> >
+>> >If you add this option I think it'll also fix your "primitive not
+>> defined" problem, which probably happens because the library is never
+>> properly initialized (it's only imported with your manual change to the
+>> generated code).
+>> >
+>> >I suppose the reason that it *did* work before with the C version may be
+>> some kind of transitive import phenonemon. Perhaps you imported something
+>> like libstrc without also explicitly importing libstratego-sglr before? I
+>> think the Java version doesn't allow implicit library imports like that.
+>> >
+>> >cheers,
+>> >
+>> >Lennart
+>> >
+>> >@ 07:51 PM 4/8/2011, Rob Economopoulos wrote:
+>> >>After several attempts today, I managed to use strj to compile my
+>> stratego program, but now I get the following error when I try running the
+>> compiled Java:
+>> >>
+>> >>$java -cp classes/:jars/strategoxt.jar merge_claims -i
+>> ../tests/fortes/benchmarks/EUREKA_bf20_det.c -c
+>> ../tests/fortes/benchmarks/EUREKA_bf20_det.c.claims -o
+>> ../tests/fortes/benchmarks/EUREKA_.trm
+>> >>
+>> >>Fatal error at
+>> >>io_merge_claims_0_0
+>> >>io_stream_wrap_4_0
+>> >>option_wrap_5_0
+>> >>io_stream_1_0
+>> >>do_main_0_0
+>> >>parse_C_stream_0_0
+>> >>Exception in thread "main" org.strategoxt.lang.StrategoException:
+>> Primitive not defined: STRSGLR_open_parse_table
+>> >>at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>> >>at
+>> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>> >>at merge_claims$parse_$C_stream_0_0.invoke(merge_claims.java:20752)
+>> >>at merge_claims$do_main_0_0.invoke(merge_claims.java:20641)
+>> >>at org.strategoxt.stratego_lib.io_stream_1_0.invoke(io_stream_1_0.java)
+>> >>at org.strategoxt.stratego_lib.lifted503.invoke(lifted503.java)
+>> >>at
+>> org.strategoxt.stratego_lib.option_wrap_5_0.invoke(option_wrap_5_0.java)
+>> >>at
+>> org.strategoxt.stratego_lib.io_stream_wrap_4_0.invoke(io_stream_wrap_4_0.java)
+>> >>at merge_claims$io_merge_claims_0_0.invoke(merge_claims.java:20530)
+>> >>at org.strategoxt.lang.Context.invokeStrategyCLI(Context.java)
+>> >>at merge_claims.main(merge_claims.java:278)
+>> >>
+>> >>
+>> >>However, this problem might be caused by the way that I compiled the
+>> generated Java. When I tried compiling the Java generated by strj I got the
+>> following error:
+>> >>
+>> >>$javac -classpath jars/strategoxt.jar merge_claims.java -d classes
+>> >>
+>> >>merge_claims.java:20659: package asfix_anno_comments_0_0 does not exist
+>> >>        term = asfix_anno_comments_0_0.instance.invoke(context, term);
+>> >>
+>> >>plus another 12 similar errors...
+>> >>
+>> >>
+>> >>I didn't manage to get it working by fiddling with the classpath, but I
+>> did eventually get it to compile by add the following "import" to the Java
+>> generated by strj:
+>> >>
+>> >>import org.strategoxt.stratego_sglr.*;
+>> >>
+>> >>
+>> >>This clearly isn't the way to do this! Does anyone have any ideas on how
+>> to get it working?
+>> >>
+>> >>Cheers,
+>> >>Rob
+>> >>
+>> >>On 8 April 2011 11:52, Eelco Visser <<mailto:E.Visser at tudelft.nl
+>> ><mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:
+>> >>Hi Rob,
+>> >>Have you tried Stratego/Java? With strj you'd avoid all the libtools
+>> >>misery. (I guess you may get classpath issues in return, but my
+>> >>impression is that it should be a friendlier environment.)
+>> >>-- Eelco
+>> >>On Fri, Apr 8, 2011 at 12:22 PM, Rob Economopoulos <<mailto:
+>> gre at ecs.soton.ac.uk><mailto:gre at ecs.soton.ac.uk>gre at ecs.soton.ac.uk>
+>> wrote:
+>> >>> Hi guys,
+>> >>>
+>> >>> I'm trying to build a stratego program with statically linked
+>> >>> libraries, but the linker is complaining:
+>> >>>
+>> >>> /usr/bin/ld: attempted static link of dynamic object
+>> >>>
+>> `/nix/store/76ryacgacwyyz396izgx5vchs3il2km5-strategoxt-1.8pre21513/lib/libstratego-
+>> >>> sglr.so'
+>> >>>
+>> >>> I'm using strategoxt installed from Nix. Is there a strategoxt package
+>> >>> that uses statically linked libraries that I can use? I have tried
+>> >>> building the strategoxt source distribution manually using:
+>> >>> ./configure --disable-shared make LDFLAGS='-static -all-static'
+>> >>>
+>> >>> but also have problems there .
+>> >>> Cheers , Rob
+>> >>> --
+>> >>> Dr Giorgios Robert Economopoulos School of Electronics and Computer
+>> >>> Science University of Southampton Southampton SO 17 1 BJ United
+>> >>> Kingdom Phone : + 44 ( 0 ) 238 059 3123
+>> >>>
+>> >>>
+>> >>> --
+>> >>> Dr Giorgios Robert Economopoulos
+>> >>> School of Electronics and Computer Science
+>> >>> University of Southampton
+>> >>> Southampton
+>> >>> SO17 1BJ
+>> >>> United Kingdom
+>> >>>
+>> >>> Phone: +44 (0)238 059 3123
+>> >>> _______________________________________________
+>> >>> Users mailing list
+>> >>> <mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>
+>> Users at strategoxt.org
+>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>>
+>> >>
+>> >>
+>> >>--
+>> >>Associate Professor at Delft University of Technology
+>> >>Group:          Software Language Design and Engineering
+>> >>Email:          <mailto:e.visser at tudelft.nl><mailto:e.visser at tudelft.nl
+>> >e.visser at tudelft.nl
+>> >>Homepage:   <<http://eelcovisser.org>http://eelcovisser.org>
+>> http://eelcovisser.org
+>> >>Publications: <<http://researchr.org/profile/eelcovisser>
+>> http://researchr.org/profile/eelcovisser>
+>> http://researchr.org/profile/eelcovisser
+>> >>News:           <<http://twitter.com/eelcovisser>
+>> http://twitter.com/eelcovisser>http://twitter.com/eelcovisser
+>> >>_______________________________________________
+>> >>Users mailing list
+>> >><mailto:Users at strategoxt.org><mailto:Users at strategoxt.org>
+>> Users at strategoxt.org
+>> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >>
+>> >>
+>> >>
+>> >>--
+>> >>Dr Giorgios Robert Economopoulos
+>> >>School of Electronics and Computer Science
+>> >>University of Southampton
+>> >>Southampton
+>> >>SO17 1BJ
+>> >>United Kingdom
+>> >>
+>> >>Phone: +44 (0)238 059 3123
+>> >>
+>> >>_______________________________________________
+>> >>Users mailing list
+>> >><mailto:Users at strategoxt.org>Users at strategoxt.org
+>> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >_______________________________________________
+>> >Users mailing list
+>> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+>> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>> >
+>> >
+>> >--
+>> >Dr Giorgios Robert Economopoulos
+>> >School of Electronics and Computer Science
+>> >University of Southampton
+>> >Southampton
+>> >SO17 1BJ
+>> >United Kingdom
+>> >
+>> >Phone: +44 (0)238 059 3123
+>> >
+>> >_______________________________________________
+>> >Users mailing list
+>> >Users at strategoxt.org
+>> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+> --
+> Dr Giorgios Robert Economopoulos
+> School of Electronics and Computer Science
+> University of Southampton
+> Southampton
+> SO17 1BJ
+> United Kingdom
+>
+> Phone: +44 (0)238 059 3123
+>
+>
+
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110412/b1770f5c/attachment.html>
+

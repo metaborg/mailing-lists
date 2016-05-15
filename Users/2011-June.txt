@@ -1,0 +1,310 @@
+From bootch at nc.rr.com  Wed Jun  1 14:57:07 2011
+From: bootch at nc.rr.com (bootch at nc.rr.com)
+Date: Wed, 1 Jun 2011 8:57:07 -0400
+Subject: [Stratego Users] python to objective C PIL
+Message-ID: <20110601125707.PEQLY.72223.root@cdptpa-web02-z01>
+
+I am interested in a subset of Python compiled to Objective C.
+The purpose is to port applications to various platforms, including mobile platforms iOS and Android.
+
+I have looked at PIL.  I like the idea, but I don't like the Java syntax.  Also, there are more type declarations than are necessary to translate to Objective C ( in Objective C, most type declarations are optional hints to the compiler.)
+
+I am considering writing yet another front-end from Python to PIL, and then working on the PIL to Objective C backend.
+
+I am also considering just rewriting some of the PIL pieces to accept an even simpler Python-like language.
+
+This is not a criticism of PIL, I realize that everyone has their own idea of what is sugar.  I am writing this email to get suggestions.
+
+My strategy is to develop in Python, a weakly typed interpreted language, and port to Objective C, which also is optionally weakly typed (like Smalltalk) but compilable.  I would also like to port to Java (the Android language) but I haven't worked out the details of that.  
+
+From zef at zefhemel.com  Wed Jun  1 15:10:03 2011
+From: zef at zefhemel.com (Zef Hemel)
+Date: Wed, 1 Jun 2011 15:10:03 +0200
+Subject: [Stratego Users] python to objective C PIL
+In-Reply-To: <20110601125707.PEQLY.72223.root@cdptpa-web02-z01>
+References: <20110601125707.PEQLY.72223.root@cdptpa-web02-z01>
+Message-ID: <BANLkTintdgAXGuVfriTyBJ4RKoR-EV6jFg@mail.gmail.com>
+
+Hi,
+
+One thing to consider is that SDF/SGLR are not great with
+indentation-based languages like Python, have you looked at that
+issue?
+
+Best,
+
+Zef
+
+On Wed, Jun 1, 2011 at 2:57 PM,  <bootch at nc.rr.com> wrote:
+> I am interested in a subset of Python compiled to Objective C.
+> The purpose is to port applications to various platforms, including mobile platforms iOS and Android.
+>
+> I have looked at PIL. ?I like the idea, but I don't like the Java syntax. ?Also, there are more type declarations than are necessary to translate to Objective C ( in Objective C, most type declarations are optional hints to the compiler.)
+>
+> I am considering writing yet another front-end from Python to PIL, and then working on the PIL to Objective C backend.
+>
+> I am also considering just rewriting some of the PIL pieces to accept an even simpler Python-like language.
+>
+> This is not a criticism of PIL, I realize that everyone has their own idea of what is sugar. ?I am writing this email to get suggestions.
+>
+> My strategy is to develop in Python, a weakly typed interpreted language, and port to Objective C, which also is optionally weakly typed (like Smalltalk) but compilable. ?I would also like to port to Java (the Android language) but I haven't worked out the details of that.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Zef Hemel
+http://zef.me
+http://twitter.com/zef
+
+
+From L.C.L.Kats at tudelft.nl  Thu Jun  2 23:17:20 2011
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 02 Jun 2011 23:17:20 +0200
+Subject: [Stratego Users] Problem to Extend Java SDF grammar with Spoofax
+In-Reply-To: <BANLkTimz1Ma7pN-vtx=wXSoMpztYV_x8fQ@mail.gmail.com>
+References: <BANLkTimo7S-ivthpozdyVspeHgEegsbX9A@mail.gmail.com>
+	<BANLkTimz1Ma7pN-vtx=wXSoMpztYV_x8fQ@mail.gmail.com>
+Message-ID: <201106022117.p52LHLLJ022733@mc-smtp1.infopact.nl>
+
+Hi Giorgio,
+
+In the current version you need to put the Java syntax (Java-15.def, as provided with the Java-front package) in the lib/ directory.
+
+You should also change the build.main.xml Ant build file so 'build.sdf.imports' refers to that file:
+
+  <property name="build.sdf.imports" value="-Idef &quot;${lib}/Java-15.def&quot;"/>
+
+hth,
+
+Lennart
+
+
+@ 06:45 PM 5/31/2011, Giorgio Torres wrote:
+>Hi guys, I am working with grammar extention and I have to extend java grammar to accept others production (e.g. from a language of mine), and launch it inside an eclipse editor. That's
+>why i'm using spoofax, so I can generate an eclipse editor, with at least the highlighting facility and syntax correction, to my extended language.
+>The problem i'm facing is that i'm trying to import Java-15/Main Java's SDF declaration in my language SDF grammar, but the binder reclaims that the imported module does no match with
+>the filename.
+>
+>I've already read the FAQ at Spoofax/Stratego site, but i found nothing.
+>
+>I hope someone here could help with this issue!
+>
+>Thanks.
+>
+>
+>-- 
+>Giorgio Pr?mola F. G. Torres
+>Graduando em Ci?ncia da Computa??o
+>Universidade Federal de Vi?osa
+
+
+
+From torres.giorgio at gmail.com  Fri Jun  3 01:12:54 2011
+From: torres.giorgio at gmail.com (Giorgio Torres)
+Date: Thu, 2 Jun 2011 20:12:54 -0300
+Subject: [Stratego Users] Problem to Extend Java SDF grammar with Spoofax
+In-Reply-To: <201106022117.p52LHLLJ022733@mc-smtp1.infopact.nl>
+References: <BANLkTimo7S-ivthpozdyVspeHgEegsbX9A@mail.gmail.com>
+	<BANLkTimz1Ma7pN-vtx=wXSoMpztYV_x8fQ@mail.gmail.com>
+	<201106022117.p52LHLLJ022733@mc-smtp1.infopact.nl>
+Message-ID: <BANLkTimc1WQw83xHp+hqFWYpVTemHsg1MA@mail.gmail.com>
+
+Thank you Lennart, it was very helpfull!
+
+I had put Java's sdf in a folder called 'src' inside the 'syntax' folder of
+the spoofax/IMP project. (i.e. syntax/src).
+Yesterday afternoon i tryed to mix up everything (the java sdf grammar and
+its packages) in the syntax folder and it also worked, but the codes got
+messy!
+I believe keep the imported files in the lib folder leaves the project more
+organized!
+
+Thanks for your support!
+
+
+On Thu, Jun 2, 2011 at 6:17 PM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Giorgio,
+>
+> In the current version you need to put the Java syntax (Java-15.def, as
+> provided with the Java-front package) in the lib/ directory.
+>
+> You should also change the build.main.xml Ant build file so
+> 'build.sdf.imports' refers to that file:
+>
+>  <property name="build.sdf.imports" value="-Idef
+> &quot;${lib}/Java-15.def&quot;"/>
+>
+> hth,
+>
+> Lennart
+>
+>
+> @ 06:45 PM 5/31/2011, Giorgio Torres wrote:
+> >Hi guys, I am working with grammar extention and I have to extend java
+> grammar to accept others production (e.g. from a language of mine), and
+> launch it inside an eclipse editor. That's
+> >why i'm using spoofax, so I can generate an eclipse editor, with at least
+> the highlighting facility and syntax correction, to my extended language.
+> >The problem i'm facing is that i'm trying to import Java-15/Main Java's
+> SDF declaration in my language SDF grammar, but the binder reclaims that the
+> imported module does no match with
+> >the filename.
+> >
+> >I've already read the FAQ at Spoofax/Stratego site, but i found nothing.
+> >
+> >I hope someone here could help with this issue!
+> >
+> >Thanks.
+> >
+> >
+> >--
+> >Giorgio Pr?mola F. G. Torres
+> >Graduando em Ci?ncia da Computa??o
+> >Universidade Federal de Vi?osa
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Giorgio Pr?mola F. G. Torres
+Graduando em Ci?ncia da Computa??o
+Universidade Federal de Vi?osa
+
+<http://www.facebook.com/giorgio.torres>
+<http://br.linkedin.com/in/giorgiotorres>
+  <http://www.twitter.com/gprimola>
+<http://www.flickr.com/photos/bygior>
+<http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110602/216e0ac8/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Jun 20 11:40:34 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 20 Jun 2011 11:40:34 +0200
+Subject: [Stratego Users] Fwd: K 2011: Call for Papers
+In-Reply-To: <201106200911.p5K9Bba4013344@hera.cwi.nl>
+References: <201106200911.p5K9Bba4013344@hera.cwi.nl>
+Message-ID: <BANLkTinL4YkNf_+2FmfGSEwo-Bt8RsY+bg@mail.gmail.com>
+
+=============================================================================
+
+? ? ? ? ? ? ? ? ? ? ? K 2011
+
+? ?2nd International Workshop on the K Framework and its Applications
+
+? ? ? ? ? ? ?August 8-12, 2011, Cheile Gradistei, Romania
+
+=============================================================================
+
+K (http://k-framework.org) is an executable semantic framework focused on the
+definition of programming languages, language calculi, type systems, and
+formal analysis tools. K has been successfully used for giving the formal
+definitions of a series of real-life languages, including (see below for
+links):
+
+* C [1]
+* Scheme [2], and
+* Verilog [3].
+
+K has also been used in semantics-based analysis and verification frameworks
+such as Matching Logic [4], and is currently used in language design and
+language semantics courses at several universities. The K workshop series
+promotes research and collaboration in the area of the development and use of
+the K framework.
+
+The topics of the workshop comprise, but are not limited to:
+
+# foundations and models of K;
+# languages based on K, including implementation issues;
+# K as a logical framework;
+# K as a semantic framework, including for
+?* object-oriented systems,
+?* concurrent and/or parallel systems,
+?* interactive, distributed, open ended and mobile systems;
+# uses of K to provide rigorous support for model-based software engineering;
+# comparisons of K with existing formalisms having analogous aims.
+
+The first edition of the workshop was held in Nags Head (US) in 2010. K 2011,
+like K 2010, is planned as a "true workshop", with significant time set aside
+for participants to both talk and work together outside of research
+presentations.
+
+Submissions and Publication: Before the workshop, authors are invited to submit
+an extended abstract of 2 to 3 pages. Accepted abstracts will be presented at
+the workshop and included in the preliminary proceedings, available at the
+workshop. Abstracts can be submitted using EasyChair at
+https://www.easychair.org/conferences/?conf=k2011.
+
+After the workshop, authors will be invited to submit a full paper (most likely
+of 15 pages), based on their abstract and presentation, which will be refereed
+and considered for publication in ENTCS.
+
+Beyond original ideas and recent results not already submitted or published
+elsewhere, we also invite authors to submit abstracts describing relevant work
+that has been or will be published elsewhere, or work in progress. These
+submissions will only be considered for presentation at the workshop and
+inclusion in the preliminary proceedings, but not in the final proceedings.
+
+Depending on the quality of the received submissions for the final proceedings,
+we envision publication of a special issue of a journal dedicated to the K 2011
+workshop.
+
+Important Dates:
+# Submission of Abstract: July 7, 2011
+# Notification: July 10, 2011
+# Preliminary proceedings version due: July 31, 2011
+# Workshop: August 8-12, 2011
+# Submission for final proceedings: October 31, 2011
+# Notification: December 12, 2011
+# Final version: January 23, 2012
+
+Steering Committee:
+# Chucky Ellison (University of Illinois at Urbana-Champaign, USA)
+# Dorel Lucanu (Alexandru Ioan Cuza University of Iasi, Romania)
+# Grigore Rosu (University of Illinois at Urbana-Champaign, USA)
+
+Program Committee:
+# Maria Alpuente, Universidad Politecnica de Valencia, Spain
+# Santiago Escobar, Universidad Politecnica de Valencia, Spain
+# Robert Bruce Findler, Northwestern University, USA
+# Fabio Gadducci, University of Pisa, Italy
+# Dan Ghica, University of Birmingham, UK
+# Klaus Havelund, NASA Jet Propulsion Laboratory, USA
+# Mark Hills, CWI, The Netherlands (Chair)
+# Lennart Kats, Delft University of Technology, The Netherlands
+# Andrew Lenharth, The University of Texas at Austin, USA
+# Dorel Lucanu, Alexandru Ioan Cuza University of Iasi, Romania
+# Salvador Lucas, Universidad Politecnica de Valencia, Spain
+# Narciso Marti-Oliet, Universidad Complutense de Madrid, Spain
+# Jose Meseguer, University of Illinois at Urbana-Champaign, USA
+# Peter Mosses, Swansea University, UK
+# Peter Olveczky, University of Oslo, Norway
+# John Regehr, University of Utah, USA
+# Grigore Rosu, University of Illinois at Urbana-Champaign, USA
+# Vlad Rusu, INRIA, France
+# Wolfram Schulte, Microsoft Research, USA
+# Jurgen Vinju, CWI, The Netherlands
+
+Workshop web page: http://k-framework.org/K11/index.html
+
+For more information please email K11 at k-framework.org.
+
+[1] http://fsl.cs.uiuc.edu/index.php/A_Formal_Semantics_of_C_with_Applications
+[2] http://fsl.cs.uiuc.edu/index.php/K-Scheme
+[3] http://fsl.cs.uiuc.edu/index.php/Verilog_Semantics
+[4] http://fsl.cs.uiuc.edu/index.php/Matching_Logic
+
+

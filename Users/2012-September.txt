@@ -1,0 +1,960 @@
+From emmanuel.castro at laposte.net  Fri Sep  7 00:59:23 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Fri, 7 Sep 2012 00:59:23 +0200
+Subject: [Stratego Users] SDF syntax clarificaiton needed
+Message-ID: <CAEXdecks0anVCe5foRD_ssvCM7pL3ZWXi2CXAezPEf3G9e1fdw@mail.gmail.com>
+
+In the Java syntax definition (see URL and sample below), String literals
+are defined in a way that splits strings into parts making backslash-escape
+easier to process.
+However, I could not find any precise explanation of the 'syntax' syntax in
+the SDF documentation. I could only get explanations about 'lexical syntax'
+and 'context-free syntax'.
+
+Can someone give me some pointers to some hidden documentations.
+
+http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#6
+
+  syntax
+    StringLiteral
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>
+-> <StringLiteral
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>-CF>
+  %% Where is StringLiteral defined?
+
+    "\"" StringPart
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>*
+"\"" -> StringLiteral
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>
+{cons("String")}
+    StringChars
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#26>
+   -> StringPart
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+{cons("Chars")}
+    UnicodeEscape
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/UnicodeEscapes.sdf.html#12>
+ -> StringPart <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+    EscapeSeq <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/EscapeSequences.sdf.html#17>
+     -> StringPart
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+
+    <FooStringChars-LEX> -> StringChars
+<http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#26>
+    ~[\"\\\n\13]+  -> <FooStringChars-LEX>
+
+Thank you
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120907/1c24f04a/attachment.html>
+
+From sumsel2000-mailinglist at yahoo.de  Fri Sep  7 15:41:54 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Fri, 07 Sep 2012 15:41:54 +0200
+Subject: [Stratego Users] SDF syntax clarificaiton needed
+In-Reply-To: <CAEXdecks0anVCe5foRD_ssvCM7pL3ZWXi2CXAezPEf3G9e1fdw@mail.gmail.com>
+References: <CAEXdecks0anVCe5foRD_ssvCM7pL3ZWXi2CXAezPEf3G9e1fdw@mail.gmail.com>
+Message-ID: <5049F9A2.7070102@yahoo.de>
+
+Hi Emmanuel,
+
+my knowledge about "syntax" sections without the prefixes "lexical" or 
+"context-free" is just from experimenting with sdf2table. So use it with 
+caution.
+
+For a rule (also known as production) like
+	 [a]? [b] -> A
+defined in a context-free syntax section sdf2table produces the 
+following BNF-rules:
+	<[a]?-CF> <LAYOUT?-CF> [b] -> <A-CF>
+	[a]           		   -> <[a]?-CF>
+	                           -> <[a]?-CF>
+In this BNF rules <[a]?-CF> is a non-terminal (e.g. variable). The 
+extension of <...-CF> marks that it is context-free.
+
+Would the given example rule has stood in a lexical syntax section 
+sdf2table would produce the following BNF-rules:
+	<[a]?-LEX> [b] -> <A-LEX>
+	<A-LEX>        -> <A-CF>
+	<[a]?-LEX>     -> <[a]?-CF>
+	[a]            -> <[a]?-LEX>
+	               -> <[a]?-LEX>
+The second and third rule is produced, to be able to use lexical 
+definitions in context-free rules.
+
+In case of a syntax section the following BNF-rules would have been 
+produced:
+	[a]? [b] -> A
+	[a]      -> [a]?
+                  -> [a]?
+These rules cannot be used in context-free or lexical rules because no 
+<...-LEX> or <...-CF> is produced.
+
+<...-LEX> and <...-CF> can be used in sdf files as well. They are needed 
+if you want to tell explicitly if you want to use a lexical or a 
+context-free rule. The following example grammar recognizes a sequence 
+of several "a":
+
+context-free start-symbols SequenceOfA
+lexical syntax
+	"a" -> A
+context-free syntax
+	"b" -> A
+	<A-LEX>* -> SequenceOfA
+
+If you would write
+	A* -> SequenceOfA
+this grammar would accept the same language as the regular expression 
+(a|b)*.
+
+In the StringLiterals example which you mentioned the rule
+	StringLiteral -> <StringLiteral-CF>
+defines that the definition of StringLiteral in this module may be used 
+in context-free rules. If you would define
+
+context-free syntax
+	StringLiteral -> MyString
+
+sdf2table would produce
+	<StringLiteral-CF> -> <MyString-CF>
+	StringLiteral      -> <StringLiteral-CF> %% from StringLiterals
+
+A comment to the use of module StringLiteral:
+I used this module together with ExcapeSequences and UnicodeEscapes in a 
+self defined grammar for my "Extractor Description Language" (EDL). If 
+you want to parse the String "\4\34\40\377" it produced an ambiguity 
+caused by the rules in the module ExcapeSequences. (I transformed the 
+syntax sections to lexical and context-free syntax sections. That's why 
+I am not sure if the original modules produce the ambiguity as well.) I 
+solved it by adapting the definition of OctaEscape to:
+"\\" LastOcta             -> OctaEscape  {cons("OctaEscape1")}
+"\\" [0-3] LastOcta       -> OctaEscape  {cons("OctaEscape2")}
+"\\" [4-7] LastOcta       -> OctaEscape  {cons("OctaEscape2")}
+"\\" [0-3] [0-7] LastOcta -> OctaEscape  {cons("OctaEscape3")}
+
+Regards
+Daniel
+
+Am 07.09.2012 00:59, schrieb Emmanuel Castro:
+> In the Java syntax definition (see URL and sample below), String literals
+> are defined in a way that splits strings into parts making backslash-escape
+> easier to process.
+> However, I could not find any precise explanation of the 'syntax' syntax in
+> the SDF documentation. I could only get explanations about 'lexical syntax'
+> and 'context-free syntax'.
+>
+> Can someone give me some pointers to some hidden documentations.
+>
+> http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#6
+>
+>    syntax
+>      StringLiteral
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>
+> -> <StringLiteral
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>-CF>
+>    %% Where is StringLiteral defined?
+>
+>      "\"" StringPart
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>*
+> "\"" -> StringLiteral
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#21>
+> {cons("String")}
+>      StringChars
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#26>
+>     -> StringPart
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+> {cons("Chars")}
+>      UnicodeEscape
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/UnicodeEscapes.sdf.html#12>
+>   -> StringPart <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+>      EscapeSeq <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/EscapeSequences.sdf.html#17>
+>       -> StringPart
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#22>
+>
+>      <FooStringChars-LEX> -> StringChars
+> <http://releases.strategoxt.org/docs/syntax/java-front/stable/docs/html/languages/java-15/lexical/literals/StringLiterals.sdf.html#26>
+>      ~[\"\\\n\13]+  -> <FooStringChars-LEX>
+>
+> Thank you
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+From emmanuel.castro at laposte.net  Sat Sep  8 16:31:40 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sat, 8 Sep 2012 16:31:40 +0200
+Subject: [Stratego Users] SDF syntax clarificaiton needed
+In-Reply-To: <5049F9A2.7070102@yahoo.de>
+References: <CAEXdecks0anVCe5foRD_ssvCM7pL3ZWXi2CXAezPEf3G9e1fdw@mail.gmail.com>
+	<5049F9A2.7070102@yahoo.de>
+Message-ID: <CAEXdecnvzCM3w=vYyjTj9bVg5kQ485XJeGTOe9bxuNjitR8m+Q@mail.gmail.com>
+
+Thank you for the explanation you gave me.
+
+It pointed me towards the reading of Syntax Definition for Language
+Prototyping, a Ph.D. Thesis in 1997. In ?3.3.2, the author explains
+the details of the normalisation, and how it adds the -LEX and -CF
+suffixes. As far as I could understand from what Daniel explained and
+my reading, a "prefixless" syntax does not go through the
+normalisation process. Especially, it allows to make rules that behave
+as context-free syntax (one can use "cons") without adding the
+interleaved LAYOUT?.
+
+http://www.cs.uu.nl/groups/ST/Visser/SyntaxDefinitionForLanguagePrototyping
+
+Correct me if I'm wrong.
+
+Manu
+
+
+From E.Visser at tudelft.nl  Mon Sep 10 12:07:14 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 10 Sep 2012 12:07:14 +0200
+Subject: [Stratego Users] SDF syntax clarificaiton needed
+In-Reply-To: <CAEXdecnvzCM3w=vYyjTj9bVg5kQ485XJeGTOe9bxuNjitR8m+Q@mail.gmail.com>
+References: <CAEXdecks0anVCe5foRD_ssvCM7pL3ZWXi2CXAezPEf3G9e1fdw@mail.gmail.com>
+	<5049F9A2.7070102@yahoo.de>
+	<CAEXdecnvzCM3w=vYyjTj9bVg5kQ485XJeGTOe9bxuNjitR8m+Q@mail.gmail.com>
+Message-ID: <CAFaCHU3EP+HnOCLq9nNrrGM5LnEZYtWUCpkwY0ev7yMnjD67MA@mail.gmail.com>
+
+Hi Manu,
+
+You got it. The 'syntax' sections form the core (Kernel) language of
+SDF. Context-free and lexical syntax sections are translated into
+'syntax' productions. This achieves two goals (1) introducing LAYOUT
+between symbols in context-free productions, and (2) separating
+non-terminals for lexical and context-free syntax.
+
+In the example from JavaFront, a syntax section is indeed used to give
+an AST structure to parts of a lexical non-terminal. Normally,
+lexicals are collapsed to strings in the AST.
+
+cheers,
+
+-- Eelco
+
+On Sat, Sep 8, 2012 at 4:31 PM, Emmanuel Castro
+<emmanuel.castro at laposte.net> wrote:
+> Thank you for the explanation you gave me.
+>
+> It pointed me towards the reading of Syntax Definition for Language
+> Prototyping, a Ph.D. Thesis in 1997. In ?3.3.2, the author explains
+> the details of the normalisation, and how it adds the -LEX and -CF
+> suffixes. As far as I could understand from what Daniel explained and
+> my reading, a "prefixless" syntax does not go through the
+> normalisation process. Especially, it allows to make rules that behave
+> as context-free syntax (one can use "cons") without adding the
+> interleaved LAYOUT?.
+>
+> http://www.cs.uu.nl/groups/ST/Visser/SyntaxDefinitionForLanguagePrototyping
+>
+> Correct me if I'm wrong.
+>
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From emmanuel.castro at laposte.net  Tue Sep 11 09:17:51 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 11 Sep 2012 09:17:51 +0200
+Subject: [Stratego Users] Stratego Debugger
+Message-ID: <CAEXdeckdgkTMJqC2AdFAiXB1oWDbbpUcjekJZAkDTZ8cTMnCgQ@mail.gmail.com>
+
+Hello
+
+I am trying to launch the Stratego debugger on the Entity sample project.
+I use the procedure described in
+http://strategoxt.org/Spoofax/DebugStratego/Spoofax/DebugStratego
+unfortunately it fails. I tried to enable the debug mode by:
+- adding the .debugmode file,
+- changing .ctree to .jar in Ant's target "all"
+- setting breakpoints in 'generate.str' at various places in the to-java rules
+
+How should I start debugging? Just launching the "to-java" rule fails
+to debug anything.
+I tried making a "Hybrid" launching configuration and launching it in
+debug mode, but it fails with a
+"Strategy name unspecified" error.
+
+I tried with the current stable version of Spoofax.
+The nightly version stated in the wiki fails to build the project.
+
+Where did I miss the point?
+
+Manu
+
+PS. The wiki instructions are not always up to date. How is it
+possible to correct them? It is not possible to register on it now.
+
+From emmanuel.castro at laposte.net  Thu Sep 13 14:21:07 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Thu, 13 Sep 2012 14:21:07 +0200
+Subject: [Stratego Users] Stratego Users
+Message-ID: <CAEXdeckqTSR=S5RDXQS3uvh6ucMpwAnKb+7oMtZzq6dWYxA_=g@mail.gmail.com>
+
+Hello
+
+Is there anybody using Statego debugger in Spoofax?
+Is it operational? or not?
+
+Manu.
+
+From daniele.gianni at gmail.com  Thu Sep 13 23:47:34 2012
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Thu, 13 Sep 2012 23:47:34 +0200
+Subject: [Stratego Users] CfP: 3rd International Workshop on Model-driven
+ Approaches for Simulation Engineering (Mod4Sim13) part of the Symposium on
+ Theory of Modeling and Simulation SCS SpringSim 2013)
+In-Reply-To: <CAOCNFM7WHXvbO5ZxWB6sAeSuOHtxLpj8SGHwR25ZG8ogd9Su4w@mail.gmail.com>
+References: <CAOCNFM53sm1tZ=j2qhfSnMjYx7axjSAogGfeOf2ekmojWWDAKA@mail.gmail.com>
+	<CAOCNFM5d21fgtYXLkjeeVaZfnuR7ovY+o7ErjMzGWM53Bj8myQ@mail.gmail.com>
+	<CAOCNFM4K_sZbnpHKJ=YbHxL8=gc-q6UkLdQYMZTRBuh0MKZStw@mail.gmail.com>
+	<CAOCNFM5QBqQEetK24kSmre6wRyXxHhz3=QX1jJCLu2s-RkL7pQ@mail.gmail.com>
+	<CAOCNFM6LCwz7ca1OBODiQHUYjKm+=MQQZJUM=DkcqyeW4zNEEQ@mail.gmail.com>
+	<CAOCNFM6T-8+9Ji8Z5d-Y-j2fK=xrJMcve-4eAcDOJ0XYhAfSqg@mail.gmail.com>
+	<CAOCNFM4ethHOvjjQsL95sKG-mnJKp8=WkXwKQAuK0qOkd4ZRXw@mail.gmail.com>
+	<CAOCNFM5Mc6BZUMTvJK_0t3QdZKEm7-4hC2iSQCavzQ2F=tt_tw@mail.gmail.com>
+	<CAOCNFM79vcr=oEzsDG0DdjFPasC3LnTa6bZ-W6XY7=-b2N5htQ@mail.gmail.com>
+	<CAOCNFM4P+Z4Z0QskdrTA2Xqt0i_Qkh8_xv+W8-FUjChW2c2BvQ@mail.gmail.com>
+	<CAOCNFM5hsdXNYztviLHSHUWFwgph=+E3ivdB3AG1h==UU9mkoA@mail.gmail.com>
+	<CAOCNFM7YeqL13u7TAuOeKVvw4ocMQMHOT6LL0wQ5+BMu6ozRvw@mail.gmail.com>
+	<CAOCNFM5dWAU3V3QV-cozOkEm=5hy4DwYKHYv4jNL88+ee-HCpA@mail.gmail.com>
+	<CAOCNFM6JRU7H0ZqdYofJd20OU-TpC7ZD_FHzkY_tqXB5+Tx98A@mail.gmail.com>
+	<CAOCNFM4iFFqD4b9exeJHTqqkRZirmabG87ef9S4K0TAwopiLsA@mail.gmail.com>
+	<CAOCNFM5reb1Ehg5d9V=hyOAD-G=WSkDGRR+BzFxEa7X5Lo=iDA@mail.gmail.com>
+	<CAOCNFM4kzasSQVgbB02a_SO1+or7HE6A_tiGqy4Y0BuK-sbZJw@mail.gmail.com>
+	<CAOCNFM5sT+XRuRFvjr0vnpo5X7oFuH=wu4mh1awgVnFxyAhWBw@mail.gmail.com>
+	<CAOCNFM7FXQa_xujWTjitEUhbLRVJoCK7ZzeTf7wRsq=y=zXZcw@mail.gmail.com>
+	<CAOCNFM7vqa3JqropOHkn-kVMFwxLS4QnZ6Fz-bK-KWfdBiGdYQ@mail.gmail.com>
+	<CAOCNFM6nzyF10aPB9qp-9upTeCbFR-VFC_Cj7QPovA7WcOSaBg@mail.gmail.com>
+	<CAOCNFM7MTp-AHMw2s=cLLrDw5QDHPK2rweSfWinMA8QGWCY64w@mail.gmail.com>
+	<CAOCNFM6dJi2dZTVeHMC738WRj3VsGZ+cEHt0Evxkc1X6SSi6bg@mail.gmail.com>
+	<CAOCNFM7RR5HRNjsA2b7tUrokWzjpPmQj_EDrkE1fv6OcXRAndw@mail.gmail.com>
+	<CAOCNFM5Lw=iQEE_WFhN7Ei3dfX=g1A69q-VezmJfu=LYx5o_eQ@mail.gmail.com>
+	<CAOCNFM76MssohXGgoF_K2JuQpM1Dw_JNxoR_Uf2ewWkRMK5yiQ@mail.gmail.com>
+	<CAOCNFM7WJ+LsHa71FSS_5PT4W_3Y4uRd8Ap-sDNsWD7PbPBmwQ@mail.gmail.com>
+	<CAOCNFM752QwJ4LA58Ay8q+m=EOL0hoiRY-cFwa0eP=SkkVjbfg@mail.gmail.com>
+	<CAOCNFM5uW6aLZHCD7Umq595UpVZxrGbB14JVOD1mBtXdUMOjHw@mail.gmail.com>
+	<CAOCNFM72H3H9Qd_ZvPV8auwYpOfTrttsctw6Gw8x4mPYSG2Wew@mail.gmail.com>
+	<CAOCNFM7RefJ-61bJxPcfn+eNJYFfypRDKV8NkkhZS4HDdy=Dxw@mail.gmail.com>
+	<CAOCNFM5+UmgquS00TDYD5VAN0H69o0-u7Q+ockO4+HUZre6BmQ@mail.gmail.com>
+	<CAOCNFM772SqkLQgmPBSLeASPg-qwUhq51Y_0wHzbEYL4_ANqPg@mail.gmail.com>
+	<CAOCNFM4Uh8M5bWhtNPrsG-Cccz=b=RdAT7Tnbsc86PkBw3n0Qw@mail.gmail.com>
+	<CAOCNFM7WHXvbO5ZxWB6sAeSuOHtxLpj8SGHwR25ZG8ogd9Su4w@mail.gmail.com>
+Message-ID: <CAOCNFM4X9hsKMBbRXkNfH55Kqy8-_5gkw+iR+Gvd5Kto6krp5w@mail.gmail.com>
+
+#################################################################
+
+                        CALL FOR PAPERS
+
+               3rd International Workshop on
+      Model-driven Approaches for Simulation Engineering
+   part of the Symposium on Theory of Modeling and Simulation
+                     (SCS SpringSim 2013)
+
+#################################################################
+
+April 7-10, 2013, San Diego, CA (USA)
+http://www.sel.uniroma2.it/Mod4Sim13
+
+#################################################################
+# Papers Due: *** November 1, 2012 ***
+# Accepted papers will be published in the conference proceedings
+# and archived in the ACM Digital Library.
+#################################################################
+
+The workshop aims to bring together experts in model-based,
+model-driven and software engineering with experts in simulation
+methods and simulation practitioners, with the objective to advance
+the state of the art in model-driven simulation engineering.
+
+Model-driven engineering approaches provide considerable advantages to
+software systems engineering activities through the provision of
+consistent and coherent models at different abstraction levels. As
+these models are in a machine readable form, model-driven engineering
+approaches can also support the exploitation of computing capabilities
+for model reuse, programming code generation, and model checking, for
+example.
+
+The definition of a simulation model, its software implementation and
+its execution platform form what is known as simulation engineering.
+As simulation systems are mainly based on software, these systems can
+similarly benefit from model-driven approaches to support automatic
+software generation, enhance software quality, and reduce costs,
+development effort and time-to-market.
+
+Similarly to systems and software engineering, simulation engineering
+can exploit the capabilities of model-driven approaches by increasing
+the abstraction level in simulation model specifications and by
+automating the derivation of simulator code. Further advantages can be
+gained by using modeling languages, such as UML and SysML ? but not
+exclusively those. For example, modeling languages can be used for
+descriptive modeling (to describe the system to be simulated), for
+analytical modeling (to specify analytically the simulation of the
+same system), and for implementation modeling (to define the
+respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore) and
+distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms
+(discrete event simulation, multi-agent simulation, sketch-based *
+simulation, etc.)
+* model-driven methods and tools for performance engineering of
+simulation systems
+* simulation tools for model-driven software performance engineering
+* model-driven technologies for simulation verification and validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* Executable UML
+* Executable Architectures
+* SysML / Modelica integration
+* Simulation Model Portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider scope
+and welcomes contributions offering original perspectives on
+model-driven engineering of simulation systems.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+We invite paper submissions in three forms:
+
+1. Full paper (max 8 pages), describing innovative research results.
+These papers are eligible for the best paper award and may be invited
+for an extended version in a special issue of the SCS SIMULATION
+journal.
+2. Work-in-progress paper (max 6 pages), describing novel research
+ideas and promising work that have not yet been fully evaluated.
+3. Short paper (max 6 pages), describing industrial and hands-on
+experience on any relevant area (i.e. military, government, space,
+etc.).
+
+All the papers must be submitted through the SCS conference management
+systems (http://www.softconf.com/scs/DEVS13/) and select the Mod4Sim
+track. The submissions must be in PDF format and conform to the SCS
+conference template (Word template is available at
+http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc
+, guidelines are available at
+http://www.scs.org/PDFs/formattingkit.pdf). All the submitted papers
+must be original and not submitted else where. Submitted papers will
+be peer reviewed with respect to their quality, originality and
+relevance. The authors of the accepted papers must register in advance
+for inclusion of their paper in the conference proceedings. Authors of
+accepted papers will be invited to update their papers basing on the
+reviews, before providing the camera ready.
+
+All accepted papers will be included in the conference proceedings and
+archived in both the ACM Digital Library. However, **only** accepted
+**full papers** will be printed in hard copy.
+
+Authors may contact the organizers for expression of interest and
+content appropriateness at any time.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+ * Submission Deadline: November 1, 2012
+ * Decision to paper authors: January 10, 2013
+ * Camera ready due: February 5, 2013
+ * Conference dates: April 7-10, 2013
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+ * Andrea D'Ambrogio - University of Rome TorVergata, Italy
+ * Daniele Gianni - European Space Agency, The Netherlands
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+ * Steffen Becker - University of Paderborn, Germany
+ * Paolo Bocciarelli - University of Rome TorVergata, Italy
+ * David Chen - Univeristy of Bordeaux I, France
+ * Cristian Englert - Serco, The Netherlands
+ * Huascar Espinoza - European Software Institute and Tecnalia, Spain
+ * Paul A. Fishwick - University of Florida, USA
+ * Carlos Juiz - University of Balearic Islands, Spain
+ * Cristiano Leorato - Rhea, The Netherlands
+ * Steve McKeever - University of Oxford, UK
+ * Halit Oguzt?z?n - Middle East Technical University, Turkey
+ * Andreas Tolk - Old Dominion University, USA
+ * Hans Vangheluwe - University of Antwerp, Belgium and McGill
+University, Canada
+ * Anthony Walsh - European Space Agency, Germany
+ * Heming Zhang - Tsinghua University, China
+
+
+*** Contact Information ***
+Andrea D'Ambrogio and Daniele Gianni (workshop co-chairs)
+Emails: dambro at uniroma2.it and danielegmail-mod4sim at yahoo.it
+
+
+From E.Visser at tudelft.nl  Sat Sep 22 16:37:00 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 22 Sep 2012 16:37:00 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-HMw=H4A2feUkdcO6hevLLkoxK-dhHbZz9j_8ST5fS+bA@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+	<CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+	<CAFaCHU3gyKQ+L8t=U0xLJitQEHsy-+Lam2evJOeMzUzxX3JWyw@mail.gmail.com>
+	<CAJ8oX-G4eOfTp6_=9aWFo1BWQSFHLh+H1t+Z4_sKgTY=Wn0QOg@mail.gmail.com>
+	<CAFaCHU3X983xWjDn5OW_-BjneEFYK_VcsM71w=RWenkf2zaLfw@mail.gmail.com>
+	<CAJ8oX-HMw=H4A2feUkdcO6hevLLkoxK-dhHbZz9j_8ST5fS+bA@mail.gmail.com>
+Message-ID: <CAFaCHU2sqVKmmwTjmV88TCHFXu0sRqyJPPHr+kXX79d6MGzNSQ@mail.gmail.com>
+
+Hi Matthew,
+
+It turns out the concrete syntax is very well integrated into Spoofax,
+but one just has to know what to do. I have created a little project
+to illustrate the use of concrete syntax:
+
+ https://svn.strategoxt.org/repos/StrategoXT/spoofax-contrib/enfun/tags/cs0
+
+The project is used to demonstrate other recent features of Spoofax as
+well and requires the current unstable release.
+
+I intend to write some documentation on concrete syntax, but I thought
+I'd send you an advance notice.
+
+Key elements
+
+* define an SDF module syntax/Stratego-L.sdf where L is the name of
+your language
+* follow the example of syntax/Stratego-Enfun.sdf
+* for each sort S in your grammar include a rule of the form
+
+    "|[" S "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+* for each module m.str in which you want to use concrete syntax add
+an extra file m.meta with as content
+
+   Meta([Syntax("Stratego-L")])
+
+Note that the current release has a bug: after changing your syntax
+definition and rebuilding you need to restart Eclipse in order that
+the syntax becomes available in your modules. We're looking into the
+problem.
+
+Hope this helps. Let me know if you encounter any problems.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From emmanuel.castro at laposte.net  Sun Sep 23 11:57:21 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sun, 23 Sep 2012 11:57:21 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU2sqVKmmwTjmV88TCHFXu0sRqyJPPHr+kXX79d6MGzNSQ@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+	<CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+	<CAFaCHU3gyKQ+L8t=U0xLJitQEHsy-+Lam2evJOeMzUzxX3JWyw@mail.gmail.com>
+	<CAJ8oX-G4eOfTp6_=9aWFo1BWQSFHLh+H1t+Z4_sKgTY=Wn0QOg@mail.gmail.com>
+	<CAFaCHU3X983xWjDn5OW_-BjneEFYK_VcsM71w=RWenkf2zaLfw@mail.gmail.com>
+	<CAJ8oX-HMw=H4A2feUkdcO6hevLLkoxK-dhHbZz9j_8ST5fS+bA@mail.gmail.com>
+	<CAFaCHU2sqVKmmwTjmV88TCHFXu0sRqyJPPHr+kXX79d6MGzNSQ@mail.gmail.com>
+Message-ID: <CAEXdecnNjGQ87ViGf5JKYGTx947K8mRLX+-8x3otwhcQXqEd=Q@mail.gmail.com>
+
+In the concrete syntax example, the operator |[ ]| is used to
+introduce expressions using concrete syntax. Is it allowed to used
+different operators ?
+e.g:
+? when ?|[? is already used in the target language (yet very unlikely).
+??when subparts of the language are ambiguous. Say, if ?Definition?
+and ?Exp? are ambiguous, e.g. x=1 might be a definition (x is set to
+1) and an expression (testing is x is equals to 1). One might have to
+distinguish them using d|[x=1]| for the definition form, and e|[x=1]|
+for the expression.
+
+Manu
+
+
+From E.Visser at tudelft.nl  Sun Sep 23 13:20:27 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 23 Sep 2012 13:20:27 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAEXdecnNjGQ87ViGf5JKYGTx947K8mRLX+-8x3otwhcQXqEd=Q@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+	<CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+	<CAFaCHU3gyKQ+L8t=U0xLJitQEHsy-+Lam2evJOeMzUzxX3JWyw@mail.gmail.com>
+	<CAJ8oX-G4eOfTp6_=9aWFo1BWQSFHLh+H1t+Z4_sKgTY=Wn0QOg@mail.gmail.com>
+	<CAFaCHU3X983xWjDn5OW_-BjneEFYK_VcsM71w=RWenkf2zaLfw@mail.gmail.com>
+	<CAJ8oX-HMw=H4A2feUkdcO6hevLLkoxK-dhHbZz9j_8ST5fS+bA@mail.gmail.com>
+	<CAFaCHU2sqVKmmwTjmV88TCHFXu0sRqyJPPHr+kXX79d6MGzNSQ@mail.gmail.com>
+	<CAEXdecnNjGQ87ViGf5JKYGTx947K8mRLX+-8x3otwhcQXqEd=Q@mail.gmail.com>
+Message-ID: <CAFaCHU3wgoE8Vqkvap1iWq1nqfL2Z3JGP7tRZz8duQmJd0abgQ@mail.gmail.com>
+
+Hi Manu,
+
+> In the concrete syntax example, the operator |[ ]| is used to
+> introduce expressions using concrete syntax. Is it allowed to used
+> different operators ?
+> e.g:
+> ? when ?|[? is already used in the target language (yet very unlikely).
+> ? when subparts of the language are ambiguous. Say, if ?Definition?
+> and ?Exp? are ambiguous, e.g. x=1 might be a definition (x is set to
+> 1) and an expression (testing is x is equals to 1). One might have to
+> distinguish them using d|[x=1]| for the definition form, and e|[x=1]|
+> for the expression.
+
+Absolutely. The syntax for making object language terms into Stratego
+terms is under your control. For example, the Stratego-Enfun.sdf
+defines the embedding as
+
+    "|[" Definition "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+But this could be easily changed into something else. For example, we
+used <| ... |> in an SQL embedding at some point:
+
+    "<|" Definition "|>" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+Similarly, you can add disambiguating tags to an embedding:
+
+    "d|[" Definition "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+cheers,
+
+-- Eelco
+
+
+
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From emmanuel.castro at laposte.net  Sun Sep 23 19:30:55 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sun, 23 Sep 2012 19:30:55 +0200
+Subject: [Stratego Users] Nix and Spoofax source build
+Message-ID: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+
+Bonsoir,
+
+I am experimenting building Spoofax on Eclipse so that I can write a new
+recipe helping newbies to build and debug the spoofax code.
+I made progress when I realised that the "Open Referenced Project" in
+Eclipse is not reliable for Spoofax projects. I don't know why, however the
+MANIFEST.MF files are correct.
+I now can make an Eclipse project without compile error.
+
+My current problem is Nix, which is required to build
+org.stratego.imp.generator. Is it possible to install Nix in the userland?
+(without root access to /).
+I am still struggling to install it on Ubuntu. After installing the debian
+package, Nix complains about directory access failure or creation in
+/nix/profile.
+
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120923/2f997599/attachment.html>
+
+From karltk at strategoxt.org  Thu Sep 27 21:28:23 2012
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Thu, 27 Sep 2012 21:28:23 +0200
+Subject: [Stratego Users] Nix and Spoofax source build
+In-Reply-To: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+References: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+Message-ID: <CAGxSwVXFJY4vPo1EDyEG67OUkHbyzH=LFZOHyN_N=+9JPyyGfA@mail.gmail.com>
+
+You will need root access the first time you install nix. (There are ways
+to get around this but it's going to become a mess further down the road).
+
+The best is to create /nix and chown it to your user. Alternative is to
+bind-mount /nix to a dir in your user's home dir.
+
+Afterwards, you will not need root again.
+
+-- karl t
+Den 23. sep. 2012 19:31 skrev "Emmanuel Castro" <emmanuel.castro at laposte.net>
+f?lgende:
+
+> Bonsoir,
+>
+> I am experimenting building Spoofax on Eclipse so that I can write a new
+> recipe helping newbies to build and debug the spoofax code.
+> I made progress when I realised that the "Open Referenced Project" in
+> Eclipse is not reliable for Spoofax projects. I don't know why, however the
+> MANIFEST.MF files are correct.
+> I now can make an Eclipse project without compile error.
+>
+> My current problem is Nix, which is required to build
+> org.stratego.imp.generator. Is it possible to install Nix in the userland?
+> (without root access to /).
+> I am still struggling to install it on Ubuntu. After installing the debian
+> package, Nix complains about directory access failure or creation in
+> /nix/profile.
+>
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120927/a7a989eb/attachment.html>
+
+From emmanuel.castro at laposte.net  Fri Sep 28 14:07:07 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Fri, 28 Sep 2012 14:07:07 +0200
+Subject: [Stratego Users] Nix and Spoofax source build
+In-Reply-To: <CAGxSwVXFJY4vPo1EDyEG67OUkHbyzH=LFZOHyN_N=+9JPyyGfA@mail.gmail.com>
+References: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+	<CAGxSwVXFJY4vPo1EDyEG67OUkHbyzH=LFZOHyN_N=+9JPyyGfA@mail.gmail.com>
+Message-ID: <CAEXdec=RXJNiSVBVzZL0nHCvjdEqp9OHC=Zib7YkOj9DhFGkXw@mail.gmail.com>
+
+I've finally made it working out, using the tutorial of WebDSL. I had to
+create my profile directory by hand in the Nix per-user directory.
+I did not bother with chowning directories, except the one in per-user, as
+running the command with sudo works fine.
+
+However I've noticed a problem with the Ubuntu edition of Nix.
+Something is broken with the Perl symbol *Perl_Gthr_key_ptr. I guess a
+security update form Perl broke the binary compatibility.*
+*I had to compile Nix from sources. Hopefully it proceed smoothly.*
+*
+*
+*What would be cool for the future of the Ubuntu .deb package, would be
+that it install the deamon automatically, and that the per-user directories
+be created automatically with the right access-rights.*
+*
+*
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120928/d561ab21/attachment.html>
+
+From tbrandonau at gmail.com  Sun Sep 30 11:29:57 2012
+From: tbrandonau at gmail.com (Thomas Brandon)
+Date: Sun, 30 Sep 2012 19:29:57 +1000
+Subject: [Stratego Users] Start symbol in tests
+Message-ID: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+
+I am unable to get the start symbol option to work in test files. As I
+understand it you should be able to have a .spt file containing:
+
+module test-example2
+
+language Test
+start symbol Definition
+
+test Simple entity [[
+  entity User {
+    name : String
+  }
+]] 0 errors
+
+
+However this gives a "Fails to parse" error.
+
+This is based on the example syntax generated when creating a new project:
+    "module" ID Definition*       -> Start {cons("Module")}
+    "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+    ID ":" Type                   -> Property {cons("Property")}
+    ID                            -> Type {cons("Type")}
+
+If I add a module line to the test input and set the start rule to Start
+then it works but I haven't been able to get the start symbol option to
+work for anything but the start rule of the language.
+Am I doing something wrong or should this work?
+
+Thanks,
+Tom
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120930/5f29e28a/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Sun Sep 30 11:42:20 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Sun, 30 Sep 2012 09:42:20 +0000
+Subject: [Stratego Users] Start symbol in tests
+In-Reply-To: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+References: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8840F5@SRV364.tudelft.net>
+
+The start symbol in test cases needs to be one of the start symbols in your syntax definition. Thus, you need something like
+
+context-free start-symbols
+  Definition
+
+-- Guido Wachsmuth
+
+On 30 Sep 2012, at 11:29, Thomas Brandon <tbrandonau at gmail.com> wrote:
+
+> I am unable to get the start symbol option to work in test files. As I understand it you should be able to have a .spt file containing:
+> 
+> module test-example2
+> 
+> language Test
+> start symbol Definition
+> 
+> test Simple entity [[
+>   entity User {
+>     name : String
+>   }
+> ]] 0 errors
+> 
+> 
+> However this gives a "Fails to parse" error.
+> 
+> This is based on the example syntax generated when creating a new project:
+>     "module" ID Definition*       -> Start {cons("Module")}
+>     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>     ID ":" Type                   -> Property {cons("Property")}
+>     ID                            -> Type {cons("Type")}
+> 
+> If I add a module line to the test input and set the start rule to Start then it works but I haven't been able to get the start symbol option to work for anything but the start rule of the language.
+> Am I doing something wrong or should this work?
+> 
+> Thanks,
+> Tom _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From lennart at lclnet.nl  Sun Sep 30 11:45:22 2012
+From: lennart at lclnet.nl (Lennart Kats)
+Date: Sun, 30 Sep 2012 11:45:22 +0200
+Subject: [Stratego Users] Start symbol in tests
+In-Reply-To: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+References: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+Message-ID: <506814B2.9040503@lclnet.nl>
+
+Hi Tom,
+
+You need to declare Definition as an additional start symbol in your 
+grammar as well. The standard grammar only includes "Start".
+
+hth,
+
+Lennart
+
+On 9/30/12 11:29 , Thomas Brandon wrote:
+> I am unable to get the start symbol option to work in test files. As I
+> understand it you should be able to have a .spt file containing:
+>
+> module test-example2
+>
+> language Test
+> start symbol Definition
+>
+> test Simple entity [[
+>    entity User {
+>      name : String
+>    }
+> ]] 0 errors
+>
+>
+> However this gives a "Fails to parse" error.
+>
+> This is based on the example syntax generated when creating a new project:
+>      "module" ID Definition*       -> Start {cons("Module")}
+>      "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>      ID ":" Type                   -> Property {cons("Property")}
+>      ID                            -> Type {cons("Type")}
+>
+> If I add a module line to the test input and set the start rule to Start
+> then it works but I haven't been able to get the start symbol option to
+> work for anything but the start rule of the language.
+> Am I doing something wrong or should this work?
+>
+> Thanks,
+> Tom
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+

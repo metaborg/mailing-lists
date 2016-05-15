@@ -1,0 +1,688 @@
+From rustompmody at gmail.com  Fri Nov  8 10:22:08 2013
+From: rustompmody at gmail.com (Rustom Mody)
+Date: Fri, 8 Nov 2013 14:52:08 +0530
+Subject: [Stratego Users] installing spoofax
+In-Reply-To: <CAJ+TeoczAgPedJOhLpe1UTws0GTMM-0iZuf-5mTF1t+qVU28qA@mail.gmail.com>
+References: <CAJ+TeoczAgPedJOhLpe1UTws0GTMM-0iZuf-5mTF1t+qVU28qA@mail.gmail.com>
+Message-ID: <CAJ+Teoc1zTmrz2DA=TvBz0ZVzSw2QPRRtzdQqSKg8BTZg+6mVg@mail.gmail.com>
+
+When I run eclipse (after trying to install spoofax) I get this message
+from eclipse:
+
+spoofax needs eclipse to be started with
+<list of arguments>
+
+The following arguments are currently missing:
+-server
+
+Setup:
+Linux ubuntu saucy 64 bit
+
+Eclipse Standard/SDK
+Version: Kepler Service Release 1
+Build id: 20130919-0819
+
+$ java -version
+java version "1.7.0_45"
+
+
+
+Eclipse.ini
+--------------
+-startup
+plugins/org.eclipse.equinox.launcher_1.3.0.v20130327-1440.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20130807-1835
+-product
+org.eclipse.epp.package.standard.product
+--launcher.defaultAction
+openFile
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+--launcher.appendVmargs
+-vm
+/opt/jdk1.7.0_45/bin/
+-vmargs
+-server
+-Xss8m
+-Xms256m
+-Xmx1024m
+-XX:MaxPermSize=256m
+-Djava.net.preferIPv4Stack=true
+-Dosgi.requiredJavaVersion=1.6
+-XX:MaxPermSize=256m
+-Xms40m
+-Xmx512m
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131108/2208e6a3/attachment.html>
+
+From v.vergu at gmail.com  Fri Nov  8 13:52:45 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Fri, 8 Nov 2013 13:52:45 +0100
+Subject: [Stratego Users] installing spoofax
+In-Reply-To: <CAJ+Teoc1zTmrz2DA=TvBz0ZVzSw2QPRRtzdQqSKg8BTZg+6mVg@mail.gmail.com>
+References: <CAJ+TeoczAgPedJOhLpe1UTws0GTMM-0iZuf-5mTF1t+qVU28qA@mail.gmail.com>
+ <CAJ+Teoc1zTmrz2DA=TvBz0ZVzSw2QPRRtzdQqSKg8BTZg+6mVg@mail.gmail.com>
+Message-ID: <E34C48FE-8D7C-43E9-A315-6FCED843D8F0@gmail.com>
+
+Hi Rustom,
+
+> When I run eclipse (after trying to install spoofax) I get this message from eclipse:
+
+Which version of Spoofax have you installed?
+
+> Eclipse.ini
+> --------------
+> ...
+> -vmargs
+> -server
+> -Xss8m
+> -Xms256m
+> -Xmx1024m
+> -XX:MaxPermSize=256m
+> -Djava.net.preferIPv4Stack=true
+> -Dosgi.requiredJavaVersion=1.6
+> -XX:MaxPermSize=256m
+> -Xms40m
+> -Xmx512m
+
+The -Xms, -Xmx and -XX:MaxPermSize are given more than once, that is not supported by the JVM, perhaps that causes the warning message to pop up. I run my Eclipse (Kepler) with:
+
+-vmargs
+-Xss32m
+-Xms4096m
+-Xmx4096m
+-XX:MaxPermSize=1G
+-server
+
+But that may be a bit overkill. 
+
+Vlad
+
+From gabrielkonat at gmail.com  Fri Nov  8 17:04:31 2013
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Fri, 8 Nov 2013 17:04:31 +0100
+Subject: [Stratego Users] installing spoofax
+In-Reply-To: <CAJ+Teoc1zTmrz2DA=TvBz0ZVzSw2QPRRtzdQqSKg8BTZg+6mVg@mail.gmail.com>
+References: <CAJ+TeoczAgPedJOhLpe1UTws0GTMM-0iZuf-5mTF1t+qVU28qA@mail.gmail.com>
+ <CAJ+Teoc1zTmrz2DA=TvBz0ZVzSw2QPRRtzdQqSKg8BTZg+6mVg@mail.gmail.com>
+Message-ID: <CAOipTuj+UQ0fqT_0OY8RMi1dQN-G+nnir5b-=s0O2frTnYRdvw@mail.gmail.com>
+
+Dear Rustom,
+
+This is a bug in Spoofax, you can safely ignore the warning about -server.
+
+Cheers,
+Gabriel
+
+
+On 8 November 2013 10:22, Rustom Mody <rustompmody at gmail.com> wrote:
+
+> When I run eclipse (after trying to install spoofax) I get this message
+> from eclipse:
+>
+> spoofax needs eclipse to be started with
+> <list of arguments>
+>
+> The following arguments are currently missing:
+> -server
+>
+> Setup:
+> Linux ubuntu saucy 64 bit
+>
+> Eclipse Standard/SDK
+> Version: Kepler Service Release 1
+> Build id: 20130919-0819
+>
+> $ java -version
+> java version "1.7.0_45"
+>
+>
+>
+> Eclipse.ini
+> --------------
+> -startup
+> plugins/org.eclipse.equinox.launcher_1.3.0.v20130327-1440.jar
+> --launcher.library
+>
+> plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20130807-1835
+> -product
+> org.eclipse.epp.package.standard.product
+> --launcher.defaultAction
+> openFile
+> -showsplash
+> org.eclipse.platform
+> --launcher.XXMaxPermSize
+> 256m
+> --launcher.defaultAction
+> openFile
+> --launcher.appendVmargs
+> -vm
+> /opt/jdk1.7.0_45/bin/
+> -vmargs
+> -server
+> -Xss8m
+> -Xms256m
+> -Xmx1024m
+> -XX:MaxPermSize=256m
+> -Djava.net.preferIPv4Stack=true
+> -Dosgi.requiredJavaVersion=1.6
+> -XX:MaxPermSize=256m
+> -Xms40m
+> -Xmx512m
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131108/2282712e/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Nov 28 12:53:07 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 28 Nov 2013 12:53:07 +0100
+Subject: [Stratego Users] CFP: The Future of Programming | TU Delft,
+	16 and 17 January 2014
+Message-ID: <CAFaCHU258JejJLW9-yVLmV1eR+=5F3tQX=8EXK2yyrUXdZ+mJw@mail.gmail.com>
+
+---------------------------------------------------------
+Invitation to attend the symposium on
+
+The Future of Programming
+
+followed by the inaugural speech of Eelco Visser
+
+TU Delft, 16 and 17 January 2014
+---------------------------------------------------------
+
+Software systems are the engines of modern information society. Our ability
+to cope
+with the increasing complexity of software systems is limited by the
+programming
+languages we use to build them. Bridging the gap between domain concepts
+and
+the implementation of these concepts in a programming language is one of
+the core
+challenges of software engineering. Modern programming languages have
+considerably
+reduced this gap, but often still require low-level programmatic encodings
+of domain
+concepts.
+
+## Symposium
+
+On Thursday January 16 and Friday January 17, 2014, TU Delft hosts a
+symposium
+on the future of programming, which will provide an overview of the
+challenges in
+software development and programming languages and visions to their
+solution from
+different angles by a line-up of distinguished national and international
+speakers
+from academia and industry.
+
+The symposium is followed by the inaugural speech of Eelco Visser on the
+occasion
+of his appointment as Antoni van Leeuwenhoek Professor at TU Delft.
+
+## Speakers
+
+The following distinguished speakers have confirmed their participation:
+
+* Arie van Deursen: On software changes, large and small. Versioning in the
+Maven ecosystem
+* Brandon Hill: DSL engineering in industry (Spoofax at Oracle Labs)
+* Erik Meijer: Reactive programming (Rx)
+* Guido Wachsmuth: Meta-languages for language design (Spoofax)
+* Harry Buhrman: Programming quantum computers
+* Manuel Serrano: From PCs to tablets: Programming the diffuse Web
+* Markus P?schel: Teaching computers to write fast libraries
+* Markus V?lter: mbeddr: Extensible languages for embedded software
+engineering
+* Sebastian Erdweg: Library-based language extensions in SugarJ
+* Stefan Hanenberg: User studies of programming language productivity
+
+## Inaugural Speech Eelco Visser
+
+The symposium is followed by Eelco Visser's inaugural speech
+
+    "Programming Languages shape Computational Thinking"
+
+on January 17, 2014 at 15:00 in the TU Delft Aula.
+
+## Registration
+
+Register now at http://eelcovisser.org/wiki/future-of-programming
+
+
+
+-- Eelco Visser
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131128/ab8727b0/attachment.html>
+
+From andre.gasser at gmx.ch  Fri Nov 29 16:06:42 2013
+From: andre.gasser at gmx.ch (=?ISO-8859-1?Q?Andr=E9_Gasser?=)
+Date: Fri, 29 Nov 2013 16:06:42 +0100
+Subject: [Stratego Users] Island grammar problem
+Message-ID: <5298AD82.4090307@gmx.ch>
+
+Hi all,
+
+I am doing some experiments using island grammars and SDF. The grammar I
+want to create in the end should recognize C preprocessor directives
+such as #ifdef, but since I am new to SDF and the concepts behind island
+grammars, I have simplified the case a little bit. Therefore I would
+like to create a grammar, which is able to recognize UPPERCASE words in
+a textfile.
+
+Unfortunately I have tried several examples, but often they didn't seem
+to work properly, often there were ambiguities in my parse tree/ AST
+(amb). As far as I understand, an island grammar should not have
+ambiguities, if implemented correctly, right?
+
+Please find my current grammar definition and commands below. It for
+sure contains errors. Could someone perhaps have a look at it and give
+me a hint in the right direction?
+
+Just to make sure, here is the tool suite I am using on linux:
+
+aterm-2.5 (including patch)
+sdf2-bundle-2.4
+
+I have downloaded them as source files from
+http://strategoxt.org/Stratego/StrategoDownload and compiled them on my
+machine.
+
+
+This is my grammar:
+
+Module Layout:
+--------------
+module layout
+
+exports
+
+  lexical syntax
+    [\ \t\n]  -> LAYOUT
+
+Module Water:
+-------------
+module water
+
+exports
+
+  sorts Water
+
+  lexical syntax
+    ~[\ \t\n]+  -> Water {avoid}
+
+Module Main:
+------------
+module main
+
+imports water
+imports layout
+
+exports
+
+  sorts Input Chunk Uppercase
+  context-free start-symbols Input
+
+  lexical syntax
+    [A-Z]+ -> Uppercase
+
+  context-free syntax
+    Chunk*    -> Input  {cons("Input")}
+    Water     -> Chunk  {cons("Water")}
+    Uppercase -> Chunk  {cons("Uppercase")}
+
+
+These are the commands I use to create a parse table:
+
+pack-sdf -i layout.sdf -o layout.def
+pack-sdf -i water.sdf -o water.def
+pack-sdf -i main.sdf -o main.def
+sdf2table -i main.def -o main.tbl -m main
+
+To parse a file, I invoke the following command:
+
+cat testdata3.txt | sglri -p main.tbl
+
+The file "testdata3.txt" contains the following data:
+
+Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+
+
+Thank you very much for your assistance.
+
+Kind regards,
+Andr? Gasser
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: OpenPGP digital signature
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131129/6511bd14/attachment.sig>
+
+From eelcovis at gmail.com  Fri Nov 29 17:21:25 2013
+From: eelcovis at gmail.com (Eelco)
+Date: Fri, 29 Nov 2013 17:21:25 +0100
+Subject: [Stratego Users] Island grammar problem
+In-Reply-To: <5298AD82.4090307@gmx.ch>
+References: <5298AD82.4090307@gmx.ch>
+Message-ID: <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+
+Hi Andre,
+
+Have a look at our TOPLAS 2012 paper about parse error recovery. The recovery extensions of SDF2/JSGLR may apply to more coarse grained island grammars. But we haven't tried it yet. 
+
+-- Eelco Visser (from my iPhone)
+http://eelcovisser.org
+
+> On 29 nov. 2013, at 16:06, Andr? Gasser <andre.gasser at gmx.ch> wrote:
+> 
+> Hi all,
+> 
+> I am doing some experiments using island grammars and SDF. The grammar I
+> want to create in the end should recognize C preprocessor directives
+> such as #ifdef, but since I am new to SDF and the concepts behind island
+> grammars, I have simplified the case a little bit. Therefore I would
+> like to create a grammar, which is able to recognize UPPERCASE words in
+> a textfile.
+> 
+> Unfortunately I have tried several examples, but often they didn't seem
+> to work properly, often there were ambiguities in my parse tree/ AST
+> (amb). As far as I understand, an island grammar should not have
+> ambiguities, if implemented correctly, right?
+> 
+> Please find my current grammar definition and commands below. It for
+> sure contains errors. Could someone perhaps have a look at it and give
+> me a hint in the right direction?
+> 
+> Just to make sure, here is the tool suite I am using on linux:
+> 
+> aterm-2.5 (including patch)
+> sdf2-bundle-2.4
+> 
+> I have downloaded them as source files from
+> http://strategoxt.org/Stratego/StrategoDownload and compiled them on my
+> machine.
+> 
+> 
+> This is my grammar:
+> 
+> Module Layout:
+> --------------
+> module layout
+> 
+> exports
+> 
+>  lexical syntax
+>    [\ \t\n]  -> LAYOUT
+> 
+> Module Water:
+> -------------
+> module water
+> 
+> exports
+> 
+>  sorts Water
+> 
+>  lexical syntax
+>    ~[\ \t\n]+  -> Water {avoid}
+> 
+> Module Main:
+> ------------
+> module main
+> 
+> imports water
+> imports layout
+> 
+> exports
+> 
+>  sorts Input Chunk Uppercase
+>  context-free start-symbols Input
+> 
+>  lexical syntax
+>    [A-Z]+ -> Uppercase
+> 
+>  context-free syntax
+>    Chunk*    -> Input  {cons("Input")}
+>    Water     -> Chunk  {cons("Water")}
+>    Uppercase -> Chunk  {cons("Uppercase")}
+> 
+> 
+> These are the commands I use to create a parse table:
+> 
+> pack-sdf -i layout.sdf -o layout.def
+> pack-sdf -i water.sdf -o water.def
+> pack-sdf -i main.sdf -o main.def
+> sdf2table -i main.def -o main.tbl -m main
+> 
+> To parse a file, I invoke the following command:
+> 
+> cat testdata3.txt | sglri -p main.tbl
+> 
+> The file "testdata3.txt" contains the following data:
+> 
+> Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+> 
+> 
+> Thank you very much for your assistance.
+> 
+> Kind regards,
+> Andr? Gasser
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From j.smits-1 at student.tudelft.nl  Sat Nov 30 17:13:30 2013
+From: j.smits-1 at student.tudelft.nl (Jeff Smits)
+Date: Sat, 30 Nov 2013 17:13:30 +0100
+Subject: [Stratego Users] Island grammar problem
+In-Reply-To: <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+References: <5298AD82.4090307@gmx.ch>
+ <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+Message-ID: <CAPvsMmAi5cJPii=8PoMpxeNTC2_pbDnEz4oCRnkYevmJnSiMUA@mail.gmail.com>
+
+Hi Andr?,
+
+I'm by no means an expert in any of this, but I took a look at what you
+want to achieve with your grammar and what's ambiguous about it now. I
+noticed that you don't use follow restrictions anywhere.
+In my experience with SDF I've always needed a follow restriction on LAYOUT
+looking like this in your case:
+
+(addition to layout.sdf)
+  context-free restrictions
+    LAYOUT? -/- [\ \t\n]
+
+Other follow restriction are appropriate in your grammar because if I
+understand your goal correctly, you want your lexical syntax to match
+greedily. Since this isn't standard in SDF, you need the following
+additions:
+
+(addition to water.sdf)
+  lexical restrictions
+    Water -/- ~[\ \t\n]
+
+(addition to main.sdf)
+  lexical restrictions
+    Uppercase -/- [A-Z]
+
+With these additions your test file parses in less than a second with only
+a few ambiguities left. I added a rather conservative follow restriction to
+Uppercase. If you use a much more relaxed follow restriction like ~[\
+\t\n], you can get an unambiguous ast from your test file that looks like
+this (I used pp-aterm to pretty-print):
+
+Input(
+  [ Water("Das")
+  , Water("ist")
+  , Water("ein")
+  , Water("Satz")
+  , Water("mit")
+  , Uppercase("UPPERCASE")
+  , Water("und")
+  , Water("lowercase")
+  , Water("W?rtern.")
+  ]
+)
+
+I suspect that this is what you're after.
+
+PS: If you are instead looking for an AST where any uppercase letter gets
+its own Uppercase() constructor, then you shouldn't relax the follow
+restriction beyond [A-Z]. However I don't know how to make your grammar
+unambiguous in that case. I suspect it has to do with the ambiguity being
+between matching e.g. Water("Das") by rule Water -> Chunk or
+Uppercase("D"), Water("as") by some internal rule generated from Chunk* ->
+Input.
+
+I hope this helps with you a bit. For in depth information you should
+follow the advice of experts like Eelco.
+--
+Kind regards,
+Jeff Smits
+
+On Fri, Nov 29, 2013 at 5:21 PM, Eelco <eelcovis at gmail.com> wrote:
+
+> Hi Andre,
+>
+> Have a look at our TOPLAS 2012 paper about parse error recovery. The
+> recovery extensions of SDF2/JSGLR may apply to more coarse grained island
+> grammars. But we haven't tried it yet.
+>
+> -- Eelco Visser (from my iPhone)
+> http://eelcovisser.org
+>
+> > On 29 nov. 2013, at 16:06, Andr? Gasser <andre.gasser at gmx.ch> wrote:
+> >
+> > Hi all,
+> >
+> > I am doing some experiments using island grammars and SDF. The grammar I
+> > want to create in the end should recognize C preprocessor directives
+> > such as #ifdef, but since I am new to SDF and the concepts behind island
+> > grammars, I have simplified the case a little bit. Therefore I would
+> > like to create a grammar, which is able to recognize UPPERCASE words in
+> > a textfile.
+> >
+> > Unfortunately I have tried several examples, but often they didn't seem
+> > to work properly, often there were ambiguities in my parse tree/ AST
+> > (amb). As far as I understand, an island grammar should not have
+> > ambiguities, if implemented correctly, right?
+> >
+> > Please find my current grammar definition and commands below. It for
+> > sure contains errors. Could someone perhaps have a look at it and give
+> > me a hint in the right direction?
+> >
+> > Just to make sure, here is the tool suite I am using on linux:
+> >
+> > aterm-2.5 (including patch)
+> > sdf2-bundle-2.4
+> >
+> > I have downloaded them as source files from
+> > http://strategoxt.org/Stratego/StrategoDownload and compiled them on my
+> > machine.
+> >
+> >
+> > This is my grammar:
+> >
+> > Module Layout:
+> > --------------
+> > module layout
+> >
+> > exports
+> >
+> >  lexical syntax
+> >    [\ \t\n]  -> LAYOUT
+> >
+> > Module Water:
+> > -------------
+> > module water
+> >
+> > exports
+> >
+> >  sorts Water
+> >
+> >  lexical syntax
+> >    ~[\ \t\n]+  -> Water {avoid}
+> >
+> > Module Main:
+> > ------------
+> > module main
+> >
+> > imports water
+> > imports layout
+> >
+> > exports
+> >
+> >  sorts Input Chunk Uppercase
+> >  context-free start-symbols Input
+> >
+> >  lexical syntax
+> >    [A-Z]+ -> Uppercase
+> >
+> >  context-free syntax
+> >    Chunk*    -> Input  {cons("Input")}
+> >    Water     -> Chunk  {cons("Water")}
+> >    Uppercase -> Chunk  {cons("Uppercase")}
+> >
+> >
+> > These are the commands I use to create a parse table:
+> >
+> > pack-sdf -i layout.sdf -o layout.def
+> > pack-sdf -i water.sdf -o water.def
+> > pack-sdf -i main.sdf -o main.def
+> > sdf2table -i main.def -o main.tbl -m main
+> >
+> > To parse a file, I invoke the following command:
+> >
+> > cat testdata3.txt | sglri -p main.tbl
+> >
+> > The file "testdata3.txt" contains the following data:
+> >
+> > Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+> >
+> >
+> > Thank you very much for your assistance.
+> >
+> > Kind regards,
+> > Andr? Gasser
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131130/248c2ffa/attachment.html>
+

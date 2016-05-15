@@ -1,0 +1,549 @@
+From andre.gasser at gmx.ch  Sun Dec  8 13:56:33 2013
+From: andre.gasser at gmx.ch (=?UTF-8?B?QW5kcsOpIEdhc3Nlcg==?=)
+Date: Sun, 08 Dec 2013 13:56:33 +0100
+Subject: [Stratego Users] Island grammar problem
+In-Reply-To: <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+References: <5298AD82.4090307@gmx.ch>
+ <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+Message-ID: <52A46C81.3040505@gmx.ch>
+
+Hi Eelco,
+
+Thank you very much. I will have a look into it.
+
+Best regards,
+Andr?
+
+On 29.11.2013 17:21, Eelco wrote:
+> Hi Andre,
+> 
+> Have a look at our TOPLAS 2012 paper about parse error recovery. The recovery extensions of SDF2/JSGLR may apply to more coarse grained island grammars. But we haven't tried it yet. 
+> 
+> -- Eelco Visser (from my iPhone)
+> http://eelcovisser.org
+> 
+>> On 29 nov. 2013, at 16:06, Andr? Gasser <andre.gasser at gmx.ch> wrote:
+>>
+>> Hi all,
+>>
+>> I am doing some experiments using island grammars and SDF. The grammar I
+>> want to create in the end should recognize C preprocessor directives
+>> such as #ifdef, but since I am new to SDF and the concepts behind island
+>> grammars, I have simplified the case a little bit. Therefore I would
+>> like to create a grammar, which is able to recognize UPPERCASE words in
+>> a textfile.
+>>
+>> Unfortunately I have tried several examples, but often they didn't seem
+>> to work properly, often there were ambiguities in my parse tree/ AST
+>> (amb). As far as I understand, an island grammar should not have
+>> ambiguities, if implemented correctly, right?
+>>
+>> Please find my current grammar definition and commands below. It for
+>> sure contains errors. Could someone perhaps have a look at it and give
+>> me a hint in the right direction?
+>>
+>> Just to make sure, here is the tool suite I am using on linux:
+>>
+>> aterm-2.5 (including patch)
+>> sdf2-bundle-2.4
+>>
+>> I have downloaded them as source files from
+>> http://strategoxt.org/Stratego/StrategoDownload and compiled them on my
+>> machine.
+>>
+>>
+>> This is my grammar:
+>>
+>> Module Layout:
+>> --------------
+>> module layout
+>>
+>> exports
+>>
+>>  lexical syntax
+>>    [\ \t\n]  -> LAYOUT
+>>
+>> Module Water:
+>> -------------
+>> module water
+>>
+>> exports
+>>
+>>  sorts Water
+>>
+>>  lexical syntax
+>>    ~[\ \t\n]+  -> Water {avoid}
+>>
+>> Module Main:
+>> ------------
+>> module main
+>>
+>> imports water
+>> imports layout
+>>
+>> exports
+>>
+>>  sorts Input Chunk Uppercase
+>>  context-free start-symbols Input
+>>
+>>  lexical syntax
+>>    [A-Z]+ -> Uppercase
+>>
+>>  context-free syntax
+>>    Chunk*    -> Input  {cons("Input")}
+>>    Water     -> Chunk  {cons("Water")}
+>>    Uppercase -> Chunk  {cons("Uppercase")}
+>>
+>>
+>> These are the commands I use to create a parse table:
+>>
+>> pack-sdf -i layout.sdf -o layout.def
+>> pack-sdf -i water.sdf -o water.def
+>> pack-sdf -i main.sdf -o main.def
+>> sdf2table -i main.def -o main.tbl -m main
+>>
+>> To parse a file, I invoke the following command:
+>>
+>> cat testdata3.txt | sglri -p main.tbl
+>>
+>> The file "testdata3.txt" contains the following data:
+>>
+>> Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+>>
+>>
+>> Thank you very much for your assistance.
+>>
+>> Kind regards,
+>> Andr? Gasser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+
+-- 
+Web: http://blog.andregasser.net
+Twitter: @andregasser
+
+Key ID: 0xF28EE3F5
+Key Fingerprint: 321C E761 AD70 5A8F 6511 CAC7 216F ED72 F28E E3F5
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: OpenPGP digital signature
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131208/d47231de/attachment.sig>
+
+From andre.gasser at gmx.ch  Sun Dec  8 14:19:01 2013
+From: andre.gasser at gmx.ch (=?UTF-8?B?QW5kcsOpIEdhc3Nlcg==?=)
+Date: Sun, 08 Dec 2013 14:19:01 +0100
+Subject: [Stratego Users] Island grammar problem
+In-Reply-To: <CAPvsMmAi5cJPii=8PoMpxeNTC2_pbDnEz4oCRnkYevmJnSiMUA@mail.gmail.com>
+References: <5298AD82.4090307@gmx.ch>
+ <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+ <CAPvsMmAi5cJPii=8PoMpxeNTC2_pbDnEz4oCRnkYevmJnSiMUA@mail.gmail.com>
+Message-ID: <52A471C5.5000907@gmx.ch>
+
+Hi Jeff,
+
+Thank you very much for your feedback which helped me a lot. I will
+experiment with it further.
+
+The next step I would like to achieve is writing a small C program which
+does the following:
+
+1. Read an SDF grammar and generate the parse table
+2. Use the parse table to parse an input (generating the AST)
+3. Extract information from the generated AST
+
+Do you know, if that is possible? I have seen that the Aterms C library
+[1] offers functions to read an AST in Aterms format, but as far as I
+could see, step 1 is not supported.
+
+Thank you very much.
+Andr?
+
+[1]
+http://homepages.cwi.nl/~daybuild/daily-books/technology/aterm-guide/aterm-guide.html
+
+
+On 30.11.2013 17:13, Jeff Smits wrote:
+> Hi Andr?,
+> 
+> I'm by no means an expert in any of this, but I took a look at what you
+> want to achieve with your grammar and what's ambiguous about it now. I
+> noticed that you don't use follow restrictions anywhere.
+> In my experience with SDF I've always needed a follow restriction on
+> LAYOUT looking like this in your case:
+> 
+> (addition to layout.sdf)
+>   context-free restrictions
+>     LAYOUT? -/- [\ \t\n]
+> 
+> Other follow restriction are appropriate in your grammar because if I
+> understand your goal correctly, you want your lexical syntax to match
+> greedily. Since this isn't standard in SDF, you need the following
+> additions:
+> 
+> (addition to water.sdf)
+>   lexical restrictions
+>     Water -/- ~[\ \t\n]
+> 
+> (addition to main.sdf)
+>   lexical restrictions
+>     Uppercase -/- [A-Z]
+> 
+> With these additions your test file parses in less than a second with
+> only a few ambiguities left. I added a rather conservative follow
+> restriction to Uppercase. If you use a much more relaxed follow
+> restriction like ~[\ \t\n], you can get an unambiguous ast from your
+> test file that looks like this (I used pp-aterm to pretty-print):
+> 
+> Input(
+>   [ Water("Das")
+>   , Water("ist")
+>   , Water("ein")
+>   , Water("Satz")
+>   , Water("mit")
+>   , Uppercase("UPPERCASE")
+>   , Water("und")
+>   , Water("lowercase")
+>   , Water("W?rtern.")
+>   ]
+> )
+> 
+> I suspect that this is what you're after.
+> 
+> PS: If you are instead looking for an AST where any uppercase letter
+> gets its own Uppercase() constructor, then you shouldn't relax the
+> follow restriction beyond [A-Z]. However I don't know how to make your
+> grammar unambiguous in that case. I suspect it has to do with the
+> ambiguity being between matching e.g. Water("Das") by rule Water ->
+> Chunk or Uppercase("D"), Water("as") by some internal rule generated
+> from Chunk* -> Input. 
+> 
+> I hope this helps with you a bit. For in depth information you should
+> follow the advice of experts like Eelco.
+> --
+> Kind regards,
+> Jeff Smits
+> 
+> On Fri, Nov 29, 2013 at 5:21 PM, Eelco <eelcovis at gmail.com
+> <mailto:eelcovis at gmail.com>> wrote:
+> 
+>     Hi Andre,
+> 
+>     Have a look at our TOPLAS 2012 paper about parse error recovery. The
+>     recovery extensions of SDF2/JSGLR may apply to more coarse grained
+>     island grammars. But we haven't tried it yet.
+> 
+>     -- Eelco Visser (from my iPhone)
+>     http://eelcovisser.org
+> 
+>     > On 29 nov. 2013, at 16:06, Andr? Gasser <andre.gasser at gmx.ch
+>     <mailto:andre.gasser at gmx.ch>> wrote:
+>     >
+>     > Hi all,
+>     >
+>     > I am doing some experiments using island grammars and SDF. The
+>     grammar I
+>     > want to create in the end should recognize C preprocessor directives
+>     > such as #ifdef, but since I am new to SDF and the concepts behind
+>     island
+>     > grammars, I have simplified the case a little bit. Therefore I would
+>     > like to create a grammar, which is able to recognize UPPERCASE
+>     words in
+>     > a textfile.
+>     >
+>     > Unfortunately I have tried several examples, but often they didn't
+>     seem
+>     > to work properly, often there were ambiguities in my parse tree/ AST
+>     > (amb). As far as I understand, an island grammar should not have
+>     > ambiguities, if implemented correctly, right?
+>     >
+>     > Please find my current grammar definition and commands below. It for
+>     > sure contains errors. Could someone perhaps have a look at it and give
+>     > me a hint in the right direction?
+>     >
+>     > Just to make sure, here is the tool suite I am using on linux:
+>     >
+>     > aterm-2.5 (including patch)
+>     > sdf2-bundle-2.4
+>     >
+>     > I have downloaded them as source files from
+>     > http://strategoxt.org/Stratego/StrategoDownload and compiled them
+>     on my
+>     > machine.
+>     >
+>     >
+>     > This is my grammar:
+>     >
+>     > Module Layout:
+>     > --------------
+>     > module layout
+>     >
+>     > exports
+>     >
+>     >  lexical syntax
+>     >    [\ \t\n]  -> LAYOUT
+>     >
+>     > Module Water:
+>     > -------------
+>     > module water
+>     >
+>     > exports
+>     >
+>     >  sorts Water
+>     >
+>     >  lexical syntax
+>     >    ~[\ \t\n]+  -> Water {avoid}
+>     >
+>     > Module Main:
+>     > ------------
+>     > module main
+>     >
+>     > imports water
+>     > imports layout
+>     >
+>     > exports
+>     >
+>     >  sorts Input Chunk Uppercase
+>     >  context-free start-symbols Input
+>     >
+>     >  lexical syntax
+>     >    [A-Z]+ -> Uppercase
+>     >
+>     >  context-free syntax
+>     >    Chunk*    -> Input  {cons("Input")}
+>     >    Water     -> Chunk  {cons("Water")}
+>     >    Uppercase -> Chunk  {cons("Uppercase")}
+>     >
+>     >
+>     > These are the commands I use to create a parse table:
+>     >
+>     > pack-sdf -i layout.sdf -o layout.def
+>     > pack-sdf -i water.sdf -o water.def
+>     > pack-sdf -i main.sdf -o main.def
+>     > sdf2table -i main.def -o main.tbl -m main
+>     >
+>     > To parse a file, I invoke the following command:
+>     >
+>     > cat testdata3.txt | sglri -p main.tbl
+>     >
+>     > The file "testdata3.txt" contains the following data:
+>     >
+>     > Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+>     >
+>     >
+>     > Thank you very much for your assistance.
+>     >
+>     > Kind regards,
+>     > Andr? Gasser
+>     >
+>     > _______________________________________________
+>     > Users mailing list
+>     > Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+
+-- 
+Web: http://blog.andregasser.net
+Twitter: @andregasser
+
+Key ID: 0xF28EE3F5
+Key Fingerprint: 321C E761 AD70 5A8F 6511 CAC7 216F ED72 F28E E3F5
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: OpenPGP digital signature
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131208/9df93c54/attachment.sig>
+
+From j.smits-1 at student.tudelft.nl  Fri Dec 13 15:07:55 2013
+From: j.smits-1 at student.tudelft.nl (Jeff Smits)
+Date: Fri, 13 Dec 2013 15:07:55 +0100
+Subject: [Stratego Users] Island grammar problem
+In-Reply-To: <52A46C81.3040505@gmx.ch>
+References: <5298AD82.4090307@gmx.ch>
+ <356DA7FA-0A44-49FD-93B1-C800EC8B4471@gmail.com>
+ <52A46C81.3040505@gmx.ch>
+Message-ID: <CAPvsMmBVk6eG8spRFB7pmSzCVhFK8Jq13FjJW3mEeequt+i=YQ@mail.gmail.com>
+
+You can probably achieve step 1 and 2 by calling the commands you usually
+call in a command-line interface. If you're not worried about
+cross-platform issues, you can use something like
+system()<http://www.gnu.org/software/libc/manual/html_node/Running-a-Command.html>in
+C.
+Depending on how big a task your step 3 is, you may want to consider using
+a more high-level programming language than C.
+
+Good luck with your experiments ;)
+
+(I tried to send this email before but got back a mail delivery error. If
+it still arrived and this is a double post, I apologise)
+
+On Sun, Dec 8, 2013 at 1:56 PM, Andr? Gasser <andre.gasser at gmx.ch> wrote:
+
+> Hi Eelco,
+>
+> Thank you very much. I will have a look into it.
+>
+> Best regards,
+> Andr?
+>
+> On 29.11.2013 17:21, Eelco wrote:
+> > Hi Andre,
+> >
+> > Have a look at our TOPLAS 2012 paper about parse error recovery. The
+> recovery extensions of SDF2/JSGLR may apply to more coarse grained island
+> grammars. But we haven't tried it yet.
+> >
+> > -- Eelco Visser (from my iPhone)
+> > http://eelcovisser.org
+> >
+> >> On 29 nov. 2013, at 16:06, Andr? Gasser <andre.gasser at gmx.ch> wrote:
+> >>
+> >> Hi all,
+> >>
+> >> I am doing some experiments using island grammars and SDF. The grammar I
+> >> want to create in the end should recognize C preprocessor directives
+> >> such as #ifdef, but since I am new to SDF and the concepts behind island
+> >> grammars, I have simplified the case a little bit. Therefore I would
+> >> like to create a grammar, which is able to recognize UPPERCASE words in
+> >> a textfile.
+> >>
+> >> Unfortunately I have tried several examples, but often they didn't seem
+> >> to work properly, often there were ambiguities in my parse tree/ AST
+> >> (amb). As far as I understand, an island grammar should not have
+> >> ambiguities, if implemented correctly, right?
+> >>
+> >> Please find my current grammar definition and commands below. It for
+> >> sure contains errors. Could someone perhaps have a look at it and give
+> >> me a hint in the right direction?
+> >>
+> >> Just to make sure, here is the tool suite I am using on linux:
+> >>
+> >> aterm-2.5 (including patch)
+> >> sdf2-bundle-2.4
+> >>
+> >> I have downloaded them as source files from
+> >> http://strategoxt.org/Stratego/StrategoDownload and compiled them on my
+> >> machine.
+> >>
+> >>
+> >> This is my grammar:
+> >>
+> >> Module Layout:
+> >> --------------
+> >> module layout
+> >>
+> >> exports
+> >>
+> >>  lexical syntax
+> >>    [\ \t\n]  -> LAYOUT
+> >>
+> >> Module Water:
+> >> -------------
+> >> module water
+> >>
+> >> exports
+> >>
+> >>  sorts Water
+> >>
+> >>  lexical syntax
+> >>    ~[\ \t\n]+  -> Water {avoid}
+> >>
+> >> Module Main:
+> >> ------------
+> >> module main
+> >>
+> >> imports water
+> >> imports layout
+> >>
+> >> exports
+> >>
+> >>  sorts Input Chunk Uppercase
+> >>  context-free start-symbols Input
+> >>
+> >>  lexical syntax
+> >>    [A-Z]+ -> Uppercase
+> >>
+> >>  context-free syntax
+> >>    Chunk*    -> Input  {cons("Input")}
+> >>    Water     -> Chunk  {cons("Water")}
+> >>    Uppercase -> Chunk  {cons("Uppercase")}
+> >>
+> >>
+> >> These are the commands I use to create a parse table:
+> >>
+> >> pack-sdf -i layout.sdf -o layout.def
+> >> pack-sdf -i water.sdf -o water.def
+> >> pack-sdf -i main.sdf -o main.def
+> >> sdf2table -i main.def -o main.tbl -m main
+> >>
+> >> To parse a file, I invoke the following command:
+> >>
+> >> cat testdata3.txt | sglri -p main.tbl
+> >>
+> >> The file "testdata3.txt" contains the following data:
+> >>
+> >> Das ist ein Satz mit UPPERCASE und lowercase W?rtern.
+> >>
+> >>
+> >> Thank you very much for your assistance.
+> >>
+> >> Kind regards,
+> >> Andr? Gasser
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> --
+> Web: http://blog.andregasser.net
+> Twitter: @andregasser
+>
+> Key ID: 0xF28EE3F5
+> Key Fingerprint: 321C E761 AD70 5A8F 6511 CAC7 216F ED72 F28E E3F5
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20131213/9dc0c479/attachment.html>
+

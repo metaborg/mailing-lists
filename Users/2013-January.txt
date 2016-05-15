@@ -1,0 +1,1258 @@
+From bgh.list.reader at gmail.com  Tue Jan  1 01:27:47 2013
+From: bgh.list.reader at gmail.com (Brandon Hill)
+Date: Mon, 31 Dec 2012 16:27:47 -0800
+Subject: [Stratego Users] Command-line builds
+Message-ID: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+
+I was wondering if anyone had any guidance on how to use the build.main.xml
+for command-line based Ant builds.  In a project I am working on, not all
+team members use Eclipse, but would they want to include my Spoofax project
+as part of a bigger Ant based build process.  In looking into this, and it
+seems there is some magic that Eclipse uses to amend the classpath to
+include all the needed Spoofax jars.  I'm not immediately seeing where this
+magic occurs.  Just calling ant -lib ~/eclipse/plugins/ -f build.main.xml
+clearly doesn't cut it.  I can piece something together, but I was
+wondering if I was missing a simple way to do this.
+
+Thank you,
+Brandon
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121231/43c7fa23/attachment.html>
+
+From v.vergu at gmail.com  Thu Jan  3 11:12:58 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 3 Jan 2013 12:12:58 +0200
+Subject: [Stratego Users] Command-line builds
+In-Reply-To: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+References: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+Message-ID: <4104805B-B08C-48E2-8D02-A0A0E4936374@gmail.com>
+
+Hi Brandon,
+
+We currently have little experience with building Spoofax projects outside of Eclipse easily. We're planning improvements in this area together with refactoring of the compilers.
+
+Nevertheless, the recipe below should get you closer.
+
+The build.generated.xml file has a target called utils-files. This target needs to be run from Eclipse once, and places required jars locally in the project. The jars are copied from various Spoofax plugins located within the Eclipse installation. To build from command line you would need to include these jars in the classpath. The check-classpath target should succeed if all the required libraries are available.
+
+Additionally you'll need to provide two executables, sdf2table and implodePT. These are shipped with Spoofax and are in ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle */. The build file expects these to be in ${build.strategoxt.sdf}/ path, property which is set in build.main.xml to the ${eclipse.spoofaximp.nativeprefix} location. This location is determined at runtime depending on the platform used. In fact the location is nothing more than a path towards the two executables within the ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle plugin. You can therefore set the ${build.strategoxt.sdf} property manually in build.main.xml to the nativebundle.
+
+I hope this helps, a bit,
+
+Vlad
+
+On Jan 1, 2013, at 2:27 AM, Brandon Hill <bgh.list.reader at gmail.com> wrote:
+
+> I was wondering if anyone had any guidance on how to use the build.main.xml for command-line based Ant builds.  In a project I am working on, not all team members use Eclipse, but would they want to include my Spoofax project as part of a bigger Ant based build process.  In looking into this, and it seems there is some magic that Eclipse uses to amend the classpath to include all the needed Spoofax jars.  I'm not immediately seeing where this magic occurs.  Just calling ant -lib ~/eclipse/plugins/ -f build.main.xml clearly doesn't cut it.  I can piece something together, but I was wondering if I was missing a simple way to do this.  
+> 
+> Thank you,
+> Brandon
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From bgh.list.reader at gmail.com  Thu Jan  3 23:04:00 2013
+From: bgh.list.reader at gmail.com (Brandon Hill)
+Date: Thu, 3 Jan 2013 14:04:00 -0800
+Subject: [Stratego Users] Command-line builds
+In-Reply-To: <4104805B-B08C-48E2-8D02-A0A0E4936374@gmail.com>
+References: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+	<4104805B-B08C-48E2-8D02-A0A0E4936374@gmail.com>
+Message-ID: <CAEdnT78qYCjL4_tY_4G4ssE+KzD61DbcpeJa+rJDzyMbXhCFeA@mail.gmail.com>
+
+That helps, but maybe I am missing a step.  To enable check-classpath to
+see these jars, it needs to have the classpath or classpathref that points
+to them.  How do I generate a build.generated.xml that will then add this
+classpath to the necessary java calls?   There doesn't seem to be a way in
+Ant to globally declare a classpath in build.main.xml that all subsequent
+java invocations use without prompting.
+
+Thanks,
+Brandon
+
+
+On Thu, Jan 3, 2013 at 2:12 AM, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Hi Brandon,
+>
+> We currently have little experience with building Spoofax projects outside
+> of Eclipse easily. We're planning improvements in this area together with
+> refactoring of the compilers.
+>
+> Nevertheless, the recipe below should get you closer.
+>
+> The build.generated.xml file has a target called utils-files. This target
+> needs to be run from Eclipse once, and places required jars locally in the
+> project. The jars are copied from various Spoofax plugins located within
+> the Eclipse installation. To build from command line you would need to
+> include these jars in the classpath. The check-classpath target should
+> succeed if all the required libraries are available.
+>
+> Additionally you'll need to provide two executables, sdf2table and
+> implodePT. These are shipped with Spoofax and are in
+> ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle */. The build file
+> expects these to be in ${build.strategoxt.sdf}/ path, property which is set
+> in build.main.xml to the ${eclipse.spoofaximp.nativeprefix} location. This
+> location is determined at runtime depending on the platform used. In fact
+> the location is nothing more than a path towards the two executables within
+> the ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle plugin. You can
+> therefore set the ${build.strategoxt.sdf} property manually in
+> build.main.xml to the nativebundle.
+>
+> I hope this helps, a bit,
+>
+> Vlad
+>
+> On Jan 1, 2013, at 2:27 AM, Brandon Hill <bgh.list.reader at gmail.com>
+> wrote:
+>
+> > I was wondering if anyone had any guidance on how to use the
+> build.main.xml for command-line based Ant builds.  In a project I am
+> working on, not all team members use Eclipse, but would they want to
+> include my Spoofax project as part of a bigger Ant based build process.  In
+> looking into this, and it seems there is some magic that Eclipse uses to
+> amend the classpath to include all the needed Spoofax jars.  I'm not
+> immediately seeing where this magic occurs.  Just calling ant -lib
+> ~/eclipse/plugins/ -f build.main.xml clearly doesn't cut it.  I can piece
+> something together, but I was wondering if I was missing a simple way to do
+> this.
+> >
+> > Thank you,
+> > Brandon
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130103/e1267781/attachment.html>
+
+From v.vergu at gmail.com  Fri Jan  4 14:05:29 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Fri, 4 Jan 2013 15:05:29 +0200
+Subject: [Stratego Users] Command-line builds
+In-Reply-To: <CAEdnT78qYCjL4_tY_4G4ssE+KzD61DbcpeJa+rJDzyMbXhCFeA@mail.gmail.com>
+References: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+	<4104805B-B08C-48E2-8D02-A0A0E4936374@gmail.com>
+	<CAEdnT78qYCjL4_tY_4G4ssE+KzD61DbcpeJa+rJDzyMbXhCFeA@mail.gmail.com>
+Message-ID: <9D3C18C8-AED8-492F-805B-CEEC071D5CC8@gmail.com>
+
+Hi Brandon,
+
+Indeed the targets in build.generated.xml use the default classpath. I've opened an issue (http://yellowgrass.org/issue/Spoofax/600) for an improvement. For now, you can either invoke ant with the -lib option, or create a target in build.main.xml that calls (using antcall) the building target but passes in your custom classpath as the default. I believe you can pass properties into the callee environment, including an overridden classpath.
+
+Vlad
+
+On Jan 4, 2013, at 12:04 AM, Brandon Hill <bgh.list.reader at gmail.com> wrote:
+
+> That helps, but maybe I am missing a step.  To enable check-classpath to see these jars, it needs to have the classpath or classpathref that points to them.  How do I generate a build.generated.xml that will then add this classpath to the necessary java calls?   There doesn't seem to be a way in Ant to globally declare a classpath in build.main.xml that all subsequent java invocations use without prompting.  
+> 
+> Thanks,
+> Brandon
+> 
+> 
+> On Thu, Jan 3, 2013 at 2:12 AM, Vlad Vergu <v.vergu at gmail.com> wrote:
+> Hi Brandon,
+> 
+> We currently have little experience with building Spoofax projects outside of Eclipse easily. We're planning improvements in this area together with refactoring of the compilers.
+> 
+> Nevertheless, the recipe below should get you closer.
+> 
+> The build.generated.xml file has a target called utils-files. This target needs to be run from Eclipse once, and places required jars locally in the project. The jars are copied from various Spoofax plugins located within the Eclipse installation. To build from command line you would need to include these jars in the classpath. The check-classpath target should succeed if all the required libraries are available.
+> 
+> Additionally you'll need to provide two executables, sdf2table and implodePT. These are shipped with Spoofax and are in ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle */. The build file expects these to be in ${build.strategoxt.sdf}/ path, property which is set in build.main.xml to the ${eclipse.spoofaximp.nativeprefix} location. This location is determined at runtime depending on the platform used. In fact the location is nothing more than a path towards the two executables within the ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle plugin. You can therefore set the ${build.strategoxt.sdf} property manually in build.main.xml to the nativebundle.
+> 
+> I hope this helps, a bit,
+> 
+> Vlad
+> 
+> On Jan 1, 2013, at 2:27 AM, Brandon Hill <bgh.list.reader at gmail.com> wrote:
+> 
+> > I was wondering if anyone had any guidance on how to use the build.main.xml for command-line based Ant builds.  In a project I am working on, not all team members use Eclipse, but would they want to include my Spoofax project as part of a bigger Ant based build process.  In looking into this, and it seems there is some magic that Eclipse uses to amend the classpath to include all the needed Spoofax jars.  I'm not immediately seeing where this magic occurs.  Just calling ant -lib ~/eclipse/plugins/ -f build.main.xml clearly doesn't cut it.  I can piece something together, but I was wondering if I was missing a simple way to do this.
+> >
+> > Thank you,
+> > Brandon
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130104/43efd700/attachment.html>
+
+From hilalks at gmail.com  Mon Jan  7 10:34:10 2013
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 7 Jan 2013 11:34:10 +0200
+Subject: [Stratego Users] Code path
+Message-ID: <CACLuXbK2oEz9H2UKJnm+=VMbwLQ9SxNfJfdFU__nfD=n+cT0mg@mail.gmail.com>
+
+Hi,
+
+Is there a way to give path of generated java code manually? I want to
+generate two or more java files from a test file and I want to name
+them. As far as I know, it only creates one java file with the same name
+but with .java extension.
+
+Best regards,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130107/ddb3900e/attachment-0001.html>
+
+From andre.s.d.vieira at gmail.com  Mon Jan  7 11:51:33 2013
+From: andre.s.d.vieira at gmail.com (Andre Vieira)
+Date: Mon, 7 Jan 2013 11:51:33 +0100
+Subject: [Stratego Users] Command-line builds
+In-Reply-To: <9D3C18C8-AED8-492F-805B-CEEC071D5CC8@gmail.com>
+References: <CAEdnT7_LdGxtUidE5O7ztAnxXXjGQAQYRWiZjzv79GWe=v7gMg@mail.gmail.com>
+	<4104805B-B08C-48E2-8D02-A0A0E4936374@gmail.com>
+	<CAEdnT78qYCjL4_tY_4G4ssE+KzD61DbcpeJa+rJDzyMbXhCFeA@mail.gmail.com>
+	<9D3C18C8-AED8-492F-805B-CEEC071D5CC8@gmail.com>
+Message-ID: <CAGzthGs0gMSB5oUN3f_DR4oVYtnKgTEOfQsG7BJF5MTzQ7+OnA@mail.gmail.com>
+
+I don't use Eclipse either for my project and I use the command line
+Stratego to Java compiler, STRJ. To add my own Jars to the equation I had
+to change the strj-jar tool (that basically jars the compiled code) to
+actually use the runtimecp command.
+
+I could post the fixed strj-jar somewhere if you'd like, not entirely sure
+this would help you tho. I myself dont use ant.
+
+Cheers,
+Andre
+
+
+On Fri, Jan 4, 2013 at 2:05 PM, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Hi Brandon,
+>
+> Indeed the targets in build.generated.xml use the default classpath. I've
+> opened an issue (http://yellowgrass.org/issue/Spoofax/600) for an
+> improvement. For now, you can either invoke ant with the -lib option, or
+> create a target in build.main.xml that calls (using antcall) the building
+> target but passes in your custom classpath as the default. I believe you
+> can pass properties into the callee environment, including an overridden
+> classpath.
+>
+> Vlad
+>
+> On Jan 4, 2013, at 12:04 AM, Brandon Hill <bgh.list.reader at gmail.com>
+> wrote:
+>
+> That helps, but maybe I am missing a step.  To enable check-classpath to
+> see these jars, it needs to have the classpath or classpathref that points
+> to them.  How do I generate a build.generated.xml that will then add this
+> classpath to the necessary java calls?   There doesn't seem to be a way in
+> Ant to globally declare a classpath in build.main.xml that all subsequent
+> java invocations use without prompting.
+>
+> Thanks,
+> Brandon
+>
+>
+> On Thu, Jan 3, 2013 at 2:12 AM, Vlad Vergu <v.vergu at gmail.com> wrote:
+>
+>> Hi Brandon,
+>>
+>> We currently have little experience with building Spoofax projects
+>> outside of Eclipse easily. We're planning improvements in this area
+>> together with refactoring of the compilers.
+>>
+>> Nevertheless, the recipe below should get you closer.
+>>
+>> The build.generated.xml file has a target called utils-files. This target
+>> needs to be run from Eclipse once, and places required jars locally in the
+>> project. The jars are copied from various Spoofax plugins located within
+>> the Eclipse installation. To build from command line you would need to
+>> include these jars in the classpath. The check-classpath target should
+>> succeed if all the required libraries are available.
+>>
+>> Additionally you'll need to provide two executables, sdf2table and
+>> implodePT. These are shipped with Spoofax and are in
+>> ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle */. The build file
+>> expects these to be in ${build.strategoxt.sdf}/ path, property which is set
+>> in build.main.xml to the ${eclipse.spoofaximp.nativeprefix} location. This
+>> location is determined at runtime depending on the platform used. In fact
+>> the location is nothing more than a path towards the two executables within
+>> the ECLIPSE_DIR/plugins/org.strategoxt.imp.nativebundle plugin. You can
+>> therefore set the ${build.strategoxt.sdf} property manually in
+>> build.main.xml to the nativebundle.
+>>
+>> I hope this helps, a bit,
+>>
+>> Vlad
+>>
+>> On Jan 1, 2013, at 2:27 AM, Brandon Hill <bgh.list.reader at gmail.com>
+>> wrote:
+>>
+>> > I was wondering if anyone had any guidance on how to use the
+>> build.main.xml for command-line based Ant builds.  In a project I am
+>> working on, not all team members use Eclipse, but would they want to
+>> include my Spoofax project as part of a bigger Ant based build process.  In
+>> looking into this, and it seems there is some magic that Eclipse uses to
+>> amend the classpath to include all the needed Spoofax jars.  I'm not
+>> immediately seeing where this magic occurs.  Just calling ant -lib
+>> ~/eclipse/plugins/ -f build.main.xml clearly doesn't cut it.  I can piece
+>> something together, but I was wondering if I was missing a simple way to do
+>> this.
+>> >
+>> > Thank you,
+>> > Brandon
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130107/82e2eb7a/attachment.html>
+
+From E.Visser at tudelft.nl  Wed Jan  9 21:46:40 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 9 Jan 2013 21:46:40 +0100
+Subject: [Stratego Users] Spoofax + Stratego/XT roadmap
+Message-ID: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+
+Dear Spoofax / Stratego users,
+
+We are starting a new cycle of development on the Spoofax Language
+Workbench. To start that process we have cleaned up the issue list on
+the YellowGrass issue tracker. In the cleaning operation we have
+closed a number of issues that seemed fixed or irrelevant. The latter
+issues we have tagged aboned:
+
+   http://yellowgrass.org/tag/Spoofax/abandoned
+
+If you disagree with closing any of these issues you can propose to reopen them.
+
+Next we have created a new roadmap covering development in the next
+couple of months:
+
+   http://yellowgrass.org/roadmap/Spoofax
+
+Spoofax release 1.1 will include the version of the new Name Binding
+Language that is the current unstable release (which has been in wide
+use) and a large number of bug fixes and improvements with respect to
+the Spoofax 1.0 release. The NBL version in this release may still
+have some limitations, but we strive to make its syntax as stable as
+possible.
+
+Spoofax release 1.2 will include a new, more complete, implementation
+of NBL-based name resolution. We also aim to integrate Sebastian
+Erdweg's extension of JSGLR with layout sensitive parsing in this
+release.
+
+This release should provide a stable base for users. After this we
+will start attacking a number of larger operations, including
+maintenance and refactoring operations, which should provide the basis
+for further research and innovation.
+
+If there are important issues that you think should be addressed
+please submit them to YellowGrass and/or vote for existing issues on
+YellowGrass. (You can vote for an issue using the thumbs-up icon on an
+issue page.) While we cannot guarantee anything, we will pay more
+attention to issues with lots of votes.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From betsy.pepels at gmail.com  Wed Jan  9 23:16:14 2013
+From: betsy.pepels at gmail.com (Betsy Pepels)
+Date: Wed, 9 Jan 2013 23:16:14 +0100
+Subject: [Stratego Users] Spoofax + Stratego/XT roadmap
+In-Reply-To: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+References: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+Message-ID: <CAH-6SyfzVWYjQxhejwxd316by3+V3jTkXKR6n6fO4RAdoFXNHQ@mail.gmail.com>
+
+Hi Eelco,
+
+Je werkdag mag best eerder dan 21.46 eindigen ;)
+
+Maar verder: dit is goed nieuws. Keep up the good work :)
+
+Ik neem binnenkort contact op over Spoofax dan wel Xtext als onze nieuwe
+language workbench.
+Ik zelf weet het wel, maar er zijn altijd krachten die ondersteuning door
+Itemis belangrijker vinden dan technologie.
+
+Grt Betsy
+
+On 9 January 2013 21:46, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Dear Spoofax / Stratego users,
+>
+> We are starting a new cycle of development on the Spoofax Language
+> Workbench. To start that process we have cleaned up the issue list on
+> the YellowGrass issue tracker. In the cleaning operation we have
+> closed a number of issues that seemed fixed or irrelevant. The latter
+> issues we have tagged aboned:
+>
+>    http://yellowgrass.org/tag/Spoofax/abandoned
+>
+> If you disagree with closing any of these issues you can propose to reopen
+> them.
+>
+> Next we have created a new roadmap covering development in the next
+> couple of months:
+>
+>    http://yellowgrass.org/roadmap/Spoofax
+>
+> Spoofax release 1.1 will include the version of the new Name Binding
+> Language that is the current unstable release (which has been in wide
+> use) and a large number of bug fixes and improvements with respect to
+> the Spoofax 1.0 release. The NBL version in this release may still
+> have some limitations, but we strive to make its syntax as stable as
+> possible.
+>
+> Spoofax release 1.2 will include a new, more complete, implementation
+> of NBL-based name resolution. We also aim to integrate Sebastian
+> Erdweg's extension of JSGLR with layout sensitive parsing in this
+> release.
+>
+> This release should provide a stable base for users. After this we
+> will start attacking a number of larger operations, including
+> maintenance and refactoring operations, which should provide the basis
+> for further research and innovation.
+>
+> If there are important issues that you think should be addressed
+> please submit them to YellowGrass and/or vote for existing issues on
+> YellowGrass. (You can vote for an issue using the thumbs-up icon on an
+> issue page.) While we cannot guarantee anything, we will pay more
+> attention to issues with lots of votes.
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130109/9baa4714/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Jan 14 11:49:03 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 14 Jan 2013 11:49:03 +0100
+Subject: [Stratego Users] Spoofax + Stratego/XT roadmap
+In-Reply-To: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+References: <CAFaCHU1d6OpoCSp7=PAQ+hf+QF6_ms3EK7fRXMugu_HdAPsgFQ@mail.gmail.com>
+Message-ID: <CAFaCHU26sZCtq+22ZQj79uXZO0k2SkSvi_wUircMcxWFiQW0Cg@mail.gmail.com>
+
+Hi,
+
+To follow up on the earlier announcement, we have set the fairly sharp
+date of February 8, 2013 for finishing the Spoofax 1.1 release:
+
+   http://yellowgrass.org/tag/Spoofax/1.1
+
+If you see any issues that you can contribute to, your help would be
+most appreciated; please get in touch to coordinate.
+
+cheers,
+
+-- Eelco
+
+On Wed, Jan 9, 2013 at 9:46 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Dear Spoofax / Stratego users,
+>
+> We are starting a new cycle of development on the Spoofax Language
+> Workbench. To start that process we have cleaned up the issue list on
+> the YellowGrass issue tracker. In the cleaning operation we have
+> closed a number of issues that seemed fixed or irrelevant. The latter
+> issues we have tagged aboned:
+>
+>    http://yellowgrass.org/tag/Spoofax/abandoned
+>
+> If you disagree with closing any of these issues you can propose to reopen them.
+>
+> Next we have created a new roadmap covering development in the next
+> couple of months:
+>
+>    http://yellowgrass.org/roadmap/Spoofax
+>
+> Spoofax release 1.1 will include the version of the new Name Binding
+> Language that is the current unstable release (which has been in wide
+> use) and a large number of bug fixes and improvements with respect to
+> the Spoofax 1.0 release. The NBL version in this release may still
+> have some limitations, but we strive to make its syntax as stable as
+> possible.
+>
+> Spoofax release 1.2 will include a new, more complete, implementation
+> of NBL-based name resolution. We also aim to integrate Sebastian
+> Erdweg's extension of JSGLR with layout sensitive parsing in this
+> release.
+>
+> This release should provide a stable base for users. After this we
+> will start attacking a number of larger operations, including
+> maintenance and refactoring operations, which should provide the basis
+> for further research and innovation.
+>
+> If there are important issues that you think should be addressed
+> please submit them to YellowGrass and/or vote for existing issues on
+> YellowGrass. (You can vote for an issue using the thumbs-up icon on an
+> issue page.) While we cannot guarantee anything, we will pay more
+> attention to issues with lots of votes.
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From E.Visser at tudelft.nl  Tue Jan 15 14:57:03 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 15 Jan 2013 14:57:03 +0100
+Subject: [Stratego Users] YellowGrass Q&A
+Message-ID: <CAFaCHU1R=wRUR2hQ0Yade73mkcMhy1CNnc=1KkeLsS8EL0eMKw@mail.gmail.com>
+
+Dear Spoofax Users,
+
+As of today, YellowGrass, the issue tracker we use for the Spoofax project
+
+   http://yellowgrass.org/project/Spoofax
+
+now also has an experimental (!) Questions and Answers section for projects:
+
+   http://yellowgrass.org/questions/Spoofax
+
+This section can be used to post those issues that are really
+questions about application of Spoofax. The extension is fairly basic
+and will be extended in the future. But it should already be useable.
+
+Looking forward to your questions,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From hilalks at gmail.com  Mon Jan 21 10:56:06 2013
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 21 Jan 2013 11:56:06 +0200
+Subject: [Stratego Users] Global Hash Maps
+Message-ID: <CACLuXbKWy62VvGOjK4pKM6fDEJ4M-hErfB-+e8=NJtj=mfPUQw@mail.gmail.com>
+
+Hello,
+
+Is it possible to define global hash maps?
+
+I define a hash map, using
+            new-hashtable => variableHashMap
+
+but I want to put something to this hashmap from rule a, and get from this
+hashmap from rule b.
+
+When I try to put to hash map, using
+               <hashtable-put(|"Key", "Value")> variableHashMap,
+I get the error "Variable variableHashMap is not defined".
+
+Can you help me about this thing?
+
+Thank you,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130121/555d43a9/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Jan 21 11:19:20 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 21 Jan 2013 11:19:20 +0100
+Subject: [Stratego Users] Global Hash Maps
+In-Reply-To: <CACLuXbKWy62VvGOjK4pKM6fDEJ4M-hErfB-+e8=NJtj=mfPUQw@mail.gmail.com>
+References: <CACLuXbKWy62VvGOjK4pKM6fDEJ4M-hErfB-+e8=NJtj=mfPUQw@mail.gmail.com>
+Message-ID: <CAFaCHU1K-8ApbOuHjhZ5sPCWE+61gjJuX4WOKWZiOoHtVfGtUg@mail.gmail.com>
+
+Hi Hilal,
+
+Is it possible to define global hash maps?
+>
+> I define a hash map, using
+>             new-hashtable => variableHashMap
+>
+> but I want to put something to this hashmap from rule a, and get from this
+> hashmap from rule b.
+>
+> When I try to put to hash map, using
+>                <hashtable-put(|"Key", "Value")> variableHashMap,
+> I get the error "Variable variableHashMap is not defined".
+>
+> Can you help me about this thing?
+>
+
+The idiomatic way for doing this is to use dynamic rules:
+
+   rule-a =
+      ?VarDef(x, t); rules( TypeOf : x -> t )
+
+   rule-b:
+      Var(x) -> Var(x{t})
+       where <TypeOf> x => t
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130121/3ce2dd5a/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Jan 21 11:22:31 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 21 Jan 2013 11:22:31 +0100
+Subject: [Stratego Users] Global Hash Maps
+In-Reply-To: <CAFaCHU1K-8ApbOuHjhZ5sPCWE+61gjJuX4WOKWZiOoHtVfGtUg@mail.gmail.com>
+References: <CACLuXbKWy62VvGOjK4pKM6fDEJ4M-hErfB-+e8=NJtj=mfPUQw@mail.gmail.com>
+	<CAFaCHU1K-8ApbOuHjhZ5sPCWE+61gjJuX4WOKWZiOoHtVfGtUg@mail.gmail.com>
+Message-ID: <CAFaCHU0iUpwiEhrz=ULm8CnOy_io-phQTP53d_3=EUyHNG3+Mw@mail.gmail.com>
+
+Hi Hilal,
+
+I have added your quesion to Spoofax Q&A:
+
+    http://yellowgrass.org/question/Spoofax/6
+
+-- Eelco
+
+
+On Mon, Jan 21, 2013 at 11:19 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Hilal,
+>
+> Is it possible to define global hash maps?
+>>
+>> I define a hash map, using
+>>             new-hashtable => variableHashMap
+>>
+>> but I want to put something to this hashmap from rule a, and get from
+>> this hashmap from rule b.
+>>
+>> When I try to put to hash map, using
+>>                <hashtable-put(|"Key", "Value")> variableHashMap,
+>> I get the error "Variable variableHashMap is not defined".
+>>
+>> Can you help me about this thing?
+>>
+>
+> The idiomatic way for doing this is to use dynamic rules:
+>
+>    rule-a =
+>       ?VarDef(x, t); rules( TypeOf : x -> t )
+>
+>    rule-b:
+>       Var(x) -> Var(x{t})
+>        where <TypeOf> x => t
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130121/93591736/attachment.html>
+
+From andre.s.d.vieira at gmail.com  Mon Jan 21 11:36:06 2013
+From: andre.s.d.vieira at gmail.com (Andre Vieira)
+Date: Mon, 21 Jan 2013 11:36:06 +0100
+Subject: [Stratego Users] Global Hash Maps
+In-Reply-To: <CAFaCHU0iUpwiEhrz=ULm8CnOy_io-phQTP53d_3=EUyHNG3+Mw@mail.gmail.com>
+References: <CACLuXbKWy62VvGOjK4pKM6fDEJ4M-hErfB-+e8=NJtj=mfPUQw@mail.gmail.com>
+	<CAFaCHU1K-8ApbOuHjhZ5sPCWE+61gjJuX4WOKWZiOoHtVfGtUg@mail.gmail.com>
+	<CAFaCHU0iUpwiEhrz=ULm8CnOy_io-phQTP53d_3=EUyHNG3+Mw@mail.gmail.com>
+Message-ID: <CAGzthGsbdgbhzy4O7exczbaiAR8gj87sb25e5J5Mz=xZBecdQw@mail.gmail.com>
+
+Eelco,
+
+Maybe its a good idea to advise people to define only one source for a
+dynamic rule, code wise. I.e. make a strategy that writes to the dynamic
+rule say write-TypeOf= ?(x,t) ; rules(TypeOf: x -> t) and use the
+write-TypeOf strategy instead of rules(TypeOf: x -> t) throughout your
+code. I have experienced a bug when I defined the same dynamic rule in
+different parts of my code and Danny told me he had experienced this before
+too. The bug was that the bagof and the bigbagof always yielded empty lists.
+
+Cheers,
+Andre
+
+
+On Mon, Jan 21, 2013 at 11:22 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Hilal,
+>
+> I have added your quesion to Spoofax Q&A:
+>
+>     http://yellowgrass.org/question/Spoofax/6
+>
+> -- Eelco
+>
+>
+> On Mon, Jan 21, 2013 at 11:19 AM, Eelco Visser <E.Visser at tudelft.nl>wrote:
+>
+>> Hi Hilal,
+>>
+>> Is it possible to define global hash maps?
+>>>
+>>> I define a hash map, using
+>>>             new-hashtable => variableHashMap
+>>>
+>>> but I want to put something to this hashmap from rule a, and get from
+>>> this hashmap from rule b.
+>>>
+>>> When I try to put to hash map, using
+>>>                <hashtable-put(|"Key", "Value")> variableHashMap,
+>>> I get the error "Variable variableHashMap is not defined".
+>>>
+>>> Can you help me about this thing?
+>>>
+>>
+>> The idiomatic way for doing this is to use dynamic rules:
+>>
+>>    rule-a =
+>>       ?VarDef(x, t); rules( TypeOf : x -> t )
+>>
+>>    rule-b:
+>>       Var(x) -> Var(x{t})
+>>        where <TypeOf> x => t
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>>
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130121/e26d88c0/attachment-0001.html>
+
+From emmanuel.castro at laposte.net  Tue Jan 22 09:07:22 2013
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 22 Jan 2013 09:07:22 +0100
+Subject: [Stratego Users] Spoofax dynamic call
+Message-ID: <CAEXdecnMypBi04_MmFbyG1oDzhn5D9-548wU7OKY=LeADCn8qA@mail.gmail.com>
+
+Stratego docs defines Dynamic call, but I could not actually use it in
+Spoofax? Is there a sample somewhere?
+
+My problem: I've got the name of a strategy in a String, and I want to
+apply it on
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130122/578d3a62/attachment.html>
+
+From emmanuel.castro at laposte.net  Tue Jan 22 09:10:00 2013
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 22 Jan 2013 09:10:00 +0100
+Subject: [Stratego Users] ...
+Message-ID: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+
+...oops (mispressed a key).
+
+My problem: I've got the name of a strategy in a String, and I want to
+apply it on some terms.
+
+Note: I tried to submit this question in Yellowgrass Q&A, but it seems that
+there is a bug somwhere in it.
+
+Thank
+
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130122/bd809769/attachment.html>
+
+From andre.s.d.vieira at gmail.com  Tue Jan 22 10:56:54 2013
+From: andre.s.d.vieira at gmail.com (Andre Vieira)
+Date: Tue, 22 Jan 2013 10:56:54 +0100
+Subject: [Stratego Users] ...
+In-Reply-To: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+References: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+Message-ID: <CAGzthGtSB=a60FUOBRiKNBScutqD59Qt_HysNLLG1Sacb6VtZw@mail.gmail.com>
+
+You will not be able to do this through Stratego alone. However, you can
+create an external java strategy, import the HybridInterpreter, load the
+jar the strategy should be in and invoke it using the name in the string.
+
+Hope that helps ya!
+
+Cheers,
+Andre
+
+On Tue, Jan 22, 2013 at 9:10 AM, Emmanuel Castro <
+emmanuel.castro at laposte.net> wrote:
+
+> ...oops (mispressed a key).
+>
+> My problem: I've got the name of a strategy in a String, and I want to
+> apply it on some terms.
+>
+> Note: I tried to submit this question in Yellowgrass Q&A, but it seems
+> that there is a bug somwhere in it.
+>
+> Thank
+>
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130122/82a30c7a/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Jan 22 11:22:34 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 22 Jan 2013 11:22:34 +0100
+Subject: [Stratego Users] ...
+In-Reply-To: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+References: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+Message-ID: <CAFaCHU0Nog0XG16GEgwsbMMv90h8XhDGshUBtw1v+E1YLwFOFw@mail.gmail.com>
+
+Hi Emmanuel,
+
+Note: I tried to submit this question in Yellowgrass Q&A, but it seems that
+> there is a bug somwhere in it.
+>
+
+Sorry about that. Should be fixed now.
+
+http://yellowgrass.org/question/Spoofax/7
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130122/50be01b5/attachment.html>
+
+From emmanuel.castro at laposte.net  Tue Jan 22 14:47:00 2013
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 22 Jan 2013 14:47:00 +0100
+Subject: [Stratego Users] ...
+In-Reply-To: <CAGzthGtSB=a60FUOBRiKNBScutqD59Qt_HysNLLG1Sacb6VtZw@mail.gmail.com>
+References: <CAEXdec=3FvG+Rz0KvTgbHQrEeJqBHD2-8GwRr_W2DXjsf+uK+g@mail.gmail.com>
+	<CAGzthGtSB=a60FUOBRiKNBScutqD59Qt_HysNLLG1Sacb6VtZw@mail.gmail.com>
+Message-ID: <CAEXdec=Y8t+p3JF0Zfn9dro4SO3ZbjhTdQ4f72WWUzWxPVwa=Q@mail.gmail.com>
+
+It is too complex for what I intend to do.
+
+
+2013/1/22 Andre Vieira <andre.s.d.vieira at gmail.com>
+
+> You will not be able to do this through Stratego alone. However, you can
+> create an external java strategy, import the HybridInterpreter, load the
+> jar the strategy should be in and invoke it using the name in the string.
+>
+> Hope that helps ya!
+>
+> Cheers,
+> Andre
+>
+> On Tue, Jan 22, 2013 at 9:10 AM, Emmanuel Castro <
+> emmanuel.castro at laposte.net> wrote:
+>
+>> ...oops (mispressed a key).
+>>
+>> My problem: I've got the name of a strategy in a String, and I want to
+>> apply it on some terms.
+>>
+>> Note: I tried to submit this question in Yellowgrass Q&A, but it seems
+>> that there is a bug somwhere in it.
+>>
+>> Thank
+>>
+>> Manu
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130122/1bf48d8c/attachment.html>
+
+From dobesv at gmail.com  Sat Jan 26 01:34:52 2013
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Fri, 25 Jan 2013 16:34:52 -0800
+Subject: [Stratego Users] Layout-sensitive parsing preview build?
+Message-ID: <CADbG_jb=viw0j6w_GwF41M1qxahteHfm4UdvUYkkR5s8VaY8jw@mail.gmail.com>
+
+Hi there,
+
+I'm eager to use the layout-sensitive parsing and I'm wondering:  does
+anyone has a build or some tips on how to build it myself without waiting
+on the official release?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130125/df8ba494/attachment.html>
+
+From seba at informatik.uni-marburg.de  Sat Jan 26 11:08:04 2013
+From: seba at informatik.uni-marburg.de (Sebastian Erdweg)
+Date: Sat, 26 Jan 2013 11:08:04 +0100
+Subject: [Stratego Users] Layout-sensitive parsing preview build?
+In-Reply-To: <CADbG_jb=viw0j6w_GwF41M1qxahteHfm4UdvUYkkR5s8VaY8jw@mail.gmail.com>
+References: <CADbG_jb=viw0j6w_GwF41M1qxahteHfm4UdvUYkkR5s8VaY8jw@mail.gmail.com>
+Message-ID: <237E1D49-27BC-43E5-B949-DE8F3355A534@informatik.uni-marburg.de>
+
+Hi Dobes,
+
+don't know about a preview build of Spoofax, but you can try out the layout-sensitive parser here: http://parser.sugarj.org
+The source code of the parser is here (https://github.com/seba--/layout-parsing/), which Eclipse can easily build for you.
+
+Cheers,
+Sebastian
+
+On 26.01.2013, at 01:34, Dobes Vandermeer <dobesv at gmail.com> wrote:
+
+> Hi there,
+> 
+> I'm eager to use the layout-sensitive parsing and I'm wondering:  does anyone has a build or some tips on how to build it myself without waiting on the official release?
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-- 
+http://www.stg.tu-darmstadt.de/staff/sebastian_erdweg__
+
+
+
+From hilalks at gmail.com  Sat Jan 26 13:38:04 2013
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Sat, 26 Jan 2013 14:38:04 +0200
+Subject: [Stratego Users] set/get globals
+Message-ID: <CACLuXbLFiW1Q8D2j4yminQcr-nsXZxtuVaJD-f-2Bq9EYGXADw@mail.gmail.com>
+
+Hi,
+
+I had asked a question about defining globals in stratego. As Dobes
+suggested, I defined following:
+
+*set-global = ?(name,value) ; rules(get-global: name -> value)*
+
+And I have following rules
+
+*RuleA(VarName, x)->$[*
+*..*
+*]*
+*where*
+*<set-global> (VarName, "abc")*
+*
+*
+*
+*
+*RuleB(VarName, x, y)->$[*
+*..*
+*]*
+*where*
+*bar := <get-global> VarName*
+
+When RuleB runs, I get the error:
+
+HyFlexGeneration: rewriting failed, trace:
+generate_java_0_0
+to_java_0_0
+to_java_0_0
+map_1_0
+to_java_0_0
+map_1_0
+get_global_0_0
+dr_lookup_rule_0_2
+dr_lookup_rule_1_2
+dr_lookup_rule_1_2
+[ HyFlexGeneration | critical ] Internal error: with clause failed
+unexpectedly in rule 'to-java'
+
+What am I missing?
+Thank you,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130126/3025291c/attachment.html>
+
+From E.Visser at tudelft.nl  Sat Jan 26 14:01:58 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 26 Jan 2013 14:01:58 +0100
+Subject: [Stratego Users] set/get globals
+In-Reply-To: <CACLuXbLFiW1Q8D2j4yminQcr-nsXZxtuVaJD-f-2Bq9EYGXADw@mail.gmail.com>
+References: <CACLuXbLFiW1Q8D2j4yminQcr-nsXZxtuVaJD-f-2Bq9EYGXADw@mail.gmail.com>
+Message-ID: <CAFaCHU2i2E0Zq=YJsgoRNdUFNNi9-k45nt2bk7Lt57VDAOJYrw@mail.gmail.com>
+
+Hi Hilal,
+
+Probably the <get-global> VarName is applied to a VarName for which no
+set-global was done previously. This would lead the get-global to fail. To
+verify, change the call to:
+
+ <get-global <+ debug(!"global not set: ")> VarName
+
+cheers,
+
+-- Eelco
+
+On Sat, Jan 26, 2013 at 1:38 PM, Hilal Kevser <hilalks at gmail.com> wrote:
+
+> Hi,
+>
+> I had asked a question about defining globals in stratego. As Dobes
+> suggested, I defined following:
+>
+> *set-global = ?(name,value) ; rules(get-global: name -> value)*
+>
+> And I have following rules
+>
+> *RuleA(VarName, x)->$[*
+> *..*
+> *]*
+> *where*
+> *<set-global> (VarName, "abc")*
+> *
+> *
+> *
+> *
+> *RuleB(VarName, x, y)->$[*
+> *..*
+> *]*
+> *where*
+> *bar := <get-global> VarName*
+>
+> When RuleB runs, I get the error:
+>
+> HyFlexGeneration: rewriting failed, trace:
+> generate_java_0_0
+> to_java_0_0
+>  to_java_0_0
+> map_1_0
+> to_java_0_0
+>  map_1_0
+> get_global_0_0
+> dr_lookup_rule_0_2
+>  dr_lookup_rule_1_2
+> dr_lookup_rule_1_2
+> [ HyFlexGeneration | critical ] Internal error: with clause failed
+> unexpectedly in rule 'to-java'
+>
+> What am I missing?
+> Thank you,
+> Hilal
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130126/884addc5/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Jan 31 23:05:40 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 31 Jan 2013 23:05:40 +0100
+Subject: [Stratego Users] The Language Designer's Workbench
+Message-ID: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+
+Dear Stratego, Spoofax Community,
+
+It is a great honor that the dutch national science foundation NWO has
+awarded my VICI proposal 'The Language Designer's Workbench' to
+investigate the building blocks of the next generation of language
+workbenches. The essence of the plan is to provide much better support
+to language designers by means of deep analyses of language
+definitions.
+
+While the VICI grant is a personal grant, I feel it is also an award
+for the outstanding work done by theStratego/XT and Spoofax teams over
+the last 15 years, which has provided the foundation for this new
+work. In particular, I would like to thank my PhD students and
+postdocs, in alphabetical order: Anya Helene Bagge,Martin Bravenboer,
+Sander van der Burg, Eelco Dolstra, Danny Groenewegen, Zef Hemel,
+Maartje de Jonge,Merijn de Jonge, Karl Trygve Kalleberg, Lennart Kats,
+Gabri?l Konat, Karina Olmos, Vlad Vergu, Rob Vermaas, Sander Vermolen,
+Guido Wachsmuth.
+
+With a budget of 1,500,000 Euro for five years I can compose a strong
+team of PhD students and postdocs. If you have a strong background in
+language engineering, compiler construction, program analysis, proof
+assistants, and/or mechanized meta-theory, and if you are interested
+in contributing to the future of software language engineering,
+consider applying for a PhD or postdoc position in the project.
+
+cheers,
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+

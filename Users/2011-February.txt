@@ -1,0 +1,2376 @@
+From shannonbay at gmail.com  Thu Feb  3 23:12:33 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Fri, 4 Feb 2011 11:12:33 +1300
+Subject: [Stratego Users] Java primitives in stratego
+Message-ID: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.com>
+
+Hi everybody,
+
+I want to write a java primitive for stratego, or strj I guess.
+Below is an example of the what I want the java code to do.
+How do I use this as a stratego extension?
+
+Cheers,
+
+Shannon
+
+
+
+import org.sat4j.core.VecInt;
+import org.sat4j.minisat.*;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IProblem;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.TimeoutException;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class Sat4JTest {
+    /**
+     * Solve a cnf formula.  The formula is a two-dimensional int array.
+The
+     * first dimension represents clauses, the second dimension represents
+     * terms.  Terms must be non-zero ints, each int representing one
+variable,
+     * the negation of that int indicating a logical negation of the
+variable.
+     * @param formula
+     * @throws ContradictionException
+     * @throws TimeoutException
+     * @return true if the problem is satisfiable
+     */
+    public static boolean solve(int[][] formula) {
+        final int MAXVAR = 1000000;
+
+        ISolver solver = SolverFactory.newLight();
+        solver.setTimeout(10); // 10 second timeout
+        // prepare the solver to accept MAXVAR variables. MANDATORY
+        solver.newVar(MAXVAR);
+        // not mandatory for SAT solving. MANDATORY for MAXSAT solving
+        solver.setExpectedNumberOfClauses(formula.length);
+        // Feed the solver using Dimacs format, using arrays of int
+        // (best option to avoid dependencies on SAT4J IVecInt)
+        try {
+            for (int i=0;i<formula.length;i++) {
+              int [] clause = formula[i];
+
+                solver.addClause(new VecInt(clause));
+            }
+        } catch (ContradictionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } // adapt Array to IVecInt
+        // we are done. Working now on the IProblem interface
+
+        IProblem problem = solver;
+        boolean isSatisfiable = false;
+
+        try {
+            isSatisfiable = problem.isSatisfiable();
+        } catch (TimeoutException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return isSatisfiable;
+    }
+
+    @Test (expected=ContradictionException.class)
+    public void triviallyUnsatisfiable() throws ContradictionException,
+TimeoutException{
+        solve(new int[][]{{1},{-1}});
+    }
+
+    @Test
+    public void triviallySatisfiable() throws ContradictionException,
+TimeoutException{
+        assertTrue( solve(new int[][]{{1},{1}}) );
+    }
+}
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110204/d36da293/attachment.html>
+
+From L.C.L.Kats at tudelft.nl  Fri Feb  4 12:37:01 2011
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Fri, 04 Feb 2011 12:37:01 +0100
+Subject: [Stratego Users] Java primitives in stratego
+In-Reply-To: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.c
+ om>
+References: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.com>
+Message-ID: <20110204113703.9F54B68C67@atlantis.udag.de>
+
+Hi Shannon,
+
+If you create a Spoofax project, it provides an example of how to do this in the editor/java/.../strategies/java_strategy_0_0.java file. This is a Java class that subclasses the Strategy class, and it can be invoked form Stratego if you import it as follows:
+
+  external java-strategy(|) // tell stratego it has 0 strategy and 0 term arguments
+
+  main = java-strategy // now it works
+
+Other than that, there are some boilerplate classes in that same editor/java/.../strategies directory. The important one is the InteropRegisterer that must list all Java strategy. The standard build script compiles all the classes in the directory to a JAR file, and imports the JAR file again when compiling with strj and javac.
+
+For your example you would just need to marshal the Stratego ATerms to a Java int[][]. From an IStrategoTerm, you can determine its type using the getTermType() method, and then cast it to IStrategoList or IStrategoInt for a list or integers. Let me know if you run into any trouble with all this :)
+
+hth,
+
+Lennart
+
+@ 11:12 PM 2/3/2011, Shannon Bay wrote:
+>Hi everybody,
+>
+>I want to write a java primitive for stratego, or strj I guess.
+>Below is an example of the what I want the java code to do.
+>How do I use this as a stratego extension?
+>
+>Cheers,
+>
+>Shannon
+>
+>
+>
+>import org.sat4j.core.VecInt;
+>import org.sat4j.minisat.*;
+>import org.sat4j.specs.ContradictionException;
+>import org.sat4j.specs.IProblem;
+>import org.sat4j.specs.ISolver;
+>import org.sat4j.specs.TimeoutException;
+>
+>import org.junit.Test;
+>import static org.junit.Assert.*;
+>
+>public class Sat4JTest {
+>    /**
+>     * Solve a cnf formula.  The formula is a two-dimensional int array.  The 
+>     * first dimension represents clauses, the second dimension represents 
+>     * terms.  Terms must be non-zero ints, each int representing one variable,
+>     * the negation of that int indicating a logical negation of the variable.  
+>     * @param formula
+>     * @throws ContradictionException 
+>     * @throws TimeoutException
+>     * @return true if the problem is satisfiable 
+>     */
+>    public static boolean solve(int[][] formula) {
+>        final int MAXVAR = 1000000;
+>        
+>        ISolver solver = SolverFactory.newLight();
+>        solver.setTimeout(10); // 10 second timeout
+>        // prepare the solver to accept MAXVAR variables. MANDATORY
+>        solver.newVar(MAXVAR);
+>        // not mandatory for SAT solving. MANDATORY for MAXSAT solving
+>        solver.setExpectedNumberOfClauses(formula.length);
+>        // Feed the solver using Dimacs format, using arrays of int
+>        // (best option to avoid dependencies on SAT4J IVecInt)
+>        try {
+>            for (int i=0;i<formula.length;i++) {
+>              int [] clause = formula[i];
+>              
+>                solver.addClause(new VecInt(clause));
+>            }
+>        } catch (ContradictionException e) {
+>            // TODO Auto-generated catch block
+>            e.printStackTrace();
+>        } // adapt Array to IVecInt
+>        // we are done. Working now on the IProblem interface
+>        
+>        IProblem problem = solver;
+>        boolean isSatisfiable = false;
+>        
+>        try {
+>            isSatisfiable = problem.isSatisfiable();
+>        } catch (TimeoutException e) {
+>            // TODO Auto-generated catch block
+>            e.printStackTrace();
+>        }       
+>        
+>        return isSatisfiable;
+>    }
+>    
+>    @Test (expected=ContradictionException.class)
+>    public void triviallyUnsatisfiable() throws ContradictionException, TimeoutException{
+>        solve(new int[][]{{1},{-1}});
+>    }
+>    
+>    @Test
+>    public void triviallySatisfiable() throws ContradictionException, TimeoutException{
+>        assertTrue( solve(new int[][]{{1},{1}}) );
+>    }
+>}
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From kralikba at msn.com  Sun Feb  6 08:36:34 2011
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Sun, 6 Feb 2011 08:36:34 +0100
+Subject: [Stratego Users] compilation: lt-xtc running infinitely
+Message-ID: <COL112-DS8C71BF98B2EDF8032DE34D0E80@phx.gbl>
+
+Hi there,
+
+ 
+
+I have been trying to build Stratego/XT from sources for an ARM box, but
+compilation hangs. 
+
+Everything goes well until: make[2]: Entering directory
+`/data/root/stratego/strategoxt-1.8pre21764/xtc/src'
+
+After this, the 3rd step runs lt-xtc:
+
+ 
+
+/root/stratego/strategoxt-1.8pre21764/xtc/src/.libs/lt-xtc -r
+/root/stratego/strategoxt-1.8pre21764/BUILDTIME_XTC register -l
+/root/stratego/strategoxt-1.8pre21764/xtc/src -V 1.8 -t xtc-lib.str
+
+ 
+
+lt-xtc eats up 100% of CPU time and does nothing. So far, it has run 6+
+hours, so I think this is not normal.
+
+I have tried many configurations: latest (strategoxt-1.8pre21764) and latest
+stable (0.17) on an ARM/Debian box and on a freshly installed Ubuntu on x64.
+The command line was simply ./configure && make.
+
+ 
+
+What am I doing wrong?
+
+ 
+
+Thanks
+
+Barnab?s Kr?lik
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110206/a4ee5698/attachment.html>
+
+From spider.vz at gmail.com  Sun Feb  6 18:15:53 2011
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Sun, 6 Feb 2011 18:15:53 +0100
+Subject: [Stratego Users] SLE 2011: 2nd Call for papers
+Message-ID: <AANLkTikcZ9XNP-m2pxKbhoUfuGj8BiixtWQX+pzC_HqC@mail.gmail.com>
+
+============================================================
+
+            2nd CALL FOR PAPERS
+
+                    SLE 2011
+4th International Conference on Software Language Engineering
+
+          Braga, Portugal, 3-6 July 2011
+
+          http://planet-sl.org/sle2011/
+
+    Co-located with the 4th Summer School on Generative and
+ Transformational Techniques in Software Engineering
+                    (GTTSE 2011)
+
+=============================================================
+
+IMPORTANT DATES
+
+* 2011:
+Paper submission: April 08 (midnight Apia Samoa time)
+Author notification: May 13
+Paper submission for online proceedings: June 17
+Conference: July 03-06
+Camera-ready copy submission for post-proceedings: August 29
+
+---------------------------------------------------------
+
+Software language engineering is devoted to topics related
+to artificial languages in software engineering. The foremost
+mission of the International Conference on Software Language
+Engineering (SLE) is to encourage and organize communication
+between communities that traditionally have looked at soft-
+ware languages from different, more specialized, and yet
+complementary perspectives. Thus, technologies, methods,
+experiments and case studies from modelware, grammarware,
+and ontologyware serving the objectives of software languages
+are of particular relevance to SLE.
+
+We invite high-quality submissions to all conference tracks.
+Submissions must be PDF files following the Springer LNCS
+style and will be managed using the EasyChair submission system.
+Please check the conference web site for further information.
+
+SLE 2011 will include a Doctoral Symposium that will provide a
+supportive yet questioning setting in which PhD students can
+present their work, including goals, methods, and preliminary
+results. The Symposium aims to provide students with useful
+guidance and feedback on various aspects of their research from
+established researchers and the other student attendees.
+
+Please forward this call to anyone who might be interested.
+
+http://planet-sl.org/sle2011/
+
+---------------------------------------------------------
+PAPER SUBMISSION
+
+Submitted papers must be original work and must not be
+previously published in, currently submitted to, or currently
+in consideration for any journal, book, conference, or
+workshop. Each submitted paper will be reviewed closely by
+at least three members of the program committee. Accepted
+papers will be distributed at the conference via the online
+proceedings as well as published in the post-proceedings,
+which will appear in the Springer Lecture Notes in Computer
+Science (LNCS) series. Authors will have the opportunity
+to revise their accepted paper(s) for the pre- and post-
+proceedings. For an accepted paper to appear in the proceedings,
+at least one author must attend the event and present the work.
+
+---------------------------------------------------------
+RESEARCH PAPERS
+
+Research papers should report a substantial research contribution
+to SLE and/or a successful application of SLE techniques.  We
+solicit high-quality contributions in the area of SLE ranging
+from theoretical and conceptual contributions to tools, techniques,
+and frameworks that support the aforementioned lifecycle activities.
+We list examples of tools, techniques, applications, and problems of
+interest to clarify the types of contributes that we seek:
+
+* Formalisms used in designing and specifying languages and
+tools that analyze such language descriptions
+* Language implementation techniques
+* Program and model transformation tools
+* Composition, integration, and mapping tools for managing
+different aspects of software languages or different
+manifestations of a given language
+* Transformations and transformation languages between
+languages and models
+* Language evolution
+* Approaches to elicitation, specification, or verification
+of requirements for software languages
+* Language development frameworks, methodologies, techniques,
+best practices, and tools for the broader language lifecycle
+covering phases such as analysis, testing , and documentation.
+* Design challenges in SLE
+* Applications of languages including innovative domain-specific
+languages or "little" languages
+
+The preceding list is neither exclusive nor exhaustive.  Visit
+the conference web site for more information about the scope
+and topics of interest of SLE, or contact the program co-chairs
+with questions.
+
+Page limit: 20
+
+---------------------------------------------------------
+SHORT PAPERS
+
+Short papers may describe interesting or thought-provoking
+concepts that are not yet fully developed or evaluated, make
+an initial contribution to challenging research issues in SLE,
+or discuss and analyze controversial issues in the field.
+
+Page limit: 10
+
+---------------------------------------------------------
+TOOL DEMONSTRATION PAPERS
+
+Because of SLE's ample interest in tools, we seek papers
+that present software tools related to the field of SLE.
+These papers will accompany a tool demonstration to be given
+at the conference. The selection criteria include the
+originality of the tool, its innovative aspects, the relevance
+of the tool to SLE, and the maturity of the tool. Submissions
+may also include an appendix (that will not be published)
+containing additional screen-shots and discussion of
+the proposed demonstration.
+
+Page limit: 10
+
+---------------------------------------------------------
+MINI-TUTORIAL PAPERS
+
+SLE is composed of various research areas, such as grammarware,
+modelware, language schemas, and semantic technologies. The
+cross product of attendees at SLE creates a situation where
+the contribution from one session may be difficult to
+understand by those not initiated to the area. To help unite
+the various communities of SLE 2011, we solicit mini-tutorials
+that provide discussion points for mapping common ideas between
+related and complementary research topics of SLE.
+
+A mini-tutorial submission should be between 15 and 20 pages.
+
+---------------------------------------------------------
+DOCTORAL SYMPOSIUM
+
+The Doctoral Symposium provides a forum for both early and late-stage
+PhD students to present their research and get detailed feedback and
+advice from researchers both in and out of their particular research
+area.  Submissions are invited from PhD students working on any topic
+that falls within the SLE conference remit. Submissions consist of two
+parts, a research abstract and a letter of recommendation from the
+student's supervisor.  See the upcoming Doctoral Symposium call for
+submissions for full details. Participants will also be invited to
+present a poster on their research as part of the conference poster
+session.
+
+------------------------------------------------------------
+GENERAL CHAIR
+
+   Jo?o Saraiva
+   Universidade do Minho, Portugal
+   jas at di.uminho.pt
+
+PROGRAM CO-CHAIRS
+
+   Uwe A?mann
+   Dresden University of Technology, Germany
+   uwe.assmann at tu-dresden.de
+
+   Anthony Sloane
+   Macquarie University, Australia
+   anthony.sloane at mq.edu.au
+
+DOCTORAL SYMPOSIUM CHAIRS
+
+   Perdita Stevens
+   University of Edinburgh, UK
+   perdita.stevens at ed.ac.uk
+
+   Eric Van Wyk
+   University of Minnesota, USA
+   evw at cs.umn.edu
+
+PROGRAM COMITTEE
+
+   Adrian Johnstone, University of London, UK
+   Aldo Gangemi, Semantic Technology Laboratory, Italy
+   Alexander Serebrenik, Eindhoven University of Technology, Netherlands
+   Ana Moreira, FCT/UNL, Portugal
+   Anthony Cleve, University of Namur, Belgium
+   Anya Helene Bagge, University of Bergen, Norway
+   Bernhard Rumpe, Aachen University, Germany
+   Bijan Parsia, University of Manchester, UK
+   Brian Malloy, Clemson University, USA
+   Bruno Oliveira, Seoul National University, Korea
+   Chiara Ghidini, FBK-irst, Italy
+   Daniel Oberle, SAP Research, Germany
+   Eelco Visser, Delft University of Technology, Netherlands
+   Eric Van Wyk, University of Minnesota, USA
+   Fernando Pereira, Federal University of Minas Gerais, Brasil
+   Fernando Silva Parreiras, University of Koblenz-Landau, Germany
+   Friedrich Steimann, University of Hannover, Germany
+   G?rel Hedin, Lund University, USA
+   Ivan Kurtev, University of Twente, Netherlands
+   James Power, National University of Ireland, Ireland
+   Jean-Marie Favre, OneTree Technologies, France
+   Jeff Gray, University of Alabama, USA
+   Jeff Z. Pan, University of Aberdeen, UK
+   Jo?o Paulo Fernandes, Univ. of Minho&  Univ. of Porto, Portugal
+   John Boyland, University of Wisconsin-Milwaukee, USA
+   John Grundy, Swinburne University of Technology, Australia
+   Jordi Cabot, University of Toronto, Canada
+   Jurgen Vinju, CWI, Netherlands
+   Laurence Tratt, Middlesex University, UK
+   Marjan Mernik, University of Maribor, Slovenia
+   Mark van den Brand, Eindhoven University of Technology, Netherlands
+   Michael Collard, University of Akron, USA
+   Nicholas Kraft, University of Alabama, USA
+   Paul Klint, CWI, Netherlands
+   Paulo Borba, Federal University of Pernambuco, Brazil
+   Peter Haase, University of Karlsruhe, Germany
+   Peter Mosses, Swansea University, UK
+   Ralf M?ller, Hamburg University of Technology, Germany
+   Silvana Castano, University of Milan, Italy
+   Steffen Zschaler, Lancaster University, UK
+   York Sure, University of Koblenz-Landau, Germany
+   Zhenjiang Hu, National Institute of Informatics, Japan
+
+ORGANIZATION COMMITTEE
+
+   Jos? Creissac Campos (Finance Chair)
+   Universidade do Minho, Portugal
+
+   Jo?o Paulo Fernandes (Web and Publicity co-Chair)
+   Universidade do Porto&  Universidade do Minho, Portugal
+
+   Jurgen Vinju (Workshop Selection Chair)
+   CWI, The Netherlands
+
+   Vadim Zaytsev (Publicity co-Chair)
+   CWI, The Netherlands
+
+
+From rob.vermaas at gmail.com  Mon Feb  7 16:51:50 2011
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Mon, 7 Feb 2011 16:51:50 +0100
+Subject: [Stratego Users] compilation: lt-xtc running infinitely
+In-Reply-To: <COL112-DS8C71BF98B2EDF8032DE34D0E80@phx.gbl>
+References: <AQGPnw6lYWVkMQ/c0cjeKlw7um8VIZRsYvzg>
+	<COL112-DS8C71BF98B2EDF8032DE34D0E80@phx.gbl>
+Message-ID: <AANLkTin9_ANOGMOQ=3Qn_Axeza0-Pg+O7V5kx8Xp7-fd@mail.gmail.com>
+
+Hi,
+
+this looks like you are using aterm without a needed patch. The correct
+aterm version to use is aterm-2.5 with this patch:
+https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch
+as can be found on this page:
+http://strategoxt.org/Stratego/StrategoDownload
+
+hope this helps,
+Rob Vermaas
+
+
+2011/2/6 Kr?lik Barnab?s <kralikba at msn.com>
+
+> Hi there,
+>
+>
+>
+> I have been trying to build Stratego/XT from sources for an ARM box, but
+> compilation hangs.
+>
+> Everything goes well until: make[2]: Entering directory
+> `/data/root/stratego/strategoxt-1.8pre21764/xtc/src'
+>
+> After this, the 3rd step runs lt-xtc:
+>
+>
+>
+> /root/stratego/strategoxt-1.8pre21764/xtc/src/.libs/lt-xtc -r
+> /root/stratego/strategoxt-1.8pre21764/BUILDTIME_XTC register -l
+> /root/stratego/strategoxt-1.8pre21764/xtc/src -V 1.8 -t xtc-lib.str
+>
+>
+>
+> lt-xtc eats up 100% of CPU time and does nothing. So far, it has run 6+
+> hours, so I think this is not normal.
+>
+> I have tried many configurations: latest (strategoxt-1.8pre21764) and
+> latest stable (0.17) on an ARM/Debian box and on a freshly installed Ubuntu
+> on x64. The command line was simply ./configure && make.
+>
+>
+>
+> What am I doing wrong?
+>
+>
+>
+> Thanks
+>
+> Barnab?s Kr?lik
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110207/16c77f02/attachment.html>
+
+From shannonbay at gmail.com  Tue Feb  8 04:43:35 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Tue, 8 Feb 2011 16:43:35 +1300
+Subject: [Stratego Users] Java primitives in stratego
+In-Reply-To: <20110204113703.9F54B68C67@atlantis.udag.de>
+References: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.com>
+	<20110204113703.9F54B68C67@atlantis.udag.de>
+Message-ID: <AANLkTim46q=RyUm8dXzopky1NWHUaBhTtNS2t+Qf1c=d@mail.gmail.com>
+
+Hi Lennart,
+
+That worked fine thanks, I managed to implement a basic java strategy.
+However, I am getting a NoClassDefFoundError on ISolver, part of sat4j.
+I tried copying the sat4j jar into my project's root directory and added the
+following line to build.main.xml:
+
+<property name="externaljar" value="org.sat4j.core_2.2.0.SQUEEZE.jar"/>
+
+Still no luck though.
+
+Cheers,
+
+Shannon
+
+
+On Sat, Feb 5, 2011 at 12:37 AM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Shannon,
+>
+> If you create a Spoofax project, it provides an example of how to do this
+> in the editor/java/.../strategies/java_strategy_0_0.java file. This is a
+> Java class that subclasses the Strategy class, and it can be invoked form
+> Stratego if you import it as follows:
+>
+>  external java-strategy(|) // tell stratego it has 0 strategy and 0 term
+> arguments
+>
+>  main = java-strategy // now it works
+>
+> Other than that, there are some boilerplate classes in that same
+> editor/java/.../strategies directory. The important one is the
+> InteropRegisterer that must list all Java strategy. The standard build
+> script compiles all the classes in the directory to a JAR file, and imports
+> the JAR file again when compiling with strj and javac.
+>
+> For your example you would just need to marshal the Stratego ATerms to a
+> Java int[][]. From an IStrategoTerm, you can determine its type using the
+> getTermType() method, and then cast it to IStrategoList or IStrategoInt for
+> a list or integers. Let me know if you run into any trouble with all this :)
+>
+> hth,
+>
+> Lennart
+>
+> @ 11:12 PM 2/3/2011, Shannon Bay wrote:
+> >Hi everybody,
+> >
+> >I want to write a java primitive for stratego, or strj I guess.
+> >Below is an example of the what I want the java code to do.
+> >How do I use this as a stratego extension?
+> >
+> >Cheers,
+> >
+> >Shannon
+> >
+> >
+> >
+> >import org.sat4j.core.VecInt;
+> >import org.sat4j.minisat.*;
+> >import org.sat4j.specs.ContradictionException;
+> >import org.sat4j.specs.IProblem;
+> >import org.sat4j.specs.ISolver;
+> >import org.sat4j.specs.TimeoutException;
+> >
+> >import org.junit.Test;
+> >import static org.junit.Assert.*;
+> >
+> >public class Sat4JTest {
+> >    /**
+> >     * Solve a cnf formula.  The formula is a two-dimensional int array.
+>  The
+> >     * first dimension represents clauses, the second dimension represents
+> >     * terms.  Terms must be non-zero ints, each int representing one
+> variable,
+> >     * the negation of that int indicating a logical negation of the
+> variable.
+> >     * @param formula
+> >     * @throws ContradictionException
+> >     * @throws TimeoutException
+> >     * @return true if the problem is satisfiable
+> >     */
+> >    public static boolean solve(int[][] formula) {
+> >        final int MAXVAR = 1000000;
+> >
+> >        ISolver solver = SolverFactory.newLight();
+> >        solver.setTimeout(10); // 10 second timeout
+> >        // prepare the solver to accept MAXVAR variables. MANDATORY
+> >        solver.newVar(MAXVAR);
+> >        // not mandatory for SAT solving. MANDATORY for MAXSAT solving
+> >        solver.setExpectedNumberOfClauses(formula.length);
+> >        // Feed the solver using Dimacs format, using arrays of int
+> >        // (best option to avoid dependencies on SAT4J IVecInt)
+> >        try {
+> >            for (int i=0;i<formula.length;i++) {
+> >              int [] clause = formula[i];
+> >
+> >                solver.addClause(new VecInt(clause));
+> >            }
+> >        } catch (ContradictionException e) {
+> >            // TODO Auto-generated catch block
+> >            e.printStackTrace();
+> >        } // adapt Array to IVecInt
+> >        // we are done. Working now on the IProblem interface
+> >
+> >        IProblem problem = solver;
+> >        boolean isSatisfiable = false;
+> >
+> >        try {
+> >            isSatisfiable = problem.isSatisfiable();
+> >        } catch (TimeoutException e) {
+> >            // TODO Auto-generated catch block
+> >            e.printStackTrace();
+> >        }
+> >
+> >        return isSatisfiable;
+> >    }
+> >
+> >    @Test (expected=ContradictionException.class)
+> >    public void triviallyUnsatisfiable() throws ContradictionException,
+> TimeoutException{
+> >        solve(new int[][]{{1},{-1}});
+> >    }
+> >
+> >    @Test
+> >    public void triviallySatisfiable() throws ContradictionException,
+> TimeoutException{
+> >        assertTrue( solve(new int[][]{{1},{1}}) );
+> >    }
+> >}
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110208/baf39c6d/attachment.html>
+
+From L.C.L.Kats at tudelft.nl  Tue Feb  8 12:01:09 2011
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Tue, 08 Feb 2011 12:01:09 +0100
+Subject: [Stratego Users] Java primitives in stratego
+In-Reply-To: <AANLkTim46q=RyUm8dXzopky1NWHUaBhTtNS2t+Qf1c=d@mail.gmail.c
+ om>
+References: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.com>
+	<20110204113703.9F54B68C67@atlantis.udag.de>
+	<AANLkTim46q=RyUm8dXzopky1NWHUaBhTtNS2t+Qf1c=d@mail.gmail.com>
+Message-ID: <20110208110112.6679754801D@athosian.udag.de>
+
+Hi Shannon,
+
+The NoClassDefFoundError indicates that it's not on the runtime classpath. In Spoofax you can add additional jars to the classpath by adding an entry like this to the editor/*-Builders.esv file:
+
+  provider: lib/org.sat4j.core_2.2.0.SQUEEZE.jar
+
+hth,
+
+Lennart
+
+@ 04:43 AM 2/8/2011, U wrote:
+>Hi Lennart,
+>
+>That worked fine thanks, I managed to implement a basic java strategy.
+>However, I am getting a NoClassDefFoundError on ISolver, part of sat4j.
+>I tried copying the sat4j jar into my project's root directory and added the following line to build.main.xml:
+>
+><property name="externaljar" value="org.sat4j.core_2.2.0.SQUEEZE.jar"/>
+>
+>Still no luck though.
+>
+>Cheers,
+>
+>Shannon
+>
+>
+>On Sat, Feb 5, 2011 at 12:37 AM, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+>Hi Shannon,
+>
+>If you create a Spoofax project, it provides an example of how to do this in the editor/java/.../strategies/java_strategy_0_0.java file. This is a Java class that subclasses the Strategy class, and it can be invoked form Stratego if you import it as follows:
+>
+> external java-strategy(|) // tell stratego it has 0 strategy and 0 term arguments
+>
+> main = java-strategy // now it works
+>
+>Other than that, there are some boilerplate classes in that same editor/java/.../strategies directory. The important one is the InteropRegisterer that must list all Java strategy. The standard build script compiles all the classes in the directory to a JAR file, and imports the JAR file again when compiling with strj and javac.
+>
+>For your example you would just need to marshal the Stratego ATerms to a Java int[][]. From an IStrategoTerm, you can determine its type using the getTermType() method, and then cast it to IStrategoList or IStrategoInt for a list or integers. Let me know if you run into any trouble with all this :)
+>
+>hth,
+>
+>Lennart
+>
+>@ 11:12 PM 2/3/2011, Shannon Bay wrote:
+>>Hi everybody,
+>>
+>>I want to write a java primitive for stratego, or strj I guess.
+>>Below is an example of the what I want the java code to do.
+>>How do I use this as a stratego extension?
+>>
+>>Cheers,
+>>
+>>Shannon
+>>
+>>
+>>
+>>import org.sat4j.core.VecInt;
+>>import org.sat4j.minisat.*;
+>>import org.sat4j.specs.ContradictionException;
+>>import org.sat4j.specs.IProblem;
+>>import org.sat4j.specs.ISolver;
+>>import org.sat4j.specs.TimeoutException;
+>>
+>>import org.junit.Test;
+>>import static org.junit.Assert.*;
+>>
+>>public class Sat4JTest {
+>>    /**
+>>     * Solve a cnf formula.  The formula is a two-dimensional int array.  The
+>>     * first dimension represents clauses, the second dimension represents
+>>     * terms.  Terms must be non-zero ints, each int representing one variable,
+>>     * the negation of that int indicating a logical negation of the variable.
+>>     * @param formula
+>>     * @throws ContradictionException
+>>     * @throws TimeoutException
+>>     * @return true if the problem is satisfiable
+>>     */
+>>    public static boolean solve(int[][] formula) {
+>>        final int MAXVAR = 1000000;
+>>
+>>        ISolver solver = SolverFactory.newLight();
+>>        solver.setTimeout(10); // 10 second timeout
+>>        // prepare the solver to accept MAXVAR variables. MANDATORY
+>>        solver.newVar(MAXVAR);
+>>        // not mandatory for SAT solving. MANDATORY for MAXSAT solving
+>>        solver.setExpectedNumberOfClauses(formula.length);
+>>        // Feed the solver using Dimacs format, using arrays of int
+>>        // (best option to avoid dependencies on SAT4J IVecInt)
+>>        try {
+>>            for (int i=0;i<formula.length;i++) {
+>>              int [] clause = formula[i];
+>>
+>>                solver.addClause(new VecInt(clause));
+>>            }
+>>        } catch (ContradictionException e) {
+>>            // TODO Auto-generated catch block
+>>            e.printStackTrace();
+>>        } // adapt Array to IVecInt
+>>        // we are done. Working now on the IProblem interface
+>>
+>>        IProblem problem = solver;
+>>        boolean isSatisfiable = false;
+>>
+>>        try {
+>>            isSatisfiable = problem.isSatisfiable();
+>>        } catch (TimeoutException e) {
+>>            // TODO Auto-generated catch block
+>>            e.printStackTrace();
+>>        }
+>>
+>>        return isSatisfiable;
+>>    }
+>>
+>>    @Test (expected=ContradictionException.class)
+>>    public void triviallyUnsatisfiable() throws ContradictionException, TimeoutException{
+>>        solve(new int[][]{{1},{-1}});
+>>    }
+>>
+>>    @Test
+>>    public void triviallySatisfiable() throws ContradictionException, TimeoutException{
+>>        assertTrue( solve(new int[][]{{1},{1}}) );
+>>    }
+>>}
+>>_______________________________________________
+>>Users mailing list
+>><mailto:Users at strategoxt.org>Users at strategoxt.org
+>>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>_______________________________________________
+>Users mailing list
+><mailto:Users at strategoxt.org>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From shannonbay at gmail.com  Tue Feb  8 22:06:19 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Wed, 9 Feb 2011 10:06:19 +1300
+Subject: [Stratego Users] Java primitives in stratego
+In-Reply-To: <20110208110112.6679754801D@athosian.udag.de>
+References: <AANLkTinFJRUFT8ndvkw4ou-w=r-AakGBJj2s30mg_Jzu@mail.gmail.com>
+	<20110204113703.9F54B68C67@atlantis.udag.de>
+	<AANLkTim46q=RyUm8dXzopky1NWHUaBhTtNS2t+Qf1c=d@mail.gmail.com>
+	<20110208110112.6679754801D@athosian.udag.de>
+Message-ID: <AANLkTikCATzW8CvC-ketteZgg59Sp9y12+b+unB08ZBY@mail.gmail.com>
+
+Brilliant, as always, that worked like a charm.
+
+Cheers
+
+On Wed, Feb 9, 2011 at 12:01 AM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Shannon,
+>
+> The NoClassDefFoundError indicates that it's not on the runtime classpath.
+> In Spoofax you can add additional jars to the classpath by adding an entry
+> like this to the editor/*-Builders.esv file:
+>
+>  provider: lib/org.sat4j.core_2.2.0.SQUEEZE.jar
+>
+> hth,
+>
+> Lennart
+>
+> @ 04:43 AM 2/8/2011, U wrote:
+> >Hi Lennart,
+> >
+> >That worked fine thanks, I managed to implement a basic java strategy.
+> >However, I am getting a NoClassDefFoundError on ISolver, part of sat4j.
+> >I tried copying the sat4j jar into my project's root directory and added
+> the following line to build.main.xml:
+> >
+> ><property name="externaljar" value="org.sat4j.core_2.2.0.SQUEEZE.jar"/>
+> >
+> >Still no luck though.
+> >
+> >Cheers,
+> >
+> >Shannon
+> >
+> >
+> >On Sat, Feb 5, 2011 at 12:37 AM, Lennart Kats <<mailto:
+> L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+> >Hi Shannon,
+> >
+> >If you create a Spoofax project, it provides an example of how to do this
+> in the editor/java/.../strategies/java_strategy_0_0.java file. This is a
+> Java class that subclasses the Strategy class, and it can be invoked form
+> Stratego if you import it as follows:
+> >
+> > external java-strategy(|) // tell stratego it has 0 strategy and 0 term
+> arguments
+> >
+> > main = java-strategy // now it works
+> >
+> >Other than that, there are some boilerplate classes in that same
+> editor/java/.../strategies directory. The important one is the
+> InteropRegisterer that must list all Java strategy. The standard build
+> script compiles all the classes in the directory to a JAR file, and imports
+> the JAR file again when compiling with strj and javac.
+> >
+> >For your example you would just need to marshal the Stratego ATerms to a
+> Java int[][]. From an IStrategoTerm, you can determine its type using the
+> getTermType() method, and then cast it to IStrategoList or IStrategoInt for
+> a list or integers. Let me know if you run into any trouble with all this :)
+> >
+> >hth,
+> >
+> >Lennart
+> >
+> >@ 11:12 PM 2/3/2011, Shannon Bay wrote:
+> >>Hi everybody,
+> >>
+> >>I want to write a java primitive for stratego, or strj I guess.
+> >>Below is an example of the what I want the java code to do.
+> >>How do I use this as a stratego extension?
+> >>
+> >>Cheers,
+> >>
+> >>Shannon
+> >>
+> >>
+> >>
+> >>import org.sat4j.core.VecInt;
+> >>import org.sat4j.minisat.*;
+> >>import org.sat4j.specs.ContradictionException;
+> >>import org.sat4j.specs.IProblem;
+> >>import org.sat4j.specs.ISolver;
+> >>import org.sat4j.specs.TimeoutException;
+> >>
+> >>import org.junit.Test;
+> >>import static org.junit.Assert.*;
+> >>
+> >>public class Sat4JTest {
+> >>    /**
+> >>     * Solve a cnf formula.  The formula is a two-dimensional int array.
+>  The
+> >>     * first dimension represents clauses, the second dimension
+> represents
+> >>     * terms.  Terms must be non-zero ints, each int representing one
+> variable,
+> >>     * the negation of that int indicating a logical negation of the
+> variable.
+> >>     * @param formula
+> >>     * @throws ContradictionException
+> >>     * @throws TimeoutException
+> >>     * @return true if the problem is satisfiable
+> >>     */
+> >>    public static boolean solve(int[][] formula) {
+> >>        final int MAXVAR = 1000000;
+> >>
+> >>        ISolver solver = SolverFactory.newLight();
+> >>        solver.setTimeout(10); // 10 second timeout
+> >>        // prepare the solver to accept MAXVAR variables. MANDATORY
+> >>        solver.newVar(MAXVAR);
+> >>        // not mandatory for SAT solving. MANDATORY for MAXSAT solving
+> >>        solver.setExpectedNumberOfClauses(formula.length);
+> >>        // Feed the solver using Dimacs format, using arrays of int
+> >>        // (best option to avoid dependencies on SAT4J IVecInt)
+> >>        try {
+> >>            for (int i=0;i<formula.length;i++) {
+> >>              int [] clause = formula[i];
+> >>
+> >>                solver.addClause(new VecInt(clause));
+> >>            }
+> >>        } catch (ContradictionException e) {
+> >>            // TODO Auto-generated catch block
+> >>            e.printStackTrace();
+> >>        } // adapt Array to IVecInt
+> >>        // we are done. Working now on the IProblem interface
+> >>
+> >>        IProblem problem = solver;
+> >>        boolean isSatisfiable = false;
+> >>
+> >>        try {
+> >>            isSatisfiable = problem.isSatisfiable();
+> >>        } catch (TimeoutException e) {
+> >>            // TODO Auto-generated catch block
+> >>            e.printStackTrace();
+> >>        }
+> >>
+> >>        return isSatisfiable;
+> >>    }
+> >>
+> >>    @Test (expected=ContradictionException.class)
+> >>    public void triviallyUnsatisfiable() throws ContradictionException,
+> TimeoutException{
+> >>        solve(new int[][]{{1},{-1}});
+> >>    }
+> >>
+> >>    @Test
+> >>    public void triviallySatisfiable() throws ContradictionException,
+> TimeoutException{
+> >>        assertTrue( solve(new int[][]{{1},{1}}) );
+> >>    }
+> >>}
+> >>_______________________________________________
+> >>Users mailing list
+> >><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110209/76bf3f9b/attachment.html>
+
+From kralikba at msn.com  Tue Feb  8 10:03:24 2011
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Tue, 8 Feb 2011 10:03:24 +0100
+Subject: [Stratego Users] compilation: lt-xtc running infinitely
+In-Reply-To: <AANLkTin9_ANOGMOQ=3Qn_Axeza0-Pg+O7V5kx8Xp7-fd@mail.gmail.com>
+References: <AQGPnw6lYWVkMQ/c0cjeKlw7um8VIZRsYvzg>	<COL112-DS8C71BF98B2EDF8032DE34D0E80@phx.gbl>
+	<AANLkTin9_ANOGMOQ=3Qn_Axeza0-Pg+O7V5kx8Xp7-fd@mail.gmail.com>
+Message-ID: <COL112-DS4887CCC07CEF2136D25D2D0EC0@phx.gbl>
+
+Hi,
+
+ 
+
+Thanks for the help. Sorry for bothering, this was an obvious RTFM indeed.
+
+ 
+
+Greetings
+
+Barnab?s Kr?lik
+
+ 
+
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Rob Vermaas
+Sent: Monday, February 07, 2011 4:52 PM
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] compilation: lt-xtc running infinitely
+
+ 
+
+Hi,
+
+this looks like you are using aterm without a needed patch. The correct
+aterm version to use is aterm-2.5 with this patch:
+https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/ate
+rm/max-long.patch 
+as can be found on this page:
+http://strategoxt.org/Stratego/StrategoDownload
+
+hope this helps,
+Rob Vermaas
+
+
+
+2011/2/6 Kr?lik Barnab?s <kralikba at msn.com>
+
+Hi there,
+
+ 
+
+I have been trying to build Stratego/XT from sources for an ARM box, but
+compilation hangs. 
+
+Everything goes well until: make[2]: Entering directory
+`/data/root/stratego/strategoxt-1.8pre21764/xtc/src'
+
+After this, the 3rd step runs lt-xtc:
+
+ 
+
+/root/stratego/strategoxt-1.8pre21764/xtc/src/.libs/lt-xtc -r
+/root/stratego/strategoxt-1.8pre21764/BUILDTIME_XTC register -l
+/root/stratego/strategoxt-1.8pre21764/xtc/src -V 1.8 -t xtc-lib.str
+
+ 
+
+lt-xtc eats up 100% of CPU time and does nothing. So far, it has run 6+
+hours, so I think this is not normal.
+
+I have tried many configurations: latest (strategoxt-1.8pre21764) and latest
+stable (0.17) on an ARM/Debian box and on a freshly installed Ubuntu on x64.
+The command line was simply ./configure && make.
+
+ 
+
+What am I doing wrong?
+
+ 
+
+Thanks
+
+Barnab?s Kr?lik
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110208/f9ed6f1e/attachment.html>
+
+From shannonbay at gmail.com  Thu Feb 10 23:03:05 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Fri, 11 Feb 2011 11:03:05 +1300
+Subject: [Stratego Users] fail from a java-strategy
+Message-ID: <AANLkTim-kCKQ109hSXvOePogegFAXL-TjUgA8kvEHTNC@mail.gmail.com>
+
+Hi guys,
+
+Simple question this time: how do I fail from a java strategy?  Currently I
+use
+
+if(sat) return factory.makeString("true");
+return factory.makeString("false");
+
+and then ?"false" in my stratego program.
+
+Cheers,
+
+Shannon
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110211/acfac630/attachment.html>
+
+From karltk at strategoxt.org  Fri Feb 11 09:07:10 2011
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Fri, 11 Feb 2011 09:07:10 +0100
+Subject: [Stratego Users] fail from a java-strategy
+In-Reply-To: <AANLkTim-kCKQ109hSXvOePogegFAXL-TjUgA8kvEHTNC@mail.gmail.com>
+References: <AANLkTim-kCKQ109hSXvOePogegFAXL-TjUgA8kvEHTNC@mail.gmail.com>
+Message-ID: <AANLkTimbcxpKycuvny1JL3a_h9KG+XNVK4YSD_=jgzZf@mail.gmail.com>
+
+> Simple question this time: how do I fail from a java strategy?
+
+return null
+
+-- Karl T
+
+From E.Visser at tudelft.nl  Fri Feb 11 09:16:51 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 11 Feb 2011 09:16:51 +0100
+Subject: [Stratego Users] CFP: Onward! 2011 Research Papers
+Message-ID: <AANLkTimmpWDpBKi3SaN2iAqZJH6i8o7GVJGQ4hbr-q+z@mail.gmail.com>
+
+==========================================================================
+Call for Papers
+
+Onward! 2011
+
+The ACM Conference on New Ideas in Programming and Reflections on Software
+
+October 22-27, 2011
+Portland, Oregon, USA
+
+Co-located with SPLASH/OOPSLA 2011
+
+Sponsored by ACM SIGPLAN
+==========================================================================
+
+Onward! is more radical, more visionary and more open than other
+conferences to not
+so well-proven but well-argued ideas. We welcome different ways of
+thinking about,
+approaching, and reporting on programming language and software
+engineering research.
+
+Onward! fosters the multidisciplinarity of software development. We
+are interested in
+anything to do with programming and software. Processes, methods,
+languages, art,
+philosophy, biology, economics, communities, politics, ethics, and of course
+applications. Anything!
+
+Sounds good? Do you want to report on and present your new ideas to
+the community and
+get feedback? Do you have a video to show or a story to tell? Do you
+want to bring
+new insights to the community? Or you just want to know more about innovations,
+visions and the future of programming languages and software
+engineering? Then...
+
+Join Onward!, the unique, creative and collaborative environment to discuss and
+investigate challenging problems related to software, its creation and
+nurturing.
+
+Call for Research Papers
+========================
+
+Have you ever wished you could get your ideas out there for comment
+quickly? Have you
+ever wondered where are the conferences or journals that cater to work
+earlier than
+usual in the scientific cycle?
+
+Onward! is that place. At Onward! we are interested in papers that
+describe work with
+potential to change significantly the field. But Onward! isn''t a
+venue for just any
+old thing - an Onward! paper must say something substantially
+original, and must be
+sufficiently important and interesting to deserve the attention of the
+programming
+and software communities. An Onward! paper must present some
+supporting evidence -
+not pure conjecture. Evidence may be in the form of a compelling argument or
+analysis, a sketch of validity, or an initial implementation.
+
+The scope of an Onward! paper can be broad: It can be single idea, a
+new approach, or
+a new paradigm. It can talk about programming languages, programming
+methodologies,
+process, software engineering, collaboration, and anything to do with
+programming and
+creating software.
+
+But above all, an Onward! paper must be well thought out, well-written, and
+compelling in its argument.
+
+Onward! is a fully peer-reviewed conference, and accepted papers will
+appear in the
+SPLASH (formerly OOPSLA) proceedings and the ACM Digital Library.
+
+Theme: Software Language Design
+===============================
+
+Collectively the software language community is exploring the space of language
+designs. It often takes many years for a design (a point in this space) to be
+implemented, applied, and evaluated. Language design is very much an art. Can we
+speed up the process by more systematic methods? What properties do
+good language
+designs have? What are good language design patterns? How can we
+evaluate language
+design at an early stage, i.e. before an implementation exists? Can we
+(and should
+we) incorporate method from human-computer interaction in the
+evaluation of language
+designs? Can we use user-centered design methods to inform language design? Can
+programming language designers learn from the design methodologies of other
+disciplines such as architecture and industrial design? Are there
+principled ways to
+guide and evaluate software language designs other than empirical experiment and
+mathematical proof? What assumptions do we hold so dearly about
+programming languages
+that it would be heresy to question them? This year the Onward! PC
+would welcome in
+particular papers reflecting on the future of software language design.
+
+Author Guidelines
+=================
+
+All papers will be peer-reviewed by members of the Onward 2010 program
+committee and
+additional expert reviewers drawn from relevant research communities.
+
+Submissions will be evaluated on the basis of originality, significance of the
+contribution to the field, technical correctness and presentation. If
+a submitted
+paper may appear to overlap with the previously published or
+simultaneously reviewed
+work, the authors should email the Program Chair directly to explain
+how the new work
+represents a unique and substantial new contribution.  Submission
+
+   1. Electronic submission through easychair is required:
+   http://www.easychair.org/conferences/?conf=onward11
+
+   2. Submissions must be in ACM SIGPLAN 10 point format; templates
+for Microsoft
+   Word and LaTeX are available. For ease of reviewing, please include
+page numbers
+   in your submission. (Note that the SIGPLAN formats differ from the
+standard ACM
+   formats in some respects.)
+
+   3. Papers must be submitted in PDF format. PDF files must be created to allow
+   printing, and must be readily printable on a modestly configured color laser
+   printer.
+
+   4. Final camera-ready essays must also be formatted to conform to SIGPLAN
+   Proceedings requirements. Details will be released once your paper has been
+   accepted.
+
+   5. Papers must be both no longer than 10,000 words and no longer
+than 20 pages
+   when formatted under the SIGPLAN templates. Papers violating these
+guidelines will
+   be rejected without review; contact the essays chairThis e-mail
+address is being
+   protected from spambots. You need JavaScript enabled to view it in
+advance if you
+   have any doubts about the length of your paper.
+
+   6. Onward! and OOPSLA provide a number of other publication venues;
+papers that
+   are not accepted to the research program may, at the discretion of
+the committee,
+   be forwarded for consideration for the OOPSLA research program.
+
+   7. Papers must not have been previously published, and must not be
+concurrently
+   submitted for publication elsewhere (including journals and formal
+proceedings of
+   conferences and workshops). Violation of this policy will result in
+rejection of
+   the essay. See the SIGPLAN republication policy for more details.
+
+Important Dates
+
+    * Abstract submission: April 1, 2011
+    * Paper submission: April 8, 2011
+    * Notification: June 13, 2011
+    * Camera Ready: July 25, 2011
+
+Research Papers Chair
+
+    * Eelco Visser
+
+Research Papers Committee
+
+    * Jean B?zivin
+    * Dave Clarke
+    * Jonathan Edwards
+    * Robert Hirschfeld
+    * Ralf Laemmel
+    * Oscar Nierstrasz
+    * Klaus Ostermann
+    * Alex Payne
+    * Lori Pollock
+    * Jeremy Siek
+    * Tom Van Cutsem
+    * Tao Xie
+
+
+From gvidal at dsic.upv.es  Tue Feb 15 17:38:19 2011
+From: gvidal at dsic.upv.es (German Vidal)
+Date: Tue, 15 Feb 2011 17:38:19 +0100
+Subject: [Stratego Users] LOPSTR 2011 - second call for papers
+References: <F2106298-7325-4C64-9A0F-85590BC90ADA@dsic.upv.es>
+Message-ID: <80AB4C52-411B-4EF7-B206-F41C5B163799@dsic.upv.es>
+
+============================================================
+
+                      Call for papers
+               21th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2011
+
+             http://users.dsic.upv.es/~lopstr11/
+            Odense, Denmark, July 18-20, 2011
+                  (co-located with PPDP 2011)
+
+============================================================
+
+Objectives:
+
+The aim of the LOPSTR series is to stimulate and promote international
+research and collaboration on logic-based program development. LOPSTR
+is open to contributions in logic-based program development in any
+language paradigm. LOPSTR has a reputation for being a lively,
+friendly forum for presenting and discussing work in progress. Formal
+proceedings are produced only after the symposium so that authors can
+incorporate this feedback in the published papers.
+
+The 21st International Symposium on Logic-based Program Synthesis and
+Transformation (LOPSTR 2011) will be held in Odense, Denmark; previous
+symposia were held in Hagenberg, Coimbra, Valencia, Lyngby, Venice,
+London, Verona, Uppsala, Madrid, Paphos, London, Venice, Manchester,
+Leuven, Stockholm, Arnhem, Pisa, Louvain-la-Neuve, and Manchester (you
+might have a look at the contents of past LOPSTR symposia). LOPSTR
+2011 will be co-located with PPDP 2011 (International ACM SIGPLAN
+Symposium on Principles and Practice of Declarative Programming).
+
+
+Topics:
+
+Topics of interest cover all aspects of logic-based program development,
+all stages of the software life cycle, and issues of both programming-
+in-the-small and programming-in-the-large. Papers describing
+applications in these areas are especially welcome. Contributions are
+welcome on all aspects of logic-based program development, including,
+but not limited to:
+
+- specification
+- synthesis
+- verification
+- transformation
+- analysis
+- optimisation
+- specialization
+- partial evaluation
+- inversion
+- composition
+- program/model manipulation
+- certification
+- security
+- transformational techniques in SE
+- applications and tools
+
+Survey papers, that present some aspect of the above topics from a new
+perspective, and application  papers, that describe experience with
+industrial applications, are also welcome. Papers must describe
+original work, be written and presented  in English, and must not
+substantially overlap with papers that have been published or that are
+simultaneously submitted to a journal or a conference with refereed
+proceedings. Work that already appeared in unpublished or informally
+published workshops proceedings may be submitted.
+
+Following past editions, the formal post-conference proceedings will
+be published by Springer in the Lecture Notes in Computer Science (LNCS)
+series.
+
+
+IMPORTANT DATES AND SUBMISSION GUIDELINES:
+
+
+- Paper submission: March 27,  2011
+- Extended abstract submission: April 3, 2011
+- Notification (for pre-proceedings): May 16, 2011
+- Camera-ready (for pre-proceedings): June 12, 2011
+- Symposium: July 18-20, 2011
+
+
+Submissions can either be (short) extended abstracts or (full) papers
+whose length should not exceed 9 and 15 pages (including references),
+respectively. Submissions must be formatted in the Lecture Notes in
+Computer Science style (excluding well-marked appendices not intended
+for publication). Referees are not required to read the appendices,
+and thus papers should be intelligible without them. Short papers may
+describe work-in-progress or tool demonstrations.
+
+Both short and full papers can be accepted for presentation at the
+symposium and will then appear in the LOPSTR 2011
+pre-proceedings. Full papers can also be immediately accepted for
+publication in the formal proceedings to be published by Springer
+in the LNCS series. In addition, after the symposium, the programme
+committee will select further short or full papers presented
+in LOPSTR 2011 to be considered for formal publication. These authors
+will be invited to revise and/or extend their submissions in the
+light of the feedback solicited at the symposium. Then after another
+round of reviewing, these revised papers can also be published in the
+formal proceedings.
+
+
+Program Committee:
+
+Elvira Albert (Complutense University of Madrid, Spain)
+Malgorzata Biernacka (University of Wroclaw , Poland)
+Manuel Carro (Technical University of Madrid, Spain)
+Michael Codish (Ben-Gurion University of the Negev, Israel)
+Danny De Schreye (K.U.Leuven, Belgium)
+Maribel Fernandez (King's College London, UK)
+Raul Gutierrez (University of Illinois at Urbana-Champaign, USA)
+Mark Harman (University College London, UK)
+Frank Huch (C.A.U. Kiel, Germany)
+Michael Leuschel (University of Dusseldorf, Germany)
+Yanhong Annie Liu (State University of New York at Stony Brook, USA)
+Kazutaka Matsuda (Tohoku University, Japan)
+Fred Mesnard (Universite de La Reunion, France)
+Ulrich Neumerkel (Technical University of Wien, Austria)
+Alberto Pettorossi (Universita' di Roma Tor Vergata, Italy)
+Carla Piazza (University of Udine, Italy)
+Peter Schneider-Kamp (University of Southern Denmark, Denmark)
+Hirohisa Seki (Nagoya Institute of Technology, Japan)
+Josep Silva (Technical University of Valencia, Spain)
+German Vidal (Technical University of Valencia, Spain)
+Jurgen Vinju (Centrum Wiskunde & Informatica, The Netherlands)
+Jianjun Zhao (Shanghai Jiao Tong University, Shanghai)
+
+Contacts
+
+Program Chair (contact him for additional information about papers and  
+submissions):
+
+    German Vidal
+    Department of Computer Science (DSIC)
+    Universitat Politecnica de Valencia
+    Valencia, Spain
+    Email: lopstr11 at dsic.upv.es
+
+General Chair
+
+    Peter Schneider-Kamp
+    Dept. of Mathematics and Computer Science
+    University of Southern Denmark
+    Campusvej 55
+    DK-5230 Odense M, Denmark
+    Email: petersk at imada.sdu.dk
+
+
+
+From shannonbay at gmail.com  Wed Feb 16 03:48:07 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Wed, 16 Feb 2011 15:48:07 +1300
+Subject: [Stratego Users] How to control when analysis for marker generation
+	is performed
+Message-ID: <AANLkTimTt+fsUsHiU+8Sgg1hhKstPvL_k+GywuyO6sDX@mail.gmail.com>
+
+Hi everyone,
+
+Thanks to Karl for the swift reply for my last retarded question (how to
+fail from java strategies).
+
+Because my analysis for generating warnings is quite slow, I want to disable
+real-time analysis and have it run on demand (eg from a spoofax builder).  I
+can't find any eclipse or spoofax settings to do this.  I discovered the
+set-markers(|ast) strategy in lib/editor-common.generated.str, and thought I
+could call it from a builder.  Unfortunately this approach hasn't work out
+as I hoped.  This is my current attempt:
+
+in FSMdsl-Builders.esv -
+
+builder                   : "Check transitions (for selection)" =
+check-transitions
+
+And the corresponding strategy:
+
+check-transitions:
+        (selected, position, ast, path, project-path) ->
+            < ?x; where(<set-markers(|ast)>(ast, [], warnings, [])); !x
+>(filename, result)
+        with
+            filename := <guarantee-extension(|"msf")> path;
+            warnings := <collect-all(condition-warning, conc)> ast;
+            result := <map(to-dimacs)><collect-om(trans-to-cnf)>selected
+
+Any suggestions how to generate markers on demand only?
+
+Cheers,
+
+Shannon
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110216/7b1e9929/attachment.html>
+
+From shannonbay at gmail.com  Wed Feb 16 03:58:33 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Wed, 16 Feb 2011 15:58:33 +1300
+Subject: [Stratego Users] How to control when analysis for marker
+	generation is performed
+In-Reply-To: <AANLkTimTt+fsUsHiU+8Sgg1hhKstPvL_k+GywuyO6sDX@mail.gmail.com>
+References: <AANLkTimTt+fsUsHiU+8Sgg1hhKstPvL_k+GywuyO6sDX@mail.gmail.com>
+Message-ID: <AANLkTikpgOhP2g1B-WgN4=vHVpeGFV+U7qigfL5Y3EXU@mail.gmail.com>
+
+Thought I should probably mention what the problem with my current attempt
+actually is - I'm getting this exception:
+
+org.spoofax.interpreter.core.InterpreterException: Wrong term arity when
+calling 'SSL_EXT_set_markers', expected 2 got 1
+    at org.spoofax.interpreter.stratego.PrimT.eval(PrimT.java:54)
+    at org.spoofax.interpreter.stratego.Strategy.evaluate(Strategy.java:96)
+    at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:72)
+    at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:359)
+    at org.strategoxt.imp.runtime.Environment$1.invoke(Environment.java:196)
+    at
+org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:571)
+    at
+org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:310)
+    at
+org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:185)
+    at
+org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:170)
+    at
+org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:157)
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+If term arity refers to the number of term arguments, that's weird because
+the strategy is defined as
+set-markers(|ast) = prim("SSL_EXT_set_markers", ast)
+in editor-common.generated.str
+
+But it does look like the actual primitive strategy does want two term
+arguments, if my guess is correct:
+
+package org.strategoxt.imp.runtime.stratego;
+
+SetMarkersPrimitive extends AbstractPrimitive {
+
+	public SetMarkersPrimitive() {
+		super("SSL_EXT_set_markers", 0, 2);
+	}
+
+On Wed, Feb 16, 2011 at 3:48 PM, Shannon Bay <shannonbay at gmail.com> wrote:
+
+> Hi everyone,
+>
+> Thanks to Karl for the swift reply for my last retarded question (how to
+> fail from java strategies).
+>
+> Because my analysis for generating warnings is quite slow, I want to
+> disable real-time analysis and have it run on demand (eg from a spoofax
+> builder).  I can't find any eclipse or spoofax settings to do this.  I
+> discovered the set-markers(|ast) strategy in
+> lib/editor-common.generated.str, and thought I could call it from a
+> builder.  Unfortunately this approach hasn't work out as I hoped.  This is
+> my current attempt:
+>
+> in FSMdsl-Builders.esv -
+>
+> builder                   : "Check transitions (for selection)" =
+> check-transitions
+>
+> And the corresponding strategy:
+>
+> check-transitions:
+>         (selected, position, ast, path, project-path) ->
+>             < ?x; where(<set-markers(|ast)>(ast, [], warnings, [])); !x
+> >(filename, result)
+>         with
+>             filename := <guarantee-extension(|"msf")> path;
+>             warnings := <collect-all(condition-warning, conc)> ast;
+>             result := <map(to-dimacs)><collect-om(trans-to-cnf)>selected
+>
+> Any suggestions how to generate markers on demand only?
+>
+> Cheers,
+>
+> Shannon
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110216/184d31f4/attachment.html>
+
+From karltk at strategoxt.org  Wed Feb 16 14:05:34 2011
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Wed, 16 Feb 2011 14:05:34 +0100
+Subject: [Stratego Users] How to control when analysis for marker
+ generation is performed
+In-Reply-To: <AANLkTikpgOhP2g1B-WgN4=vHVpeGFV+U7qigfL5Y3EXU@mail.gmail.com>
+References: <AANLkTimTt+fsUsHiU+8Sgg1hhKstPvL_k+GywuyO6sDX@mail.gmail.com>
+	<AANLkTikpgOhP2g1B-WgN4=vHVpeGFV+U7qigfL5Y3EXU@mail.gmail.com>
+Message-ID: <AANLkTimrwUwRvmLSJZU-MaKSxW7FxxKa6vtv4wh+RLHX@mail.gmail.com>
+
+> set-markers(|ast) = prim("SSL_EXT_set_markers", ast)
+
+This is right.
+
+> 	public SetMarkersPrimitive() {
+> 		super("SSL_EXT_set_markers", 0, 2);
+> 	}
+
+This is wrong. The SetMarkersPrimitive#call() method in only needs
+tvars[0], i.e. one term argument.
+
+You could try this as a temporary workaround:
+
+my-set-markers(|ast) = prim("SSL_EXT_set_markers", ast, None())
+
+Cheers,
+
+-- Karl T
+
+From Rolf.Daniel at gmx.net  Tue Feb 22 15:32:19 2011
+From: Rolf.Daniel at gmx.net (Rolf Daniel)
+Date: Tue, 22 Feb 2011 15:32:19 +0100
+Subject: [Stratego Users] Grammar for rules, strategies,...
+Message-ID: <000301cbd29d$50940f10$f1bc2d30$@Daniel@gmx.net>
+
+Hey guys,
+
+ 
+
+I have the following question: 
+
+Is there a grammar that defines the syntax of rules, strategies, etc.?
+
+ 
+
+Thanks for your help.
+
+ 
+
+Best regards, Rolf
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110222/bcf36991/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Feb 22 18:03:05 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 22 Feb 2011 18:03:05 +0100
+Subject: [Stratego Users] Grammar for rules, strategies,...
+In-Reply-To: <-734649336783591994@unknownmsgid>
+References: <-734649336783591994@unknownmsgid>
+Message-ID: <AANLkTinmRs6Y_W-_TD+cihx9o=A2qrRGZsa39gDu4uoh@mail.gmail.com>
+
+Hi Rolf,
+
+You can find the complete syntax definition of Stratego here:
+
+     https://svn.strategoxt.org/repos/StrategoXT/strategoxt/trunk/stratego-front/syn/
+
+cheers,
+
+-- Eelco
+
+On Tue, Feb 22, 2011 at 3:32 PM, Rolf Daniel <Rolf.Daniel at gmx.net> wrote:
+> Hey guys,
+>
+>
+>
+> I have the following question:
+>
+> Is there a grammar that defines the syntax of rules, strategies, etc.?
+>
+>
+>
+> Thanks for your help.
+>
+>
+>
+> Best regards, Rolf
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From sescobar at dsic.upv.es  Wed Feb 23 15:18:57 2011
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Wed, 23 Feb 2011 15:18:57 +0100
+Subject: [Stratego Users] 2nd CfP: WRS 2011 - 10th International Workshop on
+	Reduction Strategies in Rewriting and Programming
+References: <3CEB9622-C52F-4FC9-9E3B-1735AF31C82C@dsic.upv.es>
+Message-ID: <028A2EB4-8AA2-430E-987B-5D93F338A87C@dsic.upv.es>
+
+                      Call for Papers
+
+                         WRS 2011
+              10th International Workshop on 
+      Reduction Strategies in Rewriting and Programming 
+          http://www.dsic.upv.es/workshops/wrs2011
+               29 May 2011, Novi Sad, Serbia
+
+                  An RDP 2011 workshop 
+Federated Conference on Rewriting, Deduction, and Programming
+
+
+This workshop promotes research and collaboration in the area of 
+reduction strategies. It encourages the presentation of new 
+directions, developments, and results as well as surveys and 
+tutorials on existing knowledge in this area. Reduction strategies 
+define which (sub)expression(s) should be selected for evaluation 
+and which rule(s) should be applied. These choices affect fundamental 
+properties of computations such as laziness, strictness, completeness, 
+and efficiency, to name a few. For this reason programming languages 
+such as Elan, Maude, OBJ, Stratego, and TOM allow the explicit 
+definition of the evaluation strategy, whereas languages such as 
+Clean, Curry, and Haskell allow its modification. In addition to 
+strategies in rewriting and programming, WRS also covers the use of 
+strategies and tactics in other areas such as theorem and termination 
+proving. 
+
+Previous editions of the workshop were held in Utrecht (2001), 
+Copenhagen (2002), Valencia (2003), Aachen (2004), Nara (2005), 
+Seattle (2006), Paris (2007), Hagenberg (2008), Brasilia (2009), 
+and Edinburgh (2010); the last one as a joint workshop with the 
+STRATEGIES workshop. Further information can be found at the 
+permanent site for WRS <http://www.dsic.upv.es/~wrs/>.
+
+WRS 2011 is planned to be co-located with RTA 2011 (22nd International 
+Conference on Rewriting Techniques and Applications), as a satellite 
+event of RDP, the Federated Conference on Rewriting, Deduction, and 
+Programming. WRS 2011 will be held at Novi Sad, Serbia on 29 May 2011.
+
+Submissions and Publication: Before the workshop, authors are 
+invited to submit an extended abstract (max. 5 pages) to be 
+formatted in the EasyChair class style through the EasyChair submission site. 
+Accepted abstracts will be presented at the workshop and included in the 
+preliminary proceedings, available at the workshop. After the workshop, 
+authors will be invited to submit a full paper of their presentation 
+(typically a 15-pages paper), which will be refereed and considered 
+for publication in an electronic journal, such as Electronic Proceedings 
+in Theoretical Computer Science. 
+
+Beyond original ideas and recent results not published nor submitted 
+elsewhere, we also invite authors to submit a 5-pages abstract 
+describing relevant work that has been or will be published elsewhere, 
+or work in progress. These submissions will be only considered for 
+presentation at the workshop and inclusion in the preliminary 
+proceedings but not in the final proceedings.
+
+We envisage publication of a special issue of a journal dedicated to WRS
+after the event.
+
+Important Dates:
+# Submission: 20 March 2011
+# Notification: 4 April 2011 (changed)
+# Preliminary proceedings version due: 15 April 2011
+# Workshop: 29 May 2011
+# Submission for final proceedings: 12 September 2011
+# Notification: 7 November 2011
+# Final version: 21 November 2011
+
+Programme Committee:
+# Dan Dougherty, Worcester Polytechnic Institute, USA
+# Santiago Escobar, Universidad Politecnica de Valencia, Spain (chair)
+# Maribel Fernandez, King's College London, UK
+# Juergen Giesl, RWTH Aachen, Germany
+# Bernhard Gramlich, Technische Universit Wien, Austria
+# Helene Kirchner, Centre de Recherche INRIA Bordeaux, France
+# Francisco Javier Lopez Fraguas, Universidad Complutense de Madrid, Spain
+# Salvador Lucas, Universidad Politecnica de Valencia, Spain
+# Aart Middeldorp, University of Innsbruck, Austria
+# Jaco van de Pol, University of Twente, The Netherlands
+# Masahiko Sakai, Nagoya University, Japan
+# Manfred Schmidt-Schauss, Johann Wolfgang Goethe-Universitat, Germany 
+
+For more information, please contact
+Santiago Escobar
+Universidad Politecnica de Valencia, Spain
+Email: sescobar at dsic.upv.es
+
+
+From joachim.haensel at first.fraunhofer.de  Wed Feb 23 23:20:18 2011
+From: joachim.haensel at first.fraunhofer.de (Joachim Haensel)
+Date: Wed, 23 Feb 2011 23:20:18 +0100
+Subject: [Stratego Users] Overview of Stratego Syntax
+Message-ID: <4D658822.2070103@first.fraunhofer.de>
+
+Hello there,
+
+recently I was playing around with the spoofax language workbench.
+It is a lot of fun and I enjoyed the rapid results that i got with 
+little effort.
+I'm really happy that I found spoofax.
+
+There is only one thing I'm really missing:
+An introduction into the term rewriting language. Some functional
+programming lectures from the past helped a lot, but couldn't help
+with every problem (like a simple recursion over a list). Also having a
+look into the libraries weren't helpful enough. I'm sure you have
+something like it, it's just I can not find it.
+
+Thanks in advance,
+
+Jochen
+
+-- 
+Joachim H?nsel
+Eingebettete Systeme (EST)
+
+Tel: +49 30 6392 ? 1912
+Fax: +49 30 6392 ? 1805
+joachim.haensel at first.fraunhofer.de
+
+Fraunhofer-Institut fuer Rechnerarchitektur und Softwaretechnik, FIRST
+Kekulestrasse 7
+12489 Berlin
+Germany
+http://www.first.fraunhofer.de
+
+
+
+From shannonbay at gmail.com  Wed Feb 23 23:27:34 2011
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Thu, 24 Feb 2011 11:27:34 +1300
+Subject: [Stratego Users] Overview of Stratego Syntax
+In-Reply-To: <4D658822.2070103@first.fraunhofer.de>
+References: <4D658822.2070103@first.fraunhofer.de>
+Message-ID: <AANLkTi=32itNcjEURwVvBqFV9Y6BFqQsDkn-Xf1otpPY@mail.gmail.com>
+
+Hi Jochen,
+
+The documentation for Stratego can be found here:
+
+http://strategoxt.org/Stratego/StrategoDocumentation
+
+It may take two or three days to work through that, but well worth it.
+
+Another useful resource is the API:
+
+http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/
+
+I recommend installing the Stratego Shell also.
+
+http://www.program-transformation.org/Stratego/StrategoShell
+
+Cheers,
+
+Shannon
+
+On Thu, Feb 24, 2011 at 11:20 AM, Joachim Haensel <
+joachim.haensel at first.fraunhofer.de> wrote:
+
+> Hello there,
+>
+> recently I was playing around with the spoofax language workbench.
+> It is a lot of fun and I enjoyed the rapid results that i got with little
+> effort.
+> I'm really happy that I found spoofax.
+>
+> There is only one thing I'm really missing:
+> An introduction into the term rewriting language. Some functional
+> programming lectures from the past helped a lot, but couldn't help
+> with every problem (like a simple recursion over a list). Also having a
+> look into the libraries weren't helpful enough. I'm sure you have
+> something like it, it's just I can not find it.
+>
+> Thanks in advance,
+>
+> Jochen
+>
+> --
+> Joachim H?nsel
+> Eingebettete Systeme (EST)
+>
+> Tel: +49 30 6392 ? 1912
+> Fax: +49 30 6392 ? 1805
+> joachim.haensel at first.fraunhofer.de
+>
+> Fraunhofer-Institut fuer Rechnerarchitektur und Softwaretechnik, FIRST
+> Kekulestrasse 7
+> 12489 Berlin
+> Germany
+> http://www.first.fraunhofer.de
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110224/2247c071/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Feb 24 11:09:26 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 24 Feb 2011 11:09:26 +0100
+Subject: [Stratego Users] Onward! 2011: Call for Papers, Essays, Films,
+	and Workshops
+Message-ID: <AANLkTim2pwpzeubtDugF9b4jb=3j0vzMjSGjPfD3ijH3@mail.gmail.com>
+
+Call for Papers, Essays, Films, and Workshops
+
+-=-=-=-=-=
+
+Onward! 2011
+ACM Conference on New Ideas in Programming and Reflections on Software
+October 22-27, 2011
+Hilton Portland & Executive Tower, Portland, Oregon USA
+Sponsored by ACM SIGPLAN
+
+http://onward-conference.org/2011/
+http://onward-conference.org/2011/poster.html
+
+-=-=-=-=-=-=-=-=-=-=
+
+Onward! is more radical, more visionary, and more open than other
+conferences to not (yet) so well-proven but well-argued ideas. We
+welcome different ways of thinking about, approaching, and reporting
+on programming language and software engineering research.
+
+Onward! fosters the multidisciplinarity of software development. We
+are interested in anything to do with programming and software.
+Processes, methods, languages, art, philosophy, biology, economics,
+communities, politics, ethics, and of course applications. Anything!
+
+Sounds good? Do you want to report on and present your new ideas to
+the community and get feedback? Do you have a video to show or a story
+to tell, an essay perhaps? Do you want to bring reflections and new
+insights to the community? Or do you simply want to know more about
+innovations, visions, and the future of programming languages and
+software engineering? Then...
+
+Join Onward!, the unique, creative, and collaborative environment to
+discuss and investigate challenging problems related to software, its
+creation, and nurturing.
+
+-=-=-=-=-=-=-=-=-=-=
+
+Call for Research Papers:
+
+* http://onward-conference.org/2011/papers-call.html
+* Research papers submission: April 8, 2011
+* Research papers notification: June 13, 2011
+* Camera-ready copy of research papers due: July 25, 2011
+
+Call for Essays:
+
+* http://onward-conference.org/2011/essays-call.html
+* Essays submission: April 18, 2011
+* Essays notification: June 13, 2011
+* Camera-ready copy of essays due: July 15, 2011
+
+Call for Films:
+
+* http://onward-conference.org/2011/films-call.html
+* Films submission: May 10, 2011
+* Films notification: July 1, 2011
+* Final Films due: August 1, 2011
+
+Call for Workshops:
+
+* http://onward-conference.org/2011/workshops-call.html
+* Workshop proposal submission: April 8, 2011
+* Workshop proposal notification: May 8, 2011
+* Camera-ready copy of workshop abstracts due: June 8, 2011
+
+-=-=-=-=-=-=-=-=-=-=
+
+Organization
+
+* General Chair: Robert Hirschfeld, Hasso-Plattner-Institut Potsdam, Germany
+* Steering Committee Chair and General Co-Chair: Richard P. Gabriel,
+IBM Research, USA
+* Program Chair: Eelco Visser, Delft University of Technology, The Netherlands
+* Workshops Chair: Pascal Costanza, Vrije Universiteit Brussel, Belgium
+* Essays Chair: David West, New Mexico Highlands University, USA
+* Films Chair: Bernd Bruegge, Technische Universitaet Muenchen, Germany
+* Web Chair: Tobias Pape, Hasso-Plattner-Institute Potsdam, Germany
+* Design: Constanze Langer, Institute of Industrial Design, Hochschule
+Magdeburg-Stendal, Germany
+
+-=-=-=-=-=-=-=-=-=-=
+
+From Rolf.Daniel at gmx.net  Thu Feb 24 17:29:33 2011
+From: Rolf.Daniel at gmx.net (Rolf Daniel)
+Date: Thu, 24 Feb 2011 17:29:33 +0100
+Subject: [Stratego Users] Overview of Stratego Syntax
+In-Reply-To: <4D658822.2070103@first.fraunhofer.de>
+References: <4D658822.2070103@first.fraunhofer.de>
+Message-ID: <000901cbd440$063ede50$12bc9af0$@Daniel@gmx.net>
+
+Hey Jochen,
+
+I had the same problem, but the tutorial was a great help for me:
+
+http://hydra.nixos.org/build/848848/download/1/manual/chunk-chapter/tutorial
+.html
+
+Best regards,
+Rolf
+
+-----Urspr?ngliche Nachricht-----
+Von: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] Im
+Auftrag von Joachim Haensel
+Gesendet: Mittwoch, 23. Februar 2011 23:20
+An: users at strategoxt.org
+Betreff: [Stratego Users] Overview of Stratego Syntax
+
+Hello there,
+
+recently I was playing around with the spoofax language workbench.
+It is a lot of fun and I enjoyed the rapid results that i got with 
+little effort.
+I'm really happy that I found spoofax.
+
+There is only one thing I'm really missing:
+An introduction into the term rewriting language. Some functional
+programming lectures from the past helped a lot, but couldn't help
+with every problem (like a simple recursion over a list). Also having a
+look into the libraries weren't helpful enough. I'm sure you have
+something like it, it's just I can not find it.
+
+Thanks in advance,
+
+Jochen
+
+-- 
+Joachim H?nsel
+Eingebettete Systeme (EST)
+
+Tel: +49 30 6392 ? 1912
+Fax: +49 30 6392 ? 1805
+joachim.haensel at first.fraunhofer.de
+
+Fraunhofer-Institut fuer Rechnerarchitektur und Softwaretechnik, FIRST
+Kekulestrasse 7
+12489 Berlin
+Germany
+http://www.first.fraunhofer.de
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From daniele.gianni at gmail.com  Sun Feb 27 16:21:24 2011
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Sun, 27 Feb 2011 16:21:24 +0100
+Subject: [Stratego Users] ***Extended deadline: March 18*** COMETS 2011 -
+ 2nd International Track on Collaborative Modeling and Simulation - Call for
+ Papers
+In-Reply-To: <AANLkTimMxn3pcJ7rDvzQvsXj1fxnwUGj0V9KXSTKd3Cc@mail.gmail.com>
+References: <AANLkTin98pZPUr8E9E15Pm+s1oFf4UhEhEBdCmfdqSSx@mail.gmail.com>
+	<AANLkTimgnoQptN8=BaL909H_FjnO9psVK_r6uR=L-RPn@mail.gmail.com>
+	<AANLkTim8ijLcebZ3S2XVv4COga3V11soWZ7mF8BA1Hr=@mail.gmail.com>
+	<AANLkTi=hDgvY1jvOqZ8+Z=obLhYuo4xTqrKHuygCxjmZ@mail.gmail.com>
+	<AANLkTimkENPGjNVBzF_5mKJC-Hv6Q3AR4DWuj-bTQG2v@mail.gmail.com>
+	<AANLkTimP8upRid39eTh-msdT3WeLB6bMCcMh4hmei7rY@mail.gmail.com>
+	<AANLkTik4_yq5J_mst8rOSVOanZsJ1Bw5+dzz9TmuNDHi@mail.gmail.com>
+	<AANLkTimz=CrmLqjAme5dbxtyrZM097Pz4psatn9=Pt2m@mail.gmail.com>
+	<AANLkTi=d5-TqWB59aaLnB4ba6mRKqheDMtcRw7Jjuk9k@mail.gmail.com>
+	<AANLkTimXELNkZNKTVzDj9vM245WGqb+Z6CM-zGQNANMK@mail.gmail.com>
+	<AANLkTi=ndPA8AG0O50TBjQZhiJp3pkjxXnF5wWeYcSKd@mail.gmail.com>
+	<AANLkTikwRCxOS6yTe_OAGwi1ZT7CxtQ1BLf9j5=DS-5t@mail.gmail.com>
+	<AANLkTinavShqvcVtqbu1pw02sguDbSavmLe8k5SqPuyU@mail.gmail.com>
+	<AANLkTikZRi7z5TcC4yNdG-btFc_VVBwPDoq0C1aR0ugB@mail.gmail.com>
+	<AANLkTikDjmvpxVYpvHCqvefHQCeJSB=0RghBXzDfXvk=@mail.gmail.com>
+	<AANLkTik_WS_=JSDn+5nPr6g5PJcQFUKNKcwz2Pv=M442@mail.gmail.com>
+	<AANLkTi=gjiiy3bPRF0M3-2FZCzigdCnR6O3PrwUjbqpA@mail.gmail.com>
+	<AANLkTi=iXs7LB44wQBufAVu8yEtzshWcBWWNcdB9OSXx@mail.gmail.com>
+	<AANLkTimCmaiksisM98ie269V4hspKPLz+FVMptoD2fq4@mail.gmail.com>
+	<AANLkTimGF+s60NDZ-RF8kc-JRXUfAdFdo_Mkk0=Dxb1O@mail.gmail.com>
+	<AANLkTi=4jt4i698nGrky9G2YWjxYWrdnPBHPPGm-bFzP@mail.gmail.com>
+	<AANLkTi=XG6LBSfD0cNDCHB1gTJ+Q3yAM_m1G9FFf6pz7@mail.gmail.com>
+	<AANLkTi=m9u=U=vdsoYh7BN+vCC82tBcBCrHOGUo_fWSD@mail.gmail.com>
+	<AANLkTinPoCM_1AW7sHZWmDDJY6=J8rK1PcurOCw97+dL@mail.gmail.com>
+	<AANLkTi=Tft90M-e0CbFHbw+JwqnN3WyX27Xstk3XsU_9@mail.gmail.com>
+	<AANLkTikOJSvJt5VdQHi32VxsYCvYUTf3v=DXu7QBpXgz@mail.gmail.com>
+	<AANLkTimHYpGXTz+qnLH00SjmOkjp8WFC3g+WxNNuMwNM@mail.gmail.com>
+	<AANLkTi=e5HSYFgF+yXQHP34316q4H3kOqmMvsLu+zABA@mail.gmail.com>
+	<AANLkTik5xPqDQ3q1eP_qh_uc3ZGCF8gZHAR9f_p44yOq@mail.gmail.com>
+	<AANLkTim2OgAtoGz769Ed3rOowuR17HwpnW7B4zKTkyC=@mail.gmail.com>
+	<AANLkTikXCD1kHtuUCJqYCS8rJZCJic+UhSFJgpmCu8Xi@mail.gmail.com>
+	<AANLkTikCq6p=0c3q=TKJLNngvY2904ev7d4okx1NAWPg@mail.gmail.com>
+	<AANLkTimMxn3pcJ7rDvzQvsXj1fxnwUGj0V9KXSTKd3Cc@mail.gmail.com>
+Message-ID: <AANLkTi=BMoAPTH4-d3gEdJ4ixJaMurkosqMUK758bbo7@mail.gmail.com>
+
+**** Please note submission deadline extended to March 18, 2011 ****
+
+(apologies if you receive multiple copies of this call for papers)
+
+#################################################################
+                IEEE WETICE 2011
+         2nd International Track on
+     Collaborative Modeling and Simulation
+                CALL FOR PAPERS
+#################################################################
+
+June 27 - June 29, 2011, Paris (France)
+http://www.sel.uniroma2.it/CoMetS11
+
+#################################################################
+# Papers Due: *** March 18, 2011 *** EXTENDED
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and indexed by EI.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices to the design of
+collaborative environments. These environments are continuously
+becoming more complex, and therefore their design requires
+ systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non?exhaustive list of topics of interest includes:
+
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* workflow modelling for collaborative environments and processes
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance evaluation of collaborative networks
+* model-driven simulation engineering
+* domain specific languages for the simulation of collaborative environments
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'11 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format, which is single spaced, two columns, 10 pt
+Times/Roman font. All submissions should be electronic (in PDF)
+and will be peer-reviewed by at least three program committee
+members.
+
+Accepted full papers will be included in the proceedings and
+ published by the IEEE Computer Society Press (IEEE
+approval pending). Please note that at least one author for each
+accepted paper should register to attend WETICE 2011 to have the
+paper published in the proceedings.
+
+Authors may contact the organizers for expression of interests
+and content appropriateness at any time. Papers can be submitted
+in PDF format at the submission site
+(https://www.easychair.org/conferences/?conf=comets2011), which is
+supported by the EasyChair conference management system. Please
+contact the track chairs (comets2011 at easychair.org) if you
+experience problems with the EasyChair Web site.
+
++++++++++++++++
+ Important Dates
++++++++++++++++
+
+* Submission Deadline: March 18, 2011 *** EXTENDED
+* Decision to paper authors: April 11, 2011  *** EXTENDED
+* Final version of accepted papers due to IEEE: April 29, 2011
+* Conference dates: June 27 - June 29, 2011
+
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Andrea D'Ambrogio, University of Roma TorVergata, Italy
+* Daniele Gianni, European Space Agency, The Netherlands
+* Joachim Fuchs, European Space Agency, The Netherlands
+* Giuseppe Iazeolla, University of Roma TorVergata, Italy
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Santiago Balestrini, Georgia Institute of Technology, USA
+* Torsten Bieler, European Space Agency, The Netherlands
+* Olivier Dalle, University of Nice Sophia Antipolis, CNRS & INRIA, France
+* Joseph Giampapa, SEI, Carnegie Mellon University, USA
+* Ralph Huntsinger, Beijng University of Aeronautics and Astronautics,
+China
+ and California State University, USA
+* Axel Lehmann, Universitaet der Bundeswehr Muenchen, Germany
+* Cristiano Leorato, Rhea, The Netherlands
+* Brian Lewis, Vanguard Software Corporation, USA
+* Steve McKeever, University of Oxford, UK
+* David Nickerson, Auckland Bioengineering Institute, NZ
+* Alfred Park, Oak Ridge National Laboratory, USA
+* Wolfgang Prinz, Fraunhofer FIT and RWTH Aachen, Germany
+* Jos? L. Risco-Martin, Universidad Complutense de Madrid, Spain
+* Maarten Sierhuis, NASA and Palo Alto Research Center, USA
+* Hans Vangheluwe, University of Antwerp, Belgium, and McGill University,
+Canada
+* Gabriel Wainer, Carleton University, Canada
+* Quirien Wijnands, European Space Agency, The Netherlands
+* Heming Zhang, Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni (track co-chair)
+Email: daniele.gianni at esa.int
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110227/c5b3fe25/attachment.html>
+

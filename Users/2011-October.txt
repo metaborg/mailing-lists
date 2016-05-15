@@ -1,0 +1,1690 @@
+From headness13 at gmail.com  Mon Oct  3 15:41:12 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Mon, 3 Oct 2011 16:41:12 +0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CA+5itiNci-dVYsAjHyFEMjSodVAHcnVYZ29BwC_J-46VsTYfYg@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+	<CA+5itiNci-dVYsAjHyFEMjSodVAHcnVYZ29BwC_J-46VsTYfYg@mail.gmail.com>
+Message-ID: <CAFu+moLOXBKg=md7_7v6A5atbQECQWWJ+fmRoXkNUpP8YiA8Fw@mail.gmail.com>
+
+Thanks,
+
+Hi Giorgio. I managed to get it to work in the end. I was doing something
+wrong when I was compiling the str files. I had to include the libraries I
+was using. Now I'm using something like this:
+
+`java -jar strategoxt.jar -i xmlify.str -o MyClassName -la stratego-sglr
+--lib -p mypackage` - this to export java files as a library, and
+`java -jar strategoxt.jar -i xmlify.str -o MyClassName -la stratego-sglr -m
+MainStrategy` - to create a command line java project
+
+stratego_lib is included by default. The rest are not, they have to be
+specified at the compilation time.
+
+On Tue, Sep 27, 2011 at 7:56 PM, Giorgio Torres <torres.giorgio at gmail.com>wrote:
+
+> Have you searched in the stratego documentation?
+> I`m new with stratego and spoofax, i`m not exactly the best person to give
+> you any information about it.
+>
+> In my mind, stratego is only for program transformation. As I could notice
+> from the sort of entrance you`d like to use, you`re trying to transform some
+> unstructured data to xml.
+> Check out this link <http://strategoxt.org/Stratego/StrategoDocumentation>,
+> it leads you to the stratego documentation. There you can see some libs for
+> those who want to use the stratego API.
+>
+> I think it`s the closest I get to help you.
+>
+>
+> On Mon, Sep 26, 2011 at 6:49 PM, Radu Mereuta <headness13 at gmail.com>wrote:
+>
+>> I know that I can extract only the parser. The problem was to make it work
+>> from within stratego, as a command line tool. I like the simplicity of it,
+>> it's very convenient. Plus that I can get location information...
+>> I've been playing with strategoxt.jar and I've managed to compile some str
+>> files, but when I call a rule like this:
+>>
+>>     <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>>
+>> in a java file, I get an exception like this:
+>>     Exception in thread "main" org.strategoxt.lang.StrategoException:
+>> Primitive not defined: STRSGLR_open_parse_table
+>>     at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>>     at
+>> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>>
+>> On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres <torres.giorgio at gmail.com
+>> > wrote:
+>>
+>>> I don`t know what are you trying to do, but you can have the parser of
+>>> your
+>>> grammar. I`ve already done this, but programmatically in Java, and
+>>> without the stratego transforms.
+>>>
+>>> To get the sdf parser,
+>>>
+>>> When you write the grammar of your language in the specific sdf file, and
+>>> build the project, so it generates a new editor, it also generates a tbl
+>>> file. I`m not sure, but it is something like <yourlanguagesname>.tbl. It`s
+>>> in some directory of your project, you just have to search it.
+>>>
+>>> Then, in the library files, you can get the JSGLR parser as a jar, that
+>>> you must pass to it that tbl file you just found before.
+>>>
+>>> Now that you have the both, create a new Java project and put the JSGLR
+>>> into your imported libs, and your tbl file as an input. For more
+>>> information, try to search about the use of the JSGLR.
+>>>
+>>> Then, you have your parser, and you can parse any files described in that
+>>> language of yours, just passing them as args in the Java`s main fuction.
+>>>
+>>> I don`t know if there is another easiest way. But i`ve been through this,
+>>> and that`s how i`ve done.
+>>>
+>>> I hope it could help you.
+>>>
+>>>
+>>> On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta <headness13 at gmail.com>wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> I am using Spoofax - the eclipse plugin - for a while. I wrote an SDF
+>>>> grammar and a stratego function to process my input into some XML.
+>>>> Is there any way to export the parser and the stratego files so I can
+>>>> use them in command line?
+>>>> I would like to have something like this: "cat input.txt | some_tool >
+>>>> out.xml".
+>>>>
+>>>> I see that you have incorporated some of the tools from Spoofax in
+>>>> strategoxt.jar, but I couldn't find the proper documentation on how to use
+>>>> it. I could find something on the manual, but I believe this is for an older
+>>>> version of the tool and don't really match up.
+>>>>
+>>>> I could really appreciate it, if you could help me with this, or point
+>>>> me to the right documentation.
+>>>>
+>>>> Thanks,
+>>>> Radu Mereuta - Research Assistant - FII UAIC
+>>>>
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>
+>>>
+>>> --
+>>> Giorgio Pr?mola F. G. Torres
+>>> Graduando em Ci?ncia da Computa??o
+>>> Universidade Federal de Vi?osa
+>>>
+>>> <http://www.facebook.com/giorgio.torres> <http://br.linkedin.com/in/giorgiotorres>
+>>>   <http://www.twitter.com/gprimola> <http://www.flickr.com/photos/bygior>
+>>>   <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Giorgio Pr?mola F. G. Torres
+> Graduando em Ci?ncia da Computa??o
+> Universidade Federal de Vi?osa
+>
+> <http://www.facebook.com/giorgio.torres> <http://br.linkedin.com/in/giorgiotorres>
+>   <http://www.twitter.com/gprimola>  <http://www.flickr.com/photos/bygior>
+>   <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111003/03b63337/attachment-0001.html>
+
+From l.c.l.kats at tudelft.nl  Mon Oct  3 16:23:53 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Mon, 03 Oct 2011 16:23:53 +0200
+Subject: [Stratego Users] [Spoofax development]
+In-Reply-To: <CAEDkRuyWLNTpN+h2JQgXAfxEAiBx1Be99fdKrD3oAZjY6+7auA@mail.gmail.com>
+References: <CAEDkRuyWLNTpN+h2JQgXAfxEAiBx1Be99fdKrD3oAZjY6+7auA@mail.gmail.com>
+Message-ID: <4E89C579.2030103@tudelft.nl>
+
+Hi,
+
+Scott, thanks for asking. We're definitely committed to the project and 
+working hard on new features and improvements :) It's been a while since 
+we did a release, but the next version should come with at least two 
+major features:
+
+- Refactoring support
+- Support for testing language definitions 
+(http://researchr.org/publication/KatsVermaasVisser2011)
+
+Getting everything nice and shiny again has been taking a while though. 
+If you want, you can try the 'unstable' release at 
+http://lclnet.nl/update/unstable. We're also using this version in a 
+course; a new public release should be very soon.
+
+As for the mailing list, it turns out there was a problem with the mail 
+server for at least the past week or so :( A lot of communication also 
+happens outside the mailing list, e.g. on the #spoofax IRC channel.
+
+cheers,
+
+Lennart
+
+From scott.finnie at gmail.com  Mon Oct  3 21:36:00 2011
+From: scott.finnie at gmail.com (Scott Finnie)
+Date: Mon, 03 Oct 2011 20:36:00 +0100
+Subject: [Stratego Users] [Spoofax development]
+In-Reply-To: <4E89C579.2030103@tudelft.nl>
+References: <CAEDkRuyWLNTpN+h2JQgXAfxEAiBx1Be99fdKrD3oAZjY6+7auA@mail.gmail.com>
+	<4E89C579.2030103@tudelft.nl>
+Message-ID: <4E8A0EA0.2070104@gmail.com>
+
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111003/9bf58d77/attachment.html>
+
+From headness13 at gmail.com  Tue Oct  4 00:20:30 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 4 Oct 2011 01:20:30 +0300
+Subject: [Stratego Users] How to parse Javadoc style comments?
+Message-ID: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+
+Hi,
+
+I'm having some difficulties writing an SDF grammar that can parse comments
+in the stile of Javadoc.
+I want to include latex comments in my language with the help of /*@ */ and
+//@.
+My current solution is something like this:
+
+"/*" (~[\@\*] | CommentChar) (~[\*] | CommentChar)* "*/" -> LAYOUT  %%
+normal layout does not start with @
+"/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+
+The problem is that I get a lot of ambiguities because I have to comment the
+follow restrictions for layout to allow the latex comments to parse:
+
+context-free restrictions
+%% Ensure greedy matching for comments
+LAYOUT? -/- [\ \t\n\r]
+ %%LAYOUT? -/- [\/].[\/]
+ %%LAYOUT? -/- [\/].[\*]
+
+My question is, is there any example of how to do this? Did anyone have this
+problem?
+
+Thanks,
+Radu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111004/ed815f31/attachment.html>
+
+From Jurgen.Vinju at cwi.nl  Tue Oct  4 08:08:10 2011
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Tue, 4 Oct 2011 08:08:10 +0200
+Subject: [Stratego Users] How to parse Javadoc style comments?
+In-Reply-To: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+References: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+Message-ID: <CAEy4yM7kP=miE2rE6Dk2ts5FqbHsGYGBAOK7E0UOP9XM8fqxhQ@mail.gmail.com>
+
+Hi Radu,
+
+I don't really see why you would need extra rules to recognize the @
+sign... but you probably have a good reason ;-) I'll assume that you
+do need it.
+
+The grammar becomes ambiguous between the two alternatives of the
+comment syntax. You might solve that by adding a follow restriction
+fix it:
+
+"/*" (~[\*] | CommentChar)* "*/"     -> LAYOUT
+"/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+
+lexical restrictions
+  "/*" -/- [\@]
+
+But not that if any comment starts with /*@ in the source code in a
+position that you did not cater for by included the LATEX
+non-terminal, you get a parse error.
+
+You need also to re-add the follow restrictions that you removed, but
+change them a bit:
+
+ LAYOUT? -/- [\/].[\/].~[\@]
+ LAYOUT? -/- [\/].[\*].~[\@]
+
+See, it will still implement "first match" for LAYOUT?, which is
+important for ambiguity, but it will not filter if there is still a @
+after the * such that the LATEX non-terminal can be recognized.
+
+This should get you toward a solution, but there may be some glitches
+that you need to solve.
+
+Cheers,
+
+Jurgen
+
+On Tue, Oct 4, 2011 at 12:21 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+> Hi,
+>
+> I'm having some difficulties writing an SDF grammar that can parse comments
+> in the stile of Javadoc.
+> I want to include latex comments in my language with the help of /*@ */ and
+> //@.
+> My current solution is something like this:
+> "/*" (~[\@\*] | CommentChar) (~[\*] | CommentChar)* "*/" -> LAYOUT ?%%
+> normal layout does not start with @
+> "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+> The problem is that I get a lot of ambiguities because I have to comment the
+> follow restrictions for layout to allow the latex comments to parse:
+> context-free restrictions
+> %% Ensure greedy matching for comments
+> LAYOUT? -/- [\ \t\n\r]
+> ?%%LAYOUT? -/- [\/].[\/]
+> ?%%LAYOUT? -/- [\/].[\*]
+> My question is, is there any example of how to do this? Did anyone have this
+> problem?
+> Thanks,
+> Radu
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SEN1
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+? www: http://jurgen.vinju.org,
+http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+
+
+From headness13 at gmail.com  Tue Oct  4 11:01:21 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 4 Oct 2011 12:01:21 +0300
+Subject: [Stratego Users] How to parse Javadoc style comments?
+In-Reply-To: <CAEy4yM7kP=miE2rE6Dk2ts5FqbHsGYGBAOK7E0UOP9XM8fqxhQ@mail.gmail.com>
+References: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+	<CAEy4yM7kP=miE2rE6Dk2ts5FqbHsGYGBAOK7E0UOP9XM8fqxhQ@mail.gmail.com>
+Message-ID: <CAFu+moLTDJ8EjgC_XA2gctKkhCrYcmWdfgQRg+DuUfbBW51j2w@mail.gmail.com>
+
+I guess those glitches made me write that email, as I tried that solution in
+the first place.
+
+I have the two usual comments // and /* */, and if they have @ immediately
+after the comment start, then it should be a Latex comment (of course, only
+in the right places)
+I get these weird behaviors:
+
+/*@ ... */ -> recognized
+//@ ... -> not recognized - parse error
+
+// ... -> recognized no ambiguities
+/* ... */ -> recognized, generates ambiguities
+
+and my rules now look like this:
+---------------------------------
+lexical syntax
+"/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+"/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+"//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+"//@" ~[\n\r]* ([\n\r] | EOF) -> LATEX
+
+lexical restrictions
+"/*" -/- [\@]
+"//" -/- [\@]
+
+context-free restrictions
+LAYOUT? -/- [\/].[\/].~[\@]
+LAYOUT? -/- [\/].[\*].~[\@]
+-------------------------------
+
+By the looks of it, should work the way I'm expecting it to work, but
+something is wrong. Either my grammar, or I've triggered a bug.
+Is there a similar example that I can use and compare?
+
+Thanks,
+Radu
+
+On Tue, Oct 4, 2011 at 9:08 AM, Jurgen Vinju <Jurgen.Vinju at cwi.nl> wrote:
+
+> Hi Radu,
+>
+> I don't really see why you would need extra rules to recognize the @
+> sign... but you probably have a good reason ;-) I'll assume that you
+> do need it.
+>
+> The grammar becomes ambiguous between the two alternatives of the
+> comment syntax. You might solve that by adding a follow restriction
+> fix it:
+>
+> "/*" (~[\*] | CommentChar)* "*/"     -> LAYOUT
+> "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+>
+> lexical restrictions
+>  "/*" -/- [\@]
+>
+> But not that if any comment starts with /*@ in the source code in a
+> position that you did not cater for by included the LATEX
+> non-terminal, you get a parse error.
+>
+> You need also to re-add the follow restrictions that you removed, but
+> change them a bit:
+>
+>  LAYOUT? -/- [\/].[\/].~[\@]
+>  LAYOUT? -/- [\/].[\*].~[\@]
+>
+> See, it will still implement "first match" for LAYOUT?, which is
+> important for ambiguity, but it will not filter if there is still a @
+> after the * such that the LATEX non-terminal can be recognized.
+>
+> This should get you toward a solution, but there may be some glitches
+> that you need to solve.
+>
+> Cheers,
+>
+> Jurgen
+>
+> On Tue, Oct 4, 2011 at 12:21 AM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+> > Hi,
+> >
+> > I'm having some difficulties writing an SDF grammar that can parse
+> comments
+> > in the stile of Javadoc.
+> > I want to include latex comments in my language with the help of /*@ */
+> and
+> > //@.
+> > My current solution is something like this:
+> > "/*" (~[\@\*] | CommentChar) (~[\*] | CommentChar)* "*/" -> LAYOUT  %%
+> > normal layout does not start with @
+> > "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+> > The problem is that I get a lot of ambiguities because I have to comment
+> the
+> > follow restrictions for layout to allow the latex comments to parse:
+> > context-free restrictions
+> > %% Ensure greedy matching for comments
+> > LAYOUT? -/- [\ \t\n\r]
+> >  %%LAYOUT? -/- [\/].[\/]
+> >  %%LAYOUT? -/- [\/].[\*]
+> > My question is, is there any example of how to do this? Did anyone have
+> this
+> > problem?
+> > Thanks,
+> > Radu
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> Jurgen Vinju
+> - Centrum Wiskunde & Informatica - SEN1
+> - INRIA Lille - ATEAMS
+> - Universiteit van Amsterdam
+>
+>   www: http://jurgen.vinju.org,
+> http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+> skype: jurgen.vinju
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111004/a940f95b/attachment-0001.html>
+
+From Jurgen.Vinju at cwi.nl  Tue Oct  4 15:17:04 2011
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Tue, 4 Oct 2011 15:17:04 +0200
+Subject: [Stratego Users] How to parse Javadoc style comments?
+In-Reply-To: <CAFu+moLTDJ8EjgC_XA2gctKkhCrYcmWdfgQRg+DuUfbBW51j2w@mail.gmail.com>
+References: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+	<CAEy4yM7kP=miE2rE6Dk2ts5FqbHsGYGBAOK7E0UOP9XM8fqxhQ@mail.gmail.com>
+	<CAFu+moLTDJ8EjgC_XA2gctKkhCrYcmWdfgQRg+DuUfbBW51j2w@mail.gmail.com>
+Message-ID: <CAEy4yM4mni5Vw_bAW-34XxcsTn1o7PvjrbW6Deksorc_XPLCfA@mail.gmail.com>
+
+Hi Radu,
+
+I think this should work. It could be a bug in the parser, or it could
+be something about the position of the LATEX non-terminal in your
+grammar.
+
+Cheers,
+
+Jurgen
+
+On Tue, Oct 4, 2011 at 11:02 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+> I guess those glitches made me write that email, as I tried that solution in
+> the first place.
+>
+> I have the two usual comments // and /* */, and if they have @ immediately
+> after the comment start, then it should be a Latex comment (of course, only
+> in the right places)
+> I get these weird behaviors:
+> /*@ ... */ -> recognized
+> //@ ... -> not recognized - parse error
+> // ... -> recognized no ambiguities
+> /* ... */ -> recognized, generates ambiguities
+> and my rules now look like this:
+> ---------------------------------
+> lexical syntax
+> "/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+> "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+> "//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+> "//@" ~[\n\r]* ([\n\r] | EOF) -> LATEX
+>
+> lexical restrictions
+> "/*" -/- [\@]
+> "//" -/- [\@]
+>
+> context-free restrictions
+> LAYOUT? -/- [\/].[\/].~[\@]
+> LAYOUT? -/- [\/].[\*].~[\@]
+> -------------------------------
+> By the looks of it, should work the way I'm expecting it to work, but
+> something is wrong. Either my grammar, or I've triggered a bug.
+> Is there a similar example that I can use and compare?
+> Thanks,
+> Radu
+> On Tue, Oct 4, 2011 at 9:08 AM, Jurgen Vinju <Jurgen.Vinju at cwi.nl> wrote:
+>>
+>> Hi Radu,
+>>
+>> I don't really see why you would need extra rules to recognize the @
+>> sign... but you probably have a good reason ;-) I'll assume that you
+>> do need it.
+>>
+>> The grammar becomes ambiguous between the two alternatives of the
+>> comment syntax. You might solve that by adding a follow restriction
+>> fix it:
+>>
+>> "/*" (~[\*] | CommentChar)* "*/" ? ? -> LAYOUT
+>> "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+>>
+>> lexical restrictions
+>> ?"/*" -/- [\@]
+>>
+>> But not that if any comment starts with /*@ in the source code in a
+>> position that you did not cater for by included the LATEX
+>> non-terminal, you get a parse error.
+>>
+>> You need also to re-add the follow restrictions that you removed, but
+>> change them a bit:
+>>
+>> ?LAYOUT? -/- [\/].[\/].~[\@]
+>> ?LAYOUT? -/- [\/].[\*].~[\@]
+>>
+>> See, it will still implement "first match" for LAYOUT?, which is
+>> important for ambiguity, but it will not filter if there is still a @
+>> after the * such that the LATEX non-terminal can be recognized.
+>>
+>> This should get you toward a solution, but there may be some glitches
+>> that you need to solve.
+>>
+>> Cheers,
+>>
+>> Jurgen
+>>
+>> On Tue, Oct 4, 2011 at 12:21 AM, Radu Mereuta <headness13 at gmail.com>
+>> wrote:
+>> > Hi,
+>> >
+>> > I'm having some difficulties writing an SDF grammar that can parse
+>> > comments
+>> > in the stile of Javadoc.
+>> > I want to include latex comments in my language with the help of /*@ */
+>> > and
+>> > //@.
+>> > My current solution is something like this:
+>> > "/*" (~[\@\*] | CommentChar) (~[\*] | CommentChar)* "*/" -> LAYOUT ?%%
+>> > normal layout does not start with @
+>> > "/*@" (~[\*] | CommentChar)* "*/" -> LATEX
+>> > The problem is that I get a lot of ambiguities because I have to comment
+>> > the
+>> > follow restrictions for layout to allow the latex comments to parse:
+>> > context-free restrictions
+>> > %% Ensure greedy matching for comments
+>> > LAYOUT? -/- [\ \t\n\r]
+>> > ?%%LAYOUT? -/- [\/].[\/]
+>> > ?%%LAYOUT? -/- [\/].[\*]
+>> > My question is, is there any example of how to do this? Did anyone have
+>> > this
+>> > problem?
+>> > Thanks,
+>> > Radu
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> Jurgen Vinju
+>> - Centrum Wiskunde & Informatica - SEN1
+>> - INRIA Lille - ATEAMS
+>> - Universiteit van Amsterdam
+>>
+>> ? www: http://jurgen.vinju.org,
+>> http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+>> skype: jurgen.vinju
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SEN1
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+? www: http://jurgen.vinju.org,
+http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+
+
+From l.c.l.kats at tudelft.nl  Wed Oct  5 11:54:18 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Wed, 05 Oct 2011 11:54:18 +0200
+Subject: [Stratego Users] How to parse Javadoc style comments?
+In-Reply-To: <CAEy4yM4mni5Vw_bAW-34XxcsTn1o7PvjrbW6Deksorc_XPLCfA@mail.gmail.com>
+References: <CAFu+moLmDzU_=6BA3O5DDMKhuMcbDjkEC_FQSCYttOikhnrubg@mail.gmail.com>
+	<CAEy4yM7kP=miE2rE6Dk2ts5FqbHsGYGBAOK7E0UOP9XM8fqxhQ@mail.gmail.com>
+	<CAFu+moLTDJ8EjgC_XA2gctKkhCrYcmWdfgQRg+DuUfbBW51j2w@mail.gmail.com>
+	<CAEy4yM4mni5Vw_bAW-34XxcsTn1o7PvjrbW6Deksorc_XPLCfA@mail.gmail.com>
+Message-ID: <4E8C294A.8000309@tudelft.nl>
+
+Hi,
+
+Note that this thread is continued at 
+http://yellowgrass.org/issue/Spoofax/434.
+
+cheers, Lennart
+
+On 10/4/11 15:17 , Jurgen Vinju wrote:
+> Hi Radu,
+>
+> I think this should work. It could be a bug in the parser, or it could
+> be something about the position of the LATEX non-terminal in your
+> grammar.
+>
+> Cheers,
+>
+> Jurgen
+>
+> On Tue, Oct 4, 2011 at 11:02 AM, Radu Mereuta<headness13 at gmail.com>  wrote:
+>> I guess those glitches made me write that email, as I tried that solution in
+>> the first place.
+>>
+>> I have the two usual comments // and /* */, and if they have @ immediately
+>> after the comment start, then it should be a Latex comment (of course, only
+>> in the right places)
+>> I get these weird behaviors:
+>> /*@ ... */ ->  recognized
+>> //@ ... ->  not recognized - parse error
+>> // ... ->  recognized no ambiguities
+>> /* ... */ ->  recognized, generates ambiguities
+>> and my rules now look like this:
+>> ---------------------------------
+>> lexical syntax
+>> "/*" (~[\*] | CommentChar)* "*/" ->  LAYOUT
+>> "/*@" (~[\*] | CommentChar)* "*/" ->  LATEX
+>> "//" ~[\n\r]* ([\n\r] | EOF) ->  LAYOUT
+>> "//@" ~[\n\r]* ([\n\r] | EOF) ->  LATEX
+>>
+>> lexical restrictions
+>> "/*" -/- [\@]
+>> "//" -/- [\@]
+>>
+>> context-free restrictions
+>> LAYOUT? -/- [\/].[\/].~[\@]
+>> LAYOUT? -/- [\/].[\*].~[\@]
+>> -------------------------------
+>> By the looks of it, should work the way I'm expecting it to work, but
+>> something is wrong. Either my grammar, or I've triggered a bug.
+>> Is there a similar example that I can use and compare?
+>> Thanks,
+>> Radu
+>> On Tue, Oct 4, 2011 at 9:08 AM, Jurgen Vinju<Jurgen.Vinju at cwi.nl>  wrote:
+>>> Hi Radu,
+>>>
+>>> I don't really see why you would need extra rules to recognize the @
+>>> sign... but you probably have a good reason ;-) I'll assume that you
+>>> do need it.
+>>>
+>>> The grammar becomes ambiguous between the two alternatives of the
+>>> comment syntax. You might solve that by adding a follow restriction
+>>> fix it:
+>>>
+>>> "/*" (~[\*] | CommentChar)* "*/"     ->  LAYOUT
+>>> "/*@" (~[\*] | CommentChar)* "*/" ->  LATEX
+>>>
+>>> lexical restrictions
+>>>   "/*" -/- [\@]
+>>>
+>>> But not that if any comment starts with /*@ in the source code in a
+>>> position that you did not cater for by included the LATEX
+>>> non-terminal, you get a parse error.
+>>>
+>>> You need also to re-add the follow restrictions that you removed, but
+>>> change them a bit:
+>>>
+>>>   LAYOUT? -/- [\/].[\/].~[\@]
+>>>   LAYOUT? -/- [\/].[\*].~[\@]
+>>>
+>>> See, it will still implement "first match" for LAYOUT?, which is
+>>> important for ambiguity, but it will not filter if there is still a @
+>>> after the * such that the LATEX non-terminal can be recognized.
+>>>
+>>> This should get you toward a solution, but there may be some glitches
+>>> that you need to solve.
+>>>
+>>> Cheers,
+>>>
+>>> Jurgen
+>>>
+>>> On Tue, Oct 4, 2011 at 12:21 AM, Radu Mereuta<headness13 at gmail.com>
+>>> wrote:
+>>>> Hi,
+>>>>
+>>>> I'm having some difficulties writing an SDF grammar that can parse
+>>>> comments
+>>>> in the stile of Javadoc.
+>>>> I want to include latex comments in my language with the help of /*@ */
+>>>> and
+>>>> //@.
+>>>> My current solution is something like this:
+>>>> "/*" (~[\@\*] | CommentChar) (~[\*] | CommentChar)* "*/" ->  LAYOUT  %%
+>>>> normal layout does not start with @
+>>>> "/*@" (~[\*] | CommentChar)* "*/" ->  LATEX
+>>>> The problem is that I get a lot of ambiguities because I have to comment
+>>>> the
+>>>> follow restrictions for layout to allow the latex comments to parse:
+>>>> context-free restrictions
+>>>> %% Ensure greedy matching for comments
+>>>> LAYOUT? -/- [\ \t\n\r]
+>>>>   %%LAYOUT? -/- [\/].[\/]
+>>>>   %%LAYOUT? -/- [\/].[\*]
+>>>> My question is, is there any example of how to do this? Did anyone have
+>>>> this
+>>>> problem?
+>>>> Thanks,
+>>>> Radu
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>
+>>>
+>>> --
+>>> Jurgen Vinju
+>>> - Centrum Wiskunde&  Informatica - SEN1
+>>> - INRIA Lille - ATEAMS
+>>> - Universiteit van Amsterdam
+>>>
+>>>    www: http://jurgen.vinju.org,
+>>> http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+>>> skype: jurgen.vinju
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+
+
+From torres.giorgio at gmail.com  Wed Oct  5 14:41:48 2011
+From: torres.giorgio at gmail.com (Giorgio Torres)
+Date: Wed, 5 Oct 2011 09:41:48 -0300
+Subject: [Stratego Users] Fwd: SDF aspectj language extension definition
+In-Reply-To: <CA+5itiOPQT6EXNX7+O+=nCCVpEW3Vmhw+YsfFfMhLOEiZD54JA@mail.gmail.com>
+References: <CA+5itiOPQT6EXNX7+O+=nCCVpEW3Vmhw+YsfFfMhLOEiZD54JA@mail.gmail.com>
+Message-ID: <CA+5itiPGhpk4_942pbj8bejkEmN5yMk-8+KvAx50MynY3o5Hsw@mail.gmail.com>
+
+Hi,
+
+I'm doing an aspectj language extension using the sdf formalism, and i've
+been studying it for the last weeks.
+My aim is to build an editor for my language using spoofax.
+I've read the sdf manual and also the spoofax's in order to know better
+these tools.
+
+When I started to build my own language, I began importing the "aspectj-ajc"
+aspectj sdf definition, and just wrote the grammar of my dsl right below, in
+the context-free syntax section.
+But when I did that, it appeared that the start symbol of my grammar wasn't
+being reachable by the parser, and in the editor generated it only had
+parsed aspectj syntax (and also Java), the parser wasn`t parsing any
+construction of my language`s grammar.
+It was when I realized that i was doing something wrong. Then I just started
+to stud the aspectj sdf definition code, and I noticed that I would have to
+do the same that was being done with aspectj and java, for my language.
+
+So, i tryied to understand that mechanism of parameterized module/import,
+and, for the example of the list, the one is given in the manual, it is
+quiet simple to understand.
+But, about that JavaCtx AspectCtx PointcutCtx PatternCtx parameters that are
+given to the JavaExtension.sdf file, i've been trying to understand that,
+and i've got nothing! :-(
+
+I would appreciate if someone could give me a better explanation about what
+is being doing in the JavaExtension.sdf, mainly about that
+mechanism of parameterized contexts that are being passed through other
+modules/imports as a parameter, so I could do the same in my language,
+because i think that is the way i have to follow to extend the aspectj
+language.
+
+
+thank you,
+
+
+-- 
+Giorgio Pr?mola F. G. Torres
+Graduando em Ci?ncia da Computa??o
+Universidade Federal de Vi?osa
+
+<http://www.facebook.com/giorgio.torres>
+<http://br.linkedin.com/in/giorgiotorres>
+  <http://www.twitter.com/gprimola>
+<http://www.flickr.com/photos/bygior>
+<http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111005/2d4bb917/attachment.html>
+
+From bootch at nc.rr.com  Fri Oct  7 16:23:28 2011
+From: bootch at nc.rr.com (bootch at nc.rr.com)
+Date: Fri, 7 Oct 2011 14:23:28 +0000
+Subject: [Stratego Users] parsing offside rule languages
+Message-ID: <20111007142328.65UBY.44101.root@cdptpa-web27-z02>
+
+This post describes my Spoofax project and seeks advice.  I am inexperienced with Spoofax and term rewriting.
+
+I am trying to parse a language that uses "offside rules" or INDENT/DEDENT to delimit blocks, e.g. Python.  A traditional parser pipeline for such a language uses a step after lexing to fabricate INDENT/DEDENT tokens for the parser.
+
+I am trying to parse an offside rule language using a Stratego transformation.  The SDF preserves newlines and whitespace indents/dedents into the AST.  I anticipate that a Stratego transformation will transform an AST which has the wrong tree structure (because the SDF does not recognize levels of indent/dedent) into the correct tree structure (by pruning and reparenting branches upward.)  In other words, my naive idea is that the traditional step between lexer and parser can be done after the parser as a transformation.
+
+I anticipated needing dynamic rules.  But now, my SDF produces an ambiguity.  Now I am studying whether I need to eliminate the ambiguity in the SDF, or whether disambiguation in Stratego is part of the solution.  Also, I am considering whether I will need one rule for each level of indent/dedent mismatch, or whether one parameterized rule will suffice.
+
+Any advice is welcome.  Has recognizing offside rule languages in Stratego been done already?  Is it theoretically possible?
+
+My ultimate goal is to source-to-source transform an idiom (subset) of Python into Objective C.
+
+From dgroenewegen at gmail.com  Sat Oct  8 10:54:18 2011
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sat, 8 Oct 2011 10:54:18 +0200
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <20111007142328.65UBY.44101.root@cdptpa-web27-z02>
+References: <20111007142328.65UBY.44101.root@cdptpa-web27-z02>
+Message-ID: <CA+JOw5V+s9t62MJmzyFFSKabLcLMsSQrbLVnzczxfxrUr+dk4w@mail.gmail.com>
+
+Hi,
+
+There is a Spoofax project that uses the same approach to handle syntax with
+off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen created
+a domain-specific language for programming the Arduino (
+http://www.arduino.cc/). The project is available on Github:
+https://github.com/nielsegberts/Ardlang
+
+-- Danny
+
+On Fri, Oct 7, 2011 at 4:23 PM,  <bootch at nc.rr.com> wrote:
+> This post describes my Spoofax project and seeks advice.  I am
+inexperienced with Spoofax and term rewriting.
+>
+> I am trying to parse a language that uses "offside rules" or INDENT/DEDENT
+to delimit blocks, e.g. Python.  A traditional parser pipeline for such a
+language uses a step after lexing to fabricate INDENT/DEDENT tokens for the
+parser.
+>
+> I am trying to parse an offside rule language using a Stratego
+transformation.  The SDF preserves newlines and whitespace indents/dedents
+into the AST.  I anticipate that a Stratego transformation will transform an
+AST which has the wrong tree structure (because the SDF does not recognize
+levels of indent/dedent) into the correct tree structure (by pruning and
+reparenting branches upward.)  In other words, my naive idea is that the
+traditional step between lexer and parser can be done after the parser as a
+transformation.
+>
+> I anticipated needing dynamic rules.  But now, my SDF produces an
+ambiguity.  Now I am studying whether I need to eliminate the ambiguity in
+the SDF, or whether disambiguation in Stratego is part of the solution.
+ Also, I am considering whether I will need one rule for each level of
+indent/dedent mismatch, or whether one parameterized rule will suffice.
+>
+> Any advice is welcome.  Has recognizing offside rule languages in Stratego
+been done already?  Is it theoretically possible?
+>
+> My ultimate goal is to source-to-source transform an idiom (subset) of
+Python into Objective C.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111008/7cc67f14/attachment.html>
+
+From bootch at nc.rr.com  Sat Oct  8 15:53:54 2011
+From: bootch at nc.rr.com (bootch at nc.rr.com)
+Date: Sat, 8 Oct 2011 9:53:54 -0400
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <CA+JOw5V+s9t62MJmzyFFSKabLcLMsSQrbLVnzczxfxrUr+dk4w@mail.gmail.com>
+Message-ID: <20111008135354.ASW95.49082.root@cdptpa-web27-z02>
+
+Thanks.
+
+I just looked at Ardlang.  It does not appear to use disambiguation in Stratego.  Rather, the syntax is unambiguous and doesn't parse blocks (compound stmts) but fabricates blocks by a transformation in Stratego.  Also, on first glance, it appears to use an imperative style rather than declarative style in that transformation (but if it works, fine.)
+
+Also, there is a discussion of this issue in "SDF Disambiguation Medkit for Programming Languages".
+
+For now, I am trying to put a disambiguator in Spoofx, per issue #394 on YellowGrass issue tracker for Spoofax.
+But its not working, I might have to use unstable or nightly Spoofax rather than the stable version?
+
+
+---- Danny Groenewegen <dgroenewegen at gmail.com> wrote: 
+> Hi,
+> 
+> There is a Spoofax project that uses the same approach to handle syntax with
+> off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen created
+> a domain-specific language for programming the Arduino (
+> http://www.arduino.cc/). The project is available on Github:
+> https://github.com/nielsegberts/Ardlang
+> 
+> -- Danny
+> 
+> On Fri, Oct 7, 2011 at 4:23 PM,  <bootch at nc.rr.com> wrote:
+> > This post describes my Spoofax project and seeks advice.  I am
+> inexperienced with Spoofax and term rewriting.
+> >
+> > I am trying to parse a language that uses "offside rules" or INDENT/DEDENT
+> to delimit blocks, e.g. Python.  A traditional parser pipeline for such a
+> language uses a step after lexing to fabricate INDENT/DEDENT tokens for the
+> parser.
+> >
+> > I am trying to parse an offside rule language using a Stratego
+> transformation.  The SDF preserves newlines and whitespace indents/dedents
+> into the AST.  I anticipate that a Stratego transformation will transform an
+> AST which has the wrong tree structure (because the SDF does not recognize
+> levels of indent/dedent) into the correct tree structure (by pruning and
+> reparenting branches upward.)  In other words, my naive idea is that the
+> traditional step between lexer and parser can be done after the parser as a
+> transformation.
+> >
+> > I anticipated needing dynamic rules.  But now, my SDF produces an
+> ambiguity.  Now I am studying whether I need to eliminate the ambiguity in
+> the SDF, or whether disambiguation in Stratego is part of the solution.
+>  Also, I am considering whether I will need one rule for each level of
+> indent/dedent mismatch, or whether one parameterized rule will suffice.
+> >
+> > Any advice is welcome.  Has recognizing offside rule languages in Stratego
+> been done already?  Is it theoretically possible?
+> >
+> > My ultimate goal is to source-to-source transform an idiom (subset) of
+> Python into Objective C.
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+
+
+From tobivollebregt at gmail.com  Sat Oct  8 16:15:44 2011
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Sat, 8 Oct 2011 16:15:44 +0200
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <20111008135354.ASW95.49082.root@cdptpa-web27-z02>
+References: <CA+JOw5V+s9t62MJmzyFFSKabLcLMsSQrbLVnzczxfxrUr+dk4w@mail.gmail.com>
+	<20111008135354.ASW95.49082.root@cdptpa-web27-z02>
+Message-ID: <CAOPyLrFqcxJn3_z9O4u8kSGfVx3CbSVfDXsu853CZLWBN+wwcg@mail.gmail.com>
+
+Hi,
+
+The current stable release does not have the custom disambiguation
+feature yet. You need unstable or nightly for this.
+
+Tobi
+
+On 8 October 2011 15:53,  <bootch at nc.rr.com> wrote:
+> Thanks.
+>
+> I just looked at Ardlang. ?It does not appear to use disambiguation in Stratego. ?Rather, the syntax is unambiguous and doesn't parse blocks (compound stmts) but fabricates blocks by a transformation in Stratego. ?Also, on first glance, it appears to use an imperative style rather than declarative style in that transformation (but if it works, fine.)
+>
+> Also, there is a discussion of this issue in "SDF Disambiguation Medkit for Programming Languages".
+>
+> For now, I am trying to put a disambiguator in Spoofx, per issue #394 on YellowGrass issue tracker for Spoofax.
+> But its not working, I might have to use unstable or nightly Spoofax rather than the stable version?
+>
+>
+> ---- Danny Groenewegen <dgroenewegen at gmail.com> wrote:
+>> Hi,
+>>
+>> There is a Spoofax project that uses the same approach to handle syntax with
+>> off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen created
+>> a domain-specific language for programming the Arduino (
+>> http://www.arduino.cc/). The project is available on Github:
+>> https://github.com/nielsegberts/Ardlang
+>>
+>> -- Danny
+>>
+>> On Fri, Oct 7, 2011 at 4:23 PM, ?<bootch at nc.rr.com> wrote:
+>> > This post describes my Spoofax project and seeks advice. ?I am
+>> inexperienced with Spoofax and term rewriting.
+>> >
+>> > I am trying to parse a language that uses "offside rules" or INDENT/DEDENT
+>> to delimit blocks, e.g. Python. ?A traditional parser pipeline for such a
+>> language uses a step after lexing to fabricate INDENT/DEDENT tokens for the
+>> parser.
+>> >
+>> > I am trying to parse an offside rule language using a Stratego
+>> transformation. ?The SDF preserves newlines and whitespace indents/dedents
+>> into the AST. ?I anticipate that a Stratego transformation will transform an
+>> AST which has the wrong tree structure (because the SDF does not recognize
+>> levels of indent/dedent) into the correct tree structure (by pruning and
+>> reparenting branches upward.) ?In other words, my naive idea is that the
+>> traditional step between lexer and parser can be done after the parser as a
+>> transformation.
+>> >
+>> > I anticipated needing dynamic rules. ?But now, my SDF produces an
+>> ambiguity. ?Now I am studying whether I need to eliminate the ambiguity in
+>> the SDF, or whether disambiguation in Stratego is part of the solution.
+>> ?Also, I am considering whether I will need one rule for each level of
+>> indent/dedent mismatch, or whether one parameterized rule will suffice.
+>> >
+>> > Any advice is welcome. ?Has recognizing offside rule languages in Stratego
+>> been done already? ?Is it theoretically possible?
+>> >
+>> > My ultimate goal is to source-to-source transform an idiom (subset) of
+>> Python into Objective C.
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From bootch at nc.rr.com  Sat Oct  8 16:46:58 2011
+From: bootch at nc.rr.com (bootch at nc.rr.com)
+Date: Sat, 8 Oct 2011 10:46:58 -0400
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <CAOPyLrFqcxJn3_z9O4u8kSGfVx3CbSVfDXsu853CZLWBN+wwcg@mail.gmail.com>
+Message-ID: <20111008144659.VQONU.49277.root@cdptpa-web27-z02>
+
+Thanks.
+I just looked at the FAQ and found that the update site for the unstable release is .../update/nightly
+
+But it won't install because it depends on bundle org.eclipse.core.expressions 3.4.200,
+because I have eclipse 3.5.2 installed?
+
+What do you advise: reverting to Eclipse 3.4.2 or trying to update the dependencies
+in the manifest for Spoofax?
+But the latter might be beyond my knowledge.
+Another voyage to dependency hell.
+I have a spare computer, I can try installing Eclipse 3.4.2 on it.
+
+
+---- Tobi Vollebregt <tobivollebregt at gmail.com> wrote: 
+> Hi,
+> 
+> The current stable release does not have the custom disambiguation
+> feature yet. You need unstable or nightly for this.
+> 
+> Tobi
+> 
+> On 8 October 2011 15:53,  <bootch at nc.rr.com> wrote:
+> > Thanks.
+> >
+> > I just looked at Ardlang. ?It does not appear to use disambiguation in Stratego. ?Rather, the syntax is unambiguous and doesn't parse blocks (compound stmts) but fabricates blocks by a transformation in Stratego. ?Also, on first glance, it appears to use an imperative style rather than declarative style in that transformation (but if it works, fine.)
+> >
+> > Also, there is a discussion of this issue in "SDF Disambiguation Medkit for Programming Languages".
+> >
+> > For now, I am trying to put a disambiguator in Spoofx, per issue #394 on YellowGrass issue tracker for Spoofax.
+> > But its not working, I might have to use unstable or nightly Spoofax rather than the stable version?
+> >
+> >
+> > ---- Danny Groenewegen <dgroenewegen at gmail.com> wrote:
+> >> Hi,
+> >>
+> >> There is a Spoofax project that uses the same approach to handle syntax with
+> >> off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen created
+> >> a domain-specific language for programming the Arduino (
+> >> http://www.arduino.cc/). The project is available on Github:
+> >> https://github.com/nielsegberts/Ardlang
+> >>
+> >> -- Danny
+> >>
+> >> On Fri, Oct 7, 2011 at 4:23 PM, ?<bootch at nc.rr.com> wrote:
+> >> > This post describes my Spoofax project and seeks advice. ?I am
+> >> inexperienced with Spoofax and term rewriting.
+> >> >
+> >> > I am trying to parse a language that uses "offside rules" or INDENT/DEDENT
+> >> to delimit blocks, e.g. Python. ?A traditional parser pipeline for such a
+> >> language uses a step after lexing to fabricate INDENT/DEDENT tokens for the
+> >> parser.
+> >> >
+> >> > I am trying to parse an offside rule language using a Stratego
+> >> transformation. ?The SDF preserves newlines and whitespace indents/dedents
+> >> into the AST. ?I anticipate that a Stratego transformation will transform an
+> >> AST which has the wrong tree structure (because the SDF does not recognize
+> >> levels of indent/dedent) into the correct tree structure (by pruning and
+> >> reparenting branches upward.) ?In other words, my naive idea is that the
+> >> traditional step between lexer and parser can be done after the parser as a
+> >> transformation.
+> >> >
+> >> > I anticipated needing dynamic rules. ?But now, my SDF produces an
+> >> ambiguity. ?Now I am studying whether I need to eliminate the ambiguity in
+> >> the SDF, or whether disambiguation in Stratego is part of the solution.
+> >> ?Also, I am considering whether I will need one rule for each level of
+> >> indent/dedent mismatch, or whether one parameterized rule will suffice.
+> >> >
+> >> > Any advice is welcome. ?Has recognizing offside rule languages in Stratego
+> >> been done already? ?Is it theoretically possible?
+> >> >
+> >> > My ultimate goal is to source-to-source transform an idiom (subset) of
+> >> Python into Objective C.
+> >> > _______________________________________________
+> >> > Users mailing list
+> >> > Users at strategoxt.org
+> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From dgroenewegen at gmail.com  Sat Oct  8 17:02:35 2011
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sat, 8 Oct 2011 17:02:35 +0200
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <20111008144659.VQONU.49277.root@cdptpa-web27-z02>
+References: <CAOPyLrFqcxJn3_z9O4u8kSGfVx3CbSVfDXsu853CZLWBN+wwcg@mail.gmail.com>
+	<20111008144659.VQONU.49277.root@cdptpa-web27-z02>
+Message-ID: <CA+JOw5XD_Uk5tSJgFo7G4pNofuCea0CrDH-cT6sviKWTrNdR9Q@mail.gmail.com>
+
+Eclipse keeps configuration data in its own directory and the workspace, so
+you can have multiple versions installed on one machine.
+
+
+On Sat, Oct 8, 2011 at 4:46 PM, <bootch at nc.rr.com> wrote:
+
+> Thanks.
+> I just looked at the FAQ and found that the update site for the unstable
+> release is .../update/nightly
+>
+> But it won't install because it depends on bundle
+> org.eclipse.core.expressions 3.4.200,
+> because I have eclipse 3.5.2 installed?
+>
+> What do you advise: reverting to Eclipse 3.4.2 or trying to update the
+> dependencies
+> in the manifest for Spoofax?
+> But the latter might be beyond my knowledge.
+> Another voyage to dependency hell.
+> I have a spare computer, I can try installing Eclipse 3.4.2 on it.
+>
+>
+> ---- Tobi Vollebregt <tobivollebregt at gmail.com> wrote:
+> > Hi,
+> >
+> > The current stable release does not have the custom disambiguation
+> > feature yet. You need unstable or nightly for this.
+> >
+> > Tobi
+> >
+> > On 8 October 2011 15:53,  <bootch at nc.rr.com> wrote:
+> > > Thanks.
+> > >
+> > > I just looked at Ardlang.  It does not appear to use disambiguation in
+> Stratego.  Rather, the syntax is unambiguous and doesn't parse blocks
+> (compound stmts) but fabricates blocks by a transformation in Stratego.
+>  Also, on first glance, it appears to use an imperative style rather than
+> declarative style in that transformation (but if it works, fine.)
+> > >
+> > > Also, there is a discussion of this issue in "SDF Disambiguation Medkit
+> for Programming Languages".
+> > >
+> > > For now, I am trying to put a disambiguator in Spoofx, per issue #394
+> on YellowGrass issue tracker for Spoofax.
+> > > But its not working, I might have to use unstable or nightly Spoofax
+> rather than the stable version?
+> > >
+> > >
+> > > ---- Danny Groenewegen <dgroenewegen at gmail.com> wrote:
+> > >> Hi,
+> > >>
+> > >> There is a Spoofax project that uses the same approach to handle
+> syntax with
+> > >> off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen
+> created
+> > >> a domain-specific language for programming the Arduino (
+> > >> http://www.arduino.cc/). The project is available on Github:
+> > >> https://github.com/nielsegberts/Ardlang
+> > >>
+> > >> -- Danny
+> > >>
+> > >> On Fri, Oct 7, 2011 at 4:23 PM,  <bootch at nc.rr.com> wrote:
+> > >> > This post describes my Spoofax project and seeks advice.  I am
+> > >> inexperienced with Spoofax and term rewriting.
+> > >> >
+> > >> > I am trying to parse a language that uses "offside rules" or
+> INDENT/DEDENT
+> > >> to delimit blocks, e.g. Python.  A traditional parser pipeline for
+> such a
+> > >> language uses a step after lexing to fabricate INDENT/DEDENT tokens
+> for the
+> > >> parser.
+> > >> >
+> > >> > I am trying to parse an offside rule language using a Stratego
+> > >> transformation.  The SDF preserves newlines and whitespace
+> indents/dedents
+> > >> into the AST.  I anticipate that a Stratego transformation will
+> transform an
+> > >> AST which has the wrong tree structure (because the SDF does not
+> recognize
+> > >> levels of indent/dedent) into the correct tree structure (by pruning
+> and
+> > >> reparenting branches upward.)  In other words, my naive idea is that
+> the
+> > >> traditional step between lexer and parser can be done after the parser
+> as a
+> > >> transformation.
+> > >> >
+> > >> > I anticipated needing dynamic rules.  But now, my SDF produces an
+> > >> ambiguity.  Now I am studying whether I need to eliminate the
+> ambiguity in
+> > >> the SDF, or whether disambiguation in Stratego is part of the
+> solution.
+> > >>  Also, I am considering whether I will need one rule for each level of
+> > >> indent/dedent mismatch, or whether one parameterized rule will
+> suffice.
+> > >> >
+> > >> > Any advice is welcome.  Has recognizing offside rule languages in
+> Stratego
+> > >> been done already?  Is it theoretically possible?
+> > >> >
+> > >> > My ultimate goal is to source-to-source transform an idiom (subset)
+> of
+> > >> Python into Objective C.
+> > >> > _______________________________________________
+> > >> > Users mailing list
+> > >> > Users at strategoxt.org
+> > >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> > >> >
+> > >
+> > > _______________________________________________
+> > > Users mailing list
+> > > Users at strategoxt.org
+> > > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> > >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111008/d1ee2f67/attachment-0001.html>
+
+From l.c.l.kats at tudelft.nl  Sat Oct  8 18:16:35 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Sat, 08 Oct 2011 18:16:35 +0200
+Subject: [Stratego Users] parsing offside rule languages
+In-Reply-To: <20111008144659.VQONU.49277.root@cdptpa-web27-z02>
+References: <20111008144659.VQONU.49277.root@cdptpa-web27-z02>
+Message-ID: <4E907763.8090604@tudelft.nl>
+
+Hi,
+
+That's a risk with the nightly release I suppose, apparently someone 
+added an unnecessary dependency on a 3.4 package last week... The build 
+farm is making a new release without the dependency as we speak 
+(http://hydra.nixos.org/build/1444422). But instead of the "nightly" you 
+can also try the "unstable" version, basically a snapshot of an older 
+"nightly": http://lclnet.nl/update/unstable
+
+hth,
+
+Lennart
+
+On 10/8/11 16:46 , bootch at nc.rr.com wrote:
+> Thanks.
+> I just looked at the FAQ and found that the update site for the unstable release is .../update/nightly
+>
+> But it won't install because it depends on bundle org.eclipse.core.expressions 3.4.200,
+> because I have eclipse 3.5.2 installed?
+>
+> What do you advise: reverting to Eclipse 3.4.2 or trying to update the dependencies
+> in the manifest for Spoofax?
+> But the latter might be beyond my knowledge.
+> Another voyage to dependency hell.
+> I have a spare computer, I can try installing Eclipse 3.4.2 on it.
+>
+>
+> ---- Tobi Vollebregt<tobivollebregt at gmail.com>  wrote:
+>> Hi,
+>>
+>> The current stable release does not have the custom disambiguation
+>> feature yet. You need unstable or nightly for this.
+>>
+>> Tobi
+>>
+>> On 8 October 2011 15:53,<bootch at nc.rr.com>  wrote:
+>>> Thanks.
+>>>
+>>> I just looked at Ardlang.  It does not appear to use disambiguation in Stratego.  Rather, the syntax is unambiguous and doesn't parse blocks (compound stmts) but fabricates blocks by a transformation in Stratego.  Also, on first glance, it appears to use an imperative style rather than declarative style in that transformation (but if it works, fine.)
+>>>
+>>> Also, there is a discussion of this issue in "SDF Disambiguation Medkit for Programming Languages".
+>>>
+>>> For now, I am trying to put a disambiguator in Spoofx, per issue #394 on YellowGrass issue tracker for Spoofax.
+>>> But its not working, I might have to use unstable or nightly Spoofax rather than the stable version?
+>>>
+>>>
+>>> ---- Danny Groenewegen<dgroenewegen at gmail.com>  wrote:
+>>>> Hi,
+>>>>
+>>>> There is a Spoofax project that uses the same approach to handle syntax with
+>>>> off-side rule. Niels Egberts, Oskar van Rest, and Wouter van Koppen created
+>>>> a domain-specific language for programming the Arduino (
+>>>> http://www.arduino.cc/). The project is available on Github:
+>>>> https://github.com/nielsegberts/Ardlang
+>>>>
+>>>> -- Danny
+>>>>
+>>>> On Fri, Oct 7, 2011 at 4:23 PM,<bootch at nc.rr.com>  wrote:
+>>>>> This post describes my Spoofax project and seeks advice.  I am
+>>>> inexperienced with Spoofax and term rewriting.
+>>>>> I am trying to parse a language that uses "offside rules" or INDENT/DEDENT
+>>>> to delimit blocks, e.g. Python.  A traditional parser pipeline for such a
+>>>> language uses a step after lexing to fabricate INDENT/DEDENT tokens for the
+>>>> parser.
+>>>>> I am trying to parse an offside rule language using a Stratego
+>>>> transformation.  The SDF preserves newlines and whitespace indents/dedents
+>>>> into the AST.  I anticipate that a Stratego transformation will transform an
+>>>> AST which has the wrong tree structure (because the SDF does not recognize
+>>>> levels of indent/dedent) into the correct tree structure (by pruning and
+>>>> reparenting branches upward.)  In other words, my naive idea is that the
+>>>> traditional step between lexer and parser can be done after the parser as a
+>>>> transformation.
+>>>>> I anticipated needing dynamic rules.  But now, my SDF produces an
+>>>> ambiguity.  Now I am studying whether I need to eliminate the ambiguity in
+>>>> the SDF, or whether disambiguation in Stratego is part of the solution.
+>>>>   Also, I am considering whether I will need one rule for each level of
+>>>> indent/dedent mismatch, or whether one parameterized rule will suffice.
+>>>>> Any advice is welcome.  Has recognizing offside rule languages in Stratego
+>>>> been done already?  Is it theoretically possible?
+>>>>> My ultimate goal is to source-to-source transform an idiom (subset) of
+>>>> Python into Objective C.
+>>>>> _______________________________________________
+>>>>> Users mailing list
+>>>>> Users at strategoxt.org
+>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From bootch at nc.rr.com  Mon Oct 10 17:53:13 2011
+From: bootch at nc.rr.com (lloyd konneker)
+Date: Mon, 10 Oct 2011 11:53:13 -0400
+Subject: [Stratego Users] notes about stratego/xt install on ubuntu
+Message-ID: <1318261993.16748.28.camel@bootch-desktop>
+
+This post is about my experience building strategoxt on ubuntu.  The
+post is trivial, for the benefit of new users.  (I tried to post an
+issue to JIRA but was unable to determine how to post an issue to any
+project but GW.)  I wanted Stratego/XT so I could use the shell to learn
+the Stratego language (following the manual.)
+
+I downloaded the pertinent packages.  Note you must build the packages
+in the order given, stratego-shell last.
+
+You must download the patch to aterm, say to the directory where the
+to-be patched file exists, e.g. to foo/aterm-2.5/aterm/max_long.patch.
+You must apply the patch for aterm:
+
+>cd foo/aterm-2.5/aterm
+>patch <max_long.patch
+
+If you don't apply the patch, the build of aterm hangs (doesn't return.)
+
+When building stratego-shell, at the ./configure step I got:
+
+configure: error: no termcap library found.
+
+So I used Synaptic to install the package libncurses-dev.
+Then I got:
+
+configure: GNU readline headers are required.
+
+So I installed the package libreadline6-dev.
+( dev packages include C language header files required to compile with
+libraries.)
+
+Finally:
+
+>stratego-shell
+
+brings up the shell (its prompt is "stratego>")
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111010/7e3906bb/attachment.html>
+
+From E.Visser at tudelft.nl  Fri Oct 14 23:16:47 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 14 Oct 2011 23:16:47 +0200
+Subject: [Stratego Users] GPCE 2011 in Portland: last chance to register
+Message-ID: <CAFaCHU0OLUp8PYTaSRH0m6c-P27WJY+R6VLoniXT1pZdsAyjMA@mail.gmail.com>
+
+------------------------------------------------------------------------
+                    CALL FOR PARTICIPATION
+               Tenth International Conference on
+        Generative Programming and Component Engineering
+                       (GPCE 2011)
+                   October 22-23, 2011
+                  Portland, Oregon, USA
+               (collocated with SPLASH 2011)
+                   http://www.gpce.org
+     http://twitter.com/GPCECONF    Facebook: GPCE 2011
+------------------------------------------------------------------------
+
+Last chance to register for GPCE 2011.  The program features keynotes
+by Matthias Felleisen (Northeastern University) and Gary Shubert
+(Lockheed Martin Space Systems Company), 18 technical talks covering
+theoretical and practical aspects of generative and component based
+programming, and two tech talks by Olivier Danvy (University of
+Aarhus) and John Launchbury (Galois, Inc.).
+
+Registration: http://splashcon.org/2011/attending/registering
+
+GPCE SCOPE
+
+Generative and component approaches are revolutionizing software
+development just as automation and componentization revolutionized
+manufacturing. Key technologies for automating program development are
+Generative Programming for program synthesis, Component Engineering
+for modularity, and Domain-Specific Languages (DSLs) for compact
+problem-oriented programming notations.
+
+The International Conference on Generative Programming and Component
+Engineering is a venue for researchers and practitioners interested in
+techniques that use program generation and component deployment to
+increase programmer productivity, improve software quality, and
+shorten the time-to-market of software products. In addition to
+exploring cutting-edge techniques of generative and component-based
+software, our goal is to foster further cross-fertilization between
+the software engineering and the programming languages research
+communities.
+
+ORGANIZATION
+
+Chairs (chairs at gpce.org)
+
+General Chair:    Ewen Denney (SGT/NASA Ames, USA)
+Program Chair:    Ulrik Pagh Schultz (University of Southern Denmark)
+Publicity Chair:  Chang Hwan Peter Kim (University of Texas, USA)
+
+Program Committee
+
+* Andrzej Wasowski (IT University of Copenhagen, Denmark)
+* Aniruddha Gokhale (Vanderbilt University, USA)
+* Bernd Fischer (University of Southampton, UK)
+* Bruno C. d. S. Oliveira (Seoul National University, Korea)
+* Christian Kaestner (Philipps Universitat Marburg, Germany)
+* Chung-Chieh Shan (Rutgers, The State University of New Jersey, USA)
+* Don Batory (University of Texas, USA)
+* Eli Tilevich (Virginia Tech, USA)
+* Eric Tanter (University of Chile, Chile)
+* Gorel Hedin (Lund Institute of Technology, Sweden)
+* Ina Schaefer (TU Braunschweig, Germany)
+* Jeremiah Willcock (Indiana University, USA)
+* Jeremy Siek (University of Colorado at Boulder, USA)
+* Jurgen Vinju (Centrum Wiskunde en Informatica, The Netherlands)
+* Lionel Seinturier (University of Lille, France)
+* Marjan Mernik (University of Maribor, Slovenia)
+* Mat Marcus (Adobe Systems, USA)
+* Nicolas Loriant (INRIA, France)
+* Ras Bodik (University of California, USA)
+* Robert Gluck (University of Copenhagen, Denmark)
+* Steffen Zschaler (King's College London, UK)
+* Tudor Girba (netstyle.ch, Switzerland)
+* Walter Binder (University of Lugano, Switzerland)
+* Yanhong A. Liu (State University of New York at Stony Brook, USA)
+
+From anya at anyanka.org  Thu Oct 20 18:18:12 2011
+From: anya at anyanka.org (Anya Helene Bagge)
+Date: Thu, 20 Oct 2011 18:18:12 +0200
+Subject: [Stratego Users] LDTA 2012 First Call for Papers
+Message-ID: <4EA049C4.1050803@anyanka.org>
+
+                       LDTA 2012 Call for Papers
+
+                     12th International Workshop on
+             Language Descriptions, Tools, and Applications
+
+                              www.ldta.info
+
+                             Tallinn, Estonia
+                         March 31 & April 1, 2012
+                            an ETAPS workshop
+
+LDTA is an application and tool-oriented workshop focused on
+grammarware - software based on grammars in some form. Grammarware
+applications are typically language processing applications and
+traditional examples include parsers, program analyzers, optimizers
+and translators. A primary focus of LDTA is grammarware that is
+generated from high-level grammar-centric specifications and thus
+submissions on parser generation, attribute grammar systems,
+term/graph rewriting systems, and other grammar-related
+meta-programming tools, techniques, and formalisms are encouraged.
+
+LDTA is also a forum in which theory is put to the test, in many cases
+on real-world software engineering challenges. Thus, LDTA also
+solicits papers on the application of grammarware to areas including,
+but not limited to, the following:
+- program analysis, transformation, generation, and verification,
+- implementation of Domain-Specific Languages,
+- reverse engineering and re-engineering,
+- refactoring and other source-to-source transformations,
+- language definition and language prototyping, and
+- debugging, profiling, IDE support, and testing.
+
+Note that LDTA is a well-established workshop similar to other
+conferences on (programming) language engineering topics such as SLE
+and GPCE, but is solely focused on grammarware.
+
+Paper Submission
+----------------
+LDTA solicits papers in the following categories.
+
+- research papers: original research results within the scope of LDTA
+   with a clear motivation, description, analysis, and evaluation.
+
+- short research papers: new innovative ideas that have not been
+   completely fleshed out.  As a workshop, LDTA strongly encourages
+   these types of submissions.
+
+- experience report papers: description of the use of a grammarware
+   tool or technique to solve a non-trivial applied problem with an
+   emphasis on the advantages and disadvantages of the chosen approach
+   to the problem.
+
+- tool demo papers: discussion of a tool or technique that explains
+   the contributions of the tool and what specifically will be
+   demonstrated.
+
+Each submission must clearly state in which of these categories it
+falls, and must not be published or submitted elsewhere.  Papers are to use
+the standard LaTeX article style and the authblk style for
+affiliations; a sample of which is provided at www.ldta.info.
+Research and experience papers are limited to 15 pages, tool
+demonstration papers are limited to 10 pages, and short papers are
+limited to 6 pages.  The final version of the accepted papers will,
+pending approval, be published in the ACM Digital Library and will
+also be made available during the workshop.
+
+Please submit your abstract and paper using EasyChair at
+http://www.easychair.org/conferences/?conf=ldta2012.
+
+The authors of each submission are required to give a presentation at
+LDTA 2011 and tool demonstration paper presentations are intended to
+include a significant live, interactive demonstration.
+
+The authors of the best papers will be invited to write a journal
+version of their paper which will be separately reviewed and, assuming
+acceptance, be published in journal form.  As in past years this will
+be done in a special issue of the journal Science of Computer
+Programming (Elsevier Science).
+
+Invited Speaker
+---------------
+To be announced
+
+Important Dates
+---------------
+Abstract submission: Nov. 28, 2011
+Full paper submission: Dec. 5, 2011
+Author notification: Jan. 20, 2012
+Camera-ready papers: Feb. 05, 2012
+LDTA Workshop: Mar. 31 - Apr. 1, 2012
+
+LDTA Tool Challenge
+-------------------
+The 2011 Workshop pioneered the LDTA Tool Challenge where tool
+developers were invited to develop solutions to a range of language
+processing tasks over a simple but evolving set of imperative
+programming languages. We expect a challenge to form part of LDTA
+every two years. The 2012 workshop will feature presentations devoted
+to a de-brief of the 2011 challenge, based on the paper currently
+being prepared by challenge participants.
+
+Program Committee
+-----------------
+Suzana Andova, Eindhoven University of Technology, The Netherlands 
+(co-chair)
+Anthony Sloane, Macquarie University, Australia (co-chair)
+Anya Helene Bagge, University of Bergen, Norway
+Kyung-Goo Doh, Hanyang University, Ansan, South Korea
+Jeff Gray, University of Alabama, USA
+G?rel Hedin, Lund Institute of Technology, Sweden
+Zhenjiang Hu, National Institute of Informatics, Japan
+Ivan Kurtev, University of Twente, The Netherlands
+Marjan Mernik, University of Maribor, Slovenia
+Sylvain Schmitz, Ecole Normale Sup?rieure de Cachan, France
+Vadim Zaytsev, Centre for Mathematics & Computer Science, The Netherlands
+Zolt?n Horv?th, E?tv?s Lor?nd University, Budapest, Hungary
+Nate Nystrom, University of Lugano, Switzerland
+[Full list to be announced later]
+
+Organizing Committee
+--------------------
+Anya Helene Bagge, University of Bergen, Norway
+Emilie Balland, INRIA, France
+
+Steering Committee
+------------------
+Mark van den Brand, Eindhoven University of Technology, The Netherlands
+G?rel Hedin, Lund University, Sweden
+Tony Sloane, Macquarie University, Australia
+Eric Van Wyk, University of Minnesota, United States
+

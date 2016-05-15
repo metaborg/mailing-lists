@@ -1,0 +1,2107 @@
+From E.Visser at tudelft.nl  Mon Nov  1 12:14:47 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 1 Nov 2010 12:14:47 +0100
+Subject: [Stratego Users] Hi, I just learn the stratego/XT,
+ Do you know how to change the expression to nothing
+In-Reply-To: <AANLkTi=Rsm7j8zHTBdOH7zym+HFZka8kJsXdbXTgds72@mail.gmail.com>
+References: <AANLkTi=Rsm7j8zHTBdOH7zym+HFZka8kJsXdbXTgds72@mail.gmail.com>
+Message-ID: <AANLkTin-NERiMGDi5xyacbSP=E70+-VKQb1rNA8fw5T4@mail.gmail.com>
+
+Hi Sheng,
+
+(1) Stratego is a rule-based language. We try to avoid deeply nested
+if statements, instead you could write rules such as
+
+    PrintOp :
+       Op(op, exp1, exp2) -> <onlycall> exp2
+       where <isRefInt> exp1; not(<isRefInt> exp2
+
+(2) A transformation should always result in _some_ term; for
+instance, you could use None() to represent nothing:
+
+    PrintOp :
+       Op(op, exp1, exp2) -> None()
+       where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+
+or the empty string, if you're rewriting to text:
+
+    PrintOp :
+       Op(op, exp1, exp2) -> ""
+       where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+
+cheers,
+
+-- Eelco
+
+On Sun, Oct 31, 2010 at 3:30 PM, Sheng Lu
+<sheng.lu at student.adelaide.edu.au> wrote:
+> Hi All,
+> I use the stratego/XT, transform one language to another.
+> I just simply want to change some expression to none or nothing, How
+> can I do this?
+> For my case, it is like this:
+> ? PrintOp: ? Op(op,exp1,exp2) -> result
+> ? ? ? ? ? ?where
+> ? ? ? ? ? ? ? ?debug(!"op");
+> ? ? ? ? ? ? ? ?if ?<isRefInt> exp1
+> ? ? ? ? ? ? ? ?then
+> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"if");
+> ? ? ? ? ? ? ? ? ? ? ? ?if <isRefInt> exp2
+> ? ? ? ? ? ? ? ? ? ? ? ?then
+> --------------------------------------
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?nothing=>result; in here I just want none(I mean I want
+> the blank result) to result does anybody know how to do it?
+> -----------------------------------------
+> ? ? ? ? ? ? ? ? ? ? ? ?else
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2 => result
+> ? ? ? ? ? ? ? ? ? ? ? ?end
+> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"in")
+> ? ? ? ? ? ? ? ?else
+> ? ? ? ? ? ? ? ? ? ? ? ?if ?<isRefInt> exp2
+> ? ? ? ? ? ? ? ? ? ? then
+> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"else1");
+> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1 => result
+> ? ? ? ? ? ? ? ? ? ? else
+> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"elseelse") ;
+> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1=>exp1';
+> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2=>exp2';
+> ? ? ? ? ? ? ? ? ? ? ? ?debug(!exp2');
+> ? ? ? ? ? ? ? ? ? ? ? ?(<id>exp1',<id>exp2')=>result
+> ? ? ? ? ? ? ? ? ? ? end
+> ? ? ? ? ? ? ? ? end
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From sheng.lu at student.adelaide.edu.au  Mon Nov  1 13:43:40 2010
+From: sheng.lu at student.adelaide.edu.au (Sheng Lu)
+Date: Mon, 1 Nov 2010 22:13:40 +0930
+Subject: [Stratego Users] Hi, I just learn the stratego/XT,
+ Do you know how to change the expression to nothing
+In-Reply-To: <AANLkTin-NERiMGDi5xyacbSP=E70+-VKQb1rNA8fw5T4@mail.gmail.com>
+References: <AANLkTi=Rsm7j8zHTBdOH7zym+HFZka8kJsXdbXTgds72@mail.gmail.com>
+	<AANLkTin-NERiMGDi5xyacbSP=E70+-VKQb1rNA8fw5T4@mail.gmail.com>
+Message-ID: <AANLkTikFjJe0CamE3rwAG+Un1KigR6x5QDBRp2aLN3+i@mail.gmail.com>
+
+Hi, Eelco
+Thank you for your last letter, but I find the program still have problem.
+I try to define rule like below:
+   PrintOp:   Op(op,exp1,exp2) -> result
+            where
+            	debug(!"op");
+            	if  <isRefInt> exp1
+            	then
+            		//debug(!"if");
+            		if <isRefInt> exp2
+            		then
+            			debug(!"ififup");
+            			None()=>result;
+            			debug(!"ififdown")
+            		else
+            			<onlycall> exp2 => result
+            		end
+            		//debug(!"in")
+            	else
+            		if  <isRefInt> exp2
+            	     then
+            	     	debug(!"else1");
+            	     	<id> exp1 => result
+            	     else
+            	     	//debug(!"elseelse") ;
+            	     	<onlycall> exp1=>exp1';
+            	     	<onlycall> exp2=>exp2';
+		          <conc>([<id>exp1'],[<id>exp2'])=>result
+		            end
+		          end
+
+you can see the expression:
+            			debug(!"ififup");
+            			None()=>result;
+            			debug(!"ififdown")
+that means for some cases, I want to output none as result, but the
+result of my code is:
+lu at lu-laptop:~/tmpspace/testsp/trans$ ./trans -i evoout.recl
+opOp(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10")))
+opOp(Times,Int("100"),Int("10"))
+ififupOp(Times,Int("100"),Int("10"))     ------------------you can see
+the program stop at "ififup"
+unrecognised case:Body(Basecase(Pexp(Leq,Ref("1"),Int("1")),Int("0")),Reccase(Op(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10")))))
+Fundec(Parmlist([Parmdec(Inttype,"a_0")]),Body(Basecase(Pexp(Leq,Ref("1"),Int("1")),Int("0")),Reccase(Op(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10"))))))
+
+you can see the program stop at "ififup", the program execute
+debug(!"ififup"); but not debug(!"ififdown").
+So, I think it must be something wrong at None()=>result;
+I think it do not recognize None expression. I try to import
+libstratego-lib and liblib it is no change. could you give me the
+formula that make it can recognize None() as nothing to give variable
+result.
+
+Best Regeards
+Sheng Lu
+
+
+On 1 November 2010 20:44, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Hi Sheng,
+>
+> (1) Stratego is a rule-based language. We try to avoid deeply nested
+> if statements, instead you could write rules such as
+>
+> ? ?PrintOp :
+> ? ? ? Op(op, exp1, exp2) -> <onlycall> exp2
+> ? ? ? where <isRefInt> exp1; not(<isRefInt> exp2
+>
+> (2) A transformation should always result in _some_ term; for
+> instance, you could use None() to represent nothing:
+>
+> ? ?PrintOp :
+> ? ? ? Op(op, exp1, exp2) -> None()
+> ? ? ? where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+>
+> or the empty string, if you're rewriting to text:
+>
+> ? ?PrintOp :
+> ? ? ? Op(op, exp1, exp2) -> ""
+> ? ? ? where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+>
+> cheers,
+>
+> -- Eelco
+>
+> On Sun, Oct 31, 2010 at 3:30 PM, Sheng Lu
+> <sheng.lu at student.adelaide.edu.au> wrote:
+>> Hi All,
+>> I use the stratego/XT, transform one language to another.
+>> I just simply want to change some expression to none or nothing, How
+>> can I do this?
+>> For my case, it is like this:
+>> ? PrintOp: ? Op(op,exp1,exp2) -> result
+>> ? ? ? ? ? ?where
+>> ? ? ? ? ? ? ? ?debug(!"op");
+>> ? ? ? ? ? ? ? ?if ?<isRefInt> exp1
+>> ? ? ? ? ? ? ? ?then
+>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"if");
+>> ? ? ? ? ? ? ? ? ? ? ? ?if <isRefInt> exp2
+>> ? ? ? ? ? ? ? ? ? ? ? ?then
+>> --------------------------------------
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?nothing=>result; in here I just want none(I mean I want
+>> the blank result) to result does anybody know how to do it?
+>> -----------------------------------------
+>> ? ? ? ? ? ? ? ? ? ? ? ?else
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2 => result
+>> ? ? ? ? ? ? ? ? ? ? ? ?end
+>> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"in")
+>> ? ? ? ? ? ? ? ?else
+>> ? ? ? ? ? ? ? ? ? ? ? ?if ?<isRefInt> exp2
+>> ? ? ? ? ? ? ? ? ? ? then
+>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"else1");
+>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1 => result
+>> ? ? ? ? ? ? ? ? ? ? else
+>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"elseelse") ;
+>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1=>exp1';
+>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2=>exp2';
+>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!exp2');
+>> ? ? ? ? ? ? ? ? ? ? ? ?(<id>exp1',<id>exp2')=>result
+>> ? ? ? ? ? ? ? ? ? ? end
+>> ? ? ? ? ? ? ? ? end
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+> http://researchr.org/profile/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From E.Visser at tudelft.nl  Mon Nov  1 14:44:14 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 1 Nov 2010 14:44:14 +0100
+Subject: [Stratego Users] Hi, I just learn the stratego/XT,
+ Do you know how to change the expression to nothing
+In-Reply-To: <AANLkTikFjJe0CamE3rwAG+Un1KigR6x5QDBRp2aLN3+i@mail.gmail.com>
+References: <AANLkTi=Rsm7j8zHTBdOH7zym+HFZka8kJsXdbXTgds72@mail.gmail.com>
+	<AANLkTin-NERiMGDi5xyacbSP=E70+-VKQb1rNA8fw5T4@mail.gmail.com>
+	<AANLkTikFjJe0CamE3rwAG+Un1KigR6x5QDBRp2aLN3+i@mail.gmail.com>
+Message-ID: <AANLkTik1+GmV09X4gDvLbTUhuJ8HtZvCmHO=hTYQ+Ucw@mail.gmail.com>
+
+Hi Sheng Lu,
+
+You wrote None() => result, but in that usage None() is a congruence
+operator; try !None() => result to _build_ the None() term.
+
+-- Eelco
+
+On Mon, Nov 1, 2010 at 1:43 PM, Sheng Lu
+<sheng.lu at student.adelaide.edu.au> wrote:
+> Hi, Eelco
+> Thank you for your last letter, but I find the program still have problem.
+> I try to define rule like below:
+> ? PrintOp: ? Op(op,exp1,exp2) -> result
+> ? ? ? ? ? ?where
+> ? ? ? ? ? ? ? ?debug(!"op");
+> ? ? ? ? ? ? ? ?if ?<isRefInt> exp1
+> ? ? ? ? ? ? ? ?then
+> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"if");
+> ? ? ? ? ? ? ? ? ? ? ? ?if <isRefInt> exp2
+> ? ? ? ? ? ? ? ? ? ? ? ?then
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?debug(!"ififup");
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?None()=>result;
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?debug(!"ififdown")
+> ? ? ? ? ? ? ? ? ? ? ? ?else
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2 => result
+> ? ? ? ? ? ? ? ? ? ? ? ?end
+> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"in")
+> ? ? ? ? ? ? ? ?else
+> ? ? ? ? ? ? ? ? ? ? ? ?if ?<isRefInt> exp2
+> ? ? ? ? ? ? ? ? ? ? then
+> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"else1");
+> ? ? ? ? ? ? ? ? ? ? ? ?<id> exp1 => result
+> ? ? ? ? ? ? ? ? ? ? else
+> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"elseelse") ;
+> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1=>exp1';
+> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2=>exp2';
+> ? ? ? ? ? ? ? ? ? ? ? ? ?<conc>([<id>exp1'],[<id>exp2'])=>result
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?end
+> ? ? ? ? ? ? ? ? ? ? ? ? ?end
+>
+> you can see the expression:
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?debug(!"ififup");
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?None()=>result;
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?debug(!"ififdown")
+> that means for some cases, I want to output none as result, but the
+> result of my code is:
+> lu at lu-laptop:~/tmpspace/testsp/trans$ ./trans -i evoout.recl
+> opOp(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10")))
+> opOp(Times,Int("100"),Int("10"))
+> ififupOp(Times,Int("100"),Int("10")) ? ? ------------------you can see
+> the program stop at "ififup"
+> unrecognised case:Body(Basecase(Pexp(Leq,Ref("1"),Int("1")),Int("0")),Reccase(Op(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10")))))
+> Fundec(Parmlist([Parmdec(Inttype,"a_0")]),Body(Basecase(Pexp(Leq,Ref("1"),Int("1")),Int("0")),Reccase(Op(Sub,Call([Int("01")]),Op(Times,Int("100"),Int("10"))))))
+>
+> you can see the program stop at "ififup", the program execute
+> debug(!"ififup"); but not debug(!"ififdown").
+> So, I think it must be something wrong at None()=>result;
+> I think it do not recognize None expression. I try to import
+> libstratego-lib and liblib it is no change. could you give me the
+> formula that make it can recognize None() as nothing to give variable
+> result.
+>
+> Best Regeards
+> Sheng Lu
+>
+>
+> On 1 November 2010 20:44, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>> Hi Sheng,
+>>
+>> (1) Stratego is a rule-based language. We try to avoid deeply nested
+>> if statements, instead you could write rules such as
+>>
+>> ? ?PrintOp :
+>> ? ? ? Op(op, exp1, exp2) -> <onlycall> exp2
+>> ? ? ? where <isRefInt> exp1; not(<isRefInt> exp2
+>>
+>> (2) A transformation should always result in _some_ term; for
+>> instance, you could use None() to represent nothing:
+>>
+>> ? ?PrintOp :
+>> ? ? ? Op(op, exp1, exp2) -> None()
+>> ? ? ? where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+>>
+>> or the empty string, if you're rewriting to text:
+>>
+>> ? ?PrintOp :
+>> ? ? ? Op(op, exp1, exp2) -> ""
+>> ? ? ? where not( <isRefInt> exp1 ); not(<isRefInt> exp2
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> On Sun, Oct 31, 2010 at 3:30 PM, Sheng Lu
+>> <sheng.lu at student.adelaide.edu.au> wrote:
+>>> Hi All,
+>>> I use the stratego/XT, transform one language to another.
+>>> I just simply want to change some expression to none or nothing, How
+>>> can I do this?
+>>> For my case, it is like this:
+>>> ? PrintOp: ? Op(op,exp1,exp2) -> result
+>>> ? ? ? ? ? ?where
+>>> ? ? ? ? ? ? ? ?debug(!"op");
+>>> ? ? ? ? ? ? ? ?if ?<isRefInt> exp1
+>>> ? ? ? ? ? ? ? ?then
+>>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"if");
+>>> ? ? ? ? ? ? ? ? ? ? ? ?if <isRefInt> exp2
+>>> ? ? ? ? ? ? ? ? ? ? ? ?then
+>>> --------------------------------------
+>>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?nothing=>result; in here I just want none(I mean I want
+>>> the blank result) to result does anybody know how to do it?
+>>> -----------------------------------------
+>>> ? ? ? ? ? ? ? ? ? ? ? ?else
+>>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2 => result
+>>> ? ? ? ? ? ? ? ? ? ? ? ?end
+>>> ? ? ? ? ? ? ? ? ? ? ? ?//debug(!"in")
+>>> ? ? ? ? ? ? ? ?else
+>>> ? ? ? ? ? ? ? ? ? ? ? ?if ?<isRefInt> exp2
+>>> ? ? ? ? ? ? ? ? ? ? then
+>>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"else1");
+>>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1 => result
+>>> ? ? ? ? ? ? ? ? ? ? else
+>>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!"elseelse") ;
+>>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp1=>exp1';
+>>> ? ? ? ? ? ? ? ? ? ? ? ?<onlycall> exp2=>exp2';
+>>> ? ? ? ? ? ? ? ? ? ? ? ?debug(!exp2');
+>>> ? ? ? ? ? ? ? ? ? ? ? ?(<id>exp1',<id>exp2')=>result
+>>> ? ? ? ? ? ? ? ? ? ? end
+>>> ? ? ? ? ? ? ? ? end
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>> http://researchr.org/profile/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From ubuntulist at yandex.ru  Mon Nov  1 15:40:18 2010
+From: ubuntulist at yandex.ru (Vyacheslav Karamov)
+Date: Mon, 01 Nov 2010 16:40:18 +0200
+Subject: [Stratego Users] Error building octavec
+Message-ID: <4CCED152.2060600@yandex.ru>
+
+Hi all!
+
+I need to install octavec in my Kubuntu 9.04.
+
+I've isnstalled autotools, libtool, octave 3.01 and all packages from  
+ftp://ftp.stratego-language.org/pub/stratego/StrategoXT/strategoxt-0.17/ubuntu904i386/ 
+
+
+then
+
+mkdir octavec; cd octavec; svn co 
+https://svn.strategoxt.org/repos/octave/octavec/trunk/; cd trunk
+autoxt&&autoreconf -ifv;./configure&&make
+
+but compilation fails.
+See log below:
+
+make  all-recursive
+make[1]: Entering directory `/home/vkaramov/Projects/octavec/trunk'
+Making all in syntax
+make[2]: Entering directory `/home/vkaramov/Projects/octavec/trunk/syntax'
+Making all in pp
+make[3]: Entering directory 
+`/home/vkaramov/Projects/octavec/trunk/syntax/pp'
+Tools registered in repository 
+/home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:   Data registered 
+in repository /home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:   
+Octave-pretty.pp.af RealOctave-pretty.pp.af C-pretty1.pp.af  make[3]: 
+Leaving directory `/home/vkaramov/Projects/octavec/trunk/syntax/pp'
+Making all in libparseoctave
+make[3]: Entering directory 
+`/home/vkaramov/Projects/octavec/trunk/syntax/libparseoctave'
+Tools registered in repository 
+/home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:   Data registered 
+in repository /home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:     
+make[3]: Leaving directory 
+`/home/vkaramov/Projects/octavec/trunk/syntax/libparseoctave'
+make[3]: Entering directory `/home/vkaramov/Projects/octavec/trunk/syntax'
+Tools registered in repository 
+/home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:   Data registered 
+in repository /home/vkaramov/Projects/octavec/trunk/BUILDTIME_XTC:     
+Octave-Concrete-SyntaxRenamed.def Octave-Concrete-SyntaxRenamed.sdf 
+common.def StrategoOctaveCS.tbl type-specification.tbl 
+Stratego-Octave-C.tbl Octave-Concrete-Syntax.tbl 
+Octave-Concrete-SyntaxRenamed.tbl common.sdf 
+Octave-Concrete-SyntaxRenamed.sdf Octave-Concrete-Syntax.sdf 
+Octave-C.sdf OctaveTC-Congruences.sdf OctaveTC-Variables.sdf 
+Operators.sdf Stratego-Octave-C.sdf StrategoOctaveCS.sdf 
+StrategoOctaveTc.sdf type-specification.sdf Octave-Concrete-Syntax.def 
+make[3]: Leaving directory `/home/vkaramov/Projects/octavec/trunk/syntax'
+make[2]: Leaving directory `/home/vkaramov/Projects/octavec/trunk/syntax'
+Making all in src
+make[2]: Entering directory `/home/vkaramov/Projects/octavec/trunk/src'
+/usr/bin/strc -c --library \
+     -O 2 --verbose 1 \
+     -i oct.str -o liboctavec.rtree \
+     --statistics 2 \
+     --format-check 0 \
+     -I ../syntax -I .  && \
+     rm liboctavec.str
+[ strc | info ] Compiling 'oct.str'
+/bin/bash: line 6: 13871 Aborted                 /usr/bin/strc -c 
+--library -O 2 --verbose 1 -i oct.str -o liboctavec.rtree --statistics 2 
+--format-check 0 -I ../syntax -I .
+make[2]: *** [liboctavec.c] Error 134
+make[2]: Leaving directory `/home/vkaramov/Projects/octavec/trunk/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/home/vkaramov/Projects/octavec/trunk'
+make: *** [all] Error 2
+
+
+From camila.sa.da.fonseca at gmail.com  Sat Nov  6 20:16:42 2010
+From: camila.sa.da.fonseca at gmail.com (=?ISO-8859-1?Q?Camila_S=E1?=)
+Date: Sat, 6 Nov 2010 16:16:42 -0300
+Subject: [Stratego Users] Xml-Interpretation
+Message-ID: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+
+Hello everyone, i was trying to use xml2aterm to make some transformations
+on an xml archive. However it dint`d work, i think it happened because i use
+a metamodel to extend the structure of my xml. It worked with parse-xml-info
+and parse-xml-doc, and I could make the transformations, but when I return
+to xml the archive lost its structure. I saw that when xml tools wasn't in
+xml-front, Stratego had a xml-interpreter which led the archive to use an
+external schema. I`ve tried to install that, but it didn`t work. Can anyone
+tell me how could i install/use that xml-interpreter or if there is another
+tool available with xml-front that helps me to convert a xml document that
+has an external metamodel?
+
+Regards,
+
+-- 
+Camila S? da Fonseca
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101106/1212fa0f/attachment.html 
+
+From E.Visser at tudelft.nl  Sat Nov  6 21:08:06 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 6 Nov 2010 21:08:06 +0100
+Subject: [Stratego Users] Xml-Interpretation
+In-Reply-To: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+References: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+Message-ID: <AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+
+Hi Camila,
+
+It is not clear what you mean by XML interpreter, what sort of
+external meta-model you have, or how that would affect transformations
+written in Stratego. Perhaps you can give a more concrete example of
+what you are trying to do.
+
+cheers,
+
+-- Eelco
+
+On Sat, Nov 6, 2010 at 8:16 PM, Camila S?
+<camila.sa.da.fonseca at gmail.com> wrote:
+> Hello everyone, i was trying to use xml2aterm to make some transformations
+> on an xml archive. However it dint`d work, i think it happened because i use
+> a metamodel to extend the structure of my xml. It worked with parse-xml-info
+> and parse-xml-doc, and I could make the transformations, but when I return
+> to xml the archive lost its structure. I saw that when xml tools wasn't in
+> xml-front, Stratego had a xml-interpreter which led the archive to use an
+> external schema. I`ve tried to install that, but it didn`t work. Can anyone
+> tell me how could i install/use that xml-interpreter or if there is another
+> tool available with xml-front that helps me to convert a xml document that
+> has an external metamodel?
+>
+> Regards,
+>
+> --
+> Camila S? da Fonseca
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From camila.sa.da.fonseca at gmail.com  Sat Nov  6 23:33:40 2010
+From: camila.sa.da.fonseca at gmail.com (=?ISO-8859-1?Q?Camila_S=E1?=)
+Date: Sat, 6 Nov 2010 19:33:40 -0300
+Subject: [Stratego Users] Xml-Interpretation
+In-Reply-To: <AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+References: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+	<AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+Message-ID: <AANLkTimTbsT5Ph7dS4MwV5dH0Ud=ag8Lh_H2HEmF=O_+@mail.gmail.com>
+
+Hi Eelco,
+
+well, i`m actually using the xmi extension:
+
+   - http://www.omg.org/XMI as xmi
+   - http://www.w3.org/2001/XMLSchema-instance as xsi
+   - a metamodel.ecore as a metamodel (i`ve built to include other
+   components to the xmi)
+
+That affects my transformations because the transformations are centred on
+new components that i`d increased with the created metamodel. When i do the
+transformations on the xml-info/xml-doc representation and then came back to
+xmi that new xmi doesn`t recognize the elements the metamodel creates as
+really elements.
+
+I`m attaching an input model (xmi), the representation in aterm (trm) and
+the output (after the transformation and after the conversion back to xml,
+xmi).
+
+I was thinking on transform the metamodel into a grammar, and extend the
+xml-front to extend the xml grammar. However I would need the traditional
+xmi as well and I just can`t find a representation of its grammar that fits
+with Stratego format. I`m afraid it wold take a lot of time. So that would
+be great if the interpreter could interpret the schema.
+
+I don`t know if i made it clear, hope so!
+
+I really appreciate your help!!
+
+On Sat, Nov 6, 2010 at 5:08 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Camila,
+>
+> It is not clear what you mean by XML interpreter, what sort of
+> external meta-model you have, or how that would affect transformations
+> written in Stratego. Perhaps you can give a more concrete example of
+> what you are trying to do.
+>
+> cheers,
+>
+> -- Eelco
+>
+> On Sat, Nov 6, 2010 at 8:16 PM, Camila S?
+> <camila.sa.da.fonseca at gmail.com> wrote:
+> > Hello everyone, i was trying to use xml2aterm to make some
+> transformations
+> > on an xml archive. However it dint`d work, i think it happened because i
+> use
+> > a metamodel to extend the structure of my xml. It worked with
+> parse-xml-info
+> > and parse-xml-doc, and I could make the transformations, but when I
+> return
+> > to xml the archive lost its structure. I saw that when xml tools wasn't
+> in
+> > xml-front, Stratego had a xml-interpreter which led the archive to use an
+> > external schema. I`ve tried to install that, but it didn`t work. Can
+> anyone
+> > tell me how could i install/use that xml-interpreter or if there is
+> another
+> > tool available with xml-front that helps me to convert a xml document
+> that
+> > has an external metamodel?
+> >
+> > Regards,
+> >
+> > --
+> > Camila S? da Fonseca
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+> http://researchr.org/profile/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Camila S? da Fonseca
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101106/0247bc17/attachment.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-OUT-Transformed.xmi
+Type: application/octet-stream
+Size: 1451 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101106/0247bc17/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-IN-2.xmi
+Type: application/octet-stream
+Size: 510 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101106/0247bc17/attachment-0001.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-IN-2-xml-info.trm
+Type: application/octet-stream
+Size: 641 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101106/0247bc17/attachment-0002.obj 
+
+From camila.sa.da.fonseca at gmail.com  Sun Nov  7 11:49:53 2010
+From: camila.sa.da.fonseca at gmail.com (=?ISO-8859-1?Q?Camila_S=E1?=)
+Date: Sun, 7 Nov 2010 07:49:53 -0300
+Subject: [Stratego Users] Xml-Interpretation
+In-Reply-To: <AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+References: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+	<AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+Message-ID: <AANLkTi=FjRUf_OWrBNz+E74QkAgXTXykJFWwq3WztDCH@mail.gmail.com>
+
+Hi Eelco,
+
+well, i`m actually using the xmi extension:
+
+   - http://www.omg.org/XMI as xmi
+   - http://www.w3.org/2001/XMLSchema-instance as xsi
+   - a metamodel.ecore as a metamodel (i`ve built to include other
+   components to the xmi)
+
+That affects my transformations because the transformations are centred on
+new components that i`d increased with the created metamodel. When i do the
+transformations on the xml-info/xml-doc representation and then came back to
+xmi that new xmi doesn`t recognize the elements the metamodel creates as
+really elements.
+
+I`m attaching an input model (xmi), the representation in aterm (trm) and
+the output (how it should be in xmi and how it look like after the
+transformation using the trm and after the conversion back to xmi). I'm also
+attaching the metamodel itself.
+
+I was thinking on transform the metamodel into a grammar, and extend the
+xml-front to extend the xml grammar. However I would need the traditional
+xmi as well and I can`t find a representation of its grammar that fits with
+Stratego format. I`m afraid it wold take a lot of time. So that would be
+great if the interpreter could interpret the schema.
+
+I don`t know if i made it clear, hope so!
+
+I really appreciate your help!!
+
+On Sat, Nov 6, 2010 at 5:08 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Camila,
+>
+> It is not clear what you mean by XML interpreter, what sort of
+> external meta-model you have, or how that would affect transformations
+> written in Stratego. Perhaps you can give a more concrete example of
+> what you are trying to do.
+>
+> cheers,
+>
+> -- Eelco
+>
+> On Sat, Nov 6, 2010 at 8:16 PM, Camila S?
+> <camila.sa.da.fonseca at gmail.com> wrote:
+> > Hello everyone, i was trying to use xml2aterm to make some
+> transformations
+> > on an xml archive. However it dint`d work, i think it happened because i
+> use
+> > a metamodel to extend the structure of my xml. It worked with
+> parse-xml-info
+> > and parse-xml-doc, and I could make the transformations, but when I
+> return
+> > to xml the archive lost its structure. I saw that when xml tools wasn't
+> in
+> > xml-front, Stratego had a xml-interpreter which led the archive to use an
+> > external schema. I`ve tried to install that, but it didn`t work. Can
+> anyone
+> > tell me how could i install/use that xml-interpreter or if there is
+> another
+> > tool available with xml-front that helps me to convert a xml document
+> that
+> > has an external metamodel?
+> >
+> > Regards,
+> >
+> > --
+> > Camila S? da Fonseca
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+> http://researchr.org/profile/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Camila S? da Fonseca
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101107/94e2241e/attachment-0001.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-IN-2-xml-info.trm
+Type: application/octet-stream
+Size: 641 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101107/94e2241e/attachment-0004.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-OUT-Transformed.xmi
+Type: application/octet-stream
+Size: 1451 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101107/94e2241e/attachment-0005.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-IN-2.xmi
+Type: application/octet-stream
+Size: 510 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101107/94e2241e/attachment-0006.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IntrMethod-OUT2.xmi
+Type: application/octet-stream
+Size: 418 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101107/94e2241e/attachment-0007.obj 
+
+From E.Visser at tudelft.nl  Tue Nov 16 09:12:12 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 16 Nov 2010 09:12:12 +0100
+Subject: [Stratego Users] Xml-Interpretation
+In-Reply-To: <AANLkTi=FjRUf_OWrBNz+E74QkAgXTXykJFWwq3WztDCH@mail.gmail.com>
+References: <AANLkTikDqA50mkoeJUztO7MSdYpAXnWcn1kqKg7ouZB7@mail.gmail.com>
+	<AANLkTimAOaR6zzB2DAshpv4oW8LV99qoUq5nrHV1Q0zN@mail.gmail.com>
+	<AANLkTi=FjRUf_OWrBNz+E74QkAgXTXykJFWwq3WztDCH@mail.gmail.com>
+Message-ID: <AANLkTiky5dgvdB3fMVFMajkfYUE62T1zk=79E3apsTzL@mail.gmail.com>
+
+Hi Camila,
+
+I don't quite understand your problem. You don't need to extend the
+XML grammar to support an extended meta-model or schema. The beauty of
+XML is that one syntax can be used to encode a variety of schemas. I
+can imagine that if you introduce tags that are not part of XMI, your
+tool cannot read the resulting XML file.
+
+cheers,
+
+-- Eelco
+
+On Sun, Nov 7, 2010 at 11:49 AM, Camila S?
+<camila.sa.da.fonseca at gmail.com> wrote:
+> Hi Eelco,
+>
+> well, i`m actually using the xmi extension:
+>
+> http://www.omg.org/XMI as xmi
+> http://www.w3.org/2001/XMLSchema-instance as xsi
+> a metamodel.ecore as a metamodel (i`ve built to include other components to
+> the xmi)
+>
+> That affects my transformations because the transformations are centred on
+> new components that i`d increased with the created metamodel. When i do the
+> transformations on the xml-info/xml-doc representation and then came back to
+> xmi that new xmi doesn`t recognize the elements the metamodel creates as
+> really elements.
+>
+> I`m attaching an input model (xmi), the representation in aterm (trm) and
+> the output (how it should be in xmi and how it look like after the
+> transformation using the trm and after the conversion back to xmi). I'm also
+> attaching the metamodel itself.
+>
+> I was thinking on transform the metamodel into a grammar, and extend the
+> xml-front to extend the xml grammar. However I would need the traditional
+> xmi as well and I can`t find a representation of its grammar that fits with
+> Stratego format. I`m afraid it wold take a lot of time. So that would be
+> great if the interpreter could interpret the schema.
+>
+> I don`t know if i made it clear, hope so!
+>
+> I really appreciate your help!!
+>
+> On Sat, Nov 6, 2010 at 5:08 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Camila,
+>>
+>> It is not clear what you mean by XML interpreter, what sort of
+>> external meta-model you have, or how that would affect transformations
+>> written in Stratego. Perhaps you can give a more concrete example of
+>> what you are trying to do.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> On Sat, Nov 6, 2010 at 8:16 PM, Camila S?
+>> <camila.sa.da.fonseca at gmail.com> wrote:
+>> > Hello everyone, i was trying to use xml2aterm to make some
+>> > transformations
+>> > on an xml archive. However it dint`d work, i think it happened because i
+>> > use
+>> > a metamodel to extend the structure of my xml. It worked with
+>> > parse-xml-info
+>> > and parse-xml-doc, and I could make the transformations, but when I
+>> > return
+>> > to xml the archive lost its structure. I saw that when xml tools wasn't
+>> > in
+>> > xml-front, Stratego had a xml-interpreter which led the archive to use
+>> > an
+>> > external schema. I`ve tried to install that, but it didn`t work. Can
+>> > anyone
+>> > tell me how could i install/use that xml-interpreter or if there is
+>> > another
+>> > tool available with xml-front that helps me to convert a xml document
+>> > that
+>> > has an external metamodel?
+>> >
+>> > Regards,
+>> >
+>> > --
+>> > Camila S? da Fonseca
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>> http://researchr.org/profile/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> --
+> Camila S? da Fonseca
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From len.hamey at mq.edu.au  Wed Nov 17 09:57:18 2010
+From: len.hamey at mq.edu.au (Len Hamey)
+Date: Wed, 17 Nov 2010 19:57:18 +1100
+Subject: [Stratego Users] Changes of the way to implement concrete syntax.
+In-Reply-To: <AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+References: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+	<AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+Message-ID: <4ce398f8.16958e0a.424d.798b@mx.google.com>
+
+I have a project that has been based on stratego since 2008.  It uses
+concrete syntax.  The
+Method of creating the concrete syntax capability is combining
+StrategoRenamed with the target
+Language.  I am having trouble rebuilding the project.  
+
+1. I don't have a command script to build the combined files
+strategoapply.def and strategoapply.tbl, so I am assuming that the commands
+are:
+
+-----------------
+#! /bin/sh -e
+
+# collect modules 
+pack-sdf -i StrategoApply.sdf -o StrategoApply.def
+
+# generate parse table
+sdf2table -i StrategoApply.def -o StrategoApply.tbl -m StrategoApply
+-----------------------------
+
+But these commands give errors: start symbol not defined by any production,
+and warnings about the bracket attribute on rules that appear to be inside
+stratego.
+
+Here is the code:
+-----------
+module StrategoApply
+imports StrategoRenamed
+        Apply
+hiddens
+  context-free start-symbols StrategoModule
+exports
+  context-free syntax
+
+    %% Basic concrete syntax
+    "|[" Exp "]|"          -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Statement "]|"    -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Statements "]|"   -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" FunctionArgs "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Declarations "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Function "]|"     -> StrategoTerm {cons("ToTerm"),prefer}
+    "~" StrategoTerm       -> LoopType     {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Id           {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Exp          {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Statement    {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Statements   {cons("FromTerm"),prefer}
+    "~*" StrategoTerm      -> {Exp ","}*   {cons("FromTerm")}
+
+    %% Providing for annotations in concrete syntax
+    Exp "{" StrategoTerm "}"        -> Exp          {cons("Anno")}
+    Statement "{" StrategoTerm "}"  -> Statement    {cons("Anno")}
+    Statements "{" StrategoTerm "}" -> Statements   {cons("Anno")}
+
+    %% Brackets to disambiguate inside rules
+    "[" Exp "]"                     -> Exp          {bracket}
+    "[" Statement "]"               -> Statement    {bracket}
+    "[" Statements "]"              -> Statements   {bracket}
+
+exports
+  variables
+    [e][0-9]*             -> Exp          {prefer}
+    [s][0-9]*             -> Statements   {prefer}
+    %% i... represents an integer - parse it as IntConst and Int will be
+wrapped around it
+    [ijk][0-9]*           -> IntConst     {prefer}
+    %% x... represents a variable name - parse it as Id and Var will be
+wrapped around it
+    [x][0-9]*             -> Id           {prefer} 
+
+---------------
+
+2. I saw in an email from earlier this year to use StrategoMix.  I cannot
+find documentation
+Relevant to it online.  Here is what I tried...
+
+---
+module StrategoApply
+imports StrategoMix[StrategoHost]
+        Apply
+hiddens
+  context-free start-symbols Module[[StrategoHost]]
+exports
+  context-free syntax
+
+    %% Basic concrete syntax
+    "|[" Exp "]|"          -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Statement "]|"    -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Statements "]|"   -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" FunctionArgs "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Declarations "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Function "]|"     -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> LoopType     {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Id           {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Exp          {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Statement    {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Statements   {cons("FromTerm"),prefer}
+    "~*" Term[[StrategoHost]]      -> {Exp ","}*   {cons("FromTerm")}
+
+    %% Providing for annotations in concrete syntax
+    Exp "{" Term[[StrategoHost]] "}"        -> Exp          {cons("Anno")}
+    Statement "{" Term[[StrategoHost]] "}"  -> Statement    {cons("Anno")}
+    Statements "{" Term[[StrategoHost]] "}" -> Statements   {cons("Anno")}
+
+    %% Brackets to disambiguate inside rules
+    "[" Exp "]"                     -> Exp          {bracket}
+    "[" Statement "]"               -> Statement    {bracket}
+    "[" Statements "]"              -> Statements   {bracket}
+
+exports
+  variables
+    [e][0-9]*             -> Exp          {prefer}
+    [s][0-9]*             -> Statements   {prefer}
+    %% i... represents an integer - parse it as IntConst and Int will be
+wrapped around it
+    [ijk][0-9]*           -> IntConst     {prefer}
+    %% x... represents a variable name - parse it as Id and Var will be
+wrapped around it
+    [x][0-9]*             -> Id           {prefer}
+---
+
+But it produces even more errors.  StrategoHost is an undeclared sort.
+StrategoHost is not defined by any production.  Start symbol is not defined
+by any production.  Also, bracket warnings.
+
+All I want to be able to do is to recompile the existing code that uses
+concrete syntax.
+It would be nice to upgrade to the latest way of implementing concrete
+syntax to help ensure
+Future sustainability of the project.
+
+Regards
+Len Hamey
+
+
+From len.hamey at mq.edu.au  Thu Nov 18 05:53:23 2010
+From: len.hamey at mq.edu.au (Len Hamey)
+Date: Thu, 18 Nov 2010 15:53:23 +1100
+Subject: [Stratego Users] Changes of the way to implement concrete syntax.
+In-Reply-To: <AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+References: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+	<AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+Message-ID: <4ce4b14e.13f88e0a.1280.ffffabe0@mx.google.com>
+
+I have a project that has been based on stratego since 2008.  It uses
+concrete syntax.  The
+Method of creating the concrete syntax capability is combining
+StrategoRenamed with the target
+Language.  I am having trouble rebuilding the project.  
+
+1. I don't have a command script to build the combined files
+strategoapply.def and strategoapply.tbl, so I am assuming that the commands
+are:
+
+-----------------
+#! /bin/sh -e
+
+# collect modules 
+pack-sdf -i StrategoApply.sdf -o StrategoApply.def
+
+# generate parse table
+sdf2table -i StrategoApply.def -o StrategoApply.tbl -m StrategoApply
+-----------------------------
+
+But these commands give errors: start symbol not defined by any production,
+and warnings about the bracket attribute on rules that appear to be inside
+stratego.
+
+Here is the code:
+-----------
+module StrategoApply
+imports StrategoRenamed
+        Apply
+hiddens
+  context-free start-symbols StrategoModule
+exports
+  context-free syntax
+
+    %% Basic concrete syntax
+    "|[" Exp "]|"          -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Statement "]|"    -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Statements "]|"   -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" FunctionArgs "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Declarations "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+    "|[" Function "]|"     -> StrategoTerm {cons("ToTerm"),prefer}
+    "~" StrategoTerm       -> LoopType     {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Id           {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Exp          {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Statement    {cons("FromTerm"),prefer}
+    "~" StrategoTerm       -> Statements   {cons("FromTerm"),prefer}
+    "~*" StrategoTerm      -> {Exp ","}*   {cons("FromTerm")}
+
+    %% Providing for annotations in concrete syntax
+    Exp "{" StrategoTerm "}"        -> Exp          {cons("Anno")}
+    Statement "{" StrategoTerm "}"  -> Statement    {cons("Anno")}
+    Statements "{" StrategoTerm "}" -> Statements   {cons("Anno")}
+
+    %% Brackets to disambiguate inside rules
+    "[" Exp "]"                     -> Exp          {bracket}
+    "[" Statement "]"               -> Statement    {bracket}
+    "[" Statements "]"              -> Statements   {bracket}
+
+exports
+  variables
+    [e][0-9]*             -> Exp          {prefer}
+    [s][0-9]*             -> Statements   {prefer}
+    %% i... represents an integer - parse it as IntConst and Int will be
+wrapped around it
+    [ijk][0-9]*           -> IntConst     {prefer}
+    %% x... represents a variable name - parse it as Id and Var will be
+wrapped around it
+    [x][0-9]*             -> Id           {prefer} 
+
+---------------
+
+2. I saw in an email from earlier this year to use StrategoMix.  I cannot
+find documentation
+Relevant to it online.  Here is what I tried...
+
+---
+module StrategoApply
+imports StrategoMix[StrategoHost]
+        Apply
+hiddens
+  context-free start-symbols Module[[StrategoHost]]
+exports
+  context-free syntax
+
+    %% Basic concrete syntax
+    "|[" Exp "]|"          -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Statement "]|"    -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Statements "]|"   -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" FunctionArgs "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Declarations "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "|[" Function "]|"     -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> LoopType     {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Id           {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Exp          {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Statement    {cons("FromTerm"),prefer}
+    "~" Term[[StrategoHost]]       -> Statements   {cons("FromTerm"),prefer}
+    "~*" Term[[StrategoHost]]      -> {Exp ","}*   {cons("FromTerm")}
+
+    %% Providing for annotations in concrete syntax
+    Exp "{" Term[[StrategoHost]] "}"        -> Exp          {cons("Anno")}
+    Statement "{" Term[[StrategoHost]] "}"  -> Statement    {cons("Anno")}
+    Statements "{" Term[[StrategoHost]] "}" -> Statements   {cons("Anno")}
+
+    %% Brackets to disambiguate inside rules
+    "[" Exp "]"                     -> Exp          {bracket}
+    "[" Statement "]"               -> Statement    {bracket}
+    "[" Statements "]"              -> Statements   {bracket}
+
+exports
+  variables
+    [e][0-9]*             -> Exp          {prefer}
+    [s][0-9]*             -> Statements   {prefer}
+    %% i... represents an integer - parse it as IntConst and Int will be
+wrapped around it
+    [ijk][0-9]*           -> IntConst     {prefer}
+    %% x... represents a variable name - parse it as Id and Var will be
+wrapped around it
+    [x][0-9]*             -> Id           {prefer}
+---
+
+But it produces even more errors.  StrategoHost is an undeclared sort.
+StrategoHost is not defined by any production.  Start symbol is not defined
+by any production.  Also, bracket warnings.
+
+All I want to be able to do is to recompile the existing code that uses
+concrete syntax.
+It would be nice to upgrade to the latest way of implementing concrete
+syntax to help ensure
+Future sustainability of the project.
+
+Regards
+Len Hamey
+
+
+From karltk at strategoxt.org  Thu Nov 18 13:30:10 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Thu, 18 Nov 2010 13:30:10 +0100
+Subject: [Stratego Users] Changes of the way to implement concrete
+	syntax.
+In-Reply-To: <4ce4b14e.13f88e0a.1280.ffffabe0@mx.google.com>
+References: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+	<AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+	<4ce4b14e.13f88e0a.1280.ffffabe0@mx.google.com>
+Message-ID: <AANLkTimBDx+Krs+jdbc=SbQjP=SPxCbqZ8dQJ_U_BxXq@mail.gmail.com>
+
+Hi,
+
+there's always the syntax embedding in Java Front:
+
+https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/syntax-embedding/
+
+Another is the Stratego+WebDSL embedding:
+
+https://svn.strategoxt.org/repos/WebDSL/webdsls/trunk/src/org/webdsl/dsl/syntax/
+
+
+We recently had a paper about making the embedding easier:
+
+http://swerl.tudelft.nl/twiki/pub/Main/TechnicalReports/TUD-SERG-2010-040.pdf
+
+The tooling explained this paper is not part of any official Stratego
+or Spoofax release yet.
+
+
+Cheers,
+
+-- Karl T
+
+From E.Visser at tudelft.nl  Mon Nov 22 00:26:27 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 22 Nov 2010 00:26:27 +0100
+Subject: [Stratego Users] CfP ICMT 2011 - International Conference on Model
+	Transformation
+In-Reply-To: <0E3D4BD0-3466-4B48-86BF-9E70BB051B3E@cs.york.ac.uk>
+References: <0E3D4BD0-3466-4B48-86BF-9E70BB051B3E@cs.york.ac.uk>
+Message-ID: <AANLkTi=qkb76sV=tOAkL=_Pxu8p3u0ruptd3gCZEULAz@mail.gmail.com>
+
+-----------------------------------------------------------------------
+INTERNATIONAL CONFERENCE ON MODEL TRANSFORMATION (ICMT) 2011
+
+Co-located with TOOLS Europe 2011
+
+Zurich - Switzerland, 27 - 28 June 2011
+
+http://www.model-transformation.org/ICMT2011/
+-----------------------------------------------------------------------
+
+Overview
+-------------------------
+
+Modelling is a key element in reducing the complexity of software
+systems during their development and maintenance. Model transformations
+are essential for elevating models from documentation elements to
+first-class artifacts of the development process. Model transformation
+includes model-to-text transformation to generate code from models,
+text-to-model transformations to parse textual representations to model
+representations, model extraction to derive higher-level models from
+legacy code, and model-to-model transformations to normalize, weave,
+optimize, and refactor models, as well as to translate between modeling
+languages.
+
+Model transformation encompasses a variety of technical spaces,
+including modelware, grammarware, and XML-ware, a variety of
+transformation representations including graphs, trees, and DAGs, and a
+variety of transformation paradigms including rule-based graph
+transformation, term rewriting, and implementations in general-purpose
+programming languages.
+
+The study of model transformation includes foundations, semantics,
+structuring mechanisms, and properties (such as modularity,
+composability, and parameterization) of transformations, transformation
+languages, techniques and tools. An important goal of the field is the
+development of high-level declarative model transformation languages,
+providing model representations of transformations that are amenable to
+'higher-order' model transformation. To achieve impact on software
+engineering practice, tools and methodologies to integrate model
+transformation into existing development environments and processes are
+required. ICMT is the premier forum for the presentation of
+contributions that advance the state-of-the-art in the field of model
+transformation and aims to bring together researchers from all areas of
+model transformation.
+
+
+Topics
+-------------------------
+
+Topics of interest include, but are not limited to:
+
+?* Transformation paradigms and languages
+? ?* graph rewriting, tree rewriting, attribute grammars
+? ?* rule-based, declarative, imperative, functional
+? ?* textual, graphical
+? ?* pattern matching
+? ?* transformation by example
+? ?* modularity, reusability, and composition
+? ?* comparison of transformation languages
+? ?* theoretical foundations
+
+?* Transformation algorithms and strategies
+? ?* model representations: graphs, dags, trees
+? ?* bidirectional transformation
+? ?* incremental transformation
+? ?* scalability
+? ?* optimization
+? ?* termination and confluence
+? ?* higher-order transformation
+? ?* evolution of transformations
+
+?* Implementation and tools
+? ?* design of transformations and transformation languages
+? ?* verification, validation and testing of transformations
+
+?* Applications and case studies
+? ?* refactoring
+? ?* aspect weaving
+? ?* model comparison, differencing and merging
+? ?* round-trip engineering
+? ?* co-evolution of models and meta-models
+? ?* reverse engineering (code-to-model)
+? ?* code generation by model transformation
+
+?* Industrial experience reports
+
+?* Empirical studies
+
+Submission guidelines
+-------------------------
+
+All contributions will be subject to a rigorous selection process by the
+international Program Committee, with an emphasis on originality,
+practicality and overall quality. Papers should clearly indicate their
+contributions with respect to previous work. Each paper will be reviewed
+by at least 3 committee members. All submissions should follow the LNCS
+format and should include the authors' names, affiliations and contact
+details. Further instructions for submitting a paper will be available
+at http://www.model-transformation.org/ICMT2011/.
+
+As in previous editions of ICMT, we intend to publish proceedings in the
+Springer LNCS series. Moreover, a special issue with a selection of the
+best papers from the conference will be published in the Journal of
+Object Technology (JOT).
+
+Important dates
+-------------------------
+
+?* Abstract submission: 4 February 2011
+?* Paper submission: 11 February 2011
+?* Notification of acceptance: 14 March 2011
+?* Camera-ready version due: 28 March 2011
+?* Conference dates: 27-28 June 2011
+
+Organization
+-------------------------
+
+PC chairs:
+?* Eelco Visser
+?* Jordi Cabot
+
+Publicity chair:
+?* Dimitrios Kolovos
+
+Web chair:
+?* Davide Di Ruscio
+
+Steering committee:
+?* Jean B?zivin
+?* Martin Gogolla
+?* Jeff Gray
+?* Richard Paige
+?* Alfonso Pierantonio
+?* Antonio Vallecillo
+?* Laurence Tratt
+
+Program Committee:
+?* Andy Sch?rr
+?* Antonio Cicchetti
+?* Bernhard Rumpe
+?* Daniel Varro
+?* Dennis Wagelaar
+?* Eric Van Wyk
+?* Gerti Kappel
+?* Gregor Engels
+?* G?nter Kniesel
+?* Hans Vangheluwe
+?* Ivan Kurtev
+?* Janis Voigtl?nder
+?* Jendrik Johannes
+?* Jesus Garcia-Molina
+?* Jim Cordy
+?* Juan de Lara
+?* Jurgen Vinju
+?* Krzysztof Czarnecki
+?* Marco Brambilla
+?* Mark van den Brand
+?* Nate Foster
+?* Oscar Nierstrasz
+?* Paolo Atzeni
+?* Perdita Stevens
+?* Pieter Van Gorp
+?* Ralf Laemmel
+?* Reiko Heckel
+?* Simon Thompson
+?* Thomas Kuehne
+?* Tony Clark
+?* Zhenjiang Hu
+
+
+From L.C.L.Kats at tudelft.nl  Mon Nov 22 16:00:00 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Mon, 22 Nov 2010 16:00:00 +0100
+Subject: [Stratego Users] Changes of the way to implement concrete
+ syntax.
+In-Reply-To: <4ce4b14e.13f88e0a.1280.ffffabe0@mx.google.com>
+References: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+	<AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+	<4ce4b14e.13f88e0a.1280.ffffabe0@mx.google.com>
+Message-ID: <201011221500.oAMF00Q0002322@mc-smtp1.infopact.nl>
+
+Hi,
+
+I don't think there's been any fundamental changes here. The sdf2table error checker tends to give spurious error messages though. I imagine it may not be able to determine that the StrategoModule start symbol was renamed, but it should still work. Most errors it prints are not fatal. Perhaps the table it generates is just fine?
+
+Lennart
+
+@ 05:53 AM 11/18/2010, U wrote:
+>I have a project that has been based on stratego since 2008.  It uses
+>concrete syntax.  The
+>Method of creating the concrete syntax capability is combining
+>StrategoRenamed with the target
+>Language.  I am having trouble rebuilding the project.  
+>
+>1. I don't have a command script to build the combined files
+>strategoapply.def and strategoapply.tbl, so I am assuming that the commands
+>are:
+>
+>-----------------
+>#! /bin/sh -e
+>
+># collect modules 
+>pack-sdf -i StrategoApply.sdf -o StrategoApply.def
+>
+># generate parse table
+>sdf2table -i StrategoApply.def -o StrategoApply.tbl -m StrategoApply
+>-----------------------------
+>
+>But these commands give errors: start symbol not defined by any production,
+>and warnings about the bracket attribute on rules that appear to be inside
+>stratego.
+>
+>Here is the code:
+>-----------
+>module StrategoApply
+>imports StrategoRenamed
+>        Apply
+>hiddens
+>  context-free start-symbols StrategoModule
+>exports
+>  context-free syntax
+>
+>    %% Basic concrete syntax
+>    "|[" Exp "]|"          -> StrategoTerm {cons("ToTerm"),prefer}
+>    "|[" Statement "]|"    -> StrategoTerm {cons("ToTerm"),prefer}
+>    "|[" Statements "]|"   -> StrategoTerm {cons("ToTerm"),prefer}
+>    "|[" FunctionArgs "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+>    "|[" Declarations "]|" -> StrategoTerm {cons("ToTerm"),prefer}
+>    "|[" Function "]|"     -> StrategoTerm {cons("ToTerm"),prefer}
+>    "~" StrategoTerm       -> LoopType     {cons("FromTerm"),prefer}
+>    "~" StrategoTerm       -> Id           {cons("FromTerm"),prefer}
+>    "~" StrategoTerm       -> Exp          {cons("FromTerm"),prefer}
+>    "~" StrategoTerm       -> Statement    {cons("FromTerm"),prefer}
+>    "~" StrategoTerm       -> Statements   {cons("FromTerm"),prefer}
+>    "~*" StrategoTerm      -> {Exp ","}*   {cons("FromTerm")}
+>
+>    %% Providing for annotations in concrete syntax
+>    Exp "{" StrategoTerm "}"        -> Exp          {cons("Anno")}
+>    Statement "{" StrategoTerm "}"  -> Statement    {cons("Anno")}
+>    Statements "{" StrategoTerm "}" -> Statements   {cons("Anno")}
+>
+>    %% Brackets to disambiguate inside rules
+>    "[" Exp "]"                     -> Exp          {bracket}
+>    "[" Statement "]"               -> Statement    {bracket}
+>    "[" Statements "]"              -> Statements   {bracket}
+>
+>exports
+>  variables
+>    [e][0-9]*             -> Exp          {prefer}
+>    [s][0-9]*             -> Statements   {prefer}
+>    %% i... represents an integer - parse it as IntConst and Int will be
+>wrapped around it
+>    [ijk][0-9]*           -> IntConst     {prefer}
+>    %% x... represents a variable name - parse it as Id and Var will be
+>wrapped around it
+>    [x][0-9]*             -> Id           {prefer} 
+>
+>---------------
+>
+>2. I saw in an email from earlier this year to use StrategoMix.  I cannot
+>find documentation
+>Relevant to it online.  Here is what I tried...
+>
+>---
+>module StrategoApply
+>imports StrategoMix[StrategoHost]
+>        Apply
+>hiddens
+>  context-free start-symbols Module[[StrategoHost]]
+>exports
+>  context-free syntax
+>
+>    %% Basic concrete syntax
+>    "|[" Exp "]|"          -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "|[" Statement "]|"    -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "|[" Statements "]|"   -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "|[" FunctionArgs "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "|[" Declarations "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "|[" Function "]|"     -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>    "~" Term[[StrategoHost]]       -> LoopType     {cons("FromTerm"),prefer}
+>    "~" Term[[StrategoHost]]       -> Id           {cons("FromTerm"),prefer}
+>    "~" Term[[StrategoHost]]       -> Exp          {cons("FromTerm"),prefer}
+>    "~" Term[[StrategoHost]]       -> Statement    {cons("FromTerm"),prefer}
+>    "~" Term[[StrategoHost]]       -> Statements   {cons("FromTerm"),prefer}
+>    "~*" Term[[StrategoHost]]      -> {Exp ","}*   {cons("FromTerm")}
+>
+>    %% Providing for annotations in concrete syntax
+>    Exp "{" Term[[StrategoHost]] "}"        -> Exp          {cons("Anno")}
+>    Statement "{" Term[[StrategoHost]] "}"  -> Statement    {cons("Anno")}
+>    Statements "{" Term[[StrategoHost]] "}" -> Statements   {cons("Anno")}
+>
+>    %% Brackets to disambiguate inside rules
+>    "[" Exp "]"                     -> Exp          {bracket}
+>    "[" Statement "]"               -> Statement    {bracket}
+>    "[" Statements "]"              -> Statements   {bracket}
+>
+>exports
+>  variables
+>    [e][0-9]*             -> Exp          {prefer}
+>    [s][0-9]*             -> Statements   {prefer}
+>    %% i... represents an integer - parse it as IntConst and Int will be
+>wrapped around it
+>    [ijk][0-9]*           -> IntConst     {prefer}
+>    %% x... represents a variable name - parse it as Id and Var will be
+>wrapped around it
+>    [x][0-9]*             -> Id           {prefer}
+>---
+>
+>But it produces even more errors.  StrategoHost is an undeclared sort.
+>StrategoHost is not defined by any production.  Start symbol is not defined
+>by any production.  Also, bracket warnings.
+>
+>All I want to be able to do is to recompile the existing code that uses
+>concrete syntax.
+>It would be nice to upgrade to the latest way of implementing concrete
+>syntax to help ensure
+>Future sustainability of the project.
+>
+>Regards
+>Len Hamey
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From Jurgen.Vinju at cwi.nl  Wed Nov 24 15:10:51 2010
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Wed, 24 Nov 2010 15:10:51 +0100
+Subject: [Stratego Users] GTTSE/SLE Call for Workshop Proposals
+Message-ID: <AANLkTimYgkDx6aMNz66ziaZu+VSyBsQT1ewHo94kbxft@mail.gmail.com>
+
+Call for Workshop Proposals
+
+*4th International Summer School on Generative and Transformational
+Techniques in SE (GTTSE 2011)*
+
+*4th International Conference on Software Language Engineering (SLE 2011)*
+
+*2?10 July 2011 (tentative)*
+
+*Braga, Portugal*
+------------------------------
+
+In the 2011 editions of GTTSE and SLE, these two different forms of
+scientific venues on software language engineering and software
+transformation will team up to create a synergy which promises to attract a
+considerable number of both senior scientists and PhD students for an
+intensive exchange in the special environment of Hotel Falperra in the
+scenic outskirts of Braga. A *small number of workshops* will be hosted
+before GTTSE/SLE in the same venue. Workshop rooms are available at the
+conference site, and all local arrangements will be facilitated by the
+GTTSE/SLE organization.
+
+Proposals for half-day to full-day workshops are cordially invited. *The
+workshops should clearly relate to the broader mission of GTTSE/SLE, or they
+should focus on general aspects of research* (e.g., Research 2.0). The
+proposals should be sent by 21 December 2010, to sle2011 at di.uminho.pt and
+should include the following information:
+
+   - Name of the workshop
+   - Intended aims and scope
+   - Form of proceedings (online?)
+   - Expected number of participants (min/avg/max)
+   - Contact person with full contact information
+
+If you have any questions, please contact any member of the selection
+committee (see below).
+------------------------------
+Important Dates
+
+   - Submission deadline for proposals: 21 December 2010
+   - Notification: 10 January, 2011
+   - Workshop days: 2-3 July, 2011 (tentative)
+
+------------------------------
+Workshop Selection Chair
+
+   - Jurgen Vinju (CWI, Amsterdam, The Netherlands)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101124/c83749fe/attachment.html 
+
+From Jurgen.Vinju at cwi.nl  Wed Nov 24 15:10:51 2010
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Wed, 24 Nov 2010 15:10:51 +0100
+Subject: [Stratego Users] GTTSE/SLE Call for Workshop Proposals
+Message-ID: <AANLkTimYgkDx6aMNz66ziaZu+VSyBsQT1ewHo94kbxft@mail.gmail.com>
+
+Call for Workshop Proposals
+
+*4th International Summer School on Generative and Transformational
+Techniques in SE (GTTSE 2011)*
+
+*4th International Conference on Software Language Engineering (SLE 2011)*
+
+*2?10 July 2011 (tentative)*
+
+*Braga, Portugal*
+------------------------------
+
+In the 2011 editions of GTTSE and SLE, these two different forms of
+scientific venues on software language engineering and software
+transformation will team up to create a synergy which promises to attract a
+considerable number of both senior scientists and PhD students for an
+intensive exchange in the special environment of Hotel Falperra in the
+scenic outskirts of Braga. A *small number of workshops* will be hosted
+before GTTSE/SLE in the same venue. Workshop rooms are available at the
+conference site, and all local arrangements will be facilitated by the
+GTTSE/SLE organization.
+
+Proposals for half-day to full-day workshops are cordially invited. *The
+workshops should clearly relate to the broader mission of GTTSE/SLE, or they
+should focus on general aspects of research* (e.g., Research 2.0). The
+proposals should be sent by 21 December 2010, to sle2011 at di.uminho.pt and
+should include the following information:
+
+   - Name of the workshop
+   - Intended aims and scope
+   - Form of proceedings (online?)
+   - Expected number of participants (min/avg/max)
+   - Contact person with full contact information
+
+If you have any questions, please contact any member of the selection
+committee (see below).
+------------------------------
+Important Dates
+
+   - Submission deadline for proposals: 21 December 2010
+   - Notification: 10 January, 2011
+   - Workshop days: 2-3 July, 2011 (tentative)
+
+------------------------------
+Workshop Selection Chair
+
+   - Jurgen Vinju (CWI, Amsterdam, The Netherlands)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101124/c83749fe/attachment-0001.html 
+
+From shannonbay at gmail.com  Wed Nov 24 23:25:05 2010
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Wed, 24 Nov 2010 22:25:05 +0000 (UTC)
+Subject: [Stratego Users]
+	=?utf-8?q?Transformation_using_concrete_syntax_w?=
+	=?utf-8?q?ith=09Spoofax?=
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+Message-ID: <loom.20101124T231438-169@post.gmane.org>
+
+Hi Lennart,
+
+Can you please explain, possibly with reference to this solution 
+(http://permalink.gmane.org/gmane.comp.lang.stratego.user/813)
+how I might use java-front's concrete syntax, Stratego-Java-15, 
+within a spoofax project?
+
+Many thanks,
+
+Shannon
+
+
+
+From shannonbay at gmail.com  Thu Nov 25 00:37:18 2010
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Thu, 25 Nov 2010 12:37:18 +1300
+Subject: [Stratego Users] Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <loom.20101124T231438-169@post.gmane.org>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+	<loom.20101124T231438-169@post.gmane.org>
+Message-ID: <AANLkTinOUSPXzfCaG724rUaCcEYS6GLMVA_Mi1GHhjdg@mail.gmail.com>
+
+By the way, I have already installed java-front, so have the grammar files
+at /usr/local/share/java-front - so perhaps my question is really, "how
+would I tell the ant build where to look for those?"
+
+On Thu, Nov 25, 2010 at 11:25 AM, Shannon Bay <shannonbay at gmail.com> wrote:
+
+> Hi Lennart,
+>
+> Can you please explain, possibly with reference to this solution
+> (http://permalink.gmane.org/gmane.comp.lang.stratego.user/813)
+> how I might use java-front's concrete syntax, Stratego-Java-15,
+> within a spoofax project?
+>
+> Many thanks,
+>
+> Shannon
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101125/c57307dc/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Nov 25 13:23:52 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 25 Nov 2010 13:23:52 +0100
+Subject: [Stratego Users] Transformation using concrete syntax with
+ Spoofax
+In-Reply-To: <AANLkTinOUSPXzfCaG724rUaCcEYS6GLMVA_Mi1GHhjdg@mail.gmail.c
+ om>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+	<loom.20101124T231438-169@post.gmane.org>
+	<AANLkTinOUSPXzfCaG724rUaCcEYS6GLMVA_Mi1GHhjdg@mail.gmail.com>
+Message-ID: <201011251223.oAPCNqG0004235@mc-smtp1.infopact.nl>
+
+Hi Shannon,
+
+If you already have a parse table for the combined language, all you need to do is make sure that table is in your Eclipse workspace, and that you use a .meta file with the contents Meta([Syntax("Stratego-Java-15")]) for each .str file. This means you can copy your /user/local/share/java-front/Stratego-Java-15.tbl file to your Spoofax project. 
+
+To enable full error recovery when parsing using the Stratego-Java language, you could take an additional step, applying the make-permissive tool to the Stratego-Java-15.def file and then making a new parse table for it. If you'd do this using Ant you would get something like the following (untested, adapted from build.generated.xml):
+
+        <property name="javadef" value="/usr/local/share/java-front/Stratego-Java-15.def"/>
+
+        <target name="sj-sdf2table" depends="sjmake-permissive">
+            <apply executable="${build.strategoxt.sdf}sdf2table" dest="${include}" failonerror="true">
+                <arg value="-i"/>
+                <srcfile/>
+                <arg value="-o"/>
+                <targetfile/>
+                <arg value="-m"/>
+                <arg value="Stratego-Java-15"/>
+                
+                <fileset file="${include}/Stratego-Java-15-Permissive.def"/>
+                <mapper type="glob" from="*-Permissive.def" to="*.tbl"/>
+            </apply>
+        </target>
+        
+        <target name="sj-make-permissive">
+            <dependset>
+                <srcfileset file="${javadef}"/>
+                <targetfileset file="${include}/Stratego-Java-15-Permissive.def"/>
+            </dependset>
+            <available file="${include}/Stratego-Java-15-Permissive.def" property="sj-permissive-grammar.available"/>
+            <antcall target="sj-make-permissive.helper"/>
+        </target>
+    
+        <target name="sj-make-permissive.helper" unless="sj-permissive-grammar.available">
+            <java classname="org.strategoxt.permissivegrammars.make_permissive" failonerror="true">
+                <arg value="-i"/>
+                <arg value="${javadef}"/>
+                <arg value="-o"/>
+                <arg value="${include}/Stratego-Java-15-Permissive.def"/>
+            </java>
+        </target>
+
+Ant tends to be quite verbose for these things, but the idea is to first apply make-permissive and then sdf2table to get a new Stratego-Java-15.tbl. But before you do that, try just copying the normal Stratego-Java-15.tbl to your workspace and see what happens. Using the permissive table may just improve the editing experience a bit, since interactive parsing works best with these permissive tables.
+
+hth,
+
+Lennart
+
+@ 12:37 AM 11/25/2010, Shannon Bay wrote:
+>By the way, I have already installed java-front, so have the grammar files at /usr/local/share/java-front - so perhaps my question is really, "how would I tell the ant build where to look for those?"
+>
+>On Thu, Nov 25, 2010 at 11:25 AM, Shannon Bay <<mailto:shannonbay at gmail.com>shannonbay at gmail.com> wrote:
+>Hi Lennart,
+>
+>Can you please explain, possibly with reference to this solution
+>(<http://permalink.gmane.org/gmane.comp.lang.stratego.user/813>http://permalink.gmane.org/gmane.comp.lang.stratego.user/813)
+>how I might use java-front's concrete syntax, Stratego-Java-15,
+>within a spoofax project?
+>
+>Many thanks,
+>
+>Shannon
+>
+>
+>_______________________________________________
+>Users mailing list
+><mailto:Users at strategoxt.org>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From shannonbay at gmail.com  Thu Nov 25 20:56:53 2010
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Fri, 26 Nov 2010 08:56:53 +1300
+Subject: [Stratego Users] Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <201011251223.oAPCNqG0004235@mc-smtp1.infopact.nl>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+	<loom.20101124T231438-169@post.gmane.org>
+	<AANLkTinOUSPXzfCaG724rUaCcEYS6GLMVA_Mi1GHhjdg@mail.gmail.com>
+	<201011251223.oAPCNqG0004235@mc-smtp1.infopact.nl>
+Message-ID: <AANLkTin8kmSgRiQit+XSAiDO2etjXt3v7JCWrrNEC_O+@mail.gmail.com>
+
+Hi Lennart,
+
+Great reply, thanks!  I got concrete syntax going just now - will try the
+permissive grammar in a minute and let you know how that goes too.
+
+I did have trouble initially - my generate.str just wouldn't compile - the
+stratego editor was giving me errors on the concrete syntax from this
+example<http://hydra.nixos.org/build/766792/download/1/manual/chunk-chapter/java-front.html#id1249266>,
+even after I refreshed all my project folders, as you suggest
+here<http://article.gmane.org/gmane.comp.lang.stratego.user/822/match=marcos>.
+I'm using Eclipse Version: 3.6.1
+
+However, restarting eclipse resolved the issue.  So I'm lucky I tried that
+with the concrete syntax in place.
+
+Cheers,
+
+Shannon
+
+On Fri, Nov 26, 2010 at 1:23 AM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Shannon,
+>
+> If you already have a parse table for the combined language, all you need
+> to do is make sure that table is in your Eclipse workspace, and that you use
+> a .meta file with the contents Meta([Syntax("Stratego-Java-15")]) for each
+> .str file. This means you can copy your
+> /user/local/share/java-front/Stratego-Java-15.tbl file to your Spoofax
+> project.
+>
+> To enable full error recovery when parsing using the Stratego-Java
+> language, you could take an additional step, applying the make-permissive
+> tool to the Stratego-Java-15.def file and then making a new parse table for
+> it. If you'd do this using Ant you would get something like the following
+> (untested, adapted from build.generated.xml):
+>
+>        <property name="javadef"
+> value="/usr/local/share/java-front/Stratego-Java-15.def"/>
+>
+>        <target name="sj-sdf2table" depends="sjmake-permissive">
+>            <apply executable="${build.strategoxt.sdf}sdf2table"
+> dest="${include}" failonerror="true">
+>                <arg value="-i"/>
+>                <srcfile/>
+>                <arg value="-o"/>
+>                <targetfile/>
+>                <arg value="-m"/>
+>                <arg value="Stratego-Java-15"/>
+>
+>                <fileset file="${include}/Stratego-Java-15-Permissive.def"/>
+>                <mapper type="glob" from="*-Permissive.def" to="*.tbl"/>
+>            </apply>
+>        </target>
+>
+>        <target name="sj-make-permissive">
+>            <dependset>
+>                <srcfileset file="${javadef}"/>
+>                <targetfileset
+> file="${include}/Stratego-Java-15-Permissive.def"/>
+>            </dependset>
+>            <available file="${include}/Stratego-Java-15-Permissive.def"
+> property="sj-permissive-grammar.available"/>
+>            <antcall target="sj-make-permissive.helper"/>
+>        </target>
+>
+>        <target name="sj-make-permissive.helper"
+> unless="sj-permissive-grammar.available">
+>            <java
+> classname="org.strategoxt.permissivegrammars.make_permissive"
+> failonerror="true">
+>                <arg value="-i"/>
+>                <arg value="${javadef}"/>
+>                <arg value="-o"/>
+>                <arg value="${include}/Stratego-Java-15-Permissive.def"/>
+>            </java>
+>        </target>
+>
+> Ant tends to be quite verbose for these things, but the idea is to first
+> apply make-permissive and then sdf2table to get a new Stratego-Java-15.tbl.
+> But before you do that, try just copying the normal Stratego-Java-15.tbl to
+> your workspace and see what happens. Using the permissive table may just
+> improve the editing experience a bit, since interactive parsing works best
+> with these permissive tables.
+>
+> hth,
+>
+> Lennart
+>
+> @ 12:37 AM 11/25/2010, Shannon Bay wrote:
+> >By the way, I have already installed java-front, so have the grammar files
+> at /usr/local/share/java-front - so perhaps my question is really, "how
+> would I tell the ant build where to look for those?"
+> >
+> >On Thu, Nov 25, 2010 at 11:25 AM, Shannon Bay <<mailto:
+> shannonbay at gmail.com>shannonbay at gmail.com> wrote:
+> >Hi Lennart,
+> >
+> >Can you please explain, possibly with reference to this solution
+> >(<http://permalink.gmane.org/gmane.comp.lang.stratego.user/813>
+> http://permalink.gmane.org/gmane.comp.lang.stratego.user/813)
+> >how I might use java-front's concrete syntax, Stratego-Java-15,
+> >within a spoofax project?
+> >
+> >Many thanks,
+> >
+> >Shannon
+> >
+> >
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101126/3bed6b8c/attachment.html 
+
+From Magne.Haveraaen at ii.uib.no  Tue Nov 30 19:55:11 2010
+From: Magne.Haveraaen at ii.uib.no (Magne Haveraaen)
+Date: Tue, 30 Nov 2010 12:55:11 -0600
+Subject: [Stratego Users] CFP - Program Generation and Transformation for
+	HPC Applications
+Message-ID: <4CF5488F.1070303@ii.uib.no>
+
+
+###################################################################
+   CALL FOR PAPERS
+
+* "Program Generation and Transformation for HPC Applications"
+* Workshop at ICCS 2011, Tsukuba, Japan, June 1-3, 2011
+* Paper Submission Deadline: January 8, 2011
+* website: http://www.mcs.anl.gov/events/workshops/PGTatICCS2011/
+###################################################################
+
+Workshop on
+   Program Generation and Transformation  for HPC Applications
+
+at the
+
+   2011 International Conference on Computational Science (ICCS 2011)
+   http://www.iccs-meeting.org/
+   Tsukuba, Japan, June 1-3, 2011
+
+The efficient use of current hardware for applications in the area of 
+high performance computing requires specific programming skills and 
+awareness of hardware-specific programming languages/interfaces. For 
+complicated numerical models with a large source code base a manual 
+adaptation of the source code  to frequently updated hardware 
+environments becomes increasingly untenable. Software transformation 
+systems, automated code generation  from domain-specific higher-level 
+abstractions, and automated code optimization are the most promising 
+approaches to bridge the gap between numerical models written in 
+higher-level programming languages and the hardware-specific programming 
+models one has to use to achieve maximal efficiency.  Examples are 
+source transformation systems such as Stratego and ROSE,  and 
+application areas such as automatic differentiation, performance 
+optimization, automated extraction of computational kernels. To define 
+efficient techniques for the automated manipulation of software, 
+scientists will need compiler front-ends to support relevant HPC 
+languages,  the ability to do custom analysis and transformations, and 
+back-ends to generate either source code or object code. The goal of 
+this workshop is to bring together developers and users of such tools to 
+illustrate the state of the art and advance areas of common interest.
+
+Organizers:
+-----------
+   Magne Haveraaen (University of Bergen, Norway),
+   Koichi Kubota (Chuo University, Tokyo, Japan)
+   Dan Quinlan (Lawrence Livermore National Laboratory, USA)
+   Jean Utke (University of Chicago / Argonne National Laboratory, USA), 
+primary contact
+
+Paper Submission:
+-----------------
+   Details about the paper submission (10 pages) can be found on the 
+workshop website http://www.mcs.anl.gov/events/workshops/PGTatICCS2011/
+
+Proceedings:
+------------
+   The proceedings of the ICCS 2011 will be published by Elsevier 
+Science in the open-access Procedia Computer Science series. The 
+workshop papers are contained in the same proceeding of the conference.
+
+Important Dates:
+----------------
+    January    8, 2011: Full papers submission due
+    February  20, 2011: Notification of acceptance
+    March      7, 2011: Camera ready papers
+
+Contact Information:
+--------------------
+In case of questions, please email Jean Utke (utke at mcs.anl.gov).
+Questions about local travel, accommodations etc. should be sent to 
+Koichi Kubota (kubota at ise.chuo-u.ac.jp).
+Please prefix your subject line with ICCS2011.
+
+-- 
+Magne Haveraaen
+https://www.ii.uib.no/~magne/
+http://bldl.ii.uib.no/
+

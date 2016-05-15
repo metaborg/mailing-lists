@@ -1,0 +1,3288 @@
+From daniele.gianni at gmail.com  Thu Mar 15 23:33:00 2012
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Thu, 15 Mar 2012 23:33:00 +0100
+Subject: [Stratego Users] ***Extended deadline: March 26*** COMETS 2012 -
+ 3rd International Track on Collaborative Modeling and Simulation - Call for
+ Papers
+In-Reply-To: <CAOCNFM7766u0PCFyvOXCkTfmRagSJyky6kNXOvOcQxeiBYDp=w@mail.gmail.com>
+References: <201203122126.q2CLQRUe008972@DSX4000-4.tagadab.com>
+	<1331849919.4666.YahooMailNeo@web28410.mail.ukl.yahoo.com>
+	<CAOCNFM4D5iHFVJ0uxanNu63Zob=X4swN+Ei2q=7Yy20DaW6oVQ@mail.gmail.com>
+	<CAOCNFM58bCPqHPyEnDTBt_Zz426eKMGN6odwpcQRamJwFbO-mw@mail.gmail.com>
+	<CAOCNFM5QK76XV5dezUmbRDP6+6MLcuLs3PPV57vaC8QrMnqFWA@mail.gmail.com>
+	<CAOCNFM6tRX=16XxcrQhvacTQMTC9cOKkFS9dxF+xaYcazZstiw@mail.gmail.com>
+	<CAOCNFM7FsJ6N6TBR+ZSVecD=mtxxWY0rmO80T7u=bbY9=u=13A@mail.gmail.com>
+	<CAOCNFM7LSAe+4jsPG_Y=20p--F=g4_AfZ6UJN5Pa+m8Ywckk1w@mail.gmail.com>
+	<CAOCNFM50f0QU1S_PYffUsy7vgRrnAzAEe=eSGy0szR=V+pPP3Q@mail.gmail.com>
+	<CAOCNFM6-3HGZ6M6ENpW4pScqNJMuYEfqPuiNw4fi7mzUmN-sDg@mail.gmail.com>
+	<CAOCNFM6LOGxTpD6x0YDM8G2Lzfu3yoXsWyoxUZEDZLrE8xOjtA@mail.gmail.com>
+	<CAOCNFM4YW7qS0vg-u81zOZ0Qzw9+ZqfTopOBctRVL54zhZP-eA@mail.gmail.com>
+	<CAOCNFM4Pkn-QiiJYRQBzccWgOUxGk0E2n9kYrt1n79buuGCj2A@mail.gmail.com>
+	<CAOCNFM690p+WkuWCjQEp-NEimC54hmeLL_4qc6v6-1eCy=94pQ@mail.gmail.com>
+	<CAOCNFM7VVw41PW1Md_e9xnHS4m7395P23zq45g06H5Q0x7QKFQ@mail.gmail.com>
+	<CAOCNFM5h__15f61qRd=yqxB7Ehah0pRKfq9WZ81fbJyy+SyaOw@mail.gmail.com>
+	<CAOCNFM7VW63GAfAt33je3pgk0b7_r4Fv_LioQNR=_1oMj_YkWA@mail.gmail.com>
+	<CAOCNFM4va944ARDCAxcU8f1ooocm6aS_LwbLCFp8AXV2-sf4=w@mail.gmail.com>
+	<CAOCNFM5TD--arc-0iUg61aM09-xxHtERp-AcTbeCmKzSL9VSSA@mail.gmail.com>
+	<CAOCNFM6Kav73q3X5k-xmdJn2St8-Tt_JO0mb6CyU3ZLXKDfhag@mail.gmail.com>
+	<CAOCNFM4UPzK5RzXdJ+DpOWwNtTZoRzf60MRpFD=1-8nz8hcPcw@mail.gmail.com>
+	<CAOCNFM6F_M6GpWAVo_ukYBhu9fORRZ8YvQ4Gu5+T7JMNgQ1Fag@mail.gmail.com>
+	<CAOCNFM4OQ5T+UNZhiOGCmNhgZbCz6aTTMR8_XSPTiAnwJmVLiw@mail.gmail.com>
+	<CAOCNFM4zHs-EqxOtGn+k4Nebmdvj2cEYX-_tEdosnBUGaPXZzg@mail.gmail.com>
+	<CAOCNFM4tTVdWepoZ20YrON4QO_5ZpGjDBLZ2TiwFBopZ0nMjQw@mail.gmail.com>
+	<CAOCNFM5kSxJoGdgQxq2=mUh3FDFUebswbqpQ05PKMMo1EJ6yrw@mail.gmail.com>
+	<CAOCNFM7f-HHdasU_8NzwE6vzVmzRMv0i1siryS33d65PPOU4wg@mail.gmail.com>
+	<CAOCNFM7nqwKb3=ro+s1=qvHp8GRSPg2CjW8W8LwDCdr6AORfZA@mail.gmail.com>
+	<CAOCNFM6nWUSx6yMc99DCH_Tay_fqyeQDMy79-b9wrR2WDAC85Q@mail.gmail.com>
+	<CAOCNFM7766u0PCFyvOXCkTfmRagSJyky6kNXOvOcQxeiBYDp=w@mail.gmail.com>
+Message-ID: <CAOCNFM6k+TahPooVQfFZNiSt-ospozu83pQE28PWkJYBGY1RUg@mail.gmail.com>
+
+************* Deadline Extended to March 26, 2012 ***************
+
+(Please accept our apologies if you receive multiple copies of this message)
+
+#################################################################
+? ? ? ? ? ? ? ? ? ? ? IEEE WETICE 2012
+? ? 3rd IEEE Track on Collaborative Modeling and Simulation
+? ? ? ? ? ? ? ? ? ? ? ? (Comets 2012)
+
+? ? ? ? ? ? ? ? ? ? ? in cooperation with
+? ? ? ? ? ? ? ? ? AFIS (INCOSE France Chapter)
+? ? ? ? ? ? ? MIMOS (Italian Association for M&S)
+
+? ? ? ? ? ? ? ? ? ? ? CALL FOR PAPERS
+
+#################################################################
+
+June 25-27, 2012, Toulouse (France)
+http://www.sel.uniroma2.it/comets12
+
+#################################################################
+# Papers Due: March 26, 2012 **** Extended Deadline ****
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and indexed by EI.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices to the design of
+collaborative environments. These environments are continuously
+becoming more complex, and therefore their design requires
+systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non?exhaustive list of topics of interest includes:
+
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* workflow modelling for collaborative environments and processes
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance evaluation of collaborative networks
+* model-driven simulation engineering
+* domain specific languages for the simulation of collaborative environments
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+* collaborative DEVS M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'12 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+This year, we will accept submissions in two forms:
+
+(1) papers
+(2) poster and industrial presentations
+
+(1) Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format, which is single spaced, two columns, 10 pt
+Times/Roman font. All submissions should be electronic (in PDF)
+and will be peer-reviewed by at least three program committee
+members.
+
+Accepted full papers will be included in the proceedings and
+published by the IEEE Computer Society Press (IEEE approval pending).
+Please note that at least one author for each accepted paper should
+register to attend WETICE 2012 (http://www.wetice.org) to have the
+paper published in the proceedings.
+
+(2) Posters should describe a practical, on-the-field, experience in
+any domain area using collaborative M&S. The poster submission
+requires the submission of an abstract for evaluation from the
+organizers. Accepted abstract must be followed by the submission of
+a poster which will be displayed at conference time.
+With the poster submission, a short (15 minutes) slot might be
+allocated for oral presentation illustrating the industrial case.
+The presentation may also include a live demo, but it should not
+include commercial details.
+
+Interested authors and participants may contact the organizers for
+expression of interests and content appropriateness at any time.
+
+Papers and posters can be submitted in PDF format at the submission
+site (https://www.easychair.org/conferences/?conf=comets2012),
+which is supported by the EasyChair conference management system.
+Please feel free to contact the track chairs (comets2012 at easychair.org)
+if you experience problems with the EasyChair Web site.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission Deadline: March 26, 2012 **** Extended deadline ****
+* Notification to authors: April 16, 2012
+* Camera Ready to IEEE: April 30, 2012
+* Conference dates: June 25 - June 27, 2012
+
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Andrea D'Ambrogio, University of Roma TorVergata, Italy
+* Daniele Gianni, European Space Agency, The Netherlands
+* Joachim Fuchs, European Space Agency, The Netherlands
+* Giuseppe Iazeolla, University of Roma TorVergata, Italy
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Santiago Balestrini, Georgia Institute of Technology, USA
+* Massimo Bandecchi, European Space Agency, The Netherlands
+* Joseph Giampapa, SEI, Carnegie Mellon University, USA
+* Alain Kerbrat, CollESys - AFIS, France
+* Axel Lehmann, Universitaet der Bundeswehr Muenchen, Germany
+* Cristiano Leorato, Rhea, The Netherlands
+* Steve McKeever, University of Oxford, UK
+* David Nickerson, Auckland Bioengineering Institute, NZ
+* Alfred Park, Oak Ridge National Laboratory, USA
+* Wolfgang Prinz, Fraunhofer FIT and RWTH Aachen, Germany
+* Jos? L. Risco-Martin, Universidad Complutense de Madrid, Spain
+* Jean-Francois Santucci, University of Corsica, France
+* Gabriel Wainer, Carleton University, Canada
+* Quirien Wijnand, European Space Agency, The Netherlands
+* Justyna Zander, Harvard University, USA, and Fraunhofer Institute FOKUS,
+Germany
+* Heming Zhang, Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni (track co-chair)
+Email: danielegmail-comets at yahoo.it
+
+
+COMETS 2012 - 3rd IEEE Track on Collaborative Modeling and Simulation
+- Call for Papers
+
+************* Deadline Extended to March 26, 2012 ***************
+
+(Please accept our apologies if you receive multiple copies of this message)
+
+#################################################################
+? ? ? ? ? ? ? ? ? ? ? IEEE WETICE 2012
+? ? 3rd IEEE Track on Collaborative Modeling and Simulation
+? ? ? ? ? ? ? ? ? ? ? ? (Comets 2012)
+
+? ? ? ? ? ? ? ? ? ? ? in cooperation with
+? ? ? ? ? ? ? ? ? AFIS (INCOSE France Chapter)
+? ? ? ? ? ? ? MIMOS (Italian Association for M&S)
+
+? ? ? ? ? ? ? ? ? ? ? CALL FOR PAPERS
+
+#################################################################
+
+June 25-27, 2012, Toulouse (France)
+http://www.sel.uniroma2.it/comets12
+
+#################################################################
+# Papers Due: March 26, 2012 **** Extended Deadline ****
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and indexed by EI.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices to the design of
+collaborative environments. These environments are continuously
+becoming more complex, and therefore their design requires
+systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non?exhaustive list of topics of interest includes:
+
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* workflow modelling for collaborative environments and processes
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance evaluation of collaborative networks
+* model-driven simulation engineering
+* domain specific languages for the simulation of collaborative environments
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+* collaborative DEVS M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'12 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+This year, we will accept submissions in two forms:
+
+(1) papers
+(2) poster and industrial presentations
+
+(1) Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format, which is single spaced, two columns, 10 pt
+Times/Roman font. All submissions should be electronic (in PDF)
+and will be peer-reviewed by at least three program committee
+members.
+
+Accepted full papers will be included in the proceedings and
+published by the IEEE Computer Society Press (IEEE approval pending).
+Please note that at least one author for each accepted paper should
+register to attend WETICE 2012 (http://www.wetice.org) to have the
+paper published in the proceedings.
+
+(2) Posters should describe a practical, on-the-field, experience in
+any domain area using collaborative M&S. The poster submission
+requires the submission of an abstract for evaluation from the
+organizers. Accepted abstract must be followed by the submission of
+a poster which will be displayed at conference time.
+With the poster submission, a short (15 minutes) slot might be
+allocated for oral presentation illustrating the industrial case.
+The presentation may also include a live demo, but it should not
+include commercial details.
+
+Interested authors and participants may contact the organizers for
+expression of interests and content appropriateness at any time.
+
+Papers and posters can be submitted in PDF format at the submission
+site (https://www.easychair.org/conferences/?conf=comets2012),
+which is supported by the EasyChair conference management system.
+Please feel free to contact the track chairs (comets2012 at easychair.org)
+if you experience problems with the EasyChair Web site.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission Deadline: March 26, 2012 **** Extended deadline ****
+* Notification to authors: April 16, 2012
+* Camera Ready to IEEE: April 30, 2012
+* Conference dates: June 25 - June 27, 2012
+
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Andrea D'Ambrogio, University of Roma TorVergata, Italy
+* Daniele Gianni, European Space Agency, The Netherlands
+* Joachim Fuchs, European Space Agency, The Netherlands
+* Giuseppe Iazeolla, University of Roma TorVergata, Italy
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Santiago Balestrini, Georgia Institute of Technology, USA
+* Massimo Bandecchi, European Space Agency, The Netherlands
+* Joseph Giampapa, SEI, Carnegie Mellon University, USA
+* Alain Kerbrat, CollESys - AFIS, France
+* Axel Lehmann, Universitaet der Bundeswehr Muenchen, Germany
+* Cristiano Leorato, Rhea, The Netherlands
+* Steve McKeever, University of Oxford, UK
+* David Nickerson, Auckland Bioengineering Institute, NZ
+* Alfred Park, Oak Ridge National Laboratory, USA
+* Wolfgang Prinz, Fraunhofer FIT and RWTH Aachen, Germany
+* Jos? L. Risco-Martin, Universidad Complutense de Madrid, Spain
+* Jean-Francois Santucci, University of Corsica, France
+* Gabriel Wainer, Carleton University, Canada
+* Quirien Wijnand, European Space Agency, The Netherlands
+* Justyna Zander, Harvard University, USA, and Fraunhofer Institute
+FOKUS, Germany
+* Heming Zhang, Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni (track co-chair)
+Email: danielegmail-comets at yahoo.it
+
+
+From ajay at csc.lsu.edu  Fri Mar 16 16:55:40 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Fri, 16 Mar 2012 08:55:40 -0700
+Subject: [Stratego Users] SDF : check character in Column 1 of a line
+Message-ID: <CALgJuAoC2NqSWU2Ou535pvv5QRNFku-2H-NQ+SN77AiPVd59XQ@mail.gmail.com>
+
+Hello,
+
+Is there a way in SDF to check whether a particular character
+appears in the first column of a line, and then apply a certain rule.
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120316/45e3ba43/attachment.html>
+
+From ajay at csc.lsu.edu  Mon Mar 19 01:30:31 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Sun, 18 Mar 2012 17:30:31 -0700
+Subject: [Stratego Users] SDF : Ignoring special characters
+Message-ID: <CALgJuApvS-KmK2UF6OeqKhA9+bmeKkoM0dByO3FC_wFir_zSRg@mail.gmail.com>
+
+Hello,
+
+When writing an SDF grammar, is it possible to
+ignore characters in the first few columns of a line.
+
+For example if a line contains something like
+
+i  a=1 + i
+
+The 'i' in column 1 of the line should be ignored,
+but not the 'i' in the expression 1+i
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120318/26ea36f8/attachment.html>
+
+From tobivollebregt at gmail.com  Tue Mar 20 11:22:05 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Tue, 20 Mar 2012 11:22:05 +0100
+Subject: [Stratego Users] SDF : Ignoring special characters
+In-Reply-To: <CALgJuApvS-KmK2UF6OeqKhA9+bmeKkoM0dByO3FC_wFir_zSRg@mail.gmail.com>
+References: <CALgJuApvS-KmK2UF6OeqKhA9+bmeKkoM0dByO3FC_wFir_zSRg@mail.gmail.com>
+Message-ID: <CAOPyLrG26WLU85ObMkB0h-sihfLO7_diyiwOpFytBBdKp7iwkA@mail.gmail.com>
+
+Hi Ajay,
+
+You'll have to devise a special grammar for this, with productions
+that match the newline "\n", the to-be-ignored characters right after
+the newline, and the actual language construct that should follow this
+construct. So for example:
+
+context-free syntax
+  "\n" ID? Expression -> Line {cons("Line")}
+
+This also allows the "i" (from your example) in any column, as long as
+there is only layout before it. If you want to ensure the "i" is only
+ignored when it is at the start of the line, then you'll have to use
+kernel syntax, e.g. something like this:
+
+syntax
+  "\n" <ID?-LEX> <LAYOUT?-CF> <Expression-CF> -> <Line-CF> {cons("Line")}
+
+Note that in either case:
+- you'll probably have to remove the newline character from the LAYOUT
+symbol, which may or may not be acceptable depending on the rest of
+your language.
+- you'll have to use some postprocessing to actually remove the "i"
+from the AST, because in both my examples it will be added as a child
+of the Line constructor.
+
+I hope this helps a bit,
+Regards,
+
+Tobi
+
+
+On 19 March 2012 01:30, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> Hello,
+>
+> When writing an SDF grammar, is it possible to
+> ignore characters in the first few columns of a line.
+>
+> For example if a line contains something like
+>
+> i ?a=1 + i
+>
+> The 'i' in column 1 of the line should be ignored,
+> but not the 'i' in the expression 1+i
+>
+> Thanks
+> Ajay
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From ajay at csc.lsu.edu  Tue Mar 20 15:50:48 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Tue, 20 Mar 2012 07:50:48 -0700
+Subject: [Stratego Users] SDF : Ignoring special characters
+In-Reply-To: <CAOPyLrG26WLU85ObMkB0h-sihfLO7_diyiwOpFytBBdKp7iwkA@mail.gmail.com>
+References: <CALgJuApvS-KmK2UF6OeqKhA9+bmeKkoM0dByO3FC_wFir_zSRg@mail.gmail.com>
+	<CAOPyLrG26WLU85ObMkB0h-sihfLO7_diyiwOpFytBBdKp7iwkA@mail.gmail.com>
+Message-ID: <CALgJuArVGe1-3XkWco18-t2J+nuHY1PQ8uiy5b9S5pkBkZ1Mwg@mail.gmail.com>
+
+Hi Tobi,
+
+Thanks for the detailed response. I have a better idea of how to do it now.
+
+syntax
+ "\n" <ID?-LEX> <LAYOUT?-CF> <Expression-CF> -> <Line-CF> {cons("Line")}
+
+Note that in either case:
+- you'll probably have to remove the newline character from the LAYOUT
+symbol, which may or may not be acceptable depending on the rest of
+your language.
+
+Yes. Trying to remove \n from the layout was not acceptable in my case.
+
+- you'll have to use some postprocessing to actually remove the "i"
+from the AST, because in both my examples it will be added as a child
+of the Line constructor.
+
+I will give it a try now.
+
+
+Something slightly different -
+
+Do you happen to know if the sdf grammars for languages available in the
+sdf-library located in the asfsdf-meta bundle need to be built differently ?
+
+For example if I try to build the Fortran grammar available there.
+
+pack-sdf -i Fortran90.sdf -o Fortran.def
+
+sdf2table -i Fortran.def -m Fortran90
+
+echo "program main end program" | sglri -p Fortran.tbl -s ExecutableProgram
+
+I get a segmentation fault in the last step (when using sglri).
+
+
+Thanks
+Ajay
+
+
+
+On Tue, Mar 20, 2012 at 3:22 AM, Tobi Vollebregt
+<tobivollebregt at gmail.com>wrote:
+
+> Hi Ajay,
+>
+> You'll have to devise a special grammar for this, with productions
+> that match the newline "\n", the to-be-ignored characters right after
+> the newline, and the actual language construct that should follow this
+> construct. So for example:
+>
+> context-free syntax
+>  "\n" ID? Expression -> Line {cons("Line")}
+>
+> This also allows the "i" (from your example) in any column, as long as
+> there is only layout before it. If you want to ensure the "i" is only
+> ignored when it is at the start of the line, then you'll have to use
+> kernel syntax, e.g. something like this:
+>
+> syntax
+>  "\n" <ID?-LEX> <LAYOUT?-CF> <Expression-CF> -> <Line-CF> {cons("Line")}
+>
+> Note that in either case:
+> - you'll probably have to remove the newline character from the LAYOUT
+> symbol, which may or may not be acceptable depending on the rest of
+> your language.
+> - you'll have to use some postprocessing to actually remove the "i"
+> from the AST, because in both my examples it will be added as a child
+> of the Line constructor.
+>
+> I hope this helps a bit,
+> Regards,
+>
+> Tobi
+>
+>
+> On 19 March 2012 01:30, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> > Hello,
+> >
+> > When writing an SDF grammar, is it possible to
+> > ignore characters in the first few columns of a line.
+> >
+> > For example if a line contains something like
+> >
+> > i  a=1 + i
+> >
+> > The 'i' in column 1 of the line should be ignored,
+> > but not the 'i' in the expression 1+i
+> >
+> > Thanks
+> > Ajay
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120320/39c0b079/attachment.html>
+
+From tobivollebregt at gmail.com  Tue Mar 20 17:54:27 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Tue, 20 Mar 2012 17:54:27 +0100
+Subject: [Stratego Users] SDF : Ignoring special characters
+In-Reply-To: <CALgJuArVGe1-3XkWco18-t2J+nuHY1PQ8uiy5b9S5pkBkZ1Mwg@mail.gmail.com>
+References: <CALgJuApvS-KmK2UF6OeqKhA9+bmeKkoM0dByO3FC_wFir_zSRg@mail.gmail.com>
+	<CAOPyLrG26WLU85ObMkB0h-sihfLO7_diyiwOpFytBBdKp7iwkA@mail.gmail.com>
+	<CALgJuArVGe1-3XkWco18-t2J+nuHY1PQ8uiy5b9S5pkBkZ1Mwg@mail.gmail.com>
+Message-ID: <CAOPyLrHS9aehTPqeQRf1-TNOHTJiGA8ziMLruLKFH-jo685frQ@mail.gmail.com>
+
+Hi Ajay,
+
+> Something slightly different -
+>
+> Do you happen to know if the sdf grammars for languages available in the
+> sdf-library located in the asfsdf-meta bundle need to be built differently ?
+
+No, sorry, I don't know anything about asfsdf SDF.
+
+Regards,
+Tobi
+
+
+On 20 March 2012 15:50, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> Hi Tobi,
+>
+> Thanks for the detailed response. I have a better idea of how to do it now.
+>
+> syntax
+> ?"\n" <ID?-LEX> <LAYOUT?-CF> <Expression-CF> -> <Line-CF> {cons("Line")}
+>
+> Note that in either case:
+> - you'll probably have to remove the newline character from the LAYOUT
+> symbol, which may or may not be acceptable depending on the rest of
+> your language.
+>
+> Yes. Trying to remove \n from the layout was not acceptable in my case.
+>
+> - you'll have to use some postprocessing to actually remove the "i"
+> from the AST, because in both my examples it will be added as a child
+> of the Line constructor.
+>
+> I will give it a try now.
+>
+>
+> Something slightly different -
+>
+> Do you happen to know if the sdf grammars for languages available in the
+> sdf-library located in the asfsdf-meta bundle need to be built differently ?
+>
+> For example if I try to build the Fortran grammar available there.
+>
+> pack-sdf -i Fortran90.sdf -o Fortran.def
+>
+> sdf2table -i Fortran.def -m Fortran90
+>
+> echo "program main end program" | sglri -p Fortran.tbl -s ExecutableProgram
+>
+> I get a segmentation fault in the last step (when using sglri).
+>
+>
+> Thanks
+> Ajay
+>
+>
+>
+> On Tue, Mar 20, 2012 at 3:22 AM, Tobi Vollebregt <tobivollebregt at gmail.com>
+> wrote:
+>>
+>> Hi Ajay,
+>>
+>> You'll have to devise a special grammar for this, with productions
+>> that match the newline "\n", the to-be-ignored characters right after
+>> the newline, and the actual language construct that should follow this
+>> construct. So for example:
+>>
+>> context-free syntax
+>> ?"\n" ID? Expression -> Line {cons("Line")}
+>>
+>> This also allows the "i" (from your example) in any column, as long as
+>> there is only layout before it. If you want to ensure the "i" is only
+>> ignored when it is at the start of the line, then you'll have to use
+>> kernel syntax, e.g. something like this:
+>>
+>> syntax
+>> ?"\n" <ID?-LEX> <LAYOUT?-CF> <Expression-CF> -> <Line-CF> {cons("Line")}
+>>
+>> Note that in either case:
+>> - you'll probably have to remove the newline character from the LAYOUT
+>> symbol, which may or may not be acceptable depending on the rest of
+>> your language.
+>> - you'll have to use some postprocessing to actually remove the "i"
+>> from the AST, because in both my examples it will be added as a child
+>> of the Line constructor.
+>>
+>> I hope this helps a bit,
+>> Regards,
+>>
+>> Tobi
+>>
+>>
+>> On 19 March 2012 01:30, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>> > Hello,
+>> >
+>> > When writing an SDF grammar, is it possible to
+>> > ignore characters in the first few columns of a line.
+>> >
+>> > For example if a line contains something like
+>> >
+>> > i ?a=1 + i
+>> >
+>> > The 'i' in column 1 of the line should be ignored,
+>> > but not the 'i' in the expression 1+i
+>> >
+>> > Thanks
+>> > Ajay
+>> >
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From joachim.haensel at first.fraunhofer.de  Thu Mar 22 12:09:06 2012
+From: joachim.haensel at first.fraunhofer.de (Joachim Haensel)
+Date: Thu, 22 Mar 2012 12:09:06 +0100
+Subject: [Stratego Users] content completion
+Message-ID: <4F6B0852.8060303@first.fraunhofer.de>
+
+Hello,
+
+is there a more detailed tutorial on content completion with spoofax 
+than the one on the spoofax-tour page?
+
+Regards
+
+Joachim H?nsel
+
+-- 
+Joachim H?nsel
+Eingebettete Systeme (EST)
+
+Tel: +49 30 6392 ? 1912
+Fax: +49 30 6392 ? 1805
+joachim.haensel at first.fraunhofer.de
+
+
+
+Fraunhofer-Institut fuer Rechnerarchitektur und Softwaretechnik, FIRST
+
+Kekulestrasse 7
+
+12489 Berlin
+
+Germany
+
+http://www.first.fraunhofer.de
+
+  
+
+
+From ajay at csc.lsu.edu  Fri Mar 23 03:32:41 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Thu, 22 Mar 2012 19:32:41 -0700
+Subject: [Stratego Users] ast2text fails
+Message-ID: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+
+I have a very small SDF grammar.
+I am trying to test whether the Aterms
+produced by invoking sglri can be unparsed
+back to source using ast2text. I followed
+the sequence  of commands below
+
+pack-sdf -i test.sdf -o test.def
+
+sdf2table -i test.def -o test.tbl -m Main
+
+sglri -p test.tbl -i test.prog -o test.ast -s Start
+
+pp-aterm -i test.ast -o test.ppast
+
+ppgen -i test.def -o test.pp
+
+ast2text -p test.pp -i test.ppast -o test.txt
+
+ast2text outputs the terms in test.ppast and gives
+the error
+
+ast2text: rewriting failed, trace:
+main_0_0
+io_stream_wrap_4_0
+option_wrap_5_0
+lifted216
+io_stream_1_0
+ast2text_0_0
+ast2box_0_1
+ast2abox_0_1
+trm2abox_0_1
+
+
+I am not able to figure out why this is happening.
+I am new to Stratego XT and saw this sequence of
+commands to unparse the source in the TIL language
+documentation at
+http://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+
+Could someone please point out the reason for this error ?
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120322/c38b9a9e/attachment.html>
+
+From tobivollebregt at gmail.com  Fri Mar 23 09:47:10 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Fri, 23 Mar 2012 09:47:10 +0100
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+Message-ID: <CAOPyLrHD-wKv=_k-CxU4wke5NLexEH+M8hZrvoGtKJrU-VTtXA@mail.gmail.com>
+
+Hi Ajay,
+
+I tried the same, and it appears to work for me for some trivial
+grammar. Maybe the grammar you tried includes some construct that is
+not handled by ppgen, so that the pretty printing table in test.pp is
+incomplete. Can you post the grammar?
+
+Regards,
+
+Tobi
+
+PS: Another difference could be the Stratego/XT version. I'm using one
+of the latest builds, which version are you using?
+
+
+On 23 March 2012 03:32, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> I have a very small SDF grammar.
+> I am trying to test whether the Aterms
+> produced by invoking sglri can be unparsed
+> back to source using ast2text. I followed
+> the sequence ?of commands below
+>
+> pack-sdf -i test.sdf -o test.def
+>
+> sdf2table -i test.def -o test.tbl -m Main
+>
+> sglri -p test.tbl -i test.prog -o test.ast -s Start
+>
+> pp-aterm -i test.ast -o test.ppast
+>
+> ppgen -i test.def -o test.pp
+>
+> ast2text -p test.pp -i test.ppast -o test.txt
+>
+> ast2text outputs the terms in test.ppast and gives
+> the error
+>
+> ast2text: rewriting failed, trace:
+> main_0_0
+> io_stream_wrap_4_0
+> option_wrap_5_0
+> lifted216
+> io_stream_1_0
+> ast2text_0_0
+> ast2box_0_1
+> ast2abox_0_1
+> trm2abox_0_1
+>
+>
+> I am not able to figure out why this is happening.
+> I am new to Stratego XT and saw this sequence of
+> commands to unparse the source in the TIL language
+> documentation at
+> http://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+>
+> Could someone please point out the reason for this error ?
+>
+> Thanks
+> Ajay
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From pku.tian.meng at hotmail.com  Fri Mar 23 14:22:28 2012
+From: pku.tian.meng at hotmail.com (=?iso-2022-jp?B?GyRCVG0bKEIgGyRCRUQbKEI=?=)
+Date: Fri, 23 Mar 2012 21:22:28 +0800
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+Message-ID: <BAY153-W651D8963652516FA2CFC98B2460@phx.gbl>
+
+
+Hi, Ajay
+
+You can try splitting the last step into two sub steps, and it might be helpful to pinpoint the problem.  i.e. 
+
+ast2text -p test.pp -i test.ppast -o test.txt   =====>
+
+ast2abox -p test.pp -i test.ppast -o test.abox                      (It seems the error you met with happens in this step. And it often implies that your generated pp table needs some manual fix for certain transformation rules.)
+abox2text -i test.abox -o test.txt
+
+
+Regards,
+
+Meng Tian
+
+ Electronic and Software Systems (ESS) Group 
+School of Electronics & Computer Science
+University of Southampton
+Southampton, SO17 1BJ, UK
+
+Date: Thu, 22 Mar 2012 19:32:41 -0700
+From: ajay at csc.lsu.edu
+To: users at strategoxt.org
+Subject: [Stratego Users] ast2text fails
+
+I have a very small SDF grammar.I am trying to test whether the Aterms produced by invoking sglri can be unparsedback to source using ast2text. I followedthe sequence  of commands below
+
+pack-sdf -i test.sdf -o test.def 
+
+sdf2table -i test.def -o test.tbl -m Main
+
+sglri -p test.tbl -i test.prog -o test.ast -s Start
+
+pp-aterm -i test.ast -o test.ppast
+
+ppgen -i test.def -o test.pp
+
+
+ast2text -p test.pp -i test.ppast -o test.txt 
+
+ast2text outputs the terms in test.ppast and gives
+the error 
+ast2text: rewriting failed, trace:
+	main_0_0
+
+	io_stream_wrap_4_0
+	option_wrap_5_0
+	lifted216
+	io_stream_1_0
+	ast2text_0_0
+	ast2box_0_1
+	ast2abox_0_1
+	trm2abox_0_1
+
+
+I am not able to figure out why this is happening.
+I am new to Stratego XT and saw this sequence ofcommands to unparse the source in the TIL languagedocumentation athttp://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+
+Could someone please point out the reason for this error ?
+ThanksAjay
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120323/e74617e5/attachment.html>
+
+From ajay at csc.lsu.edu  Fri Mar 23 15:07:33 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Fri, 23 Mar 2012 07:07:33 -0700
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <CAOPyLrHD-wKv=_k-CxU4wke5NLexEH+M8hZrvoGtKJrU-VTtXA@mail.gmail.com>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+	<CAOPyLrHD-wKv=_k-CxU4wke5NLexEH+M8hZrvoGtKJrU-VTtXA@mail.gmail.com>
+Message-ID: <CALgJuApkf+JS6=wFFoqK=39T2t2E19LZS1NLDuYgN898FiTngw@mail.gmail.com>
+
+Hi Tobi,
+
+I actually have 2 grammars which have the same problem.
+The smaller one works now. It was due to
+some bugs in the grammar itself.
+
+The non-trivial grammar is a Fortran 90 grammar from
+the sdf-library available as part of the asf-sdf bundle at
+http://www.meta-environment.org/Meta-Environment/Download
+
+(asfsdf-meta-bundle-2.0.3/sdf-library-1.1/library/languages/fortran)
+
+I am using the latest build (v 0.17) too.
+
+The grammar did not have any constructors defined. So I added
+cons defs everywhere with the same name. Could giving the same
+name for that large number of grammar rules be part of the issue ?
+
+
+Thanks
+Ajay
+
+On Fri, Mar 23, 2012 at 1:47 AM, Tobi Vollebregt
+<tobivollebregt at gmail.com>wrote:
+
+> Hi Ajay,
+>
+> I tried the same, and it appears to work for me for some trivial
+> grammar. Maybe the grammar you tried includes some construct that is
+> not handled by ppgen, so that the pretty printing table in test.pp is
+> incomplete. Can you post the grammar?
+>
+> Regards,
+>
+> Tobi
+>
+> PS: Another difference could be the Stratego/XT version. I'm using one
+> of the latest builds, which version are you using?
+>
+>
+> On 23 March 2012 03:32, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> > I have a very small SDF grammar.
+> > I am trying to test whether the Aterms
+> > produced by invoking sglri can be unparsed
+> > back to source using ast2text. I followed
+> > the sequence  of commands below
+> >
+> > pack-sdf -i test.sdf -o test.def
+> >
+> > sdf2table -i test.def -o test.tbl -m Main
+> >
+> > sglri -p test.tbl -i test.prog -o test.ast -s Start
+> >
+> > pp-aterm -i test.ast -o test.ppast
+> >
+> > ppgen -i test.def -o test.pp
+> >
+> > ast2text -p test.pp -i test.ppast -o test.txt
+> >
+> > ast2text outputs the terms in test.ppast and gives
+> > the error
+> >
+> > ast2text: rewriting failed, trace:
+> > main_0_0
+> > io_stream_wrap_4_0
+> > option_wrap_5_0
+> > lifted216
+> > io_stream_1_0
+> > ast2text_0_0
+> > ast2box_0_1
+> > ast2abox_0_1
+> > trm2abox_0_1
+> >
+> >
+> > I am not able to figure out why this is happening.
+> > I am new to Stratego XT and saw this sequence of
+> > commands to unparse the source in the TIL language
+> > documentation at
+> >
+> http://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+> >
+> > Could someone please point out the reason for this error ?
+> >
+> > Thanks
+> > Ajay
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120323/34444545/attachment.html>
+
+From ajay at csc.lsu.edu  Fri Mar 23 15:09:35 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Fri, 23 Mar 2012 07:09:35 -0700
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <BAY153-W651D8963652516FA2CFC98B2460@phx.gbl>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+	<BAY153-W651D8963652516FA2CFC98B2460@phx.gbl>
+Message-ID: <CALgJuArWc9QXjY52Qo7uwcvdQzBL0-nUbyrtYcXbGgBaJq7VfQ@mail.gmail.com>
+
+Hi Tian,
+
+
+ast2abox -p test.pp -i test.ppast -o test.abox                      (It
+seems the error you met with happens in this step. And it often implies
+that your generated pp table needs some manual fix for certain
+transformation rules.)
+
+Yes, this is where the error is happening.
+Is there a good way to figure out (debug) which rules need
+manual fixes since the grammar is very big.
+
+Thanks
+Ajay
+
+
+2012/3/23 ? ? <pku.tian.meng at hotmail.com>
+
+>  Hi, Ajay
+>
+> You can try splitting the last step into two sub steps, and it might be
+> helpful to pinpoint the problem.  i.e.
+>
+> ast2text -p test.pp -i test.ppast -o test.txt   =====>
+>
+> ast2abox -p test.pp -i test.ppast -o test.abox                      (It
+> seems the error you met with happens in this step. And it often implies
+> that your generated pp table needs some manual fix for certain
+> transformation rules.)
+> abox2text -i test.abox -o test.txt
+>
+>
+> *Regards,
+>
+> **Meng Tian
+> *
+> Electronic and Software Systems (ESS) Group
+> School of Electronics & Computer Science
+> University of Southampton
+> Southampton, SO17 1BJ, UK
+>
+> ------------------------------
+> Date: Thu, 22 Mar 20 12 19:32:41 -0700
+> From: ajay at csc.lsu.edu
+> To: users at strategoxt.org
+> Subject: [Stratego Users] ast2text fails
+>
+>
+> I have a very small SDF grammar.
+> I am trying to test whether the Aterms
+> produced by invoking sglri can be unparsed
+> back to source using ast2text. I followed
+> the sequence  of commands below
+>
+> pack-sdf -i test.sdf -o test.def
+>
+> sdf2table -i test.def -o test.tbl -m Main
+>
+> sglri -p test.tbl -i test.prog -o test.ast -s Start
+>
+> pp-aterm -i test.ast -o test.ppast
+>
+> ppgen -i test.def -o test.pp
+>
+> ast2text -p test.pp -i test.ppast -o test.txt
+>
+> ast2text outputs the terms in test.ppast and gives
+> the error
+>
+> ast2text: rewriting failed, trace:
+> main_0_0
+> io_stream_wrap_4_0
+> option_wrap_5_0
+> lifted216
+> io_stream_1_0
+> ast2text_0_0
+> ast2box_0_1
+> ast2abox_0_1
+> trm2abox_0_1
+>
+>
+> I am not able to figure out why this is happening.
+> I am new to Stratego XT and saw this sequence of
+> commands to unparse the source in the TIL language
+> documentation at
+>
+> http://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+>
+> Could someone please point out the reason for this error ?
+>
+> Thanks
+> Ajay
+>
+>
+>
+>
+> _______________________________________________ Users mailing list
+> Users at strategoxt.org https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120323/f9d5e218/attachment.html>
+
+From pku.tian.meng at hotmail.com  Fri Mar 23 17:05:51 2012
+From: pku.tian.meng at hotmail.com (=?iso-2022-jp?B?GyRCVG0bKEIgGyRCRUQbKEI=?=)
+Date: Sat, 24 Mar 2012 00:05:51 +0800
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <CALgJuArWc9QXjY52Qo7uwcvdQzBL0-nUbyrtYcXbGgBaJq7VfQ@mail.gmail.com>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>,
+	<BAY153-W651D8963652516FA2CFC98B2460@phx.gbl>,
+	<CALgJuArWc9QXjY52Qo7uwcvdQzBL0-nUbyrtYcXbGgBaJq7VfQ@mail.gmail.com>
+Message-ID: <BAY153-W131F980370B451405B29FEB2460@phx.gbl>
+
+
+Hi, Ajay
+
+Unfortunately, I don't have a good way to debug it either. But there are two directions that I would try to diagnose.
+
+1. Check warnings in "sdf2table" and "ppgen" process.
+2. Open the "test.abox" after the error turned up. As the transformation process terminated due to the error, the result file might just end at where the specific transformation is performed.
+
+Sorry, I am not an expert about it either. Just hope it would help.
+
+
+Regards,
+
+Meng Tian
+
+ Electronic and Software Systems (ESS) Group 
+School of Electronics & Computer Science
+University of Southampton
+Southampton, SO17 1BJ, UK
+
+Date: Fri, 23 Mar 2012 07:09:35 -0700
+From: ajay at csc.lsu.edu
+To: users at strategoxt.org
+Subject: Re: [Stratego Users] ast2text fails
+
+Hi Tian,
+
+
+ast2abox -p test.pp -i test.ppast -o test.abox                      (It seems the error you met with happens in this step. And it often implies that your generated pp table needs some manual fix for certain transformation rules.)
+
+Yes, this is where the error is happening. Is there a good way to figure out (debug) which rules needmanual fixes since the grammar is very big.
+Thanks
+Ajay
+
+2012/3/23 ? ? <pku.tian.meng at hotmail.com>
+
+
+
+
+
+Hi, Ajay
+
+You can try splitting the last step into two sub steps, and it might be helpful to pinpoint the problem.  i.e. 
+
+ast2text -p test.pp -i test.ppast -o test.txt   =====>
+
+ast2abox -p test.pp -i test.ppast -o test.abox                      (It seems the error you met with happens in this step. And it often implies that your generated pp table needs some manual fix for certain transformation rules.)
+
+abox2text -i test.abox -o test.txt
+
+
+Regards,
+
+Meng Tian
+
+ Electronic and Software Systems (ESS) Group 
+
+School of Electronics & Computer Science
+University of Southampton
+Southampton, SO17 1BJ, UK
+
+Date: Thu, 22 Mar 20
+ 12 19:32:41 -0700
+From: ajay at csc.lsu.edu
+To: users at strategoxt.org
+Subject: [Stratego Users] ast2text fails
+
+
+I have a very small SDF grammar.I am trying to test whether the Aterms produced by invoking sglri can be unparsedback to source using ast2text. I followed
+the sequence  of commands below
+
+pack-sdf -i test.sdf -o test.def 
+
+sdf2table -i test.def -o test.tbl -m Main
+
+sglri -p test.tbl -i test.prog -o test.ast -s Start
+
+pp-aterm -i test.ast -o test.ppast
+
+ppgen -i test.def -o test.pp
+
+
+
+ast2text -p test.pp -i test.ppast -o test.txt 
+
+ast2text outputs the terms in test.ppast and gives
+the error 
+ast2text: rewriting failed, trace:
+	main_0_0
+
+
+	io_stream_wrap_4_0
+	option_wrap_5_0
+	lifted216
+	io_stream_1_0
+	ast2text_0_0
+	ast2box_0_1
+	ast2abox_0_1
+	trm2abox_0_1
+
+
+I am not able to figure out why this is happening.
+
+I am new to Stratego XT and saw this sequence ofcommands to unparse the source in the TIL languagedocumentation athttp://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+
+
+Could someone please point out the reason for this error ?
+ThanksAjay
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users 		 	   		  
+
+_______________________________________________
+
+Users mailing list
+
+Users at strategoxt.org
+
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120324/3bf319b9/attachment-0001.html>
+
+From ajay at csc.lsu.edu  Fri Mar 23 18:38:42 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Fri, 23 Mar 2012 10:38:42 -0700
+Subject: [Stratego Users] ast2text fails
+In-Reply-To: <BAY153-W131F980370B451405B29FEB2460@phx.gbl>
+References: <CALgJuAoo9=e3rJCu-dw8g-40AHSvCKKniKr2bjxaGqZwSWMdbg@mail.gmail.com>
+	<BAY153-W651D8963652516FA2CFC98B2460@phx.gbl>
+	<CALgJuArWc9QXjY52Qo7uwcvdQzBL0-nUbyrtYcXbGgBaJq7VfQ@mail.gmail.com>
+	<BAY153-W131F980370B451405B29FEB2460@phx.gbl>
+Message-ID: <CALgJuAqsu+pA7rR_rbZjB8PXmUHhCir0m1D-66UDZd60LrmPfA@mail.gmail.com>
+
+Tian,
+
+1. Check warnings in "sdf2table" and "ppgen" process.
+
+There are no warnings in sdf2table and ppgen. I checked by invoking
+these commands with verbose options.
+
+2. Open the "test.abox" after the error turned up.
+
+I tried to do this, but the test.abox file does not even get created.
+
+Thanks
+Ajay
+
+2012/3/23 ? ? <pku.tian.meng at hotmail.com>
+
+>  Hi, Ajay
+>
+> Unfortunately, I don't have a good way to debug it either. But there are
+> two directions that I would try to diagnose.
+>
+> 1. Check warnings in "sdf2table" and "ppgen" process.
+> 2. Open the "test.abox" after the error turned up. As the transformation
+> process terminated due to the error, the result file might just end at
+> where the specific transformation is performed.
+>
+> Sorry, I am not an expert about it either. Just hope it would help.
+>
+>
+>
+> *Regards,
+>
+> **Meng Tian
+> *
+> Electronic and Software Systems (ESS) Group
+> School of Electronics & Computer Science
+> University of Southampton
+> Southampton, SO17 1BJ, UK
+>
+> ------------------------------
+> Date: Fri, 23 Mar 2012 07:09:35 -0700
+> From: ajay at csc.lsu.edu
+> To: users at strategoxt.org*Subject: Re: [Stratego Users] ast2text fails
+>
+>
+> Hi Tian,
+>
+>
+> ast2abox -p test.pp -i test.ppast -o test.abox                      (It
+> seems the error you met with happens in this step. And it often implies
+> that your generated pp table needs some manual fix for certain
+> transformation rules.)
+>
+> Yes, this is where the error is happening.
+> Is there a good way to figure out (debug) which rules need
+> manual fixes since the grammar is very big.
+>
+> Thanks
+> Ajay
+>
+>
+> 2012/3/23 ? ? <pku.tian.meng at hotmail.com>
+>
+>  Hi, Ajay
+>
+> You can try splitting the last step into two sub steps, and it might be
+> helpful to pinpoint the problem.  i.e.
+>
+> ast2text -p test.pp -i test.ppast -o test.txt   =====>
+>
+> ast2abox -p test.pp -i test.ppast -o test.abox                      (It
+> seems the error you met with happens in this step. And it often implies
+> that your generated pp table needs some manual fix for certain
+> transformation rules.)
+> abox2text -i test.abox -o test.txt
+>
+>
+> Regards,
+>
+> Meng Tian
+>
+> Electronic and Software Systems (ESS) Group
+> School of Electronics & Computer Science
+> University of Southampton
+> Southampton, SO17 1BJ, UK
+>
+> ------------------------------
+> Date: Thu, 22 Mar 20 12 19:32:41 -0700
+> From: ajay at csc.lsu.edu
+> To: users at strategoxt.org
+> Subject: [Stratego Users] ast2text fails
+>
+>
+> I have a very small SDF grammar.
+> I am trying to test whether the Aterms
+> produced by invoking sglri can be unparsed
+> back to source using ast2text. I followed
+> the sequence  of commands below
+>
+> pack-sdf -i test.sdf -o test.def
+>
+> sdf2table -i test.def -o test.tbl -m Main
+>
+> sglri -p test.tbl -i test.prog -o test.ast -s Start
+>
+> pp-aterm -i test.ast -o test.ppast
+>
+> ppgen -i test.def -o test.pp
+>
+> ast2text -p test.pp -i test.ppast -o test.txt
+>
+> ast2text outputs the terms in test.ppast and gives
+> the error
+>
+> ast2text: rewriting failed, trace:
+> main_0_0
+> io_stream_wrap_4_0
+> option_wrap_5_0
+> lifted216
+> io_stream_1_0
+> ast2text_0_0
+> ast2box_0_1
+> ast2abox_0_1
+> trm2abox_0_1
+>
+>
+> I am not able to figure out why this is happening.
+> I am new to Stratego XT and saw this sequence of
+> commands to unparse the source in the TIL language
+> documentation at
+>
+> http://hydra.nixos.org/build/2230584/download/1/manual/chunk-chapter/demo-sdf.html
+>
+> Could someone please point out the reason for this error ?
+>
+> Thanks
+> Ajay
+>
+>
+>
+>
+> _______________________________________________ Users mailing list
+> Users at strategoxt.org https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>
+>
+> _______________________________________________ Users mailing list
+> Users at strategoxt.org https://mailman.st.ewi.tudelft.nl/listinfo/users
+> *
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120323/3f772e9b/attachment.html>
+
+From ajay at csc.lsu.edu  Sat Mar 24 02:01:04 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Fri, 23 Mar 2012 18:01:04 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+Message-ID: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+
+Hello,
+
+How I do do the conversion from aterms back to source using Spoofax IDE ?
+I do not see a way to invoke ast2text from within the IDE.
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120323/f594b132/attachment.html>
+
+From headness13 at gmail.com  Sun Mar 25 11:04:22 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Sun, 25 Mar 2012 12:04:22 +0300
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+Message-ID: <CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+
+You can call this: prim("SSL_EXT_origin_text", <id>)
+Each term has a start and end index. The function above will return a
+string from the original file from those bounds.
+You can check the bounds using this:  prim("SSL_EXT_origin_location", <id>)
+
+Radu Mereuta
+PhDc at FII, UAIC
+
+On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+
+> Hello,
+>
+> How I do do the conversion from aterms back to source using Spoofax IDE ?
+> I do not see a way to invoke ast2text from within the IDE.
+>
+> Thanks
+> Ajay
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120325/e1c299ef/attachment.html>
+
+From ajay at csc.lsu.edu  Sun Mar 25 18:28:51 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Sun, 25 Mar 2012 09:28:51 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+Message-ID: <CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+
+You can call this: prim("SSL_EXT_origin_text", <id>)
+
+Do I need to link some library when compiling the strategy file ?
+
+Thanks
+Ajay
+
+On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> You can call this: prim("SSL_EXT_origin_text", <id>)
+> Each term has a start and end index. The function above will return a
+> string from the original file from those bounds.
+> You can check the bounds using this:  prim("SSL_EXT_origin_location", <id>)
+>
+> Radu Mereuta
+> PhDc at FII, UAIC
+>
+> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>
+>> Hello,
+>>
+>> How I do do the conversion from aterms back to source using Spoofax IDE ?
+>> I do not see a way to invoke ast2text from within the IDE.
+>>
+>> Thanks
+>> Ajay
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120325/9f4a2c12/attachment.html>
+
+From tobivollebregt at gmail.com  Sun Mar 25 21:49:20 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Sun, 25 Mar 2012 21:49:20 +0200
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+Message-ID: <CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+
+Hi Ajay, Radu,
+
+There are two meanings of getting from ATerms back to source.
+
+One of those is the this origin-text primitive. This does not map the
+ATerm to a new string, but instead it returns the exact string that
+was parsed to this ATerm (including layout and such). For this to
+work, origin tracking needs to be enabled in the parser.
+
+The other meaning is to unparse / pretty print an ATerm, which may
+never have been produced by a parser (i.e., it has been build using
+some transformations). For this scenario, you can use libstratego-gpp.
+This includes strategies such as ast2box and box2text-string, which
+can be combined to do what ast2text does.
+
+Here are some docs:
+http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+
+Also look in the editor-common.generated.str file in any Spoofax
+project, it contains an implementation of a language-specific PP-based
+pretty printing strategy that uses libstratego-gpp.
+
+Regards,
+Tobi
+
+On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> You can call this: prim("SSL_EXT_origin_text", <id>)
+>
+> Do I need to link some library when compiling the strategy file ?
+>
+> Thanks
+> Ajay
+>
+> On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+>>
+>> You can call this: prim("SSL_EXT_origin_text", <id>)
+>> Each term has a start and end index. The function above will return a
+>> string from the original file from those bounds.
+>> You can check the bounds using this: ?prim("SSL_EXT_origin_location",
+>> <id>)
+>>
+>> Radu Mereuta
+>> PhDc at FII, UAIC
+>>
+>> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>>
+>>> Hello,
+>>>
+>>> How I do do the conversion from aterms back to source using Spoofax IDE ?
+>>> I do not see a way to invoke ast2text from within the IDE.
+>>>
+>>> Thanks
+>>> Ajay
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From ajay at csc.lsu.edu  Sun Mar 25 22:01:06 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Sun, 25 Mar 2012 13:01:06 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+Message-ID: <CALgJuApFnbTw9TTmBHejE8N_JfeMHwvgp33bUEZ-L4PROitQ-w@mail.gmail.com>
+
+Hi Tobi,
+
+One of those is the this origin-text primitive. This does not map the
+ATerm to a new string, but instead it returns the exact string that
+was parsed to this ATerm (including layout and such). For this to
+work, origin tracking needs to be enabled in the parser.
+
+This is what I was looking for (the exact string).
+
+I do not know what is happening with the command
+line tools, but the regular tree grammar and Stratego signature
+cannot be generated for the grammar I am using, but they get
+generated when using Spoofax.
+
+Similarly ast2text from command line fails for this grammar
+and I was trying to invoke it from within Spoofax.
+
+Here are some docs:
+http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+
+Also look in the editor-common.generated.str file in any Spoofax
+project, it contains an implementation of a language-specific PP-based
+pretty printing strategy that uses libstratego-gpp.
+
+I will read through these docs.
+
+Thanks
+Ajay
+
+On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt
+<tobivollebregt at gmail.com>wrote:
+
+> Hi Ajay, Radu,
+>
+> There are two meanings of getting from ATerms back to source.
+>
+> One of those is the this origin-text primitive. This does not map the
+> ATerm to a new string, but instead it returns the exact string that
+> was parsed to this ATerm (including layout and such). For this to
+> work, origin tracking needs to be enabled in the parser.
+>
+> The other meaning is to unparse / pretty print an ATerm, which may
+> never have been produced by a parser (i.e., it has been build using
+> some transformations). For this scenario, you can use libstratego-gpp.
+> This includes strategies such as ast2box and box2text-string, which
+> can be combined to do what ast2text does.
+>
+> Here are some docs:
+>
+> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>
+> Also look in the editor-common.generated.str file in any Spoofax
+> project, it contains an implementation of a language-specific PP-based
+> pretty printing strategy that uses libstratego-gpp.
+>
+> Regards,
+> Tobi
+>
+> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> > You can call this: prim("SSL_EXT_origin_text", <id>)
+> >
+> > Do I need to link some library when compiling the strategy file ?
+> >
+> > Thanks
+> > Ajay
+> >
+> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+> >>
+> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+> >> Each term has a start and end index. The function above will return a
+> >> string from the original file from those bounds.
+> >> You can check the bounds using this:  prim("SSL_EXT_origin_location",
+> >> <id>)
+> >>
+> >> Radu Mereuta
+> >> PhDc at FII, UAIC
+> >>
+> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> >>>
+> >>> Hello,
+> >>>
+> >>> How I do do the conversion from aterms back to source using Spoofax
+> IDE ?
+> >>> I do not see a way to invoke ast2text from within the IDE.
+> >>>
+> >>> Thanks
+> >>> Ajay
+> >>>
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Users mailing list
+> >>> Users at strategoxt.org
+> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120325/d5e740b7/attachment.html>
+
+From ajay at csc.lsu.edu  Tue Mar 27 02:56:57 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Mon, 26 Mar 2012 17:56:57 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+Message-ID: <CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+
+Hi Tobi, Radu
+
+Could you please point me to some example transformations
+that use the stratego  libraries to unparse from Aterms back to source code?
+
+I am able to successfully specify rewrite rules and strategies for
+manipulating
+the Aterms, but am not sure what is going wrong when trying to
+unparse back to the source code from the rewritten(transformed) Aterm.
+
+I have the following:
+
+module simple
+imports
+...
+signature
+...
+rules
+  E : ...
+
+strategies
+main = io-wrap(eval)
+eval = alltd(E)
+
+.....  -> tried a bunch of things (with ast2abox and box2text) at this
+point
+           to print back the source code after Aterm manipulation is
+finished.
+
+Thanks
+Ajay
+
+On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt
+<tobivollebregt at gmail.com>wrote:
+
+> Hi Ajay, Radu,
+>
+> There are two meanings of getting from ATerms back to source.
+>
+> One of those is the this origin-text primitive. This does not map the
+> ATerm to a new string, but instead it returns the exact string that
+> was parsed to this ATerm (including layout and such). For this to
+> work, origin tracking needs to be enabled in the parser.
+>
+> The other meaning is to unparse / pretty print an ATerm, which may
+> never have been produced by a parser (i.e., it has been build using
+> some transformations). For this scenario, you can use libstratego-gpp.
+> This includes strategies such as ast2box and box2text-string, which
+> can be combined to do what ast2text does.
+>
+> Here are some docs:
+>
+> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>
+> Also look in the editor-common.generated.str file in any Spoofax
+> project, it contains an implementation of a language-specific PP-based
+> pretty printing strategy that uses libstratego-gpp.
+>
+> Regards,
+> Tobi
+>
+> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> > You can call this: prim("SSL_EXT_origin_text", <id>)
+> >
+> > Do I need to link some library when compiling the strategy file ?
+> >
+> > Thanks
+> > Ajay
+> >
+> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+> >>
+> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+> >> Each term has a start and end index. The function above will return a
+> >> string from the original file from those bounds.
+> >> You can check the bounds using this:  prim("SSL_EXT_origin_location",
+> >> <id>)
+> >>
+> >> Radu Mereuta
+> >> PhDc at FII, UAIC
+> >>
+> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> >>>
+> >>> Hello,
+> >>>
+> >>> How I do do the conversion from aterms back to source using Spoofax
+> IDE ?
+> >>> I do not see a way to invoke ast2text from within the IDE.
+> >>>
+> >>> Thanks
+> >>> Ajay
+> >>>
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Users mailing list
+> >>> Users at strategoxt.org
+> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120326/279db70c/attachment.html>
+
+From headness13 at gmail.com  Tue Mar 27 10:42:43 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 27 Mar 2012 11:42:43 +0300
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+	<CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+Message-ID: <CAFu+mo+zipy=Q36Wx2GOatfkex2rFb01PHn_eaWLASzrXhWWoA@mail.gmail.com>
+
+Hi Ajay,
+
+I'm using unparse in the following way:
+
+to-xml:
+    Rule(x1) -> $[<rule loc="[loc]" value="[x1']" />
+    ]
+    where x1' := prim("SSL_EXT_origin_text", <id>) ; xmlStringEscape ;
+escape
+    where loc := prim("SSL_EXT_origin_location", <id>) ; write-to-string
+
+I'm trying to generate XML from my code, and I need to get the exact string
+for one of my production rules. I'm calling  prim("SSL_EXT_origin_text",
+<id>) to get the original text of Rule(x1) and then escape characters like
+" < > & to &quote; &lt; &gt; &amp;.
+I wrote this rule in Spoofax (the java implementation of the  parser and
+the Stratego interpretor) in one of the .str files.
+Then I compile the .str files into java (using strategoxt.jar) and get a
+bunch of java classes that I can then integrate into a standalone tool.
+
+You can have a look at my code here:
+http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Syntax/trans/xmlify.str
+It's a bit more complicated than I described, but it works for me, so maybe
+you will find what you are looking for.
+
+Good luck,
+Radu
+
+
+
+On Tue, Mar 27, 2012 at 3:56 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+
+> Hi Tobi, Radu
+>
+> Could you please point me to some example transformations
+> that use the stratego  libraries to unparse from Aterms back to source
+> code?
+>
+> I am able to successfully specify rewrite rules and strategies for
+> manipulating
+> the Aterms, but am not sure what is going wrong when trying to
+> unparse back to the source code from the rewritten(transformed) Aterm.
+>
+> I have the following:
+>
+> module simple
+> imports
+> ...
+> signature
+> ...
+> rules
+>   E : ...
+>
+> strategies
+> main = io-wrap(eval)
+> eval = alltd(E)
+>
+> .....  -> tried a bunch of things (with ast2abox and box2text) at this
+> point
+>            to print back the source code after Aterm manipulation is
+> finished.
+>
+> Thanks
+> Ajay
+>
+> On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt <
+> tobivollebregt at gmail.com> wrote:
+>
+>> Hi Ajay, Radu,
+>>
+>> There are two meanings of getting from ATerms back to source.
+>>
+>> One of those is the this origin-text primitive. This does not map the
+>> ATerm to a new string, but instead it returns the exact string that
+>> was parsed to this ATerm (including layout and such). For this to
+>> work, origin tracking needs to be enabled in the parser.
+>>
+>> The other meaning is to unparse / pretty print an ATerm, which may
+>> never have been produced by a parser (i.e., it has been build using
+>> some transformations). For this scenario, you can use libstratego-gpp.
+>> This includes strategies such as ast2box and box2text-string, which
+>> can be combined to do what ast2text does.
+>>
+>> Here are some docs:
+>>
+>> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>>
+>> Also look in the editor-common.generated.str file in any Spoofax
+>> project, it contains an implementation of a language-specific PP-based
+>> pretty printing strategy that uses libstratego-gpp.
+>>
+>> Regards,
+>> Tobi
+>>
+>> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>> > You can call this: prim("SSL_EXT_origin_text", <id>)
+>> >
+>> > Do I need to link some library when compiling the strategy file ?
+>> >
+>> > Thanks
+>> > Ajay
+>> >
+>> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+>> wrote:
+>> >>
+>> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+>> >> Each term has a start and end index. The function above will return a
+>> >> string from the original file from those bounds.
+>> >> You can check the bounds using this:  prim("SSL_EXT_origin_location",
+>> >> <id>)
+>> >>
+>> >> Radu Mereuta
+>> >> PhDc at FII, UAIC
+>> >>
+>> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu>
+>> wrote:
+>> >>>
+>> >>> Hello,
+>> >>>
+>> >>> How I do do the conversion from aterms back to source using Spoofax
+>> IDE ?
+>> >>> I do not see a way to invoke ast2text from within the IDE.
+>> >>>
+>> >>> Thanks
+>> >>> Ajay
+>> >>>
+>> >>>
+>> >>>
+>> >>> _______________________________________________
+>> >>> Users mailing list
+>> >>> Users at strategoxt.org
+>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>>
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >
+>> >
+>> >
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120327/ed34d063/attachment.html>
+
+From ajay at csc.lsu.edu  Tue Mar 27 17:15:52 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Tue, 27 Mar 2012 08:15:52 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CAFu+mo+zipy=Q36Wx2GOatfkex2rFb01PHn_eaWLASzrXhWWoA@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+	<CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+	<CAFu+mo+zipy=Q36Wx2GOatfkex2rFb01PHn_eaWLASzrXhWWoA@mail.gmail.com>
+Message-ID: <CALgJuAog3FbGU9sdhy7bZuYZ2GSJ0M750y0uEXnN6sVrCw0D7g@mail.gmail.com>
+
+Hi Radu,
+
+I wrote this rule in Spoofax (the java implementation of the  parser and
+the Stratego interpretor) in one of the .str files.
+Then I compile the .str files into java (using strategoxt.jar) and get a
+bunch of java classes that I can then integrate into a standalone tool.
+
+I was able to do the same. I ran the produced class file on an Aterm input.
+It prints out
+the transformed ATerm.
+
+getstr = prim("SSL_EXT_origin_text", <id>)  - I am looking for the string
+that represents the transformed ATerm,
+this would give me the original string, but not the string that represents
+the transformed ATerm ?
+
+I am trying to output the exact string that represents a transformed ATerm.
+Using ast2text from the command line is not working for me, hence decided
+to do it using Spoofax.
+
+*Does your code unparse the transformed Aterms somewhere ?*
+
+Thanks
+Ajay
+
+On Tue, Mar 27, 2012 at 1:42 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> Hi Ajay,
+>
+> I'm using unparse in the following way:
+>
+> to-xml:
+>     Rule(x1) -> $[<rule loc="[loc]" value="[x1']" />
+>     ]
+>     where x1' := prim("SSL_EXT_origin_text", <id>) ; xmlStringEscape ;
+> escape
+>     where loc := prim("SSL_EXT_origin_location", <id>) ; write-to-string
+>
+> I'm trying to generate XML from my code, and I need to get the exact
+> string for one of my production rules. I'm calling
+> prim("SSL_EXT_origin_text", <id>) to get the original text of Rule(x1) and
+> then escape characters like " < > & to &quote; &lt; &gt; &amp;.
+> I wrote this rule in Spoofax (the java implementation of the  parser and
+> the Stratego interpretor) in one of the .str files.
+> Then I compile the .str files into java (using strategoxt.jar) and get a
+> bunch of java classes that I can then integrate into a standalone tool.
+>
+> You can have a look at my code here:
+> http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Syntax/trans/xmlify.str
+> It's a bit more complicated than I described, but it works for me, so
+> maybe you will find what you are looking for.
+>
+> Good luck,
+> Radu
+>
+>
+>
+> On Tue, Mar 27, 2012 at 3:56 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>
+>> Hi Tobi, Radu
+>>
+>> Could you please point me to some example transformations
+>> that use the stratego  libraries to unparse from Aterms back to source
+>> code?
+>>
+>> I am able to successfully specify rewrite rules and strategies for
+>> manipulating
+>> the Aterms, but am not sure what is going wrong when trying to
+>> unparse back to the source code from the rewritten(transformed) Aterm.
+>>
+>> I have the following:
+>>
+>> module simple
+>> imports
+>> ...
+>> signature
+>> ...
+>> rules
+>>   E : ...
+>>
+>> strategies
+>> main = io-wrap(eval)
+>> eval = alltd(E)
+>>
+>> .....  -> tried a bunch of things (with ast2abox and box2text) at this
+>> point
+>>            to print back the source code after Aterm manipulation is
+>> finished.
+>>
+>> Thanks
+>> Ajay
+>>
+>> On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt <
+>> tobivollebregt at gmail.com> wrote:
+>>
+>>> Hi Ajay, Radu,
+>>>
+>>> There are two meanings of getting from ATerms back to source.
+>>>
+>>> One of those is the this origin-text primitive. This does not map the
+>>> ATerm to a new string, but instead it returns the exact string that
+>>> was parsed to this ATerm (including layout and such). For this to
+>>> work, origin tracking needs to be enabled in the parser.
+>>>
+>>> The other meaning is to unparse / pretty print an ATerm, which may
+>>> never have been produced by a parser (i.e., it has been build using
+>>> some transformations). For this scenario, you can use libstratego-gpp.
+>>> This includes strategies such as ast2box and box2text-string, which
+>>> can be combined to do what ast2text does.
+>>>
+>>> Here are some docs:
+>>>
+>>> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>>>
+>>> Also look in the editor-common.generated.str file in any Spoofax
+>>> project, it contains an implementation of a language-specific PP-based
+>>> pretty printing strategy that uses libstratego-gpp.
+>>>
+>>> Regards,
+>>> Tobi
+>>>
+>>> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>> > You can call this: prim("SSL_EXT_origin_text", <id>)
+>>> >
+>>> > Do I need to link some library when compiling the strategy file ?
+>>> >
+>>> > Thanks
+>>> > Ajay
+>>> >
+>>> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+>>> wrote:
+>>> >>
+>>> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+>>> >> Each term has a start and end index. The function above will return a
+>>> >> string from the original file from those bounds.
+>>> >> You can check the bounds using this:  prim("SSL_EXT_origin_location",
+>>> >> <id>)
+>>> >>
+>>> >> Radu Mereuta
+>>> >> PhDc at FII, UAIC
+>>> >>
+>>> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu>
+>>> wrote:
+>>> >>>
+>>> >>> Hello,
+>>> >>>
+>>> >>> How I do do the conversion from aterms back to source using Spoofax
+>>> IDE ?
+>>> >>> I do not see a way to invoke ast2text from within the IDE.
+>>> >>>
+>>> >>> Thanks
+>>> >>> Ajay
+>>> >>>
+>>> >>>
+>>> >>>
+>>> >>> _______________________________________________
+>>> >>> Users mailing list
+>>> >>> Users at strategoxt.org
+>>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> >>>
+>>> >>
+>>> >>
+>>> >> _______________________________________________
+>>> >> Users mailing list
+>>> >> Users at strategoxt.org
+>>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> >>
+>>> >
+>>> >
+>>> >
+>>> >
+>>> >
+>>> > _______________________________________________
+>>> > Users mailing list
+>>> > Users at strategoxt.org
+>>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> >
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120327/4b689002/attachment.html>
+
+From headness13 at gmail.com  Tue Mar 27 20:31:16 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 27 Mar 2012 21:31:16 +0300
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CALgJuAog3FbGU9sdhy7bZuYZ2GSJ0M750y0uEXnN6sVrCw0D7g@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+	<CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+	<CAFu+mo+zipy=Q36Wx2GOatfkex2rFb01PHn_eaWLASzrXhWWoA@mail.gmail.com>
+	<CALgJuAog3FbGU9sdhy7bZuYZ2GSJ0M750y0uEXnN6sVrCw0D7g@mail.gmail.com>
+Message-ID: <CAFu+moLTsAWL96+0QE4gzfzbHwYwcskNHtYZCGNiB=hF1ObL3A@mail.gmail.com>
+
+Hi Ajay,
+
+If you look closely at my code there, you will see a strategy called
+'callxml'. I'm calling that from ...-Builders.esv and it opens a a new
+window (just like in the case of ATerms)
+With this rule 'callxml1' I'm telling the editor to create a file with the
+extension .xml and then transform the ATerm resulted from parsing into what
+I want.
+Basically is the same functionality like the 'Generate Java code' you get
+when you create a new project in Spoofax.
+
+If you want to use this transformation outside of Spoofax, you could
+compile the .str files into Java, link it with strategoxt.jar and you can
+create your own external tool.
+I'm using a command like this: java -jar strategoxt.jar -i xmlify.str -o
+K2Str -la stratego-sglr --lib -I .. -p k2parser.lib --clean to generate the
+java classes representing the XML transformation.
+If you want to see how I'm using the java classes afterwards, you can have
+a look here:
+http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Java/src/k2parser/KParser.java
+
+Radu
+
+On Tue, Mar 27, 2012 at 6:15 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+
+> Hi Radu,
+>
+> I wrote this rule in Spoofax (the java implementation of the  parser and
+> the Stratego interpretor) in one of the .str files.
+> Then I compile the .str files into java (using strategoxt.jar) and get a
+> bunch of java classes that I can then integrate into a standalone tool.
+>
+> I was able to do the same. I ran the produced class file on an Aterm
+> input. It prints out
+> the transformed ATerm.
+>
+> getstr = prim("SSL_EXT_origin_text", <id>)  - I am looking for the string
+> that represents the transformed ATerm,
+> this would give me the original string, but not the string that represents
+> the transformed ATerm ?
+>
+> I am trying to output the exact string that represents a transformed ATerm.
+> Using ast2text from the command line is not working for me, hence decided
+> to do it using Spoofax.
+>
+> *Does your code unparse the transformed Aterms somewhere ?*
+>
+> Thanks
+> Ajay
+>
+> On Tue, Mar 27, 2012 at 1:42 AM, Radu Mereuta <headness13 at gmail.com>wrote:
+>
+>> Hi Ajay,
+>>
+>> I'm using unparse in the following way:
+>>
+>> to-xml:
+>>     Rule(x1) -> $[<rule loc="[loc]" value="[x1']" />
+>>     ]
+>>     where x1' := prim("SSL_EXT_origin_text", <id>) ; xmlStringEscape ;
+>> escape
+>>     where loc := prim("SSL_EXT_origin_location", <id>) ; write-to-string
+>>
+>> I'm trying to generate XML from my code, and I need to get the exact
+>> string for one of my production rules. I'm calling
+>> prim("SSL_EXT_origin_text", <id>) to get the original text of Rule(x1) and
+>> then escape characters like " < > & to &quote; &lt; &gt; &amp;.
+>> I wrote this rule in Spoofax (the java implementation of the  parser and
+>> the Stratego interpretor) in one of the .str files.
+>> Then I compile the .str files into java (using strategoxt.jar) and get a
+>> bunch of java classes that I can then integrate into a standalone tool.
+>>
+>> You can have a look at my code here:
+>> http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Syntax/trans/xmlify.str
+>> It's a bit more complicated than I described, but it works for me, so
+>> maybe you will find what you are looking for.
+>>
+>> Good luck,
+>> Radu
+>>
+>>
+>>
+>> On Tue, Mar 27, 2012 at 3:56 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>
+>>> Hi Tobi, Radu
+>>>
+>>> Could you please point me to some example transformations
+>>> that use the stratego  libraries to unparse from Aterms back to source
+>>> code?
+>>>
+>>> I am able to successfully specify rewrite rules and strategies for
+>>> manipulating
+>>> the Aterms, but am not sure what is going wrong when trying to
+>>> unparse back to the source code from the rewritten(transformed) Aterm.
+>>>
+>>> I have the following:
+>>>
+>>> module simple
+>>> imports
+>>> ...
+>>> signature
+>>> ...
+>>> rules
+>>>   E : ...
+>>>
+>>> strategies
+>>> main = io-wrap(eval)
+>>> eval = alltd(E)
+>>>
+>>> .....  -> tried a bunch of things (with ast2abox and box2text) at this
+>>> point
+>>>            to print back the source code after Aterm manipulation is
+>>> finished.
+>>>
+>>> Thanks
+>>> Ajay
+>>>
+>>> On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt <
+>>> tobivollebregt at gmail.com> wrote:
+>>>
+>>>> Hi Ajay, Radu,
+>>>>
+>>>> There are two meanings of getting from ATerms back to source.
+>>>>
+>>>> One of those is the this origin-text primitive. This does not map the
+>>>> ATerm to a new string, but instead it returns the exact string that
+>>>> was parsed to this ATerm (including layout and such). For this to
+>>>> work, origin tracking needs to be enabled in the parser.
+>>>>
+>>>> The other meaning is to unparse / pretty print an ATerm, which may
+>>>> never have been produced by a parser (i.e., it has been build using
+>>>> some transformations). For this scenario, you can use libstratego-gpp.
+>>>> This includes strategies such as ast2box and box2text-string, which
+>>>> can be combined to do what ast2text does.
+>>>>
+>>>> Here are some docs:
+>>>>
+>>>> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>>>>
+>>>> Also look in the editor-common.generated.str file in any Spoofax
+>>>> project, it contains an implementation of a language-specific PP-based
+>>>> pretty printing strategy that uses libstratego-gpp.
+>>>>
+>>>> Regards,
+>>>> Tobi
+>>>>
+>>>> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>>> > You can call this: prim("SSL_EXT_origin_text", <id>)
+>>>> >
+>>>> > Do I need to link some library when compiling the strategy file ?
+>>>> >
+>>>> > Thanks
+>>>> > Ajay
+>>>> >
+>>>> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+>>>> wrote:
+>>>> >>
+>>>> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+>>>> >> Each term has a start and end index. The function above will return a
+>>>> >> string from the original file from those bounds.
+>>>> >> You can check the bounds using this:  prim("SSL_EXT_origin_location",
+>>>> >> <id>)
+>>>> >>
+>>>> >> Radu Mereuta
+>>>> >> PhDc at FII, UAIC
+>>>> >>
+>>>> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu>
+>>>> wrote:
+>>>> >>>
+>>>> >>> Hello,
+>>>> >>>
+>>>> >>> How I do do the conversion from aterms back to source using Spoofax
+>>>> IDE ?
+>>>> >>> I do not see a way to invoke ast2text from within the IDE.
+>>>> >>>
+>>>> >>> Thanks
+>>>> >>> Ajay
+>>>> >>>
+>>>> >>>
+>>>> >>>
+>>>> >>> _______________________________________________
+>>>> >>> Users mailing list
+>>>> >>> Users at strategoxt.org
+>>>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>> >>>
+>>>> >>
+>>>> >>
+>>>> >> _______________________________________________
+>>>> >> Users mailing list
+>>>> >> Users at strategoxt.org
+>>>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>> >>
+>>>> >
+>>>> >
+>>>> >
+>>>> >
+>>>> >
+>>>> > _______________________________________________
+>>>> > Users mailing list
+>>>> > Users at strategoxt.org
+>>>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>> >
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120327/dc748baa/attachment-0001.html>
+
+From ajay at csc.lsu.edu  Wed Mar 28 01:14:27 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Tue, 27 Mar 2012 16:14:27 -0700
+Subject: [Stratego Users] Spoofax: going from aterms to source
+In-Reply-To: <CAFu+moLTsAWL96+0QE4gzfzbHwYwcskNHtYZCGNiB=hF1ObL3A@mail.gmail.com>
+References: <CALgJuAp16KqY_uxy9svGV6LVM02i0exNaF3h40swipd7EUK8Tw@mail.gmail.com>
+	<CAFu+mo+Eg5xrx1Angs2dsUd+CdpKgRESjxVSpjau01h1nACqzQ@mail.gmail.com>
+	<CALgJuAo-zORP_wGpje4+G5UYOJeKGrTBkTe+=vveJyhQmu=Wig@mail.gmail.com>
+	<CAOPyLrFHD6ovxFaEjNn7U9NGxMnaTaWrcC-CNVjuB92nL-_XsA@mail.gmail.com>
+	<CALgJuAq4xF4kXm1UEWY42nsCX5KTtBYxdtkGGW+kh7wDuhpvKQ@mail.gmail.com>
+	<CAFu+mo+zipy=Q36Wx2GOatfkex2rFb01PHn_eaWLASzrXhWWoA@mail.gmail.com>
+	<CALgJuAog3FbGU9sdhy7bZuYZ2GSJ0M750y0uEXnN6sVrCw0D7g@mail.gmail.com>
+	<CAFu+moLTsAWL96+0QE4gzfzbHwYwcskNHtYZCGNiB=hF1ObL3A@mail.gmail.com>
+Message-ID: <CALgJuAok1uaetXiS_sNrGtD9BR0BP3WLv8sw2SiAXH=u27_urw@mail.gmail.com>
+
+Thanks. Looking at your code helped a bit, but still did not solve my
+problem :(
+
+The following displays the rewritten terms (pretty printed) on stdout.
+What I am not sure about is why the source language string that
+represents the rewritten Aterms is not displayed on stdout when
+using ast2abox and abox2text.
+
+strategies
+main = xtc-io-wrap(eval)
+eval = alltd(E)
+
+pp-debug =
+where(
+write-to
+  ; xtc-transform(!"ast2abox", ["-p", "/opt/workspace/Fort/include/
+Main.generated.pp.af"])
+; xtc-abox2text
+)
+
+xtc-abox2text =
+xtc-transform(!"abox2text", pass-verbose)
+
+Thanks
+Ajay
+
+On Tue, Mar 27, 2012 at 11:31 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> Hi Ajay,
+>
+> If you look closely at my code there, you will see a strategy called
+> 'callxml'. I'm calling that from ...-Builders.esv and it opens a a new
+> window (just like in the case of ATerms)
+> With this rule 'callxml1' I'm telling the editor to create a file with the
+> extension .xml and then transform the ATerm resulted from parsing into what
+> I want.
+> Basically is the same functionality like the 'Generate Java code' you get
+> when you create a new project in Spoofax.
+>
+> If you want to use this transformation outside of Spoofax, you could
+> compile the .str files into Java, link it with strategoxt.jar and you can
+> create your own external tool.
+> I'm using a command like this: java -jar strategoxt.jar -i xmlify.str -o
+> K2Str -la stratego-sglr --lib -I .. -p k2parser.lib --clean to generate the
+> java classes representing the XML transformation.
+> If you want to see how I'm using the java classes afterwards, you can have
+> a look here:
+> http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Java/src/k2parser/KParser.java
+>
+> Radu
+>
+> On Tue, Mar 27, 2012 at 6:15 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>
+>> Hi Radu,
+>>
+>> I wrote this rule in Spoofax (the java implementation of the  parser and
+>> the Stratego interpretor) in one of the .str files.
+>> Then I compile the .str files into java (using strategoxt.jar) and get a
+>> bunch of java classes that I can then integrate into a standalone tool.
+>>
+>> I was able to do the same. I ran the produced class file on an Aterm
+>> input. It prints out
+>> the transformed ATerm.
+>>
+>> getstr = prim("SSL_EXT_origin_text", <id>)  - I am looking for the string
+>> that represents the transformed ATerm,
+>> this would give me the original string, but not the string that
+>> represents the transformed ATerm ?
+>>
+>> I am trying to output the exact string that represents a transformed
+>> ATerm.
+>> Using ast2text from the command line is not working for me, hence decided
+>> to do it using Spoofax.
+>>
+>> *Does your code unparse the transformed Aterms somewhere ?*
+>>
+>> Thanks
+>> Ajay
+>>
+>> On Tue, Mar 27, 2012 at 1:42 AM, Radu Mereuta <headness13 at gmail.com>wrote:
+>>
+>>> Hi Ajay,
+>>>
+>>> I'm using unparse in the following way:
+>>>
+>>> to-xml:
+>>>     Rule(x1) -> $[<rule loc="[loc]" value="[x1']" />
+>>>     ]
+>>>     where x1' := prim("SSL_EXT_origin_text", <id>) ; xmlStringEscape ;
+>>> escape
+>>>     where loc := prim("SSL_EXT_origin_location", <id>) ; write-to-string
+>>>
+>>> I'm trying to generate XML from my code, and I need to get the exact
+>>> string for one of my production rules. I'm calling
+>>> prim("SSL_EXT_origin_text", <id>) to get the original text of Rule(x1) and
+>>> then escape characters like " < > & to &quote; &lt; &gt; &amp;.
+>>> I wrote this rule in Spoofax (the java implementation of the  parser and
+>>> the Stratego interpretor) in one of the .str files.
+>>> Then I compile the .str files into java (using strategoxt.jar) and get a
+>>> bunch of java classes that I can then integrate into a standalone tool.
+>>>
+>>> You can have a look at my code here:
+>>> http://code.google.com/p/k-framework/source/browse/branches/k3/javasources/K3Syntax/trans/xmlify.str
+>>> It's a bit more complicated than I described, but it works for me, so
+>>> maybe you will find what you are looking for.
+>>>
+>>> Good luck,
+>>> Radu
+>>>
+>>>
+>>>
+>>> On Tue, Mar 27, 2012 at 3:56 AM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>>
+>>>> Hi Tobi, Radu
+>>>>
+>>>> Could you please point me to some example transformations
+>>>> that use the stratego  libraries to unparse from Aterms back to source
+>>>> code?
+>>>>
+>>>> I am able to successfully specify rewrite rules and strategies for
+>>>> manipulating
+>>>> the Aterms, but am not sure what is going wrong when trying to
+>>>> unparse back to the source code from the rewritten(transformed) Aterm.
+>>>>
+>>>> I have the following:
+>>>>
+>>>> module simple
+>>>> imports
+>>>> ...
+>>>> signature
+>>>> ...
+>>>> rules
+>>>>   E : ...
+>>>>
+>>>> strategies
+>>>> main = io-wrap(eval)
+>>>> eval = alltd(E)
+>>>>
+>>>> .....  -> tried a bunch of things (with ast2abox and box2text) at this
+>>>> point
+>>>>            to print back the source code after Aterm manipulation is
+>>>> finished.
+>>>>
+>>>> Thanks
+>>>> Ajay
+>>>>
+>>>> On Sun, Mar 25, 2012 at 12:49 PM, Tobi Vollebregt <
+>>>> tobivollebregt at gmail.com> wrote:
+>>>>
+>>>>> Hi Ajay, Radu,
+>>>>>
+>>>>> There are two meanings of getting from ATerms back to source.
+>>>>>
+>>>>> One of those is the this origin-text primitive. This does not map the
+>>>>> ATerm to a new string, but instead it returns the exact string that
+>>>>> was parsed to this ATerm (including layout and such). For this to
+>>>>> work, origin tracking needs to be enabled in the parser.
+>>>>>
+>>>>> The other meaning is to unparse / pretty print an ATerm, which may
+>>>>> never have been produced by a parser (i.e., it has been build using
+>>>>> some transformations). For this scenario, you can use libstratego-gpp.
+>>>>> This includes strategies such as ast2box and box2text-string, which
+>>>>> can be combined to do what ast2text does.
+>>>>>
+>>>>> Here are some docs:
+>>>>>
+>>>>> http://releases.strategoxt.org/docs/api/libstratego-gpp/libstratego-gpp-docs-stable/docs/
+>>>>>
+>>>>> Also look in the editor-common.generated.str file in any Spoofax
+>>>>> project, it contains an implementation of a language-specific PP-based
+>>>>> pretty printing strategy that uses libstratego-gpp.
+>>>>>
+>>>>> Regards,
+>>>>> Tobi
+>>>>>
+>>>>> On 25 March 2012 18:28, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>>>> > You can call this: prim("SSL_EXT_origin_text", <id>)
+>>>>> >
+>>>>> > Do I need to link some library when compiling the strategy file ?
+>>>>> >
+>>>>> > Thanks
+>>>>> > Ajay
+>>>>> >
+>>>>> > On Sun, Mar 25, 2012 at 2:04 AM, Radu Mereuta <headness13 at gmail.com>
+>>>>> wrote:
+>>>>> >>
+>>>>> >> You can call this: prim("SSL_EXT_origin_text", <id>)
+>>>>> >> Each term has a start and end index. The function above will return
+>>>>> a
+>>>>> >> string from the original file from those bounds.
+>>>>> >> You can check the bounds using this:
+>>>>>  prim("SSL_EXT_origin_location",
+>>>>> >> <id>)
+>>>>> >>
+>>>>> >> Radu Mereuta
+>>>>> >> PhDc at FII, UAIC
+>>>>> >>
+>>>>> >> On Sat, Mar 24, 2012 at 3:01 AM, Ajay Panyala <ajay at csc.lsu.edu>
+>>>>> wrote:
+>>>>> >>>
+>>>>> >>> Hello,
+>>>>> >>>
+>>>>> >>> How I do do the conversion from aterms back to source using
+>>>>> Spoofax IDE ?
+>>>>> >>> I do not see a way to invoke ast2text from within the IDE.
+>>>>> >>>
+>>>>> >>> Thanks
+>>>>> >>> Ajay
+>>>>> >>>
+>>>>> >>>
+>>>>> >>>
+>>>>> >>> _______________________________________________
+>>>>> >>> Users mailing list
+>>>>> >>> Users at strategoxt.org
+>>>>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>> >>>
+>>>>> >>
+>>>>> >>
+>>>>> >> _______________________________________________
+>>>>> >> Users mailing list
+>>>>> >> Users at strategoxt.org
+>>>>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>> >>
+>>>>> >
+>>>>> >
+>>>>> >
+>>>>> >
+>>>>> >
+>>>>> > _______________________________________________
+>>>>> > Users mailing list
+>>>>> > Users at strategoxt.org
+>>>>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>> >
+>>>>>
+>>>>> _______________________________________________
+>>>>> Users mailing list
+>>>>> Users at strategoxt.org
+>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>>
+>>>>
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120327/47adbfcf/attachment.html>
+
+From ajay at csc.lsu.edu  Thu Mar 29 01:29:42 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Wed, 28 Mar 2012 16:29:42 -0700
+Subject: [Stratego Users] using concrete syntax with ATerms generated by a
+	different tool
+Message-ID: <CALgJuAo5-1ODSy5SneMvxTY+vRLdJ=dftpu2RTc6ETDVsDQmBA@mail.gmail.com>
+
+Hello,
+
+Is it possible to still use concrete syntax for representing the
+transformations
+while using ATerms generated by a different tool (the ATerms are not
+generated
+from SDF grammars)
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120328/810d7919/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Mar 29 02:05:34 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 29 Mar 2012 02:05:34 +0200
+Subject: [Stratego Users] using concrete syntax with ATerms generated by
+ a different tool
+In-Reply-To: <CALgJuAo5-1ODSy5SneMvxTY+vRLdJ=dftpu2RTc6ETDVsDQmBA@mail.gmail.com>
+References: <CALgJuAo5-1ODSy5SneMvxTY+vRLdJ=dftpu2RTc6ETDVsDQmBA@mail.gmail.com>
+Message-ID: <CAFaCHU0-gOpzj8Btuk--M5hpkqMYe5vEGhQNBTVJSnTWoFkcdA@mail.gmail.com>
+
+Hi Ajay,
+
+> Is it possible to still use concrete syntax for representing the
+> transformations
+> while using ATerms generated by a different tool (the ATerms are not
+> generated from SDF grammars)
+
+Yes, that is possible. But you will still have to write an SDF grammar
+in which you make sure that the ATerms generated by the grammar match
+the ATerms generated by the external tool.
+
+Say, your tool generates ATerms of the form Foo(Bar("x"),"3"), then
+you could write a grammar such as
+
+  context-free syntax
+    "foo" Bar INT -> Foo {cons("Foo")}
+    "bar" ID -> Bar {cons("Bar")}
+  variables
+     "x" -> ID
+     "i" -> INT
+
+so that you can write concrete syntax patterns in rewrite rules:
+
+  desugar:
+    |[ foo bar x i ]| -> i
+
+which will be equivalent to
+
+   desugar:
+      Foo(Bar(x), i) -> i
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From ajay at csc.lsu.edu  Thu Mar 29 04:21:38 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Wed, 28 Mar 2012 19:21:38 -0700
+Subject: [Stratego Users] using concrete syntax with ATerms generated by
+ a different tool
+In-Reply-To: <CAFaCHU0-gOpzj8Btuk--M5hpkqMYe5vEGhQNBTVJSnTWoFkcdA@mail.gmail.com>
+References: <CALgJuAo5-1ODSy5SneMvxTY+vRLdJ=dftpu2RTc6ETDVsDQmBA@mail.gmail.com>
+	<CAFaCHU0-gOpzj8Btuk--M5hpkqMYe5vEGhQNBTVJSnTWoFkcdA@mail.gmail.com>
+Message-ID: <CALgJuApXOtMVXOY-ZO6xMNzy8SaTTw9mFdbEYzA4hg988PPYRQ@mail.gmail.com>
+
+Hello Eelco,
+
+Yes, that is possible. But you will still have to write an SDF grammar
+in which you make sure that the ATerms generated by the grammar match
+the ATerms generated by the external tool.
+
+Got it. I have a grammar for that which could be easily translated to SDF.
+
+I have an SDF grammar already, but the ATerms don't match the ones generated
+by the external tool.
+
+The reason I decided to switch to the external tool is that ast2text would
+fail
+when trying to unparse from ATerms back to the source language.
+
+Is it common for ast2text to fail when the grammar is very big ?
+I do not understand the generated pp.af file format deep enough
+to actually hack it manually.
+
+I used a fortran grammar in the SDF library available as part of
+the ASF-SDF bundle at http://www.meta-environment.org
+
+I tried the Spoofax route. Within a stratego program, I tried to write (to
+stdout)
+the source language string corresponding to the transformed ATerm  using
+ast2abox and abox2text as follows:
+
+strategies
+main = xtc-io-wrap(eval)
+eval = alltd(E)
+
+pp-debug =
+where(
+write-to
+; xtc-transform(!"ast2abox", ["-p", "/opt/workspace/Fort/include/
+Main.generated.pp.af"])
+; xtc-abox2text
+)
+
+xtc-abox2text =
+xtc-transform(!"abox2text", pass-verbose)
+
+but that displays the transformed ATerms on stdout rather displaying the
+source
+language equivalent of it.
+
+Is there something missing in the above code that prevents
+displaying the source language equivalent of the transformed ATerm?
+
+Thank You
+Ajay
+
+On Wed, Mar 28, 2012 at 5:05 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Ajay,
+>
+> > Is it possible to still use concrete syntax for representing the
+> > transformations
+> > while using ATerms generated by a different tool (the ATerms are not
+> > generated from SDF grammars)
+>
+> Yes, that is possible. But you will still have to write an SDF grammar
+> in which you make sure that the ATerms generated by the grammar match
+> the ATerms generated by the external tool.
+>
+> Say, your tool generates ATerms of the form Foo(Bar("x"),"3"), then
+> you could write a grammar such as
+>
+>  context-free syntax
+>    "foo" Bar INT -> Foo {cons("Foo")}
+>    "bar" ID -> Bar {cons("Bar")}
+>  variables
+>     "x" -> ID
+>     "i" -> INT
+>
+> so that you can write concrete syntax patterns in rewrite rules:
+>
+>  desugar:
+>    |[ foo bar x i ]| -> i
+>
+> which will be equivalent to
+>
+>   desugar:
+>      Foo(Bar(x), i) -> i
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120328/add2d2e9/attachment.html>
+
+From denis.bogdanas at gmail.com  Thu Mar 29 14:08:24 2012
+From: denis.bogdanas at gmail.com (Denis Bogdanas)
+Date: Thu, 29 Mar 2012 15:08:24 +0300
+Subject: [Stratego Users] Java 7 Support
+In-Reply-To: <CAD=3RU1i13QH-Ev5g4M01GtVRY9Qy=jdj5nZwXkSiGYysMZOAw@mail.gmail.com>
+References: <CAD=3RU1i13QH-Ev5g4M01GtVRY9Qy=jdj5nZwXkSiGYysMZOAw@mail.gmail.com>
+Message-ID: <CAD=3RU2t28Cke7atOxSNscDYMM1j+53UNigaTLkbA2wCe57H0A@mail.gmail.com>
+
+Hello,
+
+I'm using java-front to define semantics of java in k framework. The
+project have just started, but it would be really nice to end-up supporting
+the latest version of java. Are there any plans to extend java-front to
+Java 7?
+
+Thanks,
+Denis
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120329/d635d699/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Mar 29 14:27:51 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 29 Mar 2012 14:27:51 +0200
+Subject: [Stratego Users] Java 7 Support
+In-Reply-To: <CAD=3RU2t28Cke7atOxSNscDYMM1j+53UNigaTLkbA2wCe57H0A@mail.gmail.com>
+References: <CAD=3RU1i13QH-Ev5g4M01GtVRY9Qy=jdj5nZwXkSiGYysMZOAw@mail.gmail.com>
+	<CAD=3RU2t28Cke7atOxSNscDYMM1j+53UNigaTLkbA2wCe57H0A@mail.gmail.com>
+Message-ID: <CAFaCHU0mpXBy76+bmXvy7m1ZbWnrde5xUwUcdApdFJq1kZ104Q@mail.gmail.com>
+
+Hi Denis,
+
+> I'm using java-front to define semantics of java in k framework. The project
+> have just started, but it would be really nice to end-up supporting the
+> latest version of java. Are there any plans to extend java-front to Java 7?
+
+We have no such plans at the moment. We have limited resources, and
+currently we are spending the resources we have on making Spoofax
+better. But java-front, like Stratego and Spoofax, is an open source
+project. You are most welcome to make a Java 7 branch of java-front
+and commit it to the stratego repository.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From denis.bogdanas at gmail.com  Thu Mar 29 17:10:09 2012
+From: denis.bogdanas at gmail.com (Denis Bogdanas)
+Date: Thu, 29 Mar 2012 18:10:09 +0300
+Subject: [Stratego Users] Java 7 Support
+In-Reply-To: <CAFaCHU0mpXBy76+bmXvy7m1ZbWnrde5xUwUcdApdFJq1kZ104Q@mail.gmail.com>
+References: <CAD=3RU1i13QH-Ev5g4M01GtVRY9Qy=jdj5nZwXkSiGYysMZOAw@mail.gmail.com>
+	<CAD=3RU2t28Cke7atOxSNscDYMM1j+53UNigaTLkbA2wCe57H0A@mail.gmail.com>
+	<CAFaCHU0mpXBy76+bmXvy7m1ZbWnrde5xUwUcdApdFJq1kZ104Q@mail.gmail.com>
+Message-ID: <CAD=3RU1DMaYp9YSTirdwwwSFsK56eAFf=Y=5nQ0xsPnvUc9ojA@mail.gmail.com>
+
+Thanks for the answer.
+
+That's a possibility I will consider once Java 5 semantics is done.
+
+Denis
+
+On Thu, Mar 29, 2012 at 3:27 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Denis,
+>
+> > I'm using java-front to define semantics of java in k framework. The
+> project
+> > have just started, but it would be really nice to end-up supporting the
+> > latest version of java. Are there any plans to extend java-front to Java
+> 7?
+>
+> We have no such plans at the moment. We have limited resources, and
+> currently we are spending the resources we have on making Spoofax
+> better. But java-front, like Stratego and Spoofax, is an open source
+> project. You are most welcome to make a Java 7 branch of java-front
+> and commit it to the stratego repository.
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120329/e206593f/attachment.html>
+

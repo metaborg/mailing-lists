@@ -1,0 +1,823 @@
+From gabrielkonat at gmail.com  Wed Aug 13 23:43:11 2014
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Wed, 13 Aug 2014 14:43:11 -0700
+Subject: [Stratego Users] Spoofax 1.2 released
+Message-ID: <CAOipTujuG=hUHZpvOL+jweetEECCZNdhvJGo0LD1cg7rDmoAQQ@mail.gmail.com>
+
+Hi all,
+
+We're happy to announce the release of Spoofax 1.2! Have a look at our
+change log at
+https://github.com/metaborg/doc/blob/master/releases/spoofax/1.2.md for the
+changes in Spoofax 1.2.
+
+You can install or update to Spoofax 1.2 in Eclipse using the regular
+stable update site: http://download.spoofax.org/update/stable/. If you
+would like to downgrade to Spoofax 1.1 again after installing 1.2, you can
+uninstall Spoofax and install from update site:
+http://download.spoofax.org/update/release/1.1.
+
+Cheers,
+Gabriel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140813/f67a76a3/attachment.html>
+
+From p.d.mosses at swansea.ac.uk  Thu Aug 14 13:18:02 2014
+From: p.d.mosses at swansea.ac.uk (Peter Mosses)
+Date: Thu, 14 Aug 2014 12:18:02 +0100
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <CAMh3W66uvwsVs=NxzwaFL2qkFB1ZrcF7DpKCxhgyrV+XNuSxMA@mail.gmail.com>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+ <7276BDBB-ABF7-433F-BB47-7BE14EFF479F@swansea.ac.uk>
+ <CAMh3W66uvwsVs=NxzwaFL2qkFB1ZrcF7DpKCxhgyrV+XNuSxMA@mail.gmail.com>
+Message-ID: <D717749D-D1CF-47F6-968C-A78A2C281A09@swansea.ac.uk>
+
+Hi Eduardo,
+
+Great that Spoofax 1.2 has now been released! Also the accompanying documentation for the new features introduced by the previous unstable releases and nightly builds is much appreciated.
+
+However, it appears that 1.2 doesn't include the Lift to SDF3 (concrete) builder that you'd implemented to produce an SDF3 grammar with regular productions (i.e., no templates) from an SDF2 grammar. Please let me know whether I've overlooked some way to do that (or to generate regular productions directly from SDF3 templates). If not, I'll continue to use the unstable release along with your symbolsorts project for migrating my SDF2 grammars to SDF3 regular productions.
+
+Best regards,
+
+Peter
+
+
+On 22 Jul 2014, at 13:05, Eduardo Souza Amorim wrote:
+
+Hi Peter, 
+
+Good to know they are being helpful. When we decided to move to SDF3, we had in mind that would be useful to have such conversion tools to support users that were still using SDF2.
+I have been working on refactoring the ant files the last few days, so we could drop some tools that were being called in the previous implementation, e.g., the signature generator from .rtg files.
+Hopefully they will be added to Spoofax soon, so the build process is gonna be a little more quick.
+
+I will fix the Format (abstract) builder as soon as possible. I was using it to keep track of the changes that I was doing on the AST and it was defined just for developing purposes. I think I had it working, but
+I changed it at some point, and did not change it back.
+
+Yes, it is a good idea to have a builder to extract regular productions from templates. It should be straightforward to do it as well. I will work to have it done by the end of the week and commit it to github.
+
+I really appreciate your feedback, please let me know if there is something else you found interesting to have implemented on it.
+
+Best regards,
+
+
+
+On Tue, Jul 22, 2014 at 1:47 PM, Peter Mosses <p.d.mosses at swansea.ac.uk> wrote:
+Hi again Eduardo,
+
+On 12 Jul 2014, at 09:38, I wrote:
+
+> The new builders that you've implemented should be especially useful in connection with my migration from SDF2 to SDF3,
+
+I've noticed what seems to be a minor bug: When editing an SDF3 grammar, the new Format (abstract) builder generates concrete SDF3 text in the .aterm file, instead of the expected abstract syntax. The other builders appear to work OK. 
+
+In particular, I'm happy to see that when editing an SDF2 grammar, the Lift to SDF3 (concrete) builder produces an SDF3 grammar with regular productions (i.e., no templates). To convert an SDF3 grammar using templates to regular productions, however, it seems I need to first generate SDF2, then use Lift to SDF3 (concrete) ? could you perhaps add a builder for doing that in one go?
+
+Many thanks for making it so easy to migrate from SDF2 to SDF3!
+
+Best regards,
+
+Peter
+
+On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+
+Hi Language Engineers and Spoofax Users,
+
+I have been working for the past few months on a refactored and improved version of SDF3 and I need to get feedback from the users in order to fix errors that may appear before we migrate it. The changelog can be found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it covers the main changes we implemented in this new version.
+
+To test it you have to import and build the projects in the symbolsorts branch of metaborg/sdf from github (https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in the same workspace as your spoofax project.
+
+There are two changes that you also need to do to get it working:
+
+- Point the property 'syntax' to the location 'src-gen/syntax' in build.main.xml file of your project.
+(<property name="syntax" location="src-gen/syntax" />)
+
+- Import the main stratego pp file from src-gen/pp in trans/pp.str. The main stratego pp file is the file generated from the main .sdf3 file of your grammar (<MainModule>-pp.str).
+
+Please feel free to reply me if you find something that is not working properly, or even if you have suggestions of improvements that should be implemented.
+
+Best regards,
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140814/a6f9a63d/attachment.html>
+
+From eduardo7.ufv at gmail.com  Thu Aug 14 14:02:45 2014
+From: eduardo7.ufv at gmail.com (Eduardo Souza Amorim)
+Date: Thu, 14 Aug 2014 14:02:45 +0200
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <D717749D-D1CF-47F6-968C-A78A2C281A09@swansea.ac.uk>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+ <7276BDBB-ABF7-433F-BB47-7BE14EFF479F@swansea.ac.uk>
+ <CAMh3W66uvwsVs=NxzwaFL2qkFB1ZrcF7DpKCxhgyrV+XNuSxMA@mail.gmail.com>
+ <D717749D-D1CF-47F6-968C-A78A2C281A09@swansea.ac.uk>
+Message-ID: <CAMh3W67a8Or47xu5O-GJyK+mBnn=9GGrg8dYcS46y0xrk=Lbbg@mail.gmail.com>
+
+Hi Peter,
+
+As we were still testing my implementation of SDF3, everything that is in
+the symbolsorts branch was not included in Spoofax 1.2, unfortunately. The
+builder for SDF2 depends on the new implementation of SDF3, that is why it
+was not included in the new release.
+However, we are planning on merging it at least into nightly as soon as
+possible and include it in a stable release of Spoofax 1.3.
+
+I have just committed some changes into symbolsorts that might be
+interesting for you:
+- Productive productions can also be used in the Variables section.
+- A new builder "Extract productions" that extract productive productions
+from templates in .sdf3 files.
+
+We also plan to turn these builders into refactoring tools, so it does not
+generate a new .sdf3 file when you run the transformation, and preserve the
+comments and layout on the original file.
+
+Please let me know if everything is still working with these changes.
+
+Best regards,
+
+
+
+On Thu, Aug 14, 2014 at 1:18 PM, Peter Mosses <p.d.mosses at swansea.ac.uk>
+wrote:
+
+> Hi Eduardo,
+>
+> Great that Spoofax 1.2 has now been released! Also the accompanying
+> documentation for the new features introduced by the previous unstable
+> releases and nightly builds is much appreciated.
+>
+> However, it appears that 1.2 doesn't include the *Lift to SDF3 (concrete)* builder
+> that you'd implemented to produce an SDF3 grammar with *regular* productions
+> (i.e., no templates) from an SDF2 grammar. Please let me know whether I've
+> overlooked some way to do that (or to generate regular productions directly
+> from SDF3 templates). If not, I'll continue to use the unstable release
+> along with your symbolsorts project for migrating my SDF2 grammars to SDF3
+> regular productions.
+>
+> Best regards,
+>
+> Peter
+>
+>
+> On 22 Jul 2014, at 13:05, Eduardo Souza Amorim wrote:
+>
+> Hi Peter,
+>
+> Good to know they are being helpful. When we decided to move to SDF3, we
+> had in mind that would be useful to have such conversion tools to support
+> users that were still using SDF2.
+> I have been working on refactoring the ant files the last few days, so we
+> could drop some tools that were being called in the previous
+> implementation, e.g., the signature generator from .rtg files.
+> Hopefully they will be added to Spoofax soon, so the build process is
+> gonna be a little more quick.
+>
+> I will fix the *Format (abstract) *builder as soon as possible. I was
+> using it to keep track of the changes that I was doing on the AST and it
+> was defined just for developing purposes. I think I had it working, but
+> I changed it at some point, and did not change it back.
+>
+> Yes, it is a good idea to have a builder to extract regular productions
+> from templates. It should be straightforward to do it as well. I will work
+> to have it done by the end of the week and commit it to github.
+>
+> I really appreciate your feedback, please let me know if there is
+> something else you found interesting to have implemented on it.
+>
+> Best regards,
+>
+>
+>
+> On Tue, Jul 22, 2014 at 1:47 PM, Peter Mosses <p.d.mosses at swansea.ac.uk>
+> wrote:
+>
+>> Hi again Eduardo,
+>>
+>> On 12 Jul 2014, at 09:38, I wrote:
+>>
+>> The new builders that you've implemented should be especially useful in
+>> connection with my migration from SDF2 to SDF3,
+>>
+>>
+>> I've noticed what seems to be a minor bug: When editing an SDF3 grammar,
+>> the new *Format (abstract)* builder generates concrete SDF3 *text* in
+>> the .aterm file, instead of the expected abstract syntax. The other
+>> builders appear to work OK.
+>>
+>> In particular, I'm happy to see that when editing an SDF2 grammar, the *Lift
+>> to SDF3 (concrete)* builder produces an SDF3 grammar with *regular*
+>> productions (i.e., no templates). To convert an SDF3 grammar using
+>> templates to regular productions, however, it seems I need to first
+>> generate SDF2, then use Lift to SDF3 (concrete) ? could you perhaps add a
+>> builder for doing that in one go?
+>>
+>> Many thanks for making it so easy to migrate from SDF2 to SDF3!
+>>
+>> Best regards,
+>>
+>> Peter
+>>
+>>  On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+>>
+>> Hi Language Engineers and Spoofax Users,
+>>
+>>  I have been working for the past few months on a refactored and
+>> improved version of SDF3 and I need to get feedback from the users in order
+>> to fix errors that may appear before we migrate it. The changelog can be
+>> found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and
+>> it covers the main changes we implemented in this new version.
+>>
+>>  To test it you have to import and build the projects in the symbolsorts
+>> branch of metaborg/sdf from github (
+>> https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in
+>> the same workspace as your spoofax project.
+>>
+>>  There are two changes that you also need to do to get it working:
+>>
+>>  - Point the property 'syntax' to the location 'src-gen/syntax' in
+>> build.main.xml file of your project.
+>> (<property name="syntax" location="src-gen/syntax" />)
+>>
+>>  - Import the main stratego pp file from src-gen/pp in trans/pp.str. The
+>> main stratego pp file is the file generated from the main .sdf3 file of
+>> your grammar (<MainModule>-pp.str).
+>>
+>>  Please feel free to reply me if you find something that is not working
+>> properly, or even if you have suggestions of improvements that should be
+>> implemented.
+>>
+>>  Best regards,
+>>
+>>  --
+>> Lu?s Eduardo de Souza Amorim
+>> PhD candidate at Delft University of Technology
+>>  _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Lu?s Eduardo de Souza Amorim
+> PhD candidate at Delft University of Technology
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140814/a7efcea3/attachment-0001.html>
+
+From p.d.mosses at swansea.ac.uk  Thu Aug 14 16:24:25 2014
+From: p.d.mosses at swansea.ac.uk (Peter Mosses)
+Date: Thu, 14 Aug 2014 15:24:25 +0100
+Subject: [Stratego Users] Spoofax 1.2 released - sunshine?
+In-Reply-To: <CAOipTujuG=hUHZpvOL+jweetEECCZNdhvJGo0LD1cg7rDmoAQQ@mail.gmail.com>
+References: <CAOipTujuG=hUHZpvOL+jweetEECCZNdhvJGo0LD1cg7rDmoAQQ@mail.gmail.com>
+Message-ID: <6C9F51D3-0502-4084-8DC7-67641E9DD2AA@swansea.ac.uk>
+
+Hi,
+
+Many thanks for the release of Spoofax 1.2! A quick question:
+
+https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md states:
+
+> Obtaining Sunshine
+> 
+> Binaries
+> 
+> You can download the latest prebuilt binary of Spoofax Sunshine from the releases page. 
+
+The latest release there currently has tag 1.1.1. Will it work also with Spoofax 1.2?
+
+Cheers,
+
+Peter
+
+
+On 13 Aug 2014, at 22:43, Gabri?l Konat wrote:
+
+Hi all,
+
+We're happy to announce the release of Spoofax 1.2! Have a look at our change log at https://github.com/metaborg/doc/blob/master/releases/spoofax/1.2.md for the changes in Spoofax 1.2.
+
+You can install or update to Spoofax 1.2 in Eclipse using the regular stable update site: http://download.spoofax.org/update/stable/. If you would like to downgrade to Spoofax 1.1 again after installing 1.2, you can uninstall Spoofax and install from update site: http://download.spoofax.org/update/release/1.1.
+
+Cheers,
+Gabriel
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140814/447196b0/attachment.html>
+
+From gabrielkonat at gmail.com  Thu Aug 14 21:41:36 2014
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Thu, 14 Aug 2014 12:41:36 -0700
+Subject: [Stratego Users] Spoofax 1.2 released - sunshine?
+In-Reply-To: <6C9F51D3-0502-4084-8DC7-67641E9DD2AA@swansea.ac.uk>
+References: <CAOipTujuG=hUHZpvOL+jweetEECCZNdhvJGo0LD1cg7rDmoAQQ@mail.gmail.com>
+ <6C9F51D3-0502-4084-8DC7-67641E9DD2AA@swansea.ac.uk>
+Message-ID: <CAOipTugaPobr74rESm5B-q-vTchK7oz3Qo2XOWH2AKaA2bjp_w@mail.gmail.com>
+
+Hi Peter,
+
+The Sunshine version is not in sync with the Spoofax version (yet). The
+1.1.1 version should work with 1.2, but if you run into problems I can look
+into it.
+
+Cheers,
+Gabriel
+
+
+On 14 August 2014 07:24, Peter Mosses <p.d.mosses at swansea.ac.uk> wrote:
+
+> Hi,
+>
+> Many thanks for the release of Spoofax 1.2! A quick question:
+>
+> https://github.com/metaborg/doc/blob/master/spoofax/sunshine/sunshine.md
+> states:
+>
+> Obtaining Sunshine
+>
+> Binaries
+>
+> You can download the latest prebuilt binary of Spoofax Sunshine from
+> the releases page.
+>
+>
+> The latest release there currently has tag 1.1.1. Will it work also with
+> Spoofax 1.2?
+>
+> Cheers,
+>
+> Peter
+>
+>
+> On 13 Aug 2014, at 22:43, Gabri?l Konat wrote:
+>
+> Hi all,
+>
+> We're happy to announce the release of Spoofax 1.2! Have a look at our
+> change log at
+> https://github.com/metaborg/doc/blob/master/releases/spoofax/1.2.md for
+> the changes in Spoofax 1.2.
+>
+> You can install or update to Spoofax 1.2 in Eclipse using the regular
+> stable update site: http://download.spoofax.org/update/stable/. If you
+> would like to downgrade to Spoofax 1.1 again after installing 1.2, you can
+> uninstall Spoofax and install from update site:
+> http://download.spoofax.org/update/release/1.1.
+>
+> Cheers,
+> Gabriel
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140814/45e539e4/attachment.html>
+
+From gabrielkonat at gmail.com  Sat Aug 16 20:12:27 2014
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Sat, 16 Aug 2014 11:12:27 -0700
+Subject: [Stratego Users] Fwd: field expr with NaBL/type checking
+In-Reply-To: <51BD99BF-F97E-489C-8422-E3718270FAE7@fail0verflow.com>
+References: <51BD99BF-F97E-489C-8422-E3718270FAE7@fail0verflow.com>
+Message-ID: <CAOipTuiptwSkv+_M5W3_ACn9mcVROWgQ0WFvou8fOSErP58ypg@mail.gmail.com>
+
+---------- Forwarded message ----------
+From: iZsh <izsh at fail0verflow.com>
+Date: 16 August 2014 10:16
+Subject: field expr with NaBL/type checking
+To: g.d.p.konat at tudelft.nl
+
+
+Hello,
+
+I have the following DSL:
+
+op foo
+  attr1 = "fooattr1"
+  attr2 = "fooattr2"
+
+op bar
+  attr1 = "barattr1"
+  attr2 = "barattr2"
+
+op bogus
+  attr1 = "bogusattr1"
+
+op sum = foo | bar | bogus
+
+and at some point I have two variables:
+myvar1: foo
+myvar2: sum
+
+and an expression with a field use:
+myvar1.attr2
+myvar2.attr2
+
+my current NaBL code to support this is:
+RuleDecl(x, _):
+ defines unique Rule x of type Rule(x)
+Field(v, x):
+ refers to Attr x in Rule r
+ where v has type Rule(r)
+
+which works fine for myvar1 of type foo, but doesn't obviously for myvar2
+which is a "sum" type.
+
+I'd like to express the fact that for a sum type whenever an attribute is
+accessed, each rules in the sum type should have this attribute. I'm
+guessing this has to be done in the type system, but I dont know whether or
+not something has to be done in NaBL as well.
+
+For the sum/or type, I had started to add the following constructor:
+
+ OrRule.OrRule = < = <RuleRef+; separator=" | ">>
+ RuleRef.RuleRef = <<ID>>
+
+That way I can do:
+RuleRef(x): refers to Rule x
+
+To make sure the rules in the sum type actually exist, but that doesnt
+solve the fact that my OrRule is a list, and I don't know how to process
+that with NaBL
+
+(Actually I don't even know how to call stratego strategies in NaBL)
+
+Can anyone enlighten me?
+
+NB: I'm running Spoofax 1.2.0
+
+ --
+iZsh
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140816/b1abd035/attachment.html>
+
+From izsh at fail0verflow.com  Sat Aug 30 12:55:22 2014
+From: izsh at fail0verflow.com (iZsh)
+Date: Sat, 30 Aug 2014 12:55:22 +0200
+Subject: [Stratego Users] strategoshell
+Message-ID: <E12DCC10-5AAB-4867-9E6F-51ABA4FD717E@fail0verflow.com>
+
+Hello,
+
+since I couldn't get the strategoshell to work with Spoofax 1.2.0 (http://yellowgrass.org/issue/Spoofax/912) and the learning curve/debugging would definitely be easier with a shell, I'm trying to compile a standalone stratego-shell.
+
+I've compiled successfully a standalone StrategoXT from https://github.com/metaborg/strategoxt
+but now I have difficulties finding instructions to get and compile a matching version of stratego-shell.
+
+the link ftp://ftp.strategoxt.org/pub/stratego/StrategoXT/strategoxt-0.17/stratego-shell-0.7.tar.gz
+from http://strategoxt.org/Stratego/StrategoShellRelease07 seems down.
+
+I could svn checkout https://svn.strategoxt.org/repos/StrategoXT/stratego-shell/branches/stratego-shell-0.7/
+but then it seems to require autoxt? And I'm not sure that's the proper path of actions.
+
+Could someone help me getting either the Spoofax console to work or a standalone strategoshell?
+
+Best Regards,
+-- 
+iZsh
+PS: I'm also on the freenode #spoofax irc channel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140830/f59ca156/attachment.html>
+
+From E.Visser at tudelft.nl  Sat Aug 30 22:54:37 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 30 Aug 2014 22:54:37 +0200
+Subject: [Stratego Users] Fwd: SPLASH 2014 - Call For Participation
+In-Reply-To: <D0278652.16220%canslow@ucalgary.ca>
+References: <D0278652.16220%canslow@ucalgary.ca>
+Message-ID: <CAFaCHU06LjgpjCy-AmPFTpxipFCyMP6fEz74GV1n-wS_e6r2NA@mail.gmail.com>
+
+ /*************************************************************/
+                    ACM Conference on
+     Systems, Programming, Languages, and Applications:
+                  Software for Humanity (SPLASH'14)
+
+                  Portland, Oregon, USA
+                   20-24 October, 2014
+
+                http://www.splashcon.org
+              http://twitter.com/splashcon
+            http://www.facebook.com/SPLASHCon
+
+                Sponsored by ACM SIGPLAN
+
+/**************************************************************
+CALL FOR PARTICIPATION
+**************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH) embraces all aspects of
+software construction and delivery to make it the premier conference at the
+intersection of programming, languages, and software engineering. SPLASH is
+now inviting calls for participation.
+
+
+** REGISTRATION **
+19 September 2014 (Early Deadline)
+Contact: info at splashcon.org
+http://2014.splashcon.org/attending/registration
+
+
+** CONFERENCE PROGRAM **
+http://2014.splashcon.org/program/program-splash2014
+
+
+** KEYNOTE Speakers **
+Gary McGraw (Cigital): Software Security ? A Study in Technology Transfer
+Peter Norvig (Google): Machine Learning for Programming
+Bret Victor (WorryDream): Humane Representation of Thought: A Trail Map for
+the 21st Century
+
+http://2014.splashcon.org/track/splash2014-keynotes
+
+
+** OOPSLA Research Papers**
+Papers that address any aspect of software development are welcome,
+including requirements, modeling, prototyping, design, implementation,
+generation, analysis, verification, testing, evaluation, maintenance,
+reuse, replacement, and retirement of software systems. Papers may address
+these topics in a variety of ways, including new tools (such as languages,
+program analyses, and runtime systems), new techniques (such as
+methodologies, design processes, code organization approaches, and
+management techniques), and new evaluations (such as formalisms and proofs,
+corpora analyses, user studies, and surveys).
+
+http://2014.splashcon.org/track/oopsla2014
+
+
+** Onward! Research Papers **
+Onward! is a premier multidisciplinary conference focused on everything to
+do with programming and software: including processes, methods, languages,
+communities, and applications. Onward! is more radical, more visionary, and
+more open than other conferences to ideas that are well-argued but not yet
+proven. We welcome different ways of thinking about, approaching, and
+reporting on programming language and software engineering research.
+
+http://2014.splashcon.org/track/onward2014-papers
+
+
+** Onward! Essays **
+Onward! Essays is looking for clear and compelling pieces of writing about
+topics important to the software community. An essay can be an exploration
+of a topic, its impact, or the circumstances of its creation; it can
+present a personal view of what is, explore a terrain, or lead the reader
+in an act of discovery; it can be a philosophical digression or a deep
+analysis. It can describe a personal journey, perhaps that by which the
+author reached an understanding of such a topic. The subject area should be
+interpreted broadly and can include the relationship of software to human
+endeavors, or its philosophical, sociological, psychological, historical,
+or anthropological underpinnings.
+
+http://2014.splashcon.org/track/onward2014-essays
+
+
+** Dynamic Languages Symposium (DLS) **
+DLS is the premier forum for researchers and practitioners to share
+knowledge and research on dynamic languages, their implementation, and
+applications. The influence of dynamic languages ? from Lisp to Smalltalk
+to Python to Javascript ? on real-world practice, and research, continues
+to grow. We invite high quality papers reporting original research,
+innovative contributions, or experience related to dynamic languages, their
+implementation, and applications.
+
+http://2014.splashcon.org/track/dls14-papers
+
+
+** Wavefront **
+The SPLASH Wavefront track is looking for presentations and technology
+talks of interest to the software community, particularly to software
+professionals working in companies large and small. Wavefront is a forum
+for presenting experience reports and tutorials about innovative tools,
+technologies, and software practices.
+
+http://2014.splashcon.org/track/splash2014-wavefront
+
+
+** Panels **
+The Panels track offers exciting discussion about topics related to SPLASH.
+
+http://2014.splashcon.org/track/splash2014-panels
+
+
+** SPLASH-E **
+The SPLASH-E track brings together researchers and educators to share
+educational results, ideas, and challenges centered in Software and
+Programming Languages. Submission formats vary, including papers, tool
+demos, lightning talks, challenge-topics for discussion, and suggested
+themes for "unconference" sessions.  Help us create an engaging forum for
+educational issues related to SPLASH!
+
+http://2014.splashcon.org/track/splash2014-splash-e
+
+
+** Artifacts **
+The Artifact Evaluation process is a service provided by the community to
+help authors of accepted papers provide more substantial supplements to
+their papers so future researchers can more effectively build on and
+compare with previous work. The Artifact Evaluation Committee has been
+formed to assess how well paper authors prepare artifacts in support of
+such future researchers. Roughly, authors of papers who wish to participate
+are invited to submit an artifact that supports the conclusions of the
+paper.
+
+http://2014.splashcon.org/track/splash2014-artifacts
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops
+(14 in total), allowing their participants to meet and discuss research
+questions with peers, to mature new and exciting ideas, and to build up
+communities and start new collaborations. SPLASH workshops complement the
+main tracks of the conference and provide meetings in a smaller and more
+specialized setting. Workshops cultivate new ideas and concepts for the
+future, optionally recorded in formal proceedings.
+
+http://2014.splashcon.org/track/splash2014-workshops
+
+
+** Tutorials **
+The SPLASH Tutorials track will consist of prestigious tutorials on current
+topics in software, systems, and languages research. The scope of the
+tutorials is the same as the conference itself: all aspects of software
+construction and delivery at the intersection of programming, languages,
+and software engineering. The tutorials in particular focus on the nexus
+between research and practice, including work that takes inspiration from
+or builds connections to areas not commonly considered at SPLASH. Tutorials
+should introduce researchers to current research in an area, or show
+important new tools that can be used in research.
+
+http://2014.splashcon.org/track/splash2014-tutorials
+
+
+** Demos **
+The SPLASH Demonstrations track is an excellent vehicle for sharing your
+latest work with an experienced and technically savvy audience. Live
+demonstrations show the impact of software innovation. Demonstrations are
+not product sales pitches, but rather an opportunity to highlight, explain,
+and present interesting technical aspects of running applications in a
+dynamic and highly interactive setting. Presenters are encouraged to
+actively solicit feedback from the audience, which should lead to very
+interesting and entertaining demonstration sessions.
+
+http://2014.splashcon.org/track/splash2014-demos
+
+
+** Posters **
+The SPLASH Poster track provides an excellent forum for authors to present
+their recent or ongoing projects in an interactive setting, and receive
+feedback from the community. We invite submissions covering any aspect of
+programming, systems, languages and applications. The goal of the poster
+session is to encourage and facilitate small groups of individuals
+interested in a technical area to gather and interact. It is held early in
+the conference, to promote continued discussion among interested parties.
+Posters can be independent presentations or associated with one of the
+other parts of SPLASH.
+
+http://2014.splashcon.org/track/splash2014-posters
+
+
+** Doctoral Symposium **
+The SPLASH Doctoral Symposium provides students with useful guidance for
+completing their dissertation research and beginning their research
+careers. The Symposium will provide an interactive forum for doctoral
+students who have progressed far enough in their research to have a
+structured proposal, but will not be defending their dissertation in the
+next 12 months.
+
+http://2014.splashcon.org/track/splash2014-ds
+
+
+** Student Research Competition **
+The ACM SIGPLAN Student Research Competition (ACM SRC) is an
+internationally-recognized venue that enables undergraduate and graduate
+students to experience the research world, share their research results
+with other students and SPLASH attendees. The competition has separate
+categories for undergraduate and graduate students and awards prizes to the
+top three students in each category. The ACM SIGPLAN Student Research
+Competition shares the Poster session?s goal to facilitate interaction with
+researchers and industry practitioners; providing both sides with the
+opportunity to learn of ongoing, current research.
+
+http://2014.splashcon.org/track/splash2014-src
+
+** Co-located Events **
+
+ACM SIGAda?s Annual International Conference High Integrity Language
+Technology (HILT)
+http://sigada.org/conf/hilt2014/
+
+Multicore Parallel Programming Course:
+- Offers experienced programmers an opportunity to learn about multicore
+programming and gain mastery of cutting-edge parallel programming tools.
+- Contact: Danny Dig: http://dig.cs.illinois.edu/
+
+** Location **
+
+Portland Marriott
+Downtown Waterfront Hotel
+Portland, Oregon, USA
+
+** Organization  **
+
+SPLASH General Chair: Andrew Black (Portland State University)
+OOPSLA Papers Chair: Todd Millstein (University of California, Los Angeles)
+Onward! Papers Chair: Shriram Krishnamurthi (Brown University)
+Onward! Essays Chair: Bernd Bruegge (TU Munich)
+DLS Papers Chair: Laurence Tratt (King?s College, London)
+SPLASH-E Chair: Kathi Fisler (Worcester Polytechnic Institute)
+Wavefront Co-Chairs: David Archer (Galois) and Dennis Mancl
+(Alcatel-Lucent)
+Artifacts Co-Chairs: Matthias Hauswirth (university of Lugano) and Robby
+Findler (Northwestern University)
+Workshop Co-Chairs: Stephanie Balzer (Carnegie Mellon University) and Du Li
+(Carnegie Mellon University)
+Tutorials Chair: James Noble (Victoria University of Wellington)
+Demos Chair: Floreal Morandat (Enseirb-Matmeca)
+Posters Co-Chairs: K R Jayaram (IBM Research) and Nick Sumner (Simon Fraser
+University)
+Doctoral Symposium Chair: Lukasz Ziarek (State University of New York,
+Buffalo)
+Student Research Competition Co-Chairs: Isil Dillig (University of Texas,
+Austin) and Sam Guyer (Tufts University)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Darya
+Kurilova (Carnegie Mellon University)
+Publicity and Web Chair: Craig Anslow (University of Calgary)
+Web Technology Chair: Eelco Visser (Delft University of Technology)
+Publications Chair: Joseph Ruskiewicz (Portland State University)
+Student Mentoring Chair: Carlos Jensen (Oregon State University)
+Mobile App Chair: Reid Holmes (University of Waterloo)
+/*************************************************************/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140830/be0e804d/attachment-0001.html>
+

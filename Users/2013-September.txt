@@ -1,0 +1,435 @@
+From daniele.gianni at gmail.com  Thu Sep  5 22:31:04 2013
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Thu, 5 Sep 2013 22:31:04 +0200
+Subject: [Stratego Users] CfP: 4th International Workshop on Model-driven
+ Approaches for Simulation Engineering part of the Symposium on Theory of
+ Modeling and Simulation (SCS SpringSim 2014)
+Message-ID: <CAOCNFM4G9h3QMEM-8q-_KfmURkY80BBkTLSSkcK6rv1=Pmkzkw@mail.gmail.com>
+
+(Please accept our apologies if you receive multiple copies of this CFP)
+
+#################################################################
+ CALL FOR PAPERS
+
+                 4th International Workshop on
+        Model-driven Approaches for Simulation Engineering
+    part of the Symposium on Theory of Modeling and Simulation
+                     (SCS SpringSim 2014)
+
+
+#################################################################
+
+April 13-16, 2014, Tampa, FL (USA)
+http://www.sel.uniroma2.it/Mod4Sim14
+
+#################################################################
+# Papers Due: *** November 1, 2013 ***
+# Accepted papers will be published in the conference proceedings
+# and archived in the ACM Digital Library.
+#################################################################
+
+The workshop aims to bring together experts in model-based, model-driven
+and software engineering with experts in simulation methods and simulation
+practitioners, with the objective to advance the state of the art in
+model-driven simulation engineering.
+
+Model-driven engineering approaches provide considerable advantages to
+software systems engineering activities through the provision of consistent
+and coherent models at different abstraction levels. As these models are in
+a machine readable form, model-driven engineering approaches can also
+support the exploitation of computing capabilities for model reuse,
+programming code generation, and model checking, for example.
+
+The definition of a simulation model, its software implementation and its
+execution platform form what is known as simulation engineering. As
+simulation systems are mainly based on software, these systems can
+similarly benefit from model-driven approaches to support automatic
+software generation, enhance software quality, and reduce costs,
+development effort and time-to-market.
+
+Similarly to systems and software engineering, simulation engineering can
+exploit the capabilities of model-driven approaches by increasing the
+abstraction level in simulation model specifications and by automating the
+derivation of simulator code. Further advantages can be gained by using
+modeling languages, such as UML and SysML ? but not exclusively those. For
+example, modeling languages can be used for descriptive modeling (to
+describe the system to be simulated), for analytical modeling (to specify
+analytically the simulation of the same system), and for implementation
+modeling (to define the respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore) and
+distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms (discrete
+event simulation, multi-agent simulation, sketch-based * simulation, etc.)
+* model-driven methods and tools for performance engineering of simulation
+systems
+* simulation tools for model-driven software performance engineering
+* model-driven technologies for simulation verification and validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* Executable UML
+* Executable Architectures
+* SysML / Modelica integration
+* Simulation Model Portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider scope and
+welcomes contributions offering original perspectives on model-driven
+engineering of simulation systems.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+We invite paper submissions in three forms:
+
+1. Full paper (max 8 pages), describing innovative research results. These
+papers are eligible for the best paper award and may be invited for an
+extended version in a special issue of the SCS SIMULATION journal.
+2. Work-in-progress paper (max 6 pages), describing novel research ideas
+and promising work that have not yet been fully evaluated.
+3. Short paper (max 6 pages), describing industrial and hands-on experience
+on any relevant area (i.e. military, government, space, etc.).
+
+All the papers must be submitted through the SCS conference management
+systems (http://www.softconf.com/scs/DEVS14/) and select the Mod4Sim track.
+The submissions must be in PDF format and conform to the SCS conference
+template (Word template is available at
+http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc,
+guidelines are available at
+http://www.scs.org/PDFs/formattingkit.pdf). All the submitted papers must
+be original and not submitted else where. Submitted papers will be peer
+reviewed with respect to their quality, originality and relevance. The
+authors of the accepted papers must register in advance for inclusion of
+their paper in the conference proceedings. Authors of accepted papers will
+be invited to update their papers basing on the reviews, before providing
+the camera ready.
+
+All accepted papers will be included in the conference proceedings and
+archived in both the ACM Digital Library and IEEE Digital Library.
+
+Authors may contact the organizers for expression of interest and content
+appropriateness at any time.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+ * Submission Deadline: November 1, 2013
+ * Decision to paper authors: January 5, 2014
+ * Camera ready due: February 2, 2014
+ * Conference dates: April 13-16, 2014 (to be confirmed within the
+SpringSim schedule)
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Daniele Gianni ? University Guglielmo Marconi, Italy
+* Arnaud Cuccuru ? CEA/LIST, France
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Steffen Becker - University of Paderborn, Germany
+* Paolo Bocciarelli - University of Rome TorVergata, Italy
+* David Chen - University of Bordeaux I, France
+* Andrea D'Ambrogio - University of Rome TorVergata, Italy
+* Cristian Englert - Serco, The Netherlands
+* Huascar Espinoza - ESI-Tecnalia, Spain
+* Paul A. Fishwick - University of Florida, USA
+* Sebastien Gerard - CEA/LIST, France
+* Carlos Juiz - University of Balearic Islands, Spain
+* Cristiano Leorato - RHEA, The Netherlands
+* Steve McKeever - Uppsala University, Sweden
+* Halit Oguzt?z?n - Middle East Technical University, Turkey
+* Chris Paredis - Georgia Institute of Technology, USA
+* Nicolas Rouquette - NASA/JPL, USA
+* Volker Schaus - DLR, Germany
+* Sara Tucci - CEA/LIST, France
+* Andreas Tolk - SimIS, USA
+* Anthony Walsh - European Space Agency, Germany
+* Heming Zhang - Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni and Arnaud Cuccuru (workshop co-chairs)
+Emails: danielegmail-mod4sim at yahoo.it and arnaud.cuccuru at cea.fr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130905/cf67beae/attachment.html>
+
+From yezonghui at gmail.com  Sun Sep 22 22:29:37 2013
+From: yezonghui at gmail.com (Zhaohui Yang)
+Date: Sun, 22 Sep 2013 16:29:37 -0400
+Subject: [Stratego Users] Where to download Stratego/XT packages?
+Message-ID: <CAO51=GT9qxNPX=7+hhmcguTySGSumGutvOQyK8GmgbiDWTD+TA@mail.gmail.com>
+
+Hi,
+
+I found the ftp site for downloading stratego packages are not available
+now. Is there any other places I can download those packages?
+
+It would also be greatly appreciated if anyone send me those packages
+through email. I would need those "One-click installation using Nix",
+better also with source code packages.
+
+Thanks!
+
+-- 
+Regards,
+
+Yang, Zhaohui
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130922/a52a919b/attachment.html>
+
+From bgh.list.reader at gmail.com  Tue Sep 24 07:26:40 2013
+From: bgh.list.reader at gmail.com (Brandon Hill)
+Date: Mon, 23 Sep 2013 22:26:40 -0700
+Subject: [Stratego Users] thread-oncebu
+Message-ID: <52412290.7060507@gmail.com>
+
+Can someone suggest a clean way to construct a thread-oncebu strategy?  
+My attempts aren't working.  thread-replacement works as a threaded 
+version of all(s), but what would the equivalent be for a threaded 
+version of the strategy one(s)?
+
+Thanks,
+Brandon
+
+From G.H.Wachsmuth at tudelft.nl  Tue Sep 24 14:29:30 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Tue, 24 Sep 2013 12:29:30 +0000
+Subject: [Stratego Users] thread-oncebu
+In-Reply-To: <52412290.7060507@gmail.com>
+References: <52412290.7060507@gmail.com>
+Message-ID: <DBDE2761-1DC4-43D0-A491-BF2AB212C431@tudelft.nl>
+
+Hi Brandon,
+
+we are not quite sure what you try to achieve, but we figured something out for the case that you want a oncebu(s) which additionally updates extra data at the point where it applies s.
+
+The solution assumes the following:
+	t is the term to traverse,
+	t' is the rewritten term,
+	d is the original data,
+        d' is the updated data,
+	s is the local strategy to apply (working on a pair (t, d) and returning a pair (t', d').
+You can then call <oncebu(<s> (<id>, d); ?(<id>, d'))> t => t'
+
+Does this help or do you have something different in mind?
+
+-- Guido
+
+On Sep 24, 2013, at 07:26 , Brandon Hill <bgh.list.reader at gmail.com> wrote:
+
+> Can someone suggest a clean way to construct a thread-oncebu strategy?  My attempts aren't working.  thread-replacement works as a threaded version of all(s), but what would the equivalent be for a threaded version of the strategy one(s)?
+> 
+> Thanks,
+> Brandon
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From bgh.list.reader at gmail.com  Tue Sep 24 18:59:35 2013
+From: bgh.list.reader at gmail.com (Brandon Hill)
+Date: Tue, 24 Sep 2013 09:59:35 -0700
+Subject: [Stratego Users] thread-oncebu
+In-Reply-To: <DBDE2761-1DC4-43D0-A491-BF2AB212C431@tudelft.nl>
+References: <52412290.7060507@gmail.com>
+	<DBDE2761-1DC4-43D0-A491-BF2AB212C431@tudelft.nl>
+Message-ID: <CAEdnT78-j1iytEOW4DeM-LgXH-6pJ6UGk+8QgHiZd71forcgrg@mail.gmail.com>
+
+This does help.  Thank you.  Essentially, my system generates a list of IR
+trees.  During an unoptimized compilation, I convert each of these trees
+into a list of machine instructions using <thread-bottomup(node-to-instr)>
+(trees, (bus1_instr, bus2_instr)).  bus1_instr and bus2_instr are the
+resulting lists of instructions.  During an optimized compilation the
+instructions of all the trees get interwoven to fill bubbles in the
+pipeline.  Not all trees are the same size, so I have put my IR trees in
+order of processing priority.  I need to repeatedly grab the first IR node
+that is ready (and thus highest priority), and translate that into the
+instructions for each bus and replace that IR node with the appropriate
+result register in the tree.  Thus, I will end up putting this oncebu call
+into a repeat-until strategy that will keep rewriting the highest priority
+node until all the trees are consumed.  It may not be efficient but the
+trees are small.  Now I can focus on how to wrap this up as a fixed point
+strategy in the repeat-until style.  I think I see what I need to do.
+
+Brandon
+
+
+On Tue, Sep 24, 2013 at 5:29 AM, Guido Wachsmuth - EWI <
+G.H.Wachsmuth at tudelft.nl> wrote:
+
+> Hi Brandon,
+>
+> we are not quite sure what you try to achieve, but we figured something
+> out for the case that you want a oncebu(s) which additionally updates extra
+> data at the point where it applies s.
+>
+> The solution assumes the following:
+>         t is the term to traverse,
+>         t' is the rewritten term,
+>         d is the original data,
+>         d' is the updated data,
+>         s is the local strategy to apply (working on a pair (t, d) and
+> returning a pair (t', d').
+> You can then call <oncebu(<s> (<id>, d); ?(<id>, d'))> t => t'
+>
+> Does this help or do you have something different in mind?
+>
+> -- Guido
+>
+> On Sep 24, 2013, at 07:26 , Brandon Hill <bgh.list.reader at gmail.com>
+> wrote:
+>
+> > Can someone suggest a clean way to construct a thread-oncebu strategy?
+>  My attempts aren't working.  thread-replacement works as a threaded
+> version of all(s), but what would the equivalent be for a threaded version
+> of the strategy one(s)?
+> >
+> > Thanks,
+> > Brandon
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130924/251cdd74/attachment.html>
+
+From E.Visser at tudelft.nl  Wed Sep 25 09:36:35 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 25 Sep 2013 09:36:35 +0200
+Subject: [Stratego Users] thread-oncebu
+In-Reply-To: <CAEdnT78-j1iytEOW4DeM-LgXH-6pJ6UGk+8QgHiZd71forcgrg@mail.gmail.com>
+References: <52412290.7060507@gmail.com>
+	<DBDE2761-1DC4-43D0-A491-BF2AB212C431@tudelft.nl>
+	<CAEdnT78-j1iytEOW4DeM-LgXH-6pJ6UGk+8QgHiZd71forcgrg@mail.gmail.com>
+Message-ID: <CAFaCHU3+7Fd4CLywr8Wke6GuQmspYAU0tqu5ufejNy3AhhAnOw@mail.gmail.com>
+
+Hi Brandon,
+
+We once made an attempt at supporting instruction selection:
+
+     http://researchr.org/publication/BravenboerV02
+
+Unfortunately the ++ operator used in that paper was an experimental
+feature that has been dropped since. But perhaps the paper provides some
+inspiration nonetheless.
+
+I'd be interested in seeing the solution that you come up with.
+
+cheers,
+
+-- Eelco
+
+
+
+
+On Tue, Sep 24, 2013 at 6:59 PM, Brandon Hill <bgh.list.reader at gmail.com>wrote:
+
+> This does help.  Thank you.  Essentially, my system generates a list of IR
+> trees.  During an unoptimized compilation, I convert each of these trees
+> into a list of machine instructions using <thread-bottomup(node-to-instr)>
+> (trees, (bus1_instr, bus2_instr)).  bus1_instr and bus2_instr are the
+> resulting lists of instructions.  During an optimized compilation the
+> instructions of all the trees get interwoven to fill bubbles in the
+> pipeline.  Not all trees are the same size, so I have put my IR trees in
+> order of processing priority.  I need to repeatedly grab the first IR node
+> that is ready (and thus highest priority), and translate that into the
+> instructions for each bus and replace that IR node with the appropriate
+> result register in the tree.  Thus, I will end up putting this oncebu call
+> into a repeat-until strategy that will keep rewriting the highest priority
+> node until all the trees are consumed.  It may not be efficient but the
+> trees are small.  Now I can focus on how to wrap this up as a fixed point
+> strategy in the repeat-until style.  I think I see what I need to do.
+>
+> Brandon
+>
+>
+> On Tue, Sep 24, 2013 at 5:29 AM, Guido Wachsmuth - EWI <
+> G.H.Wachsmuth at tudelft.nl> wrote:
+>
+>> Hi Brandon,
+>>
+>> we are not quite sure what you try to achieve, but we figured something
+>> out for the case that you want a oncebu(s) which additionally updates extra
+>> data at the point where it applies s.
+>>
+>> The solution assumes the following:
+>>         t is the term to traverse,
+>>         t' is the rewritten term,
+>>         d is the original data,
+>>         d' is the updated data,
+>>         s is the local strategy to apply (working on a pair (t, d) and
+>> returning a pair (t', d').
+>> You can then call <oncebu(<s> (<id>, d); ?(<id>, d'))> t => t'
+>>
+>> Does this help or do you have something different in mind?
+>>
+>> -- Guido
+>>
+>> On Sep 24, 2013, at 07:26 , Brandon Hill <bgh.list.reader at gmail.com>
+>> wrote:
+>>
+>> > Can someone suggest a clean way to construct a thread-oncebu strategy?
+>>  My attempts aren't working.  thread-replacement works as a threaded
+>> version of all(s), but what would the equivalent be for a threaded version
+>> of the strategy one(s)?
+>> >
+>> > Thanks,
+>> > Brandon
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130925/3ff9d52f/attachment.html>
+

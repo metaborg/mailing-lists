@@ -1,0 +1,732 @@
+From v.vergu at gmail.com  Sat May  4 15:05:53 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Sat, 4 May 2013 15:05:53 +0200
+Subject: [Stratego Developers] migration svn -> git of spoofax, jsglr, terms,
+	interpreter !!
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+Message-ID: <E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+
+Dear all,
+
+This email concerns the migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+
+
+
+Dear developers,
+
+
+You are receiving this email because (1) i'm migrating many of Spoofax and Stratego related projects to Git, (2) i need your assistance and (3) it is likely that it concerns your current/previous work. 
+
+
+For the past week or so i've been working on migrating to GitHub everything that is in the spoofax and spoofax-imp directories of the StrategoXT SVN repository. At the same time i've split the two folders up into 18 separate Git repositories each with its own history. This was/is a non-trivial endeavour requiring understanding of each project's history for the last decade and lots of regular expressions, thus very error prone. As far as I can tell all history is preserved and things appear to be complete.
+
+
+My first request to you is that you carefully review the contents and histories of the resulting Git repositories (below) and report any irregularities that you discover. It is crucial that the new repositories preserve history and your feedback is therefore invaluable. Please look at code you have contributed to as well as to the rest of the codebase to check for continuity, missing files, etc. I've attached a diagram that explains how each folder from the spoofax/trunk/spoofax and spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to check these repositories by coming Tuesday and report any issues you discover, no matter how minor or major.
+
+After i've fixed the problems that you report i will (1) make the spoofax and spoofax-imp directories read-only on SVN and (2) create new Git repositories based on the then latest revisions.
+
+Before anything: Do not develop anything against the Git repositories mentioned below. They are temporary and only for review. After i've received all of your comments I will delete these repositories and i will make new ones based on the latest SVN revisions and according to the planning below. You can distinguish the temporary from the permanent repositories by the presence/absence of the MIG- prefix in their names.
+
+The new (temporary) repositories are hosted on GitHub at the following addresses:
+
+https://github.com/metaborg-testing/MIG-jsglr
+https://github.com/metaborg-testing/MIG-mb-exec
+https://github.com/metaborg-testing/MIG-mb-exec-deps
+https://github.com/metaborg-testing/MIG-mb-rep
+https://github.com/metaborg-testing/MIG-aster
+https://github.com/metaborg-testing/MIG-esv
+https://github.com/metaborg-testing/MIG-sdf
+https://github.com/metaborg-testing/MIG-nabl
+https://github.com/metaborg-testing/MIG-box
+https://github.com/metaborg-testing/MIG-spx
+https://github.com/metaborg-testing/MIG-spt
+https://github.com/metaborg-testing/MIG-stratego
+https://github.com/metaborg-testing/MIG-tdl
+https://github.com/metaborg-testing/MIG-rtg
+https://github.com/metaborg-testing/MIG-spoofax
+https://github.com/metaborg-testing/MIG-spoofax-debug
+https://github.com/metaborg-testing/MIG-spoofax-deploy
+https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+
+
+The final repositories will also be hosted on GitHub, under the Metaborg organisation.
+
+
+There a few known issues with the new repositories:
+
+1. Branches that could never non-destructively be merged into back into the trunk have been archived as tags. The are those SVN branches that branched on a particular directory of the trunk instead of the entire trunk. This was a standard practice in the SVN-era but it results in Git branch commits that delete everything that was not branched. The net effect of merging those back into master would be that of deleting everything else but your work. The tags that archive these branches preserve history of the branch and the branches can later be revived if necessary.
+
+2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as tags. This was intentional. If you happen to spot a previously deleted branch which is not tagged, please report it. Branch-deletion in Git is destructive and history would be lost unless we tag the deleted branches.
+
+3. The old Spoofax editor (first version started in ~2005) is not yet migrated. This is the big red-colored repository in the diagram. This will be migrated later, separately, as one big read-only Git repository. 
+
+
+To summarise, i kindly ask you to:
+
+1. Examine and give feedback on the health of the MIG- repositories by cob of coming Tuesday. Do pay special attention to missing or corrupted files, branches, tags, history or committer-info. 
+
+2. Avoid branching/merging in the spoofax and spoofax-imp directories. If you do so, then (1) branch the entire trunk of the respective folder (this will ensure merge-able branches) and (2) notify me. The migration is like a white-list so anything not explicitly mentioned in it does not get copied. 
+
+3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ] roots. If you do, please let me know. Things will not be copied over unless I explicitly mention them in the migration script. Making changes to subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other words, you can safely continue your work but don't start new things in the SVN repository. 
+
+
+This migration has a few more steps, here's the tentative plan (depending on the problems you discover):
+
+1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on SVN read-only. At this stage you shouldn't have any uncommitted changes anymore. 
+2. Wed 08-05 12:00 PM : all your reported issues should be fixed in the migration scripts.
+3. Wed 08-05 1:30 PM : final Git repositories published at GitHub Metaborg organisation.
+4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first build results available based on the Git repositories. This means builds of the stable, master and unstable branches.
+5. Thu 09-05 8:00 PM : all Spoofax update sites should be pointing/containing builds based on the Git repositories.
+
+
+I'll email you again (1) if something changes in the above plan and (2) after steps 3 and 5 are completed.
+
+Thank you for your help.
+
+
+Cheers,
+
+Vlad
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130504/ab25b09e/attachment-0002.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: migration_diagram.pdf
+Type: application/pdf
+Size: 166448 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130504/ab25b09e/attachment-0001.pdf>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130504/ab25b09e/attachment-0003.html>
+
+From v.vergu at gmail.com  Wed May  8 11:02:59 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Wed, 8 May 2013 11:02:59 +0200
+Subject: [Stratego Developers] migration svn -> git of spoofax, jsglr,
+	terms, interpreter !!
+In-Reply-To: <E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+	<E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+Message-ID: <B70935EB-38DA-4119-8AFA-E4E2CA5B8887@gmail.com>
+
+Dear all,
+
+This email is an update on migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+
+
+
+Dear developers,
+
+I am writing as promised to update you on the progress of the migration from SVN to Git.
+
+Everything is on or ahead of schedule. Thank you for your comments and suggestions on the health of the Git repositories; they are all implemented in the new repositories. I'm attaching an updated diagram to help you track down where everything is. All repositories have been migrated to GitHub under the Metaborg organisation. 
+
+The links to the new repositories are:
+
+git://github.com/metaborg/jsglr
+git://github.com/metaborg/mb-exec
+git://github.com/metaborg/mb-exec-deps
+git://github.com/metaborg/mb-rep
+git://github.com/metaborg/aster
+git://github.com/metaborg/esv
+git://github.com/metaborg/sdf
+git://github.com/metaborg/nabl
+git://github.com/metaborg/box
+git://github.com/metaborg/spx
+git://github.com/metaborg/spt
+git://github.com/metaborg/stratego
+git://github.com/metaborg/tdl
+git://github.com/metaborg/rtg
+git://github.com/metaborg/spoofax
+git://github.com/metaborg/spoofax-debug
+git://github.com/metaborg/spoofax-deploy
+git://github.com/metaborg/spoofax-imp-patches
+git://github.com/metaborg/spoofax-imp-archive
+
+You may begin pushing commits to these. The SVN aster, spoofax, spoofax-imp, sglr-recovery/trunk/permissive-grammars directories do not accept any new commits.
+
+The updated plan for the remaining things:
+
+1. Next few hours: Expected Spoofax nightly update site to become available again, containing the last builds from SVN.
+2. Wed 08-05 15:00: First nightly builds based on the Git repositories available.
+3. Wed 08-05 18:00: Stable update site contains stable version built from Git.
+4. Wed 08-05 22:00: Other CI jobs (e.g: interpreter, jsglr, spoofax-mdsd, spoofax-unstable) switched over to Git sources and producing builds.
+
+I will email you again (1) if something drastic changes and (2) after step 3 is completed.
+
+Cheers,
+
+Vlad 
+
+
+On May 4, 2013, at 3:05 PM, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Dear all,
+> 
+> This email concerns the migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+> 
+> 
+> 
+> Dear developers,
+> 
+> 
+> You are receiving this email because (1) i'm migrating many of Spoofax and Stratego related projects to Git, (2) i need your assistance and (3) it is likely that it concerns your current/previous work. 
+> 
+> 
+> For the past week or so i've been working on migrating to GitHub everything that is in the spoofax and spoofax-imp directories of the StrategoXT SVN repository. At the same time i've split the two folders up into 18 separate Git repositories each with its own history. This was/is a non-trivial endeavour requiring understanding of each project's history for the last decade and lots of regular expressions, thus very error prone. As far as I can tell all history is preserved and things appear to be complete.
+> 
+> 
+> My first request to you is that you carefully review the contents and histories of the resulting Git repositories (below) and report any irregularities that you discover. It is crucial that the new repositories preserve history and your feedback is therefore invaluable. Please look at code you have contributed to as well as to the rest of the codebase to check for continuity, missing files, etc. I've attached a diagram that explains how each folder from the spoofax/trunk/spoofax and spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to check these repositories by coming Tuesday and report any issues you discover, no matter how minor or major.
+> 
+> After i've fixed the problems that you report i will (1) make the spoofax and spoofax-imp directories read-only on SVN and (2) create new Git repositories based on the then latest revisions.
+> 
+> Before anything: Do not develop anything against the Git repositories mentioned below. They are temporary and only for review. After i've received all of your comments I will delete these repositories and i will make new ones based on the latest SVN revisions and according to the planning below. You can distinguish the temporary from the permanent repositories by the presence/absence of the MIG- prefix in their names.
+> 
+> The new (temporary) repositories are hosted on GitHub at the following addresses:
+> 
+> https://github.com/metaborg-testing/MIG-jsglr
+> https://github.com/metaborg-testing/MIG-mb-exec
+> https://github.com/metaborg-testing/MIG-mb-exec-deps
+> https://github.com/metaborg-testing/MIG-mb-rep
+> https://github.com/metaborg-testing/MIG-aster
+> https://github.com/metaborg-testing/MIG-esv
+> https://github.com/metaborg-testing/MIG-sdf
+> https://github.com/metaborg-testing/MIG-nabl
+> https://github.com/metaborg-testing/MIG-box
+> https://github.com/metaborg-testing/MIG-spx
+> https://github.com/metaborg-testing/MIG-spt
+> https://github.com/metaborg-testing/MIG-stratego
+> https://github.com/metaborg-testing/MIG-tdl
+> https://github.com/metaborg-testing/MIG-rtg
+> https://github.com/metaborg-testing/MIG-spoofax
+> https://github.com/metaborg-testing/MIG-spoofax-debug
+> https://github.com/metaborg-testing/MIG-spoofax-deploy
+> https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+> https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+> 
+> 
+> The final repositories will also be hosted on GitHub, under the Metaborg organisation.
+> 
+> 
+> There a few known issues with the new repositories:
+> 
+> 1. Branches that could never non-destructively be merged into back into the trunk have been archived as tags. The are those SVN branches that branched on a particular directory of the trunk instead of the entire trunk. This was a standard practice in the SVN-era but it results in Git branch commits that delete everything that was not branched. The net effect of merging those back into master would be that of deleting everything else but your work. The tags that archive these branches preserve history of the branch and the branches can later be revived if necessary.
+> 
+> 2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as tags. This was intentional. If you happen to spot a previously deleted branch which is not tagged, please report it. Branch-deletion in Git is destructive and history would be lost unless we tag the deleted branches.
+> 
+> 3. The old Spoofax editor (first version started in ~2005) is not yet migrated. This is the big red-colored repository in the diagram. This will be migrated later, separately, as one big read-only Git repository. 
+> 
+> 
+> To summarise, i kindly ask you to:
+> 
+> 1. Examine and give feedback on the health of the MIG- repositories by cob of coming Tuesday. Do pay special attention to missing or corrupted files, branches, tags, history or committer-info. 
+> 
+> 2. Avoid branching/merging in the spoofax and spoofax-imp directories. If you do so, then (1) branch the entire trunk of the respective folder (this will ensure merge-able branches) and (2) notify me. The migration is like a white-list so anything not explicitly mentioned in it does not get copied. 
+> 
+> 3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ] roots. If you do, please let me know. Things will not be copied over unless I explicitly mention them in the migration script. Making changes to subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other words, you can safely continue your work but don't start new things in the SVN repository. 
+> 
+> 
+> This migration has a few more steps, here's the tentative plan (depending on the problems you discover):
+> 
+> 1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on SVN read-only. At this stage you shouldn't have any uncommitted changes anymore. 
+> 2. Wed 08-05 12:00 PM : all your reported issues should be fixed in the migration scripts.
+> 3. Wed 08-05 1:30 PM : final Git repositories published at GitHub Metaborg organisation.
+> 4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first build results available based on the Git repositories. This means builds of the stable, master and unstable branches.
+> 5. Thu 09-05 8:00 PM : all Spoofax update sites should be pointing/containing builds based on the Git repositories.
+> 
+> 
+> I'll email you again (1) if something changes in the above plan and (2) after steps 3 and 5 are completed.
+> 
+> Thank you for your help.
+> 
+> 
+> Cheers,
+> 
+> Vlad
+>> 
+> <migration_diagram.pdf>
+> 
+> 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130508/c1bb5ec8/attachment-0002.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: migration.pdf
+Type: application/pdf
+Size: 171861 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130508/c1bb5ec8/attachment-0001.pdf>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130508/c1bb5ec8/attachment-0003.html>
+
+From v.vergu at gmail.com  Tue May 14 18:45:01 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Tue, 14 May 2013 18:45:01 +0200
+Subject: [Stratego Developers] migration svn -> git of spoofax, jsglr,
+	terms, interpreter !!
+In-Reply-To: <D7D6E63E-2A9F-435F-9A7E-8C4437BC5E00@informatik.tu-darmstadt.de>
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+	<E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+	<B70935EB-38DA-4119-8AFA-E4E2CA5B8887@gmail.com>
+	<D7D6E63E-2A9F-435F-9A7E-8C4437BC5E00@informatik.tu-darmstadt.de>
+Message-ID: <2DC0F5B5-A500-4227-A20B-7429339AD46C@gmail.com>
+
+Hi Sebastian,
+
+.gitignore should be committed if it contains sane things.
+
+
+Cheers,
+
+Vlad
+
+On May 14, 2013, at 6:10 PM, Sebastian Erdweg <erdweg at informatik.tu-darmstadt.de> wrote:
+
+> Hi everybody,
+> 
+> what is the policy regarding .gitignore files? Should they remain local or do we want to share them?
+> 
+> Cheers,
+> Sebastian 
+> 
+> On 08.05.2013, at 11:02, Vlad Vergu <v.vergu at gmail.com> wrote:
+> 
+>> Dear all,
+>> 
+>> This email is an update on migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+>> 
+>> 
+>> 
+>> Dear developers,
+>> 
+>> I am writing as promised to update you on the progress of the migration from SVN to Git.
+>> 
+>> Everything is on or ahead of schedule. Thank you for your comments and suggestions on the health of the Git repositories; they are all implemented in the new repositories. I'm attaching an updated diagram to help you track down where everything is. All repositories have been migrated to GitHub under the Metaborg organisation. 
+>> 
+>> The links to the new repositories are:
+>> 
+>> git://github.com/metaborg/jsglr
+>> git://github.com/metaborg/mb-exec
+>> git://github.com/metaborg/mb-exec-deps
+>> git://github.com/metaborg/mb-rep
+>> git://github.com/metaborg/aster
+>> git://github.com/metaborg/esv
+>> git://github.com/metaborg/sdf
+>> git://github.com/metaborg/nabl
+>> git://github.com/metaborg/box
+>> git://github.com/metaborg/spx
+>> git://github.com/metaborg/spt
+>> git://github.com/metaborg/stratego
+>> git://github.com/metaborg/tdl
+>> git://github.com/metaborg/rtg
+>> git://github.com/metaborg/spoofax
+>> git://github.com/metaborg/spoofax-debug
+>> git://github.com/metaborg/spoofax-deploy
+>> git://github.com/metaborg/spoofax-imp-patches
+>> git://github.com/metaborg/spoofax-imp-archive
+>> 
+>> You may begin pushing commits to these. The SVN aster, spoofax, spoofax-imp, sglr-recovery/trunk/permissive-grammars directories do not accept any new commits.
+>> 
+>> The updated plan for the remaining things:
+>> 
+>> 1. Next few hours: Expected Spoofax nightly update site to become available again, containing the last builds from SVN.
+>> 2. Wed 08-05 15:00: First nightly builds based on the Git repositories available.
+>> 3. Wed 08-05 18:00: Stable update site contains stable version built from Git.
+>> 4. Wed 08-05 22:00: Other CI jobs (e.g: interpreter, jsglr, spoofax-mdsd, spoofax-unstable) switched over to Git sources and producing builds.
+>> 
+>> I will email you again (1) if something drastic changes and (2) after step 3 is completed.
+>> 
+>> Cheers,
+>> 
+>> Vlad 
+>> 
+>> <migration.pdf>
+>> 
+>> On May 4, 2013, at 3:05 PM, Vlad Vergu <v.vergu at gmail.com> wrote:
+>> 
+>>> Dear all,
+>>> 
+>>> This email concerns the migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+>>> 
+>>> 
+>>> 
+>>> Dear developers,
+>>> 
+>>> 
+>>> You are receiving this email because (1) i'm migrating many of Spoofax and Stratego related projects to Git, (2) i need your assistance and (3) it is likely that it concerns your current/previous work. 
+>>> 
+>>> 
+>>> For the past week or so i've been working on migrating to GitHub everything that is in the spoofax and spoofax-imp directories of the StrategoXT SVN repository. At the same time i've split the two folders up into 18 separate Git repositories each with its own history. This was/is a non-trivial endeavour requiring understanding of each project's history for the last decade and lots of regular expressions, thus very error prone. As far as I can tell all history is preserved and things appear to be complete.
+>>> 
+>>> 
+>>> My first request to you is that you carefully review the contents and histories of the resulting Git repositories (below) and report any irregularities that you discover. It is crucial that the new repositories preserve history and your feedback is therefore invaluable. Please look at code you have contributed to as well as to the rest of the codebase to check for continuity, missing files, etc. I've attached a diagram that explains how each folder from the spoofax/trunk/spoofax and spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to check these repositories by coming Tuesday and report any issues you discover, no matter how minor or major.
+>>> 
+>>> After i've fixed the problems that you report i will (1) make the spoofax and spoofax-imp directories read-only on SVN and (2) create new Git repositories based on the then latest revisions.
+>>> 
+>>> Before anything: Do not develop anything against the Git repositories mentioned below. They are temporary and only for review. After i've received all of your comments I will delete these repositories and i will make new ones based on the latest SVN revisions and according to the planning below. You can distinguish the temporary from the permanent repositories by the presence/absence of the MIG- prefix in their names.
+>>> 
+>>> The new (temporary) repositories are hosted on GitHub at the following addresses:
+>>> 
+>>> https://github.com/metaborg-testing/MIG-jsglr
+>>> https://github.com/metaborg-testing/MIG-mb-exec
+>>> https://github.com/metaborg-testing/MIG-mb-exec-deps
+>>> https://github.com/metaborg-testing/MIG-mb-rep
+>>> https://github.com/metaborg-testing/MIG-aster
+>>> https://github.com/metaborg-testing/MIG-esv
+>>> https://github.com/metaborg-testing/MIG-sdf
+>>> https://github.com/metaborg-testing/MIG-nabl
+>>> https://github.com/metaborg-testing/MIG-box
+>>> https://github.com/metaborg-testing/MIG-spx
+>>> https://github.com/metaborg-testing/MIG-spt
+>>> https://github.com/metaborg-testing/MIG-stratego
+>>> https://github.com/metaborg-testing/MIG-tdl
+>>> https://github.com/metaborg-testing/MIG-rtg
+>>> https://github.com/metaborg-testing/MIG-spoofax
+>>> https://github.com/metaborg-testing/MIG-spoofax-debug
+>>> https://github.com/metaborg-testing/MIG-spoofax-deploy
+>>> https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+>>> https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+>>> 
+>>> 
+>>> The final repositories will also be hosted on GitHub, under the Metaborg organisation.
+>>> 
+>>> 
+>>> There a few known issues with the new repositories:
+>>> 
+>>> 1. Branches that could never non-destructively be merged into back into the trunk have been archived as tags. The are those SVN branches that branched on a particular directory of the trunk instead of the entire trunk. This was a standard practice in the SVN-era but it results in Git branch commits that delete everything that was not branched. The net effect of merging those back into master would be that of deleting everything else but your work. The tags that archive these branches preserve history of the branch and the branches can later be revived if necessary.
+>>> 
+>>> 2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as tags. This was intentional. If you happen to spot a previously deleted branch which is not tagged, please report it. Branch-deletion in Git is destructive and history would be lost unless we tag the deleted branches.
+>>> 
+>>> 3. The old Spoofax editor (first version started in ~2005) is not yet migrated. This is the big red-colored repository in the diagram. This will be migrated later, separately, as one big read-only Git repository. 
+>>> 
+>>> 
+>>> To summarise, i kindly ask you to:
+>>> 
+>>> 1. Examine and give feedback on the health of the MIG- repositories by cob of coming Tuesday. Do pay special attention to missing or corrupted files, branches, tags, history or committer-info. 
+>>> 
+>>> 2. Avoid branching/merging in the spoofax and spoofax-imp directories. If you do so, then (1) branch the entire trunk of the respective folder (this will ensure merge-able branches) and (2) notify me. The migration is like a white-list so anything not explicitly mentioned in it does not get copied. 
+>>> 
+>>> 3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ] roots. If you do, please let me know. Things will not be copied over unless I explicitly mention them in the migration script. Making changes to subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other words, you can safely continue your work but don't start new things in the SVN repository. 
+>>> 
+>>> 
+>>> This migration has a few more steps, here's the tentative plan (depending on the problems you discover):
+>>> 
+>>> 1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on SVN read-only. At this stage you shouldn't have any uncommitted changes anymore. 
+>>> 2. Wed 08-05 12:00 PM : all your reported issues should be fixed in the migration scripts.
+>>> 3. Wed 08-05 1:30 PM : final Git repositories published at GitHub Metaborg organisation.
+>>> 4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first build results available based on the Git repositories. This means builds of the stable, master and unstable branches.
+>>> 5. Thu 09-05 8:00 PM : all Spoofax update sites should be pointing/containing builds based on the Git repositories.
+>>> 
+>>> 
+>>> I'll email you again (1) if something changes in the above plan and (2) after steps 3 and 5 are completed.
+>>> 
+>>> Thank you for your help.
+>>> 
+>>> 
+>>> Cheers,
+>>> 
+>>> Vlad
+>>> <migration_diagram.pdf>
+>>> 
+>>> 
+>> 
+>> _______________________________________________
+>> Developers mailing list
+>> Developers at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> 
+> -- 
+> http://www.stg.tu-darmstadt.de/staff/sebastian_erdweg__
+> 
+
+
+
+From tobivollebregt at gmail.com  Thu May 16 08:53:54 2013
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 15 May 2013 23:53:54 -0700
+Subject: [Stratego Developers] migration svn -> git of spoofax, jsglr,
+ terms, interpreter !!
+In-Reply-To: <2DC0F5B5-A500-4227-A20B-7429339AD46C@gmail.com>
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+	<E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+	<B70935EB-38DA-4119-8AFA-E4E2CA5B8887@gmail.com>
+	<D7D6E63E-2A9F-435F-9A7E-8C4437BC5E00@informatik.tu-darmstadt.de>
+	<2DC0F5B5-A500-4227-A20B-7429339AD46C@gmail.com>
+Message-ID: <CAOPyLrE_RGY5LwmFnz_PjYdPaiQk8f5FbxOC5WPCM6CYYvxCzg@mail.gmail.com>
+
+Personal ("insane") ignore rules usually go in .git/info/exclude with git.
+
+.gitignore files are intended to be useful for all contributors (or at the
+very least not harmful to any contributor), and hence should be committed
+to the repository.
+
+
+On 14 May 2013 09:45, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Hi Sebastian,
+>
+> .gitignore should be committed if it contains sane things.
+>
+>
+> Cheers,
+>
+> Vlad
+>
+> On May 14, 2013, at 6:10 PM, Sebastian Erdweg <
+> erdweg at informatik.tu-darmstadt.de> wrote:
+>
+> > Hi everybody,
+> >
+> > what is the policy regarding .gitignore files? Should they remain local
+> or do we want to share them?
+> >
+> > Cheers,
+> > Sebastian
+> >
+> > On 08.05.2013, at 11:02, Vlad Vergu <v.vergu at gmail.com> wrote:
+> >
+> >> Dear all,
+> >>
+> >> This email is an update on migration of source code repositories for
+> the Stratego and Spoofax projects. It is directed at developers of Stratego
+> and Spoofax. If you are a user and not a developer you can safely ignore
+> this email as this migration will be transparent to you.
+> >>
+> >>
+> >>
+> >> Dear developers,
+> >>
+> >> I am writing as promised to update you on the progress of the migration
+> from SVN to Git.
+> >>
+> >> Everything is on or ahead of schedule. Thank you for your comments and
+> suggestions on the health of the Git repositories; they are all implemented
+> in the new repositories. I'm attaching an updated diagram to help you track
+> down where everything is. All repositories have been migrated to GitHub
+> under the Metaborg organisation.
+> >>
+> >> The links to the new repositories are:
+> >>
+> >> git://github.com/metaborg/jsglr
+> >> git://github.com/metaborg/mb-exec
+> >> git://github.com/metaborg/mb-exec-deps
+> >> git://github.com/metaborg/mb-rep
+> >> git://github.com/metaborg/aster
+> >> git://github.com/metaborg/esv
+> >> git://github.com/metaborg/sdf
+> >> git://github.com/metaborg/nabl
+> >> git://github.com/metaborg/box
+> >> git://github.com/metaborg/spx
+> >> git://github.com/metaborg/spt
+> >> git://github.com/metaborg/stratego
+> >> git://github.com/metaborg/tdl
+> >> git://github.com/metaborg/rtg
+> >> git://github.com/metaborg/spoofax
+> >> git://github.com/metaborg/spoofax-debug
+> >> git://github.com/metaborg/spoofax-deploy
+> >> git://github.com/metaborg/spoofax-imp-patches
+> >> git://github.com/metaborg/spoofax-imp-archive
+> >>
+> >> You may begin pushing commits to these. The SVN aster, spoofax,
+> spoofax-imp, sglr-recovery/trunk/permissive-grammars directories do not
+> accept any new commits.
+> >>
+> >> The updated plan for the remaining things:
+> >>
+> >> 1. Next few hours: Expected Spoofax nightly update site to become
+> available again, containing the last builds from SVN.
+> >> 2. Wed 08-05 15:00: First nightly builds based on the Git repositories
+> available.
+> >> 3. Wed 08-05 18:00: Stable update site contains stable version built
+> from Git.
+> >> 4. Wed 08-05 22:00: Other CI jobs (e.g: interpreter, jsglr,
+> spoofax-mdsd, spoofax-unstable) switched over to Git sources and producing
+> builds.
+> >>
+> >> I will email you again (1) if something drastic changes and (2) after
+> step 3 is completed.
+> >>
+> >> Cheers,
+> >>
+> >> Vlad
+> >>
+> >> <migration.pdf>
+> >>
+> >> On May 4, 2013, at 3:05 PM, Vlad Vergu <v.vergu at gmail.com> wrote:
+> >>
+> >>> Dear all,
+> >>>
+> >>> This email concerns the migration of source code repositories for the
+> Stratego and Spoofax projects. It is directed at developers of Stratego and
+> Spoofax. If you are a user and not a developer you can safely ignore this
+> email as this migration will be transparent to you.
+> >>>
+> >>>
+> >>>
+> >>> Dear developers,
+> >>>
+> >>>
+> >>> You are receiving this email because (1) i'm migrating many of Spoofax
+> and Stratego related projects to Git, (2) i need your assistance and (3) it
+> is likely that it concerns your current/previous work.
+> >>>
+> >>>
+> >>> For the past week or so i've been working on migrating to GitHub
+> everything that is in the spoofax and spoofax-imp directories of the
+> StrategoXT SVN repository. At the same time i've split the two folders up
+> into 18 separate Git repositories each with its own history. This was/is a
+> non-trivial endeavour requiring understanding of each project's history for
+> the last decade and lots of regular expressions, thus very error prone. As
+> far as I can tell all history is preserved and things appear to be complete.
+> >>>
+> >>>
+> >>> My first request to you is that you carefully review the contents and
+> histories of the resulting Git repositories (below) and report any
+> irregularities that you discover. It is crucial that the new repositories
+> preserve history and your feedback is therefore invaluable. Please look at
+> code you have contributed to as well as to the rest of the codebase to
+> check for continuity, missing files, etc. I've attached a diagram that
+> explains how each folder from the spoofax/trunk/spoofax and
+> spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to
+> check these repositories by coming Tuesday and report any issues you
+> discover, no matter how minor or major.
+> >>>
+> >>> After i've fixed the problems that you report i will (1) make the
+> spoofax and spoofax-imp directories read-only on SVN and (2) create new Git
+> repositories based on the then latest revisions.
+> >>>
+> >>> Before anything: Do not develop anything against the Git repositories
+> mentioned below. They are temporary and only for review. After i've
+> received all of your comments I will delete these repositories and i will
+> make new ones based on the latest SVN revisions and according to the
+> planning below. You can distinguish the temporary from the permanent
+> repositories by the presence/absence of the MIG- prefix in their names.
+> >>>
+> >>> The new (temporary) repositories are hosted on GitHub at the following
+> addresses:
+> >>>
+> >>> https://github.com/metaborg-testing/MIG-jsglr
+> >>> https://github.com/metaborg-testing/MIG-mb-exec
+> >>> https://github.com/metaborg-testing/MIG-mb-exec-deps
+> >>> https://github.com/metaborg-testing/MIG-mb-rep
+> >>> https://github.com/metaborg-testing/MIG-aster
+> >>> https://github.com/metaborg-testing/MIG-esv
+> >>> https://github.com/metaborg-testing/MIG-sdf
+> >>> https://github.com/metaborg-testing/MIG-nabl
+> >>> https://github.com/metaborg-testing/MIG-box
+> >>> https://github.com/metaborg-testing/MIG-spx
+> >>> https://github.com/metaborg-testing/MIG-spt
+> >>> https://github.com/metaborg-testing/MIG-stratego
+> >>> https://github.com/metaborg-testing/MIG-tdl
+> >>> https://github.com/metaborg-testing/MIG-rtg
+> >>> https://github.com/metaborg-testing/MIG-spoofax
+> >>> https://github.com/metaborg-testing/MIG-spoofax-debug
+> >>> https://github.com/metaborg-testing/MIG-spoofax-deploy
+> >>> https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+> >>> https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+> >>>
+> >>>
+> >>> The final repositories will also be hosted on GitHub, under the
+> Metaborg organisation.
+> >>>
+> >>>
+> >>> There a few known issues with the new repositories:
+> >>>
+> >>> 1. Branches that could never non-destructively be merged into back
+> into the trunk have been archived as tags. The are those SVN branches that
+> branched on a particular directory of the trunk instead of the entire
+> trunk. This was a standard practice in the SVN-era but it results in Git
+> branch commits that delete everything that was not branched. The net effect
+> of merging those back into master would be that of deleting everything else
+> but your work. The tags that archive these branches preserve history of the
+> branch and the branches can later be revived if necessary.
+> >>>
+> >>> 2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as
+> tags. This was intentional. If you happen to spot a previously deleted
+> branch which is not tagged, please report it. Branch-deletion in Git is
+> destructive and history would be lost unless we tag the deleted branches.
+> >>>
+> >>> 3. The old Spoofax editor (first version started in ~2005) is not yet
+> migrated. This is the big red-colored repository in the diagram. This will
+> be migrated later, separately, as one big read-only Git repository.
+> >>>
+> >>>
+> >>> To summarise, i kindly ask you to:
+> >>>
+> >>> 1. Examine and give feedback on the health of the MIG- repositories by
+> cob of coming Tuesday. Do pay special attention to missing or corrupted
+> files, branches, tags, history or committer-info.
+> >>>
+> >>> 2. Avoid branching/merging in the spoofax and spoofax-imp directories.
+> If you do so, then (1) branch the entire trunk of the respective folder
+> (this will ensure merge-able branches) and (2) notify me. The migration is
+> like a white-list so anything not explicitly mentioned in it does not get
+> copied.
+> >>>
+> >>> 3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk
+> | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ]
+> roots. If you do, please let me know. Things will not be copied over unless
+> I explicitly mention them in the migration script. Making changes to
+> subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other
+> words, you can safely continue your work but don't start new things in the
+> SVN repository.
+> >>>
+> >>>
+> >>> This migration has a few more steps, here's the tentative plan
+> (depending on the problems you discover):
+> >>>
+> >>> 1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on
+> SVN read-only. At this stage you shouldn't have any uncommitted changes
+> anymore.
+> >>> 2. Wed 08-05 12:00 PM : all your reported issues should be fixed in
+> the migration scripts.
+> >>> 3. Wed 08-05 1:30 PM : final Git repositories published at GitHub
+> Metaborg organisation.
+> >>> 4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first
+> build results available based on the Git repositories. This means builds of
+> the stable, master and unstable branches.
+> >>> 5. Thu 09-05 8:00 PM : all Spoofax update sites should be
+> pointing/containing builds based on the Git repositories.
+> >>>
+> >>>
+> >>> I'll email you again (1) if something changes in the above plan and
+> (2) after steps 3 and 5 are completed.
+> >>>
+> >>> Thank you for your help.
+> >>>
+> >>>
+> >>> Cheers,
+> >>>
+> >>> Vlad
+> >>> <migration_diagram.pdf>
+> >>>
+> >>>
+> >>
+> >> _______________________________________________
+> >> Developers mailing list
+> >> Developers at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >
+> > --
+> > http://www.stg.tu-darmstadt.de/staff/sebastian_erdweg__
+> >
+>
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20130515/c223f8e7/attachment-0001.html>
+

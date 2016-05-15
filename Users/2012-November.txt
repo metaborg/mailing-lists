@@ -1,0 +1,3747 @@
+From hilalks at gmail.com  Mon Nov  5 10:21:20 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 5 Nov 2012 11:21:20 +0200
+Subject: [Stratego Users] Generate Java Code
+Message-ID: <CACLuXb+UV6fA9Z_5Ls6jKAza-r0sG0-hWfmCFgUTMpZ4TyKb8g@mail.gmail.com>
+
+Hi,
+
+I was examining your example entity project on Spoofax. These are your
+declarations in syntax.sdf file:
+
+"module" ID Definition*       -> Start {cons("Module")}
+    "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+    ID ":" Type                   -> Property {cons("Property")}
+    ID                            -> Type {cons("Type")}
+
+
+In generate.str file, there is a to-java generation code:
+
+ to-java:
+    Type(t) -> t
+
+
+When I type the following, I get the error "Constructor Type/2 not declared"
+to-java:
+    Type(t, a) -> t
+
+How can I declare a constructor with two or more parameters? I read the
+documentation but I couldn't unserstand how to do it. Can you help me about
+this?
+
+Thank you,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/1d58ee05/attachment.html>
+
+From headness13 at gmail.com  Mon Nov  5 10:45:07 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Mon, 5 Nov 2012 11:45:07 +0200
+Subject: [Stratego Users] Generate Java Code
+In-Reply-To: <CACLuXb+UV6fA9Z_5Ls6jKAza-r0sG0-hWfmCFgUTMpZ4TyKb8g@mail.gmail.com>
+References: <CACLuXb+UV6fA9Z_5Ls6jKAza-r0sG0-hWfmCFgUTMpZ4TyKb8g@mail.gmail.com>
+Message-ID: <CAFu+moJB3umdW2dejQgfp3WTh_k2pKghURBL_aPREt=CL43RfA@mail.gmail.com>
+
+Hi Kilal,
+
+You don't declare constructors. They are generated from the grammar you
+wrote.
+
+In the example above, 'Type' will have only one parameter. 'Property' will
+have two, because in the grammar you have two non terminals:
+
+ *ID* ":" *Type*                   -> Property {cons("Property")}
+
+That's why you can write:
+
+to-java
+      Property(t, a) -> t
+
+
+Radu Mereuta
+PhD student at FII, UAIC
+
+
+On Mon, Nov 5, 2012 at 11:21 AM, Hilal Kevser <hilalks at gmail.com> wrote:
+
+> Hi,
+>
+> I was examining your example entity project on Spoofax. These are your
+> declarations in syntax.sdf file:
+>
+> "module" ID Definition*       -> Start {cons("Module")}
+>     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>     ID ":" Type                   -> Property {cons("Property")}
+>     ID                            -> Type {cons("Type")}
+>
+>
+> In generate.str file, there is a to-java generation code:
+>
+>  to-java:
+>     Type(t) -> t
+>
+>
+> When I type the following, I get the error "Constructor Type/2 not
+> declared"
+> to-java:
+>     Type(t, a) -> t
+>
+> How can I declare a constructor with two or more parameters? I read the
+> documentation but I couldn't unserstand how to do it. Can you help me about
+> this?
+>
+> Thank you,
+> Hilal
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/4e308ac2/attachment.html>
+
+From andre.s.d.vieira at gmail.com  Mon Nov  5 11:24:17 2012
+From: andre.s.d.vieira at gmail.com (Andre Vieira)
+Date: Mon, 5 Nov 2012 11:24:17 +0100
+Subject: [Stratego Users] Generate Java Code
+In-Reply-To: <CAFu+moJB3umdW2dejQgfp3WTh_k2pKghURBL_aPREt=CL43RfA@mail.gmail.com>
+References: <CACLuXb+UV6fA9Z_5Ls6jKAza-r0sG0-hWfmCFgUTMpZ4TyKb8g@mail.gmail.com>
+	<CAFu+moJB3umdW2dejQgfp3WTh_k2pKghURBL_aPREt=CL43RfA@mail.gmail.com>
+Message-ID: <CAGzthGscBLEan8Utz8ihic+VJTxrUj9kEdYp2F_tjVeU6UFWDQ@mail.gmail.com>
+
+You can declare extra constructors without defining them in SDF. Within a
+str file, under the keywords signature constructors, instead of
+rules/strategies, you can define constructors in the following manner:
+
+ExampleEmptyCons: Term
+OneParamCons: Term -> Term
+TwoParamCons: Term * Term -> Term
+
+This will let you use the constructors ExampleEmptyCons(), OneParamCons(a)
+and TwoParamCons(a,b).
+
+You can even go on to use on the spot constructor creation with
+"consName"#( ListOfParams) but I'd stay away from that if ya can :)
+
+Cheers,
+Andre
+
+On Mon, Nov 5, 2012 at 10:45 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> Hi Kilal,
+>
+> You don't declare constructors. They are generated from the grammar you
+> wrote.
+>
+> In the example above, 'Type' will have only one parameter. 'Property' will
+> have two, because in the grammar you have two non terminals:
+>
+>  *ID* ":" *Type*                   -> Property {cons("Property")}
+>
+> That's why you can write:
+>
+> to-java
+>       Property(t, a) -> t
+>
+>
+> Radu Mereuta
+> PhD student at FII, UAIC
+>
+>
+> On Mon, Nov 5, 2012 at 11:21 AM, Hilal Kevser <hilalks at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I was examining your example entity project on Spoofax. These are your
+>> declarations in syntax.sdf file:
+>>
+>> "module" ID Definition*       -> Start {cons("Module")}
+>>     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>>     ID ":" Type                   -> Property {cons("Property")}
+>>     ID                            -> Type {cons("Type")}
+>>
+>>
+>> In generate.str file, there is a to-java generation code:
+>>
+>>  to-java:
+>>     Type(t) -> t
+>>
+>>
+>> When I type the following, I get the error "Constructor Type/2 not
+>> declared"
+>> to-java:
+>>     Type(t, a) -> t
+>>
+>> How can I declare a constructor with two or more parameters? I read the
+>> documentation but I couldn't unserstand how to do it. Can you help me about
+>> this?
+>>
+>> Thank you,
+>> Hilal
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/19970266/attachment.html>
+
+From hilalks at gmail.com  Mon Nov  5 12:33:13 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 5 Nov 2012 13:33:13 +0200
+Subject: [Stratego Users] Users Digest, Vol 45, Issue 1
+In-Reply-To: <mailman.3.1352113201.7258.users@strategoxt.org>
+References: <mailman.3.1352113201.7258.users@strategoxt.org>
+Message-ID: <CACLuXbKB81ZgC8ZKPu_wugasqeekGDEmyEdywPDQoo=50WH1OQ@mail.gmail.com>
+
+Thanks for your help.
+
+In the Calculang project, Calculang.sdf file contains following rules:
+
+context-free start-symbols
+
+    Start
+
+  context-free syntax
+
+    Exp -> Start {prefer}
+    INT -> Exp   {cons("Int")}
+
+    Exp "*" Exp -> Exp {cons("Mul")}
+    Exp "+" Exp -> Exp {cons("Plus")}
+
+    "(" Exp ")" -> Exp {bracket}
+
+    Exp "!" -> Exp {cons("Fact"), right}
+
+  context-free priorities
+
+    Exp "*" Exp -> Exp {left}
+  >
+    Exp "+" Exp -> Exp {left}
+
+  context-free syntax
+
+    Stm*       -> Start {cons("Statements")}
+    ID "=" Exp -> Stm {cons("Assign")}
+    Exp        -> Stm
+    ID         -> Exp {cons("Var")}
+
+
+As you mention, there are two non-terminals for Mul rule. But when I try to
+add following code to the trans/generate.str file, I still got the error
+"Constructor Mul/2 not declared".
+
+ to-java:
+  Mul(a, b) ->
+    $<
+System.out.println(a*b);
+      >
+
+Can you help with this?
+
+Thank you,
+Hilal
+
+2012/11/5 <users-request at strategoxt.org>
+
+> Send Users mailing list submissions to
+>         users at strategoxt.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+>         users-request at strategoxt.org
+>
+> You can reach the person managing the list at
+>         users-owner at strategoxt.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Generate Java Code (Hilal Kevser)
+>    2. Re: Generate Java Code (Radu Mereuta)
+>    3. Re: Generate Java Code (Andre Vieira)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Mon, 5 Nov 2012 11:21:20 +0200
+> From: Hilal Kevser <hilalks at gmail.com>
+> To: users at strategoxt.org
+> Subject: [Stratego Users] Generate Java Code
+> Message-ID:
+>         <
+> CACLuXb+UV6fA9Z_5Ls6jKAza-r0sG0-hWfmCFgUTMpZ4TyKb8g at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Hi,
+>
+> I was examining your example entity project on Spoofax. These are your
+> declarations in syntax.sdf file:
+>
+> "module" ID Definition*       -> Start {cons("Module")}
+>     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>     ID ":" Type                   -> Property {cons("Property")}
+>     ID                            -> Type {cons("Type")}
+>
+>
+> In generate.str file, there is a to-java generation code:
+>
+>  to-java:
+>     Type(t) -> t
+>
+>
+> When I type the following, I get the error "Constructor Type/2 not
+> declared"
+> to-java:
+>     Type(t, a) -> t
+>
+> How can I declare a constructor with two or more parameters? I read the
+> documentation but I couldn't unserstand how to do it. Can you help me about
+> this?
+>
+> Thank you,
+> Hilal
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/1d58ee05/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Mon, 5 Nov 2012 11:45:07 +0200
+> From: Radu Mereuta <headness13 at gmail.com>
+> To: "Stratego/XT Users" <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Generate Java Code
+> Message-ID:
+>         <CAFu+moJB3umdW2dejQgfp3WTh_k2pKghURBL_aPREt=
+> CL43RfA at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Hi Kilal,
+>
+> You don't declare constructors. They are generated from the grammar you
+> wrote.
+>
+> In the example above, 'Type' will have only one parameter. 'Property' will
+> have two, because in the grammar you have two non terminals:
+>
+>  *ID* ":" *Type*                   -> Property {cons("Property")}
+>
+> That's why you can write:
+>
+> to-java
+>       Property(t, a) -> t
+>
+>
+> Radu Mereuta
+> PhD student at FII, UAIC
+>
+>
+> On Mon, Nov 5, 2012 at 11:21 AM, Hilal Kevser <hilalks at gmail.com> wrote:
+>
+> > Hi,
+> >
+> > I was examining your example entity project on Spoofax. These are your
+> > declarations in syntax.sdf file:
+> >
+> > "module" ID Definition*       -> Start {cons("Module")}
+> >     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+> >     ID ":" Type                   -> Property {cons("Property")}
+> >     ID                            -> Type {cons("Type")}
+> >
+> >
+> > In generate.str file, there is a to-java generation code:
+> >
+> >  to-java:
+> >     Type(t) -> t
+> >
+> >
+> > When I type the following, I get the error "Constructor Type/2 not
+> > declared"
+> > to-java:
+> >     Type(t, a) -> t
+> >
+> > How can I declare a constructor with two or more parameters? I read the
+> > documentation but I couldn't unserstand how to do it. Can you help me
+> about
+> > this?
+> >
+> > Thank you,
+> > Hilal
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/4e308ac2/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 3
+> Date: Mon, 5 Nov 2012 11:24:17 +0100
+> From: Andre Vieira <andre.s.d.vieira at gmail.com>
+> To: "Stratego/XT Users" <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Generate Java Code
+> Message-ID:
+>         <
+> CAGzthGscBLEan8Utz8ihic+VJTxrUj9kEdYp2F_tjVeU6UFWDQ at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> You can declare extra constructors without defining them in SDF. Within a
+> str file, under the keywords signature constructors, instead of
+> rules/strategies, you can define constructors in the following manner:
+>
+> ExampleEmptyCons: Term
+> OneParamCons: Term -> Term
+> TwoParamCons: Term * Term -> Term
+>
+> This will let you use the constructors ExampleEmptyCons(), OneParamCons(a)
+> and TwoParamCons(a,b).
+>
+> You can even go on to use on the spot constructor creation with
+> "consName"#( ListOfParams) but I'd stay away from that if ya can :)
+>
+> Cheers,
+> Andre
+>
+> On Mon, Nov 5, 2012 at 10:45 AM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+>
+> > Hi Kilal,
+> >
+> > You don't declare constructors. They are generated from the grammar you
+> > wrote.
+> >
+> > In the example above, 'Type' will have only one parameter. 'Property'
+> will
+> > have two, because in the grammar you have two non terminals:
+> >
+> >  *ID* ":" *Type*                   -> Property {cons("Property")}
+> >
+> > That's why you can write:
+> >
+> > to-java
+> >       Property(t, a) -> t
+> >
+> >
+> > Radu Mereuta
+> > PhD student at FII, UAIC
+> >
+> >
+> > On Mon, Nov 5, 2012 at 11:21 AM, Hilal Kevser <hilalks at gmail.com> wrote:
+> >
+> >> Hi,
+> >>
+> >> I was examining your example entity project on Spoofax. These are your
+> >> declarations in syntax.sdf file:
+> >>
+> >> "module" ID Definition*       -> Start {cons("Module")}
+> >>     "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+> >>     ID ":" Type                   -> Property {cons("Property")}
+> >>     ID                            -> Type {cons("Type")}
+> >>
+> >>
+> >> In generate.str file, there is a to-java generation code:
+> >>
+> >>  to-java:
+> >>     Type(t) -> t
+> >>
+> >>
+> >> When I type the following, I get the error "Constructor Type/2 not
+> >> declared"
+> >> to-java:
+> >>     Type(t, a) -> t
+> >>
+> >> How can I declare a constructor with two or more parameters? I read the
+> >> documentation but I couldn't unserstand how to do it. Can you help me
+> about
+> >> this?
+> >>
+> >> Thank you,
+> >> Hilal
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >>
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/19970266/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> End of Users Digest, Vol 45, Issue 1
+> ************************************
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121105/d0ac42d4/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Nov  5 13:42:33 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 5 Nov 2012 13:42:33 +0100
+Subject: [Stratego Users] First CFP: 6th International Conference on Model
+	Transformation (ICMT 2013)
+Message-ID: <CAFaCHU2Ongs=cczZ2n9VPt5WFUt4t_7s=6cgMpBSSVz4GV093Q@mail.gmail.com>
+
+**********************************************************************
+
+               F I R S T  C A L L  F O R  P A P E R S
+
+                             ICMT 2013
+
+        6th International Conference on Model Transformation
+
+                June 18?19, 2013, Budapest, Hungary
+
+                http://www.model-transformation.org
+
+**********************************************************************
+
+The 6th International Conference on Model Transformation (ICMT) will
+be held June 18?19, 2013, in Budapest, Hungary. ICMT is the premier
+forum for researchers and practitioners alike from all areas of model
+transformation. Model transformations are essential for elevating
+models from documentation elements to first-class artifacts of the
+development process.
+
+ICMT is seeking original papers, which have not been submitted
+elsewhere. For more details, please visit the conference Web site at:
+http://www.model-transformation.org
+
+
+**** IMPORTANT DATES ****
+
+* Jan 25, 2013  :  Abstract Submission
+* Feb 01, 2013  :  Paper Submission
+* Mar 22, 2013  :  Notification
+* Apr 05, 2013  :  Camera Ready Submission
+
+
+**** TOPICS OF INTEREST ****
+
+The topics of interest include, but are not restricted to:
+
+* Transformation paradigms and languages:
+  - graph rewriting, tree rewriting, attribute grammars
+  - rule-based, declarative, imperative, and functional
+  - textual, graphical
+  - pattern matching
+  - transformation by example/demonstration
+  - modularity, reusability, and composition
+  - comparison of transformation languages
+  - theoretical foundations
+
+* Transformation algorithms and strategies:
+  - bidirectional transformation
+  - incremental transformation
+  - scalability and optimization
+  - termination and confluence
+  - higher-order transformation
+  - transformation chains
+
+* Development of transformations:
+  - specification verification and validation
+  - testing and debugging
+  - evolution
+  - development processes
+  - tool support
+  - benchmarking of transformation engines
+
+* Applications and case studies:
+  - refactoring
+  - aspect weaving
+  - model comparison, differencing, and merging
+  - model synchronization and change propagation
+  - co-evolution of models, metamodels, and transformations
+  - round-trip/reverse/forward engineering
+  - industrial experience reports
+  - empirical studies
+
+
+**** PUBLISHING ****
+
+The conference proceedings will be published by Springer-Verlag in the
+LNCS series. For each published paper must be a full registration for
+the conference. Selected papers will be invited to be submitted as
+extended version to a special issue of the Journalof Object Technology
+(JOT).
+
+
+**** ORGANIZATION ****
+
+GENERAL CHAIR
+Daniel Varro (BME)
+
+PROGRAM CHAIRS
+Keith Duddy (QUT)
+Gerti Kappel (TU Wien)
+
+PUBLICATION CHAIR
+Manuel Wimmer (TU Wien)
+
+PUBLICITY CHAIR
+Philip Langer (TU Wien)
+
+WEB CHAIR
+Ludovico Iovino (Uni l'Aquila)
+
+
+**** CONTACT ****
+
+Web                 :  http://www.model-transformation.org
+Join us on LinkedIn :  http://www.linkedin.com/groups/ICMT-2013-4662349
+Follow us on twitter:  @ICMT2013 #icmt2013
+
+
+From ciraci at gmail.com  Tue Nov  6 20:32:00 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 6 Nov 2012 11:32:00 -0800
+Subject: [Stratego Users] Transformation Question
+Message-ID: <CALq5ZdzFS3M2eB9TbxWTLW0isFpeQbE9G1tegaFSFjhgE172hA@mail.gmail.com>
+
+Hi,
+
+I have read the stratego documentation though I couldn't (or didn't see) a
+solution to what I'm trying to achieve now. I have a function with labeled
+blocks, like:
+
+function foo(){
+  statement1
+  statement2
+  statement3
+ label X:
+  statementX1
+  statementX2
+ label Y:
+  statementY1
+  ...
+  statementYn
+}
+
+I want to extract say label Y from function foo and rewrite it in a
+function y.
+Like:
+function foo(){
+  statement1
+  statement2
+  statement3
+ label X:
+  statementX1
+  statementX2
+
+}
+
+function Y(){
+  statementY1
+  ...
+  statementYn
+}
+
+I'm wondering if this is possible with spoofax/stratego as this is not an
+inplace rewrite.
+
+Thanks for your help,
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121106/8f4b5a0e/attachment.html>
+
+From dobesv at gmail.com  Tue Nov  6 20:42:36 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 6 Nov 2012 11:42:36 -0800
+Subject: [Stratego Users] Transformation Question
+In-Reply-To: <CALq5ZdzFS3M2eB9TbxWTLW0isFpeQbE9G1tegaFSFjhgE172hA@mail.gmail.com>
+References: <CALq5ZdzFS3M2eB9TbxWTLW0isFpeQbE9G1tegaFSFjhgE172hA@mail.gmail.com>
+Message-ID: <CADbG_jacS5yvfyO4BPLya_1rnV7n8TYudAywTOHizaDxJVPKgQ@mail.gmail.com>
+
+Hi Selim,
+
+It is definitely possible - Stratego is quite powerful and does more than
+just simple direct rewrites.  You can write functional / procedural code in
+it to achieve transformations that are more than a simple mapping between
+terms.
+
+
+On Tue, Nov 6, 2012 at 11:32 AM, Selim Ciraci <ciraci at gmail.com> wrote:
+
+> Hi,
+>
+> I have read the stratego documentation though I couldn't (or didn't see) a
+> solution to what I'm trying to achieve now. I have a function with labeled
+> blocks, like:
+>
+> function foo(){
+>   statement1
+>   statement2
+>   statement3
+>  label X:
+>   statementX1
+>   statementX2
+>  label Y:
+>   statementY1
+>   ...
+>   statementYn
+> }
+>
+> I want to extract say label Y from function foo and rewrite it in a
+> function y.
+> Like:
+> function foo(){
+>   statement1
+>   statement2
+>   statement3
+>  label X:
+>   statementX1
+>   statementX2
+>
+> }
+>
+> function Y(){
+>   statementY1
+>   ...
+>   statementYn
+> }
+>
+> I'm wondering if this is possible with spoofax/stratego as this is not an
+> inplace rewrite.
+>
+> Thanks for your help,
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121106/1fb1626c/attachment.html>
+
+From ciraci at gmail.com  Tue Nov  6 22:18:23 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 6 Nov 2012 13:18:23 -0800
+Subject: [Stratego Users] Transformation Question
+In-Reply-To: <CADbG_jacS5yvfyO4BPLya_1rnV7n8TYudAywTOHizaDxJVPKgQ@mail.gmail.com>
+References: <CALq5ZdzFS3M2eB9TbxWTLW0isFpeQbE9G1tegaFSFjhgE172hA@mail.gmail.com>
+	<CADbG_jacS5yvfyO4BPLya_1rnV7n8TYudAywTOHizaDxJVPKgQ@mail.gmail.com>
+Message-ID: <CALq5Zdz4H2bJrgdx0O8jsZyVVTxcHeryB10hCXzi56Z8QD_qmA@mail.gmail.com>
+
+Thanks for the clarification. since it is possible, I'll use spoofax for my
+project. Sorry for asking too many questions, but I'm playing with
+transformations now. When I apply a custom rule, I got an *.aterm file. Is
+it possible to convert this back to textual format? The perty printing
+should do this, however I could not figure out how to do it.
+
+--Selim
+
+
+On Tue, Nov 6, 2012 at 11:42 AM, Dobes Vandermeer <dobesv at gmail.com> wrote:
+
+> Hi Selim,
+>
+> It is definitely possible - Stratego is quite powerful and does more than
+> just simple direct rewrites.  You can write functional / procedural code in
+> it to achieve transformations that are more than a simple mapping between
+> terms.
+>
+>
+> On Tue, Nov 6, 2012 at 11:32 AM, Selim Ciraci <ciraci at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I have read the stratego documentation though I couldn't (or didn't see)
+>> a solution to what I'm trying to achieve now. I have a function with
+>> labeled blocks, like:
+>>
+>> function foo(){
+>>   statement1
+>>   statement2
+>>   statement3
+>>  label X:
+>>   statementX1
+>>   statementX2
+>>  label Y:
+>>   statementY1
+>>   ...
+>>   statementYn
+>> }
+>>
+>> I want to extract say label Y from function foo and rewrite it in a
+>> function y.
+>> Like:
+>> function foo(){
+>>   statement1
+>>   statement2
+>>   statement3
+>>  label X:
+>>   statementX1
+>>   statementX2
+>>
+>> }
+>>
+>> function Y(){
+>>   statementY1
+>>   ...
+>>   statementYn
+>> }
+>>
+>> I'm wondering if this is possible with spoofax/stratego as this is not an
+>> inplace rewrite.
+>>
+>> Thanks for your help,
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121106/7d3f5b15/attachment.html>
+
+From dobesv at gmail.com  Tue Nov  6 23:32:17 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 6 Nov 2012 14:32:17 -0800
+Subject: [Stratego Users] Transformation Question
+In-Reply-To: <CALq5Zdz4H2bJrgdx0O8jsZyVVTxcHeryB10hCXzi56Z8QD_qmA@mail.gmail.com>
+References: <CALq5ZdzFS3M2eB9TbxWTLW0isFpeQbE9G1tegaFSFjhgE172hA@mail.gmail.com>
+	<CADbG_jacS5yvfyO4BPLya_1rnV7n8TYudAywTOHizaDxJVPKgQ@mail.gmail.com>
+	<CALq5Zdz4H2bJrgdx0O8jsZyVVTxcHeryB10hCXzi56Z8QD_qmA@mail.gmail.com>
+Message-ID: <CADbG_jaOT=T1Z80M7u8WN9LvLzR-xaf9O8hjsMj_qXR6qMENcg@mail.gmail.com>
+
+Hi Selim,
+
+You specify the possible actions and the "strategies" that implement them
+in editor/*-Builders.esv .  In my generated project it already generated an
+example strategy and builder for outputting to Java, which I could
+adapt/rename to suit my project.
+
+
+On Tue, Nov 6, 2012 at 1:18 PM, Selim Ciraci <ciraci at gmail.com> wrote:
+
+> Thanks for the clarification. since it is possible, I'll use spoofax for
+> my project. Sorry for asking too many questions, but I'm playing with
+> transformations now. When I apply a custom rule, I got an *.aterm file. Is
+> it possible to convert this back to textual format? The perty printing
+> should do this, however I could not figure out how to do it.
+>
+> --Selim
+>
+>
+>
+> On Tue, Nov 6, 2012 at 11:42 AM, Dobes Vandermeer <dobesv at gmail.com>wrote:
+>
+>> Hi Selim,
+>>
+>> It is definitely possible - Stratego is quite powerful and does more than
+>> just simple direct rewrites.  You can write functional / procedural code in
+>> it to achieve transformations that are more than a simple mapping between
+>> terms.
+>>
+>>
+>> On Tue, Nov 6, 2012 at 11:32 AM, Selim Ciraci <ciraci at gmail.com> wrote:
+>>
+>>> Hi,
+>>>
+>>> I have read the stratego documentation though I couldn't (or didn't see)
+>>> a solution to what I'm trying to achieve now. I have a function with
+>>> labeled blocks, like:
+>>>
+>>> function foo(){
+>>>   statement1
+>>>   statement2
+>>>   statement3
+>>>  label X:
+>>>   statementX1
+>>>   statementX2
+>>>  label Y:
+>>>   statementY1
+>>>   ...
+>>>   statementYn
+>>> }
+>>>
+>>> I want to extract say label Y from function foo and rewrite it in a
+>>> function y.
+>>> Like:
+>>> function foo(){
+>>>   statement1
+>>>   statement2
+>>>   statement3
+>>>  label X:
+>>>   statementX1
+>>>   statementX2
+>>>
+>>> }
+>>>
+>>> function Y(){
+>>>   statementY1
+>>>   ...
+>>>   statementYn
+>>> }
+>>>
+>>> I'm wondering if this is possible with spoofax/stratego as this is not
+>>> an inplace rewrite.
+>>>
+>>> Thanks for your help,
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121106/97e30cda/attachment.html>
+
+From emmanuel.castro at laposte.net  Sun Nov 11 18:28:09 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sun, 11 Nov 2012 18:28:09 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+Message-ID: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+
+Hello
+
+Is there a (draft?) description of the .nd files? I had a look to the
+sources in org.strategxt.imp.names , however I does not appear very clear
+to me.
+
+Thank
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121111/0721a379/attachment.html>
+
+From E.Visser at tudelft.nl  Sun Nov 11 20:32:28 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 11 Nov 2012 20:32:28 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+Message-ID: <CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+
+Hi Emmanuel,
+
+> Is there a (draft?) description of the .nd files? I had a look to the
+> sources in org.strategxt.imp.names , however I does not appear very clear to
+> me.
+
+The SLE 2012 paper provides a fairly comprehensive overview with examples
+
+  http://researchr.org/publication/KonatKWV13
+
+There might be slight differences with the implemented version. The
+MoblNBL project on github
+
+  https://github.com/metaborg/MoblNBL
+
+provides syntax definition and name binding rules for the mobl
+language based on the current (nightly) build of Spoofax.
+
+The syntax of NBL is defined in the project you're referring to:
+
+  https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From emmanuel.castro at laposte.net  Tue Nov 13 01:31:15 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 13 Nov 2012 01:31:15 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+Message-ID: <CAEXdecnK8VfBWbds1QnFew-cA79f7Tw6CV-KcCjU3zO2G4-ffg@mail.gmail.com>
+
+Thank you for the URLs
+
+I've noticed that NBL imposes design rules on the SDF-syntax
+of languages so that one can write name rules.
+For instance, I am currently working on a fragment of the Maude language.
+It allows definitions such as 'sorts A B C'. If I naively parse this
+definition using
+"sorts" ID+ -> ModuleItem {cons("Sorts")
+I can't write the name definition rule, because I can't select every ID in
+the list (Stratego does not support associative matching as Maude does).
+I know that the workaround is to contextually wrap ID in a specific
+constructor that will trigger the NBL rule.
+That said, I would be tempted to write:
+Sorts(x*) :
+defines Sort x*    // foreach element x of the constructor Sorts, defines
+Sort x.
+
+In addition, I find most of the statements of NBL rather intuitive to
+understand, however I have difficulties with the 'where' clause. What is
+confusing is that when one writes:
+
+      Var(x): refers to variable x
+
+the x is given to the refers clause, and when one writes:
+
+      Using(qname): imports class from namespace ns
+                            where qname refers to namespace ns
+
+the second (namespace ns) is the result of the refers clause.
+
+Moreover, in most of languages, including Stratego, the result part of the
+where clause is on the left. I would have understood more easily with:
+
+      Using(qname): imports class from namespace ns
+                            where namespace ns is refered by qname
+
+or using a more symbolic syntax:
+
+      Using(qname): imports class from namespace ns
+                            where namespace ns := refered_by(qname)
+
+Borrowing the syntax of natural languages such as English is something that
+I try to avoid, because it tends to bring complex linguistic problem with
+it when mixed with computer language traditions.
+
+Hoping it helps.
+
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121113/d7c502e1/attachment.html>
+
+From emmanuel.castro at laposte.net  Wed Nov 14 15:49:46 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Wed, 14 Nov 2012 15:49:46 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+Message-ID: <CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+
+In NBL, how do process old C languages definition such as:
+  int x, y, z; // defines the three variables x, y, and z as ints
+?
+
+I assume that we have the following grammar fragment:
+ Type {ID ","}+ ";" ? Decl {" Var "}
+
+It does not seem possible to write the rule:
+ Var(t, c*):
+    defines variable c of type t // for each c of c*
+
+A possible alternative would be that Var defines a scope and puts the type
+in it in order to let each variable of c* to catch it.
+
+Is there anything simpler?
+
+Manu
+
+2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+
+> Hi Emmanuel,
+>
+> > Is there a (draft?) description of the .nd files? I had a look to the
+> > sources in org.strategxt.imp.names , however I does not appear very
+> clear to
+> > me.
+>
+> The SLE 2012 paper provides a fairly comprehensive overview with examples
+>
+>   http://researchr.org/publication/KonatKWV13
+>
+> There might be slight differences with the implemented version. The
+> MoblNBL project on github
+>
+>   https://github.com/metaborg/MoblNBL
+>
+> provides syntax definition and name binding rules for the mobl
+> language based on the current (nightly) build of Spoofax.
+>
+> The syntax of NBL is defined in the project you're referring to:
+>
+>
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121114/f8394c14/attachment.html>
+
+From gabrielkonat at gmail.com  Wed Nov 14 15:54:58 2012
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Wed, 14 Nov 2012 15:54:58 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+Message-ID: <CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+
+That cannot be expressed in NBL (yet?). You can desugar such a variable
+declaration into multiple separate variable declarations and treat them as
+regular variables in NBL.
+
+On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+
+> In NBL, how do process old C languages definition such as:
+>   int x, y, z; // defines the three variables x, y, and z as ints
+> ?
+>
+> I assume that we have the following grammar fragment:
+>  Type {ID ","}+ ";" ? Decl {" Var "}
+>
+> It does not seem possible to write the rule:
+>  Var(t, c*):
+>     defines variable c of type t // for each c of c*
+>
+> A possible alternative would be that Var defines a scope and puts the type
+> in it in order to let each variable of c* to catch it.
+>
+> Is there anything simpler?
+>
+> Manu
+>
+> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>
+>> Hi Emmanuel,
+>>
+>> > Is there a (draft?) description of the .nd files? I had a look to the
+>> > sources in org.strategxt.imp.names , however I does not appear very
+>> clear to
+>> > me.
+>>
+>> The SLE 2012 paper provides a fairly comprehensive overview with examples
+>>
+>>   http://researchr.org/publication/KonatKWV13
+>>
+>> There might be slight differences with the implemented version. The
+>> MoblNBL project on github
+>>
+>>   https://github.com/metaborg/MoblNBL
+>>
+>> provides syntax definition and name binding rules for the mobl
+>> language based on the current (nightly) build of Spoofax.
+>>
+>> The syntax of NBL is defined in the project you're referring to:
+>>
+>>
+>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121114/88c88560/attachment.html>
+
+From dobesv at gmail.com  Thu Nov 15 00:10:51 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Wed, 14 Nov 2012 15:10:51 -0800
+Subject: [Stratego Users] Compiling to C
+Message-ID: <CADbG_jYwt6q5_OZ1HvM+Kq4=jP2kx=1J-1pOM-TQtNWa-kkNOw@mail.gmail.com>
+
+I was wondering whether it was feasible to implement an interpreter
+entirely in Stratego, compile that interpreter to C, and link the C
+interpreter to a C/C++ application as the scripting engine for that
+application.
+
+I also pondered the possibility that having written such an interpreter, I
+might find or make a Stratego partial evaluator that would take a program
+in my language and my interpreter and produce a Stratego program that could
+then be compiled to C code.  I'm not sure yet whether the C code generated
+by Stratego would be sufficiently interoperable for my purposes - I'd like
+to do some mobile game programming and Stratego doesn't offer much in terms
+of low level types - but it might give a head-start of some sort anyway.
+
+Part of this puzzle relates to the compatibility between the Java/Spoofax
+Stratego and the C Stratego; how the two relate is a bit fuzzy to me at
+this time.
+
+Any tips or hints?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121114/0e2a6f10/attachment.html>
+
+From gabrielkonat at gmail.com  Thu Nov 15 08:34:29 2012
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Thu, 15 Nov 2012 08:34:29 +0100
+Subject: [Stratego Users] Compiling to C
+In-Reply-To: <CADbG_jYwt6q5_OZ1HvM+Kq4=jP2kx=1J-1pOM-TQtNWa-kkNOw@mail.gmail.com>
+References: <CADbG_jYwt6q5_OZ1HvM+Kq4=jP2kx=1J-1pOM-TQtNWa-kkNOw@mail.gmail.com>
+Message-ID: <CAOipTujh8DYDegOrv1xd2R+dQnUia0+eP0xZb7p5y0zFtiBAcQ@mail.gmail.com>
+
+Hey Dobes,
+
+The Stratego C compiler generates C99 code, and it has a library mode, so
+in principle it should be possible to use that generated C code from within
+a C or C++ application.
+But there are some problems:
+The generated code is not very cross platform, for example it's hard to
+compile under Windows.
+It uses some kind gnu extensions for loading libraries at initialization,
+if the C compiler does not support this it cannot compile the code.
+Some primitives may not work on some platforms, I think they have only been
+'tested' on Linux and OSX (and Windows under Cygwin)
+We do not plan to maintain the C Stratego compiler any more.
+
+So I'm not sure if it will work at all on mobile platforms.
+
+Cheers,
+Gabri?l
+
+On 15 November 2012 00:10, Dobes Vandermeer <dobesv at gmail.com> wrote:
+
+> I was wondering whether it was feasible to implement an interpreter
+> entirely in Stratego, compile that interpreter to C, and link the C
+> interpreter to a C/C++ application as the scripting engine for that
+> application.
+>
+> I also pondered the possibility that having written such an interpreter, I
+> might find or make a Stratego partial evaluator that would take a program
+> in my language and my interpreter and produce a Stratego program that could
+> then be compiled to C code.  I'm not sure yet whether the C code generated
+> by Stratego would be sufficiently interoperable for my purposes - I'd like
+> to do some mobile game programming and Stratego doesn't offer much in terms
+> of low level types - but it might give a head-start of some sort anyway.
+>
+> Part of this puzzle relates to the compatibility between the Java/Spoofax
+> Stratego and the C Stratego; how the two relate is a bit fuzzy to me at
+> this time.
+>
+> Any tips or hints?
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121115/3de5a2a4/attachment-0001.html>
+
+From emmanuel.castro at laposte.net  Thu Nov 15 13:29:09 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Thu, 15 Nov 2012 13:29:09 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+Message-ID: <CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+
+Thank you! The desugaring approach works well. I could successfully
+implement it.
+I think that in your next papers about NBL, the constraints that apply on
+the grammar should be stated more clearly, and especially putting a
+desugaring phase before applying the NBL.
+
+Desugaring helps keeping name-definition rules simple, that is good, and
+anyway, transformations on real languages almost always start by desugaring.
+
+Furthermore, I've noticed that Spoofax project templates
+'debug-generate-deffed' does not take into account the desugaring declared
+in the 'analyse' strategy. Is it a bug? Should I open an issue?
+
+Manu
+
+
+2012/11/14 Gabri?l Konat <gabrielkonat at gmail.com>
+
+> That cannot be expressed in NBL (yet?). You can desugar such a variable
+> declaration into multiple separate variable declarations and treat them as
+> regular variables in NBL.
+>
+>
+> On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+>
+>> In NBL, how do process old C languages definition such as:
+>>   int x, y, z; // defines the three variables x, y, and z as ints
+>> ?
+>>
+>> I assume that we have the following grammar fragment:
+>>  Type {ID ","}+ ";" ? Decl {" Var "}
+>>
+>> It does not seem possible to write the rule:
+>>  Var(t, c*):
+>>     defines variable c of type t // for each c of c*
+>>
+>> A possible alternative would be that Var defines a scope and puts the
+>> type in it in order to let each variable of c* to catch it.
+>>
+>> Is there anything simpler?
+>>
+>> Manu
+>>
+>> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>>
+>>> Hi Emmanuel,
+>>>
+>>> > Is there a (draft?) description of the .nd files? I had a look to the
+>>> > sources in org.strategxt.imp.names , however I does not appear very
+>>> clear to
+>>> > me.
+>>>
+>>> The SLE 2012 paper provides a fairly comprehensive overview with examples
+>>>
+>>>   http://researchr.org/publication/KonatKWV13
+>>>
+>>> There might be slight differences with the implemented version. The
+>>> MoblNBL project on github
+>>>
+>>>   https://github.com/metaborg/MoblNBL
+>>>
+>>> provides syntax definition and name binding rules for the mobl
+>>> language based on the current (nightly) build of Spoofax.
+>>>
+>>> The syntax of NBL is defined in the project you're referring to:
+>>>
+>>>
+>>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>>
+>>> cheers,
+>>>
+>>> -- Eelco
+>>>
+>>> Associate Professor at Delft University of Technology
+>>>
+>>> Group:          Software Language Design and Engineering
+>>> Email:          e.visser at tudelft.nl
+>>> Homepage:   http://eelcovisser.org
+>>> Publications: http://researchr.org/profile/eelcovisser
+>>> News:           http://twitter.com/eelcovisser
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121115/01bfb97c/attachment.html>
+
+From gabrielkonat at gmail.com  Thu Nov 15 13:38:42 2012
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Thu, 15 Nov 2012 13:38:42 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+	<CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+Message-ID: <CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+
+Great! We did not want to go into that detail with the NBL paper, but it is
+indeed an issue that some syntax is easier to name bind with NBL than
+others. Especially getting terms from a list is a problem.
+
+About 'debug-generate-deffed', it is not really a bug I think. The
+'analyse' strategy is used explicitely by 'editor-analyze' and
+'editor-parallel-analyze', not by 'debug-generate-deffed'. So you need to
+apply your desugar rule to 'debug-generate-deffed' (and the other debug
+rules) manually. I suppose it would be nicer to have some kind of
+'editor-desugar' rule that is used in the entire file where you fill in
+your own desugar rule.
+
+Cheers,
+Gabri?l
+
+On 15 November 2012 13:29, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+
+> Thank you! The desugaring approach works well. I could successfully
+> implement it.
+> I think that in your next papers about NBL, the constraints that apply on
+> the grammar should be stated more clearly, and especially putting a
+> desugaring phase before applying the NBL.
+>
+> Desugaring helps keeping name-definition rules simple, that is good, and
+> anyway, transformations on real languages almost always start by desugaring.
+>
+> Furthermore, I've noticed that Spoofax project templates
+> 'debug-generate-deffed' does not take into account the desugaring declared
+> in the 'analyse' strategy. Is it a bug? Should I open an issue?
+>
+> Manu
+>
+>
+>
+> 2012/11/14 Gabri?l Konat <gabrielkonat at gmail.com>
+>
+>> That cannot be expressed in NBL (yet?). You can desugar such a variable
+>> declaration into multiple separate variable declarations and treat them as
+>> regular variables in NBL.
+>>
+>>
+>> On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+>>
+>>> In NBL, how do process old C languages definition such as:
+>>>   int x, y, z; // defines the three variables x, y, and z as ints
+>>> ?
+>>>
+>>> I assume that we have the following grammar fragment:
+>>>  Type {ID ","}+ ";" ? Decl {" Var "}
+>>>
+>>> It does not seem possible to write the rule:
+>>>  Var(t, c*):
+>>>     defines variable c of type t // for each c of c*
+>>>
+>>> A possible alternative would be that Var defines a scope and puts the
+>>> type in it in order to let each variable of c* to catch it.
+>>>
+>>> Is there anything simpler?
+>>>
+>>> Manu
+>>>
+>>> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>>>
+>>>> Hi Emmanuel,
+>>>>
+>>>> > Is there a (draft?) description of the .nd files? I had a look to the
+>>>> > sources in org.strategxt.imp.names , however I does not appear very
+>>>> clear to
+>>>> > me.
+>>>>
+>>>> The SLE 2012 paper provides a fairly comprehensive overview with
+>>>> examples
+>>>>
+>>>>   http://researchr.org/publication/KonatKWV13
+>>>>
+>>>> There might be slight differences with the implemented version. The
+>>>> MoblNBL project on github
+>>>>
+>>>>   https://github.com/metaborg/MoblNBL
+>>>>
+>>>> provides syntax definition and name binding rules for the mobl
+>>>> language based on the current (nightly) build of Spoofax.
+>>>>
+>>>> The syntax of NBL is defined in the project you're referring to:
+>>>>
+>>>>
+>>>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>>>
+>>>> cheers,
+>>>>
+>>>> -- Eelco
+>>>>
+>>>> Associate Professor at Delft University of Technology
+>>>>
+>>>> Group:          Software Language Design and Engineering
+>>>> Email:          e.visser at tudelft.nl
+>>>> Homepage:   http://eelcovisser.org
+>>>> Publications: http://researchr.org/profile/eelcovisser
+>>>> News:           http://twitter.com/eelcovisser
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121115/9917a880/attachment.html>
+
+From emmanuel.castro at laposte.net  Thu Nov 15 17:25:31 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Thu, 15 Nov 2012 17:25:31 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+	<CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+	<CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+Message-ID: <CAEXdec=GUtSOa=xCQ-BfsxvHE8rz3JRb_XRdxSaNwjtG4wb6dw@mail.gmail.com>
+
+I have a problem keeping term origin while desugaring when it comes that I
+have to transform strings.
+
+Consider a desugaring rule where one have to standardize name to uppercase:
+
+desugar:
+   Def(x) -> Def(<upper-case> x)
+   where not(<string-as-chars(map(is-upper))> x)
+
+It works well except that the newly defined uppercased term has lost its
+origin information. I would like to say:
+   Def(x) -> Def(<set-origin-same-as(x)>(<upper-case> x))
+
+
+2012/11/15 Gabri?l Konat <gabrielkonat at gmail.com>
+
+> Great! We did not want to go into that detail with the NBL paper, but it
+> is indeed an issue that some syntax is easier to name bind with NBL than
+> others. Especially getting terms from a list is a problem.
+>
+> About 'debug-generate-deffed', it is not really a bug I think. The
+> 'analyse' strategy is used explicitely by 'editor-analyze' and
+> 'editor-parallel-analyze', not by 'debug-generate-deffed'. So you need to
+> apply your desugar rule to 'debug-generate-deffed' (and the other debug
+> rules) manually. I suppose it would be nicer to have some kind of
+> 'editor-desugar' rule that is used in the entire file where you fill in
+> your own desugar rule.
+>
+> Cheers,
+> Gabri?l
+>
+>
+> On 15 November 2012 13:29, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+>
+>> Thank you! The desugaring approach works well. I could successfully
+>> implement it.
+>> I think that in your next papers about NBL, the constraints that apply on
+>> the grammar should be stated more clearly, and especially putting a
+>> desugaring phase before applying the NBL.
+>>
+>> Desugaring helps keeping name-definition rules simple, that is good, and
+>> anyway, transformations on real languages almost always start by desugaring.
+>>
+>> Furthermore, I've noticed that Spoofax project templates
+>> 'debug-generate-deffed' does not take into account the desugaring declared
+>> in the 'analyse' strategy. Is it a bug? Should I open an issue?
+>>
+>> Manu
+>>
+>>
+>>
+>> 2012/11/14 Gabri?l Konat <gabrielkonat at gmail.com>
+>>
+>>> That cannot be expressed in NBL (yet?). You can desugar such a variable
+>>> declaration into multiple separate variable declarations and treat them as
+>>> regular variables in NBL.
+>>>
+>>>
+>>> On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+>>>
+>>>> In NBL, how do process old C languages definition such as:
+>>>>   int x, y, z; // defines the three variables x, y, and z as ints
+>>>> ?
+>>>>
+>>>> I assume that we have the following grammar fragment:
+>>>>  Type {ID ","}+ ";" ? Decl {" Var "}
+>>>>
+>>>> It does not seem possible to write the rule:
+>>>>  Var(t, c*):
+>>>>     defines variable c of type t // for each c of c*
+>>>>
+>>>> A possible alternative would be that Var defines a scope and puts the
+>>>> type in it in order to let each variable of c* to catch it.
+>>>>
+>>>> Is there anything simpler?
+>>>>
+>>>> Manu
+>>>>
+>>>> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>>>>
+>>>>> Hi Emmanuel,
+>>>>>
+>>>>> > Is there a (draft?) description of the .nd files? I had a look to the
+>>>>> > sources in org.strategxt.imp.names , however I does not appear very
+>>>>> clear to
+>>>>> > me.
+>>>>>
+>>>>> The SLE 2012 paper provides a fairly comprehensive overview with
+>>>>> examples
+>>>>>
+>>>>>   http://researchr.org/publication/KonatKWV13
+>>>>>
+>>>>> There might be slight differences with the implemented version. The
+>>>>> MoblNBL project on github
+>>>>>
+>>>>>   https://github.com/metaborg/MoblNBL
+>>>>>
+>>>>> provides syntax definition and name binding rules for the mobl
+>>>>> language based on the current (nightly) build of Spoofax.
+>>>>>
+>>>>> The syntax of NBL is defined in the project you're referring to:
+>>>>>
+>>>>>
+>>>>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>>>>
+>>>>> cheers,
+>>>>>
+>>>>> -- Eelco
+>>>>>
+>>>>> Associate Professor at Delft University of Technology
+>>>>>
+>>>>> Group:          Software Language Design and Engineering
+>>>>> Email:          e.visser at tudelft.nl
+>>>>> Homepage:   http://eelcovisser.org
+>>>>> Publications: http://researchr.org/profile/eelcovisser
+>>>>> News:           http://twitter.com/eelcovisser
+>>>>> _______________________________________________
+>>>>> Users mailing list
+>>>>> Users at strategoxt.org
+>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>>
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121115/e9179f21/attachment-0001.html>
+
+From andre.s.d.vieira at gmail.com  Fri Nov 16 16:42:39 2012
+From: andre.s.d.vieira at gmail.com (=?utf-8?Q?Andr=C3=A9_Vieira?=)
+Date: Fri, 16 Nov 2012 16:42:39 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdec=GUtSOa=xCQ-BfsxvHE8rz3JRb_XRdxSaNwjtG4wb6dw@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+	<CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+	<CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+	<CAEXdec=GUtSOa=xCQ-BfsxvHE8rz3JRb_XRdxSaNwjtG4wb6dw@mail.gmail.com>
+Message-ID: <4A421474-1E40-4B73-85E0-92CC2A002125@gmail.com>
+
+Wasnt origin information stored in a Term's annotation? If so you can copy the annotation by rewriting it too.
+
+Desugar:
+Term(x){anno} -> Term(x'){anno}
+
+
+
+On 15 nov. 2012, at 17:25, Emmanuel Castro <emmanuel.castro at laposte.net> wrote:
+
+> I have a problem keeping term origin while desugaring when it comes that I have to transform strings.
+> 
+> Consider a desugaring rule where one have to standardize name to uppercase:
+> 
+> desugar:
+>    Def(x) -> Def(<upper-case> x)
+>    where not(<string-as-chars(map(is-upper))> x)
+> 
+> It works well except that the newly defined uppercased term has lost its origin information. I would like to say:
+>    Def(x) -> Def(<set-origin-same-as(x)>(<upper-case> x))
+> 
+> 
+> 2012/11/15 Gabri?l Konat <gabrielkonat at gmail.com>
+> Great! We did not want to go into that detail with the NBL paper, but it is indeed an issue that some syntax is easier to name bind with NBL than others. Especially getting terms from a list is a problem.
+> 
+> About 'debug-generate-deffed', it is not really a bug I think. The 'analyse' strategy is used explicitely by 'editor-analyze' and 'editor-parallel-analyze', not by 'debug-generate-deffed'. So you need to apply your desugar rule to 'debug-generate-deffed' (and the other debug rules) manually. I suppose it would be nicer to have some kind of 'editor-desugar' rule that is used in the entire file where you fill in your own desugar rule.
+> 
+> Cheers,
+> Gabri?l
+> 
+> 
+> On 15 November 2012 13:29, Emmanuel Castro <emmanuel.castro at laposte.net> wrote:
+> Thank you! The desugaring approach works well. I could successfully implement it.
+> I think that in your next papers about NBL, the constraints that apply on the grammar should be stated more clearly, and especially putting a desugaring phase before applying the NBL. 
+> 
+> Desugaring helps keeping name-definition rules simple, that is good, and anyway, transformations on real languages almost always start by desugaring.
+> 
+> Furthermore, I've noticed that Spoofax project templates 'debug-generate-deffed' does not take into account the desugaring declared in the 'analyse' strategy. Is it a bug? Should I open an issue?
+> 
+> Manu
+> 
+> 
+> 
+> 2012/11/14 Gabri?l Konat <gabrielkonat at gmail.com>
+> That cannot be expressed in NBL (yet?). You can desugar such a variable declaration into multiple separate variable declarations and treat them as regular variables in NBL.
+> 
+> 
+> On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net> wrote:
+> In NBL, how do process old C languages definition such as:
+>   int x, y, z; // defines the three variables x, y, and z as ints
+> ?
+> 
+> I assume that we have the following grammar fragment:
+>  Type {ID ","}+ ";" ? Decl {" Var "}
+> 
+> It does not seem possible to write the rule:
+>  Var(t, c*):
+>     defines variable c of type t // for each c of c*
+> 
+> A possible alternative would be that Var defines a scope and puts the type in it in order to let each variable of c* to catch it.
+> 
+> Is there anything simpler?
+> 
+> Manu
+> 
+> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+> Hi Emmanuel,
+> 
+> > Is there a (draft?) description of the .nd files? I had a look to the
+> > sources in org.strategxt.imp.names , however I does not appear very clear to
+> > me.
+> 
+> The SLE 2012 paper provides a fairly comprehensive overview with examples
+> 
+>   http://researchr.org/publication/KonatKWV13
+> 
+> There might be slight differences with the implemented version. The
+> MoblNBL project on github
+> 
+>   https://github.com/metaborg/MoblNBL
+> 
+> provides syntax definition and name binding rules for the mobl
+> language based on the current (nightly) build of Spoofax.
+> 
+> The syntax of NBL is defined in the project you're referring to:
+> 
+>   https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+> 
+> cheers,
+> 
+> -- Eelco
+> 
+> Associate Professor at Delft University of Technology
+> 
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121116/70a58bd9/attachment.html>
+
+From emmanuel.castro at laposte.net  Fri Nov 16 16:58:43 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Fri, 16 Nov 2012 16:58:43 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <4A421474-1E40-4B73-85E0-92CC2A002125@gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+	<CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+	<CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+	<CAEXdec=GUtSOa=xCQ-BfsxvHE8rz3JRb_XRdxSaNwjtG4wb6dw@mail.gmail.com>
+	<4A421474-1E40-4B73-85E0-92CC2A002125@gmail.com>
+Message-ID: <CAEXdec=Zd+FKVn1WdwXDa7b7ZisQvzBbYY7jDR_zSRrA3LfUvg@mail.gmail.com>
+
+In Spoofax r25227, the rule "Term(x){anno} -> Term(x'){anno}" fails when
+the Term(x) is not annotated (and I am doing desugaring prior to
+annotations). Moreover, when I print out annotations, there is no
+information about origin. To get them, I have to use <origin-location>.
+
+
+2012/11/16 Andr? Vieira <andre.s.d.vieira at gmail.com>
+
+> Wasnt origin information stored in a Term's annotation? If so you can copy
+> the annotation by rewriting it too.
+>
+> Desugar:
+> Term(x){anno} -> Term(x'){anno}
+>
+>
+>
+> On 15 nov. 2012, at 17:25, Emmanuel Castro <emmanuel.castro at laposte.net>
+> wrote:
+>
+> I have a problem keeping term origin while desugaring when it comes that I
+> have to transform strings.
+>
+> Consider a desugaring rule where one have to standardize name to uppercase:
+>
+> desugar:
+>    Def(x) -> Def(<upper-case> x)
+>    where not(<string-as-chars(map(is-upper))> x)
+>
+> It works well except that the newly defined uppercased term has lost its
+> origin information. I would like to say:
+>    Def(x) -> Def(<set-origin-same-as(x)>(<upper-case> x))
+>
+>
+> 2012/11/15 Gabri?l Konat <gabrielkonat at gmail.com>
+>
+>> Great! We did not want to go into that detail with the NBL paper, but it
+>> is indeed an issue that some syntax is easier to name bind with NBL than
+>> others. Especially getting terms from a list is a problem.
+>>
+>> About 'debug-generate-deffed', it is not really a bug I think. The
+>> 'analyse' strategy is used explicitely by 'editor-analyze' and
+>> 'editor-parallel-analyze', not by 'debug-generate-deffed'. So you need to
+>> apply your desugar rule to 'debug-generate-deffed' (and the other debug
+>> rules) manually. I suppose it would be nicer to have some kind of
+>> 'editor-desugar' rule that is used in the entire file where you fill in
+>> your own desugar rule.
+>>
+>> Cheers,
+>> Gabri?l
+>>
+>>
+>> On 15 November 2012 13:29, Emmanuel Castro <emmanuel.castro at laposte.net>wrote:
+>>
+>>> Thank you! The desugaring approach works well. I could successfully
+>>> implement it.
+>>> I think that in your next papers about NBL, the constraints that apply
+>>> on the grammar should be stated more clearly, and especially putting a
+>>> desugaring phase before applying the NBL.
+>>>
+>>> Desugaring helps keeping name-definition rules simple, that is good, and
+>>> anyway, transformations on real languages almost always start by desugaring.
+>>>
+>>> Furthermore, I've noticed that Spoofax project templates
+>>> 'debug-generate-deffed' does not take into account the desugaring declared
+>>> in the 'analyse' strategy. Is it a bug? Should I open an issue?
+>>>
+>>> Manu
+>>>
+>>>
+>>>
+>>> 2012/11/14 Gabri?l Konat <gabrielkonat at gmail.com>
+>>>
+>>>> That cannot be expressed in NBL (yet?). You can desugar such a variable
+>>>> declaration into multiple separate variable declarations and treat them as
+>>>> regular variables in NBL.
+>>>>
+>>>>
+>>>> On 14 November 2012 15:49, Emmanuel Castro <emmanuel.castro at laposte.net
+>>>> > wrote:
+>>>>
+>>>>> In NBL, how do process old C languages definition such as:
+>>>>>   int x, y, z; // defines the three variables x, y, and z as ints
+>>>>> ?
+>>>>>
+>>>>> I assume that we have the following grammar fragment:
+>>>>>  Type {ID ","}+ ";" ? Decl {" Var "}
+>>>>>
+>>>>> It does not seem possible to write the rule:
+>>>>>  Var(t, c*):
+>>>>>     defines variable c of type t // for each c of c*
+>>>>>
+>>>>> A possible alternative would be that Var defines a scope and puts the
+>>>>> type in it in order to let each variable of c* to catch it.
+>>>>>
+>>>>> Is there anything simpler?
+>>>>>
+>>>>> Manu
+>>>>>
+>>>>> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>>>>>
+>>>>>> Hi Emmanuel,
+>>>>>>
+>>>>>> > Is there a (draft?) description of the .nd files? I had a look to
+>>>>>> the
+>>>>>> > sources in org.strategxt.imp.names , however I does not appear very
+>>>>>> clear to
+>>>>>> > me.
+>>>>>>
+>>>>>> The SLE 2012 paper provides a fairly comprehensive overview with
+>>>>>> examples
+>>>>>>
+>>>>>>   http://researchr.org/publication/KonatKWV13
+>>>>>>
+>>>>>> There might be slight differences with the implemented version. The
+>>>>>> MoblNBL project on github
+>>>>>>
+>>>>>>   https://github.com/metaborg/MoblNBL
+>>>>>>
+>>>>>> provides syntax definition and name binding rules for the mobl
+>>>>>> language based on the current (nightly) build of Spoofax.
+>>>>>>
+>>>>>> The syntax of NBL is defined in the project you're referring to:
+>>>>>>
+>>>>>>
+>>>>>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>>>>>
+>>>>>> cheers,
+>>>>>>
+>>>>>> -- Eelco
+>>>>>>
+>>>>>> Associate Professor at Delft University of Technology
+>>>>>>
+>>>>>> Group:          Software Language Design and Engineering
+>>>>>> Email:          e.visser at tudelft.nl
+>>>>>> Homepage:   http://eelcovisser.org
+>>>>>> Publications: http://researchr.org/profile/eelcovisser
+>>>>>> News:           http://twitter.com/eelcovisser
+>>>>>> _______________________________________________
+>>>>>> Users mailing list
+>>>>>> Users at strategoxt.org
+>>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>>>
+>>>>>
+>>>>>
+>>>>> _______________________________________________
+>>>>> Users mailing list
+>>>>> Users at strategoxt.org
+>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>>
+>>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121116/4cafb07d/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Sat Nov 17 12:48:29 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 17 Nov 2012 12:48:29 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdec=Zd+FKVn1WdwXDa7b7ZisQvzBbYY7jDR_zSRrA3LfUvg@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdeckdbQpsvXtDYuf0dXjUWN-b+=Kp_zpKum5rN0ShEie66A@mail.gmail.com>
+	<CAOipTuhOm2kH7Z2ma_zYkbr27dKpH_Et3NpORpS0hTfvuLYocQ@mail.gmail.com>
+	<CAEXdecnKiboqEfeGY9seci=MJOtLztG1DrUHf2zfuCcJW9yHpQ@mail.gmail.com>
+	<CAOipTuh+-=UZmZXKvDUeaYKVkbO0UZxeVqXuGKN8B_zJ1muhuQ@mail.gmail.com>
+	<CAEXdec=GUtSOa=xCQ-BfsxvHE8rz3JRb_XRdxSaNwjtG4wb6dw@mail.gmail.com>
+	<4A421474-1E40-4B73-85E0-92CC2A002125@gmail.com>
+	<CAEXdec=Zd+FKVn1WdwXDa7b7ZisQvzBbYY7jDR_zSRrA3LfUvg@mail.gmail.com>
+Message-ID: <CAFaCHU0xqhjrGH1C+1BjGgb2UYv3ZoVd5uRXfx35GoXMuczhEQ@mail.gmail.com>
+
+Hi Emmanuel,
+
+> In Spoofax r25227, the rule "Term(x){anno} -> Term(x'){anno}" fails when the Term(x) is not annotated (and I am doing desugaring prior to annotations). Moreover, when I print out annotations, there is no information about origin. To get them, I have to use <origin-location>.
+
+The pattern Term(x){anno} matches with terms with constructor 'Term',
+a single sub-term, and exactly one annotation 'anno'. In order to
+match the complete list of annotations (including the empty list)
+write:
+
+   Term(x){^anno}
+
+Note that you can use the Spoofax console in Eclipse to experiment
+with the behaviour of Stratego programs
+
+> !A("b"){"c"}
+A("b"){"c"}
+> ?_{^g*}
+A("b"){"c"}
+>  !g*
+["c"]
+> ?_{h}
+command failed
+> ?_{}
+["c"]
+> ?_{^h}
+["c"]
+> !h
+[]
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From emmanuel.castro at laposte.net  Mon Nov 19 20:48:25 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Mon, 19 Nov 2012 20:48:25 +0100
+Subject: [Stratego Users] What does 'origin-track-forced' really do?
+Message-ID: <CAEXdecnH2csAfki=pkvjKe7oUYnx7Ogr62sy6vQUaBE1Kg83vw@mail.gmail.com>
+
+I have not found any documentation for the strategy origin-track-forced.
+Other origin-XXX are self explaning, but origin-track-forced let me with a
+lot of suppositions?
+
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121119/4a6ef7a9/attachment.html>
+
+From emmanuel.castro at laposte.net  Mon Nov 19 20:55:02 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Mon, 19 Nov 2012 20:55:02 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+Message-ID: <CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+
+Is there a way to do some stratego processing on types in NBL?
+I would like to type functions with their arity.
+E.g.:
+def foo(a,b,c) { ... }            // type is Arity(3)
+is different from
+def foo(a,b) { ... },             // type is Arity(2)
+
+The expression foo(1,2,3) calls foo(a,b,c) and foo(4,5) calls foo(a,b)
+
+In NBL, I would like to write something like:
+Def(name, params, body):
+     define Function name of type <length> params
+
+Any advice?
+
+Manu
+
+2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+
+> Hi Emmanuel,
+>
+> > Is there a (draft?) description of the .nd files? I had a look to the
+> > sources in org.strategxt.imp.names , however I does not appear very
+> clear to
+> > me.
+>
+> The SLE 2012 paper provides a fairly comprehensive overview with examples
+>
+>   http://researchr.org/publication/KonatKWV13
+>
+> There might be slight differences with the implemented version. The
+> MoblNBL project on github
+>
+>   https://github.com/metaborg/MoblNBL
+>
+> provides syntax definition and name binding rules for the mobl
+> language based on the current (nightly) build of Spoofax.
+>
+> The syntax of NBL is defined in the project you're referring to:
+>
+>
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121119/fae4e6f5/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Nov 20 00:56:58 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 20 Nov 2012 00:56:58 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+Message-ID: <CAFaCHU0Fqu4XNXGcr7pPLyGUd=Lx9K3FAjFV-B+-bcT1D4pziA@mail.gmail.com>
+
+Hi,
+
+> In NBL, I would like to write something like:
+> Def(name, params, body):
+>      define Function name of type <length> params
+
+Did you try writing this in NBL?
+
+-- Eelco
+
+On Mon, Nov 19, 2012 at 8:55 PM, Emmanuel Castro
+<emmanuel.castro at laposte.net> wrote:
+> Is there a way to do some stratego processing on types in NBL?
+> I would like to type functions with their arity.
+> E.g.:
+> def foo(a,b,c) { ... }            // type is Arity(3)
+> is different from
+> def foo(a,b) { ... },             // type is Arity(2)
+>
+> The expression foo(1,2,3) calls foo(a,b,c) and foo(4,5) calls foo(a,b)
+>
+> In NBL, I would like to write something like:
+> Def(name, params, body):
+>      define Function name of type <length> params
+>
+> Any advice?
+>
+> Manu
+>
+> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>>
+>> Hi Emmanuel,
+>>
+>> > Is there a (draft?) description of the .nd files? I had a look to the
+>> > sources in org.strategxt.imp.names , however I does not appear very
+>> > clear to
+>> > me.
+>>
+>> The SLE 2012 paper provides a fairly comprehensive overview with examples
+>>
+>>   http://researchr.org/publication/KonatKWV13
+>>
+>> There might be slight differences with the implemented version. The
+>> MoblNBL project on github
+>>
+>>   https://github.com/metaborg/MoblNBL
+>>
+>> provides syntax definition and name binding rules for the mobl
+>> language based on the current (nightly) build of Spoofax.
+>>
+>> The syntax of NBL is defined in the project you're referring to:
+>>
+>>
+>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From G.H.Wachsmuth at tudelft.nl  Tue Nov 20 01:08:18 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Tue, 20 Nov 2012 00:08:18 +0000
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8C61BC@SRV364.tudelft.net>
+
+You can specify in NBL:
+
+Def(name, params, body): defines Function name of type t where params has type t
+
+And in Stratego:
+
+type-of = map(type-of)
+
+This will store a list of parameter types as the function type. You can use this type to determine the arty. You can also include it in the type:
+
+type-of: params -> (arity, types) with types := <map(type-of)> params; arity := <length> params
+
+In case your parameters have no type, you can use this Stratego line:
+
+type-of = length
+
+Hope this helps,
+
+Guido
+
+On Nov 19, 2012, at 20:55 , Emmanuel Castro <emmanuel.castro at laposte.net<mailto:emmanuel.castro at laposte.net>> wrote:
+
+Is there a way to do some stratego processing on types in NBL?
+I would like to type functions with their arity.
+E.g.:
+def foo(a,b,c) { ... }            // type is Arity(3)
+is different from
+def foo(a,b) { ... },             // type is Arity(2)
+
+The expression foo(1,2,3) calls foo(a,b,c) and foo(4,5) calls foo(a,b)
+
+In NBL, I would like to write something like:
+Def(name, params, body):
+     define Function name of type <length> params
+
+Any advice?
+
+Manu
+
+2012/11/11 Eelco Visser <E.Visser at tudelft.nl<mailto:E.Visser at tudelft.nl>>
+Hi Emmanuel,
+
+> Is there a (draft?) description of the .nd files? I had a look to the
+> sources in org.strategxt.imp.names , however I does not appear very clear to
+> me.
+
+The SLE 2012 paper provides a fairly comprehensive overview with examples
+
+  http://researchr.org/publication/KonatKWV13
+
+There might be slight differences with the implemented version. The
+MoblNBL project on github
+
+  https://github.com/metaborg/MoblNBL
+
+provides syntax definition and name binding rules for the mobl
+language based on the current (nightly) build of Spoofax.
+
+The syntax of NBL is defined in the project you're referring to:
+
+  https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl<mailto:e.visser at tudelft.nl>
+Homepage:   http://eelcovisser.org<http://eelcovisser.org/>
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121120/e82caf43/attachment-0001.html>
+
+From emmanuel.castro at laposte.net  Tue Nov 20 11:45:41 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 20 Nov 2012 11:45:41 +0100
+Subject: [Stratego Users] Name Definition Language (.nd)
+In-Reply-To: <39465ABECE3CBC4EA3A3DDC99D576C422D8C61BC@SRV364.tudelft.net>
+References: <CAEXdecmOYrZ-rzPADpZPJS3C_v4ybbe4uUZO0KUaVuFbPxv2Jg@mail.gmail.com>
+	<CAFaCHU1eQXVDR+cuBGgj0iBohUcssez3pCq2h0WAAz6TSL1ZCw@mail.gmail.com>
+	<CAEXdec=sQ7XA-CCLe5LmgD1T=k9oSkaDmKA-rCe9AgZCfeiaVg@mail.gmail.com>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8C61BC@SRV364.tudelft.net>
+Message-ID: <CAEXdec=3sAhLfXJan6-T4TuPrsY2EA_rPkX0J+T77PzMSpuskg@mail.gmail.com>
+
+Thank you,
+
+I understand the scheme of using an intermediary expression (here, the
+parameter list) whose type is defined directly in Stratego.
+Furthermore, does the current Spoofax editor takes types into account? In
+r25724, it seems that it is not, and I've noticed that 'index-lookup-typed'
+is used nowhere.
+
+Is there a plan to support it, or should I hack it my way?
+
+Manu
+
+
+2012/11/20 Guido Wachsmuth - EWI <G.H.Wachsmuth at tudelft.nl>
+
+>  You can specify in NBL:
+>
+>  Def(name, params, body): defines Function name of type t where params
+> has type t
+>
+>  And in Stratego:
+>
+>  type-of = map(type-of)
+>
+>  This will store a list of parameter types as the function type. You can
+> use this type to determine the arty. You can also include it in the type:
+>
+>  type-of: params -> (arity, types) with types := <map(type-of)> params;
+> arity := <length> params
+>
+>  In case your parameters have no type, you can use this Stratego line:
+>
+>  type-of = length
+>
+>  Hope this helps,
+>
+>  Guido
+>
+>   On Nov 19, 2012, at 20:55 , Emmanuel Castro <emmanuel.castro at laposte.net>
+> wrote:
+>
+> Is there a way to do some stratego processing on types in NBL?
+> I would like to type functions with their arity.
+> E.g.:
+> def foo(a,b,c) { ... }            // type is Arity(3)
+> is different from
+> def foo(a,b) { ... },             // type is Arity(2)
+>
+>  The expression foo(1,2,3) calls foo(a,b,c) and foo(4,5) calls foo(a,b)
+>
+>  In NBL, I would like to write something like:
+> Def(name, params, body):
+>      define Function name of type <length> params
+>
+>  Any advice?
+>
+> Manu
+>
+> 2012/11/11 Eelco Visser <E.Visser at tudelft.nl>
+>
+>> Hi Emmanuel,
+>>
+>> > Is there a (draft?) description of the .nd files? I had a look to the
+>> > sources in org.strategxt.imp.names , however I does not appear very
+>> clear to
+>> > me.
+>>
+>>  The SLE 2012 paper provides a fairly comprehensive overview with examples
+>>
+>>   http://researchr.org/publication/KonatKWV13
+>>
+>> There might be slight differences with the implemented version. The
+>> MoblNBL project on github
+>>
+>>   https://github.com/metaborg/MoblNBL
+>>
+>> provides syntax definition and name binding rules for the mobl
+>> language based on the current (nightly) build of Spoofax.
+>>
+>> The syntax of NBL is defined in the project you're referring to:
+>>
+>>
+>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.names/syntax/NameDefinitionLanguage.sdf
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121120/89f0f6e0/attachment.html>
+
+From sumsel2000-mailinglist at yahoo.de  Wed Nov 21 14:42:09 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Wed, 21 Nov 2012 14:42:09 +0100
+Subject: [Stratego Users] Strange recognition of input
+Message-ID: <50ACDA31.2050105@yahoo.de>
+
+Dear Sir or Madam,
+
+I'm writing a grammar for the Graph Repository Query Language (GReQL). 
+For the definition of integer, float numbers and whitespaces I use the 
+Java grammar of the java-frontend. My problem is that the term
+	list(1..3)
+is not parsed. (A minimal grammar to produce the exception is in the 
+appendix of this mail.)
+
+The parser says:
+	Syntax error near unexpected character '3' at line 1, column 9
+
+I defined the syntax of this term as
+	"list" "(" Expression ".." Expression ")" -> ValueConstruction
+where integer and float numbers are expressions. It should be parsed by 
+recognizing 1 and 3 as integers. But it seems that the parser always 
+tries to recognize
+	lift ( 1. .3 )
+where 1. and .3 are two float numbers.
+
+If I add the rule
+	"list" "(" FloatLiteral FloatLiteral ")" -> ValueConstruction
+the input is recognized as
+	lift ( 1. .3 )
+If I add the attribute {reject} after the new rule the parser says:
+	Unexpected end of file at line 1, column 10
+
+Does anyone have an idea why the parser reacts like this and how I could 
+change the grammar so that the input is parsed correctly?
+
+Yours faithfully,
+Daniel
+-------------- next part --------------
+module Test
+
+imports
+	Whitespaces %% LAYOUT
+
+exports
+	sorts Expression ValueConstruction FloatLiteral DeciFloatLiteral DeciFloatDigits IntLiteral DeciLiteral DeciNumeral
+
+	context-free start-symbols
+		Expression
+	
+	context-free syntax
+		ValueConstruction		-> Expression
+		FloatLiteral			-> Expression
+		IntLiteral				-> Expression
+		
+		"list" "(" Expression ".." Expression ")" -> ValueConstruction
+		
+	lexical syntax
+		DeciFloatLiteral	-> FloatLiteral
+		
+		DeciFloatDigits [fFdD]?	-> DeciFloatLiteral
+		[0-9]+ 					-> DeciFloatLiteral {reject}
+		
+		[0-9]* "." [0-9]* -> DeciFloatDigits
+		       "."        -> DeciFloatDigits {reject}
+		
+	lexical restrictions
+		DeciFloatLiteral -/- [fFdD]
+		DeciFloatDigits  -/- [0-9]
+
+	lexical syntax
+		DeciLiteral -> IntLiteral
+		
+		DeciNumeral [lL]? -> DeciLiteral
+		
+		"0"					-> DeciNumeral
+		[1-9][0-9]*			-> DeciNumeral
+		
+	lexical restrictions
+		DeciNumeral -/- [0-9\.fFdD]
+		DeciLiteral -/- [lL]
+-------------- next part --------------
+%%%
+ %% Section 3.6: WhiteSpace
+ %%
+ %% @author Martin Bravenboer <martin.bravenboer at gmail.com>
+ %%%
+module Whitespaces
+
+exports
+	lexical syntax
+		[\ \t\12\r\n]	-> LAYOUT
+
+	context-free restrictions
+		LAYOUT? -/- [\ \t\12\n\r]
+
+From dobesv at gmail.com  Thu Nov 22 07:55:57 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Wed, 21 Nov 2012 22:55:57 -0800
+Subject: [Stratego Users] Best practices for error handling/reporting?
+Message-ID: <CADbG_jZPtkQWbj7HTzesuc3Nwmk6q8E1M6L3A-e+wb-sfeCHoA@mail.gmail.com>
+
+Hi,
+
+I've been struggling a bit with what to do when I get a compiler error.
+
+Some kinds of error I can kind of "recover" from - for example, if there's
+a type error I just report it (using a dynamic rule to store it for later)
+and continue as if the type was correct.
+
+Sometimes things kind of pile up, though - if a variable is not defined I
+return the "bottom" type which seems OK in theory - until I try to use it
+as the target of a function call (Bottom has no information about
+parameters or return types) or some other operation that requires a
+particular kind of type.  I *think* can continue to handle this Bottom type
+approach without going insane, but the fun doesn't stop there.
+
+Now I run into a case where a function is passed the wrong number of
+parameters.  Clearly I just want to "bail out" of the whole function
+calling process and return nothing from that expression but I am not sure
+how to best to "unwind" out of the strategy that is calculating the values
+of arguments back to the root of where we're computing the call while
+reporting an error.  It almost seems like some sort of "exception" system
+would be appropriate.
+
+On the other hand, it may be that you've already found a comfortable way to
+handle errors ... so here I am asking for any helpful tips or pointers you
+might have!
+
+Thanks,
+
+Dobes
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121121/17d9ded8/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Nov 22 10:08:33 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 22 Nov 2012 10:08:33 +0100
+Subject: [Stratego Users] Best practices for error handling/reporting?
+In-Reply-To: <CADbG_jZPtkQWbj7HTzesuc3Nwmk6q8E1M6L3A-e+wb-sfeCHoA@mail.gmail.com>
+References: <CADbG_jZPtkQWbj7HTzesuc3Nwmk6q8E1M6L3A-e+wb-sfeCHoA@mail.gmail.com>
+Message-ID: <CAFaCHU12+Y37zjwr4qyfuxpGWCp1SMvMNQUBUMuf2gzakNapDQ@mail.gmail.com>
+
+Hi Dobbes,
+
+> I've been struggling a bit with what to do when I get a compiler error.
+
+We used to struggle with this problem as well. We have developed a
+nice paradigm for dealing with errors. This was prompted by the
+interactive IDE setting that we're addressing with Spoofax. The idea
+is to separate name resolution, type analysis, and constraint
+checking, so that the IDE can find as many errors as possible.
+
+The Spoofax paper explains how it is done:
+http://researchr.org/publication/KatsV10. Another example is the paper
+"Static consistency checking of web applications with WebDSL"
+(http://researchr.org/publication/HemelGKV11). The "Code generation by
+model transformation" (http://researchr.org/publication/HemelKGV-2010)
+paper explains how to combine type checking/analysis with
+transformation.
+
+Note that the name resolution stage in these papers is now replaced
+with NBL definitions
+
+    http://researchr.org/publication/KonatKWV13
+
+To answer your question more specifically: type analysis is defined by
+means of a type-of strategy that computes the type of an expression.
+If an expression has not type, type-of just fails.
+
+cheers,
+
+-- Eelco
+
+> Some kinds of error I can kind of "recover" from - for example, if there's a
+> type error I just report it (using a dynamic rule to store it for later) and
+> continue as if the type was correct.
+>
+> Sometimes things kind of pile up, though - if a variable is not defined I
+> return the "bottom" type which seems OK in theory - until I try to use it as
+> the target of a function call (Bottom has no information about parameters or
+> return types) or some other operation that requires a particular kind of
+> type.  I *think* can continue to handle this Bottom type approach without
+> going insane, but the fun doesn't stop there.
+>
+> Now I run into a case where a function is passed the wrong number of
+> parameters.  Clearly I just want to "bail out" of the whole function calling
+> process and return nothing from that expression but I am not sure how to
+> best to "unwind" out of the strategy that is calculating the values of
+> arguments back to the root of where we're computing the call while reporting
+> an error.  It almost seems like some sort of "exception" system would be
+> appropriate.
+>
+> On the other hand, it may be that you've already found a comfortable way to
+> handle errors ... so here I am asking for any helpful tips or pointers you
+> might have!
+>
+> Thanks,
+>
+> Dobes
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From E.Visser at tudelft.nl  Thu Nov 22 23:18:54 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 22 Nov 2012 23:18:54 +0100
+Subject: [Stratego Users] Strange recognition of input
+In-Reply-To: <50ACDA31.2050105@yahoo.de>
+References: <50ACDA31.2050105@yahoo.de>
+Message-ID: <CAFaCHU039D=_PaCquV5p0+0i3kMNMCAkakKPPMXJ0gy_kdQ20g@mail.gmail.com>
+
+Hi Daniel,
+
+The problem is this lexical restriction
+
+  lexical restrictions
+     DeciNumeral -/- [0-9\.fFdD]
+
+which forbids a '.' after a DecNumeral. If you write your example as
+
+  list( 1 .. 3 )
+
+I think it will parse.
+
+cheers,
+
+-- Eelco
+
+
+On Wed, Nov 21, 2012 at 2:42 PM, Daniel <sumsel2000-mailinglist at yahoo.de> wrote:
+> Dear Sir or Madam,
+>
+> I'm writing a grammar for the Graph Repository Query Language (GReQL). For
+> the definition of integer, float numbers and whitespaces I use the Java
+> grammar of the java-frontend. My problem is that the term
+>         list(1..3)
+> is not parsed. (A minimal grammar to produce the exception is in the
+> appendix of this mail.)
+>
+> The parser says:
+>         Syntax error near unexpected character '3' at line 1, column 9
+>
+> I defined the syntax of this term as
+>         "list" "(" Expression ".." Expression ")" -> ValueConstruction
+> where integer and float numbers are expressions. It should be parsed by
+> recognizing 1 and 3 as integers. But it seems that the parser always tries
+> to recognize
+>         lift ( 1. .3 )
+> where 1. and .3 are two float numbers.
+>
+> If I add the rule
+>         "list" "(" FloatLiteral FloatLiteral ")" -> ValueConstruction
+> the input is recognized as
+>         lift ( 1. .3 )
+> If I add the attribute {reject} after the new rule the parser says:
+>         Unexpected end of file at line 1, column 10
+>
+> Does anyone have an idea why the parser reacts like this and how I could
+> change the grammar so that the input is parsed correctly?
+>
+> Yours faithfully,
+> Daniel
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From w.p.vankoppen at student.tudelft.nl  Fri Nov 23 10:31:20 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Fri, 23 Nov 2012 10:31:20 +0100
+Subject: [Stratego Users] Best way to implode a list into a string using a
+	glue element
+Message-ID: <50AF4268.3010409@student.tudelft.nl>
+
+Hi all,
+
+I was wondering whether there exist an 'implode' function that merges a 
+list into a string placing a glue string between each element.
+Something like <implode(|" - ")>["a","b","c"]     ->     "a - b - c"
+
+I created something like this:
+
+add-glue(|glue): e -> (e,glue)
+concat-glue(|glue): l -> 
+<rtrim-chars(?glue)><concat-strings><map(conc-strings)><map(add-glue(|glue))>l
+
+But this does not work with an empty list(and is CPU-expensive).
+Isn't there an easier way to do this?
+
+-- 
+Kind Regards,
+
+Wouter
+
+
+From v.vergu at gmail.com  Fri Nov 23 12:45:27 2012
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Fri, 23 Nov 2012 13:45:27 +0200
+Subject: [Stratego Users] Best way to implode a list into a string using
+	a glue element
+In-Reply-To: <50AF4268.3010409@student.tudelft.nl>
+References: <50AF4268.3010409@student.tudelft.nl>
+Message-ID: <9264B845-0A35-401B-B4D4-0B9699E4D913@gmail.com>
+
+Hi Wouter,
+
+One way would be to zip your string list with a list of equal length containing your glue. The zipping strategy should be conc-strings. You then concat the entire list using concat-strings.
+
+<zip(conc-strings);concat-strings> (l, <copy(id)> (<length> l, glue)
+
+Another way is to mapconcat over the list to insert the glue at all odd positions and then concat it.
+
+<mapconcat(\ s -> [s,glue] \);concat-strings> l
+
+I think the latter is cheaper. If i remember correctly tuple operations are more expensive than lists. Hope this helps. 
+
+regards,
+
+Vlad 
+
+On Nov 23, 2012, at 11:31 AM, Wouter van Koppen <w.p.vankoppen at student.tudelft.nl> wrote:
+
+> Hi all,
+> 
+> I was wondering whether there exist an 'implode' function that merges a list into a string placing a glue string between each element.
+> Something like <implode(|" - ")>["a","b","c"]     ->     "a - b - c"
+> 
+> I created something like this:
+> 
+> add-glue(|glue): e -> (e,glue)
+> concat-glue(|glue): l -> <rtrim-chars(?glue)><concat-strings><map(conc-strings)><map(add-glue(|glue))>l
+> 
+> But this does not work with an empty list(and is CPU-expensive).
+> Isn't there an easier way to do this?
+> 
+> -- 
+> Kind Regards,
+> 
+> Wouter
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From dobesv at gmail.com  Fri Nov 23 18:10:25 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Fri, 23 Nov 2012 09:10:25 -0800
+Subject: [Stratego Users] Best way to implode a list into a string using
+ a glue element
+In-Reply-To: <50AF4268.3010409@student.tudelft.nl>
+References: <50AF4268.3010409@student.tudelft.nl>
+Message-ID: <CADbG_jYXsPzqiq360OCp2UG7uHQTf2x16O0HYXPmt8ZAyr9bvA@mail.gmail.com>
+
+I recall seeing something in the library for this. Maybe it was called
+"separated-by"?
+On Nov 23, 2012 1:36 AM, "Wouter van Koppen" <
+w.p.vankoppen at student.tudelft.nl> wrote:
+
+> Hi all,
+>
+> I was wondering whether there exist an 'implode' function that merges a
+> list into a string placing a glue string between each element.
+> Something like <implode(|" - ")>["a","b","c"]     ->     "a - b - c"
+>
+> I created something like this:
+>
+> add-glue(|glue): e -> (e,glue)
+> concat-glue(|glue): l -> <rtrim-chars(?glue)><concat-**
+> strings><map(conc-strings)><**map(add-glue(|glue))>l
+>
+> But this does not work with an empty list(and is CPU-expensive).
+> Isn't there an easier way to do this?
+>
+> --
+> Kind Regards,
+>
+> Wouter
+>
+> ______________________________**_________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/3436b022/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Fri Nov 23 19:08:46 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Fri, 23 Nov 2012 19:08:46 +0100
+Subject: [Stratego Users] Best way to implode a list into a string using
+ a glue element
+In-Reply-To: <CADbG_jYXsPzqiq360OCp2UG7uHQTf2x16O0HYXPmt8ZAyr9bvA@mail.gmail.com>
+References: <50AF4268.3010409@student.tudelft.nl>
+	<CADbG_jYXsPzqiq360OCp2UG7uHQTf2x16O0HYXPmt8ZAyr9bvA@mail.gmail.com>
+Message-ID: <50AFBBAE.4040807@student.tudelft.nl>
+
+Hi Dobes,
+
+I have solved it by using these rules:
+
+add-glue(|glue): e -> (glue,e)
+
+concat-glue(|glue): l -> 
+<concat-strings><flatten-list>[<head>l,<map(conc-strings)><tail><map(add-glue(|glue))>l]
+where
+<gt>(<length>l,0)
+
+concat-glue(|glue): l -> $[]
+where
+<eq>(<length>l,0)
+
+I have searched the complete API doc for it, but nothing found.
+http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/
+
+Kind Regards,
+
+Wouter
+
+
+On 11/23/2012 06:10 PM, Dobes Vandermeer wrote:
+>
+> I recall seeing something in the library for this. Maybe it was called 
+> "separated-by"?
+>
+> On Nov 23, 2012 1:36 AM, "Wouter van Koppen" 
+> <w.p.vankoppen at student.tudelft.nl 
+> <mailto:w.p.vankoppen at student.tudelft.nl>> wrote:
+>
+>     Hi all,
+>
+>     I was wondering whether there exist an 'implode' function that
+>     merges a list into a string placing a glue string between each
+>     element.
+>     Something like <implode(|" - ")>["a","b","c"]     ->     "a - b - c"
+>
+>     I created something like this:
+>
+>     add-glue(|glue): e -> (e,glue)
+>     concat-glue(|glue): l ->
+>     <rtrim-chars(?glue)><concat-strings><map(conc-strings)><map(add-glue(|glue))>l
+>
+>     But this does not work with an empty list(and is CPU-expensive).
+>     Isn't there an easier way to do this?
+>
+>     -- 
+>     Kind Regards,
+>
+>     Wouter
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/a5d1d912/attachment.html>
+
+From dobesv at gmail.com  Fri Nov 23 20:13:39 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Fri, 23 Nov 2012 11:13:39 -0800
+Subject: [Stratego Users] Best way to implode a list into a string using
+ a glue element
+In-Reply-To: <50AFBBAE.4040807@student.tudelft.nl>
+References: <50AF4268.3010409@student.tudelft.nl>
+	<CADbG_jYXsPzqiq360OCp2UG7uHQTf2x16O0HYXPmt8ZAyr9bvA@mail.gmail.com>
+	<50AFBBAE.4040807@student.tudelft.nl>
+Message-ID: <CADbG_jYjCjhDMg+-dVnbSJA049tmKUPOFNv2LYdc_UZgX-Tq3g@mail.gmail.com>
+
+Did you see
+http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/html/collection/list/common.html#area-in-file("collection/list/common.str",area(512,2,519,10,12497,122))
+(separate-by) ? I think it's what you wanted.
+
+Note that you can check for an empty list using <? [] >list rather than
+comparing length to zero.
+
+Even shorter: in the rule for the empty case put [] as the left side of the
+rule instead of "l" and remove the where clause. The non empty case can use
+[head|tail] on the left side of the -> and that will match only non empty
+lists and set head and tail for you. Pattern matching FTW!
+
+Hope that helps!
+ On Nov 23, 2012 10:08 AM, "Wouter van Koppen" <
+w.p.vankoppen at student.tudelft.nl> wrote:
+
+> **
+> Hi Dobes,
+>
+> I have solved it by using these rules:
+>
+> add-glue(|glue): e -> (glue,e)
+>
+> concat-glue(|glue): l ->
+> <concat-strings><flatten-list>[<head>l,<map(conc-strings)><tail><map(add-glue(|glue))>l]
+> where
+>     <gt>(<length>l,0)
+>
+> concat-glue(|glue): l -> $[]
+> where
+>     <eq>(<length>l,0)
+>
+> I have searched the complete API doc for it, but nothing found.
+> http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 11/23/2012 06:10 PM, Dobes Vandermeer wrote:
+>
+> I recall seeing something in the library for this. Maybe it was called
+> "separated-by"?
+> On Nov 23, 2012 1:36 AM, "Wouter van Koppen" <
+> w.p.vankoppen at student.tudelft.nl> wrote:
+>
+>> Hi all,
+>>
+>> I was wondering whether there exist an 'implode' function that merges a
+>> list into a string placing a glue string between each element.
+>> Something like <implode(|" - ")>["a","b","c"]     ->     "a - b - c"
+>>
+>> I created something like this:
+>>
+>> add-glue(|glue): e -> (e,glue)
+>> concat-glue(|glue): l ->
+>> <rtrim-chars(?glue)><concat-strings><map(conc-strings)><map(add-glue(|glue))>l
+>>
+>> But this does not work with an empty list(and is CPU-expensive).
+>> Isn't there an easier way to do this?
+>>
+>> --
+>> Kind Regards,
+>>
+>> Wouter
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+> _______________________________________________
+> Users mailing listUsers at strategoxt.orghttps://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/a811624e/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Fri Nov 23 20:31:36 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Fri, 23 Nov 2012 20:31:36 +0100
+Subject: [Stratego Users] Can't list content of Index
+Message-ID: <50AFCF18.2090202@student.tudelft.nl>
+
+Hi all,
+
+I get the following error when I run "Transform->Show index entries" in 
+eclipse.
+
+org.spoofax.interpreter.core.InterpreterException: Exception during 
+evaluation
+     at 
+org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:120)
+     at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+     at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+     at 
+org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+     at 
+org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:192)
+     at 
+org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+     at 
+org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+     at 
+org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+     at 
+org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+     at 
+org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+     at 
+org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+     at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.spoofax.terms.ParseError: _*Unterminated string: /home/wou*_
+     at 
+org.spoofax.terms.io.TAFTermReader.parseString(TAFTermReader.java:168)
+     at 
+org.spoofax.terms.io.TAFTermReader.parseFromStream(TAFTermReader.java:86)
+     at 
+org.spoofax.terms.io.TAFTermReader.parseTermSequence(TAFTermReader.java:232)
+
+It is strange because even the "Generate Java code" builder still works, 
+as it generates Java code for my DSL program.
+But I can't see the content of the index for my program, instead it 
+shows the error above.
+It appears it encounters an unterminated string in the /index-setup/ 
+call at /editor-analyze/.. anyone an idea how to fix?
+
+Regards,
+Wouter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/2d8d610c/attachment-0001.html>
+
+From dobesv at gmail.com  Fri Nov 23 21:08:49 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Fri, 23 Nov 2012 12:08:49 -0800
+Subject: [Stratego Users] Can't list content of Index
+In-Reply-To: <50AFCF18.2090202@student.tudelft.nl>
+References: <50AFCF18.2090202@student.tudelft.nl>
+Message-ID: <CADbG_jYKacxk3=NcAVwwT5F4uLOSxkpOuUTiCrjS6B2ErG2b6g@mail.gmail.com>
+
+I'm curious... What is "show index entries"? I don't have that feature but
+it sounds potentially useful.
+
+Is it possible you have a quote or other special character in an identifier
+that is causing this issue? I've had a case where the tools don't quite
+escape or validate identifiers when generating code.
+ On Nov 23, 2012 11:31 AM, "Wouter van Koppen" <
+w.p.vankoppen at student.tudelft.nl> wrote:
+
+> **
+> Hi all,
+>
+> I get the following error when I run "Transform->Show index entries" in
+> eclipse.
+>
+> org.spoofax.interpreter.core.InterpreterException: Exception during
+> evaluation
+>     at
+> org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:120)
+>     at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+>     at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+>     at
+> org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+>     at
+> org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:192)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+>     at
+> org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+>     at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+> Caused by: org.spoofax.terms.ParseError: *Unterminated string: /home/wou*
+>     at
+> org.spoofax.terms.io.TAFTermReader.parseString(TAFTermReader.java:168)
+>     at
+> org.spoofax.terms.io.TAFTermReader.parseFromStream(TAFTermReader.java:86)
+>     at
+> org.spoofax.terms.io.TAFTermReader.parseTermSequence(TAFTermReader.java:232)
+>
+> It is strange because even the "Generate Java code" builder still works,
+> as it generates Java code for my DSL program.
+> But I can't see the content of the index for my program, instead it shows
+> the error above.
+> It appears it encounters an unterminated string in the *index-setup* call
+> at *editor-analyze*.. anyone an idea how to fix?
+>
+> Regards,
+> Wouter
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/c5d2054b/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Fri Nov 23 21:34:21 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Fri, 23 Nov 2012 21:34:21 +0100
+Subject: [Stratego Users] Can't list content of Index
+In-Reply-To: <CADbG_jYKacxk3=NcAVwwT5F4uLOSxkpOuUTiCrjS6B2ErG2b6g@mail.gmail.com>
+References: <50AFCF18.2090202@student.tudelft.nl>
+	<CADbG_jYKacxk3=NcAVwwT5F4uLOSxkpOuUTiCrjS6B2ErG2b6g@mail.gmail.com>
+Message-ID: <50AFDDCD.30406@student.tudelft.nl>
+
+"Show index entries" shows all declarations and references that are made 
+to those declarations.
+
+For example, using the following NBL code:
+Mod (n):
+    defines Module n
+
+The index library will store all Mod (n) terms in the AST in de 
+namespace /Module/ under the name /n/.
+The content of the library can be shown with "Show index entries"
+
+Until recently this worked correctly, but now it hangs for all my DSL 
+programs for some strange reason.
+I think the problem is not in the AST, as it also occurs using a very 
+small trivial DSL program.
+Maybe the path to my workspace is the cause? As it shows _*/home/wou*_ 
+in the error.
+Any ideas?
+
+Kind Regards,
+
+Wouter
+
+
+On 11/23/2012 09:08 PM, Dobes Vandermeer wrote:
+>
+> I'm curious... What is "show index entries"? I don't have that feature 
+> but it sounds potentially useful.
+>
+> Is it possible you have a quote or other special character in an 
+> identifier that is causing this issue? I've had a case where the tools 
+> don't quite escape or validate identifiers when generating code.
+>
+> On Nov 23, 2012 11:31 AM, "Wouter van Koppen" 
+> <w.p.vankoppen at student.tudelft.nl 
+> <mailto:w.p.vankoppen at student.tudelft.nl>> wrote:
+>
+>     Hi all,
+>
+>     I get the following error when I run "Transform->Show index
+>     entries" in eclipse.
+>
+>     org.spoofax.interpreter.core.InterpreterException: Exception
+>     during evaluation
+>         at
+>     org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:120)
+>         at
+>     org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+>         at
+>     org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+>         at
+>     org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+>         at
+>     org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:192)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+>         at
+>     org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+>         at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+>     Caused by: org.spoofax.terms.ParseError: _*Unterminated string:
+>     /home/wou*_
+>         at
+>     org.spoofax.terms.io.TAFTermReader.parseString(TAFTermReader.java:168)
+>         at
+>     org.spoofax.terms.io.TAFTermReader.parseFromStream(TAFTermReader.java:86)
+>         at
+>     org.spoofax.terms.io.TAFTermReader.parseTermSequence(TAFTermReader.java:232)
+>
+>     It is strange because even the "Generate Java code" builder still
+>     works, as it generates Java code for my DSL program.
+>     But I can't see the content of the index for my program, instead
+>     it shows the error above.
+>     It appears it encounters an unterminated string in the
+>     /index-setup/ call at /editor-analyze/.. anyone an idea how to fix?
+>
+>     Regards,
+>     Wouter
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/a6e93f6b/attachment.html>
+
+From dobesv at gmail.com  Fri Nov 23 23:12:06 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Fri, 23 Nov 2012 14:12:06 -0800
+Subject: [Stratego Users] Can't list content of Index
+In-Reply-To: <50AFDDCD.30406@student.tudelft.nl>
+References: <50AFCF18.2090202@student.tudelft.nl>
+	<CADbG_jYKacxk3=NcAVwwT5F4uLOSxkpOuUTiCrjS6B2ErG2b6g@mail.gmail.com>
+	<50AFDDCD.30406@student.tudelft.nl>
+Message-ID: <CADbG_jYUsgeDjkHR1ZnL7D1TbmRkc4HRAR9Sv8e8XmAhotWNQg@mail.gmail.com>
+
+Ah interesting.  I haven't started on the NBL stuff at all yet, so much to
+learn already just with SDF and Stratego programming.
+
+
+On Fri, Nov 23, 2012 at 12:34 PM, Wouter van Koppen <
+w.p.vankoppen at student.tudelft.nl> wrote:
+
+> **
+> "Show index entries" shows all declarations and references that are made
+> to those declarations.
+>
+> For example, using the following NBL code:
+> Mod (n):
+>    defines Module n
+>
+> The index library will store all Mod (n) terms in the AST in de namespace
+> *Module* under the name *n*.
+> The content of the library can be shown with "Show index entries"
+>
+> Until recently this worked correctly, but now it hangs for all my DSL
+> programs for some strange reason.
+> I think the problem is not in the AST, as it also occurs using a very
+> small trivial DSL program.
+> Maybe the path to my workspace is the cause? As it shows */home/wou* in
+> the error.
+> Any ideas?
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 11/23/2012 09:08 PM, Dobes Vandermeer wrote:
+>
+> I'm curious... What is "show index entries"? I don't have that feature but
+> it sounds potentially useful.
+>
+> Is it possible you have a quote or other special character in an
+> identifier that is causing this issue? I've had a case where the tools
+> don't quite escape or validate identifiers when generating code.
+>  On Nov 23, 2012 11:31 AM, "Wouter van Koppen" <
+> w.p.vankoppen at student.tudelft.nl> wrote:
+>
+>> Hi all,
+>>
+>> I get the following error when I run "Transform->Show index entries" in
+>> eclipse.
+>>
+>> org.spoofax.interpreter.core.InterpreterException: Exception during
+>> evaluation
+>>     at
+>> org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:120)
+>>     at
+>> org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+>>     at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+>>     at
+>> org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+>>     at
+>> org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:192)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+>>     at
+>> org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+>>     at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+>> Caused by: org.spoofax.terms.ParseError: *Unterminated string: /home/wou*
+>>     at
+>> org.spoofax.terms.io.TAFTermReader.parseString(TAFTermReader.java:168)
+>>     at
+>> org.spoofax.terms.io.TAFTermReader.parseFromStream(TAFTermReader.java:86)
+>>     at
+>> org.spoofax.terms.io.TAFTermReader.parseTermSequence(TAFTermReader.java:232)
+>>
+>> It is strange because even the "Generate Java code" builder still works,
+>> as it generates Java code for my DSL program.
+>> But I can't see the content of the index for my program, instead it shows
+>> the error above.
+>> It appears it encounters an unterminated string in the *index-setup*call at
+>> *editor-analyze*.. anyone an idea how to fix?
+>>
+>> Regards,
+>> Wouter
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+> _______________________________________________
+> Users mailing listUsers at strategoxt.orghttps://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121123/e6884305/attachment-0001.html>
+
+From ciraci at gmail.com  Tue Nov 27 21:28:07 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 27 Nov 2012 12:28:07 -0800
+Subject: [Stratego Users] Grammar definition question
+Message-ID: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+
+Hi,
+
+I'm new to spoofax. I'm trying to define a grammar for a C like language.
+The problem is I'm having a ambiguity problem, which is a bit strange. I
+have the following lexer rules:
+"int" -> IntType
+...
+ [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+
+And some rules describing types:
+PrimitiveType -> Type {cons("Type")}
+TypeDefName -> Type {cons("Type")}
+IntType -> PrimitiveType {cons("PrimitiveType")}
+ID -> TypeDefName {cons("TypeDefName")}
+
+According to these rules "int" can be either parsed as
+PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType
+comes before the rule ID, so the lexer should detect "int" as IntType not
+ID. Is that so? If not, how can I fix this error?
+
+Thanks for your help.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121127/bb71d43e/attachment.html>
+
+From sven.stork at oracle.com  Tue Nov 27 21:34:30 2012
+From: sven.stork at oracle.com (Sven Stork)
+Date: Tue, 27 Nov 2012 12:34:30 -0800
+Subject: [Stratego Users] Grammar definition question
+In-Reply-To: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+References: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+Message-ID: <E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+
+Hi, 
+
+you have to explicitly disallow keywords to be parsed as ID. You can do this by using the "reject" annotation: 
+
+"int"				-> IntType
+IntType		        -> ID {reject}
+
+-- Sven 
+
+On Nov 27, 2012, at 12:28 PM, Selim Ciraci wrote:
+
+> Hi,
+> 
+> I'm new to spoofax. I'm trying to define a grammar for a C like language. The problem is I'm having a ambiguity problem, which is a bit strange. I have the following lexer rules:
+> "int" -> IntType
+> ...
+>  [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+> 
+> And some rules describing types:
+> PrimitiveType -> Type {cons("Type")}
+> TypeDefName -> Type {cons("Type")}
+> IntType -> PrimitiveType {cons("PrimitiveType")}
+> ID -> TypeDefName {cons("TypeDefName")}
+> 
+> According to these rules "int" can be either parsed as PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType comes before the rule ID, so the lexer should detect "int" as IntType not ID. Is that so? If not, how can I fix this error?
+> 
+> Thanks for your help.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From andre.s.d.vieira at gmail.com  Wed Nov 28 12:23:06 2012
+From: andre.s.d.vieira at gmail.com (Andre Vieira)
+Date: Wed, 28 Nov 2012 12:23:06 +0100
+Subject: [Stratego Users] Grammar definition question
+In-Reply-To: <E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+References: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+	<E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+Message-ID: <CAGzthGst7Rb2AUMwL=UUuii_Yxe-kHWG0etOgZ7Pm0j5VU5C4w@mail.gmail.com>
+
+Shouldnt it be "int" -> ID {Reject} ? ( its a a good idea to reject
+keywords for ID like lexical sorts )
+
+On Tue, Nov 27, 2012 at 9:34 PM, Sven Stork <sven.stork at oracle.com> wrote:
+
+> Hi,
+>
+> you have to explicitly disallow keywords to be parsed as ID. You can do
+> this by using the "reject" annotation:
+>
+> "int"                           -> IntType
+> IntType                 -> ID {reject}
+>
+> -- Sven
+>
+> On Nov 27, 2012, at 12:28 PM, Selim Ciraci wrote:
+>
+> > Hi,
+> >
+> > I'm new to spoofax. I'm trying to define a grammar for a C like
+> language. The problem is I'm having a ambiguity problem, which is a bit
+> strange. I have the following lexer rules:
+> > "int" -> IntType
+> > ...
+> >  [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+> >
+> > And some rules describing types:
+> > PrimitiveType -> Type {cons("Type")}
+> > TypeDefName -> Type {cons("Type")}
+> > IntType -> PrimitiveType {cons("PrimitiveType")}
+> > ID -> TypeDefName {cons("TypeDefName")}
+> >
+> > According to these rules "int" can be either parsed as
+> PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType
+> comes before the rule ID, so the lexer should detect "int" as IntType not
+> ID. Is that so? If not, how can I fix this error?
+> >
+> > Thanks for your help.
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121128/0effa7fb/attachment.html>
+
+From sven.stork at oracle.com  Wed Nov 28 22:03:44 2012
+From: sven.stork at oracle.com (Sven Stork)
+Date: Wed, 28 Nov 2012 13:03:44 -0800
+Subject: [Stratego Users] Grammar definition question
+In-Reply-To: <CAGzthGst7Rb2AUMwL=UUuii_Yxe-kHWG0etOgZ7Pm0j5VU5C4w@mail.gmail.com>
+References: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+	<E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+	<CAGzthGst7Rb2AUMwL=UUuii_Yxe-kHWG0etOgZ7Pm0j5VU5C4w@mail.gmail.com>
+Message-ID: <EF8B49F1-CF94-46DC-AA7C-AE6C621080C5@oracle.com>
+
+That works too, but if you have more than one keyword it makes sense to group them. You can find a more detailed description here:
+
+http://releases.strategoxt.org/strategoxt-manual/unstable/manual/chunk-chapter/tutorial-sdf.html#section-sdf-lexical-identifiers
+
+-- Sven
+
+On Nov 28, 2012, at 3:23 AM, Andre Vieira wrote:
+
+> Shouldnt it be "int" -> ID {Reject} ? ( its a a good idea to reject keywords for ID like lexical sorts )
+> 
+> On Tue, Nov 27, 2012 at 9:34 PM, Sven Stork <sven.stork at oracle.com> wrote:
+> Hi,
+> 
+> you have to explicitly disallow keywords to be parsed as ID. You can do this by using the "reject" annotation:
+> 
+> "int"                           -> IntType
+> IntType                 -> ID {reject}
+> 
+> -- Sven
+> 
+> On Nov 27, 2012, at 12:28 PM, Selim Ciraci wrote:
+> 
+> > Hi,
+> >
+> > I'm new to spoofax. I'm trying to define a grammar for a C like language. The problem is I'm having a ambiguity problem, which is a bit strange. I have the following lexer rules:
+> > "int" -> IntType
+> > ...
+> >  [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+> >
+> > And some rules describing types:
+> > PrimitiveType -> Type {cons("Type")}
+> > TypeDefName -> Type {cons("Type")}
+> > IntType -> PrimitiveType {cons("PrimitiveType")}
+> > ID -> TypeDefName {cons("TypeDefName")}
+> >
+> > According to these rules "int" can be either parsed as PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType comes before the rule ID, so the lexer should detect "int" as IntType not ID. Is that so? If not, how can I fix this error?
+> >
+> > Thanks for your help.
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+

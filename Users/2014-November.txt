@@ -1,0 +1,139 @@
+From eelcovis at gmail.com  Thu Nov  6 12:54:14 2014
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Thu, 6 Nov 2014 12:54:14 +0100
+Subject: [Stratego Users] PhD position at TU Delft: automatic grading and
+ tutoring in online (programming) courses
+Message-ID: <CAFaCHU0ov24HyvHE4cMnspTsBOQg1RutZf793Znb=1wXrVt45A@mail.gmail.com>
+
+We have an opening for a PhD student to work on automatic grading and
+tutoring in online courses. In particular, we are interested in automatic
+feedback and assessment techniques that we can apply in programming
+education. The results of the research will be applied and evaluated in
+several courses at TU Delft and other universities.
+
+We are looking for a candidate with a Master?s degree (or equivalent) in
+computer science or a related discipline, a passion for online education,
+and a broad interest including systems programming, compilers, language
+engineering, programming environments, web programming, machine learning,
+interaction design, education research, and teaching.
+
+For more information about the position see
+http://department.st.ewi.tudelft.nl/jobs/job/6/automatic-assessment-and-feedback-for-online-assignments
+?
+
+
+-- Eelco Visser
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20141106/9347db0d/attachment.html>
+
+From gabrielkonat at gmail.com  Wed Nov 12 16:55:49 2014
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Wed, 12 Nov 2014 16:55:49 +0100
+Subject: [Stratego Users] Spoofax 1.3 released
+Message-ID: <CAOipTuhqhZf91EduX0L0aa9Po3QzLaDD1E9gTVixeCjgtHh-Xg@mail.gmail.com>
+
+Hi all,
+
+We're happy to announce the release of Spoofax 1.3, which improves SDF3,
+the build system for languages, and the build system for Spoofax itself. The
+download links, porting notes, and changelog can be found at
+https://github.com/metaborg/doc/blob/master/releases/spoofax/1.3.md.
+
+Cheers,
+Gabriel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20141112/51400a83/attachment.html>
+
+From eelcovis at gmail.com  Mon Nov 17 13:27:52 2014
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Mon, 17 Nov 2014 13:27:52 +0100
+Subject: [Stratego Users] Spoofax 1.3 released
+In-Reply-To: <CAOipTuhqhZf91EduX0L0aa9Po3QzLaDD1E9gTVixeCjgtHh-Xg@mail.gmail.com>
+References: <CAOipTuhqhZf91EduX0L0aa9Po3QzLaDD1E9gTVixeCjgtHh-Xg@mail.gmail.com>
+Message-ID: <CAFaCHU3FS85KeEghQ5XfOSaeyAfeHmy88HCzVy9otvM5PeeVKg@mail.gmail.com>
+
+Hi Gabri?l,
+
+Can you add the release to the new site? (See my other email.)
+
+-- Eelco
+
+On Wed, Nov 12, 2014 at 4:55 PM, Gabri?l Konat <gabrielkonat at gmail.com>
+wrote:
+
+> Hi all,
+>
+> We're happy to announce the release of Spoofax 1.3, which improves SDF3,
+> the build system for languages, and the build system for Spoofax itself. The
+> download links, porting notes, and changelog can be found at
+> https://github.com/metaborg/doc/blob/master/releases/spoofax/1.3.md.
+>
+> Cheers,
+> Gabriel
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20141117/260837c5/attachment.html>
+
+From eelcovis at gmail.com  Thu Nov 20 14:58:25 2014
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Thu, 20 Nov 2014 14:58:25 +0100
+Subject: [Stratego Users] PhD student position at TU Delft on automatic
+	grading and tutoring
+Message-ID: <CAFaCHU3WBpb6i1qL7gb58rGQJ_gx5+G-5Ge7k8e2UKmVkp5+-A@mail.gmail.com>
+
+We have an opening for a PhD student to work on automatic grading and
+tutoring in online courses. In particular, we are interested in automatic
+feedback and assessment techniques that we can apply in programming
+education. The results of the research will be applied and evaluated in
+several courses at TU Delft and other universities.
+
+We are looking for a candidate with a Master?s degree (or equivalent) in
+computer science or a related discipline, a passion for online education,
+and a broad interest including systems programming, compilers, language
+engineering, programming environments, web programming, machine learning,
+interaction design, education research, and teaching.
+
+For more information about the position see
+http://department.st.ewi.tudelft.nl/jobs/job/6/automatic-assessment-and-feedback-for-online-assignments
+(While the deadline for applications mentioned on that page has passed, we
+are still accepting applications.) Please forward this to any potential
+candidates.
+
+-- Eelco Visser
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20141120/cfe54bb1/attachment.html>
+
+From kralikba at msn.com  Fri Nov 21 17:25:27 2014
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Fri, 21 Nov 2014 17:25:27 +0100
+Subject: [Stratego Users] XML support
+Message-ID: <DUB402-EAS3264409641B13D9CA9FCD25D0770@phx.gbl>
+
+Hi!
+
+Could you please give me some pointers about where to look for (any kind of)
+XML support for Spoofax? 
+
+Regards
+Barnab?s
+
+

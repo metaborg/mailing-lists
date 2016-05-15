@@ -1,0 +1,418 @@
+From gabrielkonat at gmail.com  Sun Sep 15 14:01:09 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Sun, 15 Sep 2013 12:01:09 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26151 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130915120109.B78797F800E@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Sun Sep 15 12:01:09 2013
+New Revision: 26151
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26151&sc=1
+
+Log:
+Download functional Java jar.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Tue Aug 20 19:59:43 2013	(r26150)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Sun Sep 15 12:01:09 2013	(r26151)
+@@ -55,6 +55,11 @@
+     url = http://search.maven.org/remotecontent?filepath=com/google/guava/guava/14.0.1/guava-14.0.1.jar;
+     sha256 = "d69df3331840605ef0e5fe4add60f2d28e870e3820937ea29f713d2035d9ab97";
+   };
++  
++  functional-java = pkgs.fetchurl {
++    url = http://functionaljava.googlecode.com/svn/artifacts/3.0/functionaljava.jar;
++    sha256 = "091C45B841A763FC7F922A64415ACF03069A1360F9F44CBC38BA43C750323884";
++  };
+ 
+   junit-benchmarks = pkgs.fetchurl {
+     url = http://labs.carrotsearch.com/download/junit-benchmarks/0.6.0/junit-benchmarks-0.6.0.zip;
+@@ -177,6 +182,7 @@
+         chmod -R +w .
+         ensureDir org.spoofax.interpreter.externaldeps/lib
+         cp ${guava} org.spoofax.interpreter.externaldeps/lib/guava.jar
++        cp ${functional-java} org.spoofax.interpreter.externaldeps/lib/functionaljava.jar
+         unzip ${junit-benchmarks} -d org.spoofax.interpreter.externaldeps/lib/
+             
+         chmod -R +w .
+
+From gabrielkonat at gmail.com  Tue Sep 24 17:56:35 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 24 Sep 2013 15:56:35 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26152 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130924155635.859B8CC30E@mx4.tudelft.nl>
+
+Author: gkonat
+Date: Tue Sep 24 15:56:35 2013
+New Revision: 26152
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26152&sc=1
+
+Log:
+Add analysis language to the build
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Sun Sep 15 12:01:09 2013	(r26151)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Tue Sep 24 15:56:35 2013	(r26152)
+@@ -139,6 +139,7 @@
+                  ${mbexec}/org.spoofax.interpreter.library.java \
+                  ${mbexecdeps}/org.spoofax.interpreter.externaldeps \
+                  ${metaborgRuntime}/org.metaborg.runtime.task \
++                 ${metaborgRuntime}/org.metaborg.meta.lang.analysis \
+                  ${mbrep}/org.spoofax.interpreter.library.index \
+                  ${mbrep}/org.spoofax.aterm \
+                  ${mbrep}/org.spoofax.terms \
+
+From gabrielkonat at gmail.com  Wed Sep 25 14:45:49 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Wed, 25 Sep 2013 12:45:49 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26153 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130925124549.3EB7D2B8037@mx2.tudelft.nl>
+
+Author: gkonat
+Date: Wed Sep 25 12:45:48 2013
+New Revision: 26153
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26153&sc=1
+
+Log:
+Use local tmp dir
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Tue Sep 24 15:56:35 2013	(r26152)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Wed Sep 25 12:45:48 2013	(r26153)
+@@ -239,11 +239,13 @@
+       name = "spoofax-imp-s${spoofaxRev}";
+       inherit (jobs) src;
+       inherit (jobs) generator;
+-          
++      
++      mkdir tmp;
++
+       buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
+-      mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=/tmp/m3";
++      mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+ 
+-      M2_REPO="/tmp/m3";
++      M2_REPO="tmp/m3";
+       MAVEN_OPTS="-Xss8m -Xmx1024m";
+       STRATEGOXT=pkgs.strategoPackages.strategoxt;
+       JAVA_FRONT=pkgs.strategoPackages.javafront;
+@@ -272,104 +274,104 @@
+           if [[ -f $POM ]] ; then
+              sed -i 's|</project>||' $POM
+              echo '
+-  <build>
+-    <plugins>
+- <plugin>
+-    <groupId>org.apache.maven.plugins</groupId>
+-    <artifactId>maven-antrun-plugin</artifactId>
+-    <dependencies>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>aster</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/aster.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>strategoxt</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.strj/java/strategoxt.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>sdf2imp</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/sdf2imp.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-            <groupId>local</groupId>
+-            <artifactId>make_permissive.jar</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/make_permissive.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>com.sun</groupId>
+-            <artifactId>tools</artifactId>
+-            <version>1.4.2</version>
+-            <scope>system</scope>
+-            <systemPath>''${java.home}/../lib/tools.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>ecj</groupId>
+-            <artifactId>ecj</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
+-        </dependency>
+-        <dependency>
+-           <groupId>jline</groupId>
+-            <artifactId>jline</artifactId>
+-            <version>1.0</version>
+-            <scope>system</scope>
+-            <systemPath>''${basedir}/../org.spoofax.interpreter.library.jline/lib/jline-1.0.jar</systemPath>
+-        </dependency>
+-    </dependencies>
+-    <executions>
+-       <execution>
+-               <id>generate-sources</id>
+-               <phase>generate-sources</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="externaljarx" refid="maven.compile.classpath"/>
+-                          <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+-                          <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+-                          <property name="eclipse.home" value="${eclipse}/eclipse"/>
+-                          <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+-                          <ant antfile="build.main.xml" inheritRefs="true">
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-       <execution>
+-               <id>process-classes</id>
+-               <phase>process-classes</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+-                          <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+-                          <property name="eclipse.home" value="${eclipse}/eclipse"/>
+-                          <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+-                          <ant antfile="build.main.xml" inheritRefs="true">
+-                            <target name="java.jar"/> 
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-    </executions>
+-  </plugin>
+-    </plugins>
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <dependencies>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>aster</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/aster.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>strategoxt</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.strj/java/strategoxt.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>sdf2imp</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/sdf2imp.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>make_permissive.jar</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/make_permissive.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>com.sun</groupId>
++              <artifactId>tools</artifactId>
++              <version>1.4.2</version>
++              <scope>system</scope>
++              <systemPath>''${java.home}/../lib/tools.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>ecj</groupId>
++              <artifactId>ecj</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>jline</groupId>
++              <artifactId>jline</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.spoofax.interpreter.library.jline/lib/jline-1.0.jar</systemPath>
++          </dependency>
++      </dependencies>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="externaljarx" refid="maven.compile.classpath"/>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++         <execution>
++           <id>process-classes</id>
++           <phase>process-classes</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                  <target name="java.jar"/> 
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
+ </build></project>' >>$POM
+           fi
+         done
+@@ -380,32 +382,32 @@
+           if [[ -f $POM ]] ; then
+              sed -i 's|</project>||' $POM
+              echo '
+-  <build>
+-    <plugins>
+- <plugin>
+-    <groupId>org.apache.maven.plugins</groupId>
+-    <artifactId>maven-antrun-plugin</artifactId>
+-    <executions>
+-       <execution>
+-               <id>generate-sources</id>
+-               <phase>generate-sources</phase>
+-               <configuration>
+-                  <tasks>
+-                          <echo>Running ant script</echo>
+-                          <property name="strategoxt.dir" value="${STRATEGOXT}"/>
+-                          <property name="sdf.dir" value="${SDF}"/>
+-                          <ant antfile="build.ant.xml" inheritRefs="true">
+-                              <target name="bundle-ctree" />
+-                          </ant>
+-                  </tasks>
+-               </configuration>
+-               <goals>
+-                  <goal>run</goal>
+-               </goals>
+-       </execution>
+-    </executions>
+-  </plugin>
+-    </plugins>
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="strategoxt.dir" value="${STRATEGOXT}"/>
++                <property name="sdf.dir" value="${SDF}"/>
++                <ant antfile="build.ant.xml" inheritRefs="true">
++                  <target name="bundle-ctree" />
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
+ </build></project>' >>$POM
+           fi
+         done
+
+From gabrielkonat at gmail.com  Wed Sep 25 15:10:30 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Wed, 25 Sep 2013 13:10:30 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26154 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130925131030.DAC4E7F8061@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Wed Sep 25 13:10:30 2013
+New Revision: 26154
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26154&sc=1
+
+Log:
+
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Sep 25 12:45:48 2013	(r26153)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Wed Sep 25 13:10:30 2013	(r26154)
+@@ -239,8 +239,6 @@
+       name = "spoofax-imp-s${spoofaxRev}";
+       inherit (jobs) src;
+       inherit (jobs) generator;
+-      
+-      mkdir tmp;
+ 
+       buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
+       mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+@@ -254,6 +252,9 @@
+       buildPhase = ''
+         ulimit -s unlimited
+ 
++        # local tmp directory
++        mkdir tmp
++
+         #hack
+         mkdir -p plugins
+         export eclipsefakehome=`pwd`
+

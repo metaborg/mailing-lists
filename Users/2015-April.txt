@@ -1,0 +1,265 @@
+From storm at cwi.nl  Wed Apr  1 11:37:40 2015
+From: storm at cwi.nl (Tijs van der Storm)
+Date: Wed, 1 Apr 2015 11:37:40 +0200
+Subject: [Stratego Users] DSLDI: 3rd Workshop on Domain-Specific Language
+	Design and Implementation (EXTENDED DEADLINE)
+Message-ID: <E6A23026-5DC5-4520-BD3D-B187FEC7DCF6@cwi.nl>
+
+*********************************************************************
+SECOND CALL FOR TALK PROPOSALS
+
+DSLDI 2015
+
+Third Workshop on
+Domain-Specific Language Design and Implementation
+
+July 7, 2015
+Prague, Czech Republic
+Co-located with ECOOP
+
+http://2015.ecoop.org/track/dsldi-2015-papers
+*********************************************************************
+
+EXTENDED Deadline for talk proposals: 9th of April, 2015
+
+If designed and implemented well, domain-specific languages (DSLs) combine the best features of general-purpose programming languages (e.g., performance) with high productivity (e.g., ease of programming).
+
+*** Workshop Goal ***
+
+The goal of the DSLDI workshop is to bring together researchers and practitioners interested in sharing ideas on how DSLs should be designed, implemented, supported by tools, and applied in realistic application contexts. We are both interested in discovering how already known domains such as graph processing or machine learning can be best supported by DSLs, but also in exploring new domains that could be targeted by DSLs. More generally, we are interested in building a community that can drive forward the development of modern DSLs.
+
+*** Workshop Format ***
+
+DSLDI is a single-day workshop and will consist of a series of short talks whose main goal is to trigger exchange of opinion and discussions. The talks should be on the topics within DSLDI's area of interest, which include but are not limited to the following ones:
+
+* DSL implementation techniques, including compiler-level and runtime-level solutions
+* utilization of domain knowledge for driving optimizations of DSL implementations
+* utilizing DSLs for managing parallelism and hardware heterogeneity
+* DSL performance and scalability studies
+* DSL tools, such as DSL editors and editor plugins, debuggers, refactoring tools, etc.
+* applications of DSLs to existing as well as emerging domains, for
+  example graph processing, image processing, machine learning, analytics, robotics, etc.
+* practitioners reports, for example descriptions of DSL deployment i  a real-life production setting
+
+*** Call for Submissions ***
+
+We solicit talk proposals in the form of short abstracts (max. 2 pages). A good talk proposal describes an interesting position, demonstration, or early achievement. The submissions will be reviewed on relevance and clarity, and used to plan the mostly interactive sessions of the workshop day. Publication of accepted abstracts and slides on the website is voluntary.
+
+* _EXTENDED_ Deadline for talk proposals: April 9th, 2015
+* Notification: May 8th, 2015
+* Workshop: July 7th, 2015
+* Submission website: https://easychair.org/conferences/?conf=dsldi2015
+
+*** Workshop Organization ***
+
+Organizers
+
+* Tijs van der Storm (storm at cwi.nl), CWI, The Netherlands
+* Sebastian Erdweg (erdweg at informatik.tu-darmstadt.de), TU Darmstadt, Germany
+
+Follow us on Twitter at https://twitter.com/wsdsldi
+
+Program committee
+
+* Emilie Balland
+* Martin Bravenboer (LogicBlox)
+* Hassan Chafi (Oracle Labs)
+* William Cook (UT Austin)
+* Shriram Krishnamurthi (Brown University)
+* Heather Miller (EPFL)
+* Bruno Oliveira (University of Hong Kong)
+* Cyrus Omar (CMU)
+* Richard Paige (University of York)
+* Tony Sloane (Macquarie University)
+* Emma S?derberg (Google)
+* Emma Tosch (University of Massachusetts, Amherst)
+* Jurgen Vinju (CWI)
+
+
+--
+Researcher Centrum Wiskunde & Informatica (CWI)
+Master of Software Engineering Universiteit van Amsterdam (UvA)
+Dr. Tijs van der Storm @ Centrum Wiskunde & Informatica (CWI)
+Office: L225    | Phone: +31 (0)20 5924164 | Address: Science Park 123
+P.O. Box 94079  | Postal code: 1090 GB     | Amsterdam, The Netherlands
+
+
+
+From erdweg at informatik.tu-darmstadt.de  Mon Apr 27 11:22:17 2015
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Mon, 27 Apr 2015 11:22:17 +0200
+Subject: [Stratego Users] Final CFP: Workshop on Generic Programming 2015 -
+	Deadline May 15
+Message-ID: <8698F0AF-CCDB-41BD-8C5A-13D23CDBCCF5@informatik.tu-darmstadt.de>
+
+======================================================================
+                       CALL FOR PAPERS
+
+                           WGP 2015
+
+        11th ACM SIGPLAN Workshop on Generic Programming
+                      Vancouver, Canada
+                    Sunday, August 30, 2015
+
+                http://www.wgp-sigplan.org/2015
+
+                      Co-located with the
+International Conference on Functional Programming (ICFP 2015)
+======================================================================
+
+
+Goals of the workshop
+---------------------
+
+Generic programming is about making programs more adaptable by making
+them more general. Generic programs often embody non-traditional kinds
+of polymorphism; ordinary programs are obtained from them by suitably
+instantiating their parameters. In contrast with normal programs, the
+parameters of a generic program are often quite rich in structure; for
+example they may be other programs, types or type constructors, class
+hierarchies, or even programming paradigms.
+
+Generic programming techniques have always been of interest, both to
+practitioners and to theoreticians, and, for at least 20 years,
+generic programming techniques have been a specific focus of research
+in the functional and object-oriented programming communities. Generic
+programming has gradually spread to more and more mainstream
+languages, and today is widely used in industry. This workshop brings
+together leading researchers and practitioners in generic programming
+from around the world, and features papers capturing the state of the
+art in this important area.
+
+We welcome contributions on all aspects, theoretical as well as
+practical, of
+
+* generic programming,
+* programming with (C++) concepts,
+* meta-programming,
+* programming with type classes,
+* programming with modules,
+* programming with dependent types,
+* type systems for generic programming,
+* polytypic programming,
+* adaptive object-oriented programming,
+* component-based programming,
+* strategic programming,
+* aspect-oriented programming,
+* family polymorphism,
+* object-oriented generic programming,
+* implementation of generic programming languages,
+* static and dynamic analyses of generic programs,
+* and so on.
+
+Program Committee
+-----------------
+
+* Patrick Bahr (co-chair), University of Copenhagen
+* Sebastian Erdweg (co-chair), Technical University of Darmstadt
+* Edwin Brady, University of St Andrews
+* Edsko de Vries, Well-Typed LLP
+* Mauro Jaskelioff, National University of Rosario
+* Johan Jeuring, Utrecht University
+* Pieter Koopman, Radboud University Nijmegen
+* Bruno C. d. S. Oliveira, University of Hong Kong
+* Nicolas Pouillard, IT University of Copenhagen
+* Sukyoung Ryu, Korea Advanced Institute of Science and Technology
+* Sibylle Schupp, Hamburg University of Technology
+* Sam Tobin-Hochstadt, Indiana University
+
+Proceedings and Copyright
+-------------------------
+
+We plan to have formal proceedings, published by the ACM. Accepted
+papers will be included in the ACM Digital Library. Authors must grant
+ACM publication rights upon acceptance
+(http://authors.acm.org/main.html), but may retain copyright if they
+wish. Authors are encouraged to publish auxiliary material with their
+paper (source code, test data, and so forth). The proceedings will be
+freely available for download from the ACM Digital Library from one
+week before the start of the conference until two weeks after the
+conference.
+
+Submission details
+------------------
+
+* Submission deadline:  Fri, 15th May 2015
+* Author notification:  Fri, 26th June 2015
+* Final version due:    Sun, 19th July 2015
+* Workshop:             Sun, 30th August 2015
+
+Submitted papers should fall into one of two categories:
+
+* Regular research papers (12 pages)
+* Short papers: case studies, tool demos, generic pearls (6 pages)
+
+Regular research papers are expected to present novel and interesting
+research results. Short papers need not present novel or fully polished
+results. Good candidates for short papers are those that report on 
+interesting case studies of generic programming in open source or 
+industry, present demos of generic programming tools or libraries, 
+or discuss elegant and illustrative uses of generic programming ('pearls').
+
+All submissions should be in portable document format (PDF), formatted
+using the ACM SIGPLAN style guidelines (two-column, 9pt). Regular 
+research papers must not exceed 12 pages. Short papers must not exceed 
+6 pages. If applicable, papers should be marked with one of the labels
+'case study, 'tool demo' or 'generic pearl' in the title at the time 
+of submission.
+
+Papers should be submitted via HotCRP at
+
+https://icfp-wgp15.hotcrp.com/
+
+
+
+Travel Support
+--------------
+
+Student attendees with accepted papers can apply for a SIGPLAN PAC grant
+to help cover travel expenses. PAC also offers other support, such as
+for child-care expenses during the meeting or for travel costs for
+companions of SIGPLAN members with physical disabilities, as well as for
+travel from locations outside of North America and Europe. For details
+on the PAC program, see its web page (http://www.sigplan.org/PAC.htm).
+
+History of the Workshop on Generic Programming
+----------------------------------------------
+
+Earlier Workshops on Generic Programming have been held in
+
+* Gothenburg, Sweden 2014 (affiliated with ICFP),
+* Boston, Massachusetts, US 2013 (affiliated with ICFP),
+* Copenhagen, Denmark 2012 (affiliated with ICFP),
+* Tokyo, Japan 2011 (affiliated with ICFP),
+* Baltimore, Maryland, US 2010 (affiliated with ICFP),
+* Edinburgh, UK 2009 (affiliated with ICFP),
+* Victoria, BC, Canada 2008 (affiliated with ICFP),
+* Portland 2006 (affiliated with ICFP),
+* Ponte de Lima 2000 (affiliated with MPC),
+* Marstrand 1998 (affiliated with MPC).
+
+Furthermore, there were a few informal workshops
+
+* Utrecht 2005 (informal workshop),
+* Dagstuhl 2002 (IFIP WG2.1 Working Conference),
+* Nottingham 2001 (informal workshop).
+
+There were also (closely related) DGP workshops in Oxford (June
+3-4 2004), and a Spring School on DGP in Nottingham (April 24-27
+2006, which had a half-day workshop attached).
+
+WGP Steering Committee
+----------------------
+
+* Andres L?h
+* Ronald Garcia
+* Jacques Carette
+* Jeremiah Willcock
+* Jos? Pedro Magalh?es
+* Tiark Rompf
+* Tarmo Uustalo
+* Stephanie Weirich
+* Fritz Henglein
+
+
+

@@ -1,0 +1,550 @@
+From kralikba at msn.com  Sat Mar  1 20:54:24 2014
+From: kralikba at msn.com (=?utf-8?B?S3LDoWxpayBCYXJuYWLDoXM=?=)
+Date: Sat, 1 Mar 2014 20:54:24 +0100
+Subject: [Stratego Users] Template language pretty printer broken?
+Message-ID: <DUB406-EAS18079CF5B0EDEFCB0D2DE20D08D0@phx.gbl>
+
+Hi,
+
+ 
+
+I am having some problems with a pretty-printer generated from an sdf3 file.
+I have tracked it down to add-sep/0,1 (in runtime libraries, tmpl/pp.str)
+called by pp-V-list in the same file. 
+
+add-sep expects a term that matches V(a, [b]); however, the second subterm
+is a longer list.
+
+ 
+
+The SDF3 code is as follows:
+
+    Receive.Receive = <
+
+            receive <Expression> of
+
+                  <CrClause+; separator=";\n"><AfterPart>
+
+            end>
+
+ 
+
+The generated pretty printer code is:
+
+  prettyprint-Receive :
+
+    Receive(a, b, c) -> [ H(
+
+                            [SOpt(HS(), "0")]
+
+                          , [S("receive "), a493, S(" of")]
+
+                          )
+
+                        , b171
+
+                        , H(
+
+                            [SOpt(HS(), "0")]
+
+                          , [S("end")]
+
+                          )
+
+                        ]
+
+    where a493 := <pp-one-Z(prettyprint-Expression)> a
+
+    where b171 := <pp-indent(|"2")> [ <pp-V-list(prettyprint-CrClause|"0",
+";")> b
+
+                                    , <pp-one-Z(prettyprint-AfterPart)> c
+
+                                    ]
+
+ 
+
+prettyprint-CrClause succeeds for all items of b and results in the
+following two items:
+
+[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([
+SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("5")])])])])])])])])]),Z([],[
+H([],[S("")])]),S("
+->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS
+,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0"
+)],[Z([],[S("9")])])])])])])])])])])]))]
+
+ 
+
+[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([
+SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("9")])])])])])])])])]),Z([],[
+H([],[S("")])]),S("
+->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS
+,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0"
+)],[Z([],[S("87")])])])])])])])])])])]))]
+
+ 
+
+Thanks for your help,
+
+Regards
+
+Barnab?s
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140301/fc08c688/attachment.html>
+
+From david013 at cs.washington.edu  Tue Mar  4 20:36:17 2014
+From: david013 at cs.washington.edu (David Callahan)
+Date: Tue, 4 Mar 2014 19:36:17 +0000
+Subject: [Stratego Users] NaBL
+Message-ID: <56cb018919fa438da64560d6590cdd2c@DM2PR07MB304.namprd07.prod.outlook.com>
+
+Hello,
+
+I am hoping to find an experience Spoofax user who could help me through some learning curve issues.
+
+I have gotten pretty handy with the syntax but am struggling through the name binding and type analysis aspects.
+To give an example of the limits of my understanding,  my language supports  enumerated types and declarations of constants with inferred types such as:
+
+enum Color { RED,BLUE,GREEN}
+
+const X = 0
+const Y = X + 1
+const Z = Color.RED
+
+The current rules scope RED/BLUE/GREEN to the enum declaration. In "names.nd",
+
+       EnumDef(x,_):
+             defines unique Type x
+             scopes EnumElement
+
+I can set namespaces for Color and Variables and the reference to "X" will correctly resolve to the associated definition.
+Const(x,v):
+              defines unique Variable x
+       VarRef(x):
+             refers to Variable x
+What I don't understand is how to map the term "FieldAccess(VarRef("Color"), "RED")" so it is seen as referring to the enumerated "RED" in the declaration of "Color".
+
+I tried to follow the example from
+Kats, Lennart CL, and Eelco Visser. "The spoofax language workbench: rules for declarative specification of languages and IDEs." In ACM Sigplan Notices, vol. 45, no. 10, pp. 444-463. ACM, 2010.
+
+FieldAccess(e, f):
+   refers to field f in c
+   where e has type ClassType(c)
+
+but it does not parse in the current version of the tool so perhaps there is a different way.
+
+Thanks
+david
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140304/d6d97d95/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Tue Mar  4 21:32:18 2014
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Tue, 4 Mar 2014 20:32:18 +0000
+Subject: [Stratego Users] NaBL
+In-Reply-To: <56cb018919fa438da64560d6590cdd2c@DM2PR07MB304.namprd07.prod.outlook.com>
+References: <56cb018919fa438da64560d6590cdd2c@DM2PR07MB304.namprd07.prod.outlook.com>
+Message-ID: <01AD8D3D-9A58-49B7-B1B0-FB957A5CDF68@tudelft.nl>
+
+Hi David,
+
+the syntax changed to
+
+FieldAccess(e, f):
+   refers to Field f in Class c
+   where e has type ClassType(c)
+
+In your example, you might not need the where clause:
+
+EnumElemRef(enum, elem): refers to Field elem in Type enum
+
+might also work. But this depends on the Spoofax version you are running. Your file extension indicates the stable version, which is quite behind w.r.t. changes in the name binding and typing languages.
+
+You might also want to have a look on the instructions for the compiler construction course we are teaching. The second milestone is about name and type analysis, and might help you with initial name binding and typing issues:
+
+https://github.com/guwac/compiler-construction/tree/master/assignments/milestone2-analysis
+
+? Guido Wachsmuth
+
+On 04 Mar 2014, at 20:36 , David Callahan <david013 at cs.washington.edu<mailto:david013 at cs.washington.edu>> wrote:
+
+Hello,
+
+I am hoping to find an experience Spoofax user who could help me through some learning curve issues.
+
+I have gotten pretty handy with the syntax but am struggling through the name binding and type analysis aspects.
+To give an example of the limits of my understanding,  my language supports  enumerated types and declarations of constants with inferred types such as:
+
+enum Color { RED,BLUE,GREEN}
+
+const X = 0
+const Y = X + 1
+const Z = Color.RED
+
+The current rules scope RED/BLUE/GREEN to the enum declaration. In ?names.nd?,
+
+       EnumDef(x,_):
+             defines unique Type x
+             scopes EnumElement
+
+I can set namespaces for Color and Variables and the reference to ?X? will correctly resolve to the associated definition.
+Const(x,v):
+              defines unique Variable x
+       VarRef(x):
+             refers to Variable x
+What I don?t understand is how to map the term ?FieldAccess(VarRef("Color"), "RED")? so it is seen as referring to the enumerated ?RED? in the declaration of ?Color?.
+
+I tried to follow the example from
+Kats, Lennart CL, and Eelco Visser. "The spoofax language workbench: rules for declarative specification of languages and IDEs." In ACM Sigplan Notices, vol. 45, no. 10, pp. 444-463. ACM, 2010.
+
+FieldAccess(e, f):
+   refers to field f in c
+   where e has type ClassType(c)
+
+but it does not parse in the current version of the tool so perhaps there is a different way.
+
+Thanks
+david
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140304/6027c4b4/attachment-0001.html>
+
+From eduardo7.ufv at gmail.com  Tue Mar 11 15:52:14 2014
+From: eduardo7.ufv at gmail.com (=?ISO-8859-1?Q?Lu=EDs_Eduardo_Souza_Amorim?=)
+Date: Tue, 11 Mar 2014 15:52:14 +0100
+Subject: [Stratego Users] Template language pretty printer broken?
+In-Reply-To: <DUB406-EAS18079CF5B0EDEFCB0D2DE20D08D0@phx.gbl>
+References: <DUB406-EAS18079CF5B0EDEFCB0D2DE20D08D0@phx.gbl>
+Message-ID: <CAMh3W64Ws0+nQS-7jK-TZa546pv97t7mTqOcL_OAWcyCbGnH8w@mail.gmail.com>
+
+Hi Kr?lik,
+
+I would like to see the generated rule for prettyprint-CrClause to see what
+structure it produces.
+add-sep(|sep) is inside a map, which means that it is applied to each
+result of the first strategy (pp-one-V(prettyprint-CrClause)), but this
+does not guarantee that in the resulting V(a, [b]), the size of b is one.
+Maybe there is a bug in the pretty-printer generator, but I would like to
+see the code just to be sure.
+
+Regards,
+
+
+
+On Sat, Mar 1, 2014 at 8:54 PM, Kr?lik Barnab?s <kralikba at msn.com> wrote:
+
+> Hi,
+>
+>
+>
+> I am having some problems with a pretty-printer generated from an sdf3
+> file. I have tracked it down to add-sep/0,1 (in runtime libraries,
+> tmpl/pp.str) called by pp-V-list in the same file.
+>
+> add-sep expects a term that matches V(a, [b]); however, the second subterm
+> is a longer list.
+>
+>
+>
+> The SDF3 code is as follows:
+>
+>     Receive.Receive = <
+>
+>             receive <Expression> of
+>
+>                   <CrClause+; *separator*=";\n"><AfterPart>
+>
+>             end>
+>
+>
+>
+> The generated pretty printer code is:
+>
+>   *prettyprint-Receive :*
+>
+>     Receive(a, b, c) -> [ *H*(
+>
+>                             [*SOpt*(*HS*(), "0")]
+>
+>                           , [*S*("receive "), a493, *S*(" of")]
+>
+>                           )
+>
+>                         , b171
+>
+>                         , *H*(
+>
+>                             [*SOpt*(*HS*(), "0")]
+>
+>                           , [*S*("end")]
+>
+>                           )
+>
+>                         ]
+>
+>     *where* a493 := <pp-one-Z(prettyprint-Expression)> a
+>
+>     *where* b171 := <pp-indent(|"2")> [ <pp-V-list(prettyprint-CrClause|
+> "0", ";")> b
+>
+>                                     , <pp-one-Z(prettyprint-AfterPart)> c
+>
+>                                     ]
+>
+>
+>
+> prettyprint-CrClause succeeds for all items of b and results in the
+> following two items:
+>
+> [H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("5")])])])])])])])])]),Z([],[H([],[S("")])]),S("
+> ->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("9")])])])])])])])])])])]))]
+>
+>
+>
+> [H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("9")])])])])])])])])]),Z([],[H([],[S("")])]),S("
+> ->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("87")])])])])])])])])])])]))]
+>
+>
+>
+> Thanks for your help,
+>
+> Regards
+>
+> Barnab?s
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140311/6c58625b/attachment.html>
+
+From kralikba at msn.com  Tue Mar 11 16:26:58 2014
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Tue, 11 Mar 2014 16:26:58 +0100
+Subject: [Stratego Users] Template language pretty printer broken?
+In-Reply-To: <CAMh3W64Ws0+nQS-7jK-TZa546pv97t7mTqOcL_OAWcyCbGnH8w@mail.gmail.com>
+References: <DUB406-EAS18079CF5B0EDEFCB0D2DE20D08D0@phx.gbl>
+ <CAMh3W64Ws0+nQS-7jK-TZa546pv97t7mTqOcL_OAWcyCbGnH8w@mail.gmail.com>
+Message-ID: <DUB406-EAS387244CA5857F11C3294951D0770@phx.gbl>
+
+Hi Eduardo,
+
+ 
+
+It is as follows: (rest is attached)
+
+ 
+
+prettyprint-CrClause :
+
+    CrClause(a, b, c) -> [ H(
+
+                             [SOpt(HS(), "0")]
+
+                           , [a1901, b679, S(" ->")]
+
+                           )
+
+                         , c189
+
+                         ]
+
+    where a1901 := <pp-one-Z(prettyprint-Expression)> a
+
+    where b679 := <pp-one-Z(prettyprint-ClauseGuard)> b
+
+    where c189 := <pp-indent(|"6")> [ <pp-V-list(prettyprint-Expression|"0",
+",")> c
+
+                                    ]
+
+ 
+
+Thanks for the help!
+
+ 
+
+Regards
+
+Barnab?s
+
+ 
+
+ps. "Kr?lik" is my surname; my e-mail client uses the Hungarian name order
+and I have yet to find a way to let it differentiate when writing in some
+other language :)
+
+ 
+
+From: Users [mailto:users-bounces at strategoxt.org] On Behalf Of Lu?s Eduardo
+Souza Amorim
+Sent: Tuesday, March 11, 2014 3:52 PM
+To: Stratego/XT Users; Stratego/XT Users
+Subject: Re: [Stratego Users] Template language pretty printer broken?
+
+ 
+
+Hi Kr?lik,
+
+ 
+
+I would like to see the generated rule for prettyprint-CrClause to see what
+structure it produces. 
+
+add-sep(|sep) is inside a map, which means that it is applied to each result
+of the first strategy (pp-one-V(prettyprint-CrClause)), but this does not
+guarantee that in the resulting V(a, [b]), the size of b is one.
+
+Maybe there is a bug in the pretty-printer generator, but I would like to
+see the code just to be sure.
+
+ 
+
+Regards,
+
+ 
+
+ 
+
+On Sat, Mar 1, 2014 at 8:54 PM, Kr?lik Barnab?s <kralikba at msn.com
+<mailto:kralikba at msn.com> > wrote:
+
+Hi,
+
+ 
+
+I am having some problems with a pretty-printer generated from an sdf3 file.
+I have tracked it down to add-sep/0,1 (in runtime libraries, tmpl/pp.str)
+called by pp-V-list in the same file. 
+
+add-sep expects a term that matches V(a, [b]); however, the second subterm
+is a longer list.
+
+ 
+
+The SDF3 code is as follows:
+
+    Receive.Receive = <
+
+            receive <Expression> of
+
+                  <CrClause+; separator=";\n"><AfterPart>
+
+            end>
+
+ 
+
+The generated pretty printer code is:
+
+  prettyprint-Receive :
+
+    Receive(a, b, c) -> [ H(
+
+                            [SOpt(HS(), "0")]
+
+                          , [S("receive "), a493, S(" of")]
+
+                          )
+
+                        , b171
+
+                        , H(
+
+                            [SOpt(HS(), "0")]
+
+                          , [S("end")]
+
+                          )
+
+                        ]
+
+    where a493 := <pp-one-Z(prettyprint-Expression)> a
+
+    where b171 := <pp-indent(|"2")> [ <pp-V-list(prettyprint-CrClause|"0",
+";")> b
+
+                                    , <pp-one-Z(prettyprint-AfterPart)> c
+
+                                    ]
+
+ 
+
+prettyprint-CrClause succeeds for all items of b and results in the
+following two items:
+
+[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([
+SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("5")])])])])])])])])]),Z([],[
+H([],[S("")])]),S("
+->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS
+,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0"
+)],[Z([],[S("9")])])])])])])])])])])]))]
+
+ 
+
+[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([
+SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[S("9")])])])])])])])])]),Z([],[
+H([],[S("")])]),S("
+->")]),I([SOpt(IS,"6")],H([SOpt(HS,"0")],[V([SOpt(VS,"0")],[V([],[H([SOpt(HS
+,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0")],[Z([],[H([SOpt(HS,"0"
+)],[Z([],[S("87")])])])])])])])])])])]))]
+
+ 
+
+Thanks for your help,
+
+Regards
+
+Barnab?s
+
+ 
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org <mailto:Users at strategoxt.org> 
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+
+ 
+
+-- 
+
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140311/06f85faa/attachment-0001.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: operlasyn.pp.generated.str
+Type: application/octet-stream
+Size: 45623 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140311/06f85faa/attachment-0001.obj>
+

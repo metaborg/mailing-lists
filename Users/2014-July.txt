@@ -1,0 +1,1137 @@
+From eduardo7.ufv at gmail.com  Wed Jul  9 16:54:27 2014
+From: eduardo7.ufv at gmail.com (Eduardo Souza Amorim)
+Date: Wed, 9 Jul 2014 16:54:27 +0200
+Subject: [Stratego Users] New SDF3 Testing
+Message-ID: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+
+Hi Language Engineers and Spoofax Users,
+
+I have been working for the past few months on a refactored and improved
+version of SDF3 and I need to get feedback from the users in order to fix
+errors that may appear before we migrate it. The changelog can be found in
+https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it covers
+the main changes we implemented in this new version.
+
+To test it you have to import and build the projects in the symbolsorts
+branch of metaborg/sdf from github (
+https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in the
+same workspace as your spoofax project.
+
+There are two changes that you also need to do to get it working:
+
+- Point the property 'syntax' to the location 'src-gen/syntax' in
+build.main.xml file of your project.
+(<property name="syntax" location="src-gen/syntax" />)
+
+- Import the main stratego pp file from src-gen/pp in trans/pp.str. The
+main stratego pp file is the file generated from the main .sdf3 file of
+your grammar (<MainModule>-pp.str).
+
+Please feel free to reply me if you find something that is not working
+properly, or even if you have suggestions of improvements that should be
+implemented.
+
+Best regards,
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140709/b704ba4e/attachment.html>
+
+From cnn at cs.au.dk  Sat Jul 12 00:06:30 2014
+From: cnn at cs.au.dk (Jacob Johannsen)
+Date: Sat, 12 Jul 2014 00:06:30 +0200
+Subject: [Stratego Users] PPDP 2014 Call for Participation
+Message-ID: <53C05FE6.3040403@cs.au.dk>
+
+======================================================================
+
+                CALL FOR PARTICIPATION:
+
+                   PPDP 2014
+            16th International Symposium on
+       Principles and Practice of Declarative Programming
+         Canterbury, Kent, September 8-10, 2014
+          http://users-cs.au.dk/danvy/ppdp14/
+
+                           co-located with
+
+                  LOPSTR 2014
+            24th International Symposium on
+        Logic-Based Program Synthesis and Transformation
+         Canterbury, Kent, September 9-11, 2014
+            http://www.iasi.cnr.it/events/lopstr14/
+
+======================================================================
+
+Registration is now open:
+   http://www.cs.kent.ac.uk/events/2014/ppdp-lopstr-14/
+
+A significant discount is available when registering to both events,
+especially as a student (until August 8).
+
+PPDP 2014 features
+* an invited talk by Roberto Giacobazzi, shared with LOPSTR:
+   "Obscuring Code -- Unveiling and Veiling Information in Programs"
+* no fewer than 4 distilled tutorials by
+   - Henrik Nilsson and Ivan Perez:
+     "Declarative Game Programming"
+   - Danko Ilik:
+     "Proofs in Continuation-Passing Style:
+      normalization of G?del's System T extended with sums and
+      delimited control operators"
+   - Jerzy Karczmarczuk:
+     "On the Declarative Structure of Quantum Concepts:
+      States and Observables"
+   - Ralf Laemmel, Andrei Varanovich, and Martin Leinberger:
+     "Declarative Software Development"
+* a rich program of 22 contributed research talks
+* the most influential paper 10-year award for PPDP 2004
+
+Also, please note a change of dates: LOPSTR will start on September 9,
+rather than September 10 as previously announced.
+
+Hope to see you in Canterbury.
+
+
+
+From p.d.mosses at swansea.ac.uk  Sat Jul 12 10:38:45 2014
+From: p.d.mosses at swansea.ac.uk (Mosses P.D.)
+Date: Sat, 12 Jul 2014 08:38:45 +0000
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+Message-ID: <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+
+Hi Lu?s Eduardo,
+
+The new builders that you've implemented should be especially useful in connection with my migration from SDF2 to SDF3, so I'd like to try using your new version a.s.a.p. However, I noticed the following remark at the end of the changelog:
+
+Parameterized modules and renamings are also not supported.
+
+I'm currently using the parameterized StrategoMix module for Transformation using concrete syntax with Spoofax<https://mailman.st.ewi.tudelft.nl/pipermail/users/2010-June/000183.html>, following the hints given at http://yellowgrass.org/issue/Spoofax/55
+
+It all seems to work OK in an editor for a language called CL, using a fairly recent unstable release of Spoofax  (1.2.0.0-s41649) but I have the following SDF2 rules in syntax/Stratego-CL.sdf3:
+
+module Stratego-CL
+
+imports
+  CL
+  CL-Funcons
+  StrategoMix[StrategoHost]
+
+
+
+context-free syntax
+  Module[[StrategoHost]] -> Start
+
+
+
+  "|[" Abs  "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+?
+
+I get quite a lot of warnings when building my CL editor project (and I need to quit and reopen Eclipse if I make changes in the grammars, which can be quite annoying ? see http://yellowgrass.org/tag/Spoofax/concrete-syntax ) but my Stratego transformations do exactly what I was wanting.
+
+When your refactoring and improvements to SDF3 are migrated into a release of Spoofax, would you expect them to prevent the use of StrategoMix, or should the above use of SDF2 to instantiate StrategoMix in SDF3 still work?
+
+Cheers,
+
+Peter
+
+
+
+On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+
+Hi Language Engineers and Spoofax Users,
+
+I have been working for the past few months on a refactored and improved version of SDF3 and I need to get feedback from the users in order to fix errors that may appear before we migrate it. The changelog can be found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it covers the main changes we implemented in this new version.
+
+To test it you have to import and build the projects in the symbolsorts branch of metaborg/sdf from github (https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in the same workspace as your spoofax project.
+
+There are two changes that you also need to do to get it working:
+
+- Point the property 'syntax' to the location 'src-gen/syntax' in build.main.xml file of your project.
+(<property name="syntax" location="src-gen/syntax" />)
+
+- Import the main stratego pp file from src-gen/pp in trans/pp.str. The main stratego pp file is the file generated from the main .sdf3 file of your grammar (<MainModule>-pp.str).
+
+Please feel free to reply me if you find something that is not working properly, or even if you have suggestions of improvements that should be implemented.
+
+Best regards,
+
+--
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140712/ecac7f99/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Sat Jul 12 17:48:22 2014
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Sat, 12 Jul 2014 15:48:22 +0000
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+Message-ID: <F5D9844F-8CEE-4D3E-AA7C-F20C9909A79F@tudelft.nl>
+
+Hi Peter,
+
+you can migrate your unparameterised SDF2 grammars to SDF3 and keep your parameterised SDF2 grammars for concrete object syntax around. I am currently working with a similar setup.
+
+? Guido Wachsmuth
+
+On 12 Jul 2014, at 01:38 , Mosses P.D. <p.d.mosses at swansea.ac.uk<mailto:p.d.mosses at swansea.ac.uk>> wrote:
+
+Hi Lu?s Eduardo,
+
+The new builders that you've implemented should be especially useful in connection with my migration from SDF2 to SDF3, so I'd like to try using your new version a.s.a.p. However, I noticed the following remark at the end of the changelog:
+
+Parameterized modules and renamings are also not supported.
+
+I'm currently using the parameterized StrategoMix module for Transformation using concrete syntax with Spoofax<https://mailman.st.ewi.tudelft.nl/pipermail/users/2010-June/000183.html>, following the hints given at http://yellowgrass.org/issue/Spoofax/55
+
+It all seems to work OK in an editor for a language called CL, using a fairly recent unstable release of Spoofax  (1.2.0.0-s41649) but I have the following SDF2 rules in syntax/Stratego-CL.sdf3:
+
+module Stratego-CL
+
+imports
+  CL
+  CL-Funcons
+  StrategoMix[StrategoHost]
+
+context-free syntax
+  Module[[StrategoHost]] -> Start
+
+  "|[" Abs  "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+?
+
+I get quite a lot of warnings when building my CL editor project (and I need to quit and reopen Eclipse if I make changes in the grammars, which can be quite annoying ? see http://yellowgrass.org/tag/Spoofax/concrete-syntax ) but my Stratego transformations do exactly what I was wanting.
+
+When your refactoring and improvements to SDF3 are migrated into a release of Spoofax, would you expect them to prevent the use of StrategoMix, or should the above use of SDF2 to instantiate StrategoMix in SDF3 still work?
+
+Cheers,
+
+Peter
+
+
+
+On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+
+Hi Language Engineers and Spoofax Users,
+
+I have been working for the past few months on a refactored and improved version of SDF3 and I need to get feedback from the users in order to fix errors that may appear before we migrate it. The changelog can be found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it covers the main changes we implemented in this new version.
+
+To test it you have to import and build the projects in the symbolsorts branch of metaborg/sdf from github (https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in the same workspace as your spoofax project.
+
+There are two changes that you also need to do to get it working:
+
+- Point the property 'syntax' to the location 'src-gen/syntax' in build.main.xml file of your project.
+(<property name="syntax" location="src-gen/syntax" />)
+
+- Import the main stratego pp file from src-gen/pp in trans/pp.str. The main stratego pp file is the file generated from the main .sdf3 file of your grammar (<MainModule>-pp.str).
+
+Please feel free to reply me if you find something that is not working properly, or even if you have suggestions of improvements that should be implemented.
+
+Best regards,
+
+--
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140712/4ee0791c/attachment.html>
+
+From j.smits-1 at student.tudelft.nl  Sat Jul 12 18:21:05 2014
+From: j.smits-1 at student.tudelft.nl (Jeff Smits)
+Date: Sat, 12 Jul 2014 18:21:05 +0200
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <F5D9844F-8CEE-4D3E-AA7C-F20C9909A79F@tudelft.nl>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+ <F5D9844F-8CEE-4D3E-AA7C-F20C9909A79F@tudelft.nl>
+Message-ID: <CAPvsMmDYM3YheYMgf2BYOKEdreyBQ436gGpPynFwQaH2pLykkA@mail.gmail.com>
+
+Is parametrisation of grammars really going to be dropped?
+It was (AFAIK) the only tool of abstraction in SDF2.
+--
+Jeff
+
+
+On Sat, Jul 12, 2014 at 5:48 PM, Guido Wachsmuth - EWI <
+G.H.Wachsmuth at tudelft.nl> wrote:
+
+>  Hi Peter,
+>
+>  you can migrate your unparameterised SDF2 grammars to SDF3 and keep your
+> parameterised SDF2 grammars for concrete object syntax around. I am
+> currently working with a similar setup.
+>
+>  ? Guido Wachsmuth
+>
+>  On 12 Jul 2014, at 01:38 , Mosses P.D. <p.d.mosses at swansea.ac.uk> wrote:
+>
+>  Hi Lu?s Eduardo,
+>
+>  The new builders that you've implemented should be especially useful in
+> connection with my migration from SDF2 to SDF3, so I'd like to try using
+> your new version a.s.a.p. However, I noticed the following remark at the
+> end of the changelog:
+>
+>  Parameterized modules and renamings are also not supported.
+>
+>
+>  I'm currently using the parameterized StrategoMix module for Transformation
+> using concrete syntax with Spoofax
+> <https://mailman.st.ewi.tudelft.nl/pipermail/users/2010-June/000183.html>, following
+> the hints given at http://yellowgrass.org/issue/Spoofax/55
+>
+>  It all seems to work OK in an editor for a language called CL, using a
+> fairly recent unstable release of Spoofax  (1.2.0.0-s41649) but I have the
+> following SDF2 rules in syntax/Stratego-CL.sdf3:
+>
+>   module Stratego-CL
+>
+>  imports
+>    CL
+>    CL-Funcons
+>    StrategoMix[StrategoHost]
+>
+>  context-free syntax
+>    Module[[StrategoHost]] -> Start
+>
+>    "|[" Abs  "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>  ?
+>
+>  I get quite a lot of warnings when building my CL editor project (and I
+> need to quit and reopen Eclipse if I make changes in the grammars, which
+> can be quite annoying ? see
+> http://yellowgrass.org/tag/Spoofax/concrete-syntax ) but my Stratego
+> transformations do exactly what I was wanting.
+>
+>  When your refactoring and improvements to SDF3 are migrated into a
+> release of Spoofax, would you expect them to prevent the use of
+> StrategoMix, or should the above use of SDF2 to instantiate StrategoMix in
+> SDF3 still work?
+>
+>  Cheers,
+>
+>  Peter
+>
+>
+>
+>  On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+>
+> Hi Language Engineers and Spoofax Users,
+>
+>  I have been working for the past few months on a refactored and improved
+> version of SDF3 and I need to get feedback from the users in order to fix
+> errors that may appear before we migrate it. The changelog can be found in
+> https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it
+> covers the main changes we implemented in this new version.
+>
+>  To test it you have to import and build the projects in the symbolsorts
+> branch of metaborg/sdf from github (
+> https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in
+> the same workspace as your spoofax project.
+>
+>  There are two changes that you also need to do to get it working:
+>
+>  - Point the property 'syntax' to the location 'src-gen/syntax' in
+> build.main.xml file of your project.
+> (<property name="syntax" location="src-gen/syntax" />)
+>
+>  - Import the main stratego pp file from src-gen/pp in trans/pp.str. The
+> main stratego pp file is the file generated from the main .sdf3 file of
+> your grammar (<MainModule>-pp.str).
+>
+>  Please feel free to reply me if you find something that is not working
+> properly, or even if you have suggestions of improvements that should be
+> implemented.
+>
+>  Best regards,
+>
+>  --
+> Lu?s Eduardo de Souza Amorim
+> PhD candidate at Delft University of Technology
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140712/a0b0549f/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Sat Jul 12 20:51:00 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 12 Jul 2014 20:51:00 +0200
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <CAPvsMmDYM3YheYMgf2BYOKEdreyBQ436gGpPynFwQaH2pLykkA@mail.gmail.com>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+ <F5D9844F-8CEE-4D3E-AA7C-F20C9909A79F@tudelft.nl>
+ <CAPvsMmDYM3YheYMgf2BYOKEdreyBQ436gGpPynFwQaH2pLykkA@mail.gmail.com>
+Message-ID: <CAFaCHU38NcG0Z_zau_APSuwuLdrYfdk+4g-=oZ4PsH3B0wWwVg@mail.gmail.com>
+
+Hi Jeff,
+
+Is parametrisation of grammars really going to be dropped?
+> It was (AFAIK) the only tool of abstraction in SDF2.
+>
+
+No, that is not the plan. But we need a better design than (just) the
+parametrization of SDF2.
+
+-- Eelco
+
+
+> --
+> Jeff
+>
+>
+> On Sat, Jul 12, 2014 at 5:48 PM, Guido Wachsmuth - EWI <
+> G.H.Wachsmuth at tudelft.nl> wrote:
+>
+>>  Hi Peter,
+>>
+>>  you can migrate your unparameterised SDF2 grammars to SDF3 and keep
+>> your parameterised SDF2 grammars for concrete object syntax around. I am
+>> currently working with a similar setup.
+>>
+>>  ? Guido Wachsmuth
+>>
+>>  On 12 Jul 2014, at 01:38 , Mosses P.D. <p.d.mosses at swansea.ac.uk> wrote:
+>>
+>>  Hi Lu?s Eduardo,
+>>
+>>  The new builders that you've implemented should be especially useful in
+>> connection with my migration from SDF2 to SDF3, so I'd like to try using
+>> your new version a.s.a.p. However, I noticed the following remark at the
+>> end of the changelog:
+>>
+>>  Parameterized modules and renamings are also not supported.
+>>
+>>
+>>  I'm currently using the parameterized StrategoMix module for Transformation
+>> using concrete syntax with Spoofax
+>> <https://mailman.st.ewi.tudelft.nl/pipermail/users/2010-June/000183.html>, following
+>> the hints given at http://yellowgrass.org/issue/Spoofax/55
+>>
+>>  It all seems to work OK in an editor for a language called CL, using a
+>> fairly recent unstable release of Spoofax  (1.2.0.0-s41649) but I have the
+>> following SDF2 rules in syntax/Stratego-CL.sdf3:
+>>
+>>   module Stratego-CL
+>>
+>>  imports
+>>    CL
+>>    CL-Funcons
+>>    StrategoMix[StrategoHost]
+>>
+>>  context-free syntax
+>>    Module[[StrategoHost]] -> Start
+>>
+>>    "|[" Abs  "]|" -> Term[[StrategoHost]] {cons("ToTerm"),prefer}
+>>  ?
+>>
+>>  I get quite a lot of warnings when building my CL editor project (and I
+>> need to quit and reopen Eclipse if I make changes in the grammars, which
+>> can be quite annoying ? see
+>> http://yellowgrass.org/tag/Spoofax/concrete-syntax ) but my Stratego
+>> transformations do exactly what I was wanting.
+>>
+>>  When your refactoring and improvements to SDF3 are migrated into a
+>> release of Spoofax, would you expect them to prevent the use of
+>> StrategoMix, or should the above use of SDF2 to instantiate StrategoMix in
+>> SDF3 still work?
+>>
+>>  Cheers,
+>>
+>>  Peter
+>>
+>>
+>>
+>>  On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+>>
+>> Hi Language Engineers and Spoofax Users,
+>>
+>>  I have been working for the past few months on a refactored and
+>> improved version of SDF3 and I need to get feedback from the users in order
+>> to fix errors that may appear before we migrate it. The changelog can be
+>> found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and
+>> it covers the main changes we implemented in this new version.
+>>
+>>  To test it you have to import and build the projects in the symbolsorts
+>> branch of metaborg/sdf from github (
+>> https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in
+>> the same workspace as your spoofax project.
+>>
+>>  There are two changes that you also need to do to get it working:
+>>
+>>  - Point the property 'syntax' to the location 'src-gen/syntax' in
+>> build.main.xml file of your project.
+>> (<property name="syntax" location="src-gen/syntax" />)
+>>
+>>  - Import the main stratego pp file from src-gen/pp in trans/pp.str. The
+>> main stratego pp file is the file generated from the main .sdf3 file of
+>> your grammar (<MainModule>-pp.str).
+>>
+>>  Please feel free to reply me if you find something that is not working
+>> properly, or even if you have suggestions of improvements that should be
+>> implemented.
+>>
+>>  Best regards,
+>>
+>>  --
+>> Lu?s Eduardo de Souza Amorim
+>> PhD candidate at Delft University of Technology
+>>  _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>  _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140712/66812162/attachment.html>
+
+From erdweg at informatik.tu-darmstadt.de  Fri Jul 18 15:29:08 2014
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Fri, 18 Jul 2014 15:29:08 +0200
+Subject: [Stratego Users] Call for Talk Proposals: Parsing@SLE
+Message-ID: <B4F0FF6A-4317-4935-83B3-EC4E12992E98@informatik.tu-darmstadt.de>
+
+*********************************************************************
+CALL FOR TALK PROPOSALS
+
+Second Workshop on 
+Parsing at SLE 2014
+
+September 14, 2014
+V?ster?s, Sweden
+Co-located with ASE, SLE, and GPCE
+
+http://www.sleconf.org/2014/Parsing-at-SLE.html
+*********************************************************************
+
+Deadline for talk proposals: July 25, 2014
+
+The goal of this workshop is to bring together today's experts in the fields of
+parser construction and parser application from across the diverse application
+areas. Participants will present ongoing work as well as explore the challenges
+that lie ahead. By bringing the whole community together (a rare occurrence,
+given the diversity of domain-specific conferences/workshops), we aim to forge
+new collaborations inspired by a wide-ranging collection of talks on
+parsing-related topics.
+
+*** Topics ***
+
+While parsing and parser generation, both in theory and in practice, are mature
+topics, there are challenging problems with respect to the construction,
+maintenance, optimization, and application of parsers in real-world scenarios.
+
+Especially in the context of real programming languages there are ample
+theoretical as well as practical obstacles to be overcome. Contemporary parsing
+challenges are caused by programming-language evolution and diversity in the
+face of new application areas such as IDE construction, reverse engineering,
+software metrics, domain specific (embedded) languages, etc. What are modular
+meta-formalisms for parser generation? How to obtain (fast and correct) parsers
+for both legacy and new languages that require more computational power than
+context-free grammars and regular expressions can provide? How to enable the
+verified construction or prototyping of parsers for languages such as COBOL, C++
+and Scala without years of effort?
+
+In addition to the traditional programming-language applications of parsing
+technology, several other areas of computing also depend heavily on
+parsers. Examples include computational linguistics, network traffic
+classification, network security, and bioinformatics. Those areas often have
+their own unusual requirements, such as: speed (e.g. in network algorithmics),
+memory efficiency (e.g. embedded devices for networks, but also computational
+linguistics), or rapid/dynamic parser construction (e.g. in network traffic
+classification and in bioinformatics) as grammars are adapted. We specifically
+encourage talk proposals on parsing challenges and solutions in these
+non-traditional areas.
+
+*** Call for Submissions ***
+
+We solicit talk proposals in the form of short abstracts (max. 2 pages in ACM
+2-column format). A good talk proposal describes an interesting position,
+demonstration, or early achievement. The submissions will be reviewed on
+relevance and clarity, and used to plan the mostly interactive sessions of the
+workshop day. Publication of accepted abstracts and slides on the website is
+voluntary.
+
+* Deadline for talk proposals: July 25, 2014
+* Workshop: September 14, 2014
+* Notification: August 6, 2014
+* Submission website: https://www.easychair.org/conferences/?conf=parsingsle2014
+
+*** Workshop Organization ***
+
+Organizers
+
+* Sebastian Erdweg, TU Darmstadt, Germany
+* Bruce Watson, FASTAR, Stellenbosch University, South Africa
+
+
+____________________
+Racket Users list:
+http://lists.racket-lang.org/users
+
+
+From p.d.mosses at swansea.ac.uk  Tue Jul 22 13:47:49 2014
+From: p.d.mosses at swansea.ac.uk (Peter Mosses)
+Date: Tue, 22 Jul 2014 12:47:49 +0100
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+Message-ID: <7276BDBB-ABF7-433F-BB47-7BE14EFF479F@swansea.ac.uk>
+
+Hi again Eduardo,
+
+On 12 Jul 2014, at 09:38, I wrote:
+
+> The new builders that you've implemented should be especially useful in connection with my migration from SDF2 to SDF3,
+
+I've noticed what seems to be a minor bug: When editing an SDF3 grammar, the new Format (abstract) builder generates concrete SDF3 text in the .aterm file, instead of the expected abstract syntax. The other builders appear to work OK. 
+
+In particular, I'm happy to see that when editing an SDF2 grammar, the Lift to SDF3 (concrete) builder produces an SDF3 grammar with regular productions (i.e., no templates). To convert an SDF3 grammar using templates to regular productions, however, it seems I need to first generate SDF2, then use Lift to SDF3 (concrete) ? could you perhaps add a builder for doing that in one go?
+
+Many thanks for making it so easy to migrate from SDF2 to SDF3!
+
+Best regards,
+
+Peter
+
+On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+
+Hi Language Engineers and Spoofax Users,
+
+I have been working for the past few months on a refactored and improved version of SDF3 and I need to get feedback from the users in order to fix errors that may appear before we migrate it. The changelog can be found in https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it covers the main changes we implemented in this new version.
+
+To test it you have to import and build the projects in the symbolsorts branch of metaborg/sdf from github (https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in the same workspace as your spoofax project.
+
+There are two changes that you also need to do to get it working:
+
+- Point the property 'syntax' to the location 'src-gen/syntax' in build.main.xml file of your project.
+(<property name="syntax" location="src-gen/syntax" />)
+
+- Import the main stratego pp file from src-gen/pp in trans/pp.str. The main stratego pp file is the file generated from the main .sdf3 file of your grammar (<MainModule>-pp.str).
+
+Please feel free to reply me if you find something that is not working properly, or even if you have suggestions of improvements that should be implemented.
+
+Best regards,
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140722/e05075b2/attachment.html>
+
+From eduardo7.ufv at gmail.com  Tue Jul 22 14:05:36 2014
+From: eduardo7.ufv at gmail.com (Eduardo Souza Amorim)
+Date: Tue, 22 Jul 2014 14:05:36 +0200
+Subject: [Stratego Users] New SDF3 Testing
+In-Reply-To: <7276BDBB-ABF7-433F-BB47-7BE14EFF479F@swansea.ac.uk>
+References: <CAMh3W67i_GVwEo0c9VQ3K890L+Q8VmDPoxtX6W_g5JUj5pMiag@mail.gmail.com>
+ <4EB361A4-B8F3-48D5-8936-8EB656CBF0EE@swansea.ac.uk>
+ <7276BDBB-ABF7-433F-BB47-7BE14EFF479F@swansea.ac.uk>
+Message-ID: <CAMh3W66uvwsVs=NxzwaFL2qkFB1ZrcF7DpKCxhgyrV+XNuSxMA@mail.gmail.com>
+
+Hi Peter,
+
+Good to know they are being helpful. When we decided to move to SDF3, we
+had in mind that would be useful to have such conversion tools to support
+users that were still using SDF2.
+I have been working on refactoring the ant files the last few days, so we
+could drop some tools that were being called in the previous
+implementation, e.g., the signature generator from .rtg files.
+Hopefully they will be added to Spoofax soon, so the build process is gonna
+be a little more quick.
+
+I will fix the *Format (abstract) *builder as soon as possible. I was using
+it to keep track of the changes that I was doing on the AST and it was
+defined just for developing purposes. I think I had it working, but
+I changed it at some point, and did not change it back.
+
+Yes, it is a good idea to have a builder to extract regular productions
+from templates. It should be straightforward to do it as well. I will work
+to have it done by the end of the week and commit it to github.
+
+I really appreciate your feedback, please let me know if there is something
+else you found interesting to have implemented on it.
+
+Best regards,
+
+
+
+On Tue, Jul 22, 2014 at 1:47 PM, Peter Mosses <p.d.mosses at swansea.ac.uk>
+wrote:
+
+> Hi again Eduardo,
+>
+> On 12 Jul 2014, at 09:38, I wrote:
+>
+> The new builders that you've implemented should be especially useful in
+> connection with my migration from SDF2 to SDF3,
+>
+>
+> I've noticed what seems to be a minor bug: When editing an SDF3 grammar,
+> the new *Format (abstract)* builder generates concrete SDF3 *text* in the
+> .aterm file, instead of the expected abstract syntax. The other builders
+> appear to work OK.
+>
+> In particular, I'm happy to see that when editing an SDF2 grammar, the *Lift
+> to SDF3 (concrete)* builder produces an SDF3 grammar with *regular*
+> productions (i.e., no templates). To convert an SDF3 grammar using
+> templates to regular productions, however, it seems I need to first
+> generate SDF2, then use Lift to SDF3 (concrete) ? could you perhaps add a
+> builder for doing that in one go?
+>
+> Many thanks for making it so easy to migrate from SDF2 to SDF3!
+>
+> Best regards,
+>
+> Peter
+>
+>  On 9 Jul 2014, at 15:54, Eduardo Souza Amorim wrote:
+>
+> Hi Language Engineers and Spoofax Users,
+>
+>  I have been working for the past few months on a refactored and improved
+> version of SDF3 and I need to get feedback from the users in order to fix
+> errors that may appear before we migrate it. The changelog can be found in
+> https://github.com/metaborg/sdf/blob/symbolsorts/changeLog.md and it
+> covers the main changes we implemented in this new version.
+>
+>  To test it you have to import and build the projects in the symbolsorts
+> branch of metaborg/sdf from github (
+> https://github.com/metaborg/sdf/tree/symbolsorts) and have it opened in
+> the same workspace as your spoofax project.
+>
+>  There are two changes that you also need to do to get it working:
+>
+>  - Point the property 'syntax' to the location 'src-gen/syntax' in
+> build.main.xml file of your project.
+> (<property name="syntax" location="src-gen/syntax" />)
+>
+>  - Import the main stratego pp file from src-gen/pp in trans/pp.str. The
+> main stratego pp file is the file generated from the main .sdf3 file of
+> your grammar (<MainModule>-pp.str).
+>
+>  Please feel free to reply me if you find something that is not working
+> properly, or even if you have suggestions of improvements that should be
+> implemented.
+>
+>  Best regards,
+>
+>  --
+> Lu?s Eduardo de Souza Amorim
+> PhD candidate at Delft University of Technology
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Lu?s Eduardo de Souza Amorim
+PhD candidate at Delft University of Technology
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140722/00284a49/attachment.html>
+
+From erdweg at informatik.tu-darmstadt.de  Thu Jul 24 17:21:54 2014
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Thu, 24 Jul 2014 17:21:54 +0200
+Subject: [Stratego Users] Call and Extension: Second Workshop on Parsing@SLE
+	2014
+Message-ID: <3A2CA5CA-4409-4BC1-9776-57DB1D521607@informatik.tu-darmstadt.de>
+
+*********************************************************************
+CALL FOR TALK PROPOSALS
+
+Second Workshop on 
+Parsing at SLE 2014
+
+September 14, 2014
+V?ster?s, Sweden
+Co-located with ASE, SLE, and GPCE
+
+http://www.sleconf.org/2014/Parsing-at-SLE.html
+*********************************************************************
+Deadline for talk proposals: August 5, 2014
+
+The goal of this workshop is to bring together today's experts in the fields of
+parser construction and parser application from across the diverse application
+areas. Participants will present ongoing work as well as explore the
+challenges that lie ahead. By bringing the whole community together (a rare
+occurrence, given the diversity of domain-specific conferences/workshops), we
+aim to forge new collaborations inspired by a wide-ranging collection of talks on
+parsing-related topics.
+
+*** Topics ***
+
+While parsing and parser generation, both in theory and in practice, are mature
+topics, there are challenging problems with respect to the construction,
+maintenance, optimization, and application of parsers in real-world scenarios.
+
+Especially in the context of real programming languages there are ample
+theoretical as well as practical obstacles to be overcome. Contemporary parsing
+challenges are caused by programming-language evolution and diversity in the
+face of new application areas such as IDE construction, reverse engineering,
+software metrics, domain specific (embedded) languages, etc. What are modular
+meta-formalisms for parser generation? How to obtain (fast and correct) parsers
+for both legacy and new languages that require more computational power than
+context-free grammars and regular expressions can provide? How to enable the
+verified construction or prototyping of parsers for languages such as COBOL, C++
+and Scala without years of effort?
+
+In addition to the traditional programming-language applications of parsing
+technology, several other areas of computing also depend heavily on
+parsers. Examples include computational linguistics, network traffic
+classification, network security, and bioinformatics. Those areas often have
+their own unusual requirements, such as: speed (e.g. in network algorithmics),
+memory efficiency (e.g. embedded devices for networks, but also computational
+linguistics), or rapid/dynamic parser construction (e.g. in network traffic
+classification and in bioinformatics) as grammars are adapted. We specifically
+encourage talk proposals on parsing challenges and solutions in these non-traditional
+areas.
+
+*** Call for Submissions ***
+
+We solicit talk proposals in the form of short abstracts (max. 2 pages in ACM 2-column format).
+A good talk proposal describes an interesting position, demonstration, or early
+achievement. The submissions will be reviewed on relevance and clarity, and used
+to plan the mostly interactive sessions of the workshop day. Publication of
+accepted abstracts and slides on the website is voluntary.
+
+* Deadline for talk proposals: August 5, 2014 (was July 25, 2014)
+* Notification: August 8, 2014
+* Workshop: September 14, 2014
+* Submission website: https://www.easychair.org/conferences/?conf=parsingsle2014
+
+*** Workshop Organization ***
+
+Organizers
+
+* Sebastian Erdweg, TU Darmstadt, Germany
+* Bruce Watson, FASTAR, Stellenbosch University, South Africa
+
+From cnn at cs.au.dk  Sun Jul 27 15:00:25 2014
+From: cnn at cs.au.dk (Jacob Johannsen)
+Date: Sun, 27 Jul 2014 15:00:25 +0200
+Subject: [Stratego Users] PPDP 2014: Program and 2nd Call for Participation
+Message-ID: <53D4F7E9.3020307@cs.au.dk>
+
+======================================================================
+
+		       CALL FOR PARTICIPATION:
+
+			      PPDP 2014
+		   16th International Symposium on
+	  Principles and Practice of Declarative Programming
+		Canterbury, Kent, September 8-10, 2014
+		 http://users-cs.au.dk/danvy/ppdp14/
+				
+                           co-located with
+
+			     LOPSTR 2014
+		   24th International Symposium on
+	   Logic-Based Program Synthesis and Transformation
+		Canterbury, Kent, September 9-11, 2014
+	       http://www.iasi.cnr.it/events/lopstr14/
+
+======================================================================
+
+Two weeks left for early registration (until August 8):
+   http://www.cs.kent.ac.uk/events/2014/ppdp-lopstr-14/
+
+A significant discount is available when registering to both events,
+especially as a student (until August 8).
+
+PPDP 2014 features
+* an invited talk by Roberto Giacobazzi, shared with LOPSTR:
+   "Obscuring Code -- Unveiling and Veiling Information in Programs"
+* no fewer than 4 distilled tutorials by
+   - Henrik Nilsson and Ivan Perez:
+     "Declarative Game Programming"
+   - Danko Ilik:
+     "Proofs in Continuation-Passing Style:
+      normalization of G?del's System T extended with sums and
+      delimited control operators"
+   - Jerzy Karczmarczuk:
+     "On the Declarative Structure of Quantum Concepts:
+      States and Observables"
+   - Ralf Laemmel, Andrei Varanovich, and Martin Leinberger:
+     "Declarative Software Development"
+* the most influential paper 10-year award for PPDP 2004
+
+
+Tentative program:
+
+==========
+
+Monday 8 September
+
+Welcome to PPDP 2014 - 08:45-09:00
+   Olaf Chitil and Andy King
+
+Distilled Tutorial - 9:00-10:00
+   Ralf Laemmel
+   "Declarative Software Development"
+
+Break - 10:00-10:15
+
+Session - 10:15-11:15
+
+10:15-10:45
+   R?mi Douence and Nicolas Tabareau
+   "Lazier Imperative Programming"
+
+10:45-11:15
+   Stefan Mehner, Daniel Seidel, Lutz Stra?burger and Janis Voigtl?nder
+   "Parametricity and Proving Free Theorems for Functional-Logic Languages"
+
+Break - 11:15-11:30
+
+Session - 11:30-12:30
+
+11:30:-12:00
+   Paul Tarau
+   "Bijective Collection Encodings and Boolean Operations
+    with Hereditarily Binary Natural Numbers"
+
+12:00-12:30
+   Flavio Cruz, Ricardo Rocha and Seth Goldstein
+   "Design and implementation of a multithreaded virtual machine
+    for executing linear logic programs"
+
+Lunch break - 12:30-14:00
+
+Distilled tutorial - 14:00-15:00
+   Danko Ilik
+   "Proofs in Continuation-Passing Style:
+    normalization of G?del's System T
+    extended with sums and delimited control operators"
+
+Break - 15:00-15:15
+
+Session - 15:15-16:15
+
+15:15-15:45
+   Kenichi Asai, Luminous Fennell, Peter Thiemann and Yang Zhang
+   "A Type Theoretic Specification for Partial Evaluation"
+
+15:45-16:15
+   Paul Downen, Luke Maurer, Zena Ariola and Daniele Varacca
+   "Continuations, Processes, and Sharing"
+
+Break - 16:15-16:30
+
+Session - 16:30-17:30
+
+16:30-17:00
+   Pierre Neron
+   "Partial Inlining for Program Transformation"
+
+17:00-17:30
+   Jean-Louis Giavitto and Jos? Echeveste
+   "Real-Time Matching of Antescofo Temporal Patterns"
+
+Program-chair report - 17:30-17:45
+   Olivier Danvy
+
+----------
+
+Tuesday 9 September
+
+Distilled tutorial - 9:00-10:00
+   Jerzy Karczmarczuk
+   "On the Declarative Structure of Quantum Concepts:
+    States and Observables"
+
+Break - 10:00-10:15
+
+Session - 10:15-11:15
+
+10:15-10:45
+   Jos? Meseguer and Salvador Lucas
+   "Proving Operational Termination of Declarative Programs in General 
+Logics"
+
+10:45-11:15
+   Fan Yang, Santiago Escobar, Catherine Meadows, Jos? Meseguer and 
+Paliath Narendran
+   "Theories of Homomorphic Encryption, Unification, and the Finite 
+Variant Property"
+
+Break - 11:15-11:30
+
+Session - 11:30-12:30
+
+11:30:-12:00
+   Tzu-Chun Chen, Mariangiola Dezani-Ciancaglini and Nobuko Yoshida
+   "On the Preciseness of Subtyping in Session Types"
+
+12:00-12:30
+   Hugo Pacheco, Tao Zan and Zhenjiang Hu
+   "BiFluX: A Bidirectional Functional Update Language for XML"
+
+Lunch break - 12:30-14:00
+
+Distilled tutorial - 14:00-15:00
+   Henrik Nilsson
+   "Declarative Game Programming"
+
+Break - 15:00-15:15
+
+Session - 15:15-16:15
+
+15:15-15:45
+   Francisco Ferreira and Brigitte Pientka
+   "Bidirectional Elaboration of Dependently Typed Programs"
+
+15:45-16:15
+   Steven Ramsay
+   "Exact Intersection Type Abstractions for Safety Checking of 
+Recursion Schemes"
+
+Break - 16:15-16:30
+
+Session - 16:30-17:30
+
+16:30-17:00
+   Julian Kranz and Axel Simon
+   "Structure-Preserving Compilation:
+    Efficient Integration of Functional DSLs into Legacy Systems"
+
+17:00-17:30
+   Ulrich Sch?pp
+   "Organising Low-Level Programs using Higher Types"
+
+----------
+
+Wednesday 10 September
+
+Invited talk - 9:00-10:00
+   Roberto Giacobazzi
+   Obscuring Code -- Unveiling and Veiling Information in Programs
+
+Break - 10:00-10:15
+
+Session - 10:15-11:15
+
+10:15-10:45
+   R?my Haemmerl?
+   "On Combining Backward and Forward Chaining in Constraint Logic 
+Programming"
+
+10:45-11:15
+   Nataliia Stulova, Jose F. Morales and Manuel V. Hermenegildo
+   "Assertion-based Debugging of Higher-Order (C)LP Programs"
+
+Break - 11:15-11:30
+
+Session - 11:30-12:30
+
+11:30:-12:00
+   Takahito Aoto and Sorin Stratulat
+   "Decision Procedures for Proving Inductive Theorems without Induction"
+
+12:00-12:30
+   Joachim Jansen, Ingmar Dasseville, Jo Devriendt and Gerda Janssens
+   "Experimental Evaluation of a State-of-the-Art Grounder"
+
+Lunch break - 12:30-13:30
+
+Session - 13:30-14:30
+
+13:30:-14:00
+   Tom Schrijvers, Nicolas Wu, Benoit Desouter and Bart Demoen
+   "Heuristics entwined with handlers combined"
+
+14:00-14:30
+   James Cheney, Amal Ahmed and Umut Acar
+   "Database queries that explain their work"
+
+==========
+
+Also, please note a change of dates: LOPSTR will start on September 9,
+rather than September 10 as previously announced.
+
+See you in Canterbury!
+

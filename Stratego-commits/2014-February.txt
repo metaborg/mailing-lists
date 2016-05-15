@@ -1,0 +1,710 @@
+From oskarvanrest at gmail.com  Sat Feb  8 14:43:22 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sat, 08 Feb 2014 13:43:22 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26174 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140208134323.9AF5D460052@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sat Feb  8 13:43:21 2014
+New Revision: 26174
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26174&sc=1
+
+Log:
+Remove reference to apacheAntOpenJDK
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Thu Jan 30 12:28:12 2014	(r26173)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Feb  8 13:43:21 2014	(r26174)
+@@ -251,7 +251,7 @@
+       inherit (jobs) src;
+       inherit (jobs) generator;
+ 
+-      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
++      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk strategoPackages.sdf ];
+       mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+ 
+       M2_REPO="tmp/m3";
+
+From oskarvanrest at gmail.com  Sat Feb  8 14:44:15 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sat, 08 Feb 2014 13:44:15 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26175 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140208134416.D955846012D@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sat Feb  8 13:44:15 2014
+New Revision: 26175
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26175&sc=1
+
+Log:
+ecj.jar moved to share
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Feb  8 13:43:21 2014	(r26174)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Feb  8 13:44:15 2014	(r26175)
+@@ -332,7 +332,7 @@
+               <artifactId>ecj</artifactId>
+               <version>1.0</version>
+               <scope>system</scope>
+-              <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
++              <systemPath>${pkgs.ecj}/share/java/ecj.jar</systemPath>
+           </dependency>
+           <dependency>
+              <groupId>jline</groupId>
+
+From oskarvanrest at gmail.com  Sun Feb  9 20:17:28 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sun, 09 Feb 2014 19:17:28 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26176 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140209191729.E9ACD760118@mx4.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sun Feb  9 19:17:27 2014
+New Revision: 26176
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26176&sc=1
+
+Log:
+changed dir name (Hydra doesn't like the other one)
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Feb  8 13:44:15 2014	(r26175)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sun Feb  9 19:17:27 2014	(r26176)
+@@ -21,7 +21,7 @@
+ , imppatched ? { outPath = ../../../imp-patched ; revCount = 9999; }
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+-, modelware ? { outPath = ../../../spoofax-modelware ; revCount = 9999; }
++, modelware ? { outPath = ../../../spoofax-mw ; revCount = 9999; }
+ 
+ , strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
+ , strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+
+From oskarvanrest at gmail.com  Mon Feb 10 10:52:53 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 10 Feb 2014 09:52:53 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26177 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140210095519.945E372017F@mx1.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Feb 10 09:52:52 2014
+New Revision: 26177
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26177&sc=1
+
+Log:
+fix
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sun Feb  9 19:17:27 2014	(r26176)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Feb 10 09:52:52 2014	(r26177)
+@@ -21,7 +21,7 @@
+ , imppatched ? { outPath = ../../../imp-patched ; revCount = 9999; }
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+-, modelware ? { outPath = ../../../spoofax-mw ; revCount = 9999; }
++, modelware ? { outPath = ../../../modelware ; revCount = 9999; }
+ 
+ , strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
+ , strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+
+From gabrielkonat at gmail.com  Wed Feb 12 19:12:30 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Wed, 12 Feb 2014 18:12:30 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26178 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140212181231.BB20F7201CD@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Wed Feb 12 18:12:29 2014
+New Revision: 26178
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26178&sc=1
+
+Log:
+Try to force Tycho to use Java 7.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Mon Feb 10 09:52:52 2014	(r26177)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Wed Feb 12 18:12:29 2014	(r26178)
+@@ -280,6 +280,15 @@
+ <build>
+   <plugins>
+     <plugin>
++       <groupId>org.codehaus.tycho</groupId>
++       <artifactId>maven-osgi-compiler-plugin</artifactId>
++       <version>${tycho-version}</version>
++       <configuration>
++         <source>1.7</source>
++         <target>1.7</target>
++       </configuration>
++    </plugin> 
++    <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <dependencies>
+@@ -388,6 +397,15 @@
+ <build>
+   <plugins>
+     <plugin>
++       <groupId>org.codehaus.tycho</groupId>
++       <artifactId>maven-osgi-compiler-plugin</artifactId>
++       <version>${tycho-version}</version>
++       <configuration>
++         <source>1.7</source>
++         <target>1.7</target>
++       </configuration>
++    </plugin>
++    <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <executions>
+
+From gabrielkonat at gmail.com  Thu Feb 13 00:17:04 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Wed, 12 Feb 2014 23:17:04 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26179 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140212231705.9A6C57601B0@mx4.tudelft.nl>
+
+Author: gkonat
+Date: Wed Feb 12 23:17:03 2014
+New Revision: 26179
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26179&sc=1
+
+Log:
+Escape ${
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Feb 12 18:12:29 2014	(r26178)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Wed Feb 12 23:17:03 2014	(r26179)
+@@ -282,7 +282,7 @@
+     <plugin>
+        <groupId>org.codehaus.tycho</groupId>
+        <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>${tycho-version}</version>
++       <version>\${tycho-version}</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+@@ -399,7 +399,7 @@
+     <plugin>
+        <groupId>org.codehaus.tycho</groupId>
+        <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>${tycho-version}</version>
++       <version>\${tycho-version}</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+
+From v.vergu+vc at gmail.com  Thu Feb 13 10:19:16 2014
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 13 Feb 2014 09:19:16 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26180 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140213091918.1174F46014F@mx2.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Feb 13 09:19:15 2014
+New Revision: 26180
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26180&sc=1
+
+Log:
+Trying to force tycho/maven to use Java 1.7
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Feb 12 23:17:03 2014	(r26179)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Feb 13 09:19:15 2014	(r26180)
+@@ -282,7 +282,7 @@
+     <plugin>
+        <groupId>org.codehaus.tycho</groupId>
+        <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>\${tycho-version}</version>
++       <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+@@ -399,7 +399,7 @@
+     <plugin>
+        <groupId>org.codehaus.tycho</groupId>
+        <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>\${tycho-version}</version>
++       <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+
+From gabrielkonat at gmail.com  Thu Feb 13 14:43:41 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 13 Feb 2014 13:43:41 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26181 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140213134342.CE16A460136@mx2.tudelft.nl>
+
+Author: gkonat
+Date: Thu Feb 13 13:43:41 2014
+New Revision: 26181
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26181&sc=1
+
+Log:
+Use latest version of Tycho.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Feb 13 09:19:15 2014	(r26180)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Feb 13 13:43:41 2014	(r26181)
+@@ -27,6 +27,8 @@
+ , javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
+ , hydraConfig ? { outPath = ../../. ; revCount = 9999; }
++
++, shrike ? { outPath = ../../../com.ibm.wala.shrike ; revCount = 9999; }
+ }:
+ let
+   plus = a : b : ( builtins.add a b );
+@@ -46,12 +48,6 @@
+     sha256 = "6d35823d5ae86ea4c71bc653747d1234c1587662882a76738d2881fb409394ab";
+   };
+ 
+-  shrike = pkgs.fetchsvn {
+-    url = https://wala.svn.sourceforge.net/svnroot/wala/trunk/com.ibm.wala.shrike;
+-    rev = 3073;
+-    sha256 = "0y13i31xlhian5glk4cahbzxg4mky4q61qzc5g03qkg4d67k12zd";
+-  };
+-
+   guava = pkgs.fetchurl {
+     url = http://search.maven.org/remotecontent?filepath=com/google/guava/guava/14.0.1/guava-14.0.1.jar;
+     sha256 = "d69df3331840605ef0e5fe4add60f2d28e870e3820937ea29f713d2035d9ab97";
+@@ -207,8 +203,7 @@
+       name = "spoofax-imp-generator-s${spoofaxRev}";
+       inherit (jobs) src;
+ 
+-      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.strategoxt 
+-strategoPackages.javafront ecj openjdk ];
++      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.strategoxt strategoPackages.javafront ecj openjdk ];
+ 
+       preConfigure = ''
+         cd org.strategoxt.imp.generator
+@@ -260,8 +255,8 @@
+         #hack
+         mkdir -p plugins
+         export eclipsefakehome=`pwd`
+-            
+-        mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
++
++        mvn org.eclipse.tycho:tycho-pomgenerator-plugin:generate-poms ${mvnFlags}            
+ 
+         mkdir -p org.strategoxt.strj/java
+         cp ${strj}/share/strategoxt/strategoxt/strategoxt.jar org.strategoxt.strj/java/
+@@ -280,15 +275,6 @@
+ <build>
+   <plugins>
+     <plugin>
+-       <groupId>org.codehaus.tycho</groupId>
+-       <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>3.1</version>
+-       <configuration>
+-         <source>1.7</source>
+-         <target>1.7</target>
+-       </configuration>
+-    </plugin> 
+-    <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <dependencies>
+@@ -397,15 +383,6 @@
+ <build>
+   <plugins>
+     <plugin>
+-       <groupId>org.codehaus.tycho</groupId>
+-       <artifactId>maven-osgi-compiler-plugin</artifactId>
+-       <version>3.1</version>
+-       <configuration>
+-         <source>1.7</source>
+-         <target>1.7</target>
+-       </configuration>
+-    </plugin>
+-    <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <executions>
+@@ -433,7 +410,33 @@
+           fi
+         done
+ 
+-        mvn package ${mvnFlags} -e
++sed -i 's|</build>||' pom.xml
++sed -i 's|</project>||' pom.xml
++echo '
++<pluginManagement>
++<plugins>
++<plugin>
++    <groupId>org.eclipse.tycho</groupId>
++    <artifactId>tycho-packaging-plugin</artifactId>
++    <version>0.19.0</version>
++    <configuration>
++        <strictBinIncludes>false</strictBinIncludes>
++    </configuration>
++</plugin>
++
++<plugin>
++    <groupId>org.eclipse.tycho</groupId>
++    <artifactId>tycho-compiler-plugin</artifactId>
++    <version>0.19.0</version>
++    <configuration>
++        <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
++    </configuration>
++</plugin>
++
++</plugins>
++</pluginManagement>
++</build></project>' >> pom.xml
++
+         mvn integration-test ${mvnFlags} -e
+       '';
+           
+
+From v.vergu+vc at gmail.com  Sat Feb 15 11:05:16 2014
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Sat, 15 Feb 2014 10:05:16 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26182 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140215100517.6B42C46010D@mx2.tudelft.nl>
+
+Author: VladVergu
+Date: Sat Feb 15 10:05:14 2014
+New Revision: 26182
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26182&sc=1
+
+Log:
+Trying to build the generator with Java-bootstrapped StrategoXT
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Feb 13 13:43:41 2014	(r26181)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Sat Feb 15 10:05:14 2014	(r26182)
+@@ -224,7 +224,7 @@
+         { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+-      antBuildInputs = [ pkgs.ecj strcj ];
++      antBuildInputs = [ pkgs.ecj strj ];
+ 
+       ANT_OPTS="-Xss16m -Xmx1024m -server -XX:+UseParallelGC -XX:MaxPermSize=256m";
+ 
+
+From oskarvanrest at gmail.com  Mon Feb 17 17:45:09 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 17 Feb 2014 16:45:09 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26183 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140217164510.C5FA16600DA@mx3.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Feb 17 16:45:07 2014
+New Revision: 26183
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26183&sc=1
+
+Log:
+Updated with changes to spoofax-master.nix
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Feb 15 10:05:14 2014	(r26182)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Feb 17 16:45:07 2014	(r26183)
+@@ -28,6 +28,8 @@
+ , javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
+ , hydraConfig ? { outPath = ../../. ; revCount = 9999; }
++
++, shrike ? { outPath = ../../../com.ibm.wala.shrike ; revCount = 9999; }
+ }:
+ let
+   plus = a : b : ( builtins.add a b );
+@@ -47,12 +49,6 @@
+     sha256 = "6d35823d5ae86ea4c71bc653747d1234c1587662882a76738d2881fb409394ab";
+   };
+ 
+-  shrike = pkgs.fetchsvn {
+-    url = https://wala.svn.sourceforge.net/svnroot/wala/trunk/com.ibm.wala.shrike;
+-    rev = 3073;
+-    sha256 = "0y13i31xlhian5glk4cahbzxg4mky4q61qzc5g03qkg4d67k12zd";
+-  };
+-
+   guava = pkgs.fetchurl {
+     url = http://search.maven.org/remotecontent?filepath=com/google/guava/guava/14.0.1/guava-14.0.1.jar;
+     sha256 = "d69df3331840605ef0e5fe4add60f2d28e870e3820937ea29f713d2035d9ab97";
+@@ -216,8 +212,7 @@
+       name = "spoofax-imp-generator-s${spoofaxRev}";
+       inherit (jobs) src;
+ 
+-      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.strategoxt 
+-strategoPackages.javafront ecj openjdk ];
++      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.strategoxt strategoPackages.javafront ecj openjdk ];
+ 
+       preConfigure = ''
+         cd org.strategoxt.imp.generator
+@@ -238,7 +233,7 @@
+         { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+-      antBuildInputs = [ pkgs.ecj strcj ];
++      antBuildInputs = [ pkgs.ecj strj ];
+ 
+       ANT_OPTS="-Xss16m -Xmx1024m -server -XX:+UseParallelGC -XX:MaxPermSize=256m";
+ 
+@@ -269,8 +264,8 @@
+         #hack
+         mkdir -p plugins
+         export eclipsefakehome=`pwd`
+-            
+-        mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
++
++        mvn org.eclipse.tycho:tycho-pomgenerator-plugin:generate-poms ${mvnFlags}            
+ 
+         mkdir -p org.strategoxt.strj/java
+         cp ${strj}/share/strategoxt/strategoxt/strategoxt.jar org.strategoxt.strj/java/
+@@ -424,7 +419,33 @@
+           fi
+         done
+ 
+-        mvn package ${mvnFlags} -e
++sed -i 's|</build>||' pom.xml
++sed -i 's|</project>||' pom.xml
++echo '
++<pluginManagement>
++<plugins>
++<plugin>
++    <groupId>org.eclipse.tycho</groupId>
++    <artifactId>tycho-packaging-plugin</artifactId>
++    <version>0.19.0</version>
++    <configuration>
++        <strictBinIncludes>false</strictBinIncludes>
++    </configuration>
++</plugin>
++
++<plugin>
++    <groupId>org.eclipse.tycho</groupId>
++    <artifactId>tycho-compiler-plugin</artifactId>
++    <version>0.19.0</version>
++    <configuration>
++        <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
++    </configuration>
++</plugin>
++
++</plugins>
++</pluginManagement>
++</build></project>' >> pom.xml
++
+         mvn integration-test ${mvnFlags} -e
+       '';
+           
+
+From gabrielkonat at gmail.com  Tue Feb 25 10:29:16 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 25 Feb 2014 09:29:16 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26184 - in hydra: jobs
+	strategoxt
+Message-ID: <20140225092917.B282166013E@mx3.tudelft.nl>
+
+Author: gkonat
+Date: Tue Feb 25 09:29:15 2014
+New Revision: 26184
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26184&sc=1
+
+Log:
+Use automake114x
+
+Modified:
+   hydra/jobs/strategoxt-bootstrap.nix
+   hydra/jobs/strategoxt-manual.nix
+   hydra/jobs/strategoxt.nix
+   hydra/strategoxt/packages.nix
+
+Modified: hydra/jobs/strategoxt-bootstrap.nix
+==============================================================================
+--- hydra/jobs/strategoxt-bootstrap.nix	Mon Feb 17 16:45:07 2014	(r26183)
++++ hydra/jobs/strategoxt-bootstrap.nix	Tue Feb 25 09:29:15 2014	(r26184)
+@@ -30,7 +30,7 @@
+ 
+   defaultSvnBuildInputs = pkgs :
+     [ pkgs.autoconf
+-      pkgs.automake110x
++      pkgs.automake114x
+       pkgs.libtool
+       pkgs.subversion
+     ] ++ defaultBuildInputs pkgs;
+
+Modified: hydra/jobs/strategoxt-manual.nix
+==============================================================================
+--- hydra/jobs/strategoxt-manual.nix	Mon Feb 17 16:45:07 2014	(r26183)
++++ hydra/jobs/strategoxt-manual.nix	Tue Feb 25 09:29:15 2014	(r26184)
+@@ -31,7 +31,7 @@
+       inherit (pkgs) stdenv;
+       buildInputs = [
+         pkgs.autoconf
+-        pkgs.automake
++        pkgs.automake114x
+         pkgs.libxml2
+         pkgs.libxslt
+         pkgs.zip
+
+Modified: hydra/jobs/strategoxt.nix
+==============================================================================
+--- hydra/jobs/strategoxt.nix	Mon Feb 17 16:45:07 2014	(r26183)
++++ hydra/jobs/strategoxt.nix	Tue Feb 25 09:29:15 2014	(r26184)
+@@ -1,4 +1,4 @@
+-{ nixpkgs ? ../../nixpkgs
++?{ nixpkgs ? ../../nixpkgs
+ , hydraConfig ? ../. 
+ } :
+ 
+
+Modified: hydra/strategoxt/packages.nix
+==============================================================================
+--- hydra/strategoxt/packages.nix	Mon Feb 17 16:45:07 2014	(r26183)
++++ hydra/strategoxt/packages.nix	Tue Feb 25 09:29:15 2014	(r26184)
+@@ -595,7 +595,7 @@
+       attrPrefix = "pil";
+       svnBuildInputs = buildInputs ++ [
+           pkgs.autoconf
+-          pkgs.automake110x
++          pkgs.automake114x
+           pkgs.libtool_1_5
+           pkgs.pkgconfig
+         ]; 
+@@ -1497,7 +1497,7 @@
+   autotools =
+     pkgs : [
+       pkgs.autoconf
+-      pkgs.automake110x
++      pkgs.automake114x
+       pkgs.libtool
+       pkgs.pkgconfig
+       pkgs.subversion
+
+From gabrielkonat at gmail.com  Tue Feb 25 12:53:05 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 25 Feb 2014 11:53:05 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26185 - in hydra: jobs
+	strategoxt
+Message-ID: <20140225115308.0E22C7200FB@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Tue Feb 25 11:53:05 2014
+New Revision: 26185
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26185&sc=1
+
+Log:
+Use automake111x
+
+Modified:
+   hydra/jobs/strategoxt-manual.nix
+   hydra/strategoxt/packages.nix
+
+Modified: hydra/jobs/strategoxt-manual.nix
+==============================================================================
+--- hydra/jobs/strategoxt-manual.nix	Tue Feb 25 09:29:15 2014	(r26184)
++++ hydra/jobs/strategoxt-manual.nix	Tue Feb 25 11:53:05 2014	(r26185)
+@@ -31,7 +31,7 @@
+       inherit (pkgs) stdenv;
+       buildInputs = [
+         pkgs.autoconf
+-        pkgs.automake114x
++        pkgs.automake111x
+         pkgs.libxml2
+         pkgs.libxslt
+         pkgs.zip
+
+Modified: hydra/strategoxt/packages.nix
+==============================================================================
+--- hydra/strategoxt/packages.nix	Tue Feb 25 09:29:15 2014	(r26184)
++++ hydra/strategoxt/packages.nix	Tue Feb 25 11:53:05 2014	(r26185)
+@@ -595,7 +595,7 @@
+       attrPrefix = "pil";
+       svnBuildInputs = buildInputs ++ [
+           pkgs.autoconf
+-          pkgs.automake114x
++          pkgs.automake111x
+           pkgs.libtool_1_5
+           pkgs.pkgconfig
+         ]; 
+@@ -1497,7 +1497,7 @@
+   autotools =
+     pkgs : [
+       pkgs.autoconf
+-      pkgs.automake114x
++      pkgs.automake111x
+       pkgs.libtool
+       pkgs.pkgconfig
+       pkgs.subversion
+
+From oskarvanrest at gmail.com  Fri Feb 28 01:50:56 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Fri, 28 Feb 2014 00:50:56 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26186 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140228005057.8736E460164@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Fri Feb 28 00:50:55 2014
+New Revision: 26186
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26186&sc=1
+
+Log:
+Added plugin ca.ecliptical.gmf.ant
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Tue Feb 25 11:53:05 2014	(r26185)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Fri Feb 28 00:50:55 2014	(r26186)
+@@ -169,6 +169,7 @@
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.ui \
+                  ${modelware}/org.spoofax.modelware.emf \
+                  ${modelware}/org.spoofax.modelware.gmf \
++                 ${modelware}/patched-plugins/ca.ecliptical.gmf.ant \
+                  ${spoofaxdeploy}/org.strategoxt.imp.feature \
+                  ${spoofaxdeploy}/org.spoofax.modelware.emf.feature \
+                  ${spoofaxdeploy}/org.spoofax.modelware.gmf.feature \
+

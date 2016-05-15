@@ -1,0 +1,233 @@
+From E.Visser at tudelft.nl  Wed Apr 21 10:46:05 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Apr 2010 10:46:05 +0200
+Subject: [Stratego Developers] [Stratego Users] HSX: Stratego
+In-Reply-To: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+Message-ID: <h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+
+Hi Marcos,
+
+The source is available in the StrategoXT svn repository
+
+   https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+
+I've updated the webpage.
+
+However, I doubt that this will be useful for you. The code is for
+Stratego 0.3 (we're now at 0.18)
+and probably uses antiquated stratego programming styles.
+
+cheers,
+
+-- Eelco
+
+
+On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+<marcoscamelo20 at gmail.com> wrote:
+> Hi everyone,
+> I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+> know I need to implement the transformation, I searched ?on the Stratego/XT
+> Website and found a framework called HSX to transformations, but the link is
+> always unavailable. Does anyone could help me, providing me the file?
+> The content I`d like to access is this
+> :?http://www.stratego-language.org/ftp/hsx-0.1.tar.gz?, available on this
+> page:?http://strategoxt.org/Stratego/HSX
+> Many thanks,
+> Marcos Augusto
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From marcoscamelo20 at gmail.com  Wed Apr 21 19:43:57 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Wed, 21 Apr 2010 14:43:57 -0300
+Subject: [Stratego Developers] [Stratego Users] HSX: Stratego
+In-Reply-To: <h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+	<h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+Message-ID: <v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+
+Ok, thanks. I`ll try it.
+Does anybody have any documentation that shows how to install/use this
+framework?
+
+
+Thank,
+
+Marcos Augusto
+
+On Wed, Apr 21, 2010 at 5:46 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> The source is available in the StrategoXT svn repository
+>
+>   https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+>
+> I've updated the webpage.
+>
+> However, I doubt that this will be useful for you. The code is for
+> Stratego 0.3 (we're now at 0.18)
+> and probably uses antiquated stratego programming styles.
+>
+> cheers,
+>
+> -- Eelco
+>
+>
+> On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+> <marcoscamelo20 at gmail.com> wrote:
+> > Hi everyone,
+> > I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+> > know I need to implement the transformation, I searched  on the
+> Stratego/XT
+> > Website and found a framework called HSX to transformations, but the link
+> is
+> > always unavailable. Does anyone could help me, providing me the file?
+> > The content I`d like to access is this
+> > : http://www.stratego-language.org/ftp/hsx-0.1.tar.gz , available on
+> this
+> > page: http://strategoxt.org/Stratego/HSX
+> > Many thanks,
+> > Marcos Augusto
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100421/afb62d33/attachment.html 
+
+From E.Visser at tudelft.nl  Wed Apr 21 20:54:41 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Apr 2010 20:54:41 +0200
+Subject: [Stratego Developers] [Stratego Users] HSX: Stratego
+In-Reply-To: <v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com> 
+	<h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com> 
+	<v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+Message-ID: <h2yed55b7d91004211154sa836659ej7a3f389b76ccc90a@mail.gmail.com>
+
+Hi Marcos,
+
+It can hardly be called a framework. The code was the basis for this
+publication:
+
+  http://researchr.org/publication/JohannV00
+
+which describes the implementation of the warm fusion transformation
+in Stratego.
+
+I don't think there is any documentation for installation. And it is
+not unlikely that
+the code will not compile with the current version of Stratego; for
+starters the file
+extension has been changed from .r to .str.
+
+cheers,
+
+-- Eelco
+
+On Wed, Apr 21, 2010 at 7:43 PM, Marcos Augusto
+<marcoscamelo20 at gmail.com> wrote:
+> Ok, thanks. I`ll try it.
+> Does anybody have any documentation that shows how to install/use this
+> framework?
+>
+> Thank,
+> Marcos Augusto
+> On Wed, Apr 21, 2010 at 5:46 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Marcos,
+>>
+>> The source is available in the StrategoXT svn repository
+>>
+>> ? https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+>>
+>> I've updated the webpage.
+>>
+>> However, I doubt that this will be useful for you. The code is for
+>> Stratego 0.3 (we're now at 0.18)
+>> and probably uses antiquated stratego programming styles.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>>
+>> On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+>> <marcoscamelo20 at gmail.com> wrote:
+>> > Hi everyone,
+>> > I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+>> > know I need to implement the transformation, I searched ?on the
+>> > Stratego/XT
+>> > Website and found a framework called HSX to transformations, but the
+>> > link is
+>> > always unavailable. Does anyone could help me, providing me the file?
+>> > The content I`d like to access is this
+>> > :?http://www.stratego-language.org/ftp/hsx-0.1.tar.gz?, available on
+>> > this
+>> > page:?http://strategoxt.org/Stratego/HSX
+>> > Many thanks,
+>> > Marcos Augusto
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+

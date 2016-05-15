@@ -1,0 +1,354 @@
+From pop.atry at gmail.com  Fri Apr  4 13:53:30 2014
+From: pop.atry at gmail.com (=?GB2312?B?0e6yqQ==?=)
+Date: Fri, 4 Apr 2014 19:53:30 +0800
+Subject: [Stratego Users] Where is stratego-shell?
+In-Reply-To: <CA+nJC9423MSrzjVuCa8ZgZp6zok7Qt+o=m9myQ9wmpyMQFhzjw@mail.gmail.com>
+References: <CA+nJC9423MSrzjVuCa8ZgZp6zok7Qt+o=m9myQ9wmpyMQFhzjw@mail.gmail.com>
+Message-ID: <CA+nJC96b7ej5xxPgKmixmyDTy1h12Z8r0HxoFij7A_z07RauZA@mail.gmail.com>
+
+I have downloaded strategoxt-superbundle-0.17-cygwin.tar.gz and have
+extracted it into cygwin/opt. I can invoke strc in Cygwin Bash shell, but
+there isn't a stratego-shell.exe in any bin directory. Where can I find the
+Stratego shell?
+
+I have also installed Spoofax into my Eclipse, and I can invoke Java
+version strc by this command:
+java -jar
+"d:/eclipse/plugins/org.strategoxt.strj_0.17.92.201310212315/java/strategoxt.jar"
+
+But I still did not found out where stratego-shell is, for neither C
+version nor Java version.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140404/312842f9/attachment.html>
+
+From cnn at cs.au.dk  Sat Apr 12 00:24:18 2014
+From: cnn at cs.au.dk (Jacob Johannsen)
+Date: Sat, 12 Apr 2014 00:24:18 +0200
+Subject: [Stratego Users] PPDP 2014: Call for Papers
+Message-ID: <53486B92.4050303@cs.au.dk>
+
+======================================================================
+
+                Call for papers
+            16th International Symposium on
+       Principles and Practice of Declarative Programming
+                   PPDP 2014
+
+         Canterbury, Kent, September 8-10, 2014
+             (co-located with LOPSTR 2014)
+
+          http://users-cs.au.dk/danvy/ppdp14/
+
+======================================================================
+
+           SUBMISSION DEADLINE: 15 MAY, 2014
+
+PPDP 2014 is a forum that brings together researchers from the
+declaratrive programming communities, including those working in the
+logic, constraint and functional programming paradigms, but also
+embracing languages, database languages, and knowledge representation
+languages. The goal is to stimulate research in the use of logical
+formalisms and methods for specifying, performing, and analyzing
+computations, including mechanisms for mobility, modularity,
+concurrency, object-orientation, security, verification and static
+analysis. Papers related to the use of declarative paradigms and tools
+in industry and education are especially solicited. Topics of interest
+include, but are not limited to
+
+* Functional programming
+* Logic programming
+* Answer-set programming
+* Functional-logic programming
+* Declarative visual languages
+* Constraint Handling Rules
+* Parallel implementation and concurrency
+* Monads, type classes and dependent type systems
+* Declarative domain-specific languages
+* Termination, resource analysis and the verification of declarative
+programs
+* Transformation and partial evaluation of declarative languages
+* Language extensions for security and tabulation
+* Probabilistic modeling in a declarative language and modeling reactivity
+* Memory management and the implementation of declarative systems
+* Practical experiences and industrial application
+
+This year the conference will be co-located with the 24th
+International Symposium on Logic-Based Program Synthesis and
+Transformation (LOPSTR 2014).
+
+The conference will be held in Canterbury, UK. Previous symposia were
+held at Madrid (Spain), Leuven (Belgium), Odense (Denmark), Hagenberg
+(Austria), Coimbra (Portugal), Valencia (Spain), Wroclaw (Poland),
+Venice (Italy), Lisboa (Portugal), Verona (Italy), Uppsala (Sweden),
+Pittsburgh (USA), Florence (Italy), Montreal (Canada), and Paris
+(France). You might have a look at the contents of past PPDP symposia.
+
+Papers must describe original work, be written and presented in
+English, and must not substantially overlap with papers that have been
+published or that are simultaneously submitted to a journal,
+conference, or workshop with refereed proceedings. Work that already
+appeared in unpublished or informally published workshop proceedings
+may be submitted (please contact the PC chair in case of
+questions).
+
+After the symposium, a selection of the best papers will be invited to
+extend their submissions in the light of the feedback solicited at the
+symposium. The papers are expected to include at least 30% extra
+material over and above the PPDP version. Then, after another round of
+reviewing, these revised papers will be published in a journal.
+
+Important Dates
+
+    Abstract Submission:           12 May, 2014
+    Paper submission:               15 May, 2014
+    Notification:               30 June, 2014
+    Camera-ready:               To be announced
+
+    Symposium:                  8-10 September, 2014
+
+    Invites for journal publication:   To be announced
+    Submission of journal version:     To be announced
+    Notification:               To be announced
+    Camera-ready version:          To be announced
+
+
+Authors should submit an electronic copy of the full paper in
+PDF. Papers should be submitted to the submission website for PPDP
+2014. Each submission must include on its first page the paper title;
+authors and their affiliations; abstract; and three to four
+keywords. The keywords will be used to assist the program committee in
+selecting appropriate reviewers for the paper. Papers should consist
+of the equivalent of 12 pages under the ACM formatting
+guidelines. These guidelines are available online, along with
+formatting templates or style files. Submitted papers will be judged
+on the basis of significance, relevance, correctness, originality, and
+clarity. They should include a clear identification of what has been
+accomplished and why it is significant. Authors who wish to provide
+additional material to the reviewers beyond the 12-page limit can do
+so in clearly marked appendices: reviewers are not required to read
+such appendices.
+
+Program Committee
+
+Michael Adams        University of Illinois at Urbana-Champaign, USA
+Elvira Albert        Complutense University of Madrid, Spain
+Dariusz Biernacki    University of Wroclaw, Poland
+Bernd Brassel        Recordbay, Germany
+Mike Codish        Ben-Gurion University of the Negev, Israel
+Olivier Danvy (chair)    Aarhus University, Denmark
+Marc Denecker         KU Leuven, Belgium
+Joshua Dunfield        Max Planck Institute for Software Systems, Germany
+Zoe Drey        ENSTA Bretagne/Lab-STICC, France
+Thibaut Feydy        NICTA, Australia
+Danko Ilik        Inria, France
+Yukiyoshi Kameyama    University of Tsukuba, Japan
+Chantal Keller        Microsoft Research -- Inria Joint Centre
+Temur Kutsia        RISC, Johannes Kepler University Linz, Austria
+Dan Licata        Wesleyan University, USA
+Akimasa Morihata    University of Tokyo, Japan
+Matthias Puech        McGill University, Canada
+Tiark Rompf        Oracle Labs and EPFL, Switzerland
+Kristoffer H. Rose    Two Sigma Labs, New York, USA
+Ilya Sergey           IMDEA Software Institute, Spain
+Ralf Treinen        University Paris-Diderot, France
+Frank D. Valencia    CNRS and LIX, Ecole Polytechnique, France
+
+
+Program Chair
+
+     Olivier Danvy
+     Department of Computer Science
+     Aarhus University
+     Aabogade 34
+     DK-8200 Aarhus N, Denmark
+     Email: danvy at cs.au.dk
+
+Symposium Chairs:
+
+     Andy King
+     School of Computing
+     University of Kent
+     Canterbury, Kent, CT2 7NF
+     United Kingdom
+     Email: A.M.King at kent.ac.uk
+
+     Olaf Chitil
+     School of Computing
+     University of Kent
+     Canterbury, Kent, CT2 7NF
+     United Kingdom
+     Email: O.Chitil at kent.ac.uk
+
+Publicity Chair:
+
+     Jacob Johannsen
+     Department of Computer Science
+     Aarhus University
+     Aabogade 34
+     DK-8200 Aarhus N, Denmark
+     Email: cnn at cs.au.dk
+
+
+From erdweg at informatik.tu-darmstadt.de  Thu Apr 17 17:51:15 2014
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Thu, 17 Apr 2014 17:51:15 +0200
+Subject: [Stratego Users] CFP International Workshop on DSL Architecting and
+	DSL-based Architectures (DADA'14)
+Message-ID: <E55FEFB8-9FFE-427D-8889-40831362DE84@informatik.tu-darmstadt.de>
+
+=================== Call for Papers ===================
+
+International Workshop on
+DSL Architecting and DSL-based Architectures (DADA'14)
+
+August 26, 2014; Vienna, Austria
+https://dada.wu.ac.at/
+
+co-located with
+
+8th European Conference on Software Architecture
+Vienna, Austria
+http://ecsa2014.cs.univie.ac.at/
+
+The workshop proceedings will be published in the ACM Digital Library.
+
+=======================================================
+
+*** Important Dates ***
+
+- Submission due: June 15, 2014, UTC+13 (Samoa time)
+- Notification: June 30, 2014
+- Camera-ready copy:  July 7, 2014
+- Early registration: July 31, 2014
+- Workshop: August 26, 2014
+
+*** Overview ***
+
+Domain-specific software languages (DSLs) have received considerable
+attention over the last two decades. DSLs are specifically tailored to
+the needs of a particular problem or application domain. The promise
+of DSLs is that domain experts (from technical as well as
+non-technical domains) can understand, validate, modify, test, and
+sometimes even develop models and software programs using DSLs.
+
+Domain-specific language engineering involves architectural
+decision-making in different phases of the development process. For
+example, DSL engineers can choose from different options on how to
+realize a DSL's language model (abstract syntax), on the DSL style to
+be adopted (internal vs. external DSLs), on the means to define a
+DSL's semantics, on the concrete syntax style (e.g. graphical,
+textual, or both), and on critical technology choices (e.g., host
+languages, language workbenches, metamodeling infrastructure). The DSL
+as well as the corresponding infrastructure components (such as
+parser, generator, or DSL editor) form parts of the respective
+software architecture, often assisting in realizing a particular
+architectural style, pattern, or tactic.
+
+*** Workshop Topics ***
+
+Despite the growing popularity of DSL-based architectures and a
+considerable body of knowledge on DSL engineering, there is little
+documented evidence and reflection on DSL-related architectural
+knowledge and DSL-based architectures. Therefore, we are looking for
+contributions on, but not limited to, the following topics:
+
+
+- Architectural designs adopting domain-specific software languages
+ (DSLs);
+
+- Architectural concerns of DSLs;
+
+- Architectural viewpoints on DSLs;
+
+- Quality attributes of DSLs and DSL-based software systems (e.g.,
+ maintainability, testability, usability);
+
+- Applying architectural patterns, styles, and tactics for engineering
+ DSLs;
+
+- Architectural design rationale (ADR) in DSL engineering;
+
+- Process models and guidelines for developing DSLs and DSL-based
+ software architectures; 
+
+- Engineering Architecture Description Languages (ADLs) and
+ Architecture DSLs (ADSLs);
+
+- Empirical studies on applying architectural knowledge and on
+ documenting ADR in engineering DSLs or DSL-based software systems;
+
+- Software tools and development environments for architecture-aware
+ DSL engineering;
+
+*** Keynote ***
+
+Markus V?lter will give a keynote on "Architecting Architecture DSLs":
+
+"Architecture DSLs are a useful tool to capture the cornerstones of
+platform or product line architectures. In addition, interesting
+analyses can be performed on the models, and much of the
+infrastructure and configuration code can be generated. On the flip
+side, these DSLs themselves must be architected consciously: while
+many architectural abstractions are specific to any given platform or
+product line, many other aspects are generic and hence can be reused
+for several architecture DSLs. In this talk I trace how my thinking on
+architecture modeling has changed over time, and how this is reflected
+in the archticture DSLs I have built (or helped to build), and how
+evolving tools have made these changes possible."
+
+See http://www.voelter.de/ for some background on Markus.
+
+*** Submissions ***
+
+We invite short papers (4 pages long) and full papers (8 pages) in ACM
+proceedings format:
+
+http://www.acm.org/sigs/publications/proceedings-templates
+
+Full papers report on research results regarding one or several of the 
+above topics. Short papers may report on future research, research-in-progress, 
+and position statements. The papers will be reviewed by 2 (short papers) or 
+3 PC members (full papers), respectively.
+
+Manuscripts must be submitted using easychair.org:
+
+https://www.easychair.org/conferences/?conf=dada2014
+
+Accepted papers will published in the ACM Digital Library as part of
+the joint ECSA workshop proceedings.
+
+*** Committee ***
+
+Workshop Chairs
+
+- Stefan Sobernig, WU Vienna, Austria
+- Mark Strembeck, WU Vienna, Austria
+
+Program Committee (to be extended)
+
+- Sebastian Erdweg, TU Darmstadt, Germany
+- Patrick Gaubatz, University of Vienna, Austria
+- Bernhard Hoisl, WU Vienna, Austria
+- Waldemar Hummer, TU Vienna, Austria
+- Philip Langer, TU Vienna, Austria
+- Tanja Mayerhofer, TU Vienna, Austria
+- Marjan Mernik, University of Maribor, Slovenia
+- Gustaf Neumann, WU Vienna, Austria
+- Sigrid Schefer-Wenzl, WU Vienna & FH Campus Vienna, Austria
+- Andreas Stefik, University of Nevada, United States
+- Jurgen J. Vinju, Centrum Wiskunde & Informatica, The Netherlands
+- Markus V?lter, independent & itemis AG, Germany
+- Manuel Wimmer, TU Vienna, Austria
+- Vadim Zaytsev, University of Amsterdam, The Netherlands
+- Uwe Zdun, University of Vienna, Austria
+
+*** Format ***
+
+There will be a keynote prior to the actual paper sessions (see above). 
+In each paper session, we will have 2-3 papers for presentation. We 
+will allocate for each accepted paper 20 minutes for presentation and 
+10 minutes for discussion. We will assign to each paper a devil's 
+advocate whose task is to prepare 2 or 3 critical, yet constructive 
+questions to foster a discussion in the workshop plenum.
+

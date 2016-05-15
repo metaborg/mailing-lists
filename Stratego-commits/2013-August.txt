@@ -1,0 +1,277 @@
+From chrismelman at hotmail.com  Mon Aug  5 15:30:29 2013
+From: chrismelman at hotmail.com (Chris Melman)
+Date: Mon, 05 Aug 2013 13:30:29 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26146 - hydra/webdsl
+Message-ID: <20130805133029.33751108C03A@mx3.tudelft.nl>
+
+Author: ChrisMelman
+Date: Mon Aug  5 13:30:28 2013
+New Revision: 26146
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26146&sc=1
+
+Log:
+update link spoofax update site for webdsl editor build
+
+Modified:
+   hydra/webdsl/editor.nix
+
+Modified: hydra/webdsl/editor.nix
+==============================================================================
+--- hydra/webdsl/editor.nix	Thu Jul 11 17:01:51 2013	(r26145)
++++ hydra/webdsl/editor.nix	Mon Aug  5 13:30:28 2013	(r26146)
+@@ -23,7 +23,7 @@
+       
+       installIUs = ["org.strategoxt.imp.feature.group" "org.eclipse.jst.server_adapters.ext.feature.feature.group" "org.eclipse.jst.enterprise_ui.feature.feature.group"];
+       preConfigure = ''
+-      	${if nightly then ''sed -i 's/www.lclnet.nl\/update/www.lclnet.net\/update\/nightly/' webdsl.editor.feature/feature.xml'' else ""}  
++      	${if nightly then ''sed -i 's/download.spoofax.org\/update\/stable/download.spoofax.org\/update\/nightly/' webdsl.editor.feature/feature.xml'' else ""}  
+         sed 's|@@webdsl@@|${webdslJava}|' webdsl.editor/import.webdsl.from-install-dir.properties > webdsl.editor/import.webdsl.properties
+       '';
+       
+
+From gabrielkonat at gmail.com  Thu Aug 15 22:48:06 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 15 Aug 2013 20:48:06 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26147 - in hydra: .
+	jobs/spoofax-git
+Message-ID: <20130815204806.677DE108C01E@mx3.tudelft.nl>
+
+Author: gkonat
+Date: Thu Aug 15 20:48:06 2013
+New Revision: 26147
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26147&sc=1
+
+Log:
+Upgrade Eclipse to 4.2.2
+
+Modified:
+   hydra/eclipse.nix
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/eclipse.nix
+==============================================================================
+--- hydra/eclipse.nix	Mon Aug  5 13:30:28 2013	(r26146)
++++ hydra/eclipse.nix	Thu Aug 15 20:48:06 2013	(r26147)
+@@ -1,8 +1,8 @@
+ pkgs:
+ let 
+   eclipseLinux64 = pkgs.fetchurl {
+-    url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk-x86_64.tar.gz ;
+-    sha256 = "1cg9rrb5w978sdqbzz9lnli1lds9zhb6wfsj3wp725bqf1i6v9lg";
++    url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
++    sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
+   };
+ in
+ { updatesites ? [], installIUs ? [], name, src ? eclipseLinux64, dontInstall ? false, maintainers ?[]} :
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Mon Aug  5 13:30:28 2013	(r26146)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Aug 15 20:48:06 2013	(r26147)
+@@ -73,16 +73,16 @@
+   eclipse = eclipseFun {
+     name = "eclipse-plain";
+     src =  pkgs.fetchurl {
+-      url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk.tar.gz ;
+-      sha256 = "0s48rjaswi8m5gan1zlqvfwb4l06x5nslkq41wpkrbyj9ka8gh4x";
++      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
++      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
+     };
+   }; 
+ 
+   eclipseTest = eclipseFun {
+     name = "eclipse-spoofax-install-test";
+     src =  pkgs.fetchurl {
+-      url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk.tar.gz ;
+-      sha256 = "0s48rjaswi8m5gan1zlqvfwb4l06x5nslkq41wpkrbyj9ka8gh4x";
++      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
++      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
+     };
+     updatesites = [ "file://${jobs.build}/site" ];
+     installIUs = [ "org.strategoxt.imp.feature.group" ];
+
+From gabrielkonat at gmail.com  Sat Aug 17 01:23:45 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Fri, 16 Aug 2013 23:23:45 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26148 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130816232345.33D0D7F809B@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Fri Aug 16 23:23:44 2013
+New Revision: 26148
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26148&sc=1
+
+Log:
+Use new imp-pached repo
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Aug 15 20:48:06 2013	(r26147)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Aug 16 23:23:44 2013	(r26148)
+@@ -18,7 +18,7 @@
+ , spoofax ? { outPath = ../../../spoofax ; revCount = 9999; }
+ , spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
+ , spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
+-, spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
++, imppatched ? { outPath = ../../../imp-patched ; revCount = 9999; }
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ 
+@@ -36,17 +36,11 @@
+       [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount
+         nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount spx.revCount 
+         rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount 
+-        spoofaxdebug.revCount spoofaxdeploy.revCount spoofaximppatches.revCount strategoxt.revCount strategoxtCVersion.revCount
++        spoofaxdebug.revCount spoofaxdeploy.revCount imppatched.revCount strategoxt.revCount strategoxtCVersion.revCount
+         metaborgRuntime.revCount javaFront.revCount]) ;
+ 
+   pkgs = import nixpkgs { system = "i686-linux"; };
+ 
+-  orgEclipseImp = pkgs.fetchsvn {
+-    url = http://dev.eclipse.org/svnroot/technology/org.eclipse.imp/trunk;
+-    rev = 22255;
+-    sha256 = "0mknky2wpqvpcaqnz1l6wh6p1p8zjmd299hlf1nnwm91paiqmm85";
+-  };
+-
+   jline = pkgs.fetchurl {
+     url = http://spoofax.org/mirror/extras/jline-1.0.jar;
+     sha256 = "6d35823d5ae86ea4c71bc653747d1234c1587662882a76738d2881fb409394ab";
+@@ -117,19 +111,19 @@
+             
+         header "Preparing org.eclipse.imp"
+     
+-        for d in ${orgEclipseImp}/org.eclipse.imp.cheatsheets \
+-                 ${orgEclipseImp}/org.eclipse.imp.java.hosted \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg.ide \
+-                 ${orgEclipseImp}/org.eclipse.imp.lpg.metatooling \
+-                 ${orgEclipseImp}/org.eclipse.imp.metatooling \
+-                 ${orgEclipseImp}/org.eclipse.imp.preferences \
+-                 ${orgEclipseImp}/org.eclipse.imp.prefspecs \
+-                 ${orgEclipseImp}/org.eclipse.imp.presentation \
+-                 ${orgEclipseImp}/org.eclipse.imp.runtime \
+-                 ${orgEclipseImp}/org.eclipse.imp.smapi \
+-                 ${orgEclipseImp}/org.eclipse.imp.smapifier \
+-                 ${orgEclipseImp}/org.eclipse.imp.xform \
++        for d in ${imppatched}/org.eclipse.imp.cheatsheets \
++                 ${imppatched}/org.eclipse.imp.java.hosted \
++                 ${imppatched}/org.eclipse.imp.lpg \
++                 ${imppatched}/org.eclipse.imp.lpg.ide \
++                 ${imppatched}/org.eclipse.imp.lpg.metatooling \
++                 ${imppatched}/org.eclipse.imp.metatooling \
++                 ${imppatched}/org.eclipse.imp.preferences \
++                 ${imppatched}/org.eclipse.imp.prefspecs \
++                 ${imppatched}/org.eclipse.imp.presentation \
++                 ${imppatched}/org.eclipse.imp.runtime \
++                 ${imppatched}/org.eclipse.imp.smapi \
++                 ${imppatched}/org.eclipse.imp.smapifier \
++                 ${imppatched}/org.eclipse.imp.xform \
+                  ${mbexec}/org.spoofax.compiler \
+                  ${mbexec}/org.spoofax.interpreter.core \
+                  ${mbexec}/org.spoofax.interpreter \
+@@ -202,10 +196,6 @@
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.updatesite/site.xml
+         sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.strategoxt.imp.feature/feature.xml
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.feature/feature.xml
+-
+-        header "Patching org.eclipse.imp using ${spoofaximppatches}/org.eclipse.imp/org.eclipse.imp.runtime.patch"
+-        patch -p0 < ${spoofaximppatches}/org.eclipse.imp/org.eclipse.imp.runtime.patch
+-        stopNest
+                     
+         stopNest
+       '';
+
+From gabrielkonat at gmail.com  Sat Aug 17 06:21:04 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Sat, 17 Aug 2013 04:21:04 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26149 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130817042104.0B3822B8012@mx2.tudelft.nl>
+
+Author: gkonat
+Date: Sat Aug 17 04:21:03 2013
+New Revision: 26149
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26149&sc=1
+
+Log:
+Remove legacy sidebyside project
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Fri Aug 16 23:23:44 2013	(r26148)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Sat Aug 17 04:21:03 2013	(r26149)
+@@ -161,7 +161,6 @@
+                  ${spoofax}/org.strategoxt.imp.nativebundle \
+                  ${spoofax}/org.strategoxt.imp.runtime \
+                  ${spoofax}/org.strategoxt.imp.runtime.sidebyside.main \
+-                 ${spoofax}/org.strategoxt.imp.runtime.sidebyside.legacy \
+                  ${spoofax}/org.strategoxt.imp.runtime.sidebyside.latest \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.core \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.core \
+
+From gabrielkonat at gmail.com  Tue Aug 20 21:59:44 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 20 Aug 2013 19:59:44 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26150 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130820195944.23F2F108C01D@mx3.tudelft.nl>
+
+Author: gkonat
+Date: Tue Aug 20 19:59:43 2013
+New Revision: 26150
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26150&sc=1
+
+Log:
+Remove spx and org.spoofax.compiler from the build
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Sat Aug 17 04:21:03 2013	(r26149)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Tue Aug 20 19:59:43 2013	(r26150)
+@@ -10,7 +10,6 @@
+ , esv ? { outPath = ../../../esv ; revCount = 9999; }
+ , aster ? { outPath = ../../../aster ; revCount = 9999; }
+ , box ? { outPath = ../../../box ; revCount = 9999; }
+-, spx ? { outPath = ../../../spx ; revCount = 9999; }
+ , rtg ? { outPath = ../../../rtg ; revCount = 9999; }
+ , stratego ? { outPath = ../../../stratego ; revCount = 9999; }
+ , spt ? { outPath = ../../../spt ; revCount = 9999; }
+@@ -34,7 +33,7 @@
+   
+   spoofaxRev = toString (sumrev 
+       [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount
+-        nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount spx.revCount 
++        nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount  
+         rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount 
+         spoofaxdebug.revCount spoofaxdeploy.revCount imppatched.revCount strategoxt.revCount strategoxtCVersion.revCount
+         metaborgRuntime.revCount javaFront.revCount]) ;
+@@ -124,7 +123,6 @@
+                  ${imppatched}/org.eclipse.imp.smapi \
+                  ${imppatched}/org.eclipse.imp.smapifier \
+                  ${imppatched}/org.eclipse.imp.xform \
+-                 ${mbexec}/org.spoofax.compiler \
+                  ${mbexec}/org.spoofax.interpreter.core \
+                  ${mbexec}/org.spoofax.interpreter \
+                  ${mbexec}/org.spoofax.interpreter.ui \
+@@ -149,10 +147,6 @@
+                  ${esv}/org.strategoxt.imp.editors.editorservice \
+                  ${box}/org.strategoxt.imp.editors.pp \
+                  ${rtg}/org.strategoxt.imp.editors.rtg \
+-                 ${spx}/org.strategoxt.imp.editors.spoofax \
+-                 ${spx}/org.spoofax.interpreter.library.language \
+-                 ${spx}/org.strategoxt.imp.editors.spoofax.configuration \
+-                 ${spx}/org.strategoxt.imp.spoofax.generator \
+                  ${nabl}/org.metaborg.meta.lang.nabl \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+

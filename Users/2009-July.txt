@@ -1,0 +1,717 @@
+From mathew.c.yeates at jpl.nasa.gov  Mon Jul  6 18:42:21 2009
+From: mathew.c.yeates at jpl.nasa.gov (Yeates, Mathew C)
+Date: Mon, 6 Jul 2009 09:42:21 -0700
+Subject: [Stratego Users] where is yacc2sdf?
+Message-ID: <4D311220B29AEF40BCF6A04066590EE2013B545E23FE@ALTPHYEMBEVSP10.RES.AD.JPL>
+
+I saw it somewhere. In CVS maybe?
+
+-Mathew
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090706/c16dcc70/attachment.html 
+
+From thequux at gmail.com  Mon Jul  6 21:03:49 2009
+From: thequux at gmail.com (Dan Hirsch)
+Date: Mon, 6 Jul 2009 12:03:49 -0700
+Subject: [Stratego Users] where is yacc2sdf?
+In-Reply-To: <4D311220B29AEF40BCF6A04066590EE2013B545E23FE@ALTPHYEMBEVSP10.RES.AD.JPL>
+References: <4D311220B29AEF40BCF6A04066590EE2013B545E23FE@ALTPHYEMBEVSP10.RES.AD.JPL>
+Message-ID: <612eaba90907061203w13e3fc45obfabc145d0ea45c2@mail.gmail.com>
+
+I found one copy in
+https://svn.strategoxt.org/repos/StrategoXT/grammar-recovery/trunk/; not
+sure if that's the one you're looking for.
+
+On Mon, Jul 6, 2009 at 9:42 AM, Yeates, Mathew C <
+mathew.c.yeates at jpl.nasa.gov> wrote:
+
+>  I saw it somewhere. In CVS maybe?
+>
+>
+>
+> -Mathew
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090706/37ee5a74/attachment.html 
+
+From mathew.c.yeates at jpl.nasa.gov  Mon Jul  6 21:18:48 2009
+From: mathew.c.yeates at jpl.nasa.gov (Yeates, Mathew C)
+Date: Mon, 6 Jul 2009 12:18:48 -0700
+Subject: [Stratego Users] where is yacc2sdf?
+In-Reply-To: <612eaba90907061203w13e3fc45obfabc145d0ea45c2@mail.gmail.com>
+References: <4D311220B29AEF40BCF6A04066590EE2013B545E23FE@ALTPHYEMBEVSP10.RES.AD.JPL>
+	<612eaba90907061203w13e3fc45obfabc145d0ea45c2@mail.gmail.com>
+Message-ID: <4D311220B29AEF40BCF6A04066590EE2013B545E2441@ALTPHYEMBEVSP10.RES.AD.JPL>
+
+I see it but it's not part of the Integration Build or the Continuous Build. Are there instructions for using svn to check out the trunk?
+
+Mathew
+
+________________________________
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On Behalf Of Dan Hirsch
+Sent: Monday, July 06, 2009 12:04 PM
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] where is yacc2sdf?
+
+I found one copy in https://svn.strategoxt.org/repos/StrategoXT/grammar-recovery/trunk/; not sure if that's the one you're looking for.
+On Mon, Jul 6, 2009 at 9:42 AM, Yeates, Mathew C <mathew.c.yeates at jpl.nasa.gov<mailto:mathew.c.yeates at jpl.nasa.gov>> wrote:
+
+I saw it somewhere. In CVS maybe?
+
+
+
+-Mathew
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090706/07dffee3/attachment.html 
+
+From dflynn at ireland.com  Tue Jul  7 14:01:26 2009
+From: dflynn at ireland.com (dflynn)
+Date: Tue, 7 Jul 2009 13:01:26 +0100
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+Message-ID: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local>
+
+Hi,
+
+ 
+
+I am writing refactoring analysis tools using Dryad. Is it possible to plug
+these tools into Eclipse ? If so, where is a good place to start with this ?
+
+ 
+
+ 
+
+Thank you, 
+
+Regards,
+
+Diarmuid Flynn
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090707/abf99a67/attachment.html 
+
+From dflynn at ireland.com  Tue Jul  7 15:56:27 2009
+From: dflynn at ireland.com (dflynn)
+Date: Tue, 7 Jul 2009 14:56:27 +0100
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+In-Reply-To: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local>
+References: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local>
+Message-ID: <002301c9ff0a$b95103e0$ad0ca8c0@CSE.local>
+
+I should have clarified that my question arose after reading the following
+Stratego paper:
+
+"Fusing a Transformation Language with an Open Compiler", which uses
+Stratego scripts to modify the Eclipse AST.
+
+So my question really  is, if it is theoretically possible to use Dryad API
+calls to analyze/modify an Eclipse AST ? 
+
+Hope that makes things a bit clearer.
+
+Thanks again,
+
+Diarmuid Flynn
+
+ 
+
+ 
+
+  _____  
+
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of dflynn
+Sent: 07 July 2009 13:01
+To: 'Stratego/XT Users'
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+
+ 
+
+Hi,
+
+ 
+
+I am writing refactoring analysis tools using Dryad. Is it possible to plug
+these tools into Eclipse ? If so, where is a good place to start with this ?
+
+ 
+
+ 
+
+Thank you, 
+
+Regards,
+
+Diarmuid Flynn
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090707/2fdf287f/attachment.html 
+
+From nvintila at yahoo.com  Tue Jul  7 17:00:29 2009
+From: nvintila at yahoo.com (Nicolae Vintila)
+Date: Tue, 7 Jul 2009 08:00:29 -0700 (PDT)
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+In-Reply-To: <002301c9ff0a$b95103e0$ad0ca8c0@CSE.local>
+References: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local>
+	<002301c9ff0a$b95103e0$ad0ca8c0@CSE.local>
+Message-ID: <80081.63510.qm@web39101.mail.mud.yahoo.com>
+
+HiDiarmuid,
+
+No expert but I have some understanding of Karl did.
+
+My understanding is that he used Stratego/J, a Java implementation/interpreter of Stratego and he did refactor Eclipse JDTs.
+
+I believe this refactoring nothing to do with Dryad - Dryad performs analyses and builds internal structures which are based on the code at the time of the analysis. 
+
+Hope it helps.
+Nick
+
+
+
+
+
+________________________________
+From: dflynn <dflynn at ireland.com>
+To: Stratego/XT Users <users at strategoxt.org>
+Sent: Tuesday, July 7, 2009 9:56:27 AM
+Subject: Re: [Stratego Users] Dryad Tools as Eclipse Plugins
+
+ 
+I should have clarified that my question arose after
+reading the following Stratego paper:
+?Fusing a Transformation Language with an Open Compiler?,
+which uses Stratego scripts to modify the Eclipse AST.
+So my question really  is, if it is theoretically
+possible to use Dryad API calls to analyze/modify an Eclipse AST ? 
+Hope that makes things a bit clearer.
+Thanks again,
+Diarmuid Flynn
+ 
+ 
+
+________________________________
+ 
+From:users-bounces at strategoxt.org
+[mailto:users-bounces at strategoxt.org] On
+Behalf Of dflynn
+Sent: 07 July 2009 13:01
+To: ' Stratego/XT Users '
+Subject: [ Stratego Users ] Dryad Tools as Eclipse Plugins
+ 
+Hi,
+ 
+I am writing refactoring analysis tools using Dryad.
+Is it possible to plug these tools into Eclipse ? If so, where is a good place
+to start with this ?
+ 
+ 
+Thank you, 
+Regards,
+Diarmuid Flynn
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090707/9abcbb4a/attachment.html 
+
+From mathew.c.yeates at jpl.nasa.gov  Tue Jul  7 18:37:30 2009
+From: mathew.c.yeates at jpl.nasa.gov (Yeates, Mathew C)
+Date: Tue, 7 Jul 2009 09:37:30 -0700
+Subject: [Stratego Users] rewriting
+Message-ID: <4D311220B29AEF40BCF6A04066590EE2013B545E2523@ALTPHYEMBEVSP10.RES.AD.JPL>
+
+Hi
+Here's my progress. I was able to parse an f90 file using an f90.sdf. Now, I'm looking for info on how to translate this to another language (Python). How do I proceed? I don't see any examples of this (it's mentioned in the  discussion of Tiny).
+
+Any comments appreciated.
+
+Mathew
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090707/29267db5/attachment-0001.html 
+
+From thequux at gmail.com  Tue Jul  7 21:03:17 2009
+From: thequux at gmail.com (Dan Hirsch)
+Date: Tue, 7 Jul 2009 12:03:17 -0700
+Subject: [Stratego Users] rewriting
+In-Reply-To: <4D311220B29AEF40BCF6A04066590EE2013B545E2523@ALTPHYEMBEVSP10.RES.AD.JPL>
+References: <4D311220B29AEF40BCF6A04066590EE2013B545E2523@ALTPHYEMBEVSP10.RES.AD.JPL>
+Message-ID: <AB4FEC9C-8ECA-43C5-B73A-3A67512E61CD@gmail.com>
+
+The is the part for which Stratego is used.
+The basic idea is to look at the problem of translation in terms of  
+"compiling".  I don't know Fortran, so I'll explain in terms of C to  
+Python.
+
+Basically, you look at the C language (or F90, in your case), and look  
+at the parts of the language that have not yet been translated. In  
+this case, I'll do structs.
+
+First, decide what you want to make the source feature look like in  
+the target. In this case, converting structs to objects probably makes  
+sense. So, you have this snippet in your stratego:
+
+rules
+ConvertStructs: CStruct(name,members) -> PyClass(name,  
+[DefFunction("__init__",initBody)])
+		where <map({name : Field(type,name) ->  
+Assignment(Member(Self(),name),Null())}> members => initBody
+
+Then, add translations for accessing members, passing references, and  
+whatever other operations on structs you use.
+
+Keep in mind that translation from a low-level language like Fortran  
+or C to a higher-level one is generally a multi-step process. First  
+you use automatic tools to convert the source to Python, then you go  
+through the source adding "hints", to tell the next automatic pass  
+that "function foo should be a member of class bar, with name quux",  
+and then run another automatic pass to actually perform that  
+refactoring, then lather, rinse, repeat until you have something  
+satisfactory.
+
+Does that answer your questions, or just make the muddle thicker?
+
+--Dan Hirsch
+
+On Jul 7, 2009, at 9:37 AM, Yeates, Mathew C wrote:
+
+> Hi
+> Here?s my progress. I was able to parse an f90 file using an  
+> f90.sdf. Now, I?m looking for info on how to translate this to  
+> another language (Python). How do I proceed? I don?t see any  
+> examples of this (it?s mentioned in the  discussion of Tiny).
+>
+> Any comments appreciated.
+>
+> Mathew
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090707/0953c9ef/attachment.html 
+
+From dflynn at ireland.com  Wed Jul  8 12:11:48 2009
+From: dflynn at ireland.com (dflynn)
+Date: Wed, 8 Jul 2009 11:11:48 +0100
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+In-Reply-To: <80081.63510.qm@web39101.mail.mud.yahoo.com>
+References: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local><002301c9ff0a$b95103e0$ad0ca8c0@CSE.local>
+	<80081.63510.qm@web39101.mail.mud.yahoo.com>
+Message-ID: <001e01c9ffb4$81af3830$7a01010a@CSE.local>
+
+Nick , thanks for the reply. Yes I take your point, my refactoring tool is a
+stand alone tool, based on Dryad, which obviously does its own semantic and
+syntactic analysis. The technique used in the paper mentioned ,leverages the
+existing analysis capabilities of the Eclipse compiler, it uses the AST of
+the Eclipse compiler, and just uses Stratego do any  transformations needed.
+So Dryad would not really be suitable in this situation , it is overkill.
+Does that sound correct ?
+
+ 
+
+Thanks again. 
+
+ 
+
+Diarmuid
+
+ 
+
+ 
+
+  _____  
+
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Nicolae Vintila
+Sent: 07 July 2009 16:00
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] Dryad Tools as Eclipse Plugins
+
+ 
+
+Hi Diarmuid,
+
+No expert but I have some understanding of Karl did.
+
+My understanding is that he used Stratego/J, a Java
+implementation/interpreter of Stratego and he did refactor Eclipse JDTs.
+
+I believe this refactoring nothing to do with Dryad - Dryad performs
+analyses and builds internal structures which are based on the code at the
+time of the analysis. 
+
+Hope it helps.
+Nick
+
+ 
+
+  _____  
+
+From: dflynn <dflynn at ireland.com>
+To: Stratego/XT Users <users at strategoxt.org>
+Sent: Tuesday, July 7, 2009 9:56:27 AM
+Subject: Re: [Stratego Users] Dryad Tools as Eclipse Plugins
+
+I should have clarified that my question arose after reading the following
+Stratego paper:
+
+"Fusing a Transformation Language with an Open Compiler", which uses
+Stratego scripts to modify the Eclipse AST.
+
+So my question really  is, if it is theoretically possible to use Dryad API
+calls to analyze/modify an Eclipse AST ? 
+
+Hope that makes things a bit clearer.
+
+Thanks again,
+
+Diarmuid Flynn
+
+ 
+
+ 
+
+  _____  
+
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of dflynn
+Sent: 07 July 2009 13:01
+To: ' Stratego/XT Users '
+Subject: [ Stratego Users ] Dryad Tools as Eclipse Plugins
+
+ 
+
+Hi,
+
+ 
+
+I am writing refactoring analysis tools using Dryad. Is it possible to plug
+these tools into Eclipse ? If so, where is a good place to start with this ?
+
+ 
+
+ 
+
+Thank you, 
+
+Regards,
+
+Diarmuid Flynn
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090708/f824e388/attachment.html 
+
+From nvintila at yahoo.com  Wed Jul  8 16:25:45 2009
+From: nvintila at yahoo.com (Nicolae Vintila)
+Date: Wed, 8 Jul 2009 07:25:45 -0700 (PDT)
+Subject: [Stratego Users] Dryad Tools as Eclipse Plugins
+In-Reply-To: <001e01c9ffb4$81af3830$7a01010a@CSE.local>
+References: <001201c9fefa$aa7a2320$ad0ca8c0@CSE.local><002301c9ff0a$b95103e0$ad0ca8c0@CSE.local>
+	<80081.63510.qm@web39101.mail.mud.yahoo.com>
+	<001e01c9ffb4$81af3830$7a01010a@CSE.local>
+Message-ID: <714709.43826.qm@web39108.mail.mud.yahoo.com>
+
+"suitable
+in this situation" : depends on the exact nature of the checks you need to perform.
+If they involve a lot of static analysis that Dryad provides maybe it is worth exploring.
+
+But to use it using Stratego/J you would have to strc all Dryad to rtree format because this is how Stratego/J runs Stratego code.
+
+It's a while since I used these things and never been an expert so I made be wrong in some regards.
+
+Cheers
+Nick
+
+
+
+
+________________________________
+From: dflynn <dflynn at ireland.com>
+To: Stratego/XT Users <users at strategoxt.org>
+Sent: Wednesday, July 8, 2009 6:11:48 AM
+Subject: Re: [Stratego Users] Dryad Tools as Eclipse Plugins
+
+ 
+Nick , thanks for the reply. Yes I take
+your point, my refactoring tool is a stand alone tool, based on Dryad, which
+obviously does its own semantic and syntactic analysis. The technique used in
+the paper mentioned ,leverages the existing analysis capabilities of the
+Eclipse compiler, it uses the AST of the Eclipse compiler, and just uses
+Stratego do any  transformations needed. So Dryad would not really be suitable
+in this situation , it is overkill.  Does that sound correct ?
+ 
+Thanks again. 
+ 
+Diarmuid
+ 
+ 
+
+________________________________
+ 
+From:users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On Behalf Of Nicolae Vintila
+Sent: 07 July 2009 16:00
+To: Stratego/XT Users
+Subject: Re: [ Stratego Users ] Dryad Tools as Eclipse Plugins
+ 
+Hi Diarmuid,
+
+No expert but I have some understanding of Karl did.
+
+My understanding is that he used Stratego/J, a Java implementation/interpreter
+of Stratego and he did refactor Eclipse JDTs.
+
+I believe this refactoring nothing to do with Dryad - Dryad performs analyses
+and builds internal structures which are based on the code at the time of the
+analysis. 
+
+Hope it helps.
+Nick
+ 
+
+________________________________
+ 
+From:dflynn
+<dflynn at ireland.com>
+To: Stratego/XT Users <users at strategoxt.org>
+Sent: Tuesday, July 7, 2009 9:56:27
+AM
+Subject: Re: [ Stratego Users ] Dryad Tools as Eclipse Plugins
+I should have clarified that my question arose after
+reading the following Stratego paper:
+?Fusing a Transformation Language with an Open
+Compiler?, which uses Stratego scripts to modify the Eclipse AST.
+So my question really  is, if it is
+theoretically possible to use Dryad API calls to analyze/modify an Eclipse AST
+? 
+Hope that makes things a bit clearer.
+Thanks again,
+Diarmuid Flynn
+ 
+ 
+
+________________________________
+ 
+From:users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On Behalf Of dflynn
+Sent: 07 July 2009 13:01
+To: ' Stratego/XT Users '
+Subject: [ Stratego Users ] Dryad Tools as Eclipse Plugins
+ 
+Hi,
+ 
+I am writing refactoring analysis tools using Dryad.
+Is it possible to plug these tools into Eclipse ? If so, where is a good place
+to start with this ?
+ 
+ 
+Thank you, 
+Regards,
+Diarmuid Flynn
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090708/27e57737/attachment-0001.html 
+
+From mathew.c.yeates at jpl.nasa.gov  Wed Jul  8 19:09:44 2009
+From: mathew.c.yeates at jpl.nasa.gov (Yeates, Mathew C)
+Date: Wed, 8 Jul 2009 10:09:44 -0700
+Subject: [Stratego Users] rewriting
+In-Reply-To: <AB4FEC9C-8ECA-43C5-B73A-3A67512E61CD@gmail.com>
+References: <4D311220B29AEF40BCF6A04066590EE2013B545E2523@ALTPHYEMBEVSP10.RES.AD.JPL>
+	<AB4FEC9C-8ECA-43C5-B73A-3A67512E61CD@gmail.com>
+Message-ID: <4D311220B29AEF40BCF6A04066590EE2013B545E2694@ALTPHYEMBEVSP10.RES.AD.JPL>
+
+Yes that information was very useful. It finally convinced me I'm wayyyy over my head! Are there any examples showing this?
+
+Mathew
+
+________________________________
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On Behalf Of Dan Hirsch
+Sent: Tuesday, July 07, 2009 12:03 PM
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] rewriting
+
+The is the part for which Stratego is used.
+The basic idea is to look at the problem of translation in terms of "compiling".  I don't know Fortran, so I'll explain in terms of C to Python.
+
+Basically, you look at the C language (or F90, in your case), and look at the parts of the language that have not yet been translated. In this case, I'll do structs.
+
+First, decide what you want to make the source feature look like in the target. In this case, converting structs to objects probably makes sense. So, you have this snippet in your stratego:
+
+rules
+ConvertStructs: CStruct(name,members) -> PyClass(name, [DefFunction("__init__",initBody)])
+                        where <map({name : Field(type,name) -> Assignment(Member(Self(),name),Null())}> members => initBody
+
+Then, add translations for accessing members, passing references, and whatever other operations on structs you use.
+
+Keep in mind that translation from a low-level language like Fortran or C to a higher-level one is generally a multi-step process. First you use automatic tools to convert the source to Python, then you go through the source adding "hints", to tell the next automatic pass that "function foo should be a member of class bar, with name quux", and then run another automatic pass to actually perform that refactoring, then lather, rinse, repeat until you have something satisfactory.
+
+Does that answer your questions, or just make the muddle thicker?
+
+--Dan Hirsch
+
+On Jul 7, 2009, at 9:37 AM, Yeates, Mathew C wrote:
+
+
+Hi
+Here's my progress. I was able to parse an f90 file using an f90.sdf. Now, I'm looking for info on how to translate this to another language (Python). How do I proceed? I don't see any examples of this (it's mentioned in the  discussion of Tiny).
+
+Any comments appreciated.
+
+Mathew
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090708/78203c67/attachment.html 
+
+From thequux at gmail.com  Wed Jul  8 19:54:21 2009
+From: thequux at gmail.com (Dan Hirsch)
+Date: Wed, 8 Jul 2009 10:54:21 -0700
+Subject: [Stratego Users] rewriting
+In-Reply-To: <4D311220B29AEF40BCF6A04066590EE2013B545E2694@ALTPHYEMBEVSP10.RES.AD.JPL>
+References: <4D311220B29AEF40BCF6A04066590EE2013B545E2523@ALTPHYEMBEVSP10.RES.AD.JPL>
+	<AB4FEC9C-8ECA-43C5-B73A-3A67512E61CD@gmail.com>
+	<4D311220B29AEF40BCF6A04066590EE2013B545E2694@ALTPHYEMBEVSP10.RES.AD.JPL>
+Message-ID: <2C817A6C-A311-43FE-89A2-D7868084A8DA@gmail.com>
+
+Hmmm... there is the compilers project that I did using Stratego.  
+Further, if you look through the Stratego subversion repository, there  
+are numerous useful examples; I seem to recall that the grammar- 
+reengineering tools (where you found yacc-to-sdf) have some good  
+examples. Also, look at the source for stratego-front, specifically  
+the Stratego-Desugar components; they have a wealth of good code and  
+examples.
+
+Unfortunately, while the documentation that exists is fairly good, not  
+much actually does exist, meaning that I learned it more by reverse- 
+engineering the code than anything else.
+
+Alternatively, I am looking for work right now, and I am in the Los  
+Angeles area, near UCLA; contact me privately if you are interested in  
+hiring me to do the translation.
+
+--tq
+
+On Jul 8, 2009, at 10:09 AM, Yeates, Mathew C wrote:
+
+> Yes that information was very useful. It finally convinced me I?m  
+> wayyyy over my head! Are there any examples showing this?
+>
+> Mathew
+>
+> From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org 
+> ] On Behalf Of Dan Hirsch
+> Sent: Tuesday, July 07, 2009 12:03 PM
+> To: Stratego/XT Users
+> Subject: Re: [Stratego Users] rewriting
+>
+> The is the part for which Stratego is used.
+> The basic idea is to look at the problem of translation in terms of  
+> "compiling".  I don't know Fortran, so I'll explain in terms of C to  
+> Python.
+>
+> Basically, you look at the C language (or F90, in your case), and  
+> look at the parts of the language that have not yet been translated.  
+> In this case, I'll do structs.
+>
+> First, decide what you want to make the source feature look like in  
+> the target. In this case, converting structs to objects probably  
+> makes sense. So, you have this snippet in your stratego:
+>
+> rules
+> ConvertStructs: CStruct(name,members) -> PyClass(name,  
+> [DefFunction("__init__",initBody)])
+>                         where <map({name : Field(type,name) ->  
+> Assignment(Member(Self(),name),Null())}> members => initBody
+>
+> Then, add translations for accessing members, passing references,  
+> and whatever other operations on structs you use.
+>
+> Keep in mind that translation from a low-level language like Fortran  
+> or C to a higher-level one is generally a multi-step process. First  
+> you use automatic tools to convert the source to Python, then you go  
+> through the source adding "hints", to tell the next automatic pass  
+> that "function foo should be a member of class bar, with name quux",  
+> and then run another automatic pass to actually perform that  
+> refactoring, then lather, rinse, repeat until you have something  
+> satisfactory.
+>
+> Does that answer your questions, or just make the muddle thicker?
+>
+> --Dan Hirsch
+>
+> On Jul 7, 2009, at 9:37 AM, Yeates, Mathew C wrote:
+>
+>
+> Hi
+> Here?s my progress. I was able to parse an f90 file using an  
+> f90.sdf. Now, I?m looking for info on how to translate this to  
+> another language (Python). How do I proceed? I don?t see any  
+> examples of this (it?s mentioned in the  discussion of Tiny).
+>
+> Any comments appreciated.
+>
+> Mathew
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090708/018a979c/attachment-0001.html 
+
+From dgroenewegen at gmail.com  Fri Jul 10 22:38:39 2009
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Fri, 10 Jul 2009 22:38:39 +0200
+Subject: [Stratego Users] rm -rf directory
+Message-ID: <ba99f2d70907101338x6563158fg961cbea2f6574841@mail.gmail.com>
+
+Something for the stratego library:
+
+  // rm -rf directory
+  remove-dir =
+    where(filemode; isdir; root := <getcwd>)
+  ; ?dir
+  ; readdir
+  ; remove-all(?".." <+ ?".")
+  ; where(<chdir> dir)
+  ; map(remove-file <+ remove-dir)
+  ; <chdir> root
+  ; <rmdir> dir
+
+-Danny
+

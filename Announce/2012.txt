@@ -1,0 +1,20 @@
+From l.c.l.kats at tudelft.nl  Wed Feb 15 16:18:03 2012
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Wed, 15 Feb 2012 16:18:03 +0100
+Subject: [Stratego Announce] Spoofax 1.0.2 maintenance release
+Message-ID: <4F3BCCAB.9080701@tudelft.nl>
+
+Hi all,
+
+Today we're releasing a minor maintenance release of Spoofax, version 
+1.0.2. This release fixes a memory leak that was introduced in the 1.0 
+release. There are no new features in this release, those will be 
+included in the upcoming 1.1 release instead.
+
+Spoofax can be updated using the Eclipse update manager, using
+the http://spoofax.org/update/stable update site.
+
+cheers,
+
+Lennart Kats
+

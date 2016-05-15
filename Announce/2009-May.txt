@@ -1,0 +1,37 @@
+From pvanitax at hotmail.com  Thu May  7 12:43:01 2009
+From: pvanitax at hotmail.com (Paulo Anita)
+Date: Thu, 7 May 2009 12:43:01 +0200
+Subject: [Announce] Testmail
+Message-ID: <SNT117-W545391AF4588EA67436C71C2670@phx.gbl>
+
+
+testmail; ignore please ; Paulo
+_________________________________________________________________
+See all the ways you can stay connected to friends and family
+http://www.microsoft.com/windows/windowslive/default.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/private/announce/attachments/20090507/e96dae24/attachment.html 
+
+From E.Visser at tudelft.nl  Mon May 11 23:25:19 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 11 May 2009 23:25:19 +0200
+Subject: [Stratego Announce] new stratego announce mailing list
+Message-ID: <ed55b7d90905111425y4a9df573pfa3872ae8e9bb50a@mail.gmail.com>
+
+Hi,
+
+The stratego-announce at cs.uu.nl list has been moved to a new address:
+announce at strategoxt.org
+
+All subscribers to the old list have been subscribed to the new list.
+
+To unsubscribe visit
+
+  https://mailman.st.ewi.tudelft.nl/listinfo/announce
+
+cheers,
+
+-- Eelco
+http://eelcovisser.org
+

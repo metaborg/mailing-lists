@@ -1,0 +1,239 @@
+From eelcovis at gmail.com  Wed Jan 14 09:03:06 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Wed, 14 Jan 2015 09:03:06 +0100
+Subject: [Stratego Users] Fwd: [SEWORLD] Call for Papers: ACM SIGPLAN
+ Software Language Engineering (SLE) 2015
+In-Reply-To: <54B50290.7040503@york.ac.uk>
+References: <54B50290.7040503@york.ac.uk>
+Message-ID: <CAFaCHU3PBvWOaesKV8NOetEJEYa-WN98-fVVu8UC3_GYNempeg@mail.gmail.com>
+
+ACM SIGPLAN 8th International Conference on Software Language Engineering
+(SLE) 2015
+
+Pittsburg, USA, October 2015
+
+http://www.sleconf.org/2015/
+
+Co-located with:
+ACM SIGPLAN conference on Systems, Programming, Languages and Applications:
+Software for Humanity (SPLASH 2015)
+14th International Conference on Generative Programming: Concepts and
+Experiences (GPCE 2015)
+
+
+---------------------------------------------------------
+IMPORTANT DATES
+
+Deadline for abstracts: 1 June 2015
+Deadline for papers: 15 June 2015
+Author notification: 24 July 2015
+Camera ready copies due: 7 August 2015
+SLE workshops: TBD
+Conference: End of October 2015
+
+All dates are Anywhere on Earth.
+
+---------------------------------------------------------
+SCOPE
+
+Software Language Engineering (SLE) is the application of systematic,
+disciplined, and measurable approaches to the development, use, deployment,
+and maintenance of software languages. The term "software language" is used
+broadly, and includes: general-purpose programming languages;
+domain-specific languages (e.g. BPMN, Simulink, Modelica); modeling and
+metamodeling languages (e.g. SysML and UML); data models and ontologies
+(e.g. XML-based and OWL-based languages and vocabularies).
+
+---------------------------------------------------------
+TOPICS OF INTEREST
+
+SLE aims to be broad-minded and inclusive about relevance and scope. We
+solicit high-quality contributions in areas ranging from theoretical and
+conceptual contributions to tools, techniques, and frameworks. Topics of
+interest include, but are not limited to, the following:
+
+- Approaches and methodologies for language design
+- Tools for language design and implementation (incl. meta-languages,
+meta-tools, language workbenches)
+- Generative approaches (incl. transformation and transformation languages,
+code generation)
+- Interpreters and interpreter composition
+- Techniques for analysing (and proving properties of) software language
+descriptions
+- Techniques for software language reuse, evolution and management of
+variations (syntactic/semantic) within language families
+- Integration and coordination of disparate software languages and tools
+- Applications of DSLs for different purposes  (incl. modeling, simulating,
+generation, description, checking)
+- Novel applications and/or empirical studies on any aspect of SLE
+(development, use, deployment, and maintenance of software languages)
+- Cross-fertilization of different technological spaces (e.g. modelware,
+grammarware, ontologies)
+
+---------------------------------------------------------
+TYPES OF SUBMISSIONS
+
+- Research papers: These should report a substantial research contribution
+to SLE or successful application of SLE techniques or both. Full paper
+submissions must not exceed 12 pages (in ACM SIGPLAN conference style).
+- Tool papers: Because of SLE's ample interest in tools, we seek papers
+that present software tools related to the field of SLE. Selection criteria
+include originality of the tool, its innovative aspects, and relevance to
+SLE. Tool papers should include an appendix outlining the proposed
+demonstration, including screenshots etc. A short video may be linked as
+well. Tool paper submissions must not exceed 6 pages (in ACM SIGPLAN
+conference style).
+- Bridging position papers: These papers discuss bridging ideas from the
+different areas of SLE (e.g. modelling, programming languages, grammars,
+etc). This includes both foundational ideas and/or practical techniques.
+Bridging position papers must not exceed 2 pages (in ACM SIGPLAN conference
+style).
+
+In 2015, industrial experience papers should be submitted to the ITSLE
+workshop.
+
+Papers should follow the  ACM SIGPLAN conference style,  10 point font:
+http://www.sigplan.org/Resources/Author/
+
+Note that by default the SIGPLAN Proceedings Format produces papers in 9
+point font by default. If you are formatting your paper using LaTeX, you
+will need to set the 10pt option in the \documentclass command. If you are
+formatting your paper using Word, you may wish to use the provided Word
+template that supports this font size. Please include page numbers in your
+submission; setting the preprint option in the LaTeX \documentclass command
+generates page numbers. Please also ensure that your submission is legible
+when printed on a black and white printer. In particular, please check that
+colors remain distinct and font sizes are legible.
+
+Submitted articles must not have been previously published or currently be
+submitted for publication elsewhere. The program chairs will apply the
+principles of the ACM Plagiarism Policy throughout the submission and
+review process.
+
+---------------------------------------------------------
+PUBLICATIONS
+
+All submitted papers will be reviewed by at least three members of the
+program committee. Authors will be given a brief opportunity for a reply to
+the reviews. The replies will be considered in the PC's discussions, and
+considered in the selection of the best reviewer. All accepted papers will
+be published in ACM Digital Library.
+
+Authors of best papers from the conference will be invited to revise and
+submit extended versions of their papers for a Journal special issue.
+
+---------------------------------------------------------
+AWARDS
+
+- Best paper. Award for best overall paper, as determined by the PC chairs
+based on the recommendations of the programme committee.
+- Best presentation. Award for the best paper presentation. We want to
+encourage well structured and lively presentations. Determined by the
+audience.
+- Best reviewer. Award for best reviewer, as determined by the PC chairs
+using feedback from the authors.
+
+---------------------------------------------------------
+
+CONTACT
+
+For any questions or concerns about the call for paper, please contact the
+program co-chairs at: pcchairs at sleconf.org
+
+---------------------------------------------------------
+GENERAL CHAIR
+
+Richard Paige, University of York, UK
+
+PROGRAM COMMITTEE CO-CHAIRS
+
+Davide Di Ruscio, University of L'Aquila, Italy
+Markus Voelter, Independent researcher, consultant and coach for itemis AG,
+Germany
+
+PUBLICITY CHAIR
+
+Anya Helene Bagge, University of Bergen, Norway
+
+PROGRAM COMMITTEE (TO BE COMPLETED)
+
+Emilie Balland,  INRIA Bordeaux - Sud-Ouest, France
+Anya Helene Bagge, University of Bergen, Norway
+Marco Brambilla, Politechnic Milan, Italy
+Jordi Cabot, INRIA research group at Ecole des Mines de Nantes, France
+Benoit Combemale, University of Rennes 1, France
+Zinovy Diskin, McMaster University / University of Waterloo, Canada
+Jean-Marie Favre, University of Grenoble, France
+Holger Giese, Hasso Plattner Institute at the University of Potsdam, Germany
+Martin Gogolla, University of Bremen, Germany
+Thomas Goldschmidt, ABB Corporate Research, Germany
+Jeff Gray, University of Alabama, USA
+Angelo Hulshout, Independent Consultant, The Netherlands
+Zhenjiang Hu, National Institute of Informatics, Japan
+Adrian Johnstone, Royal Holloway, UK
+Dimitris Kolovos, University of York, UK
+Juan de Lara, Universidad Autonoma de Madrid, Spain
+Terence Parr, University of San Francisco, US
+David J. Pearce, Victoria University of Wellington, New Zealand
+Alfonso Pierantonio, University of L'Aquila, Italy
+Daniel Ratiu, Siemens Corporate Technology, Germany
+Tijs van der Storm, CWI, The Netherlands
+Eugene Syriani,  University of Montreal, Canada
+Juha-Pekka Tolvanen, MetaCase, Finland
+Guido Wachsmuth, Delft University, The Netherlands
+Manuel Wimmer, Tu Wien, Austria
+Daniel Varro, Budapest University of Technology and Economics, Hungary
+Vadim Zaytsev, Universiteit van Amsterdam, Amsterdam, The Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150114/83ffafa9/attachment.html>
+
+From Phil_Miess at yahoo.com  Sat Jan 31 18:10:08 2015
+From: Phil_Miess at yahoo.com (Philip Miess)
+Date: Sat, 31 Jan 2015 12:10:08 -0500
+Subject: [Stratego Users] to many tests
+Message-ID: <54CD0C70.6070401@yahoo.com>
+
+Starting with the default setup I added Unicode characters to the
+identifier and set up tests for CJK characters.
+I also added nesting comments and a few other changes to the default
+common.sdf3
+
+I created a spt file with 517 tests each with an entity whose name was
+40 characters from CJK.
+
+The parsing never finished for this file.
+
+I broke them out into sepearate files of 100 tests per file but even
+when they parsed the test run would never finish discovering tests.
+
+I broke it down into smaller files but that didn't fix the problem until
+I had less than 50 tests in the file.
+Even at list level the test runner took far longer than it did with
+smaller files.
+
+1 test less than a second
+10 3 seconds
+20 7 seconds
+30 18 seconds
+40 30 seconds
+50 144 seconds
+60 137 seconds
+70 235 seconds
+80 364 seconds
+90 1039 seconds
+
+so you can see that there is some kind of poor scaling behavior here.
+
+I suspect the problem is in the parsing of the file since the majority
+of the time is before the tests run.
+
+I solved the problem by making the tests bigger now I have 5 files with
+1 test each containing 100 entities. one of these runs in ~2 seconds.
+
+Anyway someone might want to look into that.
+
+Phil Miess
+
+
+

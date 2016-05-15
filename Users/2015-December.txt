@@ -1,0 +1,176 @@
+From casperbp at gmail.com  Thu Dec  3 13:08:56 2015
+From: casperbp at gmail.com (Casper Bach Poulsen)
+Date: Thu, 3 Dec 2015 13:08:56 +0100
+Subject: [Stratego Users] Fwd: Delft Visit
+References: <56603074.4040003@live.rhul.ac.uk>
+Message-ID: <F0E2C719-2946-4EF6-8659-06E2D4627040@gmail.com>
+
+FYI. Might just invite him to visit me in Den Haag then.
+
+> Begin forwarded message:
+> 
+> From: Thomas van Binsbergen <Thomas.vanBinsbergen.2014 at live.rhul.ac.uk>
+> Date: 3 December 2015 at 13:07:16 GMT+1
+> To: Casper Bach Poulsen <casperbp at gmail.com>
+> Subject: Re: Delft Visit
+> 
+> Hi Casper,
+> 
+> Hopefully the move went smoothly.
+> 
+> There is no concrete need for me to visit the University, so I am fine with meeting in Den Haag and going for some "bitterballen" and a drink somewhere. Just to catch up.
+> 
+> On the other hand, it would be interesting for me to see how I can integrate the code generation that Neil and I are currently working with Spoofax. Currently we are running everything as external tools. This works, but is rather clumsy (and probably not something we want our users to do). But maybe I should come over for this another time, when Peter is in Delft as well and the code generator has stabilised.
+> 
+> Best,
+> Thomas
+> 
+> On 24/11/15 12:34, Casper Bach Poulsen wrote:
+>> Hi again,
+>> 
+>>> I will stay at my parents', which is an easy train ride away from Utrecht. Delft will be a bit harder to reach and I will probably have to travel to Utrecht first (like almost every train), but that's no problem.
+>> 
+>> OK. I moved to Voorburg in Den Haag over the weekend, a 10 minute train ride from Delft. (Delft is expensive for renting!)
+>> 
+>>>> I don?t have any commitments that I know of (I think my viva will be middle or late January), so 5th and 6th are both good with me.
+>>> 
+>>> Great, I don't have any preference at the moment so lets keep both options open for now.. If you have any preference let me know.
+>> 
+>> No preferences, so let?s keep it open.
+>> 
+>>> I am curious to learn about DynSem, although I realise that it is probably still work in progress?
+>> 
+>> Me too :). It?s mostly Vlad Vergu project, and I?m not closely involved (yet, anyway). I?m not sure if he?s around when you are (he lives in Bucharest, but is here every other week). Maybe it?s be a good excuse for me to get up to speed :).
+>> 
+>> I?ve mostly been looking at type soundness proofs since arriving here.
+>> 
+>> Enjoy Swansea!
+>> 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151203/f449f6bb/attachment.html>
+
+From casperbp at gmail.com  Thu Dec  3 13:33:44 2015
+From: casperbp at gmail.com (Casper Bach Poulsen)
+Date: Thu, 3 Dec 2015 13:33:44 +0100
+Subject: [Stratego Users] (no subject)
+Message-ID: <CAGMUbwiaHJq-ZZUP14gZu=HA536yd0g3+r8WoyLwEvyR6FKdRw@mail.gmail.com>
+
+Dear mailing list,
+
+This was meant for Eelco?s eyes only. Apologies to Thomas, and to all
+of you for the spam!
+
+-- Casper [no longer a Mac Mail client user]
+
+
+From tamarit27 at gmail.com  Sat Dec 19 21:31:11 2015
+From: tamarit27 at gmail.com (Salvador Tamarit)
+Date: Sat, 19 Dec 2015 21:31:11 +0100
+Subject: [Stratego Users] CfP: Workshop on Program Transformation for
+ Programmability in Heterogeneous Architectures (Co-located with CGO16);
+ Deadline Jan 15
+Message-ID: <CANuSBjjaDEX1fQBWrkEuaQCUXsE5xCRrmi1kRSVA=GLj5NJPWQ@mail.gmail.com>
+
+*********************************************************************************
+
+PROHA 2016, CALL FOR PAPERS
+
+First Workshop on
+Program Transformation for Programmability in Heterogeneous Architectures
+
+http://goo.gl/RzGbzY
+
+Barcelona, 12th March 2016, in conjunction with the CGO'16 Conference
+
+*********************************************************************************
+
+Important Dates:
+
+Paper submission deadline: 15 January 2016 23:59 (UTC)
+Author notification: 5 February 2016
+Final manuscript due: 26 February 2016
+
+
+Scope:
+
+Developing and maintaining high-performance applications and libraries
+for heterogeneous architectures is a difficult task, usually requiring
+code transformations performed by an expert.
+
+Tools assisting in and, if possible, automating such transformations
+are of course of great interest. However, such tools require
+significant knowledge and reasoning capabilities. For example, the
+former could be a machine-understandable descriptions of what a piece
+of code is expected to do, while the latter could be a set of
+transformations and a corresponding logical context in which they are
+applicable, respectively. Furthermore, strategies to identify the
+sequence of transformations leading to the best resulting code need to
+be elaborated.
+
+This workshop will focus on techniques and foundations which make it
+possible to perform source code transformations, which preserve the
+intended semantics of the original code and improve efficiency,
+portability or maintainability.
+
+The topics of interest for the workshop include, but are not limited to:
+
+* Program annotations to capture algorithmic properties and intended
+  code semantics.
+
+* Programming paradigms able to express underlying (mathematical)
+  properties of code.
+
+* Usage of dynamic and static mechanisms to infer relevant code
+  properties.
+
+* Transformations which preserve intended semantics.
+
+* Strategies to apply transformations.
+
+* Heuristics to guide program transformation and techniques to
+  synthesize / learn these heuristics.
+
+* Tools
+
+
+Submission Guidelines:
+
+Submissions are to be written in English and not exceed 10 pages,
+including bibliography.  Submissions should be written in ACM
+double-column format using a 10-point type.  Authors should follow the
+information for formatting ACM SIGPLAN conference papers, which can be
+found at http://www.sigplan.org/Resources/Author .
+
+Authors should submit their papers in pdf format using the EasyChair
+submission website https://easychair.org/conferences/?conf=proha2016 .
+
+
+Publication:
+
+The proceedings will be made publicly available through ArXiV.
+
+
+Workshop Organizers:
+
+- Manuel Carro, IMDEA Software Institute and Technical University of Madrid
+
+- Colin W. Glass, University of Stuttgart
+
+- Jan Kuper, University of Twente
+
+- Julio Mari?o, Technical University of Madrid
+
+- Lutz Schubert, University of Ulm
+
+- Guillermo Vigueras, IMDEA Software Institute
+
+- Salvador Tamarit, Technical University of Madrid
+
+If you have any questions, please contact the program chair at
+manuel.carro at imdea.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151219/b1f61d4d/attachment.html>
+

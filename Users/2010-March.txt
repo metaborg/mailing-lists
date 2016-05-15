@@ -1,0 +1,1983 @@
+From gthouraya at yahoo.fr  Wed Mar 10 15:21:41 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 14:21:41 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT under
+	windows XP
+Message-ID: <265349.63430.qm@web26305.mail.ukl.yahoo.com>
+
+
+
+
+I?did not understand?how to install Stratego / XT under Windows. I need this tool to make program my tool of transformation between two specifications. Please help me
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/5f9a2bec/attachment.html 
+
+From gthouraya at yahoo.fr  Wed Mar 10 15:35:18 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 14:35:18 +0000 (GMT)
+Subject: [Stratego Users] (no subject)
+Message-ID: <295356.25503.qm@web26307.mail.ukl.yahoo.com>
+
+I?did not understand?how to install Stratego / XT under Windows. I need this tool to make program my tool of transformation between two specifications. Please help me
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/3ac49a68/attachment.html 
+
+From gthouraya at yahoo.fr  Wed Mar 10 15:40:26 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 14:40:26 +0000 (GMT)
+Subject: [Stratego Users] (no subject)
+Message-ID: <566272.33516.qm@web26303.mail.ukl.yahoo.com>
+
+?
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/882c1cc5/attachment.html 
+
+From R.B.Vermaas at tudelft.nl  Wed Mar 10 15:41:11 2010
+From: R.B.Vermaas at tudelft.nl (Rob Vermaas - EWI)
+Date: Wed, 10 Mar 2010 15:41:11 +0100
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+Message-ID: <7C1D1C7736DF8642A9F8D52C83867F6D596AA9@SRV502.tudelft.net>
+
+
+Hi,
+
+you can find the latest release of StrategoXT and its dependencies at http://strategoxt.org/Stratego/StrategoRelease017 . There you can also find a link to the installation instructions, which are in the StrategoXT Manual (latest manual: http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/chunk-chapter/installation.html)
+
+If you have any problems, please let us know.
+
+greetings,
+Rob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/d6582b89/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Wed Mar 10 15:52:08 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 10 Mar 2010 15:52:08 +0100
+Subject: [Stratego Users] please help me to install the Stratego /XT
+ under windows XP
+In-Reply-To: <7C1D1C7736DF8642A9F8D52C83867F6D596AA9@SRV502.tudelft.net>
+References: <7C1D1C7736DF8642A9F8D52C83867F6D596AA9@SRV502.tudelft.net>
+Message-ID: <201003101452.o2AEq8VZ007591@smtp1.infopact.nl>
+
+Hi,
+
+Just pick the "aterm-2.5 + sdf2-bundle-2.4 + strategoxt-0.17" package from the download page below, extract it with something like 7-zip, and read the README for further instructions.
+
+Alternatively, you can also try the Spoofax Eclipse plugin at http://strategoxt.org/Spoofax, which includes a Java-based distribution of Stratego. It allows you to build your own language and transformations together with IDE support.
+
+hth,
+
+- Lennart
+
+
+@ 03:41 PM 3/10/2010, Rob Vermaas - EWI wrote:
+>Hi,
+>
+>you can find the latest release of StrategoXT and its dependencies at <http://strategoxt.org/Stratego/StrategoRelease017>http://strategoxt.org/Stratego/StrategoRelease017 . There you can also find a link to the installation instructions, which are in the StrategoXT Manual (latest manual: <http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/chunk-chapter/installation.html>http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/chunk-chapter/installation.html)
+>
+>If you have any problems, please let us know.
+>
+>greetings,
+>Rob 
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From gthouraya at yahoo.fr  Wed Mar 10 18:07:34 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 17:07:34 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+In-Reply-To: <7C1D1C7736DF8642A9F8D52C83867F6D596AA9@SRV502.tudelft.net>
+Message-ID: <242180.38216.qm@web26306.mail.ukl.yahoo.com>
+
+ok Think you very much 
+
+--- En date de?: Mer 10.3.10, Rob Vermaas - EWI <R.B.Vermaas at tudelft.nl> a ?crit?:
+
+De: Rob Vermaas - EWI <R.B.Vermaas at tudelft.nl>
+Objet: Re: [Stratego Users] please help me to install the Stratego /XT under windows XP
+?: users at strategoxt.org
+Date: Mercredi 10 mars 2010, 15h41
+
+
+
+
+ 
+ 
+Re: [Stratego Users] please help me to install the Stratego /XT under windows XP
+
+
+
+Hi,
+
+
+
+you can find the latest release of StrategoXT and its dependencies at http://strategoxt.org/Stratego/StrategoRelease017 . There you can also find a link to the installation instructions, which are in the StrategoXT Manual (latest manual: http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/chunk-chapter/installation.html)
+
+
+
+If you have any problems, please let us know.
+
+
+
+greetings,
+
+Rob
+
+
+ 
+
+-----La pi?ce jointe associ?e suit-----
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/1b5f3e93/attachment.html 
+
+From gthouraya at yahoo.fr  Wed Mar 10 21:55:13 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 20:55:13 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+In-Reply-To: <201003101452.o2AEq8VZ007591@smtp1.infopact.nl>
+Message-ID: <483936.89947.qm@web26302.mail.ukl.yahoo.com>
+
+please help me, I don't known what I do exactelly. More information in the site but I can't understand what I do exactelly? 
+please help me, I have a rules for transformation a specification in first language write with latex into another specification in a second language and also write with latex.
+I have a windows XP in my computer. 
+What are the steps which I has to follow preciselly?? is that I have to install the cygwin? I? have to work with Eclipse Java and I have to import these file (aterm-, sdf2-, strategoxt-)?
+please help me, please.
+-
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/acebc553/attachment-0001.html 
+
+From gthouraya at yahoo.fr  Wed Mar 10 22:24:39 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 21:24:39 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+In-Reply-To: <7C1D1C7736DF8642A9F8D52C83867F6D596AA9@SRV502.tudelft.net>
+Message-ID: <829008.42910.qm@web26306.mail.ukl.yahoo.com>
+
+please help me, I don't known what I do exactelly. More information in the site but I can't understand what I do exactelly? 
+please
+help me, I have a rules for transformation a specification in first
+language write with latex into another specification in a second
+language and also write with latex.
+I have a windows XP in my computer. 
+What
+are the steps which I has to follow preciselly?? is that I have to
+install the cygwin? I? have to work with Eclipse Java and I have to
+import these file (aterm-, sdf2-, strategoxt-)?
+please help me, please
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/258d304c/attachment.html 
+
+From gthouraya at yahoo.fr  Wed Mar 10 22:25:57 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Wed, 10 Mar 2010 21:25:57 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+In-Reply-To: <201003101452.o2AEq8VZ007591@smtp1.infopact.nl>
+Message-ID: <166179.52072.qm@web26308.mail.ukl.yahoo.com>
+
+please help me, I don't known what I do exactelly. More information in the site but I can't understand what I do exactelly? 
+please
+help me, I have a rules for transformation a specification in first
+language write with latex into another specification in a second
+language and also write with latex.
+I have a windows XP in my computer. 
+What
+are the steps which I has to follow preciselly?? is that I have to
+install the cygwin? I? have to work with Eclipse Java and I have to
+import these file (aterm-, sdf2-, strategoxt-)?
+please help me, please
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100310/32c0c3c9/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Mar 11 14:33:05 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 11 Mar 2010 14:33:05 +0100
+Subject: [Stratego Users] please help me to install the Stratego /XT
+ under windows XP
+Message-ID: <201003111333.o2BDX5tC032429@smtp1.infopact.nl>
+
+Hi Gouasmi,
+
+What exactly are you trying to do?
+
+And for the Spoofax plugin you don't need the aterm/sdf/strategoxt packages, it's all included. Just try it and follow the tour on spoofax.org.
+
+- Lennart
+
+@ 09:55 PM 3/10/2010, Gouasmi Thouraya wrote:
+>please help me, I don't known what I do exactelly. More information in the site but I can't understand what I do exactelly? 
+>please help me, I have a rules for transformation a specification in first language write with latex into another specification in a second language and also write with latex.
+>I have a windows XP in my computer. 
+>What are the steps which I has to follow preciselly?  is that I have to install the cygwin? I  have to work with Eclipse Java and I have to import these file (aterm-, sdf2-, strategoxt-)?
+>please help me, please.
+>-
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From gthouraya at yahoo.fr  Thu Mar 11 17:22:08 2010
+From: gthouraya at yahoo.fr (Gouasmi Thouraya)
+Date: Thu, 11 Mar 2010 16:22:08 +0000 (GMT)
+Subject: [Stratego Users] please help me to install the Stratego /XT
+	under windows XP
+In-Reply-To: <201003111333.o2BDX5tC032429@smtp1.infopact.nl>
+Message-ID: <927784.14145.qm@web26301.mail.ukl.yahoo.com>
+
+Hi Mr,
+
+I have to generate a tool which makes the transformation(processing) automatic between two specifications of two different languages. The specification of input is written in latex (commands and operators in latex) and the second? specification to be generate in latex also.
+I do not know if this generation is feasible by your tool? If yes, how I have to make exactly, because I did not understand how to use Stratego / XT, and which is the link between Stratego / XT and Spoofax?? 
+please help me in the proche time possible
+execuse me for the distrubance
+
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100311/d519c5ac/attachment.html 
+
+From roberto.cornacchia at gmail.com  Mon Mar 22 16:13:39 2010
+From: roberto.cornacchia at gmail.com (Roberto Cornacchia)
+Date: Mon, 22 Mar 2010 16:13:39 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+Message-ID: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+
+Hello,
+
+I have just started with Stratego/XT and am trying to setup a little
+project for translating a language into another.
+I guess I'll be bothering you guys with many questions, and will start
+today with the following.
+
+Say I have defined SDF grammars for source and target languages
+(LanguageA and LanguageB).
+Next, I write a Stratego program that imports the two grammar
+definitions and defines transformation rules and strategies.
+
+My question is: if both languages define a symbol called "Exp", how do
+I write a non-ambiguous mapping rule between the two?
+
+A first solution is to rename them at grammar level, so that they are
+called something like: AExp, BExp.
+I really don't like this option though, as it would make it difficult
+to re-use pre-existing grammars and it looks ugly.
+
+I'm sure Stratego provides some more clever mechanism to deal with
+this, doesn't it?
+For example, in Haskell you would write something in the line of:
+
+import qualified LanguageA as A
+import qualified LanguageB as B
+...
+
+  trans(A.Exp) = B.Exp
+
+Does anything like this exist in Stratego?
+Thanks, Roberto
+
+From E.Visser at tudelft.nl  Mon Mar 22 16:37:39 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 22 Mar 2010 15:37:39 +0000
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+Message-ID: <ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+
+Hi Roberto,
+
+> I have just started with Stratego/XT and am trying to setup a little
+> project for translating a language into another.
+
+Welcome to the list and to Stratego.
+
+Are you aware of the Spoofax language workbench:
+
+   http://strategoxt.org/Spoofax
+
+It provides an Eclipse plugin for developing SDF+Stratego programs.
+
+> I guess I'll be bothering you guys with many questions, and will start
+> today with the following.
+
+We'll do our best :)
+
+> Say I have defined SDF grammars for source and target languages
+> (LanguageA and LanguageB).
+> Next, I write a Stratego program that imports the two grammar
+> definitions and defines transformation rules and strategies.
+>
+> My question is: if both languages define a symbol called "Exp", how do
+> I write a non-ambiguous mapping rule between the two?
+
+The first answer is a question: are you doing the transformation using
+abstract syntax or using concrete syntax?
+
+In the first case, Stratego doesn't care a whole lot about the sorts
+in your syntax definition. In transformation by term rewriting you're
+mostly concerned in distinguishing abstract syntax constructors. And
+your question should then be: How does Stratego distinguish a Var
+constructor in source and target language. The answer is that it
+doesn't. You may want to design your constructors carefully; there is
+no mechanism in SDF/Stratego currently to rename constructors in
+grammars.
+
+> A first solution is to rename them at grammar level, so that they are
+> called something like: AExp, BExp.
+> I really don't like this option though, as it would make it difficult
+> to re-use pre-existing grammars and it looks ugly.
+
+If you are using concrete syntax then you _do_ want to disambiguate
+the sorts in your two grammars. And you don't have to resort to manual
+renaming; SDF supports renaming; see the chapter on concrete object
+syntax in the tutorial:
+
+http://hydra.nixos.org/build/316727/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+
+> I'm sure Stratego provides some more clever mechanism to deal with
+> this, doesn't it?
+> For example, in Haskell you would write something in the line of:
+>
+> import qualified LanguageA as A
+> import qualified LanguageB as B
+> ...
+>
+> ?trans(A.Exp) = B.Exp
+>
+> Does anything like this exist in Stratego?
+
+Well, not in Stratego, but in SDF (see link above):
+
+module StrategoTiger
+imports Stratego [ Term => StrategoTerm
+                   Var => StrategoVar
+                   Id => StrategoId
+                   StrChar => StrategoStrChar ]
+
+cheers,
+
+-- Eelco
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From roberto.cornacchia at gmail.com  Mon Mar 22 18:02:57 2010
+From: roberto.cornacchia at gmail.com (Roberto Cornacchia)
+Date: Mon, 22 Mar 2010 18:02:57 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+	<ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+Message-ID: <16633a591003221002s28f6a262j74f241d78e253780@mail.gmail.com>
+
+> Are you aware of the Spoofax language workbench:
+>
+> ? http://strategoxt.org/Spoofax
+>
+> It provides an Eclipse plugin for developing SDF+Stratego programs.
+
+Yes, I've installed it and played a bit with it.
+I found it a bit difficult (mainly because my little experience with eclipse)
+to setup a project for translation between two languages using abstract syntax
+(the example translates to java using concrete syntax, so there is no
+need to define an SDF for java).
+However, it is my plan to go back to it once I'm more familiar with Stratego/XT,
+as I would like to deploy a plugin for embedding editing of my
+language in our target application
+(it will be a custom language that translates into SQL).
+
+>> Say I have defined SDF grammars for source and target languages
+>> (LanguageA and LanguageB).
+>> Next, I write a Stratego program that imports the two grammar
+>> definitions and defines transformation rules and strategies.
+>>
+>> My question is: if both languages define a symbol called "Exp", how do
+>> I write a non-ambiguous mapping rule between the two?
+>
+> The first answer is a question: are you doing the transformation using
+> abstract syntax or using concrete syntax?
+
+For now my preference is for abstract syntax.
+I have to admit that the approach of extending the meta language, as
+in StrategoTiger,
+is still a bit above my current level of understanding.
+
+> In the first case, Stratego doesn't care a whole lot about the sorts
+> in your syntax definition. In transformation by term rewriting you're
+> mostly concerned in distinguishing abstract syntax constructors. And
+> your question should then be: How does Stratego distinguish a Var
+> constructor in source and target language. The answer is that it
+> doesn't. You may want to design your constructors carefully; there is
+> no mechanism in SDF/Stratego currently to rename constructors in
+> grammars.
+
+I see the point. Still, designing constructors carefully isn't always
+very possible, especially if I want to import pre-defined grammar definitions.
+
+> module StrategoTiger
+> imports Stratego [ Term => StrategoTerm
+> ? ? ? ? ? ? ? ? ? Var => StrategoVar
+> ? ? ? ? ? ? ? ? ? Id => StrategoId
+> ? ? ? ? ? ? ? ? ? StrChar => StrategoStrChar ]
+>
+> cheers,
+
+Yep, that's what I was looking for, thanks! Not as convenient as the
+Haskell mechanism,
+which doesn't force renaming of every single Symbol, but still fine.
+
+Many thanks, be sure I'll be soon back with more questions ;)
+Roberto
+
+
+From fcferrari at gmail.com  Wed Mar 24 19:30:03 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Wed, 24 Mar 2010 15:30:03 -0300
+Subject: [Stratego Users] Fwd: AspectJ-front: Problem for parsing and
+	pretty-printing complex pointcut expressions
+In-Reply-To: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com>
+Message-ID: <48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com>
+
+Hi, everyone.
+
+I have posted this problem a while ago (please, see below). Is there
+someone who could give me a help with this?
+
+Many thanks,
+  Fabiano
+
+
+---------- Forwarded message ----------
+From: Fabiano Ferrari <fcferrari at gmail.com>
+Date: 2 February 2010 10:48
+Subject: AspectJ-front: Problem for parsing and pretty-printing
+complex pointcut expressions
+To: developers at strategoxt.org, Users at strategoxt.org
+
+
+Hi, everybody.
+
+I'm facing some problems while using the parser and the pretty-printer
+from AspectJ-front. For instance, when I parse a pointcut expressions
+such as:
+
+
+? ? ? ?protected pointcut subjectChange(Subject subject) :
+(((execution(public int GeneralStatement.executeUpdate(..))) &&
+? ? ? ? ? ? ? ? ? ? ? ?(!within(SelectStatement))) || (call(protected
+List GeneralStatement.executeQueryWithCallback(..)))) &&
+this(subject);
+
+
+the pretty-printed code is as follows:
+
+
+? ? ? ?protected pointcut subjectChange (Subject subject)
+:execution(public int GeneralStatement.executeUpdate(..)) &&
+? ? ? ? ? ? ? ? ? ? ? ?!within(SelectStatement) || call(protected List
+GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+
+
+As you can see, some surrounding round brackets are removed, what
+results in inconsistent information binding. Other two examples are
+shown below (the original aspects are attached).
+
+
+Is anybody aware of a workaround for this? Is there a way to fix it
+(e.g. keeping all round brackets in the pretty-printed version)?
+
+Many thanks!
+
+?Fabiano Ferrari
+
+
+--------- other examples ---------
+
+?ORIGINAL EXPRESSION 1:
+
+? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+? ? ? ? ? ? ? ? ?(
+? ? ? ? ? ? ? ? ? ? ? ?(
+? ? ? ? ? ? ? ? ? ? ? ?execution( ?public void
+RuntimeSQLException.setNextException(SQLException))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?protected static int
+BaseLogProxy.getNextId())
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+Stopwatch.appendTaskTime(String,long))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void Stopwatch.reset())
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+FifoCacheController.putObject(CacheModel,Object,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+FifoCacheController.getObject(CacheModel,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+FifoCacheController.removeObject(CacheModel,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+FifoCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+LruCacheController.putObject(CacheModel,Object,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+LruCacheController.getObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+LruCacheController.removeObject(CacheModel,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+LruCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+MemoryCacheController.putObject(CacheModel,Object,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+MemoryCacheController.getObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+MemoryCacheController.removeObject(CacheModel,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+MemoryCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+InvocationHandler+.loadObject())
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+LazyResultLoader.loadObject() throws NestedRuntimeException)
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?Object[]
+AutoResultMap.getResults(RequestScope,ResultSet) throws  SQLException)
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?static long
+SessionScope.getNextId())
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+OSCacheController.removeObject(CacheModel,Object))
+? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+CacheModel.getObjectPartTwo())
+
+? ? ? ? ? ? ? ? ? ? ? ?) && this(syncObj)
+? ? ? ? ? ? ? ?);
+
+
+?PRETTY-PRINTED EXPRESSION 1:
+
+? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+? ? ? ? ? ? ? ? ?execution(public void
+RuntimeSQLException.setNextException(SQLException))
+? ? ? ? ? ? ? ? ?|| execution(protected static int BaseLogProxy.getNextId())
+? ? ? ? ? ? ? ? ?|| execution(private void
+Stopwatch.appendTaskTime(String, long))
+? ? ? ? ? ? ? ? ?|| execution(public void Stopwatch.reset())
+? ? ? ? ? ? ? ? ?|| execution(public void
+FifoCacheController.putObject(CacheModel, Object, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+FifoCacheController.getObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+FifoCacheController.removeObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public void FifoCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ?|| execution(public void
+LruCacheController.putObject(CacheModel, Object, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+LruCacheController.getObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+LruCacheController.removeObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public void LruCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ?|| execution(public void
+MemoryCacheController.putObject(CacheModel, Object, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+MemoryCacheController.getObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public Object
+MemoryCacheController.removeObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(public void
+MemoryCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ?|| execution(private void InvocationHandler+.loadObject())
+? ? ? ? ? ? ? ? ?|| execution(private void
+LazyResultLoader.loadObject() throws NestedRuntimeException)
+? ? ? ? ? ? ? ? ?|| execution(public Object[]
+AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+? ? ? ? ? ? ? ? ?|| execution(public static long SessionScope.getNextId())
+? ? ? ? ? ? ? ? ?|| execution(public Object
+OSCacheController.removeObject(CacheModel, Object))
+? ? ? ? ? ? ? ? ?|| execution(private void CacheModel.getObjectPartTwo())
+
+? ? ? ? ? ? ? ? ?&& this(syncObj);
+
+----------------------------------
+
+?ORIGINAL EXPRESSION 2:
+
+? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+? ? ? ? ? ? ? ?(
+? ? ? ? ? ? ? ? ? ?execution( ?public static ClassInfo
+ClassInfo.getInstance(Class))
+? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+OSCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ? ?|| execution( private void
+ThrottledPool.pushPartTwo(LinkedList,Object))
+? ? ? ? ? ? ? ? ? ?|| execution( private Object
+ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+IllegalAccessException)
+? ? ? ? ? ? ? ? ? ?|| execution( ?private Object
+OSCacheController.getObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException )
+? ? ? ? ? ? ? ? ? ?|| execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException)
+? ? ? ? ? ? ? ? ? ?|| execution(private void
+CacheModel.getObjectPartThree(Object,Object))
+? ? ? ? ? ? ? ? ? ?|| execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+, Object , Object, CacheKey ) throws SQLException )
+? ? ? ? ? ? ? ? ? ?|| execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+Connection, Object , int , int, CacheKey ) throws SQLException )
+? ? ? ? ? ? ? ?)
+? ? ? ? ? ? ? ?&& args(syncObj,..);
+
+
+?PRETTY-PRINTED EXPRESSION 2:
+
+? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+? ? ? ? ? ? ? ? ?execution(public static ClassInfo ClassInfo.getInstance(Class))
+? ? ? ? ? ? ? ? ?|| execution(public void OSCacheController.flush(CacheModel))
+? ? ? ? ? ? ? ? ?|| execution(private void
+ThrottledPool.pushPartTwo(LinkedList, Object))
+? ? ? ? ? ? ? ? ?|| execution(private Object
+ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+IllegalAccessException)
+? ? ? ? ? ? ? ? ?|| execution(private Object
+OSCacheController.getObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+? ? ? ? ? ? ? ? ?|| execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+? ? ? ? ? ? ? ? ?|| execution(private void
+CacheModel.getObjectPartThree(Object, Object))
+? ? ? ? ? ? ? ? ?|| execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+RequestScope, Connection, Object, Object, CacheKey) throws SQLException)
+? ? ? ? ? ? ? ? ?|| execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+Connection, Object, int, int, CacheKey) throws SQLException)
+? ? ? ? ? ? ? ? ?&& args(syncObj, ..);
+
+
+
+
+
+
+--
+Fabiano Cutigi Ferrari
+_________________________________
+PhD Candidate in Computer Science
+ICMC/USP - University of S?o Paulo - Brazil
+LabES - Laboratory of Software Engineering
+http://www.icmc.usp.br/~ferrari/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ExecuteStatementObserver.aj
+Type: application/octet-stream
+Size: 2573 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100324/4bdca938/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationExecutingObject.aj
+Type: application/octet-stream
+Size: 3152 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100324/4bdca938/attachment-0001.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationArgument.aj
+Type: application/octet-stream
+Size: 1914 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100324/4bdca938/attachment-0002.obj 
+
+From kutsia at risc.uni-linz.ac.at  Thu Mar 25 17:56:35 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Thu, 25 Mar 2010 17:56:35 +0100
+Subject: [Stratego Users] LOPSTR 2010: Deadline extension
+Message-ID: <4BAB95C3.40502@risc.uni-linz.ac.at>
+
+=====================================================================
+
+               20th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2010
+
+    http://www.risc.uni-linz.ac.at/conferences/lopstr2010/
+            Hagenberg, Austria, July 23-25, 2010
+                  (co-located with PPDP 2010)
+
+=====================================================================
+
+EXTENDED DEADLINE
+Paper (or extended abstract) submission:    March 31, 2010
+
+From kutsia at risc.uni-linz.ac.at  Thu Mar 25 19:33:00 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Thu, 25 Mar 2010 19:33:00 +0100
+Subject: [Stratego Users] 2nd CfP: WWV'10
+Message-ID: <4BABAC5C.2050109@risc.uni-linz.ac.at>
+
+[Apologies if you receive multiple copies]
+
+     ***********************************************************
+     *                   CALL FOR PAPERS                       *
+     *                                                         *
+     *                       WWV 2010                          *
+     * Automated Specification and Verification of Web Systems *
+     *             6th International Workshop                  *
+     *                                                         *
+     *      Vienna University of Technology, Austria           *
+     *                 July 30-31, 2010                        *
+     *      http://www.complang.tuwien.ac.at/WWV2010/          *
+     ***********************************************************
+
+
+***************
+IMPORTANT DATES
+***************
+
+Abstract Submission       April 12, 2010
+Full Paper Submission     April 19, 2010
+Acceptance Notification   May 23, 2010
+Camera Ready              June 20, 2010
+Workshop                  July 30-31, 2010
+
+
+***************
+SCOPE
+***************
+
+The increased complexity of Web sites and the explosive growth of
+Web-based applications has turned their design and construction into
+a challenging problem. Nowadays, many companies have diverted their
+Web sites into interactive, completely-automated, Web-based
+applications (such as Amazon, on-line banking, or travel agencies)
+with a high complexity that requires appropriate specification and
+verification techniques and tools. Systematic, formal approaches to
+the analysis and verification can address the problems of this
+particular domain with automated and reliable tools that also
+incorporate semantic aspects.
+
+We solicit original papers on formal methods and techniques applied
+to Web sites, Web services or Web-based applications, such as:
+
+* rule-based approaches to Web system analysis,
+   certification, specification, verification,
+   and optimization
+* algebraic methods for verification and certification
+   of Web systems
+* formal models for describing and reasoning about Web sites
+* model-checking, synthesis and debugging of Web sites
+* analysis and verification of linked data
+* abstract interpretation and program transformation
+   applied to the semantic Web
+* intelligent tutoring and advisory systems for
+   Web specifications authoring
+* Web quality and Web metrics
+* Web usability and accessibility
+* Testing and evaluation of Web systems and applications
+
+The WWV series provides a forum for researchers from the communities
+of Rule-based programming, Automated Software Engineering, and
+Web-oriented research to facilitate the cross-fertilization and the
+advancement of hybrid methods that combine the three areas.
+
+The previous WWV editions were: WWV'09 (Hagenberg, Austria),
+WWV'08 (Siena, Italy), WWV'07 (Venice, Italy), WWV'06 (Paphos, Cyprus),
+and WWV'05 (Valencia, Spain).
+
+
+***************
+LOCATION
+***************
+
+WWV 2010 will be held at the Compilers and Languages Group (Complang) of
+the Faculty of Informatics at the Vienna University of Technology, Austria.
+The Complang Group is located in the center of Vienna,
+beside the Karlskirche and near the Opera.
+
+For more information about the Complang Group, please visit:
+http://www.complang.tuwien.ac.at
+
+***************
+SUBMISSION
+***************
+
+Submissions must be received by April 19, 2010.
+In addition, an ASCII version of the title and abstract
+must be submitted by April 12, 2010.
+
+
+Please submit research reports up to 15 pages in PDF,
+conforming to the format produced by LaTeX using the
+easychair.cls class file of EasyChair.
+The class style may be downloaded at:
+
+http://www.easychair.org/easychair.zip
+
+Submission is web-based via this link:
+
+http://www.easychair.org/conferences/?conf=wwv2010
+
+
+***************
+PUBLICATION
+***************
+
+We will prepare workshop pre-proceedings for the workshop participants.
+
+After the workshop, an open call for a special journal issue is envisaged.
+
+
+***************
+COMMITTEES
+***************
+
+PROGRAM CO-CHAIRS:
+Laura Kovacs, Vienna University of Technology, Austria
+Temur Kutsia, Johannes Kepler University Linz, Austria
+
+
+PROGRAM COMMITTEE
+
+Maria Alpuente Frasnedo, Technical University of Valencia, Spain
+Demis Ballis, University of Udine, Italy
+Jorge Manuel Neves Coelho,  University of Porto, Portugal
+Vicente Luque Centeno, Universidad Carlos III de Madrid, Spain
+Wlodzimierz Drabent, Linkoeping University, Sweden
+Santiago Escobar, Technical University of Valencia, Spain
+Moreno Falaschi, University of Siena, Italy
+Jens Knoop, Vienna University of Technology, Austria
+Laura Kovacs, Vienna University of Technology, Austria
+Temur Kutsia, Johannes Kepler University Linz, Austria
+Catherine Meadows, Naval Research Laboratory, USA
+
+
+***************
+INVITED SPEAKERS
+***************
+Thomas Eiter, Vienna University of Technology, Austria
+Andrei Voronkov, University of Manchester, UK
+
+
+***************
+RELATED EVENTS
+***************
+WWV 2010 will take place after the RISC Summer 2010 conference series:
+
+http://www.risc.uni-linz.ac.at/about/conferences/summer2010/
+
+held in Hagenberg near Linz. There are frequent train connections of 
+about 1.5 hours between Linz and Vienna.
+
+
+
+From miguel.garcia at tuhh.de  Fri Mar 26 13:28:56 2010
+From: miguel.garcia at tuhh.de (Miguel Garcia)
+Date: Fri, 26 Mar 2010 13:28:56 +0100
+Subject: [Stratego Users] program transformation projects (Scala.Net
+	compiler) for Google Summer of Code
+Message-ID: <968EDC0945B54AAC8589878ED2D6EF2C@Miguel>
+
+
+
+Hi,
+
+I've been contributing to the Scala compiler project [1], focusing recently 
+on its .NET version.
+
+As program transformation fans, you might want to know that the Scala team 
+participates in Google Summer of Code [2], where students get paid for 
+contributing to open-source projects.
+
+>From that list, the following are about program transformation:
+
+ 3. Code Coverage for Scala
+ 9. A new backend for the Scala.Net compiler to generate C# sources
+12. Adding LINQ-awareness to Scala.Net
+
+Your ideas are welcome! For example, here's one more: [3]
+
+If you know students interested in compiler stuff, please let them know 
+about these projects.
+
+regards,
+
+Miguel
+
+[1] The Scala Compiler Corner,
+http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner/
+
+[2]  Scala project ideas for Google Summer of Code 2010 
+http://www.scala-lang.org/gsoc2010
+
+[3]  Scalify.NET and joint compilation of Scala and C#,
+http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner/MixedSourceScalaCSharp.pdf
+
+
+--
+Miguel Garcia
+Institute for Software Systems (STS), E-16
+Technische Universitaet Hamburg-Harburg
+Schwarzenbergstrasse 95
+Building E, 4th Floor
+21073 Hamburg (Germany)
+              http://www.sts.tu-harburg.de/people/mi.garcia
+
+
+From roberto.cornacchia at gmail.com  Fri Mar 26 16:18:58 2010
+From: roberto.cornacchia at gmail.com (Roberto Cornacchia)
+Date: Fri, 26 Mar 2010 16:18:58 +0100
+Subject: [Stratego Users] Too many entries in SDF precedence? (continued)
+Message-ID: <16633a591003260818r7ab3bebax5e69164348aaf986@mail.gmail.com>
+
+Hi,
+
+I'm having a similar problem compiling the Java 1.5 syntax from the Java-front:
+
+Generating parse table ...
+generating parsetable from /var/tmp/SL.19274.asfix
+[ sdf2rtg | debug ] Invoking tool implodePT at location
+/ufs/roberto/local/bin/implodePT with arguments:
+        ["-i","/tmp/StrategoXTxeHUVK","-o","/tmp/StrategoXTYHx5fA"]
+[ sdf2rtg | warning ] process signaled: SEGV (11): Invalid memory reference
+
+Like for Shannon, it does compile correctly if I take the lowest
+precedence entry away from expressions/Priorities.sdf, that would be:
+ > {right:
+      LHS "="    Expr -> Expr
+      LHS "*="   Expr -> Expr
+      LHS "/="   Expr -> Expr
+      LHS "%="   Expr -> Expr
+      LHS "+="   Expr -> Expr
+      LHS "-="   Expr -> Expr
+      LHS "<<="  Expr -> Expr
+      LHS ">>="  Expr -> Expr
+      LHS ">>>=" Expr -> Expr
+      LHS "&="   Expr -> Expr
+      LHS "^="   Expr -> Expr
+      LHS "|="   Expr -> Expr
+    }
+
+taken away.
+
+Increasing the stack with ulimit -s 16000 did not help.
+
+However, this happens only on a 64-bit machine (aterm patched). The
+same works just fine on a 32-bit machine.
+
+On both machines, I'm using the stable versions: aterm-2.5,
+sdf2-bundle-2.4, stratego/xt-0.17.
+Fedora core 11 RPMs on the 32-bit machine, compiled source tarball on
+the 64-bit machine.
+
+Any more thoughts? Shannon, could you find out more about your problem?
+
+Thanks, Roberto
+
+
+
+> Hi Shannon,
+
+> I can't reproduce the problem here, but it sounds like you need to increase the stack size using the ulimit command, e.g. ulimit -s 16000.
+
+> Cheers,
+
+> Lennart
+
+@ 03:59 AM 1/27/2010, Shannon Bay wrote:
+>Hi,
+>
+>I've encountered a strange problem in SDF where I can't seem to add any more operators to the precedence list without getting a compile error.
+>
+>I've attached an example - it's necessarily long (though I could probably experiment with ways to shave it down while keeping the bug, I haven't worked out how.)
+>If I remove one operator from the lowest precedence entry, I can generate a parse table.  But with the operator in place, I get the following error:
+>
+>[1]   Segmentation fault      ${GENERATOR} ${P...
+>Error rewriting ./syn/Challenge.def (see /var/tmp/Challenge.7073.asfix)
+>
+>Is this a known limitation?  What are the work-arounds?
+>
+>Kind regards,
+>
+>Shannon
+>
+
+From fcferrari at gmail.com  Fri Mar 26 22:11:53 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Fri, 26 Mar 2010 18:11:53 -0300
+Subject: [Stratego Users] [Stratego Developers] Fwd: AspectJ-front:
+	Problem for parsing and pretty-printing complex pointcut expressions
+In-Reply-To: <5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com>
+Message-ID: <48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com>
+
+Hi, Rob.
+
+Many thanks for this. I've run preliminary tests using the
+"aspectjtree-parenthesize" tool and everything looks fine.
+
+The best,
+  Fabiano
+
+On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> Hi Fabiano,
+>
+> sorry I missed your earlier message. It seems pp-aspectj misses a call
+> to the parenthesize strategy. I will make a fix for it, but for now
+> you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+> you aspectj AST before calling the pretty-printer.
+>
+> parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+> ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+>
+> greetings,
+> Rob
+>
+> On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> Hi, everyone.
+>>
+>> I have posted this problem a while ago (please, see below). Is there
+>> someone who could give me a help with this?
+>>
+>> Many thanks,
+>> ?Fabiano
+>>
+>>
+>> ---------- Forwarded message ----------
+>> From: Fabiano Ferrari <fcferrari at gmail.com>
+>> Date: 2 February 2010 10:48
+>> Subject: AspectJ-front: Problem for parsing and pretty-printing
+>> complex pointcut expressions
+>> To: developers at strategoxt.org, Users at strategoxt.org
+>>
+>>
+>> Hi, everybody.
+>>
+>> I'm facing some problems while using the parser and the pretty-printer
+>> from AspectJ-front. For instance, when I parse a pointcut expressions
+>> such as:
+>>
+>>
+>> ? ? ? ?protected pointcut subjectChange(Subject subject) :
+>> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+>> ? ? ? ? ? ? ? ? ? ? ? ?(!within(SelectStatement))) || (call(protected
+>> List GeneralStatement.executeQueryWithCallback(..)))) &&
+>> this(subject);
+>>
+>>
+>> the pretty-printed code is as follows:
+>>
+>>
+>> ? ? ? ?protected pointcut subjectChange (Subject subject)
+>> :execution(public int GeneralStatement.executeUpdate(..)) &&
+>> ? ? ? ? ? ? ? ? ? ? ? ?!within(SelectStatement) || call(protected List
+>> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+>>
+>>
+>> As you can see, some surrounding round brackets are removed, what
+>> results in inconsistent information binding. Other two examples are
+>> shown below (the original aspects are attached).
+>>
+>>
+>> Is anybody aware of a workaround for this? Is there a way to fix it
+>> (e.g. keeping all round brackets in the pretty-printed version)?
+>>
+>> Many thanks!
+>>
+>> ?Fabiano Ferrari
+>>
+>>
+>> --------- other examples ---------
+>>
+>> ?ORIGINAL EXPRESSION 1:
+>>
+>> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> ? ? ? ? ? ? ? ? ?(
+>> ? ? ? ? ? ? ? ? ? ? ? ?(
+>> ? ? ? ? ? ? ? ? ? ? ? ?execution( ?public void
+>> RuntimeSQLException.setNextException(SQLException))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?protected static int
+>> BaseLogProxy.getNextId())
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> Stopwatch.appendTaskTime(String,long))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void Stopwatch.reset())
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> FifoCacheController.putObject(CacheModel,Object,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> FifoCacheController.getObject(CacheModel,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> FifoCacheController.removeObject(CacheModel,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> FifoCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> LruCacheController.putObject(CacheModel,Object,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> LruCacheController.getObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> LruCacheController.removeObject(CacheModel,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> LruCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> MemoryCacheController.putObject(CacheModel,Object,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> MemoryCacheController.getObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> MemoryCacheController.removeObject(CacheModel,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> MemoryCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> InvocationHandler+.loadObject())
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?Object[]
+>> AutoResultMap.getResults(RequestScope,ResultSet) throws ?SQLException)
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?static long
+>> SessionScope.getNextId())
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> OSCacheController.removeObject(CacheModel,Object))
+>> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> CacheModel.getObjectPartTwo())
+>>
+>> ? ? ? ? ? ? ? ? ? ? ? ?) && this(syncObj)
+>> ? ? ? ? ? ? ? ?);
+>>
+>>
+>> ?PRETTY-PRINTED EXPRESSION 1:
+>>
+>> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> ? ? ? ? ? ? ? ? ?execution(public void
+>> RuntimeSQLException.setNextException(SQLException))
+>> ? ? ? ? ? ? ? ? ?|| execution(protected static int BaseLogProxy.getNextId())
+>> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> Stopwatch.appendTaskTime(String, long))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void Stopwatch.reset())
+>> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> FifoCacheController.putObject(CacheModel, Object, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> FifoCacheController.getObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> FifoCacheController.removeObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void FifoCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> LruCacheController.putObject(CacheModel, Object, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> LruCacheController.getObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> LruCacheController.removeObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void LruCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> MemoryCacheController.putObject(CacheModel, Object, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> MemoryCacheController.getObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> MemoryCacheController.removeObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> MemoryCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ?|| execution(private void InvocationHandler+.loadObject())
+>> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object[]
+>> AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+>> ? ? ? ? ? ? ? ? ?|| execution(public static long SessionScope.getNextId())
+>> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> OSCacheController.removeObject(CacheModel, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(private void CacheModel.getObjectPartTwo())
+>>
+>> ? ? ? ? ? ? ? ? ?&& this(syncObj);
+>>
+>> ----------------------------------
+>>
+>> ?ORIGINAL EXPRESSION 2:
+>>
+>> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> ? ? ? ? ? ? ? ?(
+>> ? ? ? ? ? ? ? ? ? ?execution( ?public static ClassInfo
+>> ClassInfo.getInstance(Class))
+>> ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> OSCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ? ?|| execution( private void
+>> ThrottledPool.pushPartTwo(LinkedList,Object))
+>> ? ? ? ? ? ? ? ? ? ?|| execution( private Object
+>> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> IllegalAccessException)
+>> ? ? ? ? ? ? ? ? ? ?|| execution( ?private Object
+>> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+>> NeedsRefreshException )
+>> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+>> NeedsRefreshException)
+>> ? ? ? ? ? ? ? ? ? ?|| execution(private void
+>> CacheModel.getObjectPartThree(Object,Object))
+>> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+>> , Object , Object, CacheKey ) throws SQLException )
+>> ? ? ? ? ? ? ? ? ? ?|| execution(private List
+>> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+>> Connection, Object , int , int, CacheKey ) throws SQLException )
+>> ? ? ? ? ? ? ? ?)
+>> ? ? ? ? ? ? ? ?&& args(syncObj,..);
+>>
+>>
+>> ?PRETTY-PRINTED EXPRESSION 2:
+>>
+>> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> ? ? ? ? ? ? ? ? ?execution(public static ClassInfo ClassInfo.getInstance(Class))
+>> ? ? ? ? ? ? ? ? ?|| execution(public void OSCacheController.flush(CacheModel))
+>> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> ThrottledPool.pushPartTwo(LinkedList, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> IllegalAccessException)
+>> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+>> NeedsRefreshException)
+>> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+>> NeedsRefreshException)
+>> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> CacheModel.getObjectPartThree(Object, Object))
+>> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+>> RequestScope, Connection, Object, Object, CacheKey) throws SQLException)
+>> ? ? ? ? ? ? ? ? ?|| execution(private List
+>> CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+>> Connection, Object, int, int, CacheKey) throws SQLException)
+>> ? ? ? ? ? ? ? ? ?&& args(syncObj, ..);
+>>
+>>
+>>
+>>
+>>
+>>
+>> --
+>> Fabiano Cutigi Ferrari
+>> _________________________________
+>> PhD Candidate in Computer Science
+>> ICMC/USP - University of S?o Paulo - Brazil
+>> LabES - Laboratory of Software Engineering
+>> http://www.icmc.usp.br/~ferrari/
+>>
+>> _______________________________________________
+>> Developers mailing list
+>> Developers at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>>
+>>
+>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+
+
+From shannonbay at gmail.com  Sat Mar 27 00:29:06 2010
+From: shannonbay at gmail.com (Shannon Bay)
+Date: Sat, 27 Mar 2010 12:29:06 +1300
+Subject: [Stratego Users] Too many entries in SDF precedence? (continued)
+In-Reply-To: <16633a591003260818r7ab3bebax5e69164348aaf986@mail.gmail.com>
+References: <16633a591003260818r7ab3bebax5e69164348aaf986@mail.gmail.com>
+Message-ID: <11371201003261629o28911d55rceb9127f52a1db3b@mail.gmail.com>
+
+Hi Robert,
+
+No I never did get to the bottom of that one.  But it would compile on my
+supervisors laptop, so I stopped worrying about it.  Try a different
+machine?
+
+Cheers,
+
+Shannon
+
+On Sat, Mar 27, 2010 at 4:18 AM, Roberto Cornacchia <
+roberto.cornacchia at gmail.com> wrote:
+
+> Hi,
+>
+> I'm having a similar problem compiling the Java 1.5 syntax from the
+> Java-front:
+>
+> Generating parse table ...
+> generating parsetable from /var/tmp/SL.19274.asfix
+> [ sdf2rtg | debug ] Invoking tool implodePT at location
+> /ufs/roberto/local/bin/implodePT with arguments:
+>        ["-i","/tmp/StrategoXTxeHUVK","-o","/tmp/StrategoXTYHx5fA"]
+> [ sdf2rtg | warning ] process signaled: SEGV (11): Invalid memory reference
+>
+> Like for Shannon, it does compile correctly if I take the lowest
+> precedence entry away from expressions/Priorities.sdf, that would be:
+>  > {right:
+>      LHS "="    Expr -> Expr
+>      LHS "*="   Expr -> Expr
+>      LHS "/="   Expr -> Expr
+>      LHS "%="   Expr -> Expr
+>      LHS "+="   Expr -> Expr
+>      LHS "-="   Expr -> Expr
+>      LHS "<<="  Expr -> Expr
+>      LHS ">>="  Expr -> Expr
+>      LHS ">>>=" Expr -> Expr
+>      LHS "&="   Expr -> Expr
+>      LHS "^="   Expr -> Expr
+>      LHS "|="   Expr -> Expr
+>    }
+>
+> taken away.
+>
+> Increasing the stack with ulimit -s 16000 did not help.
+>
+> However, this happens only on a 64-bit machine (aterm patched). The
+> same works just fine on a 32-bit machine.
+>
+> On both machines, I'm using the stable versions: aterm-2.5,
+> sdf2-bundle-2.4, stratego/xt-0.17.
+> Fedora core 11 RPMs on the 32-bit machine, compiled source tarball on
+> the 64-bit machine.
+>
+> Any more thoughts? Shannon, could you find out more about your problem?
+>
+> Thanks, Roberto
+>
+>
+>
+> > Hi Shannon,
+>
+> > I can't reproduce the problem here, but it sounds like you need to
+> increase the stack size using the ulimit command, e.g. ulimit -s 16000.
+>
+> > Cheers,
+>
+> > Lennart
+>
+> @ 03:59 AM 1/27/2010, Shannon Bay wrote:
+> >Hi,
+> >
+> >I've encountered a strange problem in SDF where I can't seem to add any
+> more operators to the precedence list without getting a compile error.
+> >
+> >I've attached an example - it's necessarily long (though I could probably
+> experiment with ways to shave it down while keeping the bug, I haven't
+> worked out how.)
+> >If I remove one operator from the lowest precedence entry, I can generate
+> a parse table.  But with the operator in place, I get the following error:
+> >
+> >[1]   Segmentation fault      ${GENERATOR} ${P...
+> >Error rewriting ./syn/Challenge.def (see /var/tmp/Challenge.7073.asfix)
+> >
+> >Is this a known limitation?  What are the work-arounds?
+> >
+> >Kind regards,
+> >
+> >Shannon
+> >
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100327/b678b491/attachment-0001.html 
+
+From zef at zefhemel.com  Sat Mar 27 09:03:00 2010
+From: zef at zefhemel.com (Zef Hemel)
+Date: Sat, 27 Mar 2010 09:03:00 +0100
+Subject: [Stratego Users] Too many entries in SDF precedence? (continued)
+In-Reply-To: <11371201003261629o28911d55rceb9127f52a1db3b@mail.gmail.com>
+References: <16633a591003260818r7ab3bebax5e69164348aaf986@mail.gmail.com> 
+	<11371201003261629o28911d55rceb9127f52a1db3b@mail.gmail.com>
+Message-ID: <1ede90ed1003270103g79ac98b5q35612e893c7b2c27@mail.gmail.com>
+
+My experience is that this is still a stack size limit issue. Maybe
+try ulimit -s unlimited? That seems to work on macs at least. For some
+reason these tools need gigantic stacks.
+
+HTH,
+
+Zef
+
+On Sat, Mar 27, 2010 at 12:29 AM, Shannon Bay <shannonbay at gmail.com> wrote:
+> Hi Robert,
+>
+> No I never did get to the bottom of that one.? But it would compile on my
+> supervisors laptop, so I stopped worrying about it.? Try a different
+> machine?
+>
+> Cheers,
+>
+> Shannon
+>
+> On Sat, Mar 27, 2010 at 4:18 AM, Roberto Cornacchia
+> <roberto.cornacchia at gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> I'm having a similar problem compiling the Java 1.5 syntax from the
+>> Java-front:
+>>
+>> Generating parse table ...
+>> generating parsetable from /var/tmp/SL.19274.asfix
+>> [ sdf2rtg | debug ] Invoking tool implodePT at location
+>> /ufs/roberto/local/bin/implodePT with arguments:
+>> ? ? ? ?["-i","/tmp/StrategoXTxeHUVK","-o","/tmp/StrategoXTYHx5fA"]
+>> [ sdf2rtg | warning ] process signaled: SEGV (11): Invalid memory
+>> reference
+>>
+>> Like for Shannon, it does compile correctly if I take the lowest
+>> precedence entry away from expressions/Priorities.sdf, that would be:
+>> ?> {right:
+>> ? ? ?LHS "=" ? ?Expr -> Expr
+>> ? ? ?LHS "*=" ? Expr -> Expr
+>> ? ? ?LHS "/=" ? Expr -> Expr
+>> ? ? ?LHS "%=" ? Expr -> Expr
+>> ? ? ?LHS "+=" ? Expr -> Expr
+>> ? ? ?LHS "-=" ? Expr -> Expr
+>> ? ? ?LHS "<<=" ?Expr -> Expr
+>> ? ? ?LHS ">>=" ?Expr -> Expr
+>> ? ? ?LHS ">>>=" Expr -> Expr
+>> ? ? ?LHS "&=" ? Expr -> Expr
+>> ? ? ?LHS "^=" ? Expr -> Expr
+>> ? ? ?LHS "|=" ? Expr -> Expr
+>> ? ?}
+>>
+>> taken away.
+>>
+>> Increasing the stack with ulimit -s 16000 did not help.
+>>
+>> However, this happens only on a 64-bit machine (aterm patched). The
+>> same works just fine on a 32-bit machine.
+>>
+>> On both machines, I'm using the stable versions: aterm-2.5,
+>> sdf2-bundle-2.4, stratego/xt-0.17.
+>> Fedora core 11 RPMs on the 32-bit machine, compiled source tarball on
+>> the 64-bit machine.
+>>
+>> Any more thoughts? Shannon, could you find out more about your problem?
+>>
+>> Thanks, Roberto
+>>
+>>
+>>
+>> > Hi Shannon,
+>>
+>> > I can't reproduce the problem here, but it sounds like you need to
+>> > increase the stack size using the ulimit command, e.g. ulimit -s 16000.
+>>
+>> > Cheers,
+>>
+>> > Lennart
+>>
+>> @ 03:59 AM 1/27/2010, Shannon Bay wrote:
+>> >Hi,
+>> >
+>> >I've encountered a strange problem in SDF where I can't seem to add any
+>> > more operators to the precedence list without getting a compile error.
+>> >
+>> >I've attached an example - it's necessarily long (though I could probably
+>> > experiment with ways to shave it down while keeping the bug, I haven't
+>> > worked out how.)
+>> >If I remove one operator from the lowest precedence entry, I can generate
+>> > a parse table. ?But with the operator in place, I get the following error:
+>> >
+>> >[1] ? Segmentation fault ? ? ?${GENERATOR} ${P...
+>> >Error rewriting ./syn/Challenge.def (see /var/tmp/Challenge.7073.asfix)
+>> >
+>> >Is this a known limitation? ?What are the work-arounds?
+>> >
+>> >Kind regards,
+>> >
+>> >Shannon
+>> >
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Zef Hemel
+http://zef.me
+http://twitter.com/zef
+
+
+From roberto.cornacchia at gmail.com  Sat Mar 27 23:23:13 2010
+From: roberto.cornacchia at gmail.com (Roberto Cornacchia)
+Date: Sat, 27 Mar 2010 23:23:13 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+	<ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+Message-ID: <16633a591003271523t4eefdc74i77e2082ebfd8df44@mail.gmail.com>
+
+>> For example, in Haskell you would write something in the line of:
+>>
+>> import qualified LanguageA as A
+>> import qualified LanguageB as B
+>> ...
+>>
+>> ?trans(A.Exp) = B.Exp
+>>
+>> Does anything like this exist in Stratego?
+>
+> Well, not in Stratego, but in SDF (see link above):
+>
+> module StrategoTiger
+> imports Stratego [ Term => StrategoTerm
+> ? ? ? ? ? ? ? ? ? Var => StrategoVar
+> ? ? ? ? ? ? ? ? ? Id => StrategoId
+> ? ? ? ? ? ? ? ? ? StrChar => StrategoStrChar ]
+>
+
+Actually, I'm still having a problem with this.
+Which could very well mean that I'm somehow missing the point here,
+please shoot if this is the case.
+
+Back to our languages A and B, and an abstract syntax translation from A to B.
+Say both their grammars define:
+
+export
+   sorts Expr
+context-free syntax
+   Expr "+" Expr -> Expr {cons("Plus")}
+
+Now, one of my translation rules in stratego would look like:
+
+Plus(a,b) -> Plus(a,b)
+
+Which is ambiguous. However, I cannot rename "Plus" in SDF, as
+described above. I can only rename sorts, like Expr, but Plus is no
+sort.
+
+What am I missing?
+Thanks, Roberto
+
+
+From E.Visser at tudelft.nl  Sat Mar 27 23:43:52 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 27 Mar 2010 23:43:52 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <16633a591003271523t4eefdc74i77e2082ebfd8df44@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com> 
+	<ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com> 
+	<16633a591003271523t4eefdc74i77e2082ebfd8df44@mail.gmail.com>
+Message-ID: <ed55b7d91003271543m5f8c71d0v5a0463e20cb79ab4@mail.gmail.com>
+
+Hi Roberto,
+
+You're not missing anything. This is the problem that I indicated in
+my previous answer; there is no way to rename constructors. There are
+two ways to deal with this:
+
+1) consistently rename constructors (manually) in (one of) the grammars
+
+   sed /cons("/cons("A_/g
+
+   might help doing it consistently :) might even put that in the build script
+
+2) live with / work around the ambiguity in the signatures
+
+I agree that this is not quite satisfactory; we need a better way to
+control name spaces (or language spaces).
+
+And there is a third approach 1a)
+
+1a) instead of manually changing the grammar or hacking a script to do
+it, make the transformation part of SDF,
+  i.e. extend SDF with constructor renaming and implement this
+renaming as part of SDF normalization.
+
+This would really be more satisfactory. The problem with the latter
+solution is that SDF has not been fully integrated
+into Stratego/XT. The SDF normalizer and parser generator are
+implemented in the sdf2bundle which is imported from
+the ASF+SDF meta-environment project, and is not under control of the
+Stratego/XT project. Despite years of talking
+about the needs for better name space management for SDF, this has not
+yet happened. A proper solution would be
+to implement the SDF normalizer in Stratego and re-design/extend SDF
+with better namespace controls. Volunteers are
+welcome.
+
+In the meantime we'll have to live with approaches 1 and 2.
+
+cheers,
+
+-- Eelco
+
+On Sat, Mar 27, 2010 at 11:23 PM, Roberto Cornacchia
+<roberto.cornacchia at gmail.com> wrote:
+>>> For example, in Haskell you would write something in the line of:
+>>>
+>>> import qualified LanguageA as A
+>>> import qualified LanguageB as B
+>>> ...
+>>>
+>>> ?trans(A.Exp) = B.Exp
+>>>
+>>> Does anything like this exist in Stratego?
+>>
+>> Well, not in Stratego, but in SDF (see link above):
+>>
+>> module StrategoTiger
+>> imports Stratego [ Term => StrategoTerm
+>> ? ? ? ? ? ? ? ? ? Var => StrategoVar
+>> ? ? ? ? ? ? ? ? ? Id => StrategoId
+>> ? ? ? ? ? ? ? ? ? StrChar => StrategoStrChar ]
+>>
+>
+> Actually, I'm still having a problem with this.
+> Which could very well mean that I'm somehow missing the point here,
+> please shoot if this is the case.
+>
+> Back to our languages A and B, and an abstract syntax translation from A to B.
+> Say both their grammars define:
+>
+> export
+> ? sorts Expr
+> context-free syntax
+> ? Expr "+" Expr -> Expr {cons("Plus")}
+>
+> Now, one of my translation rules in stratego would look like:
+>
+> Plus(a,b) -> Plus(a,b)
+>
+> Which is ambiguous. However, I cannot rename "Plus" in SDF, as
+> described above. I can only rename sorts, like Expr, but Plus is no
+> sort.
+>
+> What am I missing?
+> Thanks, Roberto
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From roberto.cornacchia at gmail.com  Sun Mar 28 00:14:59 2010
+From: roberto.cornacchia at gmail.com (Roberto Cornacchia)
+Date: Sun, 28 Mar 2010 00:14:59 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <ed55b7d91003271543m5f8c71d0v5a0463e20cb79ab4@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com>
+	<ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com>
+	<16633a591003271523t4eefdc74i77e2082ebfd8df44@mail.gmail.com>
+	<ed55b7d91003271543m5f8c71d0v5a0463e20cb79ab4@mail.gmail.com>
+Message-ID: <16633a591003271614q4e855014jb88176f714f0e778@mail.gmail.com>
+
+Hi Eelco,
+
+Thanks for clarifying this, and for your quick answer on a Saturday night!
+I'll probably go for solution 1).
+And maybe walk downstairs (I work at CWI) and ask the SDF guys what
+their plan/opinion is about this problem.
+
+Cheers, Roberto
+
+On Sat, Mar 27, 2010 at 23:43, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Hi Roberto,
+>
+> You're not missing anything. This is the problem that I indicated in
+> my previous answer; there is no way to rename constructors. There are
+> two ways to deal with this:
+>
+> 1) consistently rename constructors (manually) in (one of) the grammars
+>
+> ? sed /cons("/cons("A_/g
+>
+> ? might help doing it consistently :) might even put that in the build script
+>
+> 2) live with / work around the ambiguity in the signatures
+>
+> I agree that this is not quite satisfactory; we need a better way to
+> control name spaces (or language spaces).
+>
+> And there is a third approach 1a)
+>
+> 1a) instead of manually changing the grammar or hacking a script to do
+> it, make the transformation part of SDF,
+> ?i.e. extend SDF with constructor renaming and implement this
+> renaming as part of SDF normalization.
+>
+> This would really be more satisfactory. The problem with the latter
+> solution is that SDF has not been fully integrated
+> into Stratego/XT. The SDF normalizer and parser generator are
+> implemented in the sdf2bundle which is imported from
+> the ASF+SDF meta-environment project, and is not under control of the
+> Stratego/XT project. Despite years of talking
+> about the needs for better name space management for SDF, this has not
+> yet happened. A proper solution would be
+> to implement the SDF normalizer in Stratego and re-design/extend SDF
+> with better namespace controls. Volunteers are
+> welcome.
+>
+> In the meantime we'll have to live with approaches 1 and 2.
+>
+> cheers,
+>
+> -- Eelco
+>
+> On Sat, Mar 27, 2010 at 11:23 PM, Roberto Cornacchia
+> <roberto.cornacchia at gmail.com> wrote:
+>>>> For example, in Haskell you would write something in the line of:
+>>>>
+>>>> import qualified LanguageA as A
+>>>> import qualified LanguageB as B
+>>>> ...
+>>>>
+>>>> ?trans(A.Exp) = B.Exp
+>>>>
+>>>> Does anything like this exist in Stratego?
+>>>
+>>> Well, not in Stratego, but in SDF (see link above):
+>>>
+>>> module StrategoTiger
+>>> imports Stratego [ Term => StrategoTerm
+>>> ? ? ? ? ? ? ? ? ? Var => StrategoVar
+>>> ? ? ? ? ? ? ? ? ? Id => StrategoId
+>>> ? ? ? ? ? ? ? ? ? StrChar => StrategoStrChar ]
+>>>
+>>
+>> Actually, I'm still having a problem with this.
+>> Which could very well mean that I'm somehow missing the point here,
+>> please shoot if this is the case.
+>>
+>> Back to our languages A and B, and an abstract syntax translation from A to B.
+>> Say both their grammars define:
+>>
+>> export
+>> ? sorts Expr
+>> context-free syntax
+>> ? Expr "+" Expr -> Expr {cons("Plus")}
+>>
+>> Now, one of my translation rules in stratego would look like:
+>>
+>> Plus(a,b) -> Plus(a,b)
+>>
+>> Which is ambiguous. However, I cannot rename "Plus" in SDF, as
+>> described above. I can only rename sorts, like Expr, but Plus is no
+>> sort.
+>>
+>> What am I missing?
+>> Thanks, Roberto
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From E.Visser at tudelft.nl  Sun Mar 28 01:01:34 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 28 Mar 2010 01:01:34 +0100
+Subject: [Stratego Users] Renaming Symbols fromimported modules?
+In-Reply-To: <16633a591003271614q4e855014jb88176f714f0e778@mail.gmail.com>
+References: <16633a591003220813k7e55be4dtc5cf77f1c7e5da9b@mail.gmail.com> 
+	<ed55b7d91003220837g6ba748b9uf7827297f1788f5a@mail.gmail.com> 
+	<16633a591003271523t4eefdc74i77e2082ebfd8df44@mail.gmail.com> 
+	<ed55b7d91003271543m5f8c71d0v5a0463e20cb79ab4@mail.gmail.com> 
+	<16633a591003271614q4e855014jb88176f714f0e778@mail.gmail.com>
+Message-ID: <ed55b7d91003271701qecdcb5eu3dbc30912da49400@mail.gmail.com>
+
+Hi Roberto,
+
+> Thanks for clarifying this, and for your quick answer on a Saturday night!
+> I'll probably go for solution 1).
+> And maybe walk downstairs (I work at CWI) and ask the SDF guys what
+> their plan/opinion is about this problem.
+
+Excellent. Would be good to get this going again :)
+
+-- Eelco
+
+> Cheers, Roberto
+>
+> On Sat, Mar 27, 2010 at 23:43, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>> Hi Roberto,
+>>
+>> You're not missing anything. This is the problem that I indicated in
+>> my previous answer; there is no way to rename constructors. There are
+>> two ways to deal with this:
+>>
+>> 1) consistently rename constructors (manually) in (one of) the grammars
+>>
+>> ? sed /cons("/cons("A_/g
+>>
+>> ? might help doing it consistently :) might even put that in the build script
+>>
+>> 2) live with / work around the ambiguity in the signatures
+>>
+>> I agree that this is not quite satisfactory; we need a better way to
+>> control name spaces (or language spaces).
+>>
+>> And there is a third approach 1a)
+>>
+>> 1a) instead of manually changing the grammar or hacking a script to do
+>> it, make the transformation part of SDF,
+>> ?i.e. extend SDF with constructor renaming and implement this
+>> renaming as part of SDF normalization.
+>>
+>> This would really be more satisfactory. The problem with the latter
+>> solution is that SDF has not been fully integrated
+>> into Stratego/XT. The SDF normalizer and parser generator are
+>> implemented in the sdf2bundle which is imported from
+>> the ASF+SDF meta-environment project, and is not under control of the
+>> Stratego/XT project. Despite years of talking
+>> about the needs for better name space management for SDF, this has not
+>> yet happened. A proper solution would be
+>> to implement the SDF normalizer in Stratego and re-design/extend SDF
+>> with better namespace controls. Volunteers are
+>> welcome.
+>>
+>> In the meantime we'll have to live with approaches 1 and 2.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> On Sat, Mar 27, 2010 at 11:23 PM, Roberto Cornacchia
+>> <roberto.cornacchia at gmail.com> wrote:
+>>>>> For example, in Haskell you would write something in the line of:
+>>>>>
+>>>>> import qualified LanguageA as A
+>>>>> import qualified LanguageB as B
+>>>>> ...
+>>>>>
+>>>>> ?trans(A.Exp) = B.Exp
+>>>>>
+>>>>> Does anything like this exist in Stratego?
+>>>>
+>>>> Well, not in Stratego, but in SDF (see link above):
+>>>>
+>>>> module StrategoTiger
+>>>> imports Stratego [ Term => StrategoTerm
+>>>> ? ? ? ? ? ? ? ? ? Var => StrategoVar
+>>>> ? ? ? ? ? ? ? ? ? Id => StrategoId
+>>>> ? ? ? ? ? ? ? ? ? StrChar => StrategoStrChar ]
+>>>>
+>>>
+>>> Actually, I'm still having a problem with this.
+>>> Which could very well mean that I'm somehow missing the point here,
+>>> please shoot if this is the case.
+>>>
+>>> Back to our languages A and B, and an abstract syntax translation from A to B.
+>>> Say both their grammars define:
+>>>
+>>> export
+>>> ? sorts Expr
+>>> context-free syntax
+>>> ? Expr "+" Expr -> Expr {cons("Plus")}
+>>>
+>>> Now, one of my translation rules in stratego would look like:
+>>>
+>>> Plus(a,b) -> Plus(a,b)
+>>>
+>>> Which is ambiguous. However, I cannot rename "Plus" in SDF, as
+>>> described above. I can only rename sorts, like Expr, but Plus is no
+>>> sort.
+>>>
+>>> What am I missing?
+>>> Thanks, Roberto
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+

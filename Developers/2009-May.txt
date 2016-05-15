@@ -1,0 +1,285 @@
+From pvanitax at hotmail.com  Thu May  7 12:47:06 2009
+From: pvanitax at hotmail.com (Paulo Anita)
+Date: Thu, 7 May 2009 12:47:06 +0200
+Subject: [Developers] testmail
+Message-ID: <SNT117-W20FFDF5465F8F0FE38FD7CC2670@phx.gbl>
+
+
+test
+_________________________________________________________________
+Express yourself instantly with MSN Messenger! Download today it's FREE!
+http://messenger.msn.click-url.com/go/onm00200471ave/direct/01/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/private/developers/attachments/20090507/9c19a321/attachment.html 
+
+From pvanitax at hotmail.com  Thu May  7 12:58:08 2009
+From: pvanitax at hotmail.com (Paulo Anita)
+Date: Thu, 7 May 2009 12:58:08 +0200
+Subject: [Stratego Developers] Testmail
+Message-ID: <SNT117-W65DD91307BD0CDEECD66B8C2670@phx.gbl>
+
+
+Testmail ; please ignore Paulo
+_________________________________________________________________
+What can you do with the new Windows Live? Find out
+http://www.microsoft.com/windows/windowslive/default.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/private/developers/attachments/20090507/5b7b124d/attachment.html 
+
+From E.Visser at tudelft.nl  Mon May 11 22:45:46 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 11 May 2009 22:45:46 +0200
+Subject: [Stratego Developers] New mailing list
+Message-ID: <ed55b7d90905111345n55b823c2kcee4e8df748e0093@mail.gmail.com>
+
+Hi Stratego Developers,
+
+The stratego-dev mailinglist has a new address:
+developers at strategoxt.org. The list is hosted at Delft University.
+
+After this message, I will close down the old list at Utrecht
+University and move the archive to the new site:
+
+  https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+cheers,
+
+-- Eelco
+http://eelcovisser.org
+
+From L.C.L.Kats at tudelft.nl  Mon May 11 23:21:41 2009
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Mon, 11 May 2009 23:21:41 +0200
+Subject: [Stratego Developers] New mailing list
+In-Reply-To: <ed55b7d90905111345n55b823c2kcee4e8df748e0093@mail.gmail.co
+ m>
+References: <ed55b7d90905111345n55b823c2kcee4e8df748e0093@mail.gmail.com>
+Message-ID: <200905112121.n4BLLfFb026334@smtp1.infopact.nl>
+
+Hi list,
+
+Just testing the new mailing list.
+
+cheers,
+
+Lennart
+
+@ 22:45 11-5-2009, Eelco Visser wrote:
+>Hi Stratego Developers,
+>
+>The stratego-dev mailinglist has a new address:
+>developers at strategoxt.org. The list is hosted at Delft University.
+>
+>After this message, I will close down the old list at Utrecht
+>University and move the archive to the new site:
+>
+>  https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>cheers,
+>
+>-- Eelco
+>http://eelcovisser.org
+>_______________________________________________
+>Developers mailing list
+>Developers at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+
+From E.Visser at tudelft.nl  Mon May 11 23:23:07 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 11 May 2009 23:23:07 +0200
+Subject: [Stratego Developers] New mailing list
+In-Reply-To: <ed55b7d90905111345n55b823c2kcee4e8df748e0093@mail.gmail.com>
+References: <ed55b7d90905111345n55b823c2kcee4e8df748e0093@mail.gmail.com>
+Message-ID: <ed55b7d90905111423p338a4c0dye0b267f7b26f9ce3@mail.gmail.com>
+
+I forgot to mention that I already subscribed all subscribers to the
+old list to the new list.
+
+-- Eelco
+
+On Mon, May 11, 2009 at 10:45 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Hi Stratego Developers,
+>
+> The stratego-dev mailinglist has a new address:
+> developers at strategoxt.org. The list is hosted at Delft University.
+>
+> After this message, I will close down the old list at Utrecht
+> University and move the archive to the new site:
+>
+> ?https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+> cheers,
+>
+> -- Eelco
+> http://eelcovisser.org
+>
+
+
+
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Tue May 26 22:31:59 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 26 May 2009 22:31:59 +0200
+Subject: [Stratego Developers] [Stratego Bugs] [JIRA] Created: (STR-771)
+	No call to dr-leave-scope in dr-ignore-state
+In-Reply-To: <33241031.1243333877123.JavaMail.jira@cartman>
+References: <33241031.1243333877123.JavaMail.jira@cartman>
+Message-ID: <ed55b7d90905261331md07a1f6kbd1a6f1b51f6a72e@mail.gmail.com>
+
+Lennart,
+
+Does this cause the memory consumption of the strc java back-end? Are
+you using these there?
+
+Try to put it in the library and lets see if the build works.
+
+-- Eelco
+
+On Tue, May 26, 2009 at 12:31 PM, Lennart Kats (JIRA)
+<developers at strategoxt.org> wrote:
+> No call to dr-leave-scope in dr-ignore-state
+> --------------------------------------------
+>
+> ? ? ? ? ? ? ? ? Key: STR-771
+> ? ? ? ? ? ? ? ? URL: http://bugs.strategoxt.org/browse/STR-771
+> ? ? ? ? ? ? Project: Stratego/XT
+> ? ? ? ? ?Issue Type: Bug
+> ? ? ? ? ?Components: stratego-lib - Stratego Library
+> ? ?Affects Versions: 0.17
+> ? ? ? ? ? ?Reporter: Lennart Kats
+> ? ? ? ? Assigned To: Lennart Kats
+>
+>
+> The dr-ignore-state and dr-ignore-states strategies do not call dr-leave-scope. Because of STR-168, any rule assignments within them are not garbage collected.
+>
+> ?dr-ignore-state(s|name) =
+> ? ?where(
+> ? ? ?dr-new-rule-set
+> ? ? ?; dr-switch-rule-set(|name) => rs
+> ? ?)
+> ?; s
+> ?; where(<dr-set-rule-set(|name)> rs)
+>
+> ?dr-ignore-states(s|names) =
+> ? ?where(
+> ? ? ? <map(dr-new-rule-set)> names
+> ? ? ? ; zip(dr-switch-rule-set | names) => rss
+> ? ?)
+> ? ?; s
+> ? ?; where(<zip(dr-set-rule-set | names)> rss)
+>
+> I propose to add dr-leave-scope calls to both strategies. Applying this does not fail any of the standard unit tests, and it seems unlikely that other applications depend on the old behavior of these (rarely used) strategies.
+>
+> --
+> This message is automatically generated by JIRA.
+> -
+> If you think it was sent incorrectly contact one of the administrators: http://bugs.strategoxt.org/secure/Administrators.jspa
+> -
+> For more information on JIRA, see: http://www.atlassian.com/software/jira
+>
+>
+> _______________________________________________
+> Bugs mailing list
+> Bugs at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/bugs
+>
+
+
+
+-- 
+http://eelcovisser.org
+
+
+From L.C.L.Kats at tudelft.nl  Wed May 27 11:21:26 2009
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 27 May 2009 11:21:26 +0200
+Subject: [Stratego Developers] [Stratego Bugs] [JIRA] Created: (STR-771)
+ No call to dr-leave-scope in dr-ignore-state
+In-Reply-To: <ed55b7d90905261331md07a1f6kbd1a6f1b51f6a72e@mail.gmail.com
+ >
+References: <33241031.1243333877123.JavaMail.jira@cartman>
+	<ed55b7d90905261331md07a1f6kbd1a6f1b51f6a72e@mail.gmail.com>
+Message-ID: <200905270921.n4R9LQTe022222@smtp1.infopact.nl>
+
+Hi Eelco,
+
+Yes, this does seem to account to at least part of the memory consumption. I think I got some improvement with changed dr-ignore-states strategy. I also found some rules that weren't scoped at all (more rules dealing with lifted variables). All in all it's now using 200~300 MB instead of 1+ GB to build libstrc.java. It also takes much less time now :)
+
+- Lennart
+
+@ 22:31 26-5-2009, Eelco Visser wrote:
+>Lennart,
+>
+>Does this cause the memory consumption of the strc java back-end? Are
+>you using these there?
+>
+>Try to put it in the library and lets see if the build works.
+>
+>-- Eelco
+>
+>On Tue, May 26, 2009 at 12:31 PM, Lennart Kats (JIRA)
+><developers at strategoxt.org> wrote:
+>> No call to dr-leave-scope in dr-ignore-state
+>> --------------------------------------------
+>>
+>>                 Key: STR-771
+>>                 URL: http://bugs.strategoxt.org/browse/STR-771
+>>             Project: Stratego/XT
+>>          Issue Type: Bug
+>>          Components: stratego-lib - Stratego Library
+>>    Affects Versions: 0.17
+>>            Reporter: Lennart Kats
+>>         Assigned To: Lennart Kats
+>>
+>>
+>> The dr-ignore-state and dr-ignore-states strategies do not call dr-leave-scope. Because of STR-168, any rule assignments within them are not garbage collected.
+>>
+>>  dr-ignore-state(s|name) =
+>>    where(
+>>      dr-new-rule-set
+>>      ; dr-switch-rule-set(|name) => rs
+>>    )
+>>  ; s
+>>  ; where(<dr-set-rule-set(|name)> rs)
+>>
+>>  dr-ignore-states(s|names) =
+>>    where(
+>>       <map(dr-new-rule-set)> names
+>>       ; zip(dr-switch-rule-set | names) => rss
+>>    )
+>>    ; s
+>>    ; where(<zip(dr-set-rule-set | names)> rss)
+>>
+>> I propose to add dr-leave-scope calls to both strategies. Applying this does not fail any of the standard unit tests, and it seems unlikely that other applications depend on the old behavior of these (rarely used) strategies.
+>>
+>> --
+>> This message is automatically generated by JIRA.
+>> -
+>> If you think it was sent incorrectly contact one of the administrators: http://bugs.strategoxt.org/secure/Administrators.jspa
+>> -
+>> For more information on JIRA, see: http://www.atlassian.com/software/jira
+>>
+>>
+>> _______________________________________________
+>> Bugs mailing list
+>> Bugs at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/bugs
+>>
+>
+>
+>
+>-- 
+>http://eelcovisser.org
+>
+>_______________________________________________
+>Developers mailing list
+>Developers at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/developers
+
+

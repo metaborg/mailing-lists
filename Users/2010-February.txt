@@ -1,0 +1,874 @@
+From fcferrari at gmail.com  Tue Feb  2 14:48:15 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Tue, 2 Feb 2010 11:48:15 -0200
+Subject: [Stratego Users] AspectJ-front: Problem for parsing and
+	pretty-printing complex pointcut expressions
+Message-ID: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com>
+
+Hi, everybody.
+
+I'm facing some problems while using the parser and the pretty-printer
+from AspectJ-front. For instance, when I parse a pointcut expressions
+such as:
+
+
+	protected pointcut subjectChange(Subject subject) :
+(((execution(public int GeneralStatement.executeUpdate(..))) &&
+			(!within(SelectStatement))) || (call(protected List
+GeneralStatement.executeQueryWithCallback(..)))) && this(subject);
+
+
+the pretty-printed code is as follows:
+
+
+	protected pointcut subjectChange (Subject subject) :execution(public
+int GeneralStatement.executeUpdate(..)) &&
+			!within(SelectStatement) || call(protected List
+GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+
+
+As you can see, some surrounding round brackets are removed, what
+results in inconsistent information binding. Other two examples are
+shown below (the original aspects are attached).
+
+
+Is anybody aware of a workaround for this? Is there a way to fix it
+(e.g. keeping all round brackets in the pretty-printed version)?
+
+Many thanks!
+
+  Fabiano Ferrari
+
+
+--------- other examples ---------
+
+ ORIGINAL EXPRESSION 1:
+
+	  protected pointcut synchronizationPoints(Object syncObj):
+		  (
+			(
+			execution(  public void RuntimeSQLException.setNextException(SQLException))
+			|| execution(  protected static int BaseLogProxy.getNextId())
+			|| execution(  private void Stopwatch.appendTaskTime(String,long))
+			|| execution(  public void Stopwatch.reset())
+			|| execution(  public void
+FifoCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+FifoCacheController.getObject(CacheModel,Object))
+			|| execution(  public Object
+FifoCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void FifoCacheController.flush(CacheModel))
+			|| execution(  public void
+LruCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+LruCacheController.getObject(CacheModel, Object))
+			|| execution(  public Object
+LruCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void   LruCacheController.flush(CacheModel))
+			|| execution(  public void
+MemoryCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+MemoryCacheController.getObject(CacheModel, Object))
+			|| execution(  public Object
+MemoryCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void   MemoryCacheController.flush(CacheModel))
+			|| execution(  private  void InvocationHandler+.loadObject())
+			|| execution(  private  void LazyResultLoader.loadObject() throws
+NestedRuntimeException)
+			|| execution(  public  Object[]
+AutoResultMap.getResults(RequestScope,ResultSet) throws SQLException)
+			|| execution(  public  static long SessionScope.getNextId())
+			|| execution(  public Object
+OSCacheController.removeObject(CacheModel,Object))
+			|| execution(  private void CacheModel.getObjectPartTwo())
+			
+			) && this(syncObj)
+		);
+
+
+ PRETTY-PRINTED EXPRESSION 1:
+
+	  protected pointcut synchronizationPoints (Object syncObj) :
+		  execution(public void RuntimeSQLException.setNextException(SQLException))
+		  || execution(protected static int BaseLogProxy.getNextId())
+		  || execution(private void Stopwatch.appendTaskTime(String, long))
+		  || execution(public void Stopwatch.reset())
+		  || execution(public void FifoCacheController.putObject(CacheModel,
+Object, Object))
+		  || execution(public Object
+FifoCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+FifoCacheController.removeObject(CacheModel, Object))
+		  || execution(public void FifoCacheController.flush(CacheModel))
+		  || execution(public void LruCacheController.putObject(CacheModel,
+Object, Object))
+		  || execution(public Object
+LruCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+LruCacheController.removeObject(CacheModel, Object))
+		  || execution(public void LruCacheController.flush(CacheModel))
+		  || execution(public void
+MemoryCacheController.putObject(CacheModel, Object, Object))
+		  || execution(public Object
+MemoryCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+MemoryCacheController.removeObject(CacheModel, Object))
+		  || execution(public void MemoryCacheController.flush(CacheModel))
+		  || execution(private void InvocationHandler+.loadObject())
+		  || execution(private void LazyResultLoader.loadObject() throws
+NestedRuntimeException)
+		  || execution(public Object[]
+AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+		  || execution(public static long SessionScope.getNextId())
+		  || execution(public Object
+OSCacheController.removeObject(CacheModel, Object))
+		  || execution(private void CacheModel.getObjectPartTwo())
+		
+		  && this(syncObj);
+
+----------------------------------
+
+ ORIGINAL EXPRESSION 2:
+
+	  protected pointcut synchronizationPoints(Object syncObj):
+		(
+		    execution(  public static ClassInfo  ClassInfo.getInstance(Class))
+		    || execution(  public void OSCacheController.flush(CacheModel))
+		    || execution( private void ThrottledPool.pushPartTwo(LinkedList,Object))
+		    || execution( private Object
+ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+IllegalAccessException)
+		    || execution(  private Object
+OSCacheController.getObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException )
+		    || execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException)
+		    || execution(private void   CacheModel.getObjectPartThree(Object,Object))
+		    || execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+, Object , Object, CacheKey ) throws SQLException )
+		    || execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+Connection, Object , int , int, CacheKey ) throws SQLException )
+		)
+		&& args(syncObj,..);
+
+
+ PRETTY-PRINTED EXPRESSION 2:
+
+	  protected pointcut synchronizationPoints (Object syncObj) :
+		  execution(public static ClassInfo ClassInfo.getInstance(Class))
+		  || execution(public void OSCacheController.flush(CacheModel))
+		  || execution(private void ThrottledPool.pushPartTwo(LinkedList, Object))
+		  || execution(private Object ThrottledPool.popPartTwo(LinkedList)
+throws InstantiationException, IllegalAccessException)
+		  || execution(private Object
+OSCacheController.getObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+		  || execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+		  || execution(private void CacheModel.getObjectPartThree(Object, Object))
+		  || execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+RequestScope, Connection, Object, Object, CacheKey) throws
+SQLException)
+		  || execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+Connection, Object, int, int, CacheKey) throws SQLException)
+		  && args(syncObj, ..);
+
+
+
+
+
+
+-- 
+Fabiano Cutigi Ferrari
+_________________________________
+PhD Candidate in Computer Science
+ICMC/USP - University of S?o Paulo - Brazil
+LabES - Laboratory of Software Engineering
+http://www.icmc.usp.br/~ferrari/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ExecuteStatementObserver.aj
+Type: application/octet-stream
+Size: 2573 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100202/86627d4c/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationExecutingObject.aj
+Type: application/octet-stream
+Size: 3152 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100202/86627d4c/attachment-0001.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationArgument.aj
+Type: application/octet-stream
+Size: 1914 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100202/86627d4c/attachment-0002.obj 
+
+From gre at ecs.soton.ac.uk  Fri Feb 12 17:29:14 2010
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 12 Feb 2010 16:29:14 +0000
+Subject: [Stratego Users] LDTA 2010 Call for Participation
+Message-ID: <c9757bb61002120829g2052664n419fe19597d71c8c@mail.gmail.com>
+
+                           Call for Participation
+
+                             Tenth Workshop on
+           Language Descriptions, Tools and Applications (LDTA 2010)
+
+                       Satellite event of ETAPS 2010
+                      In Co-Operation with ACM SIGPLAN
+
+                             March 27-28, 2010
+                               Paphos, Cyprus
+
+                              http://ldta.info
+
+
+Registration
+------------
+Registration for LDTA 2010 is handled through the ETAPS registration page
+(http://www.etaps10.cs.ucy.ac.cy/Venue/registration.html). Early
+registration
+deadline is February 15th.
+
+
+Technical Program
+-----------------
+
+Saturday, March 27
+
+09:15-10:30  SESSION 1: Invited Talk
+
+   * Jean-Louis Giavitto
+
+11:00-12:30  SESSION 2: Program Analysis
+
+   * On the Role of Min. Typing Derivations in Type-driven Program
+     Transformation
+     Stefan Holdermans & Jurriaan Hage
+   * GamaSlicer: an Online Laboratory for Program Verification and Analysis
+     Daniela da Cruz, Pedro Rangel Henriques, & Jorge Sousa Pinto
+   * Dependence Condition Graph for Semantics-Based Abstract Program Slicing
+     Agostino Cortesi & Raju Halder
+
+14:00-15:00  SESSION 3: Anniversary Talk
+
+   * Ten Years of LDTA
+     Gorel Hedin
+
+15:00-16:00  SESSION 4: Grammars
+
+   * Faster Ambiguity Detection by Grammar Filtering
+     Bas Basten & Jurgen Vinju
+   * Tear-Insert-Fold Grammars
+     Adrian Johnstone & Elizabeth Scott
+
+16:30-18:00  SESSION 5: Panel Discussion
+   * Panel Discussion
+     TBA
+
+
+Sunday, March 28
+
+09:00-10:30  SESSION 6: Mixed LDTA Topics
+
+   * Embedding a Web-Based Workflow Management System in a Functional
+Language
+     Jan Martin Jansen, Rinus Plasmeijer, Pieter Koopman & Peter Achten
+   * Specifying Generic Java Programs: two Case Studies
+     Alain Giorgetti, Claude Marche, Elena Tushkanova, & Olga Kouchnarenko
+   * Language Description for Frontend Implementation
+     Anya Helene Bagge
+
+11:00-12:30  SESSION 7: Domain Specific Languages
+
+   * DSL Tools: Less Maintenance?
+     Paul Klint, Tijs van der Storm, & Jurgen Vinju
+   * Using DSLs for Developing Enterprise Systems
+     Margus Freudenthal
+   * Formally Specified Type Checkers for Domain Specific Languages
+     Arjan v.d. Meer, Alexander Serebrenik, Mark v.d. Brand, & Albert
+Hofkamp
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100212/474b7e51/attachment.html 
+
+From kutsia at risc.uni-linz.ac.at  Mon Feb  1 13:56:23 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Mon, 1 Feb 2010 13:56:23 +0100
+Subject: [Stratego Users] 2nd CfP: LOPSTR 2010
+Message-ID: <20100201125623.GA2426@risc.uni-linz.ac.at>
+
+=========================================================================
+
+                        Call for papers
+              20th International Symposium on
+      Logic-Based Program Synthesis and Transformation
+                        LOPSTR 2010
+
+   http://www.risc.uni-linz.ac.at/conferences/lopstr2010/
+           Hagenberg, Austria, July 23-25, 2010
+                 (co-located with PPDP 2010)
+
+=========================================================================
+
+Objectives:
+
+The  aim  of the LOPSTR series is to stimulate and  promote international
+research  and collaboration  on logic-based program  development.  LOPSTR
+is  open  to  contributions in  logic-based  program  development  in any
+language paradigm. LOPSTR  has a reputation for  being a lively, friendly
+forum for presenting and discussing work in  progress. Formal proceedings
+are produced only after the  symposium, so  authors  can  incorporate the
+feedback in the published papers.
+
+The  20th International Symposium on  Logic-based Program  Synthesis  and
+Transformation (LOPSTR 2010) will be held in Hagenberg, Austria; previous
+symposia were held in Coimbra, Valencia, Lyngby, Venice, London,  Verona,
+Uppsala, Madrid, Paphos, London, Venice, Manchester,  Leuven,  Stockholm,
+Arnhem, Pisa, Louvain-la-Neuve, and  Manchester.  LOPSTR 2010 will be co-
+located  with  PPDP 2010 (12th  International  ACM  SIGPLAN  Symposium on
+Principles and Practice of Declarative Programming).
+
+
+Topics:
+
+Topics of interest cover all aspects of logic-based  program development,
+all stages of the software life cycle, and issues of both programming-in-
+the-small and programming-in-the-large. Papers describing applications in
+these areas are especially welcome.  Contributions  are  welcome  on  all
+aspects of logic-based program development,  including,  but not  limited
+to:
+
+specification                         synthesis
+verification                          transformation
+analysis                              optimisation
+specialization                        inversion
+composition                           program/model manipulation
+certification                         security
+transformational techniques in SE     applications and tools
+
+Survey papers that present some aspect of the  above  topics  from  a new
+perspective. Application papers, that describe experience with industrial
+applications, are also welcome.  Papers must describe original  work,  be
+written and presented in English, and must not substantially overlap with
+papers that have been published or that are simultaneously submitted to a
+journal  or a conference  with  refereed  proceedings.  Work that already
+appeared in unpublished or informally published workshops proceedings may
+be submitted.
+
+Following  past  editions,  publication  of  the  formal  post-conference
+proceedings in the Springer series  Lecture  Notes  in  Computer  Science
+(LNCS) is envisaged.
+
+
+IMPORTANT DATES AND SUBMISSION GUIDELINES:
+
+Paper/extended abstract submission:   March 25, 2010
+Notification (for pre-proceedings):   May 15, 2010
+Camera-ready (for pre-proceedings):   June 15, 2010
+Symposium:                            July 23-25, 2010
+
+Submissions can either be (short) extended  abstracts  or  (full)  papers
+whose length should not exceed 9 and 15 pages, respectively.  Submissions
+must be  formatted  in  the  Springer  LNCS  style (excluding well-marked
+appendices not intended for publication).  Referees are not  required  to
+read the appendices, and thus papers should be intelligible without them.
+Short papers may describe work-in-progress or tool demonstrations.
+
+Both short and  full  papers  can  be  accepted  for  presentation at the
+symposium and will then appear  in the LOPSTR 2010  pre-proceedings. Full
+papers can also be immediately accepted  for publication  in  the  formal
+proceedings published by Springer-Verlag in the LNCS series. In addition,
+after the symposium, the programme committee will select further short or
+full  papers  presented  in  LOPSTR  2010  to  be  considered  for formal
+publication. These authors will be invited to revise and/or extend  their
+submissions in the light of the feedback solicited at the symposium. Then
+after  another  round of  reviewing,  these  revised  papers can also  be
+published in the formal post-proceedings.
+
+Papers should be submitted electronically via the submission page
+   http://www.easychair.org/conferences/?conf=lopstr2010
+They should be in PDF format and interpretable by Acrobat Reader.
+
+
+Invited Speakers:
+
+Bruno Buchberger     RISC, Johannes Kepler University Linz, Austria
+Olivier Danvy        University of Aarhus, Denmark
+Johann Schumann      RIACS/NASA Ames Research Center, USA
+
+
+Program Committee:
+
+Maria Alpuente       Tech. University of Valencia (Chair), Spain
+Sergio Antoy         Portland State University, USA
+Gilles Barthe        IMDEA Software, Madrid
+Manuel Carro         Tech. University of Madrid, Spain
+Marco Comini         University of Udine, Italy
+Danny De Schreye     K.U.Leuven, Belgium
+Santiago Escobar     Tech. University of Valencia, Spain
+Moreno Falaschi      University of Siena, Italy
+Fabio Fioravanti     University of Chieti - Pescara, Italy
+John Gallagher       Roskilde University, Denmark
+Michael Hanus        University of Kiel, Germany
+Patricia M Hill      University of Parma, Italy
+Andy King            University of Kent, UK
+Temur Kutsia         Johannes Kepler University Linz, Austria
+Ralf L?mmel          Universit?t Koblenz-Landau, Germany
+Michael Leuschel     University of Southampton, UK
+Yanhong Annie Liu    State University of New York at Stony Brook, USA
+Julio Mari?o         Tech. University of Madrid, Spain
+Ricardo Pe?a         University Complutense of Madrid, Spain
+Peter Schneider-Kamp University of Southern Denmark
+Alicia Villanueva    Tech. University of Valencia, Spain
+
+Contacts
+
+Program Chair
+
+   Maria Alpuente
+   DSIC - Technical University of Valencia
+   Camino de Vera s/n
+   Apdo. 22.012
+   E-46022 Valencia (Spain)
+   Email: alpuente at dsic.upv.es
+
+Conference Chair
+
+   Temur Kutsia
+   Research Institute for Symbolic Computation
+   Johannes Kepler University Linz
+   Altenbergerstrasse 69
+   A-4040 Linz, Austria
+   Email: kutsia at risc.uni-linz.ac.at
+
+
+From alex.kraas at gmx.de  Mon Feb 15 12:30:16 2010
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Mon, 15 Feb 2010 12:30:16 +0100
+Subject: [Stratego Users] Problems concerning the sdf2rtg tool
+Message-ID: <20100215113016.268600@gmx.net>
+
+Dear Stratego developers,
+
+at the moment I am implementing the textual syntax of the ITU-T Z.109 rec. 
+which is a UML Profil?of SDL-2000. The grammar specified in SDF works 
+fine, but I have encountered a problem when trying to transform the 
+attached SDF2 file by using the sdf2rtg tool.?I get the following error 
+messages:
+
+---
+user at linux-wijm:~/workspace/generator> sdf2rtg -i Z109_grammar.sdf---
+
+Unfortunately, I could not found any information about this issue. Now, I 
+am wondering if someone of you could give me an advise for a workaround. 
+Alternatively, I am looking for a detailed manual or specification?of the 
+RTG grammar so that I can?write a convenient RTG definition by hand.
+
+Many thanks in advance,
+Alex Kraas        
+
+[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+WhileStatement        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+Term(WhileStatement)        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+WhileStatement        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+Term(WhileStatement)        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (1,[[]])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])] 
+       
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+WhileStatement        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+Term(WhileStatement)        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+WhileStatement        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+Term(WhileStatement)        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (1,[[]])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])] 
+       
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]) 
+       
+
+[ sdf2rtg | error ] No pp entry found for: (330,[[]])        
+
+[ sdf2rtg | error ] Cannot rewrite to box:        
+
+
+[ProdRule(Nonterm(Plain("ForStepItem0")),[Appl(TupleTerm("1"),[Ref(Nonterm(Plain("ForStepItem")))])]),ProdRule(Nonterm(Plain("ListStarO
+...
+    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100215/9282e663/attachment-0001.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Z109_grammar.sdf
+Type: application/octet-stream
+Size: 34189 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100215/9282e663/attachment-0001.obj 
+
+From L.C.L.Kats at tudelft.nl  Tue Feb 16 09:59:58 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Tue, 16 Feb 2010 09:59:58 +0100
+Subject: [Stratego Users] Problems concerning the sdf2rtg tool
+In-Reply-To: <20100215113016.268600@gmx.net>
+References: <20100215113016.268600@gmx.net>
+Message-ID: <201002160900.o1G8xxAS015914@smtp1.infopact.nl>
+
+Hi Alexander,
+
+I can't seem to reproduce your problem. Are you sure you have the latest version of sdf2rtg and that your installation is not corrupted in some way? You can find the latest version on Hydra. http://hydra.nixos.org/jobset/strategoxt/strategoxt-release
+
+cheers,
+
+Lennart
+
+@ 12:30 PM 2/15/2010, Alexander Kraas wrote:
+
+>Dear Stratego developers,
+>
+>at the moment I am implementing the textual syntax of the ITU-T Z.109 rec. which is a UML Profil of SDL-2000. The grammar specified in SDF works fine, but I have encountered a problem when trying to transform the attached SDF2 file by using the sdf2rtg tool. I get the following error messages:
+>
+>---
+><mailto:user at linux-wijm:~/workspace/generator>>user at linux-wijm:~/workspace/generator> sdf2rtg -i Z109_grammar.sdf---
+>
+>Unfortunately, I could not found any information about this issue. Now, I am wondering if someone of you could give me an advise for a workaround. Alternatively, I am looking for a detailed manual or specification of the RTG grammar so that I can write a convenient RTG definition by hand.
+>
+>Many thanks in advance,
+>Alex Kraas
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (1,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (1,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])])
+>
+>[ sdf2rtg | error ] No pp entry found for: (330,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>[ProdRule(Nonterm(Plain("ForStepItem0")),[Appl(TupleTerm("1"),[Ref(Nonterm(Plain("ForStepItem")))])]),ProdRule(Nonterm(Plain("ListStarO
+>...
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From alex.kraas at gmx.de  Tue Feb 16 10:38:07 2010
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Tue, 16 Feb 2010 10:38:07 +0100
+Subject: [Stratego Users] Problems concerning the sdf2rtg tool
+In-Reply-To: <201002160900.o1G8xxAS015914@smtp1.infopact.nl>
+References: <20100215113016.268600@gmx.net>
+	<201002160900.o1G8xxAS015914@smtp1.infopact.nl>
+Message-ID: <20100216093807.187800@gmx.net>
+
+Dear Lennart,
+
+many thanks for this hint. Actually, I have installed the latetest stable 
+build v0.17 of StrategoXT. I will try to compile/install the latest 
+version, in the hope that everything will work fine :-)
+
+Best regards,
+Alex
+        
+-------- Original-Nachricht --------
+Datum: Tue, 16 Feb 2010 09:59:58 +0100
+Von: Lennart Kats <L.C.L.Kats at tudelft.nl>
+An: Stratego/XT Users <users at strategoxt.org>
+CC: users at strategoxt.org
+Betreff: Re: [Stratego Users] Problems concerning the sdf2rtg tool
+
+        Hi Alexander,
+
+I can't seem to reproduce your problem. Are you sure you have the latest 
+version of sdf2rtg and that your installation is not corrupted in some way? 
+You can find the latest version on Hydra. 
+http://hydra.nixos.org/jobset/strategoxt/strategoxt-release
+
+cheers,
+
+Lennart
+
+@ 12:30 PM 2/15/2010, Alexander Kraas wrote:
+
+>Dear Stratego developers,
+>
+>at the moment I am implementing the textual syntax of the ITU-T Z.109 rec. 
+which is a UML Profil of SDL-2000. The grammar specified in SDF works fine, 
+but I have encountered a problem when trying to transform the attached SDF2 
+file by using the sdf2rtg tool. I get the following error messages:
+>
+>---
+
+><mailto:user at linux-wijm:~/workspace/generator>>user at linux-wijm:~/workspace/generator> 
+sdf2rtg -i Z109_grammar.sdf---
+>
+>Unfortunately, I could not found any information about this issue. Now, I 
+am wondering if someone of you could give me an advise for a workaround. 
+Alternatively, I am looking for a detailed manual or specification of the 
+RTG grammar so that I can write a convenient RTG definition by hand.
+>
+>Many thanks in advance,
+>Alex Kraas
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (1,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (0,["WhileStatement"])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>WhileStatement
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+>Term(WhileStatement)
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])
+>
+>[ sdf2rtg | error ] No pp entry found for: (1,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])]
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>ProdRule(Nonterm(Plain("WhileStatement")),[Appl(Term(WhileStatement),[Ref(Nonterm(Plain("LoopTest"))),Ref(Nonterm(Plain("LoopBody")))])])
+>
+>[ sdf2rtg | error ] No pp entry found for: (330,[[]])
+>
+>[ sdf2rtg | error ] Cannot rewrite to box:
+>
+
+>[ProdRule(Nonterm(Plain("ForStepItem0")),[Appl(TupleTerm("1"),[Ref(Nonterm(Plain("ForStepItem")))])]),ProdRule(Nonterm(Plain("ListStarO
+>...
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100216/a9916626/attachment.html 
+

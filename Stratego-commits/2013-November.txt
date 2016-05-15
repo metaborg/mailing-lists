@@ -1,0 +1,249 @@
+From v.vergu+vc at gmail.com  Sat Nov  9 19:29:02 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Sat, 09 Nov 2013 18:29:02 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26159 - in hydra/jobs:
+	. _cellar
+Message-ID: <20131109182902.6F3257F8089@mx1.tudelft.nl>
+
+Author: VladVergu
+Date: Sat Nov  9 18:29:01 2013
+New Revision: 26159
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26159&sc=1
+
+Log:
+Move deprecated expressions to _cellar
+
+Added:
+   hydra/jobs/_cellar/
+   hydra/jobs/_cellar/spoofax-imp-new-terms.nix
+      - copied, changed from r26158, hydra/jobs/spoofax-imp-new-terms.nix
+   hydra/jobs/_cellar/spoofax-imp-release.nix
+      - copied, changed from r26158, hydra/jobs/spoofax-imp-release.nix
+   hydra/jobs/_cellar/spoofax-imp.nix
+      - copied, changed from r26158, hydra/jobs/spoofax-imp.nix
+Deleted:
+   hydra/jobs/spoofax-imp-new-terms.nix
+   hydra/jobs/spoofax-imp-release.nix
+   hydra/jobs/spoofax-imp.nix
+
+Copied and modified: hydra/jobs/_cellar/spoofax-imp-new-terms.nix (from r26158, hydra/jobs/spoofax-imp-new-terms.nix)
+==============================================================================
+
+Copied and modified: hydra/jobs/_cellar/spoofax-imp-release.nix (from r26158, hydra/jobs/spoofax-imp-release.nix)
+==============================================================================
+
+Copied and modified: hydra/jobs/_cellar/spoofax-imp.nix (from r26158, hydra/jobs/spoofax-imp.nix)
+==============================================================================
+
+From v.vergu+vc at gmail.com  Fri Nov 22 21:28:20 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Fri, 22 Nov 2013 20:28:20 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26160 -
+	hydra/jobs/spoofax-git
+Message-ID: <20131122202820.EC1D1108C012@mx3.tudelft.nl>
+
+Author: VladVergu
+Date: Fri Nov 22 20:28:20 2013
+New Revision: 26160
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26160&sc=1
+
+Log:
+Update strategoxt.jar copy source path
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Sat Nov  9 18:29:01 2013	(r26159)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Nov 22 20:28:20 2013	(r26160)
+@@ -264,7 +264,7 @@
+         mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
+ 
+         mkdir -p org.strategoxt.strj/java
+-        cp ${strj}/share/strategoxt/strategoxt.jar org.strategoxt.strj/java/
++        cp ${strj}/share/strategoxt/strategoxt/strategoxt.jar org.strategoxt.strj/java/
+ 
+         header "Copying back org.strategoxt.imp.generator"
+         cp -r ${generator}/dist org.strategoxt.imp.generator/
+
+From dgroenewegen at gmail.com  Sat Nov 30 17:59:54 2013
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sat, 30 Nov 2013 16:59:54 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26161 - in hydra: .
+	webdsl
+Message-ID: <20131130165954.2E3CCCC18A@mx4.tudelft.nl>
+
+Author: dgroenewegen
+Date: Sat Nov 30 16:59:53 2013
+New Revision: 26161
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26161&sc=1
+
+Log:
+Update Eclipse version used for Spoofax and WebDSL plugin builds to Eclipse Kepler (4.3.1).
+
+Modified:
+   hydra/eclipse.nix
+   hydra/spoofax-fun.nix
+   hydra/webdsl/editor.nix
+
+Modified: hydra/eclipse.nix
+==============================================================================
+--- hydra/eclipse.nix	Fri Nov 22 20:28:20 2013	(r26160)
++++ hydra/eclipse.nix	Sat Nov 30 16:59:53 2013	(r26161)
+@@ -1,8 +1,8 @@
+ pkgs:
+ let 
+   eclipseLinux64 = pkgs.fetchurl {
+-    url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
+-    sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
++    url =http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-SDK-4.3.1-linux-gtk-x86_64.tar.gz;
++    sha256 = "0ncm56ylwxw9z8rk8ccgva68c2yr9yrf1kcr1zkgw6p87xh1yczd";
+   };
+ in
+ { updatesites ? [], installIUs ? [], name, src ? eclipseLinux64, dontInstall ? false, maintainers ?[]} :
+@@ -62,7 +62,7 @@
+         # Patch binaries
+         interpreter=$(echo ${stdenv.glibc}/lib/ld-linux*.so.2)
+         patchelf --set-interpreter $interpreter $out/eclipse/eclipse
+-        patchelf --set-rpath ${freetype}/lib:${fontconfig}/lib:${xlibs.libX11}/lib:${xlibs.libXrender}/lib:${zlib}/lib $out/eclipse/libcairo-swt.so
++        #patchelf --set-rpath ${freetype}/lib:${fontconfig}/lib:${xlibs.libX11}/lib:${xlibs.libXrender}/lib:${zlib}/lib $out/eclipse/libcairo-swt.so
+ 	  
+         # Create wrapper script
+         makeWrapper $out/eclipse/eclipse $out/bin/eclipse \
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Fri Nov 22 20:28:20 2013	(r26160)
++++ hydra/spoofax-fun.nix	Sat Nov 30 16:59:53 2013	(r26161)
+@@ -5,7 +5,7 @@
+ , updatesite ? "http://www.lclnet.nl/update/unstable"
+ , updatesites ? [ updatesite ]
+ , installIUs ? [ "org.strategoxt.imp.feature.group" ]
+-, eclipseSrc
++#, eclipseSrc
+ , ...
+ } @ args :
+ let 
+@@ -14,7 +14,7 @@
+   eclipse = 
+     eclipseFun {
+       name = "spoofax-unstable";
+-      src = eclipseSrc;
++      #src = eclipseSrc;
+       inherit installIUs updatesites;
+     }; 
+     bsf =       
+@@ -36,6 +36,7 @@
+     mvnFlags = "-Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+   in ''
+     # local tmp directory to avoid interference from other builds
++    # for local test build you can replace tmp with shared /tmp to keep the cache around and speed things up
+     mkdir tmp
+     mkdir tmp/m3
+   
+@@ -44,7 +45,7 @@
+     export ANT_ARGS="-lib $bsf"
+     export MAVEN_OPTS="-Xss8m -Xmx2048m -XX:MaxPermSize=256m"
+     mkdir -p utils 
+-    cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/lib/StrategoMix.def utils/
++    cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/dist/StrategoMix.def utils/StrategoMix.def
+     sed -Ei 's|\.[0-9]{12}|.qualifier|g' */site.xml
+     sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-r${toString src.rev}"/' */site.xml
+     
+@@ -56,10 +57,10 @@
+ 
+       cd `dirname $d`
+       mkdir -p utils 
+-      cp -v $eclipse/eclipse/plugins/org.strategoxt.strj_*/java/strategoxt.jar utils/
+-      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/lib/aster.jar utils/
+-      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/lib/sdf2imp.jar utils/
+-      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/lib/make_permissive.jar utils/
++      cp -v $eclipse/eclipse/plugins/org.strategoxt.strj_*/java/strategoxt.jar utils/strategoxt.jar
++      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/dist/aster.jar utils/aster.jar
++      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/dist/sdf2imp.jar utils/sdf2imp.jar
++      cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/dist/make_permissive.jar utils/make_permissive.jar
+ 
+       if [[ -f pom.xml ]] ; then
+         sed -i 's|</project>||' pom.xml
+
+Modified: hydra/webdsl/editor.nix
+==============================================================================
+--- hydra/webdsl/editor.nix	Fri Nov 22 20:28:20 2013	(r26160)
++++ hydra/webdsl/editor.nix	Sat Nov 30 16:59:53 2013	(r26161)
+@@ -1,7 +1,12 @@
++# start local test build with 'nix-build editor.nix'
++
+ { nixpkgs ? /etc/nixos/nixpkgs
+-, webdslJava ? builtins.storePath /nix/store/40p9s92y6lrngwzgpl24x8wn9x9540pc-webdsl-java-9.7pre4936
++# for local test build replace default value for webdslJava with a locally installed webdsl compiler storepath
++, webdslJava ? builtins.storePath /nix/store/wymj36l50nk13g5cf6gh4szzbay6rja9-webdsl-java-0pre5848
++# for local test build check out the webdsl editor project manually to be able to tweak the build settings
+ , webdslEditor ? { outPath = ../../webdsl-editor ; rev = 1234; }
+-, hydraConfig ? { outPath = ../../hydra-config ; rev = 1234; }
++# hydraConfig is the repository for this file, but '../' fails with a syntax error in Nix 
++, hydraConfig ? { outPath = ../../hydra ; rev = 1234; }
+ , nightly ? false
+ }: 
+ let
+@@ -18,35 +23,42 @@
+       name = "webdsl";
+       version = "1.0.0";
+       src = webdslEditor;
++      /*
+       eclipseSrc = pkgs.fetchurl {
+         url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk-x86_64.tar.gz ;
+         sha256 = "1cg9rrb5w978sdqbzz9lnli1lds9zhb6wfsj3wp725bqf1i6v9lg";
+       };
++      */
+       buildInputs = [ pkgs.strategoPackages.sdf ];
+-      updatesites = if nightly then [ "http://download.spoofax.org/update/nightly" "http://download.eclipse.org/releases/helios/"] else [ "http://download.spoofax.org/update/stable"  "http://download.eclipse.org/releases/helios/"];
++      updatesites = if nightly 
++                    then [ "http://download.spoofax.org/update/nightly" "http://download.eclipse.org/releases/kepler"] 
++                    else [ "http://download.spoofax.org/update/unstable" "http://download.eclipse.org/releases/kepler"];
+       
+       installIUs = ["org.strategoxt.imp.feature.group" "org.eclipse.jst.server_adapters.ext.feature.feature.group" "org.eclipse.jst.enterprise_ui.feature.feature.group"];
+       preConfigure = ''
+-      	${if nightly then ''sed -i 's/download.spoofax.org\/update\/stable/download.spoofax.org\/update\/nightly/' webdsl.editor.feature/feature.xml'' else ""}  
++      	${if nightly then ''sed -i 's/download.spoofax.org\/update\/unstable/download.spoofax.org\/update\/nightly/' webdsl.editor.feature/feature.xml'' else ""}  
+         sed 's|@@webdsl@@|${webdslJava}|' webdsl.editor/import.webdsl.from-install-dir.properties > webdsl.editor/import.webdsl.properties
+       '';
+       
+     };
+-	  tests = {      
+-	   	install = eclipseFun {        
+-	   		name = "eclipse-webdsl-install-test";        
+-	   		src =  pkgs.fetchurl {          
+-	   			url = http://download.springsource.com/release/ECLIPSE/indigo/SR2/eclipse-SDK-3.7.2-linux-gtk.tar.gz ;
+-      			sha256 = "f2cce7db448fa1209452605a653d82b7db17a844a86ed3bdb07e265a483c56c7";
+-	   		};        
+-	   		updatesites = [ 
+-	   			"file://${jobs.updatesite}/site" 
+-	   			"http://download.eclipse.org/releases/indigo"
+-	   		];        
+-	   		installIUs = [ "webdsl.editor.feature.feature.group" ];        
+-	   		dontInstall = true;             
+-	   	};          
+-	  };
++
++    tests = {
++      install = eclipseFun {
++        name = "eclipse-webdsl-install-test";
++        /*
++        src =  pkgs.fetchurl {
++          url = http://download.springsource.com/release/ECLIPSE/indigo/SR2/eclipse-SDK-3.7.2-linux-gtk.tar.gz ;
++          sha256 = "f2cce7db448fa1209452605a653d82b7db17a844a86ed3bdb07e265a483c56c7";
++        };
++        */
++        updatesites = [
++          "file://${jobs.updatesite}/site"
++          "http://download.eclipse.org/releases/kepler"
++        ];
++        installIUs = [ "webdsl.editor.feature.feature.group" ];
++        dontInstall = true;
++      };
++    };
+   };
+ 
+ in jobs
+

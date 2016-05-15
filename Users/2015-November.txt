@@ -1,0 +1,106 @@
+From eelcovis at gmail.com  Wed Nov  4 10:21:20 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Wed, 4 Nov 2015 10:21:20 +0100
+Subject: [Stratego Users] Assistant Professor in Programming Languages at TU
+	Delft
+Message-ID: <CAFaCHU1ss1zxO8tK7ufV=YXKb6dKk_1wfJdMMsJJckFrwZwfdw@mail.gmail.com>
+
+The Software Engineering Research Group at TU Delft, The Netherlands is
+looking to strengthen its Programming Languages research program under the
+leadership of Prof. Dr. Eelco Visser. We aim at a broad program connecting
+logic, programming languages, and software engineering in order to improve
+the correctness, reliability, and security of software by using high-level,
+domain-specific formal specifications supported by tools such as certified
+compilers, model checkers, SMT solvers, and/or proof assistants. To that
+end, we are looking for an assistant professor to complement our current
+research strengths in language engineering and domain-specific languages
+with expertise in one or more of the following topics: software
+verification, language-based security, semantics engineering, software
+synthesis, program analysis, type systems, execution engines, performance
+engineering.
+
+See
+http://recruitment2.tudelft.nl/vacatures/index.php?lang=en&id=564299&type=a
+for further information and application instructions. Applicants are
+encouraged to submit materials by December 1, 2015. However, the position
+will remain open until filled. For additional information contact Prof.
+Eelco Visser at e.visser at tudelft.nl
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151104/ef9badaf/attachment.html>
+
+From tkkemo at gmail.com  Tue Nov 17 20:41:56 2015
+From: tkkemo at gmail.com (Tim Knutson)
+Date: Tue, 17 Nov 2015 11:41:56 -0800 (PST)
+Subject: [Stratego Users] Java Version for JSGLR
+Message-ID: <1447789316650.23e9705f@Nodemailer>
+
+Hey, I?m working with the JSGLR and was wondering what version of Java it is implemented in, Thanks!
+
+- Tim Knutson
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151117/e94c0ca3/attachment.html>
+
+From clonearmy at gmail.com  Tue Nov 17 21:31:21 2015
+From: clonearmy at gmail.com (Meredith L. Patterson)
+Date: Tue, 17 Nov 2015 21:31:21 +0100
+Subject: [Stratego Users] LangSec@SPW - Call For Papers
+Message-ID: <CAPxGCxeirn8-tHLpRZUdievBw1kcG+gQWU4hpiSSDGyP3628Bw@mail.gmail.com>
+
+Dear All,
+
+    The Third LangSec IEEE Security & Privacy workshop will take place on
+May 26, 2016. The CFP is posted at  http://spw16.langsec.org/
+
+    The workshop is collocated with the IEEE Security & Privacy Symposium and
+will share the same venue as before, the Fairmont Hotel.
+
+    Submit your papers, industry case studies, research reports, and work
+in progress---and join us in San Jose, CA! We would like to have your
+submissions before or on January 20, 2016 (see
+http://spw16.langsec.org/important-dates.html for more info).
+
+    Please help us promote the workshop and to post to any relevant mailing
+lists!
+
+    Thank you,
+
+--Meredith & Sergey, on behalf of the organizing committee
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151117/9209a400/attachment.html>
+
+From gabrielkonat at gmail.com  Wed Nov 18 13:45:02 2015
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Wed, 18 Nov 2015 13:45:02 +0100
+Subject: [Stratego Users] Java Version for JSGLR
+In-Reply-To: <1447789316650.23e9705f@Nodemailer>
+References: <1447789316650.23e9705f@Nodemailer>
+Message-ID: <CAOipTugo1AVUY7t9zmRhQSA=84VAGY7BuQMtWZ89n3x+7_hvFA@mail.gmail.com>
+
+Hi Tim,
+
+All our tools, including JSGLR, are written with Java 7 in mind, we don't
+use language features from Java 8 yet.
+
+Cheers,
+Gabriel
+
+On 17 November 2015 at 20:41, Tim Knutson <tkkemo at gmail.com> wrote:
+
+> Hey, I?m working with the JSGLR and was wondering what version of Java it
+> is implemented in, Thanks!
+>
+> - Tim Knutson
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151118/ed372079/attachment.html>
+

@@ -1,0 +1,836 @@
+From oskarvanrest at gmail.com  Sat Jan  4 09:31:09 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sat, 04 Jan 2014 08:31:09 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26162 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140104083109.A9D42CC1B1@mx4.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sat Jan  4 08:31:08 2014
+New Revision: 26162
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26162&sc=1
+
+Log:
+Nix expression for Spoofax Modelware
+
+Added:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Added: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- /dev/null	00:00:00 1970	(empty, because file is newly added)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 08:31:08 2014	(r26162)
+@@ -0,0 +1,443 @@
++{
++  nixpkgs ? ../../../nixpkgs
++
++, jsglr ? { outPath = ../../../jsglr ; revCount = 9999; }
++, mbexec ? { outPath = ../../../mb-exec ; revCount = 9999; }
++, mbexecdeps ? { outPath = ../../../mb-exec-deps ; revCount = 9999; }
++, mbrep ? { outPath = ../../../mb-rep ; revCount = 9999; }
++, nabl ? { outPath = ../../../nabl ; revCount = 9999; }
++, ts ? { outPath = ../../../ts ; revCount = 9999; }
++, sdf ? { outPath = ../../../sdf ; revCount = 9999; }
++, esv ? { outPath = ../../../esv ; revCount = 9999; }
++, aster ? { outPath = ../../../aster ; revCount = 9999; }
++, box ? { outPath = ../../../box ; revCount = 9999; }
++, rtg ? { outPath = ../../../rtg ; revCount = 9999; }
++, stratego ? { outPath = ../../../stratego ; revCount = 9999; }
++, spt ? { outPath = ../../../spt ; revCount = 9999; }
++, tdl ? { outPath = ../../../tdl ; revCount = 9999; }
++, spoofax ? { outPath = ../../../spoofax ; revCount = 9999; }
++, spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
++, spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
++, imppatched ? { outPath = ../../../imp-patched ; revCount = 9999; }
++, lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
++, metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
++, modelware ? { outPath = ../../../spoofax-modelware ; revCount = 9999; }
++
++, strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
++, strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
++, javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
++
++, hydraConfig ? { outPath = ../../. ; revCount = 9999; }
++}:
++let
++  plus = a : b : ( builtins.add a b );
++  sumrev = xs : pkgs.lib.foldl plus 0 xs ;
++  
++  spoofaxRev = toString (sumrev 
++      [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount
++        nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount  
++        rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount 
++        spoofaxdebug.revCount spoofaxdeploy.revCount imppatched.revCount strategoxt.revCount strategoxtCVersion.revCount
++        metaborgRuntime.revCount javaFront.revCount]) ;
++
++  pkgs = import nixpkgs { system = "i686-linux"; };
++
++  jline = pkgs.fetchurl {
++    url = http://spoofax.org/mirror/extras/jline-1.0.jar;
++    sha256 = "6d35823d5ae86ea4c71bc653747d1234c1587662882a76738d2881fb409394ab";
++  };
++
++  shrike = pkgs.fetchsvn {
++    url = https://wala.svn.sourceforge.net/svnroot/wala/trunk/com.ibm.wala.shrike;
++    rev = 3073;
++    sha256 = "0y13i31xlhian5glk4cahbzxg4mky4q61qzc5g03qkg4d67k12zd";
++  };
++
++  guava = pkgs.fetchurl {
++    url = http://search.maven.org/remotecontent?filepath=com/google/guava/guava/14.0.1/guava-14.0.1.jar;
++    sha256 = "d69df3331840605ef0e5fe4add60f2d28e870e3820937ea29f713d2035d9ab97";
++  };
++  
++  functional-java = pkgs.fetchurl {
++    url = http://functionaljava.googlecode.com/svn/artifacts/3.0/functionaljava.jar;
++    sha256 = "091C45B841A763FC7F922A64415ACF03069A1360F9F44CBC38BA43C750323884";
++  };
++
++  junit-benchmarks = pkgs.fetchurl {
++    url = http://labs.carrotsearch.com/download/junit-benchmarks/0.6.0/junit-benchmarks-0.6.0.zip;
++    sha256 = "07f189bd06e4294b329b4e3b0c7f54ce8236bba0393991a212a94cbb39ecd5b1";
++  };
++
++  eclipseFun = import ../../eclipse.nix pkgs ; 
++    
++  eclipse = eclipseFun {
++    name = "eclipse-plain";
++    src =  pkgs.fetchurl {
++      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
++      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
++    };
++  }; 
++
++  eclipseTest = eclipseFun {
++    name = "eclipse-spoofax-install-test";
++    src =  pkgs.fetchurl {
++      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
++      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
++    };
++    updatesites = [ "file://${jobs.build}/site" ];
++    installIUs = [ "org.strategoxt.imp.feature.group" ];
++    dontInstall = true;
++  }; 
++
++  strcj = (import ../strc-java.nix {
++      inherit nixpkgs hydraConfig;
++      strcJavaCheckout = strategoxtCVersion;
++    }).build { system = "i686-linux"; };
++
++
++  strategoxtNixExpr = pkgs.lib.concatStrings [strategoxt.outPath "/strategoxt/strategoxt-java-bootstrap.nix" ] ;
++
++  strj = (import strategoxtNixExpr {
++    inherit nixpkgs javaFront;
++    strategoxtJava = strategoxt;
++    baseline = strcj;
++  }).bootstrap3;
++
++  jobs = with pkgs.lib; {
++    tests.install = eclipseTest;
++    src = pkgs.stdenv.mkDerivation {
++      name = "spoofax-imp-src-s${spoofaxRev}";
++
++
++      buildInputs = with pkgs; [ unzip ];
++
++      buildCommand = ''
++        ensureDir $out
++        cd $out
++            
++        header "Preparing org.eclipse.imp"
++    
++        for d in ${imppatched}/org.eclipse.imp.cheatsheets \
++                 ${imppatched}/org.eclipse.imp.java.hosted \
++                 ${imppatched}/org.eclipse.imp.lpg \
++                 ${imppatched}/org.eclipse.imp.lpg.ide \
++                 ${imppatched}/org.eclipse.imp.lpg.metatooling \
++                 ${imppatched}/org.eclipse.imp.metatooling \
++                 ${imppatched}/org.eclipse.imp.preferences \
++                 ${imppatched}/org.eclipse.imp.prefspecs \
++                 ${imppatched}/org.eclipse.imp.presentation \
++                 ${imppatched}/org.eclipse.imp.runtime \
++                 ${imppatched}/org.eclipse.imp.smapi \
++                 ${imppatched}/org.eclipse.imp.smapifier \
++                 ${imppatched}/org.eclipse.imp.xform \
++                 ${mbexec}/org.spoofax.interpreter.core \
++                 ${mbexec}/org.spoofax.interpreter \
++                 ${mbexec}/org.spoofax.interpreter.ui \
++                 ${mbexec}/org.spoofax.interpreter.library.xml \
++                 ${mbexec}/org.spoofax.interpreter.library.interpreter \
++                 ${mbexec}/org.spoofax.interpreter.library.jline \
++                 ${mbexec}/org.spoofax.interpreter.adapter.ecj \
++                 ${mbexec}/org.spoofax.interpreter.library.eclipse \
++                 ${mbexec}/org.spoofax.interpreter.library.java \
++                 ${mbexecdeps}/org.spoofax.interpreter.externaldeps \
++                 ${metaborgRuntime}/org.metaborg.runtime.task \
++                 ${metaborgRuntime}/org.metaborg.meta.lang.analysis \
++                 ${mbrep}/org.spoofax.interpreter.library.index \
++                 ${mbrep}/org.spoofax.aterm \
++                 ${mbrep}/org.spoofax.terms \
++                 ${mbrep}/org.strategoxt.imp.editors.aterm \
++                 ${jsglr}/org.spoofax.jsglr \
++                 ${jsglr}/org.spoofax.interpreter.library.jsglr \
++                 ${sdf}/org.strategoxt.imp.editors.sdf \
++                 ${sdf}/org.strategoxt.imp.editors.template \
++                 ${stratego}/org.strategoxt.imp.editors.stratego \
++                 ${aster}/org.strategoxt.imp.editors.aster \
++                 ${esv}/org.strategoxt.imp.editors.editorservice \
++                 ${box}/org.strategoxt.imp.editors.pp \
++                 ${rtg}/org.strategoxt.imp.editors.rtg \
++                 ${nabl}/org.metaborg.meta.lang.nabl \
++                 ${ts}/org.metaborg.meta.lang.ts \
++                 ${spt}/org.strategoxt.imp.testing \
++                 ${spt}/org.strategoxt.imp.testing.ui \
++                 ${spoofax}/org.strategoxt.imp.generator \
++                 ${spoofax}/org.strategoxt.imp.metatooling \
++                 ${spoofax}/org.strategoxt.imp.nativebundle \
++                 ${spoofax}/org.strategoxt.imp.runtime \
++                 ${spoofax}/org.strategoxt.imp.runtime.sidebyside.main \
++                 ${spoofax}/org.strategoxt.imp.runtime.sidebyside.latest \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.core \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.core \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.runtime \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.test \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.transformer \
++                 ${spoofaxdebug}/org.strategoxt.imp.debug.ui \
++                 ${spoofaxmodelware}/org.spoofax.modelware.emf \
++                 ${spoofaxmodelware}/org.spoofax.modelware.gmf \
++                 ${spoofaxdeploy}/org.spoofax.modelware.feature \
++                 ${spoofaxdeploy}/org.strategoxt.imp.feature \
++                 ${spoofaxdeploy}/org.strategoxt.imp.updatesite
++        do
++          header "Copying $d"
++          cp -R $d .
++          stopNest
++        done
++
++        cp -R ${shrike} com.ibm.wala.shrike
++        cp -R ${lpgRuntime} lpg.runtime.java
++        cp -R ${strategoxt}/strategoxt/stratego-libraries/java-backend org.strategoxt.strj
++        
++        chmod -R +w .
++        ensureDir org.spoofax.interpreter.externaldeps/lib
++        cp ${guava} org.spoofax.interpreter.externaldeps/lib/guava.jar
++        cp ${functional-java} org.spoofax.interpreter.externaldeps/lib/functionaljava.jar
++        unzip ${junit-benchmarks} -d org.spoofax.interpreter.externaldeps/lib/
++            
++        chmod -R +w .
++        rm -rf \
++              org.spoofax.jsglr/src/org/spoofax/jsglr/shared/RemoteParseTableService* \
++              org.spoofax.jsglr/src/org/spoofax/client/JSGLREntryPoint.java \
++              org.spoofax.jsglr/src/org/spoofax/jsglr/server/RemoteParseTableServiceImpl.java \
++              org.spoofax.terms/src/org/spoofax/gwt/
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.strategoxt.imp.updatesite/site.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.updatesite/site.xml
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.strategoxt.imp.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.feature/feature.xml
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.feature/feature.xml
++                    
++        stopNest
++      '';
++    };
++
++    generator = pkgs.releaseTools.antBuild {
++      name = "spoofax-imp-generator-s${spoofaxRev}";
++      inherit (jobs) src;
++
++      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.strategoxt 
++strategoPackages.javafront ecj openjdk ];
++
++      preConfigure = ''
++        cd org.strategoxt.imp.generator
++        ulimit -s unlimited
++      '';
++
++      postUnpack = ''
++        echo ${pkgs.strategoPackages.strategoxt}
++        echo ${pkgs.strategoPackages.sdf}
++        echo ${pkgs.strategoPackages.javafront}
++      '';
++
++      antTargets = [ "install" ];
++      antProperties = [
++	{ name = "sdf2bundle"; value = pkgs.strategoPackages.sdf; }
++        { name = "strategoxt"; value = "${pkgs.strategoPackages.strategoxt}/share"; }
++        { name = "sdf"; value = pkgs.strategoPackages.sdf; }
++        { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
++        { name = "install-prefix"; value = "$out/dist"; }
++      ];
++      antBuildInputs = [ pkgs.ecj strcj ];
++
++      ANT_OPTS="-Xss16m -Xmx1024m -server -XX:+UseParallelGC -XX:MaxPermSize=256m";
++
++      dontInstall = true;
++    };
++
++
++    build = pkgs.stdenv.mkDerivation rec {
++      name = "spoofax-imp-s${spoofaxRev}";
++      inherit (jobs) src;
++      inherit (jobs) generator;
++
++      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
++      mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
++
++      M2_REPO="tmp/m3";
++      MAVEN_OPTS="-Xss8m -Xmx1024m";
++      STRATEGOXT=pkgs.strategoPackages.strategoxt;
++      JAVA_FRONT=pkgs.strategoPackages.javafront;
++      SDF=pkgs.strategoPackages.sdf;
++
++      buildPhase = ''
++        ulimit -s unlimited
++
++        # local tmp directory
++        mkdir tmp
++
++        #hack
++        mkdir -p plugins
++        export eclipsefakehome=`pwd`
++            
++        mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
++
++        mkdir -p org.strategoxt.strj/java
++        cp ${strj}/share/strategoxt/strategoxt/strategoxt.jar org.strategoxt.strj/java/
++
++        header "Copying back org.strategoxt.imp.generator"
++        cp -r ${generator}/dist org.strategoxt.imp.generator/
++
++        stopNest
++
++        for e in */build.generated.xml
++        do
++          POM=`dirname $e`/pom.xml
++          if [[ -f $POM ]] ; then
++             sed -i 's|</project>||' $POM
++             echo '
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <dependencies>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>aster</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/aster.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>strategoxt</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.strj/java/strategoxt.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>sdf2imp</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/sdf2imp.jar</systemPath>
++          </dependency>
++          <dependency>
++              <groupId>local</groupId>
++              <artifactId>make_permissive.jar</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.strategoxt.imp.generator/dist/make_permissive.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>com.sun</groupId>
++              <artifactId>tools</artifactId>
++              <version>1.4.2</version>
++              <scope>system</scope>
++              <systemPath>''${java.home}/../lib/tools.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>ecj</groupId>
++              <artifactId>ecj</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
++          </dependency>
++          <dependency>
++             <groupId>jline</groupId>
++              <artifactId>jline</artifactId>
++              <version>1.0</version>
++              <scope>system</scope>
++              <systemPath>''${basedir}/../org.spoofax.interpreter.library.jline/lib/jline-1.0.jar</systemPath>
++          </dependency>
++      </dependencies>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="externaljarx" refid="maven.compile.classpath"/>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++         <execution>
++           <id>process-classes</id>
++           <phase>process-classes</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                  <target name="java.jar"/> 
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
++</build></project>' >>$POM
++          fi
++        done
++
++        for e in */build.ant.xml
++        do
++          POM=`dirname $e`/pom.xml
++          if [[ -f $POM ]] ; then
++             sed -i 's|</project>||' $POM
++             echo '
++<build>
++  <plugins>
++    <plugin>
++      <groupId>org.apache.maven.plugins</groupId>
++      <artifactId>maven-antrun-plugin</artifactId>
++      <executions>
++         <execution>
++           <id>generate-sources</id>
++           <phase>generate-sources</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="strategoxt.dir" value="${STRATEGOXT}"/>
++                <property name="sdf.dir" value="${SDF}"/>
++                <ant antfile="build.ant.xml" inheritRefs="true">
++                  <target name="bundle-ctree" />
++                </ant>
++              </tasks>
++           </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++      </executions>
++    </plugin>
++  </plugins>
++</build></project>' >>$POM
++          fi
++        done
++
++        mvn package ${mvnFlags} -e
++        mvn integration-test ${mvnFlags} -e
++      '';
++          
++      installPhase = ''
++        ensureDir $out/nix-support
++        cp -Rv org.strategoxt.imp.updatesite/target/site $out/
++        touch $out/site/index.html
++        cd $out
++        tar cvzf $out/${name}.tar.gz site
++        echo "file site $out/site" >> $out/nix-support/hydra-build-products
++        echo "file tar $out/${name}.tar.gz" >> $out/nix-support/hydra-build-products
++      '';
++
++       __noChroot = true;
++       meta.maintainers = ["lclkats at gmail.com" "m.dejonge at tudelft.nl" "rob.vermaas at gmail.com" "karltk at strategoxt.org" "g.h.wachsmuth at tudelft.nl" "gabrielkonat at gmail.com" "v.vergu at gmail.com"];
++     } ;     
++  } ;
++
++in jobs
+
+From oskarvanrest at gmail.com  Sat Jan  4 09:47:13 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sat, 04 Jan 2014 08:47:13 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26163 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140104084713.8937A2B8014@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sat Jan  4 08:47:13 2014
+New Revision: 26163
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26163&sc=1
+
+Log:
+fix
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 08:31:08 2014	(r26162)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 08:47:13 2014	(r26163)
+@@ -171,8 +171,8 @@
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.test \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.stratego.transformer \
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.ui \
+-                 ${spoofaxmodelware}/org.spoofax.modelware.emf \
+-                 ${spoofaxmodelware}/org.spoofax.modelware.gmf \
++                 ${modelware}/org.spoofax.modelware.emf \
++                 ${modelware}/org.spoofax.modelware.gmf \
+                  ${spoofaxdeploy}/org.spoofax.modelware.feature \
+                  ${spoofaxdeploy}/org.strategoxt.imp.feature \
+                  ${spoofaxdeploy}/org.strategoxt.imp.updatesite
+
+From oskarvanrest at gmail.com  Sat Jan  4 11:16:38 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Sat, 04 Jan 2014 10:16:38 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26164 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140104101638.8BF212B8014@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Sat Jan  4 10:16:38 2014
+New Revision: 26164
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26164&sc=1
+
+Log:
+spoofax = Kepler Modeling Tools
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 08:47:13 2014	(r26163)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 10:16:38 2014	(r26164)
+@@ -73,16 +73,16 @@
+   eclipse = eclipseFun {
+     name = "eclipse-plain";
+     src =  pkgs.fetchurl {
+-      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
+-      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk-x86_64.tar.gz ;
++      sha256 = "843ef2cf807c78afe56072c17ce0da4b0761b4adcf4fe79f44debd4372ad1d11";
+     };
+   }; 
+ 
+   eclipseTest = eclipseFun {
+     name = "eclipse-spoofax-install-test";
+     src =  pkgs.fetchurl {
+-      url = http://eclipse.mirror.triple-it.nl/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-linux-gtk.tar.gz ;
+-      sha256 = "46a0e59c9bb9e3bb6d73addb42f7ad65d0f306a02d63712247434596d78a1e0d";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk-x86_64.tar.gz ;
++      sha256 = "843ef2cf807c78afe56072c17ce0da4b0761b4adcf4fe79f44debd4372ad1d11";
+     };
+     updatesites = [ "file://${jobs.build}/site" ];
+     installIUs = [ "org.strategoxt.imp.feature.group" ];
+
+From oskarvanrest at gmail.com  Mon Jan  6 03:07:35 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 06 Jan 2014 02:07:35 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26165 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140106020735.57716CC111@mx4.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Jan  6 02:07:34 2014
+New Revision: 26165
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26165&sc=1
+
+Log:
+Eclipse 64 -> Eclipse 32
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Sat Jan  4 10:16:38 2014	(r26164)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Jan  6 02:07:34 2014	(r26165)
+@@ -73,16 +73,16 @@
+   eclipse = eclipseFun {
+     name = "eclipse-plain";
+     src =  pkgs.fetchurl {
+-      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk-x86_64.tar.gz ;
+-      sha256 = "843ef2cf807c78afe56072c17ce0da4b0761b4adcf4fe79f44debd4372ad1d11";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk.tar.gz ;
++      sha256 = "2e028ca24898691f6fdf02c80338d0cf7470b0ad575f4f0f4de7e342a85ae737";
+     };
+   }; 
+ 
+   eclipseTest = eclipseFun {
+     name = "eclipse-spoofax-install-test";
+     src =  pkgs.fetchurl {
+-      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk-x86_64.tar.gz ;
+-      sha256 = "843ef2cf807c78afe56072c17ce0da4b0761b4adcf4fe79f44debd4372ad1d11";
++      url = http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/kepler/SR1/eclipse-modeling-kepler-SR1-linux-gtk.tar.gz ;
++      sha256 = "2e028ca24898691f6fdf02c80338d0cf7470b0ad575f4f0f4de7e342a85ae737";
+     };
+     updatesites = [ "file://${jobs.build}/site" ];
+     installIUs = [ "org.strategoxt.imp.feature.group" ];
+
+From oskarvanrest at gmail.com  Mon Jan  6 05:11:56 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 06 Jan 2014 04:11:56 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26166 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140106041156.465A37F8014@mx1.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Jan  6 04:11:55 2014
+New Revision: 26166
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26166&sc=1
+
+Log:
+Added new modewlare feature plugins.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Jan  6 02:07:34 2014	(r26165)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Jan  6 04:11:55 2014	(r26166)
+@@ -173,8 +173,9 @@
+                  ${spoofaxdebug}/org.strategoxt.imp.debug.ui \
+                  ${modelware}/org.spoofax.modelware.emf \
+                  ${modelware}/org.spoofax.modelware.gmf \
+-                 ${spoofaxdeploy}/org.spoofax.modelware.feature \
+                  ${spoofaxdeploy}/org.strategoxt.imp.feature \
++                 ${spoofaxdeploy}/org.spoofax.modelware.emf.feature \
++                 ${spoofaxdeploy}/org.spoofax.modelware.gmf.feature \
+                  ${spoofaxdeploy}/org.strategoxt.imp.updatesite
+         do
+           header "Copying $d"
+
+From oskarvanrest at gmail.com  Mon Jan  6 05:14:18 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 06 Jan 2014 04:14:18 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26167 - hydra/modelware
+Message-ID: <20140106041418.195D62B8007@mx2.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Jan  6 04:14:17 2014
+New Revision: 26167
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26167&sc=1
+
+Log:
+Removed old modelware stuff.
+
+Deleted:
+   hydra/modelware/
+
+From oskarvanrest at gmail.com  Mon Jan  6 06:04:47 2014
+From: oskarvanrest at gmail.com (Oskar van Rest)
+Date: Mon, 06 Jan 2014 05:04:47 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26168 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140106050447.622D4108C005@mx3.tudelft.nl>
+
+Author: OskarVanRest
+Date: Mon Jan  6 05:04:47 2014
+New Revision: 26168
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26168&sc=1
+
+Log:
+fix
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-modelware.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-modelware.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Jan  6 04:14:17 2014	(r26167)
++++ hydra/jobs/spoofax-git/spoofax-modelware.nix	Mon Jan  6 05:04:47 2014	(r26168)
+@@ -203,8 +203,10 @@
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.updatesite/site.xml
+         sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.strategoxt.imp.feature/feature.xml
+         sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.strategoxt.imp.feature/feature.xml
+-        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.feature/feature.xml
+-        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.feature/feature.xml
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.emf.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.emf.feature/feature.xml
++        sed -Ei 's|\.[0-9]\{12\}|.qualifier|g' org.spoofax.modelware.gmf.feature/feature.xml
++        sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-s${spoofaxRev}"/' org.spoofax.modelware.gmf.feature/feature.xml
+                     
+         stopNest
+       '';
+
+From dgroenewegen at gmail.com  Fri Jan 24 11:20:01 2014
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Fri, 24 Jan 2014 10:20:01 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26169 - hydra
+Message-ID: <20140124102001.AFBAD7F8008@mx1.tudelft.nl>
+
+Author: dgroenewegen
+Date: Fri Jan 24 10:20:00 2014
+New Revision: 26169
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26169&sc=1
+
+Log:
+remove unnecessary Ant dependency
+
+Modified:
+   hydra/spoofax-fun.nix
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Mon Jan  6 05:04:47 2014	(r26168)
++++ hydra/spoofax-fun.nix	Fri Jan 24 10:20:00 2014	(r26169)
+@@ -29,7 +29,7 @@
+   name = "${name}-r${toString src.rev}";
+   inherit src eclipse;
+     
+-  buildInputs = [ pkgs.maven3 pkgs.apacheAntOpenJDK ] ++ optional (args ? buildInputs) args.buildInputs ;
++  buildInputs = [ pkgs.maven3 ] ++ optional (args ? buildInputs) args.buildInputs ;
+ 
+   buildPhase = 
+   let
+
+From dgroenewegen at gmail.com  Tue Jan 28 15:00:42 2014
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Tue, 28 Jan 2014 14:00:42 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26170 - hydra
+Message-ID: <20140128140042.D2A9CCC385@mx4.tudelft.nl>
+
+Author: dgroenewegen
+Date: Tue Jan 28 14:00:42 2014
+New Revision: 26170
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26170&sc=1
+
+Log:
+update path due to change in ecj nix package
+
+Modified:
+   hydra/spoofax-fun.nix
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Fri Jan 24 10:20:00 2014	(r26169)
++++ hydra/spoofax-fun.nix	Tue Jan 28 14:00:42 2014	(r26170)
+@@ -94,7 +94,7 @@
+             <artifactId>ecj</artifactId>
+             <version>1.0</version>
+             <scope>system</scope>
+-            <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
++            <systemPath>${pkgs.ecj}/share/java/ecj.jar</systemPath>
+         </dependency>
+     </dependencies>
+     <executions>
+
+From gabrielkonat at gmail.com  Wed Jan 29 12:50:36 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Wed, 29 Jan 2014 11:50:36 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26171 -
+	hydra/strategoxt
+Message-ID: <20140129115036.32F567F8106@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Wed Jan 29 11:50:35 2014
+New Revision: 26171
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26171&sc=1
+
+Log:
+Setting gcj explicitly is not required any more.
+
+Modified:
+   hydra/strategoxt/packages.nix
+
+Modified: hydra/strategoxt/packages.nix
+==============================================================================
+--- hydra/strategoxt/packages.nix	Tue Jan 28 14:00:42 2014	(r26170)
++++ hydra/strategoxt/packages.nix	Wed Jan 29 11:50:35 2014	(r26171)
+@@ -425,8 +425,8 @@
+ 
+       buildInputs = 
+         [pkgs.pkgconfig pkgs.unzip pkgs.zlib pkgs.which pkgs.getopt] 
+-        ++ pkgs.lib.optional pkgs.stdenv.isLinux [(pkgs.ecj.override { gcj = pkgs.openjdk; }) pkgs.openjdk] 
+-        ++ pkgs.lib.optional pkgs.stdenv.isDarwin [(pkgs.ecj.override { gcj = pkgs.openjdk; }) pkgs.openjdk];
++        ++ pkgs.lib.optional pkgs.stdenv.isLinux [pkgs.ecj pkgs.openjdk] 
++        ++ pkgs.lib.optional pkgs.stdenv.isDarwin [pkgs.ecj pkgs.openjdk];
+       requires = svnRequires;
+ 
+       rpmBuildSupported = true;
+
+From gabrielkonat at gmail.com  Thu Jan 30 10:49:02 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 30 Jan 2014 09:49:02 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26172 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140130094902.D4AA6CC262@mx4.tudelft.nl>
+
+Author: gkonat
+Date: Thu Jan 30 09:49:02 2014
+New Revision: 26172
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26172&sc=1
+
+Log:
+Remove reference to apacheAntOpenJDK
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Jan 29 11:50:35 2014	(r26171)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jan 30 09:49:02 2014	(r26172)
+@@ -242,7 +242,7 @@
+       inherit (jobs) src;
+       inherit (jobs) generator;
+ 
+-      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
++      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk strategoPackages.sdf ];
+       mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+ 
+       M2_REPO="tmp/m3";
+
+From gabrielkonat at gmail.com  Thu Jan 30 13:28:13 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 30 Jan 2014 12:28:13 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26173 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140130122813.4391FCC4AC@mx4.tudelft.nl>
+
+Author: gkonat
+Date: Thu Jan 30 12:28:12 2014
+New Revision: 26173
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26173&sc=1
+
+Log:
+ecj.jar moved to share
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jan 30 09:49:02 2014	(r26172)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jan 30 12:28:12 2014	(r26173)
+@@ -323,7 +323,7 @@
+               <artifactId>ecj</artifactId>
+               <version>1.0</version>
+               <scope>system</scope>
+-              <systemPath>${pkgs.ecj}/lib/java/ecj.jar</systemPath>
++              <systemPath>${pkgs.ecj}/share/java/ecj.jar</systemPath>
+           </dependency>
+           <dependency>
+              <groupId>jline</groupId>
+

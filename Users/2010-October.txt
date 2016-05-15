@@ -1,0 +1,140 @@
+From gre at ecs.soton.ac.uk  Fri Oct 29 16:02:33 2010
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 29 Oct 2010 15:02:33 +0100
+Subject: [Stratego Users] LDTA 2011 First Call for Papers
+Message-ID: <AANLkTimRQVy9SoYhG=L=xXd12HswekK9sYV_03m=Q7AK@mail.gmail.com>
+
+11th International Workshop on Language Descriptions, Tools, and
+Applications (ETAPS workshop)
+--------------------------------------------------------------------
+Saarbruecken, Germany March 26 & 27, 2011
+http://ldta.info
+
+Important Dates
+---------------
+ * Abstract submission: Dec. 15, 2010
+ * Full paper submission: Dec. 22, 2010
+ * Author notification: Feb. 1, 2011
+ * Tool challenge submission: Mar. 05, 2011
+ * LDTA Workshop: Mar. 26-27, 2011
+
+LDTA is an application and tool-oriented workshop focused on
+grammarware - software based on grammars in some form. Grammarware
+applications are typically language processing applications and
+traditional examples include parsers, program analyzers, optimizers
+and translators. A primary focus of LDTA is grammarware that is
+generated from high-level grammar-centric specifications and thus
+submissions on parser generation, attribute grammar systems,
+term/graph rewriting systems, and other grammar-related
+meta-programming tools, techniques, and formalisms are encouraged.
+
+LDTA is also a forum in which theory is put to the test, in many cases
+on real-world software engineering challenges. Thus, LDTA also
+solicits papers on the application of grammarware to areas including,
+but not limited to, the following:
+
+ * program analysis, transformation, generation, and verification,
+ * implementation of Domain-Specific Languages,
+ * reverse engineering and re-engineering,
+ * refactoring and other source-to-source transformations,
+ * language definition and language prototyping, and,
+ * debugging, profiling, IDE support, and testing.
+
+This year LDTA will also be putting theory, as well as techniques and
+tools, to the test in a new way - in the LDTA Tool Challenge. Tool
+developers are invited to participate in the Challenge by developing
+solutions to a range of language processing tasks over a simple but
+evolving set of imperative programming languages. Tool challenge
+participants will present highlights of their solution during a
+special session of the workshop and contribute to a joint paper on the
+Tool Challenge and proposed solutions to be co-authored by all
+participants after the workshop.
+
+Note that LDTA is a well-established workshop similar to other
+conferences on (programming) language engineering topics such as SLE
+and GPCE, but is solely focused on grammarware.
+
+Paper Submission
+----------------
+
+LDTA solicits papers in the following categories.
+
+ * research papers - original research results within the scope of
+   LDTA with a clear motivation, description, analysis, and evaluation.
+ * short research papers - new innovative ideas that have not been
+   completely fleshed out. As a workshop, LDTA strongly encourages
+   these types of submissions.
+ * experience report papers - description of the use of a grammarware
+   tool or technique to solve a non-trivial applied problem with an
+   emphasis on the advantages and disadvantages of the chosen
+   approach to the problem.
+ * tool demo papers - discussion of a tool or technique that explains
+   the contributions of the tool and what specifically will be
+   demonstrated. These papers should describe tools and applications
+   that do not fit neatly into the specific problems in the Tool Challenge.
+
+Each submission must clearly state in which of these categories it
+falls and not be published or submitted elsewhere. Papers are to use
+the standard LaTeX article style and the authblk style for
+affiliations; a sample of which is provided at www.ldta.info. Research
+and experience papers are limited to 15 pages, tool demonstration
+papers are limited to 10 pages, and short papers are limited to 6
+pages. The final version of the accepted papers will, pending
+approval, be published in the ACM Digital Library and will also be
+made available during the workshop.
+
+Please submit your abstract and paper using EasyChair at
+http://www.easychair.org/conferences/?conf=ldta2011.
+
+The authors of each submission are required to give a presentation at
+LDTA 2011 and tool demonstration paper presentations are intended to
+include a significant live, interactive demonstration.
+
+The authors of the best papers will be invited to write a journal
+version of their paper which will be separately reviewed and, assuming
+acceptance, be published in journal form. As in past years this will
+be done in a special issue of the journal Science of Computer
+Programming (Elsevier Science).
+
+From sheng.lu at student.adelaide.edu.au  Sun Oct 31 15:30:54 2010
+From: sheng.lu at student.adelaide.edu.au (Sheng Lu)
+Date: Mon, 1 Nov 2010 00:00:54 +0930
+Subject: [Stratego Users] Hi, I just learn the stratego/XT,
+ Do you know how to change the expression to nothing
+Message-ID: <AANLkTi=Rsm7j8zHTBdOH7zym+HFZka8kJsXdbXTgds72@mail.gmail.com>
+
+Hi All,
+I use the stratego/XT, transform one language to another.
+I just simply want to change some expression to none or nothing, How
+can I do this?
+For my case, it is like this:
+   PrintOp:   Op(op,exp1,exp2) -> result
+            where
+            	debug(!"op");
+            	if  <isRefInt> exp1
+            	then
+            		debug(!"if");
+            		if <isRefInt> exp2
+            		then
+--------------------------------------
+            			nothing=>result; in here I just want none(I mean I want
+the blank result) to result does anybody know how to do it?
+-----------------------------------------        			
+            		else
+            			<onlycall> exp2 => result
+            		end
+            		//debug(!"in")
+            	else
+            		if  <isRefInt> exp2
+            	     then
+            	     	debug(!"else1");
+            	     	<onlycall> exp1 => result
+            	     else
+            	     	debug(!"elseelse") ;
+            	     	<onlycall> exp1=>exp1';
+            	     	<onlycall> exp2=>exp2';
+            	     	debug(!exp2');
+            	     	(<id>exp1',<id>exp2')=>result
+            	     end
+            	 end
+

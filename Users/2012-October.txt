@@ -1,0 +1,675 @@
+From tbrandonau at gmail.com  Tue Oct  2 07:22:54 2012
+From: tbrandonau at gmail.com (Thomas Brandon)
+Date: Tue, 2 Oct 2012 15:22:54 +1000
+Subject: [Stratego Users] Start symbol in tests
+In-Reply-To: <506814B2.9040503@lclnet.nl>
+References: <CAM5MpD6rqo3fM=CV6DE2GceqEy2H8nL-N7d7W+eUOmWwyjOJ7w@mail.gmail.com>
+	<506814B2.9040503@lclnet.nl>
+Message-ID: <CAM5MpD4Ujs7+XQfG46RNWJ=ySN_AmgpD7eiBJPpWKDiu0JNH=g@mail.gmail.com>
+
+Thanks for the extremely quick responses Lenart and Guido. And for
+Stratego/Spoofax in general.
+
+OK, that makes sense, sorry I didn't think to try that (my previous
+experience is primarily with ANTLR which being LL doesn't really have a
+concept of start rules except as a hint to other tools).
+Are there any issues with having large numbers of start symbols in the
+grammar (apart from neatness of code)? This could instead be done with the
+nice template features of the unit testing language. Is that better in
+terms of performance?
+
+Many thanks,
+Tom.
+
+On Sun, Sep 30, 2012 at 7:45 PM, Lennart Kats <lennart at lclnet.nl> wrote:
+
+> Hi Tom,
+>
+> You need to declare Definition as an additional start symbol in your
+> grammar as well. The standard grammar only includes "Start".
+>
+> hth,
+>
+> Lennart
+>
+> On 9/30/12 11:29 , Thomas Brandon wrote:
+>
+>> I am unable to get the start symbol option to work in test files. As I
+>> understand it you should be able to have a .spt file containing:
+>>
+>> module test-example2
+>>
+>> language Test
+>> start symbol Definition
+>>
+>> test Simple entity [[
+>>    entity User {
+>>      name : String
+>>    }
+>> ]] 0 errors
+>>
+>>
+>> However this gives a "Fails to parse" error.
+>>
+>> This is based on the example syntax generated when creating a new project:
+>>      "module" ID Definition*       -> Start {cons("Module")}
+>>      "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
+>>      ID ":" Type                   -> Property {cons("Property")}
+>>      ID                            -> Type {cons("Type")}
+>>
+>> If I add a module line to the test input and set the start rule to Start
+>> then it works but I haven't been able to get the start symbol option to
+>> work for anything but the start rule of the language.
+>> Am I doing something wrong or should this work?
+>>
+>> Thanks,
+>> Tom
+>>
+>>
+>> ______________________________**_________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>>
+>>
+> ______________________________**_________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121002/3b674a21/attachment.html>
+
+From emmanuel.castro at laposte.net  Wed Oct  3 23:04:03 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Wed, 3 Oct 2012 23:04:03 +0200
+Subject: [Stratego Users] Ctrl-click fails on terms followed by a * in SDF
+ editor / ALLOW_MULTI_CHILD_PARENT implication
+Message-ID: <CAEXdecncWRVF4xD=ZQr8ZPq+DVyRjUme3pRtdZ_E0ETTaZdmOw@mail.gmail.com>
+
+Both stable and nightly version of Spoofax have a problem with reference
+resolving that appears when using Ctrl+Click in the SDF editor. Ctrl+Click
+fails on terms of the form Definition* or (Definition)*, but not on terms
+of the form (Definition Definition)*.
+
+I've noticed that StrategoReferenceResolver.ALLOW_MULTI*_*CHILD_PARENT is
+set to 'false' since r22534. Reverting it back to 'true' gives the correct
+behaviour. I don't know the implications of reverting it to 'true'. Maybe
+Lennart Kats, who made this modification in r22534, can tell us more on the
+implication of changing the value of ALLOW_MULTI*_*CHILD_PARENT.
+
+Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121003/d6d66002/attachment.html>
+
+From tbrandonau at gmail.com  Thu Oct  4 05:25:15 2012
+From: tbrandonau at gmail.com (Thomas Brandon)
+Date: Thu, 4 Oct 2012 13:25:15 +1000
+Subject: [Stratego Users] Spoofax console
+Message-ID: <CAM5MpD4MZkA6WT0SfP=1qGRgpXbE2bYh+qwT2J6=HdY73FS9BQ@mail.gmail.com>
+
+http://blog.kalleberg.org/post/16354946489/an-eclipse-console-for-spoofax
+shows an interactive Spoofax console in Eclipse. Is this available? It
+doesn't seem to be in either the stable or nightly builds of Spoofax
+(running on Windows).
+
+Thanks,
+Tom.
+
+From g.d.p.konat at student.tudelft.nl  Thu Oct  4 09:06:09 2012
+From: g.d.p.konat at student.tudelft.nl (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Thu, 4 Oct 2012 09:06:09 +0200
+Subject: [Stratego Users] Spoofax console
+In-Reply-To: <CAM5MpD4MZkA6WT0SfP=1qGRgpXbE2bYh+qwT2J6=HdY73FS9BQ@mail.gmail.com>
+References: <CAM5MpD4MZkA6WT0SfP=1qGRgpXbE2bYh+qwT2J6=HdY73FS9BQ@mail.gmail.com>
+Message-ID: <CAOipTugMYc43HGBn_0to2DTsdWu9i9arogJpX9YUG=t17hfhXg@mail.gmail.com>
+
+Hey Thomas,
+
+The interactive console relies on a libstratego-lib.ctree file being
+installed through nix, and this is not really possible on Windows. There's
+a issue about this on Yellowgrass: http://yellowgrass.org/issue/Spoofax/499.
+
+Cheers,
+Gabri?l
+
+On 4 October 2012 05:25, Thomas Brandon <tbrandonau at gmail.com> wrote:
+
+> http://blog.kalleberg.org/post/16354946489/an-eclipse-console-for-spoofax
+> shows an interactive Spoofax console in Eclipse. Is this available? It
+> doesn't seem to be in either the stable or nightly builds of Spoofax
+> (running on Windows).
+>
+> Thanks,
+> Tom.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121004/01a5d64d/attachment.html>
+
+From lennart at lclnet.nl  Thu Oct  4 11:50:59 2012
+From: lennart at lclnet.nl (Lennart Kats)
+Date: Thu, 04 Oct 2012 11:50:59 +0200
+Subject: [Stratego Users] Ctrl-click fails on terms followed by a * in
+ SDF editor / ALLOW_MULTI_CHILD_PARENT implication
+In-Reply-To: <CAEXdecncWRVF4xD=ZQr8ZPq+DVyRjUme3pRtdZ_E0ETTaZdmOw@mail.gmail.com>
+References: <CAEXdecncWRVF4xD=ZQr8ZPq+DVyRjUme3pRtdZ_E0ETTaZdmOw@mail.gmail.com>
+Message-ID: <506D5C03.70407@lclnet.nl>
+
+Hi Emmanuel,
+
+This was an interface change described in 
+http://yellowgrass.org/issue/Spoofax/358. The SDF editor may have to be 
+updated to cope with this.
+
+Lennart
+
+On 10/3/12 23:04 , Emmanuel Castro wrote:
+> Both stable and nightly version of Spoofax have a problem with reference
+> resolving that appears when using Ctrl+Click in the SDF editor.
+> Ctrl+Click fails on terms of the form Definition* or (Definition)*, but
+> not on terms of the form (Definition Definition)*.
+>
+> I've noticed that StrategoReferenceResolver.ALLOW_MULTI/_/CHILD_PARENT
+> is set to 'false' since r22534. Reverting it back to 'true' gives the
+> correct behaviour. I don't know the implications of reverting it to
+> 'true'. Maybe Lennart Kats, who made this modification in r22534, can
+> tell us more on the implication of changing the value of
+> ALLOW_MULTI/_/CHILD_PARENT.
+>
+> Manu
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From tbrandonau at gmail.com  Thu Oct  4 12:10:20 2012
+From: tbrandonau at gmail.com (Thomas Brandon)
+Date: Thu, 4 Oct 2012 20:10:20 +1000
+Subject: [Stratego Users] Disambiguator option leaves additional information
+	in AST
+Message-ID: <CAM5MpD7yF0B9gGZ5cNhSw7nWvrG9-0HxMF4pxCW=P2mkcJ7uFA@mail.gmail.com>
+
+Adding a custom disambiguator through the disambiguator option in
+LANG.Main.esv adds information (source file and project location) to the
+AST. This breaks any tests that check the AST structure. Is it intended
+that the disambiguator should also remove this information or is it an
+oversight that it is not removed after invoking the custom disambiguator
+(or at least before tests, I haven't noticed any ill effect on the
+generated editor)?
+The information is added by the call to
+myRuntime.getInputBuilder().makeInputTerm() in
+org.strategoxt.imp.runtime.parser.CustomDisambiguator.disambiguate().
+
+Thanks,
+Tom.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121004/65d7d396/attachment.html>
+
+From E.Visser at tudelft.nl  Fri Oct  5 00:24:42 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 5 Oct 2012 00:24:42 +0200
+Subject: [Stratego Users] Nix and Spoofax source build
+In-Reply-To: <CAEXdec=RXJNiSVBVzZL0nHCvjdEqp9OHC=Zib7YkOj9DhFGkXw@mail.gmail.com>
+References: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+	<CAGxSwVXFJY4vPo1EDyEG67OUkHbyzH=LFZOHyN_N=+9JPyyGfA@mail.gmail.com>
+	<CAEXdec=RXJNiSVBVzZL0nHCvjdEqp9OHC=Zib7YkOj9DhFGkXw@mail.gmail.com>
+Message-ID: <CAFaCHU0UHf7XONUNtGm2ROcGS=81GtP1TND-5A9PqyYD72815A@mail.gmail.com>
+
+Would be even cooler if we can drop the dependency and integrate
+everything in Eclipse / on the JVM. Is there a problem with doing
+that, Karl?
+
+-- Eelco
+
+On Fri, Sep 28, 2012 at 2:07 PM, Emmanuel Castro
+<emmanuel.castro at laposte.net> wrote:
+> I've finally made it working out, using the tutorial of WebDSL. I had to
+> create my profile directory by hand in the Nix per-user directory.
+> I did not bother with chowning directories, except the one in per-user, as
+> running the command with sudo works fine.
+>
+> However I've noticed a problem with the Ubuntu edition of Nix.
+> Something is broken with the Perl symbol Perl_Gthr_key_ptr. I guess a
+> security update form Perl broke the binary compatibility.
+> I had to compile Nix from sources. Hopefully it proceed smoothly.
+>
+> What would be cool for the future of the Ubuntu .deb package, would be that
+> it install the deamon automatically, and that the per-user directories be
+> created automatically with the right access-rights.
+>
+> Manu
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From tbrandonau at gmail.com  Fri Oct  5 06:00:15 2012
+From: tbrandonau at gmail.com (Thomas Brandon)
+Date: Fri, 5 Oct 2012 14:00:15 +1000
+Subject: [Stratego Users] Spoofax console
+In-Reply-To: <CAOipTugMYc43HGBn_0to2DTsdWu9i9arogJpX9YUG=t17hfhXg@mail.gmail.com>
+References: <CAM5MpD4MZkA6WT0SfP=1qGRgpXbE2bYh+qwT2J6=HdY73FS9BQ@mail.gmail.com>
+	<CAOipTugMYc43HGBn_0to2DTsdWu9i9arogJpX9YUG=t17hfhXg@mail.gmail.com>
+Message-ID: <CAM5MpD4rydjOqhOQhUzULQAei3BZktY5xOsvD5yQzb0bVnB8AQ@mail.gmail.com>
+
+Thanks for the info Gabri?l.
+
+I did manage to get it at least partially working on Windows.
+I did this by extracting the files from the Cygwin distribution of
+StrategoXT (http://strategoxt.org/Stratego/StrategoDownload) to the
+expected nix profile path. Though the Cygwin distribution didn't
+include the libstratego-tool-doc.ctree so I used the copy from Hydra
+(http://hydra.nixos.org/build/790262/contents/1). I guess this may
+cause issues with that library, the Cygwin distribution includes only
+the rtree for that file so I'm not sure if that's because the ctree
+version will not work or just an oversight.
+With that the console does load and I am able to execute basic
+commands. Though I do note that the extra shell commands (:help, :vars
+etc) do not work, resulting in "Syntax error near unexpected character
+':' at line 1, column 1". I gathered those commands should work here,
+or am I mistaken there?
+
+The comment from Karl in that bug report suggest that it was intended
+that these files were bundled in the eclipse jars, and indeed the
+org.spoofax.interpreter jar includes the needed files (apart from
+libstratego-tool-doc.ctree) but only the frontend.ctree is loaded from
+there, the other files are loaded from the nix profile path. Was it
+found that bundling them in the jars was not a workable solution or is
+it just that it has not yet been looked at?
+
+Thanks,
+Tom.
+On Thu, Oct 4, 2012 at 5:06 PM, Gabri?l Konat
+<g.d.p.konat at student.tudelft.nl> wrote:
+> Hey Thomas,
+>
+> The interactive console relies on a libstratego-lib.ctree file being
+> installed through nix, and this is not really possible on Windows. There's a
+> issue about this on Yellowgrass: http://yellowgrass.org/issue/Spoofax/499.
+>
+> Cheers,
+> Gabri?l
+>
+> On 4 October 2012 05:25, Thomas Brandon <tbrandonau at gmail.com> wrote:
+>>
+>> http://blog.kalleberg.org/post/16354946489/an-eclipse-console-for-spoofax
+>> shows an interactive Spoofax console in Eclipse. Is this available? It
+>> doesn't seem to be in either the stable or nightly builds of Spoofax
+>> (running on Windows).
+>>
+>> Thanks,
+>> Tom.
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From emmanuel.castro at laposte.net  Fri Oct  5 14:41:39 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Fri, 5 Oct 2012 14:41:39 +0200
+Subject: [Stratego Users] Nix and Spoofax source build
+In-Reply-To: <CAFaCHU0UHf7XONUNtGm2ROcGS=81GtP1TND-5A9PqyYD72815A@mail.gmail.com>
+References: <CAEXdecnp2A6qPtuxQoomSVt6f7Dt0DmTXTN6GsikoM6TTmzrOQ@mail.gmail.com>
+	<CAGxSwVXFJY4vPo1EDyEG67OUkHbyzH=LFZOHyN_N=+9JPyyGfA@mail.gmail.com>
+	<CAEXdec=RXJNiSVBVzZL0nHCvjdEqp9OHC=Zib7YkOj9DhFGkXw@mail.gmail.com>
+	<CAFaCHU0UHf7XONUNtGm2ROcGS=81GtP1TND-5A9PqyYD72815A@mail.gmail.com>
+Message-ID: <CAEXdeck_LaaPAY7E-0KNBhXhdzmGe+rat08yeO=uCkocay1vLA@mail.gmail.com>
+
+I think it is interesting to have the different editors (SDF, Stratego),
+which are mainly Stratego code, in separate projects. For the rest, I don't
+see any need to split the Java code in many projects, but I am maybe to
+naive?
+
+-Manu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121005/7b76ed99/attachment.html>
+
+From emmanuel.castro at laposte.net  Tue Oct 23 09:43:49 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Tue, 23 Oct 2012 09:43:49 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU3wgoE8Vqkvap1iWq1nqfL2Z3JGP7tRZz8duQmJd0abgQ@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+	<CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+	<CAFaCHU3gyKQ+L8t=U0xLJitQEHsy-+Lam2evJOeMzUzxX3JWyw@mail.gmail.com>
+	<CAJ8oX-G4eOfTp6_=9aWFo1BWQSFHLh+H1t+Z4_sKgTY=Wn0QOg@mail.gmail.com>
+	<CAFaCHU3X983xWjDn5OW_-BjneEFYK_VcsM71w=RWenkf2zaLfw@mail.gmail.com>
+	<CAJ8oX-HMw=H4A2feUkdcO6hevLLkoxK-dhHbZz9j_8ST5fS+bA@mail.gmail.com>
+	<CAFaCHU2sqVKmmwTjmV88TCHFXu0sRqyJPPHr+kXX79d6MGzNSQ@mail.gmail.com>
+	<CAEXdecnNjGQ87ViGf5JKYGTx947K8mRLX+-8x3otwhcQXqEd=Q@mail.gmail.com>
+	<CAFaCHU3wgoE8Vqkvap1iWq1nqfL2Z3JGP7tRZz8duQmJd0abgQ@mail.gmail.com>
+Message-ID: <CAEXdec=YbGWhk-u=jUKpt=wgB2mqFE-sZvv5H_+eqfmT7ZpBeg@mail.gmail.com>
+
+I've successfully set up a concrete syntax for a tiny project. The problems
+that I've encountered are:
+? The sample project has a strange Enfungenerated.sdf file that reports
+error in Spoofax r25227 (unstable). It is not a really problem, but as
+there are transient errors in the editor, it gives a fuzzy impression of
+failure, while it actually works.
+? Sometime, one requires more that one Eclipse restart to make things work.
+
+Is there a simple way (command line?) to get the desugared normalized
+version of the .str file. I.e. a .sdf file
+in which toMetaExpr elements are converted to the standard Op and List.
+(what is NoAnnoList?)
+
+Manu
+
+2012/9/23 Eelco Visser <E.Visser at tudelft.nl>
+
+> Hi Manu,
+>
+> > In the concrete syntax example, the operator |[ ]| is used to
+> > introduce expressions using concrete syntax. Is it allowed to used
+> > different operators ?
+> > e.g:
+> > ? when ?|[? is already used in the target language (yet very unlikely).
+> > ? when subparts of the language are ambiguous. Say, if ?Definition?
+> > and ?Exp? are ambiguous, e.g. x=1 might be a definition (x is set to
+> > 1) and an expression (testing is x is equals to 1). One might have to
+> > distinguish them using d|[x=1]| for the definition form, and e|[x=1]|
+> > for the expression.
+>
+> Absolutely. The syntax for making object language terms into Stratego
+> terms is under your control. For example, the Stratego-Enfun.sdf
+> defines the embedding as
+>
+>     "|[" Definition "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+> But this could be easily changed into something else. For example, we
+> used <| ... |> in an SQL embedding at some point:
+>
+>     "<|" Definition "|>" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+> Similarly, you can add disambiguating tags to an embedding:
+>
+>     "d|[" Definition "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+> cheers,
+>
+> -- Eelco
+>
+>
+>
+> > Manu
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121023/d001239f/attachment.html>
+
+From dobesv at gmail.com  Wed Oct 31 02:19:49 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 30 Oct 2012 18:19:49 -0700
+Subject: [Stratego Users] Questions - mailing list, yellowgrass,
+	StackOverflow
+Message-ID: <CADbG_jZ9WvDXtnRuYMNpFPq+AnqZRHgXLj0+8NHDo2PrGXsy=w@mail.gmail.com>
+
+Following up on a thread in issue #559 ...
+http://yellowgrass.org/issue/Spoofax/559
+
+There's a question of where should people best post questions:
+
+   1. The mailing list
+   2. YellowGrass
+   3. StackOverflow (or something like it)
+
+
+If the core team were to monitor StackOverflow for certain tags like
+"Spoofax" and "StrategoXT" then users could post their questions on stack
+overflow.  You just want to advertise this fact on the Spoofax web site.
+
+The benefits of using a Stack Overflow tag include:
+
+   1. Great SEO - Google favors StackOverflow threads highly for whatever
+   reason, so a google search like "Spoofax line numbers" is more likely to
+   give a good hit on SO than on yellowgrass or a mailing list archive
+   2. The user interface is very good, certainly worlds better than the
+   mailing list and still a fair bit better than YellowGrass
+   3. The questions are persistent and easily searchable (compared to the
+   mailing list approach which)
+   4. It saves YellowGrass for just tracking bugs, so whoever is
+   responsible for keeping YellowGrass tidy and updated will have less work
+   5. It may allow you to terminate the existence of the mailing list
+   altogether (bugs & suggestions go in YellowGrass and questions can go to
+   StackOverflow)
+
+The main drawback is that it's an extra step for the team to monitor a
+StackOverflow tag, and if they forget to do so they'll leave questions
+unanswered which is a bad user experience.  But see here for some
+subscription options (RSS, Email):
+http://meta.stackoverflow.com/questions/25224/email-notifications-for-new-questions-matching-specific-tags
+
+Thoughts?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121030/079097d5/attachment.html>
+
+From ciraci at gmail.com  Wed Oct 31 03:05:46 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 30 Oct 2012 19:05:46 -0700
+Subject: [Stratego Users] SDF question
+Message-ID: <CALq5ZdySR7NdpgJvW2Qsp-mY6mj9KbAWzbYEHGdpvrowaUzS+g@mail.gmail.com>
+
+Hi all,
+
+I'm trying to write transformations for an assembly like language. The
+problem is the language has a very basic notion of blocks; only the
+beginnings are marked. So it is hard to write a transformation that
+gets all the instructions in a block and puts them into a separate
+block. I'm wondering whether while parsing, I can associate an
+instruction with a block. For example, I have the following program:
+
+block<1>:
+ins1
+ins2
+ins3
+...
+block<2>
+ins10
+int11
+
+in the parse tree I would like to have, each node to have an attribute
+that holds the block number.
+So something like
+Block("1")[Instruction(Block("1")[..] Instruction(Block("1"))[...]
+...]Block("2")[Instruction(Block("2"))[...]....]
+
+Is this possible with SDF? I appriciate it if you can help me out with
+this issue, I could not find much on SDF documentation.
+
+Thanks in advance,
+Selim
+
+From dobesv at gmail.com  Wed Oct 31 03:26:21 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 30 Oct 2012 19:26:21 -0700
+Subject: [Stratego Users] SDF question
+In-Reply-To: <CALq5ZdySR7NdpgJvW2Qsp-mY6mj9KbAWzbYEHGdpvrowaUzS+g@mail.gmail.com>
+References: <CALq5ZdySR7NdpgJvW2Qsp-mY6mj9KbAWzbYEHGdpvrowaUzS+g@mail.gmail.com>
+Message-ID: <CADbG_jagCBzeM1T-i-PcgRa4=NNBYqEhJ-nKbCt_T8++E1AbyQ@mail.gmail.com>
+
+SDF alone might not give you exactly that tree, you would have to transform
+the tree, maybe using Stratego. SDF will only put each input into the
+output tree one time. You could get a tree like Block("1",[...]) from SDF
+pretty easily I think. It's easy to transform that to the format you
+describe.
+ On Oct 30, 2012 7:06 PM, "Selim Ciraci" <ciraci at gmail.com> wrote:
+
+> Hi all,
+>
+> I'm trying to write transformations for an assembly like language. The
+> problem is the language has a very basic notion of blocks; only the
+> beginnings are marked. So it is hard to write a transformation that
+> gets all the instructions in a block and puts them into a separate
+> block. I'm wondering whether while parsing, I can associate an
+> instruction with a block. For example, I have the following program:
+>
+> block<1>:
+> ins1
+> ins2
+> ins3
+> ...
+> block<2>
+> ins10
+> int11
+>
+> in the parse tree I would like to have, each node to have an attribute
+> that holds the block number.
+> So something like
+> Block("1")[Instruction(Block("1")[..] Instruction(Block("1"))[...]
+> ...]Block("2")[Instruction(Block("2"))[...]....]
+>
+> Is this possible with SDF? I appriciate it if you can help me out with
+> this issue, I could not find much on SDF documentation.
+>
+> Thanks in advance,
+> Selim
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121030/bb6e2d0e/attachment.html>
+
+From g.d.p.konat at student.tudelft.nl  Wed Oct 31 11:51:53 2012
+From: g.d.p.konat at student.tudelft.nl (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Wed, 31 Oct 2012 11:51:53 +0100
+Subject: [Stratego Users] Questions - mailing list, yellowgrass,
+	StackOverflow
+In-Reply-To: <CADbG_jZ9WvDXtnRuYMNpFPq+AnqZRHgXLj0+8NHDo2PrGXsy=w@mail.gmail.com>
+References: <CADbG_jZ9WvDXtnRuYMNpFPq+AnqZRHgXLj0+8NHDo2PrGXsy=w@mail.gmail.com>
+Message-ID: <CAOipTugR4qH4fr8e9nFVyZHwqNEY7MPqPRFi_BnXhUgdDZZ70w@mail.gmail.com>
+
+The problem with StackExchange is you can only set notifications for tags,
+not searches. If someone asks a question about Spoofax/Stratego without
+tagging the question correctly, we will not see it.
+Also, 'Stratego' is not a very good term for searching:
+http://stackoverflow.com/search?q=stratego
+
+We had the idea of hosting our own StackExchange-like site, such as
+http://www.osqa.net/ or http://askbot.com/, but we still need to actually
+do this.
+I think that's the best way to go for QA from users and also developers.
+The mailing list should probably stay, for discussions and other things
+that don't fit on the QA site.
+Yellowgrass, or whatever tracking software we use is then used for bug
+tracking, suggestions, feature requests, etc.
+
+On 31 October 2012 02:19, Dobes Vandermeer <dobesv at gmail.com> wrote:
+
+> Following up on a thread in issue #559 ...
+> http://yellowgrass.org/issue/Spoofax/559
+>
+> There's a question of where should people best post questions:
+>
+>    1. The mailing list
+>    2. YellowGrass
+>    3. StackOverflow (or something like it)
+>
+>
+> If the core team were to monitor StackOverflow for certain tags like
+> "Spoofax" and "StrategoXT" then users could post their questions on stack
+> overflow.  You just want to advertise this fact on the Spoofax web site.
+>
+> The benefits of using a Stack Overflow tag include:
+>
+>    1. Great SEO - Google favors StackOverflow threads highly for whatever
+>    reason, so a google search like "Spoofax line numbers" is more likely to
+>    give a good hit on SO than on yellowgrass or a mailing list archive
+>    2. The user interface is very good, certainly worlds better than the
+>    mailing list and still a fair bit better than YellowGrass
+>    3. The questions are persistent and easily searchable (compared to the
+>    mailing list approach which)
+>    4. It saves YellowGrass for just tracking bugs, so whoever is
+>    responsible for keeping YellowGrass tidy and updated will have less work
+>    5. It may allow you to terminate the existence of the mailing list
+>    altogether (bugs & suggestions go in YellowGrass and questions can go to
+>    StackOverflow)
+>
+> The main drawback is that it's an extra step for the team to monitor a
+> StackOverflow tag, and if they forget to do so they'll leave questions
+> unanswered which is a bad user experience.  But see here for some
+> subscription options (RSS, Email):
+> http://meta.stackoverflow.com/questions/25224/email-notifications-for-new-questions-matching-specific-tags
+>
+> Thoughts?
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121031/cb3ac04a/attachment.html>
+

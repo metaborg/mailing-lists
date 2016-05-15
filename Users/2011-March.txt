@@ -1,0 +1,1203 @@
+From kutsia at risc.uni-linz.ac.at  Wed Mar  2 12:44:19 2011
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Wed, 02 Mar 2011 12:44:19 +0100
+Subject: [Stratego Users] Last CfP: JAL Special Issue on Automated
+ Specification and Verification of Web Systems
+Message-ID: <4D6E2D93.50006@risc.uni-linz.ac.at>
+
+[Apologies for multiple copies]
+
+========================================================================
+JOURNAL OF APPLIED LOGIC
+Special Issue on Automated Specification and Verification of Web Systems
+
+http://www.risc.uni-linz.ac.at/people/tkutsia/jal-wwv.html
+========================================================================
+
+SCOPE
+-----
+This special issue of the Journal of Applied Logic is related
+to the topics of the workshop WWV'10: Automated Specification
+and Verification of Web Systems, which took place in Vienna on
+July 30-31, 2010. Both participants of the workshop and other
+authors are invited to submit contributions.
+
+The increased complexity of Web sites and the explosive growth
+of Web-based applications has turned their design and
+construction into a challenging problem. Nowadays, many
+companies have diverted their Web sites into interactive,
+completely-automated, Web-based applications (such as Amazon,
+on-line banking, or travel agencies) with a high complexity
+that requires appropriate specification and verification
+techniques and tools. Systematic, formal approaches to the
+analysis and verification can address the problems of this
+particular domain with automated and reliable tools that also
+incorporate semantic aspects.
+
+We solicit original papers on logic-based methods and
+techniques applied to Web sites, Web services or Web-based
+applications, such as:
+
+  * Rule-based approaches to Web systems analysis, certification,
+    specification, verification, and optimization
+  * Algebraic methods for verification and certification of Web
+    systems
+  * Formal models for describing and reasoning about Web systems
+  * Model-checking, synthesis and debugging of Web systems
+  * Abstract interpretation and program transformation applied to
+    the semantic Web
+  * Intelligent tutoring and advisory systems for Web
+    specifications authoring
+  * Web quality and Web metrics
+  * Web usability and accessibility
+  * Testing and evaluation of Web systems and applications
+
+SUBMISSION
+----------
+We expect original articles (typically 15-25 pages; submission
+of larger papers will be evaluated depending on editorial
+constraints) that present high-quality contributions that have
+not been previously published and that must not be
+simultaneously submitted for publication elsewhere.
+
+Submissions must comply with JAL's author guidelines. They must
+be written in English and should be prepared using the Elsevier
+LaTeX package.
+
+Submissions are encouraged via the EasyChair submission system:
+http://www.easychair.org/conferences/?conf=jalwwv2010.
+
+IMPORTANT DATES
+---------------
+  * Submission of papers: March 7, 2011.
+  * Notification: June 6, 2011.
+
+GUEST EDITORS
+--------------
+  * Laura Kov?cs (Vienna University of Technology)
+  * Temur Kutsia (RISC, Johannes Kepler University Linz)
+
+
+From kutsia at risc.uni-linz.ac.at  Tue Mar  8 09:05:05 2011
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Tue, 08 Mar 2011 09:05:05 +0100
+Subject: [Stratego Users] Extended deadline: JAL Special Issue on Automated
+ Specification and Verification of Web Systems
+Message-ID: <4D75E331.70505@risc.uni-linz.ac.at>
+
+[Apologies for multiple copies]
+
+========================================================================
+JOURNAL OF APPLIED LOGIC
+Special Issue on Automated Specification and Verification of Web Systems
+
+http://www.risc.uni-linz.ac.at/people/tkutsia/jal-wwv.html
+
+DEADLINE EXTENSION
+========================================================================
+
+IMPORTANT DATES
+---------------
+  * Submission of papers: March 16, 2011 (extended).
+  * Notification: June 6, 2011.
+
+From E.Visser at tudelft.nl  Tue Mar  8 20:10:38 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 8 Mar 2011 20:10:38 +0100
+Subject: [Stratego Users] SPLASH 2011: Call for Contributions
+In-Reply-To: <4D704FF3.3090403@ics.uci.edu>
+References: <4D704FF3.3090403@ics.uci.edu>
+Message-ID: <AANLkTimo+=Txn2Xz+W8xjga1OofC25oQjpvpJuazgW4j@mail.gmail.com>
+
+ACM Conference on Systems, Programming, Languages, and Applications:
+? ? ? ? ? ? ? ?Software for Humanity (SPLASH'11)
+? ? ? ? ? ? ? ? ? ? ? Portland, Oregon
+? ? ? ? ? ? ? ? ? ? ?October 22-27, 2011
+? ? ? ? ? ? ? ? ? http://www.splashcon.org
+? ? ? ? ? ? ? ? http://twitter.com/splashcon
+? ? ? ? ? ? ? http://www.facebook.com/SPLASHCon
+? ? ? ? ? ? ? ? ? Sponsored by ACM SIGPLAN
+
+Since 2010 SPLASH is the new umbrella conference for OOPSLA and
+Onward!. This year, it features a third technical track, Wavefront,
+designed to publish innovative work closely related to advanced
+development and production software.
+
+The overall theme of the conference is "The Internet as the world-wide
+Virtual Machine." ?This theme captures the change in the order of
+magnitude of computing that happened over the past few years.
+
+/**************************************************************
+?* ? ? ? ? ? ? ? ? CALL FOR CONTRIBUTIONS ? ? ? ? ? ? ? ? ? ? *
+?**************************************************************/
+
+SPLASH is now accepting submissions for a variety of tracks. We
+invite high quality submissions describing original and unpublished
+work.
+
+General technical tracks:
+
+* OOPSLA -- High quality research work that uses established
+?scientific methodologies, written using high standards of academic
+?technical publications.
+?DEADLINE: April 8, 2011
+?See http://splashcon.org/2011/cfp/100
+
+* Onward! -- Innovative ideas that challenge existing beliefs, or
+?early work well written and well argued for; essays and ideas worth
+?hearing about.
+?DEADLINE: April 8, 2011
+?See http://onward-conference.org/2011/dates.html
+
+* Wavefront -- Work that has the potential for immediate impact in the
+?practice of software, or descriptions of advanced development and
+?production software, written using established guidelines for
+?technical writing. Accepts full papers as well as extended abstracts.
+?DEADLINE: April 8, 2011
+?http://splashcon.org/2011/cfp/101
+
+Specialized tracks:
+
+* Demonstrations -- Applications and systems that show specific
+?technologies in action, live.
+?DEADLINE: June 24, 2011
+?See http://splashcon.org/2011/cfp/105
+
+* Doctoral Symposium -- Doctoral proposals, both early- and mid-phase,
+?to be reviewed and commented on by a panel of experts.
+?DEADLINE: June 24, 2011
+?See http://splashcon.org/2011/cfp/103
+
+* Educators' and Trainers' Symposium -- Topics of interest for
+?developing curricula related to software training and education.
+?DEADLINE: April 8, 2011
+?See http://splashcon.org/2011/cfp/106
+
+* Experience Reports -- Work describing the use of specific software
+?technologies and methodologies in real world settings.
+?DEADLINE: April 8, 2011
+?See http://splashcon.org/2011/cfp/102
+
+* Posters -- Forum for authors to present their work in an informal
+?and interactive setting.
+?DEADLINE: June 24, 2011
+?See http://splashcon.org/2011/cfp/108
+
+Workshops:
+
+SPLASH is now accepting proposals for innovative, well-focused
+workshops on a broad spectrum of topics.
+DEADLINE: April 8, 2011
+See http://splashcon.org/2011/cfp/104
+
+Co-located events:
+
+* Dynamic Languages Symposium (DLS'11)
+?http://www.dynamic-languages-symposium.org/dls-11/
+
+* Generative Programming and Component Engineering (GPCE'11)
+?http://program-transformation.org/GPCE11
+
+* Pattern Languages of Programming (PLoP'11)
+?http://hillside.net/index.php/conferences/plop
+
+* The Scheme Workshop 2011
+?http://scheme2011.ucombinator.org/
+
+
+ORGANIZATION
+
+SPLASH General Chair: ? ? ?Cristina V. Lopes (UC Irvine)
+OOPSLA Program Chair: ? ? ?Kathleen Fisher (AT&T Labs)
+Onward! General Chair: ? ? Robert Hirschfeld (Hasso-Plattner Potsdam)
+Onward! Program Chair: ? ? Eelco Visser (Delft University of Tech.)
+Onward! Essays Chair: ? ? ?David West (New Mexico Highlands U.)
+Wavefront Chair: ? ? ? ? ? Allen Wirfs-Brock (Mozilla)
+Demonstrations Chair: ? ? ?Igor Peshansky (IBM Research)
+Doctoral Symposium Chair: ?Jonathan Aldrich (CMU)
+Educators Symposium Chair: Eugene Wallingford (U. of Northern Iowa)
+Experience Reports Chair: ?Tim O'Connor (K12 Inc.)
+Panels Chair: ? ? ? ? ? ? ?Daniel Weinreb (ITA Software)
+Posters Chairs: ? ? ? ? ? ?Sushil Bajracharya (Black Duck Software)
+? ? ? ? ? ? ? ? ? ? ? ? ? Eli Tilevich (Virginia Tech)
+Student Volunteers Chairs: Rochelle Elva (U. of Central Florida)
+? ? ? ? ? ? ? ? ? ? ? ? ? Joel Ossher (UC Irvine)
+Tech Talks Chair: ? ? ? ? ?Aino Corry (University of Aarhus)
+Workshops Chairs: ? ? ? ? ?Ademar Aguiar (University of Porto)
+? ? ? ? ? ? ? ? ? ? ? ? ? Ulrik Pagh Schultz (U. of Southern Denmark)
+Social Media: ? ? ? ? ? ? ?Michael Maximilien (IBM)
+Treasurer: ? ? ? ? ? ? ? ? William Cook (UT Austin)
+Proceedings: ? ? ? ? ? ? ? Richard Gabriel (IBM Research)
+PDX.local: ? ? ? ? ? ? ? ? Andrew Black (Portland State U.)
+Content Management: ? ? ? ?Harry Baragar (Instantiated Software)
+Conference Management: ? ? Debra Brodbeck (UC Irvine)
+
+
+From sescobar at dsic.upv.es  Fri Mar 11 15:17:12 2011
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Fri, 11 Mar 2011 15:17:12 +0100
+Subject: [Stratego Users] Last CfP: WRS 2011 - 10th International Workshop
+	on Reduction Strategies in Rewriting and Programming
+References: <C71FFE6E-3695-402C-A8D6-25F1920C726B@dsic.upv.es>
+Message-ID: <4489D31B-513E-41B8-A850-1F145259984B@dsic.upv.es>
+
+                Last Call for Papers
+
+                      WRS 2011
+           10th International Workshop on 
+   Reduction Strategies in Rewriting and Programming 
+       http://www.dsic.upv.es/workshops/wrs2011
+            29 May 2011, Novi Sad, Serbia
+
+               An RDP 2011 workshop 
+Federated Conference on Rewriting, Deduction, and Programming
+
+
+This workshop promotes research and collaboration in the area of 
+reduction strategies. It encourages the presentation of new 
+directions, developments, and results as well as surveys and 
+tutorials on existing knowledge in this area. Reduction strategies 
+define which (sub)expression(s) should be selected for evaluation 
+and which rule(s) should be applied. These choices affect fundamental 
+properties of computations such as laziness, strictness, completeness, 
+and efficiency, to name a few. For this reason programming languages 
+such as Elan, Maude, OBJ, Stratego, and TOM allow the explicit 
+definition of the evaluation strategy, whereas languages such as 
+Clean, Curry, and Haskell allow its modification. In addition to 
+strategies in rewriting and programming, WRS also covers the use of 
+strategies and tactics in other areas such as theorem and termination 
+proving. 
+
+Previous editions of the workshop were held in Utrecht (2001), 
+Copenhagen (2002), Valencia (2003), Aachen (2004), Nara (2005), 
+Seattle (2006), Paris (2007), Hagenberg (2008), Brasilia (2009), 
+and Edinburgh (2010); the last one as a joint workshop with the 
+STRATEGIES workshop. Further information can be found at the 
+permanent site for WRS <http://www.dsic.upv.es/~wrs/>.
+
+WRS 2011 is planned to be co-located with RTA 2011 (22nd International 
+Conference on Rewriting Techniques and Applications), as a satellite 
+event of RDP, the Federated Conference on Rewriting, Deduction, and 
+Programming. WRS 2011 will be held at Novi Sad, Serbia on 29 May 2011.
+
+Submissions and Publication: Before the workshop, authors are 
+invited to submit an extended abstract (max. 5 pages) to be 
+formatted in the EasyChair class style through the EasyChair submission site. 
+Accepted abstracts will be presented at the workshop and included in the 
+preliminary proceedings, available at the workshop. After the workshop, 
+authors will be invited to submit a full paper of their presentation 
+(typically a 15-pages paper), which will be refereed and considered 
+for publication in an electronic journal, such as Electronic Proceedings 
+in Theoretical Computer Science. 
+
+Beyond original ideas and recent results not published nor submitted 
+elsewhere, we also invite authors to submit a 5-pages abstract 
+describing relevant work that has been or will be published elsewhere, 
+or work in progress. These submissions will be only considered for 
+presentation at the workshop and inclusion in the preliminary 
+proceedings but not in the final proceedings.
+
+We envisage publication of a special issue of a journal dedicated to WRS
+after the event.
+
+Important Dates:
+# Submission: 20 March 2011
+# Notification: 4 April 2011
+# Preliminary proceedings version due: 15 April 2011
+# Workshop: 29 May 2011
+# Submission for final proceedings: 12 September 2011
+# Notification: 7 November 2011
+# Final version: 21 November 2011
+
+Programme Committee:
+# Dan Dougherty, Worcester Polytechnic Institute, USA
+# Santiago Escobar, Universidad Politecnica de Valencia, Spain (chair)
+# Maribel Fernandez, King's College London, UK
+# Juergen Giesl, RWTH Aachen, Germany
+# Bernhard Gramlich, Technische Universit Wien, Austria
+# Helene Kirchner, Centre de Recherche INRIA Bordeaux, France
+# Francisco Javier Lopez Fraguas, Universidad Complutense de Madrid, Spain
+# Salvador Lucas, Universidad Politecnica de Valencia, Spain
+# Aart Middeldorp, University of Innsbruck, Austria
+# Jaco van de Pol, University of Twente, The Netherlands
+# Masahiko Sakai, Nagoya University, Japan
+# Manfred Schmidt-Schauss, Johann Wolfgang Goethe-Universitat, Germany 
+
+For more information, please contact
+Santiago Escobar
+Universidad Politecnica de Valencia, Spain
+Email: sescobar at dsic.upv.es
+
+
+
+From sescobar at dsic.upv.es  Fri Mar 11 15:56:13 2011
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Fri, 11 Mar 2011 15:56:13 +0100
+Subject: [Stratego Users] Last CfP: WRS 2011 - 10th International Workshop
+	on Reduction Strategies in Rewriting and Programming
+References: <A1DF4B5D-B129-4CD6-8520-9CF3C4D171AF@dsic.upv.es>
+Message-ID: <1BCA10B7-9A72-46DA-B7C8-B670A3DB8678@dsic.upv.es>
+
+          Last Call for Papers
+
+                WRS 2011
+     10th International Workshop on 
+Reduction Strategies in Rewriting and Programming 
+ http://www.dsic.upv.es/workshops/wrs2011
+      29 May 2011, Novi Sad, Serbia
+
+         An RDP 2011 workshop 
+Federated Conference on Rewriting, Deduction, and Programming
+
+
+This workshop promotes research and collaboration in the area of 
+reduction strategies. It encourages the presentation of new 
+directions, developments, and results as well as surveys and 
+tutorials on existing knowledge in this area. Reduction strategies 
+define which (sub)expression(s) should be selected for evaluation 
+and which rule(s) should be applied. These choices affect fundamental 
+properties of computations such as laziness, strictness, completeness, 
+and efficiency, to name a few. For this reason programming languages 
+such as Elan, Maude, OBJ, Stratego, and TOM allow the explicit 
+definition of the evaluation strategy, whereas languages such as 
+Clean, Curry, and Haskell allow its modification. In addition to 
+strategies in rewriting and programming, WRS also covers the use of 
+strategies and tactics in other areas such as theorem and termination 
+proving. 
+
+Previous editions of the workshop were held in Utrecht (2001), 
+Copenhagen (2002), Valencia (2003), Aachen (2004), Nara (2005), 
+Seattle (2006), Paris (2007), Hagenberg (2008), Brasilia (2009), 
+and Edinburgh (2010); the last one as a joint workshop with the 
+STRATEGIES workshop. Further information can be found at the 
+permanent site for WRS <http://www.dsic.upv.es/~wrs/>.
+
+WRS 2011 is planned to be co-located with RTA 2011 (22nd International 
+Conference on Rewriting Techniques and Applications), as a satellite 
+event of RDP, the Federated Conference on Rewriting, Deduction, and 
+Programming. WRS 2011 will be held at Novi Sad, Serbia on 29 May 2011.
+
+Submissions and Publication: Before the workshop, authors are 
+invited to submit an extended abstract (max. 5 pages) to be 
+formatted in the EasyChair class style through the EasyChair submission site. 
+Accepted abstracts will be presented at the workshop and included in the 
+preliminary proceedings, available at the workshop. After the workshop, 
+authors will be invited to submit a full paper of their presentation 
+(typically a 15-pages paper), which will be refereed and considered 
+for publication in an electronic journal, such as Electronic Proceedings 
+in Theoretical Computer Science. 
+
+Beyond original ideas and recent results not published nor submitted 
+elsewhere, we also invite authors to submit a 5-pages abstract 
+describing relevant work that has been or will be published elsewhere, 
+or work in progress. These submissions will be only considered for 
+presentation at the workshop and inclusion in the preliminary 
+proceedings but not in the final proceedings.
+
+We envisage publication of a special issue of a journal dedicated to WRS
+after the event.
+
+Important Dates:
+# Submission: 20 March 2011
+# Notification: 4 April 2011
+# Preliminary proceedings version due: 15 April 2011
+# Workshop: 29 May 2011
+# Submission for final proceedings: 12 September 2011
+# Notification: 7 November 2011
+# Final version: 21 November 2011
+
+Programme Committee:
+# Dan Dougherty, Worcester Polytechnic Institute, USA
+# Santiago Escobar, Universidad Politecnica de Valencia, Spain (chair)
+# Maribel Fernandez, King's College London, UK
+# Juergen Giesl, RWTH Aachen, Germany
+# Bernhard Gramlich, Technische Universit Wien, Austria
+# Helene Kirchner, Centre de Recherche INRIA Bordeaux, France
+# Francisco Javier Lopez Fraguas, Universidad Complutense de Madrid, Spain
+# Salvador Lucas, Universidad Politecnica de Valencia, Spain
+# Aart Middeldorp, University of Innsbruck, Austria
+# Jaco van de Pol, University of Twente, The Netherlands
+# Masahiko Sakai, Nagoya University, Japan
+# Manfred Schmidt-Schauss, Johann Wolfgang Goethe-Universitat, Germany 
+
+For more information, please contact
+Santiago Escobar
+Universidad Politecnica de Valencia, Spain
+Email: sescobar at dsic.upv.es
+
+From gvidal at dsic.upv.es  Mon Mar 14 12:31:47 2011
+From: gvidal at dsic.upv.es (German Vidal)
+Date: Mon, 14 Mar 2011 12:31:47 +0100
+Subject: [Stratego Users] LOPSTR 2011 - Last CFP
+References: <9EEA1E6B-6D07-4862-B8DB-755509DAA69C@dsic.upv.es>
+Message-ID: <69EDA7B9-9DE4-421B-A8AA-11BFFC4D3FCC@dsic.upv.es>
+
+News:
+
+- Invited speakers:
+  * John Gallagher (Roskilde University, Denmark)
+  * Fritz Henglein (University of Copenhagen, Denmark)
+  * Vitaly Lagoon (Cadence Design Systems, Boston, USA)
+
+- Springer accepted to publish the post-proceedings
+  in the Lecture Notes in Computer Science series.
+
+- Submission deadlines approaching:
+  * Paper submission: March 27,  2011
+  * Extended abstract submission: April 3, 2011
+
+============================================================
+
+                      Call for papers
+               21th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2011
+
+             http://users.dsic.upv.es/~lopstr11/
+            Odense, Denmark, July 18-20, 2011
+     (co-located with PPDP 2011, AAIP 2011 and WFLP 2011)
+
+============================================================
+
+Objectives:
+
+The aim of the LOPSTR series is to stimulate and promote international
+research and collaboration on logic-based program development. LOPSTR
+is open to contributions in logic-based program development in any
+language paradigm. LOPSTR has a reputation for being a lively,
+friendly forum for presenting and discussing work in progress. Formal
+proceedings are produced only after the symposium so that authors can
+incorporate this feedback in the published papers.
+
+The 21st International Symposium on Logic-based Program Synthesis and
+Transformation (LOPSTR 2011) will be held in Odense, Denmark; previous
+symposia were held in Hagenberg, Coimbra, Valencia, Lyngby, Venice,
+London, Verona, Uppsala, Madrid, Paphos, London, Venice, Manchester,
+Leuven, Stockholm, Arnhem, Pisa, Louvain-la-Neuve, and Manchester (you
+might have a look at the contents of past LOPSTR symposia). LOPSTR
+2011 will be co-located with PPDP 2011 (International ACM SIGPLAN
+Symposium on Principles and Practice of Declarative Programming).
+
+
+Topics:
+
+Topics of interest cover all aspects of logic-based program development,
+all stages of the software life cycle, and issues of both programming-
+in-the-small and programming-in-the-large. Papers describing
+applications in these areas are especially welcome. Contributions are
+welcome on all aspects of logic-based program development, including,
+but not limited to:
+
+- specification
+- synthesis
+- verification
+- transformation
+- analysis
+- optimisation
+- specialization
+- partial evaluation
+- inversion
+- composition
+- program/model manipulation
+- certification
+- security
+- transformational techniques in SE
+- applications and tools
+
+Survey papers, that present some aspect of the above topics from a new
+perspective, and application  papers, that describe experience with
+industrial applications, are also welcome. Papers must describe
+original work, be written and presented  in English, and must not
+substantially overlap with papers that have been published or that are
+simultaneously submitted to a journal or a conference with refereed
+proceedings. Work that already appeared in unpublished or informally
+published workshops proceedings may be submitted.
+
+Following past editions, the formal post-conference proceedings will
+be published by Springer in the Lecture Notes in Computer Science (LNCS)
+series.
+
+
+IMPORTANT DATES AND SUBMISSION GUIDELINES:
+
+
+- Paper submission: March 27,  2011
+- Extended abstract submission: April 3, 2011
+- Notification (for pre-proceedings): May 16, 2011
+- Camera-ready (for pre-proceedings): June 12, 2011
+- Symposium: July 18-20, 2011
+
+
+Submissions can either be (short) extended abstracts or (full) papers
+whose length should not exceed 9 and 15 pages (including references),
+respectively. Submissions must be formatted in the Lecture Notes in
+Computer Science style (excluding well-marked appendices not intended
+for publication). Referees are not required to read the appendices,
+and thus papers should be intelligible without them. Short papers may
+describe work-in-progress or tool demonstrations.
+
+Both short and full papers can be accepted for presentation at the
+symposium and will then appear in the LOPSTR 2011
+pre-proceedings. Full papers can also be immediately accepted for
+publication in the formal proceedings to be published by Springer
+in the LNCS series. In addition, after the symposium, the programme
+committee will select further short or full papers presented
+in LOPSTR 2011 to be considered for formal publication. These authors
+will be invited to revise and/or extend their submissions in the
+light of the feedback solicited at the symposium. Then after another
+round of reviewing, these revised papers can also be published in the
+formal proceedings.
+
+
+Invited speakers:
+
+- John Gallagher, Roskilde University, Denmark 	
+- Fritz Henglein, University of Copenhagen, Denmark  (shared with PPDP)
+- Vitaly Lagoon, Cadence Design Systems, Boston, USA (shared with PPDP)
+
+
+Program Committee:
+
+Elvira Albert (Complutense University of Madrid, Spain)
+Malgorzata Biernacka (University of Wroclaw , Poland)
+Manuel Carro (Technical University of Madrid, Spain)
+Michael Codish (Ben-Gurion University of the Negev, Israel)
+Danny De Schreye (K.U.Leuven, Belgium)
+Maribel Fernandez (King's College London, UK)
+Raul Gutierrez (University of Illinois at Urbana-Champaign, USA)
+Mark Harman (University College London, UK)
+Frank Huch (C.A.U. Kiel, Germany)
+Michael Leuschel (University of Dusseldorf, Germany)
+Yanhong Annie Liu (State University of New York at Stony Brook, USA)
+Kazutaka Matsuda (Tohoku University, Japan)
+Fred Mesnard (Universite de La Reunion, France)
+Ulrich Neumerkel (Technical University of Wien, Austria)
+Alberto Pettorossi (Universita' di Roma Tor Vergata, Italy)
+Carla Piazza (University of Udine, Italy)
+Peter Schneider-Kamp (University of Southern Denmark, Denmark)
+Hirohisa Seki (Nagoya Institute of Technology, Japan)
+Josep Silva (Technical University of Valencia, Spain)
+German Vidal (Technical University of Valencia, Spain)
+Jurgen Vinju (Centrum Wiskunde & Informatica, The Netherlands)
+Jianjun Zhao (Shanghai Jiao Tong University, Shanghai)
+
+Contacts
+
+Program Chair (contact him for additional information about papers and  
+submissions):
+
+    German Vidal
+    Department of Computer Science (DSIC)
+    Universitat Politecnica de Valencia
+    Valencia, Spain
+    Email: lopstr11 at dsic.upv.es
+
+General Chair
+
+    Peter Schneider-Kamp
+    Dept. of Mathematics and Computer Science
+    University of Southern Denmark
+    Campusvej 55
+    DK-5230 Odense M, Denmark
+    Email: petersk at imada.sdu.dk
+
+
+
+From spider.vz at gmail.com  Tue Mar 22 13:03:47 2011
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Tue, 22 Mar 2011 13:03:47 +0100
+Subject: [Stratego Users] SLE 2011 - Final Call for Papers
+Message-ID: <AANLkTimA5vCXp=3KLw9FH31+Qk1gdegdHyi32C29hznt@mail.gmail.com>
+
+============================================================
+
+                  FINAL CALL FOR PAPERS
+
+                       SLE 2011
+4th International Conference on Software Language Engineering
+
+             Braga, Portugal, 3-6 July 2011
+
+             http://planet-sl.org/sle2011/
+
+     Co-located with the 4th Summer School on Generative and
+ Transformational Techniques in Software Engineering
+                    (GTTSE 2011)
+
+=============================================================
+
+IMPORTANT DATES
+
+* 2011:
+Paper submission: April 08 (midnight Apia Samoa time)
+Author notification: May 13
+Paper submission for online proceedings: June 17
+Conference: July 03-06
+Camera-ready copy submission for post-proceedings: August 29
+
+---------------------------------------------------------
+
+Software language engineering is devoted to topics related
+to artificial languages in software engineering. The foremost
+mission of the International Conference on Software Language
+Engineering (SLE) is to encourage and organize communication
+between communities that traditionally have looked at soft-
+ware languages from different, more specialized, and yet
+complementary perspectives. Thus, technologies, methods,
+experiments and case studies from modelware, grammarware,
+and ontologyware serving the objectives of software languages
+are of particular relevance to SLE.
+
+We invite high-quality submissions to all conference tracks.
+Submissions must be PDF files following the Springer LNCS
+style and will be managed using the EasyChair submission system.
+Please check the conference web site for further information.
+
+SLE 2011 will include a Doctoral Symposium that will provide a
+supportive yet questioning setting in which PhD students can present
+their work, including goals, methods, and preliminary results. The
+Symposium aims to provide students with useful guidance and feedback
+on various aspects of their research from established researchers and
+the other student attendees.
+
+Please forward this call to anyone who might be interested.
+
+http://planet-sl.org/sle2011/
+
+---------------------------------------------------------
+INVITED SPEAKERS
+
+SLE 2011 is proud to announce the following invited speakers.
+
+Krzysztof Czarnecki is associate professor at the University of
+Waterloo and industrial research chair at Bank of Nova Scotia / NSERC.
+Before coming to Waterloo, he spent eight years at DaimlerChrysler
+Research working on the practical applications of generative
+programming. His current work focuses on realizing the synergies
+between generative and model-driven software development.
+
+Paul Klint is head of the software engineering department at Centrum
+Wiskunde en Informatica in Amsterdam, full professor in Computer
+Science at the University of Amsterdam and theme leader of Software
+Analysis and Transformation at CWI. His research interests include
+generic language technology, domain-specific languages, software
+renovation, and technology transfer.
+
+---------------------------------------------------------
+PAPER SUBMISSION
+
+Submitted papers must be original work and must not be
+previously published in, currently submitted to, or currently
+in consideration for any journal, book, conference, or
+workshop. Each submitted paper will be reviewed closely by
+at least three members of the program committee. Accepted
+papers will be distributed at the conference via the online
+proceedings as well as published in the post-proceedings,
+which will appear in the Springer Lecture Notes in Computer
+Science (LNCS) series. Authors will have the opportunity
+to revise their accepted paper(s) for the pre- and post-
+proceedings. For an accepted paper to appear in the proceedings,
+at least one author must attend the event and present the work.
+
+---------------------------------------------------------
+RESEARCH PAPERS
+
+Research papers should report a substantial research contribution
+to SLE and/or a successful application of SLE techniques.  We
+solicit high-quality contributions in the area of SLE ranging
+from theoretical and conceptual contributions to tools, techniques,
+and frameworks that support the aforementioned lifecycle activities.
+We list examples of tools, techniques, applications, and problems of
+interest to clarify the types of contributes that we seek:
+
+* Formalisms used in designing and specifying languages and
+tools that analyze such language descriptions
+* Language implementation techniques
+* Program and model transformation tools
+* Composition, integration, and mapping tools for managing
+different aspects of software languages or different
+manifestations of a given language
+* Transformations and transformation languages between
+languages and models
+* Language evolution
+* Approaches to elicitation, specification, or verification
+of requirements for software languages
+* Language development frameworks, methodologies, techniques,
+best practices, and tools for the broader language lifecycle
+covering phases such as analysis, testing , and documentation.
+* Design challenges in SLE
+* Applications of languages including innovative domain-specific
+languages or "little" languages
+
+The preceding list is neither exclusive nor exhaustive.  Visit
+the conference web site for more information about the scope
+and topics of interest of SLE, or contact the program co-chairs
+with questions.
+
+Page limit: 20
+
+---------------------------------------------------------
+SHORT PAPERS
+
+Short papers may describe interesting or thought-provoking
+concepts that are not yet fully developed or evaluated, make
+an initial contribution to challenging research issues in SLE,
+or discuss and analyze controversial issues in the field.
+
+Page limit: 10
+
+---------------------------------------------------------
+TOOL DEMONSTRATION PAPERS
+
+Because of SLE's ample interest in tools, we seek papers
+that present software tools related to the field of SLE.
+These papers will accompany a tool demonstration to be given
+at the conference. The selection criteria include the
+originality of the tool, its innovative aspects, the relevance
+of the tool to SLE, and the maturity of the tool. Submissions
+may also include an appendix (that will not be published)
+containing additional screen-shots and discussion of
+the proposed demonstration.
+
+Page limit: 10
+
+---------------------------------------------------------
+MINI-TUTORIAL PAPERS
+
+SLE is composed of various research areas, such as grammarware,
+modelware, language schemas, and semantic technologies. The
+cross product of attendees at SLE creates a situation where
+the contribution from one session may be difficult to
+understand by those not initiated to the area. To help unite
+the various communities of SLE 2011, we solicit mini-tutorials
+that provide discussion points for mapping common ideas between
+related and complementary research topics of SLE.
+
+A mini-tutorial submission should be between 15 and 20 pages.
+
+---------------------------------------------------------
+DOCTORAL SYMPOSIUM
+
+The Doctoral Symposium provides a forum for both early and late-stage
+PhD students to present their research and get detailed feedback and
+advice from researchers both in and out of their particular research
+area.  Submissions are invited from PhD students working on any topic
+that falls within the SLE conference remit. Submissions consist of two
+parts, a research abstract and a letter of recommendation from the
+student's supervisor.  See the upcoming Doctoral Symposium call for
+submissions for full details. Participants will also be invited to
+present a poster on their research as part of the conference poster
+session.
+
+------------------------------------------------------------
+GENERAL CHAIR
+
+    Jo?o Saraiva
+    Universidade do Minho, Portugal
+    jas at di.uminho.pt
+
+PROGRAM CO-CHAIRS
+
+    Uwe A?mann
+    Dresden University of Technology, Germany
+    uwe.assmann at tu-dresden.de
+
+    Anthony Sloane
+    Macquarie University, Australia
+    anthony.sloane at mq.edu.au
+
+DOCTORAL SYMPOSIUM CHAIRS
+
+    Perdita Stevens
+    University of Edinburgh, UK
+    perdita.stevens at ed.ac.uk
+
+    Eric Van Wyk
+    University of Minnesota, USA
+    evw at cs.umn.edu
+
+PROGRAM COMITTEE
+
+    Adrian Johnstone, University of London, UK
+    Aldo Gangemi, Semantic Technology Laboratory, Italy
+    Alexander Serebrenik, Eindhoven University of Technology, Netherlands
+    Ana Moreira, FCT/UNL, Portugal
+    Anthony Cleve, University of Namur, Belgium
+    Anya Helene Bagge, University of Bergen, Norway
+    Bernhard Rumpe, Aachen University, Germany
+    Bijan Parsia, University of Manchester, UK
+    Brian Malloy, Clemson University, USA
+    Bruno Oliveira, Seoul National University, Korea
+    Chiara Ghidini, FBK-irst, Italy
+    Daniel Oberle, SAP Research, Germany
+    Eelco Visser, Delft University of Technology, Netherlands
+    Eric Van Wyk, University of Minnesota, USA
+    Fernando Pereira, Federal University of Minas Gerais, Brasil
+    Fernando Silva Parreiras, University of Koblenz-Landau, Germany
+    Friedrich Steimann, University of Hannover, Germany
+    G?rel Hedin, Lund University, USA
+    Ivan Kurtev, University of Twente, Netherlands
+    James Power, National University of Ireland, Ireland
+    Jean-Marie Favre, OneTree Technologies, France
+    Jeff Gray, University of Alabama, USA
+    Jeff Z. Pan, University of Aberdeen, UK
+    Jo?o Paulo Fernandes, Univ. of Minho & Univ. of Porto, Portugal
+    John Boyland, University of Wisconsin-Milwaukee, USA
+    John Grundy, Swinburne University of Technology, Australia
+    Jordi Cabot, ?cole des Mines de Nantes, France
+    Jurgen Vinju, CWI, Netherlands
+    Laurence Tratt, Middlesex University, UK
+    Marjan Mernik, University of Maribor, Slovenia
+    Mark van den Brand, Eindhoven University of Technology, Netherlands
+    Michael Collard, University of Akron, USA
+    Nicholas Kraft, University of Alabama, USA
+    Paul Klint, CWI, Netherlands
+    Paulo Borba, Federal University of Pernambuco, Brazil
+    Peter Haase, University of Karlsruhe, Germany
+    Peter Mosses, Swansea University, UK
+    Ralf M?ller, Hamburg University of Technology, Germany
+    Silvana Castano, University of Milan, Italy
+    Steffen Zschaler, Lancaster University, UK
+    York Sure, University of Koblenz-Landau, Germany
+    Zhenjiang Hu, National Institute of Informatics, Japan
+
+ORGANIZATION COMMITTEE
+
+    Jos? Creissac Campos (Finance Chair)
+    Universidade do Minho, Portugal
+
+    Jo?o Paulo Fernandes (Web and Publicity co-Chair)
+    Universidade do Porto & Universidade do Minho, Portugal
+
+    Jurgen Vinju (Workshop Selection Chair)
+    CWI, The Netherlands
+
+    Vadim Zaytsev (Publicity co-Chair)
+    CWI, The Netherlands
+
+
+From gvidal at dsic.upv.es  Mon Mar 28 14:57:10 2011
+From: gvidal at dsic.upv.es (German Vidal)
+Date: Mon, 28 Mar 2011 14:57:10 +0200
+Subject: [Stratego Users] LOPSTR 2011 - Submission deadline extended: April
+	17 (both full papers and extended abstracts)
+References: <287168BE-E946-46F2-B12A-B98346EC0AD1@dsic.upv.es>
+Message-ID: <C76B89FD-03FA-42ED-801A-1F724905F06F@dsic.upv.es>
+
+News:
+
+- Due to multiple requests, the submission deadlines for both
+  full papers and extended abstracts have been extended:
+
+  * Paper submission: April 17,  2011
+  * Extended abstract submission: April 17, 2011
+
+
+============================================================
+
+                      Call for papers
+               21th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2011
+
+             http://users.dsic.upv.es/~lopstr11/
+            Odense, Denmark, July 18-20, 2011
+     (co-located with PPDP 2011, AAIP 2011 and WFLP 2011)
+
+============================================================
+
+Objectives:
+
+The aim of the LOPSTR series is to stimulate and promote international
+research and collaboration on logic-based program development. LOPSTR
+is open to contributions in logic-based program development in any
+language paradigm. LOPSTR has a reputation for being a lively,
+friendly forum for presenting and discussing work in progress. Formal
+proceedings are produced only after the symposium so that authors can
+incorporate this feedback in the published papers.
+
+The 21st International Symposium on Logic-based Program Synthesis and
+Transformation (LOPSTR 2011) will be held in Odense, Denmark; previous
+symposia were held in Hagenberg, Coimbra, Valencia, Lyngby, Venice,
+London, Verona, Uppsala, Madrid, Paphos, London, Venice, Manchester,
+Leuven, Stockholm, Arnhem, Pisa, Louvain-la-Neuve, and Manchester (you
+might have a look at the contents of past LOPSTR symposia). LOPSTR
+2011 will be co-located with PPDP 2011 (International ACM SIGPLAN
+Symposium on Principles and Practice of Declarative Programming).
+
+
+Topics:
+
+Topics of interest cover all aspects of logic-based program development,
+all stages of the software life cycle, and issues of both programming-
+in-the-small and programming-in-the-large. Papers describing
+applications in these areas are especially welcome. Contributions are
+welcome on all aspects of logic-based program development, including,
+but not limited to:
+
+- specification
+- synthesis
+- verification
+- transformation
+- analysis
+- optimisation
+- specialization
+- partial evaluation
+- inversion
+- composition
+- program/model manipulation
+- certification
+- security
+- transformational techniques in SE
+- applications and tools
+
+Survey papers, that present some aspect of the above topics from a new
+perspective, and application  papers, that describe experience with
+industrial applications, are also welcome. Papers must describe
+original work, be written and presented  in English, and must not
+substantially overlap with papers that have been published or that are
+simultaneously submitted to a journal or a conference with refereed
+proceedings. Work that already appeared in unpublished or informally
+published workshops proceedings may be submitted.
+
+Following past editions, the formal post-conference proceedings will
+be published by Springer in the Lecture Notes in Computer Science (LNCS)
+series.
+
+
+IMPORTANT DATES AND SUBMISSION GUIDELINES:
+
+
+- Paper submission: April 17,  2011
+- Extended abstract submission: April 17, 2011
+- Notification (for pre-proceedings): May 26, 2011
+- Camera-ready (for pre-proceedings): June 19, 2011
+- Symposium: July 18-20, 2011
+
+
+Submissions can either be (short) extended abstracts or (full) papers
+whose length should not exceed 9 and 15 pages (including references),
+respectively. Submissions must be formatted in the Lecture Notes in
+Computer Science style (excluding well-marked appendices not intended
+for publication). Referees are not required to read the appendices,
+and thus papers should be intelligible without them. Short papers may
+describe work-in-progress or tool demonstrations.
+
+Both short and full papers can be accepted for presentation at the
+symposium and will then appear in the LOPSTR 2011
+pre-proceedings. Full papers can also be immediately accepted for
+publication in the formal proceedings to be published by Springer
+in the LNCS series. In addition, after the symposium, the programme
+committee will select further short or full papers presented
+in LOPSTR 2011 to be considered for formal publication. These authors
+will be invited to revise and/or extend their submissions in the
+light of the feedback solicited at the symposium. Then after another
+round of reviewing, these revised papers can also be published in the
+formal proceedings.
+
+
+Invited speakers:
+
+- John Gallagher, Roskilde University, Denmark 	
+- Fritz Henglein, University of Copenhagen, Denmark  (shared with PPDP)
+- Vitaly Lagoon, Cadence Design Systems, Boston, USA (shared with PPDP)
+
+
+Program Committee:
+
+Elvira Albert (Complutense University of Madrid, Spain)
+Malgorzata Biernacka (University of Wroclaw , Poland)
+Manuel Carro (Technical University of Madrid, Spain)
+Michael Codish (Ben-Gurion University of the Negev, Israel)
+Danny De Schreye (K.U.Leuven, Belgium)
+Maribel Fernandez (King's College London, UK)
+Raul Gutierrez (University of Illinois at Urbana-Champaign, USA)
+Mark Harman (University College London, UK)
+Frank Huch (C.A.U. Kiel, Germany)
+Michael Leuschel (University of Dusseldorf, Germany)
+Yanhong Annie Liu (State University of New York at Stony Brook, USA)
+Kazutaka Matsuda (Tohoku University, Japan)
+Fred Mesnard (Universite de La Reunion, France)
+Ulrich Neumerkel (Technical University of Wien, Austria)
+Alberto Pettorossi (Universita' di Roma Tor Vergata, Italy)
+Carla Piazza (University of Udine, Italy)
+Peter Schneider-Kamp (University of Southern Denmark, Denmark)
+Hirohisa Seki (Nagoya Institute of Technology, Japan)
+Josep Silva (Technical University of Valencia, Spain)
+German Vidal (Technical University of Valencia, Spain)
+Jurgen Vinju (Centrum Wiskunde & Informatica, The Netherlands)
+Jianjun Zhao (Shanghai Jiao Tong University, Shanghai)
+
+Contacts
+
+Program Chair (contact him for additional information about papers and  
+submissions):
+
+    German Vidal
+    Department of Computer Science (DSIC)
+    Universitat Politecnica de Valencia
+    Valencia, Spain
+    Email: lopstr11 at dsic.upv.es
+
+General Chair
+
+    Peter Schneider-Kamp
+    Dept. of Mathematics and Computer Science
+    University of Southern Denmark
+    Campusvej 55
+    DK-5230 Odense M, Denmark
+    Email: petersk at imada.sdu.dk
+
+
+
+From spider.vz at gmail.com  Wed Mar 30 22:59:37 2011
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Wed, 30 Mar 2011 22:59:37 +0200
+Subject: [Stratego Users] SLE 2011 - Deadline extension
+Message-ID: <AANLkTinLi6EtJAQN1rEbkbW11aNhiKaCT9W5kxXH+F48@mail.gmail.com>
+
+============================================================
+
+                * DEADLINE EXTENSION *
+
+                       SLE 2011
+4th International Conference on Software Language Engineering
+
+             Braga, Portugal, 3-6 July 2011
+
+             http://planet-sl.org/sle2011/
+
+=============================================================
+
+PAPER SUBMISSION DEADLINE EXTENSION
+
+The paper submission deadline has been *extended* and is now set to
+
+                      April, 15th
+
+---------------------------------------------------------
+INVITED SPEAKERS
+
+SLE 2011 is proud to announce the following invited speakers.
+
+Krzysztof Czarnecki is associate professor at the University of
+Waterloo and industrial research chair at Bank of Nova Scotia / NSERC.
+Before coming to Waterloo, he spent eight years at DaimlerChrysler
+Research working on the practical applications of generative
+programming. His current work focuses on realizing the synergies
+between generative and model-driven software development.
+
+Paul Klint is head of the software engineering department at Centrum
+Wiskunde en Informatica in Amsterdam, full professor in Computer
+Science at the University of Amsterdam and theme leader of Software
+Analysis and Transformation at CWI. His research interests include
+generic language technology, domain-specific languages, software
+renovation, and technology transfer.
+
+---------------------------------------------------------
+CO-LOCATED EVENTS
+
+The following events will take place together with SLE 2011:
+
+Summer School on Generative and Transformational Techniques in
+Software Engineering (GTTSE)
+*  http://gttse.wikidot.com/2011
+
+Coupled Software Transformations Workshop (CSXW)
+*  http://www.di.univaq.it/CSXW2011/
+
+Industry Track of Software Language Engineering (ITSLE)
+*  http://planet-sl.org/itsle2011/
+
+Workshop on Transforming and Weaving Ontologies and MDE (TWOMDE)
+*  http://planet-sl.org/twomde2011/
+
+------------------------------------------------------------
+SLE 2011 COMITTEES
+
+GENERAL CHAIR
+
+    Jo?o Saraiva
+    Universidade do Minho, Portugal
+    jas at di.uminho.pt
+
+PROGRAM CO-CHAIRS
+
+    Uwe A?mann
+    Dresden University of Technology, Germany
+    uwe.assmann at tu-dresden.de
+
+    Anthony Sloane
+    Macquarie University, Australia
+    anthony.sloane at mq.edu.au
+
+SLE/GTTSE Student Workshop
+
+    Joost Visser
+    Software Improvement Group
+    j.visser at sig.eu
+
+    Eric Van Wyk
+    University of Minnesota, USA
+    evw at cs.umn.edu
+
+PROGRAM COMITTEE
+
+    Adrian Johnstone, University of London, UK
+    Aldo Gangemi, Semantic Technology Laboratory, Italy
+    Alexander Serebrenik, Eindhoven University of Technology, Netherlands
+    Ana Moreira, FCT/UNL, Portugal
+    Anthony Cleve, University of Namur, Belgium
+    Anya Helene Bagge, University of Bergen, Norway
+    Bernhard Rumpe, Aachen University, Germany
+    Bijan Parsia, University of Manchester, UK
+    Brian Malloy, Clemson University, USA
+    Bruno Oliveira, Seoul National University, Korea
+    Chiara Ghidini, FBK-irst, Italy
+    Daniel Oberle, SAP Research, Germany
+    Eelco Visser, Delft University of Technology, Netherlands
+    Eric Van Wyk, University of Minnesota, USA
+    Fernando Pereira, Federal University of Minas Gerais, Brasil
+    Fernando Silva Parreiras, University of Koblenz-Landau, Germany
+    Friedrich Steimann, University of Hannover, Germany
+    G?rel Hedin, Lund University, USA
+    Ivan Kurtev, University of Twente, Netherlands
+    James Power, National University of Ireland, Ireland
+    Jean-Marie Favre, OneTree Technologies, France
+    Jeff Gray, University of Alabama, USA
+    Jeff Z. Pan, University of Aberdeen, UK
+    Jo?o Paulo Fernandes, Univ. of Minho & Univ. of Porto, Portugal
+    John Boyland, University of Wisconsin-Milwaukee, USA
+    John Grundy, Swinburne University of Technology, Australia
+    Jordi Cabot, ?cole des Mines de Nantes, France
+    Jurgen Vinju, CWI, Netherlands
+    Laurence Tratt, Middlesex University, UK
+    Marjan Mernik, University of Maribor, Slovenia
+    Mark van den Brand, Eindhoven University of Technology, Netherlands
+    Michael Collard, University of Akron, USA
+    Nicholas Kraft, University of Alabama, USA
+    Paul Klint, CWI, Netherlands
+    Paulo Borba, Federal University of Pernambuco, Brazil
+    Peter Haase, University of Karlsruhe, Germany
+    Peter Mosses, Swansea University, UK
+    Ralf M?ller, Hamburg University of Technology, Germany
+    Silvana Castano, University of Milan, Italy
+    Steffen Zschaler, Lancaster University, UK
+    York Sure, University of Koblenz-Landau, Germany
+    Zhenjiang Hu, National Institute of Informatics, Japan
+
+ORGANIZATION COMMITTEE
+
+    Jos? Creissac Campos (Finance Chair)
+    Universidade do Minho, Portugal
+
+    Jo?o Paulo Fernandes (Web and Publicity co-Chair)
+    Universidade do Porto & Universidade do Minho, Portugal
+
+    Jurgen Vinju (Workshop Selection Chair)
+    CWI, The Netherlands
+
+    Vadim Zaytsev (Publicity co-Chair)
+    CWI, The Netherlands
+
+

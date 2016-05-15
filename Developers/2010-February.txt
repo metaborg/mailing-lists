@@ -1,0 +1,215 @@
+From fcferrari at gmail.com  Tue Feb  2 14:48:15 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Tue, 2 Feb 2010 11:48:15 -0200
+Subject: [Stratego Developers] AspectJ-front: Problem for parsing and
+	pretty-printing complex pointcut expressions
+Message-ID: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com>
+
+Hi, everybody.
+
+I'm facing some problems while using the parser and the pretty-printer
+from AspectJ-front. For instance, when I parse a pointcut expressions
+such as:
+
+
+	protected pointcut subjectChange(Subject subject) :
+(((execution(public int GeneralStatement.executeUpdate(..))) &&
+			(!within(SelectStatement))) || (call(protected List
+GeneralStatement.executeQueryWithCallback(..)))) && this(subject);
+
+
+the pretty-printed code is as follows:
+
+
+	protected pointcut subjectChange (Subject subject) :execution(public
+int GeneralStatement.executeUpdate(..)) &&
+			!within(SelectStatement) || call(protected List
+GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+
+
+As you can see, some surrounding round brackets are removed, what
+results in inconsistent information binding. Other two examples are
+shown below (the original aspects are attached).
+
+
+Is anybody aware of a workaround for this? Is there a way to fix it
+(e.g. keeping all round brackets in the pretty-printed version)?
+
+Many thanks!
+
+  Fabiano Ferrari
+
+
+--------- other examples ---------
+
+ ORIGINAL EXPRESSION 1:
+
+	  protected pointcut synchronizationPoints(Object syncObj):
+		  (
+			(
+			execution(  public void RuntimeSQLException.setNextException(SQLException))
+			|| execution(  protected static int BaseLogProxy.getNextId())
+			|| execution(  private void Stopwatch.appendTaskTime(String,long))
+			|| execution(  public void Stopwatch.reset())
+			|| execution(  public void
+FifoCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+FifoCacheController.getObject(CacheModel,Object))
+			|| execution(  public Object
+FifoCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void FifoCacheController.flush(CacheModel))
+			|| execution(  public void
+LruCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+LruCacheController.getObject(CacheModel, Object))
+			|| execution(  public Object
+LruCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void   LruCacheController.flush(CacheModel))
+			|| execution(  public void
+MemoryCacheController.putObject(CacheModel,Object,Object))
+			|| execution(  public Object
+MemoryCacheController.getObject(CacheModel, Object))
+			|| execution(  public Object
+MemoryCacheController.removeObject(CacheModel,Object))
+			|| execution(  public void   MemoryCacheController.flush(CacheModel))
+			|| execution(  private  void InvocationHandler+.loadObject())
+			|| execution(  private  void LazyResultLoader.loadObject() throws
+NestedRuntimeException)
+			|| execution(  public  Object[]
+AutoResultMap.getResults(RequestScope,ResultSet) throws SQLException)
+			|| execution(  public  static long SessionScope.getNextId())
+			|| execution(  public Object
+OSCacheController.removeObject(CacheModel,Object))
+			|| execution(  private void CacheModel.getObjectPartTwo())
+			
+			) && this(syncObj)
+		);
+
+
+ PRETTY-PRINTED EXPRESSION 1:
+
+	  protected pointcut synchronizationPoints (Object syncObj) :
+		  execution(public void RuntimeSQLException.setNextException(SQLException))
+		  || execution(protected static int BaseLogProxy.getNextId())
+		  || execution(private void Stopwatch.appendTaskTime(String, long))
+		  || execution(public void Stopwatch.reset())
+		  || execution(public void FifoCacheController.putObject(CacheModel,
+Object, Object))
+		  || execution(public Object
+FifoCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+FifoCacheController.removeObject(CacheModel, Object))
+		  || execution(public void FifoCacheController.flush(CacheModel))
+		  || execution(public void LruCacheController.putObject(CacheModel,
+Object, Object))
+		  || execution(public Object
+LruCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+LruCacheController.removeObject(CacheModel, Object))
+		  || execution(public void LruCacheController.flush(CacheModel))
+		  || execution(public void
+MemoryCacheController.putObject(CacheModel, Object, Object))
+		  || execution(public Object
+MemoryCacheController.getObject(CacheModel, Object))
+		  || execution(public Object
+MemoryCacheController.removeObject(CacheModel, Object))
+		  || execution(public void MemoryCacheController.flush(CacheModel))
+		  || execution(private void InvocationHandler+.loadObject())
+		  || execution(private void LazyResultLoader.loadObject() throws
+NestedRuntimeException)
+		  || execution(public Object[]
+AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+		  || execution(public static long SessionScope.getNextId())
+		  || execution(public Object
+OSCacheController.removeObject(CacheModel, Object))
+		  || execution(private void CacheModel.getObjectPartTwo())
+		
+		  && this(syncObj);
+
+----------------------------------
+
+ ORIGINAL EXPRESSION 2:
+
+	  protected pointcut synchronizationPoints(Object syncObj):
+		(
+		    execution(  public static ClassInfo  ClassInfo.getInstance(Class))
+		    || execution(  public void OSCacheController.flush(CacheModel))
+		    || execution( private void ThrottledPool.pushPartTwo(LinkedList,Object))
+		    || execution( private Object
+ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+IllegalAccessException)
+		    || execution(  private Object
+OSCacheController.getObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException )
+		    || execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+NeedsRefreshException)
+		    || execution(private void   CacheModel.getObjectPartThree(Object,Object))
+		    || execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+, Object , Object, CacheKey ) throws SQLException )
+		    || execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+Connection, Object , int , int, CacheKey ) throws SQLException )
+		)
+		&& args(syncObj,..);
+
+
+ PRETTY-PRINTED EXPRESSION 2:
+
+	  protected pointcut synchronizationPoints (Object syncObj) :
+		  execution(public static ClassInfo ClassInfo.getInstance(Class))
+		  || execution(public void OSCacheController.flush(CacheModel))
+		  || execution(private void ThrottledPool.pushPartTwo(LinkedList, Object))
+		  || execution(private Object ThrottledPool.popPartTwo(LinkedList)
+throws InstantiationException, IllegalAccessException)
+		  || execution(private Object
+OSCacheController.getObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+		  || execution(private Object
+OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+NeedsRefreshException)
+		  || execution(private void CacheModel.getObjectPartThree(Object, Object))
+		  || execution(private Object
+CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+RequestScope, Connection, Object, Object, CacheKey) throws
+SQLException)
+		  || execution(private List
+CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+Connection, Object, int, int, CacheKey) throws SQLException)
+		  && args(syncObj, ..);
+
+
+
+
+
+
+-- 
+Fabiano Cutigi Ferrari
+_________________________________
+PhD Candidate in Computer Science
+ICMC/USP - University of S?o Paulo - Brazil
+LabES - Laboratory of Software Engineering
+http://www.icmc.usp.br/~ferrari/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ExecuteStatementObserver.aj
+Type: application/octet-stream
+Size: 2573 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100202/86627d4c/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationExecutingObject.aj
+Type: application/octet-stream
+Size: 3152 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100202/86627d4c/attachment-0001.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IBatisSynchronizationArgument.aj
+Type: application/octet-stream
+Size: 1914 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100202/86627d4c/attachment-0002.obj 
+

@@ -1,0 +1,1196 @@
+From maemarcus at gmail.com  Tue Dec 15 00:54:08 2009
+From: maemarcus at gmail.com (Dmitry N. Mikushin)
+Date: Tue, 15 Dec 2009 02:54:08 +0300
+Subject: [Stratego Users] Compile errors in octavec
+Message-ID: <e8a879a50912141554y30082a25m36692ae87058d656@mail.gmail.com>
+
+Hello, Stratego/XT community,
+
+I've got an error while compiling the most recent revision 1651 of
+Stratego/XT-based Octave Compiler source code. Here is a complete list
+of commands I've issued:
+
+svn checkout https://svn.strategoxt.org/repos/octave/
+cd octave/octavec/trunk/
+./bootstrap
+./configure --prefix=/usr/
+make
+
+make log with error is attached
+
+Also I've found, that error goes away, if we revert to revision 1626.
+
+Kind Regards,
+
+--
+Dmitry N. Mikushin
+Scientific Research Computing Center
+Moscow State University
+-------------- next part --------------
+[marcusmae at localhost trunk]$ make
+make  all-recursive
+make[1]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk'
+Making all in syntax
+make[2]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+Making all in pp
+make[3]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+/usr/bin/parse-pp-table -i Octave-pretty.pp -o Octave-pretty.pp.af
+/usr/bin/parse-pp-table -i RealOctave-pretty.pp -o RealOctave-pretty.pp.af
+/usr/bin/parse-pp-table -i C-pretty1.pp -o C-pretty1.pp.af
+Tools registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:    
+Data registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:   Octave-pretty.pp.af RealOctave-pretty.pp.af C-pretty1.pp.af   
+make[3]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+Making all in libparseoctave
+make[3]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+/bin/sh ../../libtool --tag=CXX   --mode=compile g++ -DHAVE_CONFIG_H -I. -I../..  -I/usr//include   -I/usr//include   -I/usr//include   -I../../syntax/libparseoctave  -I/usr/include/octave-3.0.1 -I/usr/include/octave-3.0.1/octave -I//usr/include -g -O2 -MT pt-aterm.lo -MD -MP -MF .deps/pt-aterm.Tpo -c -o pt-aterm.lo pt-aterm.cc
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I../.. -I/usr//include -I/usr//include -I/usr//include -I../../syntax/libparseoctave -I/usr/include/octave-3.0.1 -I/usr/include/octave-3.0.1/octave -I//usr/include -g -O2 -MT pt-aterm.lo -MD -MP -MF .deps/pt-aterm.Tpo -c pt-aterm.cc  -fPIC -DPIC -o .libs/pt-aterm.o
+pt-aterm.cc: In function ?_ATerm* initialize_octave_stuff()?:
+pt-aterm.cc:832: warning: deprecated conversion from string constant to ?char*?
+pt-aterm.cc:832: warning: deprecated conversion from string constant to ?char*?
+pt-aterm.cc:832: warning: deprecated conversion from string constant to ?char*?
+pt-aterm.cc:832: warning: deprecated conversion from string constant to ?char*?
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I../.. -I/usr//include -I/usr//include -I/usr//include -I../../syntax/libparseoctave -I/usr/include/octave-3.0.1 -I/usr/include/octave-3.0.1/octave -I//usr/include -g -O2 -MT pt-aterm.lo -MD -MP -MF .deps/pt-aterm.Tpo -c pt-aterm.cc -o pt-aterm.o >/dev/null 2>&1
+mv -f .deps/pt-aterm.Tpo .deps/pt-aterm.Plo
+/bin/sh ../../libtool --tag=CXX   --mode=link g++ -I/usr/include/octave-3.0.1 -I/usr/include/octave-3.0.1/octave -I//usr/include -g -O2  -L/usr//lib -L/usr/lib/octave-3.0.1 -lATerm -loctave -loctinterp -L/usr/lib -L/usr/libexec/octave/3.0.0  -o libparseoctave.la -rpath /usr/lib/octavec pt-aterm.lo  
+libtool: link: g++ -shared -nostdlib /usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../../crti.o /usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/crtbeginS.o  .libs/pt-aterm.o   -Wl,-rpath -Wl,/usr//lib -Wl,-rpath -Wl,/usr//lib -L/usr//lib -L/usr/lib/octave-3.0.1 /usr//lib/libATerm.so -loctave -loctinterp -L/usr/lib -L/usr/libexec/octave/3.0.0 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../.. -lstdc++ -lm -lc -lgcc_s /usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/crtendS.o /usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../../crtn.o    -Wl,-soname -Wl,libparseoctave.so.0 -o .libs/libparseoctave.so.0.0.0
+libtool: link: (cd ".libs" && rm -f "libparseoctave.so.0" && ln -s "libparseoctave.so.0.0.0" "libparseoctave.so.0")
+libtool: link: (cd ".libs" && rm -f "libparseoctave.so" && ln -s "libparseoctave.so.0.0.0" "libparseoctave.so")
+libtool: link: ar cru .libs/libparseoctave.a  pt-aterm.o
+libtool: link: ranlib .libs/libparseoctave.a
+libtool: link: ( cd ".libs" && rm -f "libparseoctave.la" && ln -s "../libparseoctave.la" "libparseoctave.la" )
+Tools registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:    
+Data registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:      
+make[3]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+make[3]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i Octave-Concrete-Syntax.sdf -o Octave-Concrete-Syntax.def --dep Octave-Concrete-Syntax.dep
+  including ./Octave-Concrete-Syntax.sdf
+/usr/bin/gen-renamed-sdf-module -i Octave-Concrete-Syntax.def -o Octave-Concrete-SyntaxRenamed.sdf --main Octave-Concrete-Syntax --name Octave-Concrete-SyntaxRenamed --prefix Octave
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- Dec [file: Octave-Concrete-Syntax.def line: 191 col: 11]
+SdfChecker:error: symbol is not defined by any production
+--- Module [file: Octave-Concrete-Syntax.def line: 190 col: 11]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "[" { Exp "," } + "]" -> Row { bracket } [file: Octave-Concrete-Syntax.def line: 96 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Octave-Concrete-Syntax.def line: 201 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Octave-Concrete-Syntax.def line: 198 col: 9]
+SdfChecker:warning: undeclared sort
+--- Dec [file: Octave-Concrete-Syntax.def line: 191 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Octave-Concrete-Syntax.def line: 190 col: 31]
+SdfChecker:warning: undeclared sort
+--- Module [file: Octave-Concrete-Syntax.def line: 190 col: 11]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Octave-Concrete-Syntax.def line: 174 col: 39]
+SdfChecker:warning: undeclared sort
+--- Case [file: Octave-Concrete-Syntax.def line: 169 col: 17]
+SdfChecker:warning: undeclared sort
+--- Init [file: Octave-Concrete-Syntax.def line: 155 col: 14]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Octave-Concrete-Syntax.def line: 155 col: 4]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Octave-Concrete-Syntax.def line: 140 col: 10]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Octave-Concrete-Syntax.def line: 127 col: 9]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Octave-Concrete-Syntax.def line: 104 col: 4]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Octave-Concrete-Syntax.def line: 103 col: 4]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Octave-Concrete-Syntax.def line: 102 col: 4]
+SdfChecker:warning: undeclared sort
+--- Row [file: Octave-Concrete-Syntax.def line: 96 col: 27]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Octave-Concrete-Syntax.def line: 89 col: 41]
+SdfChecker:warning: undeclared sort
+--- Var [file: Octave-Concrete-Syntax.def line: 88 col: 33]
+SdfChecker:warning: undeclared sort
+--- Id [file: Octave-Concrete-Syntax.def line: 88 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Octave-Concrete-Syntax.def line: 75 col: 8]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Octave-Concrete-Syntax.def line: 66 col: 4]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Octave-Concrete-Syntax.def line: 43 col: 14]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Octave-Concrete-Syntax.def line: 12 col: 8]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Octave-Concrete-Syntax.def line: 5 col: 4]
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i Octave-Concrete-SyntaxRenamed.sdf -o Octave-Concrete-SyntaxRenamed.def --dep Octave-Concrete-SyntaxRenamed.dep
+  including ./Octave-Concrete-SyntaxRenamed.sdf
+  including ./Octave-Concrete-Syntax.sdf
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i common.sdf -o common.def --dep common.dep
+  including ./common.sdf
+  including ./Octave-Concrete-Syntax.sdf
+  including ./type-specification.sdf
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i StrategoOctaveCS.sdf -o StrategoOctaveCS.def --dep StrategoOctaveCS.dep
+  including ./StrategoOctaveCS.sdf
+  including /usr/share/sdf/stratego-front/StrategoRenamed.sdf
+  including /usr/share/sdf/stratego-front/Stratego.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Layout.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Layout.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Identifiers.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Constants.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Constants.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Modules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Modules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Strategies.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Terms.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Signatures.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Signatures.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Terms.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Strategies.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Rules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-DynamicRules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Overlays.sdf
+  including ./Octave-Concrete-SyntaxRenamed.sdf
+  including ./Octave-Concrete-Syntax.sdf
+  including ./type-specification.sdf
+  including ./OctaveTC-Variables.sdf
+  including ./OctaveTC-Congruences.sdf
+/usr//bin/sdf2table -m StrategoOctaveCS -i StrategoOctaveCS.def -o StrategoOctaveCS.tbl 
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- Dec [file: StrategoOctaveCS.def line: 357 col: 11]
+SdfChecker:error: symbol is not defined by any production
+--- UnOp [file: StrategoOctaveCS.def line: 43 col: 20]
+SdfChecker:error: symbol is not defined by any production
+--- OctaveModule [file: StrategoOctaveCS.def line: 6 col: 11]
+SdfChecker:warning: undeclared sort
+--- TypeAn [file: StrategoOctaveCS.def line: 1325 col: 33]
+SdfChecker:warning: undeclared sort
+--- Exp [file: StrategoOctaveCS.def line: 1304 col: 17]
+SdfChecker:warning: undeclared sort
+--- OctaveDec [file: StrategoOctaveCS.def line: 1263 col: 25]
+SdfChecker:warning: undeclared sort
+--- OctaveModule [file: StrategoOctaveCS.def line: 1251 col: 11]
+SdfChecker:error: start-symbol not defined by any production
+--- StrategoModule [file: StrategoOctaveCS.def line: 1244 col: 29]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "(" Type ")" -> ArgType { bracket } [file: StrategoOctaveCS.def line: 810 col: 4]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "<" Strategy ">" -> StrategyAngle { bracket } [file: StrategoOctaveCS.def line: 622 col: 5]
+SdfChecker:warning: undeclared sort
+--- Exp [file: StrategoOctaveCS.def line: 441 col: 12]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: StrategoOctaveCS.def line: 440 col: 12]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: StrategoOctaveCS.def line: 439 col: 12]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: StrategoOctaveCS.def line: 438 col: 12]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: StrategoOctaveCS.def line: 437 col: 12]
+SdfChecker:warning: undeclared sort
+--- Id [file: StrategoOctaveCS.def line: 436 col: 12]
+SdfChecker:warning: undeclared sort
+--- Var [file: StrategoOctaveCS.def line: 435 col: 12]
+SdfChecker:warning: undeclared sort
+--- LValue [file: StrategoOctaveCS.def line: 434 col: 12]
+SdfChecker:warning: undeclared sort
+--- Row [file: StrategoOctaveCS.def line: 433 col: 12]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: StrategoOctaveCS.def line: 432 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: StrategoOctaveCS.def line: 431 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: StrategoOctaveCS.def line: 430 col: 12]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: StrategoOctaveCS.def line: 429 col: 12]
+SdfChecker:warning: undeclared sort
+--- Sign [file: StrategoOctaveCS.def line: 428 col: 12]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: StrategoOctaveCS.def line: 427 col: 12]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: StrategoOctaveCS.def line: 426 col: 12]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: StrategoOctaveCS.def line: 425 col: 12]
+SdfChecker:warning: undeclared sort
+--- Init [file: StrategoOctaveCS.def line: 424 col: 12]
+SdfChecker:warning: undeclared sort
+--- Case [file: StrategoOctaveCS.def line: 423 col: 12]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: StrategoOctaveCS.def line: 422 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: StrategoOctaveCS.def line: 421 col: 12]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "[" { Exp "," } + "]" -> Row { bracket } [file: StrategoOctaveCS.def line: 262 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: StrategoOctaveCS.def line: 367 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: StrategoOctaveCS.def line: 364 col: 9]
+SdfChecker:warning: undeclared sort
+--- Dec [file: StrategoOctaveCS.def line: 357 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: StrategoOctaveCS.def line: 356 col: 31]
+SdfChecker:warning: undeclared sort
+--- Module [file: StrategoOctaveCS.def line: 356 col: 11]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: StrategoOctaveCS.def line: 340 col: 39]
+SdfChecker:warning: undeclared sort
+--- Case [file: StrategoOctaveCS.def line: 335 col: 17]
+SdfChecker:warning: undeclared sort
+--- Init [file: StrategoOctaveCS.def line: 321 col: 14]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: StrategoOctaveCS.def line: 321 col: 4]
+SdfChecker:warning: undeclared sort
+--- Sign [file: StrategoOctaveCS.def line: 306 col: 10]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: StrategoOctaveCS.def line: 293 col: 9]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: StrategoOctaveCS.def line: 270 col: 4]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: StrategoOctaveCS.def line: 269 col: 4]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: StrategoOctaveCS.def line: 268 col: 4]
+SdfChecker:warning: undeclared sort
+--- Row [file: StrategoOctaveCS.def line: 262 col: 27]
+SdfChecker:warning: undeclared sort
+--- LValue [file: StrategoOctaveCS.def line: 255 col: 41]
+SdfChecker:warning: undeclared sort
+--- Var [file: StrategoOctaveCS.def line: 254 col: 33]
+SdfChecker:warning: undeclared sort
+--- Id [file: StrategoOctaveCS.def line: 254 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: StrategoOctaveCS.def line: 241 col: 8]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: StrategoOctaveCS.def line: 232 col: 4]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: StrategoOctaveCS.def line: 209 col: 14]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: StrategoOctaveCS.def line: 178 col: 8]
+SdfChecker:warning: undeclared sort
+--- Exp [file: StrategoOctaveCS.def line: 171 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: StrategoOctaveCS.def line: 151 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: StrategoOctaveCS.def line: 148 col: 9]
+SdfChecker:warning: undeclared sort
+--- FunctionDeclaration [file: StrategoOctaveCS.def line: 135 col: 17]
+SdfChecker:warning: undeclared sort
+--- CellTyped [file: StrategoOctaveCS.def line: 126 col: 15]
+SdfChecker:warning: undeclared sort
+--- Exp [file: StrategoOctaveCS.def line: 108 col: 18]
+SdfChecker:warning: undeclared sort
+--- Type [file: StrategoOctaveCS.def line: 94 col: 10]
+SdfChecker:warning: undeclared sort
+--- Id [file: StrategoOctaveCS.def line: 92 col: 2]
+SdfChecker:warning: undeclared sort
+--- FunctionType [file: StrategoOctaveCS.def line: 87 col: 14]
+SdfChecker:warning: undeclared sort
+--- VarTyped [file: StrategoOctaveCS.def line: 82 col: 14]
+SdfChecker:warning: undeclared sort
+--- UserDecls [file: StrategoOctaveCS.def line: 80 col: 38]
+SdfChecker:warning: undeclared sort
+--- MappingFuncs [file: StrategoOctaveCS.def line: 80 col: 23]
+SdfChecker:warning: undeclared sort
+--- FunctionSignatures [file: StrategoOctaveCS.def line: 80 col: 3]
+SdfChecker:warning: undeclared sort
+--- Variables [file: StrategoOctaveCS.def line: 79 col: 27]
+SdfChecker:warning: undeclared sort
+--- Constants [file: StrategoOctaveCS.def line: 79 col: 16]
+SdfChecker:warning: undeclared sort
+--- CellTyped [file: StrategoOctaveCS.def line: 49 col: 27]
+SdfChecker:warning: undeclared sort
+--- TypeShape [file: StrategoOctaveCS.def line: 47 col: 20]
+SdfChecker:warning: undeclared sort
+--- Type [file: StrategoOctaveCS.def line: 44 col: 23]
+SdfChecker:warning: undeclared sort
+--- UnOp [file: StrategoOctaveCS.def line: 43 col: 20]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: StrategoOctaveCS.def line: 41 col: 20]
+SdfChecker:warning: undeclared sort
+--- LValue [file: StrategoOctaveCS.def line: 39 col: 20]
+SdfChecker:warning: undeclared sort
+--- Exp [file: StrategoOctaveCS.def line: 36 col: 28]
+SdfChecker:warning: undeclared sort
+--- Id [file: StrategoOctaveCS.def line: 35 col: 25]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: StrategoOctaveCS.def line: 34 col: 22]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: StrategoOctaveCS.def line: 33 col: 25]
+SdfChecker:warning: undeclared sort
+--- OctaveStrConst [file: StrategoOctaveCS.def line: 28 col: 37]
+SdfChecker:warning: undeclared sort
+--- OctaveRealConst [file: StrategoOctaveCS.def line: 27 col: 37]
+SdfChecker:warning: undeclared sort
+--- OctaveId [file: StrategoOctaveCS.def line: 24 col: 37]
+SdfChecker:warning: undeclared sort
+--- TypeShape [file: StrategoOctaveCS.def line: 12 col: 9]
+SdfChecker:warning: undeclared sort
+--- OctaveIntConst [file: StrategoOctaveCS.def line: 11 col: 20]
+SdfChecker:warning: undeclared sort
+--- OctaveLValue [file: StrategoOctaveCS.def line: 10 col: 18]
+SdfChecker:warning: undeclared sort
+--- OctaveExp [file: StrategoOctaveCS.def line: 8 col: 11]
+SdfChecker:warning: undeclared sort
+--- OctaveDec [file: StrategoOctaveCS.def line: 7 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: StrategoOctaveCS.def line: 6 col: 34]
+SdfChecker:warning: undeclared sort
+--- OctaveModule [file: StrategoOctaveCS.def line: 6 col: 11]
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i type-specification.sdf -o type-specification.def --dep type-specification.dep
+  including ./type-specification.sdf
+/usr//bin/sdf2table -m type-specification -i type-specification.def -o type-specification.tbl 
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: type-specification.def line: 86 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: type-specification.def line: 83 col: 9]
+SdfChecker:warning: undeclared sort
+--- FunctionDeclaration [file: type-specification.def line: 70 col: 17]
+SdfChecker:warning: undeclared sort
+--- CellTyped [file: type-specification.def line: 61 col: 15]
+SdfChecker:warning: undeclared sort
+--- Exp [file: type-specification.def line: 43 col: 18]
+SdfChecker:warning: undeclared sort
+--- Type [file: type-specification.def line: 29 col: 10]
+SdfChecker:warning: undeclared sort
+--- Id [file: type-specification.def line: 27 col: 2]
+SdfChecker:warning: undeclared sort
+--- FunctionType [file: type-specification.def line: 22 col: 14]
+SdfChecker:warning: undeclared sort
+--- VarTyped [file: type-specification.def line: 17 col: 14]
+SdfChecker:warning: undeclared sort
+--- UserDecls [file: type-specification.def line: 15 col: 38]
+SdfChecker:warning: undeclared sort
+--- MappingFuncs [file: type-specification.def line: 15 col: 23]
+SdfChecker:warning: undeclared sort
+--- FunctionSignatures [file: type-specification.def line: 15 col: 3]
+SdfChecker:warning: undeclared sort
+--- Variables [file: type-specification.def line: 14 col: 27]
+SdfChecker:warning: undeclared sort
+--- Constants [file: type-specification.def line: 14 col: 16]
+/usr/bin/pack-sdf -I /usr/share/sdf/stratego-front -I /usr/share/sdf/c-tools -i Stratego-Octave-C.sdf -o Stratego-Octave-C.def --dep Stratego-Octave-C.dep
+  including ./Stratego-Octave-C.sdf
+  including ./Octave-Concrete-SyntaxRenamed.sdf
+  including ./Octave-Concrete-Syntax.sdf
+  including /usr/share/sdf/c-tools/Stratego-C.sdf
+  including /usr/share/sdf/c-tools/C.sdf
+  including /usr/share/sdf/c-tools/C-Keywords.sdf
+  including /usr/share/sdf/c-tools/C-Constants.sdf
+  including /usr/share/sdf/c-tools/C-Lexical.sdf
+  including /usr/share/sdf/c-tools/C-Preprocessor.sdf
+  including /usr/share/sdf/c-tools/C-Declarators.sdf
+  including /usr/share/sdf/c-tools/C-Program.sdf
+  including /usr/share/sdf/c-tools/C-Statements.sdf
+  including /usr/share/sdf/c-tools/C-Identifiers.sdf
+  including /usr/share/sdf/c-tools/C-Types.sdf
+  including /usr/share/sdf/c-tools/C-Expressions.sdf
+  including /usr/share/sdf/c-tools/C-StructsAndUnions.sdf
+  including /usr/share/sdf/c-tools/C-Enumerators.sdf
+  including /usr/share/sdf/c-tools/C-ParameterDeclarators.sdf
+  including /usr/share/sdf/c-tools/C-AbstractDeclarators.sdf
+  including /usr/share/sdf/stratego-front/StrategoRenamed.sdf
+  including /usr/share/sdf/stratego-front/Stratego.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Layout.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Layout.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Identifiers.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Constants.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Constants.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Modules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Modules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Strategies.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Terms.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Core-Signatures.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Signatures.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Terms.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Strategies.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Rules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-DynamicRules.sdf
+  including /usr/share/sdf/stratego-front/Stratego-Sugar-Overlays.sdf
+  including ./type-specification.sdf
+  including ./OctaveTC-Variables.sdf
+  including ./OctaveTC-Congruences.sdf
+/usr//bin/sdf2table -m Stratego-Octave-C -i Stratego-Octave-C.def -o Stratego-Octave-C.tbl 
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- Dec [file: Stratego-Octave-C.def line: 1869 col: 11]
+SdfChecker:error: symbol is not defined by any production
+--- MemberIdDeclarator [file: Stratego-Octave-C.def line: 1038 col: 20]
+SdfChecker:error: symbol is not defined by any production
+--- UnOp [file: Stratego-Octave-C.def line: 43 col: 20]
+SdfChecker:error: symbol is not defined by any production
+--- OctaveModule [file: Stratego-Octave-C.def line: 6 col: 11]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Stratego-Octave-C.def line: 2033 col: 17]
+SdfChecker:warning: undeclared sort
+--- OctaveDec [file: Stratego-Octave-C.def line: 1997 col: 11]
+SdfChecker:warning: undeclared sort
+--- OctaveModule [file: Stratego-Octave-C.def line: 1996 col: 11]
+SdfChecker:warning: undeclared sort
+--- Declaration [file: Stratego-Octave-C.def line: 1992 col: 35]
+SdfChecker:warning: undeclared sort
+--- Initializer [file: Stratego-Octave-C.def line: 1968 col: 30]
+SdfChecker:warning: undeclared sort
+--- CId [file: Stratego-Octave-C.def line: 1964 col: 30]
+SdfChecker:error: start-symbol not defined by any production
+--- StrategoModule [file: Stratego-Octave-C.def line: 1960 col: 29]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Stratego-Octave-C.def line: 1953 col: 12]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Stratego-Octave-C.def line: 1952 col: 12]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Stratego-Octave-C.def line: 1951 col: 12]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Stratego-Octave-C.def line: 1950 col: 12]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Stratego-Octave-C.def line: 1949 col: 12]
+SdfChecker:warning: undeclared sort
+--- Id [file: Stratego-Octave-C.def line: 1948 col: 12]
+SdfChecker:warning: undeclared sort
+--- Var [file: Stratego-Octave-C.def line: 1947 col: 12]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Stratego-Octave-C.def line: 1946 col: 12]
+SdfChecker:warning: undeclared sort
+--- Row [file: Stratego-Octave-C.def line: 1945 col: 12]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Stratego-Octave-C.def line: 1944 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Stratego-Octave-C.def line: 1943 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Stratego-Octave-C.def line: 1942 col: 12]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Stratego-Octave-C.def line: 1941 col: 12]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Stratego-Octave-C.def line: 1940 col: 12]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Stratego-Octave-C.def line: 1939 col: 12]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Stratego-Octave-C.def line: 1938 col: 12]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Stratego-Octave-C.def line: 1937 col: 12]
+SdfChecker:warning: undeclared sort
+--- Init [file: Stratego-Octave-C.def line: 1936 col: 12]
+SdfChecker:warning: undeclared sort
+--- Case [file: Stratego-Octave-C.def line: 1935 col: 12]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Stratego-Octave-C.def line: 1934 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Stratego-Octave-C.def line: 1933 col: 12]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "[" { Exp "," } + "]" -> Row { bracket } [file: Stratego-Octave-C.def line: 1774 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Stratego-Octave-C.def line: 1879 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Stratego-Octave-C.def line: 1876 col: 9]
+SdfChecker:warning: undeclared sort
+--- Dec [file: Stratego-Octave-C.def line: 1869 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Stratego-Octave-C.def line: 1868 col: 31]
+SdfChecker:warning: undeclared sort
+--- Module [file: Stratego-Octave-C.def line: 1868 col: 11]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Stratego-Octave-C.def line: 1852 col: 39]
+SdfChecker:warning: undeclared sort
+--- Case [file: Stratego-Octave-C.def line: 1847 col: 17]
+SdfChecker:warning: undeclared sort
+--- Init [file: Stratego-Octave-C.def line: 1833 col: 14]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Stratego-Octave-C.def line: 1833 col: 4]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Stratego-Octave-C.def line: 1818 col: 10]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Stratego-Octave-C.def line: 1805 col: 9]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Stratego-Octave-C.def line: 1782 col: 4]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Stratego-Octave-C.def line: 1781 col: 4]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Stratego-Octave-C.def line: 1780 col: 4]
+SdfChecker:warning: undeclared sort
+--- Row [file: Stratego-Octave-C.def line: 1774 col: 27]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Stratego-Octave-C.def line: 1767 col: 41]
+SdfChecker:warning: undeclared sort
+--- Var [file: Stratego-Octave-C.def line: 1766 col: 33]
+SdfChecker:warning: undeclared sort
+--- Id [file: Stratego-Octave-C.def line: 1766 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Stratego-Octave-C.def line: 1753 col: 8]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Stratego-Octave-C.def line: 1744 col: 4]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Stratego-Octave-C.def line: 1721 col: 14]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Stratego-Octave-C.def line: 1690 col: 8]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Stratego-Octave-C.def line: 1683 col: 4]
+SdfChecker:warning: undeclared sort
+--- Initializer [file: Stratego-Octave-C.def line: 1677 col: 29]
+SdfChecker:warning: undeclared sort
+--- VarDecl [file: Stratego-Octave-C.def line: 1650 col: 21]
+SdfChecker:warning: undeclared sort
+--- TypeName [file: Stratego-Octave-C.def line: 1646 col: 24]
+SdfChecker:warning: undeclared sort
+--- TypeSpecifier [file: Stratego-Octave-C.def line: 1642 col: 24]
+SdfChecker:warning: undeclared sort
+--- ParamDeclaration [file: Stratego-Octave-C.def line: 1638 col: 24]
+SdfChecker:warning: undeclared sort
+--- MemberDeclaration [file: Stratego-Octave-C.def line: 1634 col: 22]
+SdfChecker:warning: undeclared sort
+--- Declaration [file: Stratego-Octave-C.def line: 1619 col: 18]
+SdfChecker:error: start-symbol not defined by any production
+--- StrategoModule [file: Stratego-Octave-C.def line: 1598 col: 29]
+SdfChecker:warning: undeclared sort
+--- MemberDeclaration [file: Stratego-Octave-C.def line: 1424 col: 19]
+SdfChecker:warning: undeclared sort
+--- ExternalDef [file: Stratego-Octave-C.def line: 1423 col: 19]
+SdfChecker:warning: undeclared sort
+--- ConstantExp [file: Stratego-Octave-C.def line: 1409 col: 19]
+SdfChecker:warning: undeclared sort
+--- LineFlag [file: Stratego-Octave-C.def line: 1405 col: 48]
+SdfChecker:warning: undeclared sort
+--- IntLiteral [file: Stratego-Octave-C.def line: 1405 col: 11]
+SdfChecker:warning: undeclared sort
+--- ID [file: Stratego-Octave-C.def line: 1397 col: 23]
+SdfChecker:warning: undeclared sort
+--- Comment [file: Stratego-Octave-C.def line: 1384 col: 31]
+SdfChecker:warning: undeclared sort
+--- TypedefName [file: Stratego-Octave-C.def line: 1366 col: 13]
+SdfChecker:warning: undeclared sort
+--- PostfixingAbstractDeclarator [file: Stratego-Octave-C.def line: 1361 col: 24]
+SdfChecker:warning: undeclared sort
+--- Pointer [file: Stratego-Octave-C.def line: 1361 col: 4]
+SdfChecker:warning: undeclared sort
+--- IdDeclarator [file: Stratego-Octave-C.def line: 1344 col: 4]
+SdfChecker:warning: undeclared sort
+--- TypeQualifier [file: Stratego-Octave-C.def line: 1340 col: 4]
+SdfChecker:warning: undeclared sort
+--- DeclarationQualifierList [file: Stratego-Octave-C.def line: 1339 col: 4]
+SdfChecker:warning: undeclared sort
+--- DeclarationSpecifier [file: Stratego-Octave-C.def line: 1338 col: 4]
+SdfChecker:warning: undeclared sort
+--- TypeSpecifier [file: Stratego-Octave-C.def line: 1337 col: 4]
+SdfChecker:warning: undeclared sort
+--- CompoundStm [file: Stratego-Octave-C.def line: 1332 col: 30]
+SdfChecker:warning: undeclared sort
+--- Declaration [file: Stratego-Octave-C.def line: 1330 col: 4]
+SdfChecker:warning: undeclared sort
+--- Declaration [file: Stratego-Octave-C.def line: 1296 col: 8]
+SdfChecker:warning: undeclared sort
+--- IdOrTypedefName [file: Stratego-Octave-C.def line: 1290 col: 4]
+SdfChecker:warning: undeclared sort
+--- TypedefName [file: Stratego-Octave-C.def line: 1247 col: 42]
+SdfChecker:warning: undeclared sort
+--- ElaboratedTypeName [file: Stratego-Octave-C.def line: 1247 col: 21]
+SdfChecker:warning: undeclared sort
+--- DeclarationQualifier [file: Stratego-Octave-C.def line: 1237 col: 21]
+SdfChecker:warning: undeclared sort
+--- TypeOrDefName [file: Stratego-Octave-C.def line: 1234 col: 19]
+SdfChecker:warning: undeclared sort
+--- Declarator [file: Stratego-Octave-C.def line: 1226 col: 4]
+SdfChecker:warning: undeclared sort
+--- Initializer [file: Stratego-Octave-C.def line: 1225 col: 21]
+SdfChecker:warning: undeclared sort
+--- IdDeclarator [file: Stratego-Octave-C.def line: 1224 col: 4]
+SdfChecker:warning: undeclared sort
+--- VarDecl [file: Stratego-Octave-C.def line: 1221 col: 46]
+SdfChecker:warning: undeclared sort
+--- TypeSpecifier [file: Stratego-Octave-C.def line: 1221 col: 29]
+SdfChecker:warning: undeclared sort
+--- DeclarationSpecifier [file: Stratego-Octave-C.def line: 1221 col: 6]
+SdfChecker:warning: undeclared sort
+--- Declaration [file: Stratego-Octave-C.def line: 1220 col: 71]
+SdfChecker:warning: undeclared sort
+--- IdDecl [file: Stratego-Octave-C.def line: 1220 col: 51]
+SdfChecker:warning: undeclared sort
+--- DeclarationQualifierList [file: Stratego-Octave-C.def line: 1220 col: 6]
+SdfChecker:warning: undeclared sort
+--- TypeQualifier [file: Stratego-Octave-C.def line: 1216 col: 18]
+SdfChecker:warning: undeclared sort
+--- BasicTypeName [file: Stratego-Octave-C.def line: 1205 col: 18]
+SdfChecker:warning: undeclared sort
+--- StorageClass [file: Stratego-Octave-C.def line: 1198 col: 18]
+SdfChecker:warning: undeclared sort
+--- Keyword [file: Stratego-Octave-C.def line: 1505 col: 18]
+SdfChecker:warning: undeclared sort
+--- IdOrTypedefName [file: Stratego-Octave-C.def line: 1268 col: 19]
+SdfChecker:warning: undeclared sort
+--- TypedefName [file: Stratego-Octave-C.def line: 1267 col: 19]
+SdfChecker:warning: undeclared sort
+--- Keyword [file: Stratego-Octave-C.def line: 1259 col: 4]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "(" CommaExp ")" -> PrimaryExp { bracket } [file: Stratego-Octave-C.def line: 1054 col: 4]
+SdfChecker:warning: undeclared sort
+--- TypeName [file: Stratego-Octave-C.def line: 1084 col: 17]
+SdfChecker:warning: undeclared sort
+--- TypedefName [file: Stratego-Octave-C.def line: 1069 col: 4]
+SdfChecker:warning: undeclared sort
+--- StringLiteralList [file: Stratego-Octave-C.def line: 1053 col: 4]
+SdfChecker:warning: undeclared sort
+--- Constant [file: Stratego-Octave-C.def line: 1052 col: 4]
+SdfChecker:warning: undeclared sort
+--- ConstantExp [file: Stratego-Octave-C.def line: 1042 col: 20]
+SdfChecker:warning: undeclared sort
+--- Declarator [file: Stratego-Octave-C.def line: 1041 col: 4]
+SdfChecker:warning: undeclared sort
+--- MemberIdDeclarator [file: Stratego-Octave-C.def line: 1038 col: 20]
+SdfChecker:warning: undeclared sort
+--- TypeQualifier [file: Stratego-Octave-C.def line: 1038 col: 4]
+SdfChecker:warning: undeclared sort
+--- MemberDeclarator [file: Stratego-Octave-C.def line: 1037 col: 20]
+SdfChecker:warning: undeclared sort
+--- TypeSpecifier [file: Stratego-Octave-C.def line: 1037 col: 4]
+SdfChecker:warning: undeclared sort
+--- MemberDeclaration [file: Stratego-Octave-C.def line: 1029 col: 34]
+SdfChecker:warning: undeclared sort
+--- IdOrTypedefName [file: Stratego-Octave-C.def line: 1029 col: 13]
+SdfChecker:warning: undeclared sort
+--- EnumSpecifier [file: Stratego-Octave-C.def line: 1026 col: 4]
+SdfChecker:warning: undeclared sort
+--- UnionSpecifier [file: Stratego-Octave-C.def line: 1025 col: 4]
+SdfChecker:warning: undeclared sort
+--- ElaboratedTypeName [file: Stratego-Octave-C.def line: 1024 col: 23]
+SdfChecker:warning: undeclared sort
+--- StructSpecifier [file: Stratego-Octave-C.def line: 1024 col: 4]
+SdfChecker:warning: undeclared sort
+--- ConstantExp [file: Stratego-Octave-C.def line: 1019 col: 8]
+SdfChecker:warning: undeclared sort
+--- EnumeratorValue [file: Stratego-Octave-C.def line: 1016 col: 20]
+SdfChecker:warning: undeclared sort
+--- EnumSpecifier [file: Stratego-Octave-C.def line: 1012 col: 57]
+SdfChecker:warning: undeclared sort
+--- Enumerator [file: Stratego-Octave-C.def line: 1012 col: 33]
+SdfChecker:warning: undeclared sort
+--- IdOrTypedefName [file: Stratego-Octave-C.def line: 1012 col: 11]
+SdfChecker:warning: undeclared sort
+--- TypeName [file: Stratego-Octave-C.def line: 1006 col: 42]
+SdfChecker:warning: undeclared sort
+--- TypeQualifier [file: Stratego-Octave-C.def line: 1003 col: 4]
+SdfChecker:warning: undeclared sort
+--- DeclarationQualifierList [file: Stratego-Octave-C.def line: 1002 col: 4]
+SdfChecker:warning: undeclared sort
+--- TypedefDeclarator [file: Stratego-Octave-C.def line: 996 col: 45]
+SdfChecker:warning: undeclared sort
+--- TypeSpecifier [file: Stratego-Octave-C.def line: 996 col: 29]
+SdfChecker:warning: undeclared sort
+--- DeclarationSpecifier [file: Stratego-Octave-C.def line: 996 col: 6]
+SdfChecker:warning: undeclared sort
+--- ParamDeclaration [file: Stratego-Octave-C.def line: 995 col: 66]
+SdfChecker:warning: undeclared sort
+--- IdDeclarator [file: Stratego-Octave-C.def line: 995 col: 45]
+SdfChecker:warning: undeclared sort
+--- AbstractDeclarator [file: Stratego-Octave-C.def line: 995 col: 24]
+SdfChecker:warning: undeclared sort
+--- ParamDeclTypeSpec [file: Stratego-Octave-C.def line: 995 col: 4]
+SdfChecker:warning: undeclared sort
+--- ConstantExp [file: Stratego-Octave-C.def line: 984 col: 33]
+SdfChecker:warning: undeclared sort
+--- ParamDeclaration [file: Stratego-Octave-C.def line: 980 col: 9]
+SdfChecker:warning: undeclared sort
+--- ArrayAbstractDeclarator [file: Stratego-Octave-C.def line: 979 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixingAbstractDeclarator [file: Stratego-Octave-C.def line: 973 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixAbstractDeclarator [file: Stratego-Octave-C.def line: 972 col: 4]
+SdfChecker:warning: undeclared sort
+--- AbstractDeclarator [file: Stratego-Octave-C.def line: 971 col: 36]
+SdfChecker:warning: undeclared sort
+--- UnaryAbstractDeclarator [file: Stratego-Octave-C.def line: 971 col: 4]
+SdfChecker:warning: undeclared sort
+--- Pointer [file: Stratego-Octave-C.def line: 968 col: 26]
+SdfChecker:warning: undeclared sort
+--- TypeQualifier [file: Stratego-Octave-C.def line: 968 col: 8]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "(" Type ")" -> ArgType { bracket } [file: Stratego-Octave-C.def line: 534 col: 4]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "<" Strategy ">" -> StrategyAngle { bracket } [file: Stratego-Octave-C.def line: 346 col: 5]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Stratego-Octave-C.def line: 151 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Stratego-Octave-C.def line: 148 col: 9]
+SdfChecker:warning: undeclared sort
+--- FunctionDeclaration [file: Stratego-Octave-C.def line: 135 col: 17]
+SdfChecker:warning: undeclared sort
+--- CellTyped [file: Stratego-Octave-C.def line: 126 col: 15]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Stratego-Octave-C.def line: 108 col: 18]
+SdfChecker:warning: undeclared sort
+--- Type [file: Stratego-Octave-C.def line: 94 col: 10]
+SdfChecker:warning: undeclared sort
+--- Id [file: Stratego-Octave-C.def line: 92 col: 2]
+SdfChecker:warning: undeclared sort
+--- FunctionType [file: Stratego-Octave-C.def line: 87 col: 14]
+SdfChecker:warning: undeclared sort
+--- VarTyped [file: Stratego-Octave-C.def line: 82 col: 14]
+SdfChecker:warning: undeclared sort
+--- UserDecls [file: Stratego-Octave-C.def line: 80 col: 38]
+SdfChecker:warning: undeclared sort
+--- MappingFuncs [file: Stratego-Octave-C.def line: 80 col: 23]
+SdfChecker:warning: undeclared sort
+--- FunctionSignatures [file: Stratego-Octave-C.def line: 80 col: 3]
+SdfChecker:warning: undeclared sort
+--- Variables [file: Stratego-Octave-C.def line: 79 col: 27]
+SdfChecker:warning: undeclared sort
+--- Constants [file: Stratego-Octave-C.def line: 79 col: 16]
+SdfChecker:warning: undeclared sort
+--- CellTyped [file: Stratego-Octave-C.def line: 49 col: 27]
+SdfChecker:warning: undeclared sort
+--- TypeShape [file: Stratego-Octave-C.def line: 47 col: 20]
+SdfChecker:warning: undeclared sort
+--- Type [file: Stratego-Octave-C.def line: 44 col: 23]
+SdfChecker:warning: undeclared sort
+--- UnOp [file: Stratego-Octave-C.def line: 43 col: 20]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Stratego-Octave-C.def line: 41 col: 20]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Stratego-Octave-C.def line: 39 col: 20]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Stratego-Octave-C.def line: 36 col: 28]
+SdfChecker:warning: undeclared sort
+--- Id [file: Stratego-Octave-C.def line: 35 col: 25]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Stratego-Octave-C.def line: 34 col: 22]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Stratego-Octave-C.def line: 33 col: 25]
+SdfChecker:warning: undeclared sort
+--- OctaveStrConst [file: Stratego-Octave-C.def line: 28 col: 37]
+SdfChecker:warning: undeclared sort
+--- OctaveRealConst [file: Stratego-Octave-C.def line: 27 col: 37]
+SdfChecker:warning: undeclared sort
+--- OctaveId [file: Stratego-Octave-C.def line: 24 col: 37]
+SdfChecker:warning: undeclared sort
+--- TypeShape [file: Stratego-Octave-C.def line: 12 col: 9]
+SdfChecker:warning: undeclared sort
+--- OctaveIntConst [file: Stratego-Octave-C.def line: 11 col: 20]
+SdfChecker:warning: undeclared sort
+--- OctaveLValue [file: Stratego-Octave-C.def line: 10 col: 18]
+SdfChecker:warning: undeclared sort
+--- OctaveExp [file: Stratego-Octave-C.def line: 8 col: 11]
+SdfChecker:warning: undeclared sort
+--- OctaveDec [file: Stratego-Octave-C.def line: 7 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Stratego-Octave-C.def line: 6 col: 34]
+SdfChecker:warning: undeclared sort
+--- OctaveModule [file: Stratego-Octave-C.def line: 6 col: 11]
+/usr//bin/sdf2table -m Octave-Concrete-Syntax -i Octave-Concrete-Syntax.def -o Octave-Concrete-Syntax.tbl 
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- Dec [file: Octave-Concrete-Syntax.def line: 191 col: 11]
+SdfChecker:error: symbol is not defined by any production
+--- Module [file: Octave-Concrete-Syntax.def line: 190 col: 11]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "[" { Exp "," } + "]" -> Row { bracket } [file: Octave-Concrete-Syntax.def line: 96 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Octave-Concrete-Syntax.def line: 201 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Octave-Concrete-Syntax.def line: 198 col: 9]
+SdfChecker:warning: undeclared sort
+--- Dec [file: Octave-Concrete-Syntax.def line: 191 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Octave-Concrete-Syntax.def line: 190 col: 31]
+SdfChecker:warning: undeclared sort
+--- Module [file: Octave-Concrete-Syntax.def line: 190 col: 11]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Octave-Concrete-Syntax.def line: 174 col: 39]
+SdfChecker:warning: undeclared sort
+--- Case [file: Octave-Concrete-Syntax.def line: 169 col: 17]
+SdfChecker:warning: undeclared sort
+--- Init [file: Octave-Concrete-Syntax.def line: 155 col: 14]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Octave-Concrete-Syntax.def line: 155 col: 4]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Octave-Concrete-Syntax.def line: 140 col: 10]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Octave-Concrete-Syntax.def line: 127 col: 9]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Octave-Concrete-Syntax.def line: 104 col: 4]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Octave-Concrete-Syntax.def line: 103 col: 4]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Octave-Concrete-Syntax.def line: 102 col: 4]
+SdfChecker:warning: undeclared sort
+--- Row [file: Octave-Concrete-Syntax.def line: 96 col: 27]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Octave-Concrete-Syntax.def line: 89 col: 41]
+SdfChecker:warning: undeclared sort
+--- Var [file: Octave-Concrete-Syntax.def line: 88 col: 33]
+SdfChecker:warning: undeclared sort
+--- Id [file: Octave-Concrete-Syntax.def line: 88 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Octave-Concrete-Syntax.def line: 75 col: 8]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Octave-Concrete-Syntax.def line: 66 col: 4]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Octave-Concrete-Syntax.def line: 43 col: 14]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Octave-Concrete-Syntax.def line: 12 col: 8]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Octave-Concrete-Syntax.def line: 5 col: 4]
+/usr//bin/sdf2table -m Octave-Concrete-SyntaxRenamed -i Octave-Concrete-SyntaxRenamed.def -o Octave-Concrete-SyntaxRenamed.tbl 
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- Dec [file: Octave-Concrete-SyntaxRenamed.def line: 191 col: 11]
+SdfChecker:error: symbol is not defined by any production
+--- Module [file: Octave-Concrete-SyntaxRenamed.def line: 190 col: 11]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Octave-Concrete-SyntaxRenamed.def line: 275 col: 12]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Octave-Concrete-SyntaxRenamed.def line: 274 col: 12]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Octave-Concrete-SyntaxRenamed.def line: 273 col: 12]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Octave-Concrete-SyntaxRenamed.def line: 272 col: 12]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Octave-Concrete-SyntaxRenamed.def line: 271 col: 12]
+SdfChecker:warning: undeclared sort
+--- Id [file: Octave-Concrete-SyntaxRenamed.def line: 270 col: 12]
+SdfChecker:warning: undeclared sort
+--- Var [file: Octave-Concrete-SyntaxRenamed.def line: 269 col: 12]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Octave-Concrete-SyntaxRenamed.def line: 268 col: 12]
+SdfChecker:warning: undeclared sort
+--- Row [file: Octave-Concrete-SyntaxRenamed.def line: 267 col: 12]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Octave-Concrete-SyntaxRenamed.def line: 266 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Octave-Concrete-SyntaxRenamed.def line: 265 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Octave-Concrete-SyntaxRenamed.def line: 264 col: 12]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Octave-Concrete-SyntaxRenamed.def line: 263 col: 12]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Octave-Concrete-SyntaxRenamed.def line: 262 col: 12]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Octave-Concrete-SyntaxRenamed.def line: 261 col: 12]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Octave-Concrete-SyntaxRenamed.def line: 260 col: 12]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Octave-Concrete-SyntaxRenamed.def line: 259 col: 12]
+SdfChecker:warning: undeclared sort
+--- Init [file: Octave-Concrete-SyntaxRenamed.def line: 258 col: 12]
+SdfChecker:warning: undeclared sort
+--- Case [file: Octave-Concrete-SyntaxRenamed.def line: 257 col: 12]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Octave-Concrete-SyntaxRenamed.def line: 256 col: 12]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Octave-Concrete-SyntaxRenamed.def line: 255 col: 12]
+SdfChecker:warning: bracket attribute should be applied to productions of the form '"..." X "..." -> X'
+--- "[" { Exp "," } + "]" -> Row { bracket } [file: Octave-Concrete-SyntaxRenamed.def line: 96 col: 4]
+SdfChecker:warning: undeclared sort
+--- Asterisk [file: Octave-Concrete-SyntaxRenamed.def line: 201 col: 4]
+SdfChecker:warning: undeclared sort
+--- CommChar [file: Octave-Concrete-SyntaxRenamed.def line: 198 col: 9]
+SdfChecker:warning: undeclared sort
+--- Dec [file: Octave-Concrete-SyntaxRenamed.def line: 191 col: 11]
+SdfChecker:warning: undeclared sort
+--- StrategoStrategy [file: Octave-Concrete-SyntaxRenamed.def line: 190 col: 31]
+SdfChecker:warning: undeclared sort
+--- Module [file: Octave-Concrete-SyntaxRenamed.def line: 190 col: 11]
+SdfChecker:warning: undeclared sort
+--- Stmt [file: Octave-Concrete-SyntaxRenamed.def line: 174 col: 39]
+SdfChecker:warning: undeclared sort
+--- Case [file: Octave-Concrete-SyntaxRenamed.def line: 169 col: 17]
+SdfChecker:warning: undeclared sort
+--- Init [file: Octave-Concrete-SyntaxRenamed.def line: 155 col: 14]
+SdfChecker:warning: undeclared sort
+--- DeclSort [file: Octave-Concrete-SyntaxRenamed.def line: 155 col: 4]
+SdfChecker:warning: undeclared sort
+--- Sign [file: Octave-Concrete-SyntaxRenamed.def line: 140 col: 10]
+SdfChecker:warning: undeclared sort
+--- StrChar [file: Octave-Concrete-SyntaxRenamed.def line: 127 col: 9]
+SdfChecker:warning: undeclared sort
+--- StrConst [file: Octave-Concrete-SyntaxRenamed.def line: 104 col: 4]
+SdfChecker:warning: undeclared sort
+--- RealConst [file: Octave-Concrete-SyntaxRenamed.def line: 103 col: 4]
+SdfChecker:warning: undeclared sort
+--- IntConst [file: Octave-Concrete-SyntaxRenamed.def line: 102 col: 4]
+SdfChecker:warning: undeclared sort
+--- Row [file: Octave-Concrete-SyntaxRenamed.def line: 96 col: 27]
+SdfChecker:warning: undeclared sort
+--- LValue [file: Octave-Concrete-SyntaxRenamed.def line: 89 col: 41]
+SdfChecker:warning: undeclared sort
+--- Var [file: Octave-Concrete-SyntaxRenamed.def line: 88 col: 33]
+SdfChecker:warning: undeclared sort
+--- Id [file: Octave-Concrete-SyntaxRenamed.def line: 88 col: 4]
+SdfChecker:warning: undeclared sort
+--- PostfixOp [file: Octave-Concrete-SyntaxRenamed.def line: 75 col: 8]
+SdfChecker:warning: undeclared sort
+--- PrefixOp [file: Octave-Concrete-SyntaxRenamed.def line: 66 col: 4]
+SdfChecker:warning: undeclared sort
+--- AssignOperator [file: Octave-Concrete-SyntaxRenamed.def line: 43 col: 14]
+SdfChecker:warning: undeclared sort
+--- BinOp [file: Octave-Concrete-SyntaxRenamed.def line: 12 col: 8]
+SdfChecker:warning: undeclared sort
+--- Exp [file: Octave-Concrete-SyntaxRenamed.def line: 5 col: 4]
+Tools registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:    
+Data registered in repository /home/marcusmae/Sources/octave/octavec/trunk/BUILDTIME_XTC:     Octave-Concrete-SyntaxRenamed.def Octave-Concrete-SyntaxRenamed.sdf common.def StrategoOctaveCS.tbl type-specification.tbl Stratego-Octave-C.tbl Octave-Concrete-Syntax.tbl Octave-Concrete-SyntaxRenamed.tbl common.sdf Octave-Concrete-Syntax.sdf Octave-C.sdf OctaveTC-Congruences.sdf OctaveTC-Variables.sdf Operators.sdf Stratego-Octave-C.sdf StrategoOctaveCS.sdf StrategoOctaveTc.sdf type-specification.sdf Octave-Concrete-Syntax.def  
+rm StrategoOctaveCS.def Stratego-Octave-C.def type-specification.def
+make[3]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+make[2]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+Making all in src
+make[2]: Entering directory `/home/marcusmae/Sources/octave/octavec/trunk/src'
+/usr/bin/strc -c --library \
+	  -O 2 --verbose 1 \
+	  -i oct.str -o liboctavec.rtree \
+	  --statistics 2 \
+	  --format-check 0 \
+	  -I ../syntax -I .  && \
+	  rm liboctavec.str
+[ strc | info ] Compiling 'oct.str'
+[ strc | info ] Front-end succeeded         : [user/system] = [3.48s/0.06s]
+[ strc | info ] Optimization succeeded -O 2 : [user/system] = [0.27s/0.00s]
+[ strc | info ] Abstract syntax in 'liboctavec.rtree'
+[ strc | info ] Concrete syntax in 'liboctavec.str'
+[ strc | info ] Export of externals succeeded : [user/system] = [0.33s/0.04s]
+[ strc | info ] Pretty print                : [user/system] = [0.10s/0.00s]
+[ strc | info ] Back-end succeeded          : [user/system] = [1.77s/0.02s]
+[ strc | info ] Compilation succeeded       : [user/system] = [5.85s/0.12s]
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I/usr//include   -I/usr//include   -I/usr//include   -I../syntax/libparseoctave  -Wall -Wno-unused-label -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -DDEFAULT_XTC_REPOSITORY="\"/usr/share/octavec/XTC\"" -g -O2 -MT liboctavec.lo -MD -MP -MF .deps/liboctavec.Tpo -c -o liboctavec.lo liboctavec.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I/usr//include -I/usr//include -I/usr//include -I../syntax/libparseoctave -Wall -Wno-unused-label -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -DDEFAULT_XTC_REPOSITORY=\"/usr/share/octavec/XTC\" -g -O2 -MT liboctavec.lo -MD -MP -MF .deps/liboctavec.Tpo -c liboctavec.c  -fPIC -DPIC -o .libs/liboctavec.o
+liboctavec.c: In function ?is_command_0_0?:
+liboctavec.c:15607: warning: implicit declaration of function ?is_command?
+liboctavec.c:15607: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?is_mapping_function_0_0?:
+liboctavec.c:15636: warning: implicit declaration of function ?is_mapping_function?
+liboctavec.c:15636: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?is_dld_function_0_0?:
+liboctavec.c:15665: warning: implicit declaration of function ?is_dld_function?
+liboctavec.c:15665: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?is_builtin_function_0_0?:
+liboctavec.c:15694: warning: implicit declaration of function ?is_builtin_function?
+liboctavec.c:15694: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?is_user_function_0_0?:
+liboctavec.c:15723: warning: implicit declaration of function ?is_user_function?
+liboctavec.c:15723: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?is_function_0_0?:
+liboctavec.c:15752: warning: implicit declaration of function ?is_function?
+liboctavec.c:15752: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?parse_octave_function_0_0?:
+liboctavec.c:15802: warning: implicit declaration of function ?parse_octave?
+liboctavec.c:15802: warning: assignment makes pointer from integer without a cast
+liboctavec.c: In function ?initialize_octave_stuff_0_0?:
+liboctavec.c:15829: warning: implicit declaration of function ?initialize_octave_stuff?
+liboctavec.c:15829: warning: assignment makes pointer from integer without a cast
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I/usr//include -I/usr//include -I/usr//include -I../syntax/libparseoctave -Wall -Wno-unused-label -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -DDEFAULT_XTC_REPOSITORY=\"/usr/share/octavec/XTC\" -g -O2 -MT liboctavec.lo -MD -MP -MF .deps/liboctavec.Tpo -c liboctavec.c -o liboctavec.o >/dev/null 2>&1
+mv -f .deps/liboctavec.Tpo .deps/liboctavec.Plo
+/bin/sh ../libtool --tag=CC   --mode=link gcc -Wall -Wno-unused-label -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -DDEFAULT_XTC_REPOSITORY="\"/usr/share/octavec/XTC\"" -g -O2   -o liboctavec.la -rpath /usr/lib/octavec liboctavec.lo  
+libtool: link: gcc -shared  .libs/liboctavec.o      -Wl,-soname -Wl,liboctavec.so.0 -o .libs/liboctavec.so.0.0.0
+libtool: link: (cd ".libs" && rm -f "liboctavec.so.0" && ln -s "liboctavec.so.0.0.0" "liboctavec.so.0")
+libtool: link: (cd ".libs" && rm -f "liboctavec.so" && ln -s "liboctavec.so.0.0.0" "liboctavec.so")
+libtool: link: ar cru .libs/liboctavec.a  liboctavec.o
+libtool: link: ranlib .libs/liboctavec.a
+libtool: link: ( cd ".libs" && rm -f "liboctavec.la" && ln -s "../liboctavec.la" "liboctavec.la" )
+/usr/bin/strc -c --library \
+	  -O 2 --verbose 1 \
+	  -i o2c.str -o libo2c.rtree \
+	  --statistics 2 \
+	  --format-check 0 \
+	  -I ../syntax -I .  && \
+	rm libo2c.str
+[ strc | info ] Compiling 'o2c.str'
+[ strc | error ] in definition TranslateExpAsStmt(1|0): constructor UNIT/0 not declared
+    UNIT()
+
+[ strc | error ] Compilation failed (10.23 secs)
+make[2]: *** [libo2c.c] Error 1
+make[2]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk'
+make: *** [all] Error 2
+
+From maemarcus at gmail.com  Tue Dec 15 01:57:04 2009
+From: maemarcus at gmail.com (Dmitry N. Mikushin)
+Date: Tue, 15 Dec 2009 03:57:04 +0300
+Subject: [Stratego Users] make install error in octavec
+Message-ID: <e8a879a50912141657s458568c5k1f6fdf987a91597a@mail.gmail.com>
+
+Hello, Stratego/XT community,
+
+The 1626 revision of Octave Compiler has problems with making target
+install. Here's a build log:
+
+[root at localhost trunk]# make install
+Making install in syntax
+make[1]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+Making install in pp
+make[2]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+Tools registered in repository /home/marcusmae/Sources/trunk/BUILDTIME_XTC:
+Data registered in repository
+/home/marcusmae/Sources/trunk/BUILDTIME_XTC:   Octave-pretty.pp.af
+RealOctave-pretty.pp.af C-pretty1.pp.af
+make[3]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Tools registered in repository /usr/share/octavec/XTC:
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Data registered in repository /usr/share/octavec/XTC:
+Octave-pretty.pp.af RealOctave-pretty.pp.af C-pretty1.pp.af
+test -z "/usr/share/octavec" || /bin/mkdir -p "/usr/share/octavec"
+ /usr/bin/install -c -m 644 Octave-pretty.pp.af
+RealOctave-pretty.pp.af C-pretty1.pp.af '/usr/share/octavec'
+make[3]: Leaving directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+make[2]: Leaving directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/pp'
+Making install in libparseoctave
+make[2]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+Tools registered in repository /home/marcusmae/Sources/trunk/BUILDTIME_XTC:
+Data registered in repository /home/marcusmae/Sources/trunk/BUILDTIME_XTC:
+make[3]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Tools registered in repository /usr/share/octavec/XTC:
+test -z "/usr/lib/octavec" || /bin/mkdir -p "/usr/lib/octavec"
+ /bin/sh ../../libtool   --mode=install /usr/bin/install -c
+libparseoctave.la '/usr/lib/octavec'
+libtool: install: /usr/bin/install -c .libs/libparseoctave.so.0.0.0
+/usr/lib/octavec/libparseoctave.so.0.0.0
+libtool: install: (cd /usr/lib/octavec && { ln -s -f
+libparseoctave.so.0.0.0 libparseoctave.so.0 || { rm -f
+libparseoctave.so.0 && ln -s libparseoctave.so.0.0.0
+libparseoctave.so.0; }; })
+libtool: install: (cd /usr/lib/octavec && { ln -s -f
+libparseoctave.so.0.0.0 libparseoctave.so || { rm -f libparseoctave.so
+&& ln -s libparseoctave.so.0.0.0 libparseoctave.so; }; })
+libtool: install: /usr/bin/install -c .libs/libparseoctave.lai
+/usr/lib/octavec/libparseoctave.la
+libtool: install: /usr/bin/install -c .libs/libparseoctave.a
+/usr/lib/octavec/libparseoctave.a
+libtool: install: chmod 644 /usr/lib/octavec/libparseoctave.a
+libtool: install: ranlib /usr/lib/octavec/libparseoctave.a
+libtool: finish:
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/lib/qt4/bin:/sbin"
+ldconfig -n /usr/lib/octavec
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/lib/octavec
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Data registered in repository /usr/share/octavec/XTC:
+test -z "/usr/include" || /bin/mkdir -p "/usr/include"
+ /usr/bin/install -c -m 644 parse-octave.h '/usr/include'
+make[3]: Leaving directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+make[2]: Leaving directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax/libparseoctave'
+make[2]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+Tools registered in repository /home/marcusmae/Sources/trunk/BUILDTIME_XTC:
+Data registered in repository
+/home/marcusmae/Sources/trunk/BUILDTIME_XTC:
+Octave-Concrete-SyntaxRenamed.def Octave-Concrete-SyntaxRenamed.sdf
+common.def StrategoOctaveCS.tbl type-specification.tbl
+Stratego-Octave-C.tbl Octave-Concrete-Syntax.tbl
+Octave-Concrete-SyntaxRenamed.tbl common.sdf
+Octave-Concrete-SyntaxRenamed.sdf Octave-Concrete-Syntax.sdf
+Octave-C.sdf OctaveTC-Congruences.sdf OctaveTC-Variables.sdf
+Operators.sdf Stratego-Octave-C.sdf StrategoOctaveCS.sdf
+StrategoOctaveTc.sdf type-specification.sdf Octave-Concrete-Syntax.def
+make[3]: Entering directory
+`/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Tools registered in repository /usr/share/octavec/XTC:
+/bin/sh /home/marcusmae/Sources/trunk/config/install-sh -d `dirname
+/usr/share/octavec/XTC`
+Data registered in repository /usr/share/octavec/XTC:
+Octave-Concrete-SyntaxRenamed.def Octave-Concrete-SyntaxRenamed.sdf
+common.def StrategoOctaveCS.tbl type-specification.tbl
+Stratego-Octave-C.tbl Octave-Concrete-Syntax.tbl
+Octave-Concrete-SyntaxRenamed.tbl common.sdf
+Octave-Concrete-SyntaxRenamed.sdf Octave-Concrete-Syntax.sdf
+Octave-C.sdf OctaveTC-Congruences.sdf OctaveTC-Variables.sdf
+Operators.sdf Stratego-Octave-C.sdf StrategoOctaveCS.sdf
+StrategoOctaveTc.sdf type-specification.sdf Octave-Concrete-Syntax.def
+test -z "/usr/share/sdf/octavec" || /bin/mkdir -p "/usr/share/sdf/octavec"
+ /usr/bin/install -c -m 644 Octave-Concrete-SyntaxRenamed.def
+Octave-Concrete-SyntaxRenamed.sdf common.def StrategoOctaveCS.tbl
+type-specification.tbl Stratego-Octave-C.tbl
+Octave-Concrete-Syntax.tbl Octave-Concrete-SyntaxRenamed.tbl
+common.sdf Octave-Concrete-SyntaxRenamed.sdf
+Octave-Concrete-Syntax.sdf Octave-C.sdf OctaveTC-Congruences.sdf
+OctaveTC-Variables.sdf Operators.sdf Stratego-Octave-C.sdf
+StrategoOctaveCS.sdf StrategoOctaveTc.sdf type-specification.sdf
+Octave-Concrete-Syntax.def '/usr/share/sdf/octavec'
+/usr/bin/install: will not overwrite just-created
+`/usr/share/sdf/octavec/Octave-Concrete-SyntaxRenamed.sdf' with
+`Octave-Concrete-SyntaxRenamed.sdf'
+make[3]: *** [install-sdfdataDATA] Error 1
+make[3]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+make[2]: *** [install-am] Error 2
+make[2]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+make[1]: *** [install-recursive] Error 1
+make[1]: Leaving directory `/home/marcusmae/Sources/octave/octavec/trunk/syntax'
+make: *** [install-recursive] Error 1
+
+However, with 'make install-exec' it is still possible to install executables.
+
+Kind Regards,
+
+--
+Dmitry N. Mikushin
+Scientific Research Computing Center
+Moscow State University
+
+From maemarcus at gmail.com  Tue Dec 15 02:45:51 2009
+From: maemarcus at gmail.com (Dmitry N. Mikushin)
+Date: Tue, 15 Dec 2009 04:45:51 +0300
+Subject: [Stratego Users] Invoking octavec
+Message-ID: <e8a879a50912141745p6d433f60udab136bf65077846@mail.gmail.com>
+
+Hello,
+
+I'm trying to test various functionality of Stratego/XT Octave Compiler.
+
+As I understand, the following invocation:
+
+octavec --o2o c.m -i cellindex.m --script
+
+passes cellindex.m source code through processor and returns back to c.m
+Correct?
+
+And this is what I've got from running it:
+
+*** ERROR *** pt-aterm: Stack is empty.
+*** ERROR *** pt-aterm: Failling gracefully
+[ remove-implicit-assignments | error ] No XTC registration for builtin.ti found
+remove-implicit-assignments: rewriting failed, trace:
+	main_0_0
+	io_wrap_1_0
+	option_wrap_5_0
+	lifted145
+	input_1_0
+	lifted146
+	output_1_0
+	lifted46
+	generate_internal_fcn_rule_0_0
+	read_builtin_specs_0_0
+	xtc_find_0_0
+
+Am I doing something wrong?
+
+Kind regards,
+D.
+

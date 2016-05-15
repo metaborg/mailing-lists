@@ -1,0 +1,49 @@
+From tamarit27 at gmail.com  Tue Feb  2 23:23:06 2016
+From: tamarit27 at gmail.com (Salvador Tamarit)
+Date: Tue, 2 Feb 2016 23:23:06 +0100
+Subject: [Stratego Users] PROHA 2016 (@ CGO'16): Early Registration Deadline
+	(Feb 3)
+Message-ID: <CANuSBjgB89ARfmWWmLVZ_7fDiHQ93tph7kooEXJH3wOmWgrRig@mail.gmail.com>
+
+******************************************************************************
+
+PROHA 2016 -- CALL FOR PARTICIPATION
+
+      First Workshop on Program Transformation
+ for Programmability in Heterogeneous Architectures
+
+   Website: http://goo.gl/RzGbzY
+
+     Barcelona, 12th March 2016
+     In conjunction with the CGO'16 Conference
+
+==== Early Bird Registration: February 3rd, 2016 ====
+
+      For registration information, please see
+http://cgo.org/cgo2016/registration/
+
+******************************************************************************
+
+The PROHA  workshop focuses on  techniques and foundations to  make it
+possible  to perform  source  code transformations  that preserve  the
+intended  semantics  of  the original  code  and  improve  efficiency,
+portability  or  maintainability.   The  topics of  interest  for  the
+workshop  include,  non-exclusively:  program annotations  to  capture
+algorithmic  properties   and intended  code   semantics;  programming
+paradigms  able to  express  underlying  (mathematical) properties  of
+code; usage  of dynamic and  static mechanisms to infer  relevant code
+properties;   transformations  which   preserve  intended   semantics;
+strategies  to  apply  transformations; heuristics  to  guide  program
+transformation and techniques to  synthesize / learn these heuristics;
+tools supporting the aforementioned topics.
+
+Venue: Gran Hotel Princesa Sofia, Barcelona, Spain.
+
+Please consult the workshop website (http://goo.gl/RzGbzY) for an
+up-to-date program.
+
+******************************************************************************
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160202/96c9f333/attachment.html>
+

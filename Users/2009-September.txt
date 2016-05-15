@@ -1,0 +1,290 @@
+From gre at ecs.soton.ac.uk  Fri Sep 11 16:29:55 2009
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 11 Sep 2009 15:29:55 +0100
+Subject: [Stratego Users] LDTA 2010 First Call for Papers
+In-Reply-To: <c9757bb60909110654m6b1e4edfg1ba456089e78105e@mail.gmail.com>
+References: <c9757bb60909110231n3d9ad3eavbf58a9871a22e515@mail.gmail.com> 
+	<c9757bb60909110248n5417bdb0nee1901e642f0a1d@mail.gmail.com> 
+	<c9757bb60909110254v74b4f4c2u1fa7d31d6a406a27@mail.gmail.com> 
+	<c9757bb60909110255i69d7b1aen9d4f7dbf54088a18@mail.gmail.com> 
+	<c9757bb60909110309j3c5320acybde0e90dedfb09a7@mail.gmail.com> 
+	<c9757bb60909110311w45501c3fs417a882e230424b0@mail.gmail.com> 
+	<c9757bb60909110312l6153760fy4be7939b1e6473b@mail.gmail.com> 
+	<c9757bb60909110313y1f42675ci78ba63f7eeea8785@mail.gmail.com> 
+	<c9757bb60909110321j1f81959cu75afb6a7db59a52d@mail.gmail.com> 
+	<c9757bb60909110654m6b1e4edfg1ba456089e78105e@mail.gmail.com>
+Message-ID: <c9757bb60909110729l1910a998p673cfe057fd3f355@mail.gmail.com>
+
+*** abstracts: (Nov. 27, 2009) ?// ?full papers: (Dec. 04, 2009) ***
+
+====================================================================
+? ? ? ? ? ? ? ? ? ? ?CALL FOR PAPERS
+?10th Workshop on Language Descriptions, Tools, and Applications
+? ? ? ? ? ? ? ? ? ? ? ?(LDTA 2010)
+? ? ? ? ? ? ? ? ? ?[ http://ldta.info ]
+? ? ? ? ? ? ? ? ? ? ? Paphos, Cyprus
+? ? ? ? ? ? ?During ETAPS (March 20-28, 2010)
+====================================================================
+
+===Call For Papers 2010===
+
+This is the Call For Papers for the Tenth Workshop on
+Language Descriptions, Tools, and Applications (LDTA 2010):
+- [ http://ldta.info ]
+
+LDTA is a two-day satellite event of ETAPS which will take place
+during ETAPS (March 20-28, 2010) in Paphos, Cyprus.
+- [ http://www.etaps10.cs.ucy.ac.cy ]
+
+==Scope==
+
+LDTA is an application and tool oriented forum on meta programming in
+a broad sense. A meta program is a program that takes other programs
+as input or output. The focus of LDTA is on generated or otherwise
+efficiently implemented meta programs, possibly using high level
+descriptions of programming languages. Tools and techniques presented
+at LDTA are usually applicable in the context of "Language
+Workbenches" or "Meta Programming Systems" or simply as parts of
+advanced programming environments or IDEs. The applications areas
+include, but are not limited to:
+
+* Program analysis, transformation, generation, and verification
+* Implementation of Domain Specific Languages (both graphical and textual)
+* Reverse engineering and reengineering
+* Refactoring and other source-to-source transformations
+* Application modelling (MDE, MDA, Software Factories,
+?Software product lines)
+* Grammar engineering / Grammarware
+* Language definition and language prototyping
+* Debugging, profiling, and testing
+
+LDTA is a well-established workshop next to other conferences and
+workshops on (programming) language engineering topics such as SLE and
+GPCE. LDTA is traditionally a forum where computer science theories are
+put to the test of real-world software engineering issues, for example
+by applying:
+
+* context-free grammars to parser generation for real programming languages
+* attribute grammars to static analyzer and compiler generation
+* term rewriting to source-to-source transformation
+* action semantics to programming language implementation
+* model checking to software verification
+
+Note that LDTA solicits submissions from any technological or
+theoretical domain, as long as the paper is within the application
+scope.
+
+==Submission Procedure and Publication==
+
+Submissions in the following categories are admissible:
+* research papers
+* tool papers
+* experience papers
+
+The final version of the accepted papers will, pending approval, be
+published in the ACM Digital Library and will also be made available
+during the workshop.
+
+
+Each submission must:
+* clearly and unambiguously state in which of the three categories it falls;
+* be original, i.e. not published or submitted elsewhere;
+* contain a clear motivation;
+* contain a thorough analysis of the claimed contributions (for example by
+?comparing to related work);
+* be written in less than 15 pages (research papers and experience reports),
+?or less than 10 pages (tool papers); and
+* use the standard LaTeX article style
+?(\documentclass[10pt]{article}, \usepackage{authblk} for affiliations)
+
+Please submit your abstract and paper using EasyChair:
+- [ http://www.easychair.org/conferences/?conf=ldta2010 ].
+
+The authors of each submission are required to give a presentation at
+LDTA 2010. The authors of the tool papers are required to include an
+interactive demonstration in their presentations.
+
+The authors of the best papers will be invited to write a journal
+version of their paper which will be separately reviewed and, assuming
+acceptance, be published in journal form. As in past years, this will
+be done in a special issue devoted to LDTA 2010 of the journal Science
+of Computer Programming (Elsevier Science).
+
+==Program Committee==
+
+Claus Brabrand, IT University of Copenhagen, Denmark (co-chair)
+Pierre-Etienne Moreau, Nancy-Universit? & LORIA, France (co-chair)
+
+Emilie Balland, INRIA, France
+John Boyland, University of Wisconsin, USA
+Giorgios Robert Economopoulos, University of Southampton, UK
+Magne Haveraaen, University of Bergen, Norway
+Nigel Horspool, University of Victoria, Canada
+Shan Shan Huang, Logic Blox, USA
+Johan Jeuring, Utrecht University, The Netherlands
+Ondrej Lhotak, University of Waterloo, Canada
+Shane Markstrum, University of California, USA
+Peter D. Mosses, Swansea University, UK
+Klaus Ostermann, Philipps-Universit?t Marburg, Germany
+Marc Pantel, University of Toulouse, France
+Elizabeth Scott, Royal Holloway, University of London, UK
+Eli Tilevich, Virginia Tech, USA
+Eelco Visser, Delft University of Technology, The Netherlands
+Joost Visser, Software Improvement Group, The Netherlands
+Tobias Wrigstad, Purdue, USA
+
+==Important Dates==
+
+Abstract submission deadline: (Friday) November 27, 2009
+Paper submission deadline: (Friday) December 04, 2009
+Notification of acceptance: (Friday) February 05, 2010
+Workshop dates: (weekend) during ETAPS, March 20-28, 2010
+
+
+From marcosge at ucpel.tche.br  Tue Sep 22 05:12:46 2009
+From: marcosge at ucpel.tche.br (marcosge at ucpel.tche.br)
+Date: Tue, 22 Sep 2009 00:12:46 -0300
+Subject: [Stratego Users] Help Stratego/XT - Java-front
+Message-ID: <74033623234585530d572a56b25caa26.squirrel@webmail.ucpel.tche.br>
+
+Hello, I need introduce a new block in the Java grammar. And I changed
+some files like Java-15.str and Java-EBlock.sdf, I tried chage the files
+of the directory usr/share/java-front-language, but when I tried generate
+the abstract syntax tree using pp-aterm tool It does not recognize my new
+block. What is happening? Do I need recompiling the tool pp-aterm?
+
+And when I try using the new block for a transformation, do I need
+recompiling the parse-java?
+
+
+
+From E.Visser at tudelft.nl  Fri Sep 25 09:45:05 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 25 Sep 2009 09:45:05 +0200
+Subject: [Stratego Users] Help with Stratego/XT and Java-front
+In-Reply-To: <3da961bf83b080faacbf2d49e58e1a4d.squirrel@webmail.ucpel.tche.br>
+References: <3da961bf83b080faacbf2d49e58e1a4d.squirrel@webmail.ucpel.tche.br>
+Message-ID: <ed55b7d90909250045i7d4a60bbs4f2f52e822385992@mail.gmail.com>
+
+Hi,
+
+> Hi Eelco, I am using the Stratego/XT tool with Java-Front for translate
+> some codes. I need introduce a new block in the Java grammar. And I
+> changed
+> some files like Java-15.str and Java-EBlock.sdf, I tried chage the files
+> of the directory usr/share/java-front-language, but when I tried generate
+> the abstract syntax tree using pp-aterm tool It does not recognize my new
+> block. What is happening? Do I need recompiling the tool pp-aterm?
+>
+> And when I try using the new block for a transformation, do I need
+> recompiling the parse-java?
+
+To change the Java syntax you need to build a parse table from the
+adapted grammar. Parse-java uses the parse table for the standard Java
+syntax. Typically, you would create a new source tree with a new
+grammar module in which you import the Java grammar from
+/usr/share/java-front-language. In your source tree make a parse-table
+for the new syntax definition and use it with sglri to parse files
+using the extended syntax.
+
+Alternatively, you could download the sources of the java-front
+package itself and change things in there. That might be an easier way
+to get started. (But you'd effectively create a fork of the package,
+which you may want to undo at some point in the future).
+
+cheers,
+
+-- Eelco
+http://eelcovisser.org
+
+From naveneetha at yahoo.com  Sat Sep 26 13:16:46 2009
+From: naveneetha at yahoo.com (Naveneetha Vasudevan)
+Date: Sat, 26 Sep 2009 04:16:46 -0700 (PDT)
+Subject: [Stratego Users] Type checking in Stratego
+Message-ID: <595260.12954.qm@web51008.mail.re2.yahoo.com>
+
+Hi All,
+
+I have a question on how type checking can be achieved in Stratego. Let me explain with an example using embedded SQLs in Java.
+
+If a Java program, has an embedded 'create' statement - create table employee { id int(10), name varchar(20)} - and one or more of the select/update/delete statement (e.g: "select * from employee where id=10"), then based on the create statement, how can we enforce type checking on the 'select' statement. 
+
+So, if I have a 'select * from employee where id="10"' (it should be id=10, as 'id' is an integer), then the transformation should fail.
+
+The only way I can think of is to check the 'create' statement definition for every 'select' statement. Something along these lines:
+
+create-rule:
+[| create table x_table_name { id int .. }  |] -> [|  .. java code .. |]
+
+
+select-rule:
+[| select * from x_table_name where x_col=x_value  |] ->
+    [| .. java code ..|] where <concat-strings>["create table",x_table_name, " {", ....]
+
+So, we create the "create" statement definition at run-time based on the information in the 'select' statement; and then invoke the <create-rule> as part of the where clause of the <select-rule>. If there is a match on any transformation rule, then we are good (we don't really care about the results of the transformation, just a match is sufficient). What do you think?
+
+Is there a better way to performing this checking?
+
+thanks in advance
+
+-krish
+
+
+      
+
+From thequux at gmail.com  Sat Sep 26 22:23:40 2009
+From: thequux at gmail.com (thequux at gmail.com)
+Date: Sat, 26 Sep 2009 13:23:40 -0700
+Subject: [Stratego Users] Type checking in Stratego
+In-Reply-To: <595260.12954.qm@web51008.mail.re2.yahoo.com>
+References: <595260.12954.qm@web51008.mail.re2.yahoo.com>
+Message-ID: <20090926202340.GD19035@maverick>
+
+Yes. That is very much how I'd go about doing it. Except that in general I'd go with a set of dynamic rules of the form
+
+ColType:  table(table_name,column_name) -> column_type
+
+Because it can be used to give better diagnostics. (if the rule fails to match, no such column; if the return value is wrong, wrong type).
+
+Keep in mind that you can create terms of types other than things in the source and destination language.
+
+Another way to do it that could be clearer is to use a two-pass method, where the first pass gathers type information, and the second pass sticks the type information back into the select statements and propogates it upwards, through various functions.
+
+Does this clarify things?
+
+--Dan Hirsch
+
+On Sat, Sep 26, 2009 at 04:16:46AM -0700, Naveneetha Vasudevan wrote:
+> Hi All,
+> 
+> I have a question on how type checking can be achieved in Stratego. Let me explain with an example using embedded SQLs in Java.
+> 
+> If a Java program, has an embedded 'create' statement - create table employee { id int(10), name varchar(20)} - and one or more of the select/update/delete statement (e.g: "select * from employee where id=10"), then based on the create statement, how can we enforce type checking on the 'select' statement. 
+> 
+> So, if I have a 'select * from employee where id="10"' (it should be id=10, as 'id' is an integer), then the transformation should fail.
+> 
+> The only way I can think of is to check the 'create' statement definition for every 'select' statement. Something along these lines:
+> 
+> create-rule:
+> [| create table x_table_name { id int .. }  |] -> [|  .. java code .. |]
+> 
+> 
+> select-rule:
+> [| select * from x_table_name where x_col=x_value  |] ->
+>     [| .. java code ..|] where <concat-strings>["create table",x_table_name, " {", ....]
+> 
+> So, we create the "create" statement definition at run-time based on the information in the 'select' statement; and then invoke the <create-rule> as part of the where clause of the <select-rule>. If there is a match on any transformation rule, then we are good (we don't really care about the results of the transformation, just a match is sufficient). What do you think?
+> 
+> Is there a better way to performing this checking?
+> 
+> thanks in advance
+> 
+> -krish
+> 
+> 
+>       
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+

@@ -1,0 +1,922 @@
+From mmajid at gmail.com  Tue May  5 19:06:59 2015
+From: mmajid at gmail.com (Mahdi Jaghoori)
+Date: Tue, 5 May 2015 19:06:59 +0200
+Subject: [Stratego Users] Final CFP: Topics in Theoretical Computer Science
+ (TTCS 2015) -- Tehran, Iran
+Message-ID: <CAOKdHYajCL5fJ7GJwifhrs7SN+6f5ybc_bfk0g4iTrcC7WLo1Q@mail.gmail.com>
+
+(apologies if you receive multiple copies)
+=========================================
+Topics in Theoretical Computer Science (TTCS 2015)
+http://www.ttcs.ir/
+Institute for Research in Fundamental Sciences (IPM), Tehran, Iran
+August 26-28, 2015
+
+
+*Submission Deadline: May 15, 2015 (Anywhere on Earth)*
+========================================
+
+
+
+*Scope:*
+TTCS is a new bi-annual conference series, intending to serve as a forum
+for novel and high-quality research in all areas of Theoretical Computer
+Science. The conference is held in cooperation with the European
+Association forTheoretical Computer Science.
+
+There will be a number of satellite events at TTCS, These will feature
+presentation of early research results, and position papers. There will
+also be a forum for Ph.D. students to receive comments about their ongoing
+research projects.
+
+Topics of interest include but are not limited to:
+
+   - algebra and co-algebra in computer science,
+   - algorithms and data structures,
+   - algorithmic coding theory,
+   - algorithmic graph theory and combinatorics,
+   - approximation algorithms,
+   - computational complexity,
+   - computational geometry,
+   - computational learning theory,
+   - concurrency theory,
+   - coordination languages,
+   - economics and algorithmic game theory,
+   - fixed parameter algorithms,
+   - formal verification and model-based testing,
+   - logic in computer science,
+   - machine learning
+   - methods, models of computation and reasoning for embedded, hybrid, and
+   cyber-physical systems,
+   - optimization,
+   - parallel and distributed algorithms,
+   - quantum computing,
+   - randomness in computing,
+   - stochastic and probabilistic specification and reasoning
+   - theoretical aspects of other CS-related research areas, e.g.,
+   computational science, databases, information retrieval, and networking,
+   - theoretical cryptography,
+   - theory of programming languages, and
+   - type theory and its application in program verification.
+
+*Keynote Speakers:*
+
+Anuj Dawar, Cambridge University, UK
+Michael Fellows, Charles Darwin University, Australia
+Mehrnoosh Sadrezadeh, Queen Mary University of London, UK
+
+
+
+*Submission:*For the main conference, we solicit research papers in all
+areas of theoretical computer science. All papers will undergo a rigorous
+review process and will be judged based on their originality, soundness,
+significance of the results, and relevance to the theme of the conference.
+
+Papers should be written in English. Research papers should not exceed 15
+pages in the LNCS style format. Multiple and/or concurrent submission to
+other scientific venues is not allowed and will result in rejection as well
+as notification to the other venue. Any case of plagiarism (including
+self-plagiarism from earlier publications) will result in rejection as well
+as notification to the the authors' institutions.
+
+Papers should be submitted through our EasyChair submission website:
+https://www.easychair.org/conferences/?conf=ttcs2015 . The web site is open
+for submissions.
+
+
+*Important Dates:*
+
+
+   - *Paper Submission*: May 15, 2015 (Anywhere on Earth
+   <http://en.wikipedia.org/wiki/Anywhere_on_Earth>)
+   - *Author notification:* June 26, 2015
+   - *Camera ready paper due:* July 10, 2015
+   - *Conference:* August 26-28, 2015
+
+*Program Committee:*
+
+*Track A: Algorithms and Complexity*
+
+   - Mohammad Ali Abam, Sharif University of Technology, Iran
+   <http://www.daimi.au.dk/~abam/>
+   - Saeed Akbari, Sharif University of Technology, Iran
+   <http://dena.sharif.edu/~web/Profs/Akbari/akbari.htm>
+   - Saeed Alaei, Cornell University, USA
+   <http://www.cs.cornell.edu/~saeed/>
+   - Mohammad Hossein Bateni, Google Research, USA
+   <http://mhbateni.com/academic/>
+   - Salman Beigi, IPM, Iran
+   <http://www.ipm.ac.ir/personalinfo.jsp?PeopleCode=IP1100005>
+   - Amir Daneshgar, Sharif University of Technology, Iran
+   <http://sharif.ir/~daneshgar/>
+   - Fedor Fomin, University of Bergen, Norway
+   <http://www.ii.uib.no/~fomin/>
+   - Ali Ghodsi, University of Waterloo, Canada
+   <https://math.uwaterloo.ca/statistics-and-actuarial-science/people-profiles/ali-ghodsi>
+   - Mohammad Ghodsi, Sharif University of Technology, Iran
+   <http://sharif.edu/~ghodsi/?page=Pub_Iranian>
+   - Mohammad T. Hajiaghayi, University of Maryland, USA (Chair)
+   <http://www.cs.umd.edu/~hajiagha/>
+   - Amin Karbasi, Yale University, USA
+   <http://seas.yale.edu/faculty-research/faculty-directory/amin-karbasi>
+   - Nicole Immorlica, Microsoft Research, USA
+   <http://research.microsoft.com/en-us/people/nicimm/>
+   - Amit Kumar, IIT Delhi, India <http://www.cse.iitd.ernet.in/~amitk/>
+   - Mohammad Mahdian, Google Research, USA
+   <http://research.google.com/pubs/MohammadMahdian.html>
+   - Hamid Mahini, University of Maryland, USA
+   <http://www.cs.umd.edu/~hmahini/>
+   - Bojan Mohar, Simon Fraser University, Canada
+   <http://www.fmf.uni-lj.si/~mohar/>
+   - Mohammad Mahmoody, University of Virginia, USA
+   <http://www.cs.virginia.edu/~mohammad/>
+   - Vahab Mirrokni, Google Research, USA
+   <http://research.google.com/pubs/mirrokni.html>
+   - Morteza Monemizadeh, Frankfurt University, Germany
+   <http://www.tks.informatik.uni-frankfurt.de/monemizadeh>
+   - Shayan Oveisgharan, UC Berkeley and University of Washington, USA
+   <http://homes.cs.washington.edu/~shayan/>
+   - Debmalya Panigrahi, Duke University, USA
+   <http://www.cs.duke.edu/~debmalya/>
+   - Jorg Sack, Carleton University, Canada
+   <http://people.scs.carleton.ca/~sack/>
+   - Mohit Singh, Microsoft Research, USA
+   <http://research.microsoft.com/en-us/um/people/mohits/>
+   - Dimitrios M. Thilikos, CNRS, France and University of Athens, Greece
+   <http://www.thilikos.info/students>
+   - Suresh Venkatasubramanian, University of Utah, USA
+   <http://www.cs.utah.edu/~suresh/web/>
+   - Jan Vondrak, IBM Almaden Research Center, USA
+   <http://researcher.watson.ibm.com/researcher/view.php?person=us-jvondrak>
+
+*Track B: Logic, Semantics, and Programming Theory*
+
+   - Farhad Arbab, CWI and Leiden University, The Netherlands
+   <http://homepages.cwi.nl/~farhad>
+   - S. Arun-Kumar, IIT Delhi, India <http://www.cse.iitd.ernet.in/~sak/>
+   - Ilaria Castellani, INRIA Sophia Antipolis, France
+   <http://www-sop.inria.fr/members/Ilaria.Castellani/Home.html>
+   - Dave Clarke, Uppsala University, Sweden and KU Leuven, Belgium
+   <http://www.it.uu.se/katalog/davcl820>
+   - Pieter Cuijpers, Eindhoven University of Technology, The Netherlands
+   <http://www.tue.nl/en/employee/ep/e/d/ep-uid/19940165/>
+   - Fatemeh Ghassemi, Tehran University, Iran
+   <http://ece.ut.ac.ir/en/users/FGhassemi>
+   - Matthew Hennessy, Trinity College Dublin, Ireland
+   <https://www.cs.tcd.ie/Matthew.Hennessy/>
+   - Ichiro Hasuo, University of Tokyo, Japan
+   <http://www-mmm.is.s.u-tokyo.ac.jp/~ichiro/>
+   - Mahdi Jaghoori, AMC University of Amsterdam, The Netherlands
+   <http://homepages.cwi.nl/~jaghouri/>
+   - Jeroen Keiren, Vrije Universiteit Amsterdam, The Netherlands
+   <https://www.cs.vu.nl/en/research/Theoretical_Computer_Science/staff/index/index.asp>
+   - Bas Luttik, Eindhoven University of Technology, The Netherlands
+   <http://www.tue.nl/en/employee/ep/e/d/ep-uid/20031635/>
+   - Jose Meseguer, University of Illinois at Urbana, USA
+   <http://formal.cs.uiuc.edu/meseguer/>
+   - Lary Moss, Indiana University, USA
+   <http://www.math.indiana.edu/people/profile.phtml?id=lmoss>
+   - Mohammad Mousavi, Halmstad University, Sweden (Chair)
+   <http://www.win.tue.nl/~mousavi>
+   - Jun Pang, University of Luxembourg, Luxembourg
+   <http://wwwen.uni.lu/research/fstc/laboratory_of_algorithmics_cryptology_and_security_lacs/members/jun_pang>
+   - Gerardo Schneider, Chalmers University of Technology, Sweden
+   <http://www.cse.chalmers.se/~gersch/>
+   - Marjan Sirjani, Reykjavik University, Iceland
+   <http://www.ru.is/faculty/marjan/>
+   - Walter Vogler, Augsburg University, Germany
+   <http://www.informatik.uni-augsburg.de/lehrstuehle/swt/ti/mitarbeiter/walter/>
+   - Tim Willemse, Eindhoven University of Technology, The Netherlands
+   <http://www.win.tue.nl/~timw/index.php>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150505/faa77597/attachment.html>
+
+From erdweg at informatik.tu-darmstadt.de  Thu May 14 08:36:23 2015
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Thu, 14 May 2015 08:36:23 +0200
+Subject: [Stratego Users] Deadline extension: Workshop on Generic
+	Programming 2015 - New deadline May 22
+Message-ID: <1CBF49FF-44D3-4CBE-B5CC-1019AAAF66E6@informatik.tu-darmstadt.de>
+
+Submission deadline extended to May 22
+
+======================================================================
+                      CALL FOR PAPERS
+
+                          WGP 2015
+
+       11th ACM SIGPLAN Workshop on Generic Programming
+                     Vancouver, Canada
+                   Sunday, August 30, 2015
+
+               http://www.wgp-sigplan.org/2015
+
+                     Co-located with the
+International Conference on Functional Programming (ICFP 2015)
+======================================================================
+
+
+Goals of the workshop
+---------------------
+
+Generic programming is about making programs more adaptable by making
+them more general. Generic programs often embody non-traditional kinds
+of polymorphism; ordinary programs are obtained from them by suitably
+instantiating their parameters. In contrast with normal programs, the
+parameters of a generic program are often quite rich in structure; for
+example they may be other programs, types or type constructors, class
+hierarchies, or even programming paradigms.
+
+Generic programming techniques have always been of interest, both to
+practitioners and to theoreticians, and, for at least 20 years,
+generic programming techniques have been a specific focus of research
+in the functional and object-oriented programming communities. Generic
+programming has gradually spread to more and more mainstream
+languages, and today is widely used in industry. This workshop brings
+together leading researchers and practitioners in generic programming
+from around the world, and features papers capturing the state of the
+art in this important area.
+
+We welcome contributions on all aspects, theoretical as well as
+practical, of
+
+* generic programming,
+* programming with (C++) concepts,
+* meta-programming,
+* programming with type classes,
+* programming with modules,
+* programming with dependent types,
+* type systems for generic programming,
+* polytypic programming,
+* adaptive object-oriented programming,
+* component-based programming,
+* strategic programming,
+* aspect-oriented programming,
+* family polymorphism,
+* object-oriented generic programming,
+* implementation of generic programming languages,
+* static and dynamic analyses of generic programs,
+* and so on.
+
+Program Committee
+-----------------
+
+* Patrick Bahr (co-chair), University of Copenhagen
+* Sebastian Erdweg (co-chair), Technical University of Darmstadt
+* Edwin Brady, University of St Andrews
+* Edsko de Vries, Well-Typed LLP
+* Mauro Jaskelioff, National University of Rosario
+* Johan Jeuring, Utrecht University
+* Pieter Koopman, Radboud University Nijmegen
+* Bruno C. d. S. Oliveira, University of Hong Kong
+* Nicolas Pouillard, IT University of Copenhagen
+* Sukyoung Ryu, Korea Advanced Institute of Science and Technology
+* Sibylle Schupp, Hamburg University of Technology
+* Sam Tobin-Hochstadt, Indiana University
+
+Proceedings and Copyright
+-------------------------
+
+We plan to have formal proceedings, published by the ACM. Accepted
+papers will be included in the ACM Digital Library. Authors must grant
+ACM publication rights upon acceptance
+(http://authors.acm.org/main.html), but may retain copyright if they
+wish. Authors are encouraged to publish auxiliary material with their
+paper (source code, test data, and so forth). The proceedings will be
+freely available for download from the ACM Digital Library from one
+week before the start of the conference until two weeks after the
+conference.
+
+Submission details
+------------------
+
+* Submission deadline:  Fri, 22nd May 2015
+* Author notification:  Fri, 26th June 2015
+* Final version due:    Sun, 19th July 2015
+* Workshop:             Sun, 30th August 2015
+
+Submitted papers should fall into one of two categories:
+
+* Regular research papers (12 pages)
+* Short papers: case studies, tool demos, generic pearls (6 pages)
+
+Regular research papers are expected to present novel and interesting
+research results. Short papers need not present novel or fully polished
+results. Good candidates for short papers are those that report on 
+interesting case studies of generic programming in open source or 
+industry, present demos of generic programming tools or libraries, 
+or discuss elegant and illustrative uses of generic programming ('pearls').
+
+All submissions should be in portable document format (PDF), formatted
+using the ACM SIGPLAN style guidelines (two-column, 9pt). Regular 
+research papers must not exceed 12 pages. Short papers must not exceed 
+6 pages. If applicable, papers should be marked with one of the labels
+'case study, 'tool demo' or 'generic pearl' in the title at the time 
+of submission.
+
+Papers should be submitted via HotCRP at
+
+https://icfp-wgp15.hotcrp.com/
+
+
+
+Travel Support
+--------------
+
+Student attendees with accepted papers can apply for a SIGPLAN PAC grant
+to help cover travel expenses. PAC also offers other support, such as
+for child-care expenses during the meeting or for travel costs for
+companions of SIGPLAN members with physical disabilities, as well as for
+travel from locations outside of North America and Europe. For details
+on the PAC program, see its web page (http://www.sigplan.org/PAC.htm).
+
+History of the Workshop on Generic Programming
+----------------------------------------------
+
+Earlier Workshops on Generic Programming have been held in
+
+* Gothenburg, Sweden 2014 (affiliated with ICFP),
+* Boston, Massachusetts, US 2013 (affiliated with ICFP),
+* Copenhagen, Denmark 2012 (affiliated with ICFP),
+* Tokyo, Japan 2011 (affiliated with ICFP),
+* Baltimore, Maryland, US 2010 (affiliated with ICFP),
+* Edinburgh, UK 2009 (affiliated with ICFP),
+* Victoria, BC, Canada 2008 (affiliated with ICFP),
+* Portland 2006 (affiliated with ICFP),
+* Ponte de Lima 2000 (affiliated with MPC),
+* Marstrand 1998 (affiliated with MPC).
+
+Furthermore, there were a few informal workshops
+
+* Utrecht 2005 (informal workshop),
+* Dagstuhl 2002 (IFIP WG2.1 Working Conference),
+* Nottingham 2001 (informal workshop).
+
+There were also (closely related) DGP workshops in Oxford (June
+3-4 2004), and a Spring School on DGP in Nottingham (April 24-27
+2006, which had a half-day workshop attached).
+
+WGP Steering Committee
+----------------------
+
+* Andres L?h
+* Ronald Garcia
+* Jacques Carette
+* Jeremiah Willcock
+* Jos? Pedro Magalh?es
+* Tiark Rompf
+* Tarmo Uustalo
+* Stephanie Weirich
+* Fritz Henglein
+
+_______________________________________________
+ecoop-info mailing list
+ecoop-info at ecoop.org
+http://web.satd.uma.es/mailman/listinfo/ecoop-info
+
+From eelcovis at gmail.com  Wed May 20 20:20:22 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Wed, 20 May 2015 20:20:22 +0200
+Subject: [Stratego Users] Fwd: [HiPEAC-Publicity] [CFP] DLS 2015
+In-Reply-To: <2015519112014.555b004e@redrock.inria.fr>
+References: <2015519112014.555b004e@redrock.inria.fr>
+Message-ID: <CAFaCHU2uCzDJuBZ7=Na54gxhaTiLKwk+yipP=7Dhz=b-WY8PjA@mail.gmail.com>
+
+                        -----------------------------
+                        C A L L   F O R   P A P E R S
+                        -----------------------------
+
+                        ======== DLS 2015 ===========
+
+                   11th Dynamic Languages Symposium 2015
+                               October, 2015
+                   Pittsburgh, Pennsylvania, United States
+                          http://DLS2015.inria.fr
+
+
+                        Co-located with SPLASH 2015
+                      In association with ACM SIGPLAN
+
+The 11th Dynamic Languages Symposium (DLS) at SPLASH 2015 is the
+premier forum for researchers and practitioners to share knowledge and
+research on dynamic languages, their implementation, and
+applications. The influence of dynamic languages -- from Lisp to
+Smalltalk to Python to Javascript -- on real-world practice and
+research continues to grow.
+
+DLS 2015 invites high quality papers reporting original research,
+innovative contributions, or experience related to dynamic languages,
+their implementation, and applications. Accepted papers will be
+published in the ACM Digital Library, and freely available for 2 weeks
+before and after the event itself.  Areas of interest include but are
+not limited to:
+
+    Innovative language features and implementation techniques
+    Development and platform support, tools
+    Interesting applications
+    Domain-oriented programming
+    Very late binding, dynamic composition, and run-time adaptation
+    Reflection and meta-programming
+    Software evolution
+    Language symbiosis and multi-paradigm languages
+    Dynamic optimization
+    Hardware support
+    Experience reports and case studies
+    Educational approaches and perspectives
+    Semantics of dynamic languages
+
+== Invited Speaker ==
+
+DLS is pleased to announce a talk by the following invited speaker:
+
+  Eelco Visser: Declare your Language.
+
+
+== Submissions and proceedings ==
+
+Submissions should not have been published previously nor under review
+at other events. Research papers should describe work that advances
+the current state of the art. Experience papers should be of broad
+interest and should describe insights gained from substantive
+practical applications. The program committee will evaluate each
+contributed paper based on its relevance, significance, clarity,
+length, and originality.
+
+Papers are to be submitted electronically at
+http://www.easychair.org/conferences?conf=dls15 in PDF
+format. Submissions must be in the ACM format (see
+http://www.sigplan.org/authorInformation.htm) and not exceed 12
+pages. Authors are reminded that brevity is a virtue.
+
+DLS 2015 will run a two-phase reviewing process to help authors make
+their final papers the best that they can be. After the first round of
+reviews, papers will be rejected, conditionally accepted, or
+unconditionally accepted. Conditionally accepted papers will be given
+a list of issues raised by reviewers. Authors will then submit a
+revised version of the paper with a cover letter explaining how they
+have or why they have not addressed these issues. The reviewers will
+then consider the cover letter and revised paper and recommend final
+acceptance or rejection.
+
+Accepted papers will be published in the ACM Digital Library.
+Important dates
+
+    Abstract Submissions: Sun 7 Jun 2015
+    Full Submissions: Sun 15 Jun 2015
+    First phase notification: Mon 27 Jul
+    Revisions due: Mon 3 Aug
+    Final notification: Mon 17 Aug
+    Camera ready: Fri 21 21 Aug
+
+Program chair
+
+    Manuel Serrano, Inria Sophia-Antipolis,
+        dls15 at easychair.org
+
+Program committee
+
+    Carl Friedrich Bolz, DE
+    William R. Cook, UTexas, USA
+    Jonathan Edwards, MIT, USA
+    John Field, Google, USA
+    Matt Flatt, USA
+    Elisa Gonzalez Boix, Vrije Universiteit, BE
+    Robert Hirschfeld, Hasso-Plattner-Institut Potsdam, DE
+    Benjamin Livshits, Microsoft, USA
+    Crista Lopes, UC Irvine, USA
+    Kevin Millikin, Google, DN
+    James Noble, Victoria University of Wellington, NZ
+    Manuel Serrano, Inria, FR (General chair)
+    Didier Verna, EPITA, FR
+    Jan Vitek, Purdue, USA
+    Joe Politz, Brown University, USA
+    Olivier Tardieu, IBM, USA
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150520/fe3ab32c/attachment.html>
+
+From canslow at ucalgary.ca  Thu May 21 01:39:44 2015
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Wed, 20 May 2015 23:39:44 +0000
+Subject: [Stratego Users] SPLASH 2015 - Call for Contributions: Other Tracks
+Message-ID: <D182D9F3.280F1%canslow@ucalgary.ca>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+            Software for Humanity (SPLASH'15)
+
+       Pittsburgh, Pennsylvania, USA
+       25th-30th October, 2015
+
+       http://www.splashcon.org<http://www.splashcon.org/>
+
+       Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+COMBINED CALL FOR CONTRIBUTIONS
+ Demos
+   Doctoral Symposium
+ OOPSLA Artifacts
+ Posters
+ SPLASH-E
+ Student Research Competition
+ Student Volunteers
+ Tutorials
+ Wavefront
+ Workshops
+
+Co-Located Conferences: SLE, GPCE, DBPL, PLoP
+ /************************************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and Applications: Software for Humanity (SPLASH) embraces all aspects of software construction and delivery to make it the premier conference at the intersection of programming, languages, and software engineering. SPLASH is now accepting submissions. We invite high quality submissions describing original and unpublished work.
+
+
+** Demos **
+The SPLASH Demonstrations track is an excellent vehicle for sharing your latest work with an experienced and technically savvy audience. Live demonstrations show the impact of software innovation. Demonstrations are not product sales pitches, but rather an opportunity to highlight, explain, and present interesting technical aspects of running applications in a dynamic and highly interactive setting. Presenters are encouraged to actively solicit feedback from the audience, which should lead to very interesting and entertaining demonstration sessions.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-demos
+
+
+** Doctoral Symposium **
+The SPLASH Doctoral Symposium provides students with useful guidance for completing their dissertation research and beginning their research careers. The Symposium will provide an interactive forum for doctoral students who have progressed far enough in their research to have a structured proposal, but will not be defending their dissertation in the next 12 months.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-ds
+
+
+** OOPSLA Artifacts **
+The Artifact Evaluation process is a service provided by the community to help authors of accepted papers provide more substantial supplements to their papers so future researchers can more effectively build on and compare with previous work. The Artifact Evaluation Committee has been formed to assess how well paper authors prepare artifacts in support of such future researchers. Roughly, authors of papers who wish to participate are invited to submit an artifact that supports the conclusions of the paper.
+
+Submissions Due: 9 June, 2015
+http://2015.splashcon.org/track/splash2015-artifacts
+
+
+** Posters **
+The SPLASH Poster track provides an excellent forum for authors to present their recent or ongoing projects in an interactive setting, and receive feedback from the community. We invite submissions covering any aspect of programming, systems, languages and applications. The goal of the poster session is to encourage and facilitate small groups of individuals interested in a technical area to gather and interact. It is held early in the conference, to promote continued discussion among interested parties. Posters can be independent presentations or associated with one of the other parts of SPLASH.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-posters
+
+
+** SPLASH-E **
+The SPLASH-E track brings together researchers and educators to share educational results, ideas, and challenges centered in Software and Programming Languages. Submission formats vary, including papers, tool demos, lightning talks, challenge-topics for discussion, and suggested themes for "unconference" sessions.  Help us create an engaging forum for educational issues related to SPLASH!
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-splash-e
+
+
+** Student Research Competition **
+The ACM SIGPLAN Student Research Competition (ACM SRC) is an internationally-recognized venue that enables undergraduate and graduate students to experience the research world, share their research results with other students and SPLASH attendees. The competition has separate categories for undergraduate and graduate students and awards prizes to the top three students in each category. The ACM SIGPLAN Student Research Competition shares the Poster session?s goal to facilitate interaction with researchers and industry practitioners; providing both sides with the opportunity to learn of ongoing, current research.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-src
+
+
+** Student Volunteers **
+The SPLASH Student Volunteer program provides an opportunity for students from around the world to associate with some of the leading personalities in industry and research in the following areas: programming languages, object-oriented technology and software development. Student volunteers contribute to the smooth running of the conference by performing tasks such as: assisting with registration, providing information about the conference to attendees, assisting session organizers and monitoring sessions.
+
+Submissions Due: 7 August, 2015
+http://2015.splashcon.org/track/splash2015-sv
+
+
+** Tutorials **
+The SPLASH 2015 Tutorials programme will consist of prestigious tutorials on current topics in software, systems, and languages research. The scope of Tutorials is the same as the conference itself: all aspects of software construction and delivery at the intersection of programming, languages, and software engineering. Tutorials in particular focus on the nexus between research and practice, including work that takes inspiration from or builds connections to areas not commonly considered at SPLASH. Tutorials should introduce researchers to current research in an area, or show important new tools that can be used in research.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-tutorials
+
+
+** Wavefront **
+The SPLASH Wavefront track is looking for presentations and technology talks of interest to the software community, particularly to software professionals working in companies large and small. Wavefront is a forum for presenting experience reports and tutorials about innovative tools, technologies, and software practices.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-wavefront
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops, allowing their participants to meet and discuss research questions with peers, to mature new and exciting ideas, and to build up communities and start new collaborations. SPLASH workshops complement the main tracks of the conference and provide meetings in a smaller and more specialized setting. Workshops cultivate new ideas and concepts for the future, optionally recorded in formal proceedings.
+
+Late Phase Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-workshops
+
+
+** Co-Located Events **
+
+SLE - 8th International Conference on Software Language Engineering (SLE)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/sle2015
+
+GPCE - 14th International Conference on Generative Programming: Concepts & Experiences (GPCE)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/gpce2015
+
+DBPL - 15th Symposium on Database Programming Languages (DBPL)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/dbpl2015
+
+PLoP - 22nd International Conference on Pattern Languages of Programming (PLoP)
+Submissions Due: 12 May, 2015
+http://www.hillside.net/plop/2015/
+
+
+Information:
+SPLASH Early Registration Deadline: 25 September, 2015
+Contact: info at splashcon.org<mailto:info at splashcon.org>
+Website: http://2015.splashcon.org<http://2015.splashcon.org/>
+
+Location:
+Sheraton Station Square Hotel
+Pittsburgh, Pennsylvania, United States
+
+Organization:
+SPLASH General Chair: Jonathan Aldrich (Carnegie Mellon University)
+OOPSLA Papers Chair: Patrick Eugster (Purdue University)
+Onward! Papers Chair: Gail Murphy (University of British Columbia)
+Onward! Essays Chair: Guy Steele (Oracle Labs)
+DLS Papers Chair: Manuel Serrano (INRIA)
+Artifacts Co-Chairs: Robby Findler (Northwestern University) and Michael Hind (IBM Research)
+Demos Co-Chair: Igor Peshansky (Google) and Pietro Ferrara (IBM Research)
+Doctoral Symposium Chair: Yu David Liu, State University of New York (SUNY) Binghamton
+Local Arrangements Chair: Claire Le Goues (Carnegie Mellon University)
+PLMW Workshop Co-Chairs: Darya Kurilova (Carnegie Mellon University) and Zachary Tatlock (University of Washington)
+Posters Co-Chairs: Nick Sumner (Simon Fraser University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Publicity and Web Co-Chairs: Craig Anslow (University of Calgary) and Tijs van der Storm (CWI)
+SPLASH-E Chair: Eli Tilevich (Virginia Tech)
+SPLASH-I Co-Chairs: Tijs van der Storm (CWI) and Jan Vitek (Northeastern University)
+Student Research Competition Co-Chairs: Sam Guyer (Tufts University) and Patrick Lam (University of Waterloo)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco Harkes (TU Delft)
+Sponsorship Chair: Tony Hosking (Purdue University)
+Tutorials Co-Chair: Romain Robbes (University of Chile) and Ronald Garcia (University of British Columbia)
+Video Chair: Michael Hilton (Oregon State University)
+Videos Previews Czar: Thomas LaToza (University of California, Irvine)
+Wavefront Co-Chairs: Dennis Mancl (Alcatel-Lucent) and Joe Kiniry (Galois)
+Web Technology Chair: Eelco Visser (TU Delft)
+Workshop Co-Chairs: Du Li (Carnegie Mellon University) and Jan Rellermeyer (IBM Research)
+/************************************************************************************/
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150520/c2a5ed1c/attachment-0001.html>
+
+From tomofumi.yuki at inria.fr  Tue May 26 10:47:31 2015
+From: tomofumi.yuki at inria.fr (Tomofumi Yuki)
+Date: Tue, 26 May 2015 10:47:31 +0200 (CEST)
+Subject: [Stratego Users] CFP: GPCE' 15 (COMLAN Special Issue),
+	Deadline June 8
+In-Reply-To: <1725256588.8441856.1432630047675.JavaMail.zimbra@inria.fr>
+Message-ID: <967767550.8441859.1432630051686.JavaMail.zimbra@inria.fr>
+
+ Call for Papers: Computer Languages, Systems and Structures
+ COMLAN Special Issue on the 14th International Conference on
+  Generative Programming: Concepts & Experiences (GPCE'15)
+
+Papers will be selected among top ranked papers from GPCE'15:
+
+                    ACM SIGPLAN GPCE 2015
+              14th International Conference on
+        Generative Programming: Concepts & Experiences
+
+             Oct 26-27, 2015, Pittsburgh, PA, USA
+                   http://www.gpce.org
+
+GPCE keynote speaker: Prof. Priya Narasimhan (CMU, USA)
+
+GPCE is co-located with:
+ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH 2015)
+and
+ACM SIGPLAN 8th International Conference on Software Language
+Engineering (SLE) 2015
+
+-----------------------------------------------------------------
+IMPORTANT DATES
+
+  GPCE abstract submission  : June 8, 2015
+  GPCE full paper submission: June 15, 2015
+  GPCE authors notification : July 24, 2015
+  GPCE camera-ready         : Aug 7, 2015
+  GPCE conference           : Oct 26-27, 2015
+
+  Special issue submission  : January 1, 2016
+  Special issue notification: May 1, 2016
+  Special issue publication : July 1, 2016
+
+  Note that GPCE workshops are handled by SPLASH
+
+All dates are Anywhere on Earth
+
+-----------------------------------------------------------------
+SCOPE
+
+GPCE is a venue for researchers and practitioners interested in techniques
+that use program generation, domain-specific languages, and component
+deployment to increase programmer productivity, improve software quality,
+and shorten the time-to-market of software products. In addition to
+exploring cutting-edge techniques of generative software, our goal is to
+foster further cross-fertilization between the software engineering and the
+programming languages research communities.
+
+-----------------------------------------------------------------
+TOPICS OF INTEREST 
+
+GPCE seeks contributions on all topics related to generative software and
+its properties. Topics of interest include, but are not limited to:
+
+Generative software
+* Domain-specific languages (language extension, language embedding,
+  language design, language theory, language workbenches, interpreters,
+  compilers)
+* Product lines (domain engineering, feature-oriented and
+  aspect-oriented programming, pre-processors, feature interactions)
+* Metaprogramming (reflection, staging, partial evaluation), Type
+  systems, Program synthesis
+* Implementation techniques and tool support (components, plug-ins,
+  libraries, metaprogramming, macros, templates, generic programming,
+  run-time code generation, model-driven development, composition tools,
+  code-completion and code-recommendation systems)
+
+Practical Applications and Empirical evaluations
+* Empirical evaluations of all topics above (user studies, substantial case
+  studies, controlled experiments, surveys, rigorous measurements)  
+* Application areas and engineering practice (Cloud Computing, Internet of
+  Things, Cyber Physical Systems, Mobile Computing, Software Defined
+  Networking, High Performance Computing, Patterns and Middleware,
+  Development methods)
+
+Properties of generative software
+* Correctness of generators and generated code (analysis, testing, formal
+  methods, domain-specific error messages, safety, security)   
+* Reuse and evolution
+* Modularity, separation of concerns, understandability, and
+  maintainability  
+* Performance engineering, nonfunctional properties (program optimization
+  and parallelization, GPGPUs, multicore, footprint, metrics)
+
+We particularly welcome papers that address some of the key challenges in
+the field, such as, 
+* synthesizing code from declarative specifications
+* supporting extensible languages and language embedding
+* ensuring correctness and other nonfunctional properties of generated code
+* proving generators correct
+* improving error reporting with domain-specific error messages
+* reasoning about generators
+* handling variability-induced complexity in product lines
+* providing efficient interpreters and execution languages
+* human factors in developing and maintaining generators 
+
+GPCE encourages submissions about empirical evaluations and applications of
+generative software, and such papers will be given special consideration
+during reviewing.
+
+From Magne.Haveraaen at ii.uib.no  Tue May 26 17:32:42 2015
+From: Magne.Haveraaen at ii.uib.no (Magne Haveraaen)
+Date: Tue, 26 May 2015 17:32:42 +0200
+Subject: [Stratego Users] 3 PhD positions in Bergen
+Message-ID: <8628822D-DB0C-4A53-8BA6-7F96C014F157@ii.uib.no>
+
+3 Research Fellows (PhD candidates) in Informatics / Computer Science
+University of Bergen, Institutt for informatikk
+http://www.uib.no/ii
+
+
+The Department of Informatics, University of Bergen, is now recruiting up to three research fellows in informatics/computer science. The Department is ranked first in Norway with respect to the quality of its research, by the Research Council of Norway.
+
+The fellowship positions are for a fixed term of four years, of which 25% will comprise mandatory work such as teaching and/or administrative tasks.
+
+The PhD scholarships are open for any topic within the department. This includes 
+- programming theory
+- formal methods
+- high performance computing
+- language design and implementation
+- secure and high integrity languages and systems
+- programming models: parallel, FPGAs, user interfaces, high integrity
+
+Deadline: 1 June 2015
+http://www.jobbnorge.no/en/available-jobs/job/113292/3-research-fellows-phd-candidates-in-informatics-computer-science
+
+Salary is about ? 51 000/year or USD 57 000/year, and includes benefits.
+
+You are welcome to contact me about applying.
+
+--
+Magne Haveraaen
+https://www.ii.uib.no/~magne/
+https://bldl.ii.uib.no/
+
+From davew at cs.haverford.edu  Thu May 28 15:47:18 2015
+From: davew at cs.haverford.edu (David G. Wonnacott)
+Date: Thu, 28 May 2015 09:47:18 -0400
+Subject: [Stratego Users] Requesting opinions about Stratego and Spoofax for
+ manually-directed program transformation
+Message-ID: <55671C66.9090508@cs.haverford.edu>
+
+Hi Stratego Users ---
+
+Before putting more resources into installing Spoofax and Stratego (*), 
+I'd like to ask for your opinions about whether it is an appropriate 
+tool for my goals.
+
+Specifically, I'm looking for a system to help first-year undergraduate 
+CS students get a sense of the idea of code rewriting as a way of 
+reasoning about computation, to see the relationship between mathematics 
+and software more clearly at this early point in their education. I'd 
+like a system that lets a user select and apply a code transformation 
+(e.g., substitute the definition of a specific variable for all uses of 
+that variable, in pure functional code in a simple language for which we 
+have some rewrite rules). From the documentation, it /looks/ like 
+Spoofax and Stratego might be good tools for this. There are a number of 
+code rewriting or proof construction tools that could do what I want the 
+students to do, but they seem to be /too automatic/ for my purposes ... 
+e.g., for even the most challenging first-semester problems I pose (show 
+that the substitution rules can transform program A into program B), 
+we'd just have to tell a tool like Coq "simplify"; I want the students 
+to come up with the transformations themselves.
+
+So ... do you think Spoofax and Stratego might be appropriate?  (Or, are 
+there other tools I should be considering?).
+
+Thanks for any information you can provide,
+         Dave W
+
+(*) We've been having some trouble getting Spoofax to work on the "tour 
+of spoofax" example from the web site 
+<http://metaborg.org/spoofax/tour/>, but will persevere and/or file a 
+proper bug report if we get stumped.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150528/470dfca5/attachment.html>
+
+From eelcovis at gmail.com  Thu May 28 16:07:25 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Thu, 28 May 2015 16:07:25 +0200
+Subject: [Stratego Users] Requesting opinions about Stratego and Spoofax
+ for manually-directed program transformation
+In-Reply-To: <55671C66.9090508@cs.haverford.edu>
+References: <55671C66.9090508@cs.haverford.edu>
+Message-ID: <CAFaCHU2iSVtZK7472tb13QMY+zXasqZ9MugZUMPwWz1Uxngnrw@mail.gmail.com>
+
+Hi David,
+
+That depends a bit on the specifics of your use case. I'd be happy to
+discuss this off-list.
+
+cheers,
+
+-- Eelco
+
+
+
+On Thu, May 28, 2015 at 3:47 PM, David G. Wonnacott <davew at cs.haverford.edu>
+wrote:
+
+>  Hi Stratego Users ---
+>
+> Before putting more resources into installing Spoofax and Stratego (*),
+> I'd like to ask for your opinions about whether it is an appropriate tool
+> for my goals.
+>
+> Specifically, I'm looking for a system to help first-year undergraduate CS
+> students get a sense of the idea of code rewriting as a way of reasoning
+> about computation, to see the relationship between mathematics and software
+> more clearly at this early point in their education. I'd like a system that
+> lets a user select and apply a code transformation (e.g., substitute the
+> definition of a specific variable for all uses of that variable, in pure
+> functional code in a simple language for which we have some rewrite rules).
+> From the documentation, it *looks* like Spoofax and Stratego might be
+> good tools for this. There are a number of code rewriting or proof
+> construction tools that could do what I want the students to do, but they
+> seem to be *too automatic* for my purposes ... e.g., for even the most
+> challenging first-semester problems I pose (show that the substitution
+> rules can transform program A into program B), we'd just have to tell a
+> tool like Coq "simplify"; I want the students to come up with the
+> transformations themselves.
+>
+> So ... do you think Spoofax and Stratego might be appropriate?  (Or, are
+> there other tools I should be considering?).
+>
+> Thanks for any information you can provide,
+>         Dave W
+>
+> (*) We've been having some trouble getting Spoofax to work on the "tour
+> of spoofax" example from the web site <http://metaborg.org/spoofax/tour/>,
+> but will persevere and/or file a proper bug report if we get stumped.
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Professor of Computer Science, TU Delft
+
+http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150528/e9135d54/attachment.html>
+

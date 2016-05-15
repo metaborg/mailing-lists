@@ -1,0 +1,475 @@
+From daniele.gianni at gmail.com  Wed Jan 18 13:45:55 2012
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Wed, 18 Jan 2012 13:45:55 +0100
+Subject: [Stratego Users] COMETS 2012 - 3rd IEEE Track on Collaborative
+ Modeling and Simulation - Call for Papers
+Message-ID: <CAOCNFM5YbBRdcn9bNA16ibPOgWhCBAGNz3h=14+c8D16nSJrAg@mail.gmail.com>
+
+(Please accept our apologies if you receive multiple copies of this message)
+
+#################################################################
+                       IEEE WETICE 2012
+     3rd IEEE Track on Collaborative Modeling and Simulation
+                        (Comets 2012)
+
+                      in cooperation with
+                  AFIS (INCOSE France Chapter)
+               MIMOS (Italian Association for M&S)
+
+                       CALL FOR PAPERS
+
+#################################################################
+
+June 25-27, 2012, Toulouse (France)
+http://www.sel.uniroma2.it/comets12
+
+#################################################################
+# Papers Due: March 16, 2012
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and indexed by EI.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices to the design of
+collaborative environments. These environments are continuously
+becoming more complex, and therefore their design requires
+systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non?exhaustive list of topics of interest includes:
+
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* workflow modelling for collaborative environments and processes
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance evaluation of collaborative networks
+* model-driven simulation engineering
+* domain specific languages for the simulation of collaborative environments
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+* collaborative DEVS M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'12 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+This year, we will accept submissions in two forms:
+
+(1) papers
+(2) poster and industrial presentations
+
+(1) Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format, which is single spaced, two columns, 10 pt
+Times/Roman font. All submissions should be electronic (in PDF)
+and will be peer-reviewed by at least three program committee
+members.
+
+Accepted full papers will be included in the proceedings and
+published by the IEEE Computer Society Press (IEEE approval pending).
+Please note that at least one author for each accepted paper should
+register to attend WETICE 2012 (http://www.wetice.org) to have the
+paper published in the proceedings.
+
+(2) Posters should describe a practical, on-the-field, experience in
+any domain area using collaborative M&S. The poster submission
+requires the submission of an abstract for evaluation from the
+organizers. Accepted abstract must be followed by the submission of
+a poster which will be displayed at conference time.
+With the poster submission, a short (15 minutes) slot might be
+allocated for oral presentation illustrating the industrial case.
+The presentation may also include a live demo, but it should not
+include commercial details.
+
+Interested authors and participants may contact the organizers for
+expression of interests and content appropriateness at any time.
+
+Papers and posters can be submitted in PDF format at the submission
+site (https://www.easychair.org/conferences/?conf=comets2012),
+which is supported by the EasyChair conference management system.
+Please feel free to contact the track chairs (comets2012 at easychair.org)
+if you experience problems with the EasyChair Web site.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission Deadline: March 16, 2012
+* Notification to authors: April 16, 2012
+* Camera Ready to IEEE: April 30, 2012
+* Conference dates: June 25 - June 27, 2012
+
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Andrea D'Ambrogio, University of Roma TorVergata, Italy
+* Daniele Gianni, European Space Agency, The Netherlands
+* Joachim Fuchs, European Space Agency, The Netherlands
+* Giuseppe Iazeolla, University of Roma TorVergata, Italy
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Santiago Balestrini, Georgia Institute of Technology, USA
+* Massimo Bandecchi, European Space Agency, The Netherlands
+* Joseph Giampapa, SEI, Carnegie Mellon University, USA
+* Alain Kerbrat, CollESys - AFIS, France
+* Axel Lehmann, Universitaet der Bundeswehr Muenchen, Germany
+* Cristiano Leorato, Rhea, The Netherlands
+* Steve McKeever, University of Oxford, UK
+* David Nickerson, Auckland Bioengineering Institute, NZ
+* Alfred Park, Oak Ridge National Laboratory, USA
+* Wolfgang Prinz, Fraunhofer FIT and RWTH Aachen, Germany
+* Jos? L. Risco-Martin, Universidad Complutense de Madrid, Spain
+* Jean-Francois Santucci, University of Corsica, France
+* Gabriel Wainer, Carleton University, Canada
+* Quirien Wijnand, European Space Agency, The Netherlands
+* Heming Zhang, Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni (track co-chair)
+Email: danielegmail-comets at yahoo.it
+
+
+From pj.dewitte at gmail.com  Sun Jan 22 18:28:30 2012
+From: pj.dewitte at gmail.com (Pieter-Jan Dewitte)
+Date: Sun, 22 Jan 2012 18:28:30 +0100
+Subject: [Stratego Users] parsing offside rule languages: alternative
+	approach
+Message-ID: <CA+zdwESbWv6k6+bmHy5Uw5PgE-GJYGdTTeW-h_2h4HHQ3fcyjg@mail.gmail.com>
+
+Hi all,
+
+I found a previous topic in this mailing list, about parsing offside rule
+languages like Python in Spoofax. The suggestion was to follow the approach
+of Ardlang: parse the indentation into the AST and do post-processing to
+match e.g. "if" blocks with "else" blocks, and to find errors.
+
+In the language I would like to parse the statements have a different
+syntax depending on the type of block they are in. Those blocks can also be
+nested. I would like to use the power of a declarative syntax definition to
+define what is valid and what not, rather than parsing everything and do
+extensive post-processing to find syntax errors.
+
+I think I could do this by performing some limited pre-processing on the
+input (basically placing "{" and "}" on the end of lines, based on
+indentation). Among the automatically generated files in the project, I
+found the java classes TestLanguageParseController.java and
+TestLanguageParseControllerGenerated.java (in editor/java). In a first
+attempt, I tried to override the parse method in
+TestLanguageParseController.java, but this doesn't seem to do anything.
+
+I'm wondering what you think about the pre-processing idea and where it can
+be implemented in Spoofax. Also, I wonder whether this kind of
+pre-processing (only altering line ends) would interfere with the
+origin-tracking used to display error markers in the editor?
+
+Kind regards,
+
+Pieter-Jan Dewitte
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120122/2dc4f9dc/attachment.html>
+
+From l.c.l.kats at tudelft.nl  Thu Jan 26 11:45:30 2012
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Thu, 26 Jan 2012 11:45:30 +0100
+Subject: [Stratego Users] parsing offside rule languages: alternative
+ approach
+In-Reply-To: <CA+zdwESbWv6k6+bmHy5Uw5PgE-GJYGdTTeW-h_2h4HHQ3fcyjg@mail.gmail.com>
+References: <CA+zdwESbWv6k6+bmHy5Uw5PgE-GJYGdTTeW-h_2h4HHQ3fcyjg@mail.gmail.com>
+Message-ID: <4F212ECA.8060607@tudelft.nl>
+
+Hi Pieter-Jan,
+
+A preprocessor approach to support the offside rule is perhaps the most 
+straightforward way of getting it working with SDF. But yes, 
+unfortunately it interferes with the position information that is used 
+in the parser and the editor. In the past there were many components 
+that would analyze the parse tree and use the position information that 
+can be inferred from there. And once one of these was off, all editor 
+services from syntax highlighting to error marking would break...
+
+It's been a while since we looked into this, but it might actually be a 
+bit easier now, since we now have a new tokenizer infrastructure 
+responsible for processing this information: the 
+org.spoofax.jsglr.client.imploder.Tokenizer class is normally used to 
+create tokens with position information, and forms the basis for syntax 
+error marking, syntax highlighting, and IIRC the other services as well. 
+So unless I'm missing something else, you could experiment with creating 
+a subclass of the tokenizer that corrects for these special characters.
+
+I think you were on the right path with the TestingParseController, 
+which is used in the testing language to do a bit of post-processing and 
+parser customization. But if you're making your own language, say, 
+YourLang, you'd have to change your own parse controller: 
+org.strategoxt.imp.editors.yourlang.YourLangParseController.java. From 
+there, you should be able to preprocess the string, and set a different 
+TreeBuilder with getWrapped().getParser().getParser().setTreeBuilder(). 
+The TreeBuilder is responsible for creating and using a Tokenizer.
+
+hth,
+
+Lennart Kats
+
+
+On 1/22/12 18:28 , Pieter-Jan Dewitte wrote:
+> Hi all,
+>
+> I found a previous topic in this mailing list, about parsing offside
+> rule languages like Python in Spoofax. The suggestion was to follow the
+> approach of Ardlang: parse the indentation into the AST and do
+> post-processing to match e.g. "if" blocks with "else" blocks, and to
+> find errors.
+>
+> In the language I would like to parse the statements have a different
+> syntax depending on the type of block they are in. Those blocks can also
+> be nested. I would like to use the power of a declarative syntax
+> definition to define what is valid and what not, rather than parsing
+> everything and do extensive post-processing to find syntax errors.
+>
+> I think I could do this by performing some limited pre-processing on the
+> input (basically placing "{" and "}" on the end of lines, based on
+> indentation). Among the automatically generated files in the project, I
+> found the java classes TestLanguageParseController.java and
+> TestLanguageParseControllerGenerated.java (in editor/java). In a first
+> attempt, I tried to override the parse method in
+> TestLanguageParseController.java, but this doesn't seem to do anything.
+>
+> I'm wondering what you think about the pre-processing idea and where it
+> can be implemented in Spoofax. Also, I wonder whether this kind of
+> pre-processing (only altering line ends) would interfere with the
+> origin-tracking used to display error markers in the editor?
+>
+> Kind regards,
+>
+> Pieter-Jan Dewitte
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From anya at anyanka.org  Thu Jan 26 19:19:24 2012
+From: anya at anyanka.org (Anya Helene Bagge)
+Date: Thu, 26 Jan 2012 19:19:24 +0100
+Subject: [Stratego Users] LDTA 2012: Call for Participation
+Message-ID: <4F21992C.3030604@anyanka.org>
+
+***************************************************************************************
+                                       LDTA 2012 Call for Participation
+
+                                       12th International Workshop on
+                        Language Descriptions, Tools, and Applications
+
+                                                    http://ldta.info
+
+                                                 Tallinn, Estonia
+                                         March 31 & April 1, 2012
+                                             an ETAPS workshop
+***************************************************************************************
+
+
+You are cordially invited to LDTA'12. LDTA is an application and 
+tool-oriented
+workshop focused on grammarware - software based on grammars in some form.
+Grammarware applications are typically language processing applications and
+traditional examples include parsers, program analyzers, optimizers and
+translators.
+
+-- REGISTRATION--
+
+To register for LDTA'12, please follow the instructions at:
+
+http://www.etaps.org/2012/registration
+
+The early registration deadline is January 29, 2012.
+
+--HOTEL INFORMATION--
+
+LDTA will be co-located with ETAPS. Please visit ETAPS's web site to get 
+more
+information for the accommodation (http://www.etaps.org/2012/accommodation).
+Special rates and/or block bookings for ETAPS 2012 participants at a 
+number of
+central hotels also expire Sunday, 29 January 2012.
+
+--PROGRAM--
+
+The workshop will include an invited talk by Janis Voigtl?nder 
+(University of
+Bonn, Germany) and the presentation of the following technical papers:
+
+- Sebastian Erdweg, Paolo G. Giarrusso and Tillmann Rendel. Language 
+Composition
+  Untangled
+- Johnni Winther. Improving Precision of Generated ASTs
+- Tobi Vollebregt, Lennart C. L. Kats and Eelco Visser. Declarative
+  Specification of Template-Based Textual Editors
+- Marcos Viera, Doaitse Swierstra and Atze Dijkstra. Grammar Fragments Fly
+  First-Class
+- Marcos Viera, Doaitse Swierstra and Arie Middelkoop. UUAG Meets 
+AspectAG: How
+  to make Attribute Grammars First-Class
+- Daniel Lincke and Sibylle Schupp. From HOT to COOL - Transforming 
+Higher-Order
+  Typed Languages to Concept-Constrained Object-Oriented Languages
+- Maartje De Jonge and Eelco Visser. A Language Generic Solution for Name
+  Binding Preservation in Refactorings
+- Vadim Zaytsev. Notation-Parametric Grammar Recovery
+- Jean-Christophe Bach, Pierre-Etienne Moreau, Marc Pantel and Xavier 
+Cr?gut.
+  Models Transformations with Tom
+
+The workshop will also feature presentations devoted to a de-brief of 
+the 2011
+tool challenge, based on the paper currently being prepared by the challenge
+participants.
+
+From dagitj at gmail.com  Fri Jan 27 23:13:42 2012
+From: dagitj at gmail.com (Jason Dagit)
+Date: Fri, 27 Jan 2012 14:13:42 -0800
+Subject: [Stratego Users] Anonymous FTP access?
+Message-ID: <CAJ-DSywLYSFVibiMXQJweGYtjg7TPVpWvhpkyCOEkeW3imnGhQ@mail.gmail.com>
+
+Hello,
+
+I recently tried to download Aterm and noticed that I don't know the
+username/password to access the FTP site:
+ftp://ftp.stratego-language.org/pub/stratego/StrategoXT/strategoxt-0.17/aterm-2.5.tar.gz
+
+Is it possible to get access?
+
+Thank you!
+Jason
+
+From rob.vermaas at gmail.com  Sat Jan 28 07:06:49 2012
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Sat, 28 Jan 2012 07:06:49 +0100
+Subject: [Stratego Users] Anonymous FTP access?
+In-Reply-To: <CAJ-DSywLYSFVibiMXQJweGYtjg7TPVpWvhpkyCOEkeW3imnGhQ@mail.gmail.com>
+References: <CAJ-DSywLYSFVibiMXQJweGYtjg7TPVpWvhpkyCOEkeW3imnGhQ@mail.gmail.com>
+Message-ID: <CAJuVCXuieioMCF3vDbzA9kzYNxT_sTqxxF9zppotuET-M=9+tA@mail.gmail.com>
+
+Hi,
+
+
+> I recently tried to download Aterm and noticed that I don't know the
+
+username/password to access the FTP site:
+>
+> ftp://ftp.stratego-language.org/pub/stratego/StrategoXT/strategoxt-0.17/aterm-2.5.tar.gz
+>
+> Is it possible to get access?
+>
+>
+Something changed on the server to make it stop working. I ave fixed it,
+and you should be able to download everything again.
+
+Cheers
+Rob
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120128/8a8d00a1/attachment.html>
+
+From karltk at strategoxt.org  Sat Jan 28 13:37:54 2012
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Sat, 28 Jan 2012 13:37:54 +0100
+Subject: [Stratego Users] Anonymous FTP access?
+In-Reply-To: <CAJuVCXuieioMCF3vDbzA9kzYNxT_sTqxxF9zppotuET-M=9+tA@mail.gmail.com>
+References: <CAJ-DSywLYSFVibiMXQJweGYtjg7TPVpWvhpkyCOEkeW3imnGhQ@mail.gmail.com>
+	<CAJuVCXuieioMCF3vDbzA9kzYNxT_sTqxxF9zppotuET-M=9+tA@mail.gmail.com>
+Message-ID: <CAGxSwVWVzdjmNB5oUWAqmAh-_tHQKA_CM6cL8J7Fk=Mms5V+ww@mail.gmail.com>
+
+> Something changed on the server to make it stop working. I ave fixed it, and
+> you should be able to download everything again.
+
+Any reason we use FTP? I know it's oldskool that's supposedly cool,
+but an HTTP mirror would be more convenient for all, I suspect.
+
+-- Karl T
+
+From dagitj at gmail.com  Sun Jan 29 01:58:31 2012
+From: dagitj at gmail.com (Jason Dagit)
+Date: Sat, 28 Jan 2012 16:58:31 -0800
+Subject: [Stratego Users] Anonymous FTP access?
+In-Reply-To: <CAJuVCXuieioMCF3vDbzA9kzYNxT_sTqxxF9zppotuET-M=9+tA@mail.gmail.com>
+References: <CAJ-DSywLYSFVibiMXQJweGYtjg7TPVpWvhpkyCOEkeW3imnGhQ@mail.gmail.com>
+	<CAJuVCXuieioMCF3vDbzA9kzYNxT_sTqxxF9zppotuET-M=9+tA@mail.gmail.com>
+Message-ID: <CAJ-DSywVT4=m38NmHw8U74vUcp3cob-jyBAucnmnGTTyMrtEpg@mail.gmail.com>
+
+On Fri, Jan 27, 2012 at 10:06 PM, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> Hi,
+>
+>>
+>> I recently tried to download Aterm and noticed that I don't know the
+>>
+>> username/password to access the FTP site:
+>>
+>> ftp://ftp.stratego-language.org/pub/stratego/StrategoXT/strategoxt-0.17/aterm-2.5.tar.gz
+>>
+>> Is it possible to get access?
+>>
+>
+> Something changed on the server to make it stop working. I ave fixed it, and
+> you should be able to download everything again.
+
+Thank you, I was able to download ATerm today.
+
+Jason
+

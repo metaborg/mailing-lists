@@ -1,0 +1,270 @@
+From p.d.mosses at swansea.ac.uk  Thu Oct  8 17:46:10 2015
+From: p.d.mosses at swansea.ac.uk (Mosses P.D.)
+Date: Thu, 8 Oct 2015 15:46:10 +0000
+Subject: [Stratego Users] Stratego code for listing all files with a
+	specific extension?
+Message-ID: <D8F28D41-7313-42D5-84B6-B85E42D1E940@swansea.ac.uk>
+
+Hi,
+
+I'm looking for a strategy that returns the paths of *all* files with a particular extension found anywhere in a hierarchical directory structure. For example, the shell command
+
+	find Dropbox -name "*.jpg" -print
+
+does just what I want for the Dropbox directory and file extension "jpg", printing lines such as
+
+	Dropbox/Photos/Sample Album/Boston City Flow.jpg 
+	Dropbox/Photos/Sample Album/Costa Rican Frog.jpg 
+	Dropbox/Photos/Sample Album/Pensive Parakeet.jpg 
+
+However, I don't see how to implement that in Stratego using the path and directory operations described in the system/posix library - in particular, the find-file variants there don't appear to do what I want. If something similar has been implemented in some other Stratego library, kindly let me know where to look. I'm using Spoofax, but a novice at Stratego coding.
+
+BTW, my intended use of the above strategy is to automate the application of a Spoofax menu action to a large collection of source files. For various reasons, I'd prefer to avoid scripting this using the Spoofax command-line interface.
+
+Thanks,
+
+Peter
+
+Email: P.D.Mosses at swansea.ac.uk
+Web: www.cs.swansea.ac.uk/~cspdm
+
+
+
+From v.vergu at gmail.com  Thu Oct  8 20:40:57 2015
+From: v.vergu at gmail.com (v.vergu at gmail.com)
+Date: Thu, 8 Oct 2015 21:40:57 +0300
+Subject: [Stratego Users] Stratego code for listing all files with a
+	specific extension?
+In-Reply-To: <D8F28D41-7313-42D5-84B6-B85E42D1E940@swansea.ac.uk>
+References: <D8F28D41-7313-42D5-84B6-B85E42D1E940@swansea.ac.uk>
+Message-ID: <8E857DA8-5A60-4BF0-9DD3-16075F81ADD2@gmail.com>
+
+Hi Peter,
+
+I do not remember seeing a strategy that does this (although i do recall implementing this but i cannot find it anywhere). I think this could be implemented concisely in Java as an external strategy. We have a bit of documentation on how to write such a strategy at http://metaborg.org/stratego/external-strategies/. I hope this helps, let me know if you get stuck.
+
+Vlad
+
+
+> On 08 Oct 2015, at 18:46, Mosses P.D. <p.d.mosses at swansea.ac.uk> wrote:
+> 
+> Hi,
+> 
+> I'm looking for a strategy that returns the paths of *all* files with a particular extension found anywhere in a hierarchical directory structure. For example, the shell command
+> 
+>    find Dropbox -name "*.jpg" -print
+> 
+> does just what I want for the Dropbox directory and file extension "jpg", printing lines such as
+> 
+>    Dropbox/Photos/Sample Album/Boston City Flow.jpg 
+>    Dropbox/Photos/Sample Album/Costa Rican Frog.jpg 
+>    Dropbox/Photos/Sample Album/Pensive Parakeet.jpg 
+> 
+> However, I don't see how to implement that in Stratego using the path and directory operations described in the system/posix library - in particular, the find-file variants there don't appear to do what I want. If something similar has been implemented in some other Stratego library, kindly let me know where to look. I'm using Spoofax, but a novice at Stratego coding.
+> 
+> BTW, my intended use of the above strategy is to automate the application of a Spoofax menu action to a large collection of source files. For various reasons, I'd prefer to avoid scripting this using the Spoofax command-line interface.
+> 
+> Thanks,
+> 
+> Peter
+> 
+> Email: P.D.Mosses at swansea.ac.uk
+> Web: www.cs.swansea.ac.uk/~cspdm
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From dgroenewegen at gmail.com  Fri Oct  9 11:36:08 2015
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Fri, 9 Oct 2015 11:36:08 +0200
+Subject: [Stratego Users] Stratego code for listing all files with a
+ specific extension?
+In-Reply-To: <8E857DA8-5A60-4BF0-9DD3-16075F81ADD2@gmail.com>
+References: <D8F28D41-7313-42D5-84B6-B85E42D1E940@swansea.ac.uk>
+ <8E857DA8-5A60-4BF0-9DD3-16075F81ADD2@gmail.com>
+Message-ID: <CA+JOw5Xxjy99NafX+y25FyP6+FBmjcJvkLwNP_CqU3DBJgg4Zg@mail.gmail.com>
+
+Hi Peter,
+
+Have a look at
+https://github.com/webdsl/webdsl/blob/master/src/org/webdsl/dsl/utils/traverse.str
+
+You can just copy those strategies to your project, example usage:
+
+transform-files =
+
+  getcwd
+
+; traverse-files(try(transform-file))
+
+transform-file =
+
+  string-ends-with(|".str")
+
+; debug
+
+
+-- Danny
+
+On Thu, Oct 8, 2015 at 8:40 PM, <v.vergu at gmail.com> wrote:
+
+> Hi Peter,
+>
+> I do not remember seeing a strategy that does this (although i do recall
+> implementing this but i cannot find it anywhere). I think this could be
+> implemented concisely in Java as an external strategy. We have a bit of
+> documentation on how to write such a strategy at
+> http://metaborg.org/stratego/external-strategies/. I hope this helps, let
+> me know if you get stuck.
+>
+> Vlad
+>
+>
+> > On 08 Oct 2015, at 18:46, Mosses P.D. <p.d.mosses at swansea.ac.uk> wrote:
+> >
+> > Hi,
+> >
+> > I'm looking for a strategy that returns the paths of *all* files with a
+> particular extension found anywhere in a hierarchical directory structure.
+> For example, the shell command
+> >
+> >    find Dropbox -name "*.jpg" -print
+> >
+> > does just what I want for the Dropbox directory and file extension
+> "jpg", printing lines such as
+> >
+> >    Dropbox/Photos/Sample Album/Boston City Flow.jpg
+> >    Dropbox/Photos/Sample Album/Costa Rican Frog.jpg
+> >    Dropbox/Photos/Sample Album/Pensive Parakeet.jpg
+> >
+> > However, I don't see how to implement that in Stratego using the path
+> and directory operations described in the system/posix library - in
+> particular, the find-file variants there don't appear to do what I want. If
+> something similar has been implemented in some other Stratego library,
+> kindly let me know where to look. I'm using Spoofax, but a novice at
+> Stratego coding.
+> >
+> > BTW, my intended use of the above strategy is to automate the
+> application of a Spoofax menu action to a large collection of source files.
+> For various reasons, I'd prefer to avoid scripting this using the Spoofax
+> command-line interface.
+> >
+> > Thanks,
+> >
+> > Peter
+> >
+> > Email: P.D.Mosses at swansea.ac.uk
+> > Web: www.cs.swansea.ac.uk/~cspdm
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151009/f6a194a8/attachment.html>
+
+From p.d.mosses at swansea.ac.uk  Fri Oct  9 12:28:28 2015
+From: p.d.mosses at swansea.ac.uk (Mosses P.D.)
+Date: Fri, 9 Oct 2015 10:28:28 +0000
+Subject: [Stratego Users] Stratego code for listing all files with a
+ specific extension?
+In-Reply-To: <CA+JOw5Xxjy99NafX+y25FyP6+FBmjcJvkLwNP_CqU3DBJgg4Zg@mail.gmail.com>
+References: <D8F28D41-7313-42D5-84B6-B85E42D1E940@swansea.ac.uk>
+ <8E857DA8-5A60-4BF0-9DD3-16075F81ADD2@gmail.com>
+ <CA+JOw5Xxjy99NafX+y25FyP6+FBmjcJvkLwNP_CqU3DBJgg4Zg@mail.gmail.com>
+Message-ID: <513B9D79-E8E2-4A5C-B2E3-D4531545C202@swansea.ac.uk>
+
+Hi Danny and Vlad,
+
+Many thanks for the helpful responses.
+
+The Stratego solution fits my intended usage very nicely, so I'll try with that.
+
+Peter
+
+
+On 9 Oct 2015, at 10:36, Danny Groenewegen <dgroenewegen at gmail.com<mailto:dgroenewegen at gmail.com>> wrote:
+
+Hi Peter,
+
+Have a look at https://github.com/webdsl/webdsl/blob/master/src/org/webdsl/dsl/utils/traverse.str
+
+You can just copy those strategies to your project, example usage:
+
+transform-files =
+  getcwd
+; traverse-files(try(transform-file))
+
+
+transform-file =
+  string-ends-with(|".str")
+; debug
+
+
+-- Danny
+
+On Thu, Oct 8, 2015 at 8:40 PM, <v.vergu at gmail.com<mailto:v.vergu at gmail.com>> wrote:
+Hi Peter,
+
+I do not remember seeing a strategy that does this (although i do recall implementing this but i cannot find it anywhere). I think this could be implemented concisely in Java as an external strategy. We have a bit of documentation on how to write such a strategy at http://metaborg.org/stratego/external-strategies/. I hope this helps, let me know if you get stuck.
+
+Vlad
+
+
+> On 08 Oct 2015, at 18:46, Mosses P.D. <p.d.mosses at swansea.ac.uk<mailto:p.d.mosses at swansea.ac.uk>> wrote:
+>
+> Hi,
+>
+> I'm looking for a strategy that returns the paths of *all* files with a particular extension found anywhere in a hierarchical directory structure. For example, the shell command
+>
+>    find Dropbox -name "*.jpg" -print
+>
+> does just what I want for the Dropbox directory and file extension "jpg", printing lines such as
+>
+>    Dropbox/Photos/Sample Album/Boston City Flow.jpg
+>    Dropbox/Photos/Sample Album/Costa Rican Frog.jpg
+>    Dropbox/Photos/Sample Album/Pensive Parakeet.jpg
+>
+> However, I don't see how to implement that in Stratego using the path and directory operations described in the system/posix library - in particular, the find-file variants there don't appear to do what I want. If something similar has been implemented in some other Stratego library, kindly let me know where to look. I'm using Spoofax, but a novice at Stratego coding.
+>
+> BTW, my intended use of the above strategy is to automate the application of a Spoofax menu action to a large collection of source files. For various reasons, I'd prefer to avoid scripting this using the Spoofax command-line interface.
+>
+> Thanks,
+>
+> Peter
+>
+> Email: P.D.Mosses at swansea.ac.uk<mailto:P.D.Mosses at swansea.ac.uk>
+> Web: www.cs.swansea.ac.uk/~cspdm<http://www.cs.swansea.ac.uk/~cspdm>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org<mailto:Users at strategoxt.org>
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20151009/5b3555cb/attachment.html>
+

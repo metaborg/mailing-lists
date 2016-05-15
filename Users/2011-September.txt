@@ -1,0 +1,1753 @@
+From E.Visser at tudelft.nl  Thu Sep  1 14:23:15 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 1 Sep 2011 14:23:15 +0200
+Subject: [Stratego Users] Fwd: [SEWORLD] SPLASH 2011: Call for Participation
+In-Reply-To: <F6C41DA8-EF74-4F6F-B7B7-9F22F1DAD84B@ics.uci.edu>
+References: <F6C41DA8-EF74-4F6F-B7B7-9F22F1DAD84B@ics.uci.edu>
+Message-ID: <CAFaCHU0=0yk2fpJJA5MPwyunUC-7k4y2Zzy7gc8sW18a0xTpXQ@mail.gmail.com>
+
+ACM Conference on Systems, Programming, Languages, and Applications:
+? ? ? ? ? ? ? Software for Humanity (SPLASH'11)
+? ? ? ? ? ? ? ? ? ? ?Portland, Oregon
+? ? ? ? ? ? ? ? ? ? October 22-27, 2011
+? ? ? ? ? ? ? ? ?http://www.splashcon.org
+? ? ? ? ? ? ? ?http://twitter.com/splashcon
+? ? ? ? ? ? ?http://www.facebook.com/SPLASHCon
+? http://www.linkedin.com/groups/SPLASH-Conference-2487082
+? ? ? ? ? ? ? ? ?Sponsored by ACM SIGPLAN
+
+SPLASH is the umbrella conference for OOPSLA and Onward!.
+The overall theme of the conference is "The Internet as the world-wide
+Virtual Machine."
+
+/**************************************************************
+?* ? ? ? ? ? ? ? ? CALL FOR PARTICIPATION ? ? ? ? ? ? ? ? ? ? *
+?**************************************************************/
+
+REGISTER AT:
+https://regmaster3.com/2011conf/SPLASH11/register.php
+EARLY REGISTRATION DEADLINE: September 23, 2011
+
+PROGRAM HIGHLIGHTS
+*********************
+
+* Keynotes:
+?- Ivan Sutherland, Turing Award Winner, Portland State University
+?- Markus Puschel, ETH Zurich
+?- Brendan Eich, Mozilla
+?http://splashcon.org/2011/program/keynotes
+
+* OOPSLA research papers
+?http://splashcon.org/2011/program/oopsla-research-papers
+
+* Onward! papers, essays and films
+?http://onward-conference.org/2011/program.html
+
+* Wavefront papers and experience reports
+?http://splashcon.org/2011/program/wavefront
+?http://splashcon.org/2011/program/experience-reports
+
+* Invited TechTalks
+?- Jesper Richter-Reichhelm, Head of Engineering, WOOGA GMBH
+?- Dave Thomas, CTO, Bedarra Corporation
+?- Kresten Krab Thorup, CTO, Trifork
+?http://splashcon.org/2011/program/techtalks
+
+* Richard's Pretty Good Talks (RPG 2011)
+?- Michael Jarmer, fiction writer, Here Comes Everybody, on "Extreme
+Forced Creation"
+?- Guy Steele, Oracle Labs, on "Designing Singing Calls"
+?http://splashcon.org/2011/program/rpg
+
+* Panels
+?- Going green with refactoring: sustaining the "World Wide Virtual Machine"
+?- Language-based security as extreme modularity
+?- Multicore, manycore, and cloud computing: is a new programming
+language paradigm required?
+?- Industry-Academic research partnerships in the age of big data and
+global computing networks
+?http://splashcon.org/2011/program/panels
+
+* Posters
+?http://splashcon.org/2011/program/posters
+
+* Technology demonstrations
+?http://splashcon.org/2011/program/demonstrations
+
+PRE-CONFERENCE EVENTS
+***********************
+
+* Full day Hackathon on big data and cloud computing
+?http://splashcon.org/2011/program/hackathon
+
+* 11 Workshops
+?http://splashcon.org/2011/program/workshops
+
+* Educators and Trainers Symposium
+
+* Doctoral Symposium
+?http://splashcon.org/2011/program/doctoral-symposium
+
+* Dynamic Languages Symposium
+?http://www.dynamic-languages-symposium.org/dls-11/
+
+* The Scheme Workshop
+?http://scheme2011.ucombinator.org/
+
+CO-LOCATED CONFERENCES
+************************
+
+* GPCE (http://www.gpce.org)
+
+* PLoP (http://hillside.net/index.php/conferences/plop)
+
+
+From daniele.gianni at gmail.com  Fri Sep 23 21:28:02 2011
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Fri, 23 Sep 2011 21:28:02 +0200
+Subject: [Stratego Users] CfP: 2nd Workshop on Model-driven Approaches for
+ Simulation Engineering (Mod4Sim),
+ in Symposium on Theory of Modeling and Simulation, SCS Spring Sim 2012
+In-Reply-To: <CAOCNFM7LZs2PKLFAau_V+=agX5AgPtBA1s-ywuyqL+i2Azte0A@mail.gmail.com>
+References: <OF27FE4300.00E57B61-ONC1257914.005091AE-C1257914.0050A00F@esa.int>
+	<CAOCNFM6CNmF+Er5mjn+M5YL4Vcp997A+ZXNf5nH=gAjWraa7GQ@mail.gmail.com>
+	<CAOCNFM6kwphvhQXoCe+6PvSMGYt0ddywfSpcnQ2PeMcv5tGoaQ@mail.gmail.com>
+	<CAOCNFM7LgHLxVrGxYLBLQQXWVzfKzeRunc0kzkX0PKozeApLSw@mail.gmail.com>
+	<CAOCNFM4GBz8z6-yCC0jbStNGwAoNzwDkRBFoOt7XgEh_ZiNVdw@mail.gmail.com>
+	<CAOCNFM7cXe1y3Wf-PiiNXMRkAW1e3uFRo1vviDzFvZQ2qZ9jBw@mail.gmail.com>
+	<CAOCNFM752SzaDehvm_TYPDnG_O0WO-GQXFjUsK-JDWfyTFN2hg@mail.gmail.com>
+	<CAOCNFM4fDKQmOX5TXxafWBn5KQ0ACgrPyvaoe97L=uQUg5VxAA@mail.gmail.com>
+	<CAOCNFM50gGmSgPz12XqoXnrnbmYdd7L4pHPpfhrzsiEn7vcmgA@mail.gmail.com>
+	<CAOCNFM5iS66=sXefqXXAoTYjUnZqUabTeYXOf_Z0=OSy6qmRXA@mail.gmail.com>
+	<CAOCNFM4gX_2OgrAAjZzo2PhErLuvdkwXx3N=5at+4ymfP=AdZA@mail.gmail.com>
+	<CAOCNFM63atnrbSfCXrnDP786jAv6-KuXnue24VmAzWcutdfPWw@mail.gmail.com>
+	<CAOCNFM4sVJzS60d_G9LQNTKRTWavNm-mCniO9bDfWm56qmpXww@mail.gmail.com>
+	<CAOCNFM5ZEQjD+8kKyVyWD4+qNvtnkJbTYjPigFEden6HENNmNQ@mail.gmail.com>
+	<CAOCNFM5JAK-yt0tObucmB8vqqqKByD4CwOhBpeKmrG-9ZSJ-3g@mail.gmail.com>
+	<CAOCNFM4P0PzuXA5cm27f7CPGuBra3NAwbrV8r2729tCs-7=3EQ@mail.gmail.com>
+	<CAOCNFM5r_B4=LOHx+gEc-est8Etx6bWxRbBitgwD2-ZjOBZjgw@mail.gmail.com>
+	<CAOCNFM4AbDi0G0xhSFB-U0fZAhxzxQq9fJApNbtcHkkTt1cb=Q@mail.gmail.com>
+	<CAOCNFM41Qj==Y=urrWVQ7NR0fSw3yaMBfeEiOdG5Z4G7eMtp+g@mail.gmail.com>
+	<CAOCNFM6b4EA+YEdXN-y6WziDUR9w1cm+qyy3-6FV1jodpGie2w@mail.gmail.com>
+	<CAOCNFM49aLJmQSJ80Th+tGkcct-4Kts1dtjte9SKA00Erbchcg@mail.gmail.com>
+	<CAOCNFM7kXmQ90HQrLpw+1Y2X3gRNhTn=HACZpYxecX0q11GMLA@mail.gmail.com>
+	<CAOCNFM6=jVY=uFgkk7q1Bn2Sf=L06Rp61jpX+mnaychoy80+=Q@mail.gmail.com>
+	<CAOCNFM7Uqv+MM1ZN5o35tB_Y5LWm1h-JTdQgUAxDUtkBD5=e1Q@mail.gmail.com>
+	<CAOCNFM5KNBgBtVAZYdP9GVvbELf9bEh1nVQKk3dFUKfSJM8UKw@mail.gmail.com>
+	<CAOCNFM7an-qTzCEcr0kkyE3cK4izSvLXygcsKvGOS1v+6kqqDw@mail.gmail.com>
+	<CAOCNFM5VCGaBchQG432wOHFkWiXtDrLHw0NH8KN4M71-a80qXg@mail.gmail.com>
+	<CAOCNFM77N=0_ifnNpxdB5JxtdjNSBcHT4zhNm+xHJHN+qX0CUg@mail.gmail.com>
+	<CAOCNFM5S1O1nfanBAGE+7khpr2LLN45ffPT1hnXHgEp1r_i5Hg@mail.gmail.com>
+	<CAOCNFM6TS2ZAgpCVUxC9TWcWCeikLoYwrv7DcRjv6y91A6Djpg@mail.gmail.com>
+	<CAOCNFM6y_Pbk6-CYgdvtCROEjDauLBnGeOiSgeeenv0n9j86Ow@mail.gmail.com>
+	<CAOCNFM7yOXY3bA-bXR81g+VHvH8ymBGhNdMsKfb36tvXU_r2GA@mail.gmail.com>
+	<CAOCNFM6XqswkWQPr5+vTTGPKf9dDUrroMvksoEDoeX07kRksjQ@mail.gmail.com>
+	<CAOCNFM7kocibhvz_xQHrcOwq0MtgbFnuWc2NTU8qt_+vcBLLcA@mail.gmail.com>
+	<CAOCNFM7LZs2PKLFAau_V+=agX5AgPtBA1s-ywuyqL+i2Azte0A@mail.gmail.com>
+Message-ID: <CAOCNFM6Z=bYiOcJ6e3=FMvQyNu+EdS6nneDaNWCnUD+JSaq-Pg@mail.gmail.com>
+
+####################################################################
+
+                                                        CALL FOR PAPERS
+
+                                                 2nd International Workshop
+on
+                                  Model-driven Approaches for Simulation
+Engineering
+                          part of the Symposium on Theory of Modeling and
+Simulation
+                                                      (SCS SpringSim 2012)
+
+
+#####################################################################
+
+March 26-29, 2012, Orlando, FL (USA)
+http://www.sel.uniroma2.it/Mod4Sim12
+
+#####################################################################
+# Papers Due: *** November 15, 2011 ***
+# Accepted papers will be published in the conference proceedings and
+archived
+# in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital Library.
+# The Symposium is co-sponsored by IEEE.
+#####################################################################
+
+The workshop aims to bring together experts in model-based, model-driven and
+software engineering with experts in simulation methods and simulation
+practitioners, with the objective to advance the state of the art in
+model-driven simulation engineering.
+
+Model-driven engineering approaches provide considerable advantages to
+software systems engineering activities through the provision of consistent
+and coherent models at different abstraction levels. As these models are in
+a machine readable form, model-driven engineering approaches can also
+support the exploitation of computing capabilities for model reuse,
+programming code generation, and model checking, for example.
+
+The definition of a simulation model, its software implementation and its
+execution platform form what is known as simulation engineering. As
+simulation systems are mainly based on software, these systems can similarly
+benefit from model-driven approaches to support automatic software
+generation, enhance software quality, and reduce costs, development effort
+and time-to-market.
+
+Similarly to systems and software engineering, simulation engineering can
+exploit the capabilities of model-driven approaches by increasing the
+abstraction level in simulation model specifications and by automating the
+derivation of simulator code. Further advantages can be gained by using
+modeling languages, such as UML and SysML ? but not exclusively those. For
+example, modeling languages can be used for descriptive modeling (to
+describe the system to be simulated), for analytical modeling (to specify
+analytically the simulation of the same system), and for implementation
+modeling (to define the respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore) and
+distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms (discrete
+event simulation, multi-agent simulation, sketch-based * simulation, etc.)
+* model-driven methods and tools for performance engineering of simulation
+systems
+* simulation tools for model-driven software performance engineering
+* model-driven technologies for simulation verification and validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* Executable UML
+* Executable Architectures
+* SysML / Modelica integration
+* Simulation Model Portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider scope and
+welcomes contributions offering original perspectives on model-driven
+engineering of simulation systems.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+We invite paper submissions in three forms:
+
+1. Full paper (max 8 pages), describing innovative research results. These
+papers are eligible for the best paper award and may be invited for an
+extended version in a special issue of the SCS SIMULATION journal.
+2. Work-in-progress paper (max 6 pages), describing novel research ideas and
+promising work that have not yet been fully evaluated.
+3. Short paper (max 6 pages), describing industrial and hands-on experience
+on any relevant area (i.e. military, government, space, etc.).
+
+All the papers must be submitted through the SCS conference management
+systems (http://www.softconf.com/scs/DEVS12/), selecting the Mod4Sim track
+in the "Submission Categories" section. All the submitted papers must be in
+PDF format and must conform to the SCS conference template (Word template is
+available at
+http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc,
+guidelines are available at
+http://www.scs.org/PDFs/formattingkit.pdf). All the submitted papers must be
+original and not submitted else where. Submitted papers will be peer
+reviewed with respect to their quality, originality and relevance. The
+authors of the accepted papers must register in advance for inclusion of
+their paper in the conference proceedings. Authors of accepted papers will
+be invited to update their papers basing on the reviews, before providing
+the camera ready.
+
+All accepted papers will be included in the conference proceedings and
+archived in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital
+Library. However, **only** accepted **full papers** will be printed in hard
+copy.
+
+Authors may contact the organizers for expression of interest and content
+appropriateness at any time.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission deadline: November 15, 2011
+* Acceptance notification: January 1, 2012
+* Camera ready due: January 15, 2012
+* Conference dates: March 26 - 29, 2012
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Daniele Gianni - European Space Agency, The Netherlands
+* Nicolas Rouquette - NASA, Jet Propulsion Laboratory, USA
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Steffen Becker - University of Paderborn, Germany
+* David Chen - Univeristy of Bordeaux I, France
+* Andrea D'Ambrogio - University of Rome TorVergata, Italy
+* Juan De Lara - Universidad Autonoma de Madrid, Spain
+* Hans-Peter De Koning - European Space Agency, The Netherlands
+* Christopher Delp - NASA, Jet Propulsion Laboratory, USA
+* Dov Dori - Israel Institute of Technology, Israel, and Massachusetts
+Institute of Technology, USA
+* Howard Eisen - NASA, Jet Propulsion Laboratory, USA
+* Huascar Espinoza - European Software Institute and Tecnalia, Spain
+* Paul A. Fishwick - University of Florida, USA
+* Joachim Fuchs - European Space Agency, The Netherlands
+* Carlos Juiz - University of Balearic Islands, Spain
+* Cristiano Leorato - Rhea, The Netherlands
+* Steve McKeever - University of Oxford, UK
+* Halit O?uzt?z?n - Middle East Technical University, Turkey
+* Chris Paredis - Georgia Institute of Technology, USA
+* Andreas Tolk - Old Dominion University, USA
+* Hans Vangheluwe - University of Antwerp, Belgium and McGill University,
+Canada
+* Anthony Walsh - European Space Agency, Germany
+* Heming Zhang - Tsinghua University, China
+
+*** Contact Information ***
+
+Daniele Gianni and Nicolas Rouquette (workshop co-chairs)
+Emails: daniele.gianni at esa.int and nicolas.f.rouquette at jpl.nasa.gov
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110923/9aa6bcc3/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Fri Sep 23 22:15:09 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 23 Sep 2011 22:15:09 +0200
+Subject: [Stratego Users] CfP: 2nd Workshop on Model-driven Approaches
+ for Simulation Engineering (Mod4Sim),
+ in Symposium on Theory of Modeling and Simulation, SCS Spring Sim 2012
+In-Reply-To: <CAOCNFM6Z=bYiOcJ6e3=FMvQyNu+EdS6nneDaNWCnUD+JSaq-Pg@mail.gmail.com>
+References: <OF27FE4300.00E57B61-ONC1257914.005091AE-C1257914.0050A00F@esa.int>
+	<CAOCNFM6CNmF+Er5mjn+M5YL4Vcp997A+ZXNf5nH=gAjWraa7GQ@mail.gmail.com>
+	<CAOCNFM6kwphvhQXoCe+6PvSMGYt0ddywfSpcnQ2PeMcv5tGoaQ@mail.gmail.com>
+	<CAOCNFM7LgHLxVrGxYLBLQQXWVzfKzeRunc0kzkX0PKozeApLSw@mail.gmail.com>
+	<CAOCNFM4GBz8z6-yCC0jbStNGwAoNzwDkRBFoOt7XgEh_ZiNVdw@mail.gmail.com>
+	<CAOCNFM7cXe1y3Wf-PiiNXMRkAW1e3uFRo1vviDzFvZQ2qZ9jBw@mail.gmail.com>
+	<CAOCNFM752SzaDehvm_TYPDnG_O0WO-GQXFjUsK-JDWfyTFN2hg@mail.gmail.com>
+	<CAOCNFM4fDKQmOX5TXxafWBn5KQ0ACgrPyvaoe97L=uQUg5VxAA@mail.gmail.com>
+	<CAOCNFM50gGmSgPz12XqoXnrnbmYdd7L4pHPpfhrzsiEn7vcmgA@mail.gmail.com>
+	<CAOCNFM5iS66=sXefqXXAoTYjUnZqUabTeYXOf_Z0=OSy6qmRXA@mail.gmail.com>
+	<CAOCNFM4gX_2OgrAAjZzo2PhErLuvdkwXx3N=5at+4ymfP=AdZA@mail.gmail.com>
+	<CAOCNFM63atnrbSfCXrnDP786jAv6-KuXnue24VmAzWcutdfPWw@mail.gmail.com>
+	<CAOCNFM4sVJzS60d_G9LQNTKRTWavNm-mCniO9bDfWm56qmpXww@mail.gmail.com>
+	<CAOCNFM5ZEQjD+8kKyVyWD4+qNvtnkJbTYjPigFEden6HENNmNQ@mail.gmail.com>
+	<CAOCNFM5JAK-yt0tObucmB8vqqqKByD4CwOhBpeKmrG-9ZSJ-3g@mail.gmail.com>
+	<CAOCNFM4P0PzuXA5cm27f7CPGuBra3NAwbrV8r2729tCs-7=3EQ@mail.gmail.com>
+	<CAOCNFM5r_B4=LOHx+gEc-est8Etx6bWxRbBitgwD2-ZjOBZjgw@mail.gmail.com>
+	<CAOCNFM4AbDi0G0xhSFB-U0fZAhxzxQq9fJApNbtcHkkTt1cb=Q@mail.gmail.com>
+	<CAOCNFM41Qj==Y=urrWVQ7NR0fSw3yaMBfeEiOdG5Z4G7eMtp+g@mail.gmail.com>
+	<CAOCNFM6b4EA+YEdXN-y6WziDUR9w1cm+qyy3-6FV1jodpGie2w@mail.gmail.com>
+	<CAOCNFM49aLJmQSJ80Th+tGkcct-4Kts1dtjte9SKA00Erbchcg@mail.gmail.com>
+	<CAOCNFM7kXmQ90HQrLpw+1Y2X3gRNhTn=HACZpYxecX0q11GMLA@mail.gmail.com>
+	<CAOCNFM6=jVY=uFgkk7q1Bn2Sf=L06Rp61jpX+mnaychoy80+=Q@mail.gmail.com>
+	<CAOCNFM7Uqv+MM1ZN5o35tB_Y5LWm1h-JTdQgUAxDUtkBD5=e1Q@mail.gmail.com>
+	<CAOCNFM5KNBgBtVAZYdP9GVvbELf9bEh1nVQKk3dFUKfSJM8UKw@mail.gmail.com>
+	<CAOCNFM7an-qTzCEcr0kkyE3cK4izSvLXygcsKvGOS1v+6kqqDw@mail.gmail.com>
+	<CAOCNFM5VCGaBchQG432wOHFkWiXtDrLHw0NH8KN4M71-a80qXg@mail.gmail.com>
+	<CAOCNFM77N=0_ifnNpxdB5JxtdjNSBcHT4zhNm+xHJHN+qX0CUg@mail.gmail.com>
+	<CAOCNFM5S1O1nfanBAGE+7khpr2LLN45ffPT1hnXHgEp1r_i5Hg@mail.gmail.com>
+	<CAOCNFM6TS2ZAgpCVUxC9TWcWCeikLoYwrv7DcRjv6y91A6Djpg@mail.gmail.com>
+	<CAOCNFM6y_Pbk6-CYgdvtCROEjDauLBnGeOiSgeeenv0n9j86Ow@mail.gmail.com>
+	<CAOCNFM7yOXY3bA-bXR81g+VHvH8ymBGhNdMsKfb36tvXU_r2GA@mail.gmail.com>
+	<CAOCNFM6XqswkWQPr5+vTTGPKf9dDUrroMvksoEDoeX07kRksjQ@mail.gmail.com>
+	<CAOCNFM7kocibhvz_xQHrcOwq0MtgbFnuWc2NTU8qt_+vcBLLcA@mail.gmail.com>
+	<CAOCNFM7LZs2PKLFAau_V+=agX5AgPtBA1s-ywuyqL+i2Azte0A@mail.gmail.com>
+	<CAOCNFM6Z=bYiOcJ6e3=FMvQyNu+EdS6nneDaNWCnUD+JSaq-Pg@mail.gmail.com>
+Message-ID: <CAFaCHU3k8Ovn4YZd64Mi6Ez=7HJTf_vPe-kY0P3q__LsnPQ2Kg@mail.gmail.com>
+
+Hi,
+
+You might be interested to add your conference to the researchr
+conference calendar at
+
+??http://researchr.org/conferencecalendar
+
+Note that researchr now supports a personal conference calendar with
+conferences you follow.
+
+(You may need to sign up first)
+
+regards,
+
+-- Eelco Visser
+Associate Professor in?Software Language Engineering at?Delft
+University of Technology
+http://eelcovisser.org??http://researchr.org/profile/eelcovisser
+http://twitter.com/eelcovisser
+
+
+On Fri, Sep 23, 2011 at 9:28 PM, Daniele Gianni
+<daniele.gianni at gmail.com> wrote:
+> ####################################################################
+>
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? CALL FOR PAPERS
+>
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?2nd International Workshop
+> on
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Model-driven Approaches for Simulation
+> Engineering
+> ? ? ? ? ? ? ? ? ? ? ? ? ? part of the Symposium on Theory of Modeling and
+> Simulation
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? (SCS SpringSim 2012)
+>
+>
+> #####################################################################
+>
+> March 26-29, 2012, Orlando, FL (USA)
+> http://www.sel.uniroma2.it/Mod4Sim12
+>
+> #####################################################################
+> # Papers Due: *** November 15, 2011 ***
+> # Accepted papers will be published in the conference proceedings and
+> archived
+> # in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital Library.
+> # The Symposium is co-sponsored by IEEE.
+> #####################################################################
+>
+> The workshop aims to bring together experts in model-based, model-driven and
+> software engineering with experts in simulation methods and simulation
+> practitioners, with the objective to advance the state of the art in
+> model-driven simulation engineering.
+>
+> Model-driven engineering approaches provide considerable advantages to
+> software systems engineering activities through the provision of consistent
+> and coherent models at different abstraction levels. As these models are in
+> a machine readable form, model-driven engineering approaches can also
+> support the exploitation of computing capabilities for model reuse,
+> programming code generation, and model checking, for example.
+>
+> The definition of a simulation model, its software implementation and its
+> execution platform form what is known as simulation engineering. As
+> simulation systems are mainly based on software, these systems can similarly
+> benefit from model-driven approaches to support automatic software
+> generation, enhance software quality, and reduce costs, development effort
+> and time-to-market.
+>
+> Similarly to systems and software engineering, simulation engineering can
+> exploit the capabilities of model-driven approaches by increasing the
+> abstraction level in simulation model specifications and by automating the
+> derivation of simulator code. Further advantages can be gained by using
+> modeling languages, such as UML and SysML ? but not exclusively those. For
+> example, modeling languages can be used for descriptive modeling (to
+> describe the system to be simulated), for analytical modeling (to specify
+> analytically the simulation of the same system), and for implementation
+> modeling (to define the respective simulator).
+>
+> A partial list of topics of interest includes:
+>
+> * model-driven simulation engineering processes
+> * requirements modeling for simulation
+> * domain specific languages for modeling and simulation
+> * model transformations for simulation model building
+> * model transformations for simulation model implementation
+> * model-driven engineering of distributed simulation systems
+> * relationship between metamodeling standards (e.g., MOF, Ecore) and
+> distributed simulation standards (e.g., HLA, DIS)
+> * metamodels for simulation reuse and interoperability
+> * model-driven technologies for different simulation paradigms (discrete
+> event simulation, multi-agent simulation, sketch-based * simulation, etc.)
+> * model-driven methods and tools for performance engineering of simulation
+> systems
+> * simulation tools for model-driven software performance engineering
+> * model-driven technologies for simulation verification and validation
+> * model-driven technologies for data collection and analysis
+> * model-driven technologies for simulation visualization
+> * Executable UML
+> * Executable Architectures
+> * SysML / Modelica integration
+> * Simulation Model Portability and reuse
+> * model-based systems verification and validation
+> * simulation for model-based systems engineering
+>
+> To stimulate creativity, however, the workshop maintains a wider scope and
+> welcomes contributions offering original perspectives on model-driven
+> engineering of simulation systems.
+>
+> +++++++++++++++++++++++++++++++++++
+> On-Line Submissions and Publication
+> +++++++++++++++++++++++++++++++++++
+>
+> We invite paper submissions in three forms:
+>
+> 1. Full paper (max 8 pages), describing innovative research results. These
+> papers are eligible for the best paper award and may be invited for an
+> extended version in a special issue of the SCS SIMULATION journal.
+> 2. Work-in-progress paper (max 6 pages), describing novel research ideas and
+> promising work that have not yet been fully evaluated.
+> 3. Short paper (max 6 pages), describing industrial and hands-on experience
+> on any relevant area (i.e. military, government, space, etc.).
+>
+> All the papers must be submitted through the SCS conference management
+> systems (http://www.softconf.com/scs/DEVS12/), selecting the Mod4Sim track
+> in the "Submission Categories" section. All the submitted papers must be in
+> PDF format and must conform to the SCS conference template (Word template is
+> available at
+> http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc
+> , guidelines are available at http://www.scs.org/PDFs/formattingkit.pdf).
+> All the submitted papers must be original and not submitted else where.
+> Submitted papers will be peer reviewed with respect to their quality,
+> originality and relevance. The authors of the accepted papers must register
+> in advance for inclusion of their paper in the conference proceedings.
+> Authors of accepted papers will be invited to update their papers basing on
+> the reviews, before providing the camera ready.
+>
+> All accepted papers will be included in the conference proceedings and
+> archived in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital
+> Library. However, **only** accepted **full papers** will be printed in hard
+> copy.
+>
+> Authors may contact the organizers for expression of interest and content
+> appropriateness at any time.
+>
+> +++++++++++++++
+> Important Dates
+> +++++++++++++++
+>
+> * Submission deadline: November 15, 2011
+> * Acceptance notification: January 1, 2012
+> * Camera ready due: January 15, 2012
+> * Conference dates: March 26 - 29, 2012
+>
+> ++++++++++++++++++++
+> Organizing Committee
+> ++++++++++++++++++++
+>
+> * Daniele Gianni - European Space Agency, The Netherlands
+> * Nicolas Rouquette - NASA, Jet Propulsion Laboratory, USA
+>
+> +++++++++++++++++
+> Program Committee
+> +++++++++++++++++
+>
+> * Steffen Becker - University of Paderborn, Germany
+> * David Chen - Univeristy of Bordeaux I, France
+> * Andrea D'Ambrogio - University of Rome TorVergata, Italy
+> * Juan De Lara - Universidad Autonoma de Madrid, Spain
+> * Hans-Peter De Koning - European Space Agency, The Netherlands
+> * Christopher Delp - NASA, Jet Propulsion Laboratory, USA
+> * Dov Dori - Israel Institute of Technology, Israel, and Massachusetts
+> Institute of Technology, USA
+> * Howard Eisen - NASA, Jet Propulsion Laboratory, USA
+> * Huascar Espinoza - European Software Institute and Tecnalia, Spain
+> * Paul A. Fishwick - University of Florida, USA
+> * Joachim Fuchs - European Space Agency, The Netherlands
+> * Carlos Juiz - University of Balearic Islands, Spain
+> * Cristiano Leorato - Rhea, The Netherlands
+> * Steve McKeever - University of Oxford, UK
+> * Halit O?uzt?z?n - Middle East Technical University, Turkey
+> * Chris Paredis - Georgia Institute of Technology, USA
+> * Andreas Tolk - Old Dominion University, USA
+> * Hans Vangheluwe - University of Antwerp, Belgium and McGill University,
+> Canada
+> * Anthony Walsh - European Space Agency, Germany
+> * Heming Zhang - Tsinghua University, China
+>
+> *** Contact Information ***
+>
+> Daniele Gianni and Nicolas Rouquette (workshop co-chairs)
+> Emails: daniele.gianni at esa.int and nicolas.f.rouquette at jpl.nasa.gov
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From headness13 at gmail.com  Mon Sep 26 15:30:19 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Mon, 26 Sep 2011 16:30:19 +0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+Message-ID: <CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+
+Hi,
+
+I am using Spoofax - the eclipse plugin - for a while. I wrote an SDF
+grammar and a stratego function to process my input into some XML.
+Is there any way to export the parser and the stratego files so I can use
+them in command line?
+I would like to have something like this: "cat input.txt | some_tool >
+out.xml".
+
+I see that you have incorporated some of the tools from Spoofax in
+strategoxt.jar, but I couldn't find the proper documentation on how to use
+it. I could find something on the manual, but I believe this is for an older
+version of the tool and don't really match up.
+
+I could really appreciate it, if you could help me with this, or point me to
+the right documentation.
+
+Thanks,
+Radu Mereuta - Research Assistant - FII UAIC
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110926/441c13b6/attachment.html>
+
+From torres.giorgio at gmail.com  Mon Sep 26 16:44:19 2011
+From: torres.giorgio at gmail.com (Giorgio Torres)
+Date: Mon, 26 Sep 2011 11:44:19 -0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+Message-ID: <CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+
+I don`t know what are you trying to do, but you can have the parser of your
+grammar. I`ve already done this, but programmatically in Java, and without
+the stratego transforms.
+
+To get the sdf parser,
+
+When you write the grammar of your language in the specific sdf file, and
+build the project, so it generates a new editor, it also generates a tbl
+file. I`m not sure, but it is something like <yourlanguagesname>.tbl. It`s
+in some directory of your project, you just have to search it.
+
+Then, in the library files, you can get the JSGLR parser as a jar, that you
+must pass to it that tbl file you just found before.
+
+Now that you have the both, create a new Java project and put the JSGLR into
+your imported libs, and your tbl file as an input. For more information, try
+to search about the use of the JSGLR.
+
+Then, you have your parser, and you can parse any files described in that
+language of yours, just passing them as args in the Java`s main fuction.
+
+I don`t know if there is another easiest way. But i`ve been through this,
+and that`s how i`ve done.
+
+I hope it could help you.
+
+
+On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> Hi,
+>
+> I am using Spoofax - the eclipse plugin - for a while. I wrote an SDF
+> grammar and a stratego function to process my input into some XML.
+> Is there any way to export the parser and the stratego files so I can use
+> them in command line?
+> I would like to have something like this: "cat input.txt | some_tool >
+> out.xml".
+>
+> I see that you have incorporated some of the tools from Spoofax in
+> strategoxt.jar, but I couldn't find the proper documentation on how to use
+> it. I could find something on the manual, but I believe this is for an older
+> version of the tool and don't really match up.
+>
+> I could really appreciate it, if you could help me with this, or point me
+> to the right documentation.
+>
+> Thanks,
+> Radu Mereuta - Research Assistant - FII UAIC
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Giorgio Pr?mola F. G. Torres
+Graduando em Ci?ncia da Computa??o
+Universidade Federal de Vi?osa
+
+<http://www.facebook.com/giorgio.torres>
+<http://br.linkedin.com/in/giorgiotorres>
+  <http://www.twitter.com/gprimola>
+<http://www.flickr.com/photos/bygior>
+<http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110926/d566f8bf/attachment.html>
+
+From headness13 at gmail.com  Mon Sep 26 23:49:59 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 27 Sep 2011 00:49:59 +0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+Message-ID: <CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+
+I know that I can extract only the parser. The problem was to make it work
+from within stratego, as a command line tool. I like the simplicity of it,
+it's very convenient. Plus that I can get location information...
+I've been playing with strategoxt.jar and I've managed to compile some str
+files, but when I call a rule like this:
+
+    <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+
+in a java file, I get an exception like this:
+    Exception in thread "main" org.strategoxt.lang.StrategoException:
+Primitive not defined: STRSGLR_open_parse_table
+    at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+    at
+org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+
+On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres <torres.giorgio at gmail.com>wrote:
+
+> I don`t know what are you trying to do, but you can have the parser of your
+> grammar. I`ve already done this, but programmatically in Java, and without
+> the stratego transforms.
+>
+> To get the sdf parser,
+>
+> When you write the grammar of your language in the specific sdf file, and
+> build the project, so it generates a new editor, it also generates a tbl
+> file. I`m not sure, but it is something like <yourlanguagesname>.tbl. It`s
+> in some directory of your project, you just have to search it.
+>
+> Then, in the library files, you can get the JSGLR parser as a jar, that you
+> must pass to it that tbl file you just found before.
+>
+> Now that you have the both, create a new Java project and put the JSGLR
+> into your imported libs, and your tbl file as an input. For more
+> information, try to search about the use of the JSGLR.
+>
+> Then, you have your parser, and you can parse any files described in that
+> language of yours, just passing them as args in the Java`s main fuction.
+>
+> I don`t know if there is another easiest way. But i`ve been through this,
+> and that`s how i`ve done.
+>
+> I hope it could help you.
+>
+>
+> On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta <headness13 at gmail.com>wrote:
+>
+>> Hi,
+>>
+>> I am using Spoofax - the eclipse plugin - for a while. I wrote an SDF
+>> grammar and a stratego function to process my input into some XML.
+>> Is there any way to export the parser and the stratego files so I can use
+>> them in command line?
+>> I would like to have something like this: "cat input.txt | some_tool >
+>> out.xml".
+>>
+>> I see that you have incorporated some of the tools from Spoofax in
+>> strategoxt.jar, but I couldn't find the proper documentation on how to use
+>> it. I could find something on the manual, but I believe this is for an older
+>> version of the tool and don't really match up.
+>>
+>> I could really appreciate it, if you could help me with this, or point me
+>> to the right documentation.
+>>
+>> Thanks,
+>> Radu Mereuta - Research Assistant - FII UAIC
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Giorgio Pr?mola F. G. Torres
+> Graduando em Ci?ncia da Computa??o
+> Universidade Federal de Vi?osa
+>
+> <http://www.facebook.com/giorgio.torres> <http://br.linkedin.com/in/giorgiotorres>
+>   <http://www.twitter.com/gprimola>  <http://www.flickr.com/photos/bygior>
+>   <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110927/399837d9/attachment.html>
+
+From l.c.l.kats at tudelft.nl  Tue Sep 27 11:10:38 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Tue, 27 Sep 2011 11:10:38 +0200
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+Message-ID: <4E81930E.3080506@tudelft.nl>
+
+Hi Radu,
+
+To run a Spoofax plugin from the command-line, you need a main strategy 
+such as the following (but it sounds like you already figured that part 
+out):
+
+         main-minijava:
+                 arg* -> arg*
+                 where
+                 xtc-input-wrap(
+                         ?FILE(file);
+                         input := <parse-minijava-file> file;
+                         editor-init;
+                         ast       := <analyse> input;
+                         jbc-files := <to-jbc(|<double-quote> 
+<base-filename> file)> ast ;
+<map(write-jbc-file(| "."))> jbc-files
+                 )
+
+I ripped this example from a MiniJava plugin. It uses a helper strategy 
+xtc-input-wrap() to process command-line arguments: if you pass it a 
+command-line argument '-i FILENAME' then it will assign that FILENAME to 
+the file variable.
+
+You can then compile it by adding option '-m main-minijava' to the 
+build.main.xml file, build.stratego.args variable.
+
+The STRSGLR_open_parse_table error you get is a strange one. That would 
+indicate the JSGLR compatibility library wasn't loaded. How exactly did 
+you run your plugin? If you compile it like above it should work like 
+'java -jar myplugin.jar'?
+
+- Lennart
+
+On 9/26/11 23:49 , Radu Mereuta wrote:
+> I know that I can extract only the parser. The problem was to make it 
+> work from within stratego, as a command line tool. I like the 
+> simplicity of it, it's very convenient. Plus that I can get location 
+> information...
+> I've been playing with strategoxt.jar and I've managed to compile some 
+> str files, but when I call a rule like this:
+>
+> <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>
+> in a java file, I get an exception like this:
+>     Exception in thread "main" org.strategoxt.lang.StrategoException: 
+> Primitive not defined: STRSGLR_open_parse_table
+>     at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>     at 
+> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>
+> On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres 
+> <torres.giorgio at gmail.com <mailto:torres.giorgio at gmail.com>> wrote:
+>
+>     I don`t know what are you trying to do, but you can have the
+>     parser of your
+>     grammar. I`ve already done this, but programmatically in Java, and
+>     without the stratego transforms.
+>
+>     To get the sdf parser,
+>
+>     When you write the grammar of your language in the specific sdf
+>     file, and build the project, so it generates a new editor, it also
+>     generates a tbl file. I`m not sure, but it is something like
+>     <yourlanguagesname>.tbl. It`s in some directory of your project,
+>     you just have to search it.
+>
+>     Then, in the library files, you can get the JSGLR parser as a jar,
+>     that you must pass to it that tbl file you just found before.
+>
+>     Now that you have the both, create a new Java project and put the
+>     JSGLR into your imported libs, and your tbl file as an input. For
+>     more information, try to search about the use of the JSGLR.
+>
+>     Then, you have your parser, and you can parse any files described
+>     in that language of yours, just passing them as args in the Java`s
+>     main fuction.
+>
+>     I don`t know if there is another easiest way. But i`ve been
+>     through this, and that`s how i`ve done.
+>
+>     I hope it could help you.
+>
+>
+>     On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta
+>     <headness13 at gmail.com <mailto:headness13 at gmail.com>> wrote:
+>
+>         Hi,
+>
+>         I am using Spoofax - the eclipse plugin - for a while. I wrote
+>         an SDF grammar and a stratego function to process my input
+>         into some XML.
+>         Is there any way to export the parser and the stratego files
+>         so I can use them in command line?
+>         I would like to have something like this: "cat input.txt |
+>         some_tool > out.xml".
+>
+>         I see that you have incorporated some of the tools from
+>         Spoofax in strategoxt.jar, but I couldn't find the proper
+>         documentation on how to use it. I could find something on the
+>         manual, but I believe this is for an older version of the tool
+>         and don't really match up.
+>
+>         I could really appreciate it, if you could help me with this,
+>         or point me to the right documentation.
+>
+>         Thanks,
+>         Radu Mereuta - Research Assistant - FII UAIC
+>
+>
+>
+>         _______________________________________________
+>         Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>     -- 
+>     Giorgio Pr?mola F. G. Torres
+>     Graduando em Ci?ncia da Computa??o
+>     Universidade Federal de Vi?osa
+>
+>     <http://www.facebook.com/giorgio.torres>
+>     <http://br.linkedin.com/in/giorgiotorres>
+>     <http://www.twitter.com/gprimola>
+>     <http://www.flickr.com/photos/bygior>
+>     <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From headness13 at gmail.com  Tue Sep 27 12:07:06 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 27 Sep 2011 13:07:06 +0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <4E81930E.3080506@tudelft.nl>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+	<4E81930E.3080506@tudelft.nl>
+Message-ID: <CAFu+moKQ-Lunq+M04ndiP9NEJybPq7=UnUKvkNhapt3p1SgktQ@mail.gmail.com>
+
+Hi Lenart,
+
+I was compiling the .srt file with the strategoxt.jar, and it turned out
+that I had to link the libstratego-sglr library at compiling time.
+I'm doing it like this right now:
+
+java -jar strategoxt.jar -i xmlify.str -o a.out -m test7 -la
+libstratego-sglr
+
+and it works. I get a .java file that I can use later in an eclipse project.
+I didn't use a build script, but It seems that it helps speed up things. I
+will look into this.
+
+Thanks,
+Radu
+
+On Tue, Sep 27, 2011 at 12:10 PM, Lennart Kats <l.c.l.kats at tudelft.nl>wrote:
+
+> Hi Radu,
+>
+> To run a Spoofax plugin from the command-line, you need a main strategy
+> such as the following (but it sounds like you already figured that part
+> out):
+>
+>        main-minijava:
+>                arg* -> arg*
+>                where
+>                xtc-input-wrap(
+>                        ?FILE(file);
+>                        input := <parse-minijava-file> file;
+>                        editor-init;
+>                        ast       := <analyse> input;
+>                        jbc-files := <to-jbc(|<double-quote> <base-filename>
+> file)> ast ;
+> <map(write-jbc-file(| "."))> jbc-files
+>                )
+>
+> I ripped this example from a MiniJava plugin. It uses a helper strategy
+> xtc-input-wrap() to process command-line arguments: if you pass it a
+> command-line argument '-i FILENAME' then it will assign that FILENAME to the
+> file variable.
+>
+> You can then compile it by adding option '-m main-minijava' to the
+> build.main.xml file, build.stratego.args variable.
+>
+> The STRSGLR_open_parse_table error you get is a strange one. That would
+> indicate the JSGLR compatibility library wasn't loaded. How exactly did you
+> run your plugin? If you compile it like above it should work like 'java -jar
+> myplugin.jar'?
+>
+> - Lennart
+>
+>
+> On 9/26/11 23:49 , Radu Mereuta wrote:
+>
+>> I know that I can extract only the parser. The problem was to make it work
+>> from within stratego, as a command line tool. I like the simplicity of it,
+>> it's very convenient. Plus that I can get location information...
+>> I've been playing with strategoxt.jar and I've managed to compile some str
+>> files, but when I call a rule like this:
+>>
+>> <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>>
+>> in a java file, I get an exception like this:
+>>    Exception in thread "main" org.strategoxt.lang.StrategoException:
+>> Primitive not defined: STRSGLR_open_parse_table
+>>    at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>>    at
+>> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>>
+>> On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres <torres.giorgio at gmail.com<mailto:
+>> torres.giorgio at gmail.com>> wrote:
+>>
+>>    I don`t know what are you trying to do, but you can have the
+>>    parser of your
+>>    grammar. I`ve already done this, but programmatically in Java, and
+>>    without the stratego transforms.
+>>
+>>    To get the sdf parser,
+>>
+>>    When you write the grammar of your language in the specific sdf
+>>    file, and build the project, so it generates a new editor, it also
+>>    generates a tbl file. I`m not sure, but it is something like
+>>    <yourlanguagesname>.tbl. It`s in some directory of your project,
+>>    you just have to search it.
+>>
+>>    Then, in the library files, you can get the JSGLR parser as a jar,
+>>    that you must pass to it that tbl file you just found before.
+>>
+>>    Now that you have the both, create a new Java project and put the
+>>    JSGLR into your imported libs, and your tbl file as an input. For
+>>    more information, try to search about the use of the JSGLR.
+>>
+>>    Then, you have your parser, and you can parse any files described
+>>    in that language of yours, just passing them as args in the Java`s
+>>    main fuction.
+>>
+>>    I don`t know if there is another easiest way. But i`ve been
+>>    through this, and that`s how i`ve done.
+>>
+>>    I hope it could help you.
+>>
+>>
+>>    On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta
+>>    <headness13 at gmail.com <mailto:headness13 at gmail.com>> wrote:
+>>
+>>        Hi,
+>>
+>>        I am using Spoofax - the eclipse plugin - for a while. I wrote
+>>        an SDF grammar and a stratego function to process my input
+>>        into some XML.
+>>        Is there any way to export the parser and the stratego files
+>>        so I can use them in command line?
+>>        I would like to have something like this: "cat input.txt |
+>>        some_tool > out.xml".
+>>
+>>        I see that you have incorporated some of the tools from
+>>        Spoofax in strategoxt.jar, but I couldn't find the proper
+>>        documentation on how to use it. I could find something on the
+>>        manual, but I believe this is for an older version of the tool
+>>        and don't really match up.
+>>
+>>        I could really appreciate it, if you could help me with this,
+>>        or point me to the right documentation.
+>>
+>>        Thanks,
+>>        Radu Mereuta - Research Assistant - FII UAIC
+>>
+>>
+>>
+>>        _______________________________________________
+>>        Users mailing list
+>>        Users at strategoxt.org <mailto:Users at strategoxt.org>
+>>
+>>        https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>>
+>>    --     Giorgio Pr?mola F. G. Torres
+>>    Graduando em Ci?ncia da Computa??o
+>>    Universidade Federal de Vi?osa
+>>
+>>    <http://www.facebook.com/giorgio.torres>
+>>    <http://br.linkedin.com/in/giorgiotorres>
+>>    <http://www.twitter.com/gprimola>
+>>    <http://www.flickr.com/photos/bygior>
+>>    <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>>
+>>    _______________________________________________
+>>    Users mailing list
+>>    Users at strategoxt.org <mailto:Users at strategoxt.org>
+>>
+>>    https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110927/33e11f83/attachment-0001.html>
+
+From l.c.l.kats at tudelft.nl  Tue Sep 27 13:37:24 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Tue, 27 Sep 2011 13:37:24 +0200
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+moKQ-Lunq+M04ndiP9NEJybPq7=UnUKvkNhapt3p1SgktQ@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+	<4E81930E.3080506@tudelft.nl>
+	<CAFu+moKQ-Lunq+M04ndiP9NEJybPq7=UnUKvkNhapt3p1SgktQ@mail.gmail.com>
+Message-ID: <4E81B574.3070001@tudelft.nl>
+
+Hi,
+
+Yeah, that looks alright. The main difference in the build script is 
+probably that it uses the 'ecj' Java compiler, and that Eclipse has some 
+classes preloaded (such as those in strategoxt.jar).
+
+- Lennart
+
+On 9/27/11 12:07 , Radu Mereuta wrote:
+> Hi Lenart,
+>
+> I was compiling the .srt file with the strategoxt.jar, and it turned 
+> out that I had to link the libstratego-sglr library at compiling time.
+> I'm doing it like this right now:
+>
+> java -jar strategoxt.jar -i xmlify.str -o a.out -m test7 -la 
+> libstratego-sglr
+>
+> and it works. I get a .java file that I can use later in an eclipse 
+> project.
+> I didn't use a build script, but It seems that it helps speed up 
+> things. I will look into this.
+>
+> Thanks,
+> Radu
+>
+> On Tue, Sep 27, 2011 at 12:10 PM, Lennart Kats <l.c.l.kats at tudelft.nl 
+> <mailto:l.c.l.kats at tudelft.nl>> wrote:
+>
+>     Hi Radu,
+>
+>     To run a Spoofax plugin from the command-line, you need a main
+>     strategy such as the following (but it sounds like you already
+>     figured that part out):
+>
+>            main-minijava:
+>                    arg* -> arg*
+>                    where
+>                    xtc-input-wrap(
+>                            ?FILE(file);
+>                            input := <parse-minijava-file> file;
+>                            editor-init;
+>                            ast       := <analyse> input;
+>                            jbc-files := <to-jbc(|<double-quote>
+>     <base-filename> file)> ast ;
+>     <map(write-jbc-file(| "."))> jbc-files
+>                    )
+>
+>     I ripped this example from a MiniJava plugin. It uses a helper
+>     strategy xtc-input-wrap() to process command-line arguments: if
+>     you pass it a command-line argument '-i FILENAME' then it will
+>     assign that FILENAME to the file variable.
+>
+>     You can then compile it by adding option '-m main-minijava' to the
+>     build.main.xml file, build.stratego.args variable.
+>
+>     The STRSGLR_open_parse_table error you get is a strange one. That
+>     would indicate the JSGLR compatibility library wasn't loaded. How
+>     exactly did you run your plugin? If you compile it like above it
+>     should work like 'java -jar myplugin.jar'?
+>
+>     - Lennart
+>
+>
+>     On 9/26/11 23:49 , Radu Mereuta wrote:
+>
+>         I know that I can extract only the parser. The problem was to
+>         make it work from within stratego, as a command line tool. I
+>         like the simplicity of it, it's very convenient. Plus that I
+>         can get location information...
+>         I've been playing with strategoxt.jar and I've managed to
+>         compile some str files, but when I call a rule like this:
+>
+>         <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>
+>         in a java file, I get an exception like this:
+>            Exception in thread "main"
+>         org.strategoxt.lang.StrategoException: Primitive not defined:
+>         STRSGLR_open_parse_table
+>            at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>            at
+>         org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>
+>         On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres
+>         <torres.giorgio at gmail.com <mailto:torres.giorgio at gmail.com>
+>         <mailto:torres.giorgio at gmail.com
+>         <mailto:torres.giorgio at gmail.com>>> wrote:
+>
+>            I don`t know what are you trying to do, but you can have the
+>            parser of your
+>            grammar. I`ve already done this, but programmatically in
+>         Java, and
+>            without the stratego transforms.
+>
+>            To get the sdf parser,
+>
+>            When you write the grammar of your language in the specific sdf
+>            file, and build the project, so it generates a new editor,
+>         it also
+>            generates a tbl file. I`m not sure, but it is something like
+>         <yourlanguagesname>.tbl. It`s in some directory of your project,
+>            you just have to search it.
+>
+>            Then, in the library files, you can get the JSGLR parser as
+>         a jar,
+>            that you must pass to it that tbl file you just found before.
+>
+>            Now that you have the both, create a new Java project and
+>         put the
+>            JSGLR into your imported libs, and your tbl file as an
+>         input. For
+>            more information, try to search about the use of the JSGLR.
+>
+>            Then, you have your parser, and you can parse any files
+>         described
+>            in that language of yours, just passing them as args in the
+>         Java`s
+>            main fuction.
+>
+>            I don`t know if there is another easiest way. But i`ve been
+>            through this, and that`s how i`ve done.
+>
+>            I hope it could help you.
+>
+>
+>            On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta
+>         <headness13 at gmail.com <mailto:headness13 at gmail.com>
+>         <mailto:headness13 at gmail.com <mailto:headness13 at gmail.com>>>
+>         wrote:
+>
+>                Hi,
+>
+>                I am using Spoofax - the eclipse plugin - for a while.
+>         I wrote
+>                an SDF grammar and a stratego function to process my input
+>                into some XML.
+>                Is there any way to export the parser and the stratego
+>         files
+>                so I can use them in command line?
+>                I would like to have something like this: "cat input.txt |
+>                some_tool > out.xml".
+>
+>                I see that you have incorporated some of the tools from
+>                Spoofax in strategoxt.jar, but I couldn't find the proper
+>                documentation on how to use it. I could find something
+>         on the
+>                manual, but I believe this is for an older version of
+>         the tool
+>                and don't really match up.
+>
+>                I could really appreciate it, if you could help me with
+>         this,
+>                or point me to the right documentation.
+>
+>                Thanks,
+>                Radu Mereuta - Research Assistant - FII UAIC
+>
+>
+>
+>                _______________________________________________
+>                Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         <mailto:Users at strategoxt.org <mailto:Users at strategoxt.org>>
+>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>            --     Giorgio Pr?mola F. G. Torres
+>            Graduando em Ci?ncia da Computa??o
+>            Universidade Federal de Vi?osa
+>
+>         <http://www.facebook.com/giorgio.torres>
+>         <http://br.linkedin.com/in/giorgiotorres>
+>         <http://www.twitter.com/gprimola>
+>         <http://www.flickr.com/photos/bygior>
+>         <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>
+>            _______________________________________________
+>            Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         <mailto:Users at strategoxt.org <mailto:Users at strategoxt.org>>
+>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>         _______________________________________________
+>         Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+
+
+From l.c.l.kats at tudelft.nl  Tue Sep 27 14:11:24 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Tue, 27 Sep 2011 14:11:24 +0200
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+moKQ-Lunq+M04ndiP9NEJybPq7=UnUKvkNhapt3p1SgktQ@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+	<4E81930E.3080506@tudelft.nl>
+	<CAFu+moKQ-Lunq+M04ndiP9NEJybPq7=UnUKvkNhapt3p1SgktQ@mail.gmail.com>
+Message-ID: <4E81BD6C.6010709@tudelft.nl>
+
+Hi,
+
+Yeah, that looks alright. The main difference in the build script is 
+probably that it uses the 'ecj' Java compiler, and that Eclipse has some 
+classes preloaded (such as those in strategoxt.jar).
+
+- Lennart
+
+On 9/27/11 12:07 , Radu Mereuta wrote:
+> Hi Lenart,
+>
+> I was compiling the .srt file with the strategoxt.jar, and it turned 
+> out that I had to link the libstratego-sglr library at compiling time.
+> I'm doing it like this right now:
+>
+> java -jar strategoxt.jar -i xmlify.str -o a.out -m test7 -la 
+> libstratego-sglr
+>
+> and it works. I get a .java file that I can use later in an eclipse 
+> project.
+> I didn't use a build script, but It seems that it helps speed up 
+> things. I will look into this.
+>
+> Thanks,
+> Radu
+>
+> On Tue, Sep 27, 2011 at 12:10 PM, Lennart Kats <l.c.l.kats at tudelft.nl 
+> <mailto:l.c.l.kats at tudelft.nl>> wrote:
+>
+>     Hi Radu,
+>
+>     To run a Spoofax plugin from the command-line, you need a main
+>     strategy such as the following (but it sounds like you already
+>     figured that part out):
+>
+>            main-minijava:
+>                    arg* -> arg*
+>                    where
+>                    xtc-input-wrap(
+>                            ?FILE(file);
+>                            input := <parse-minijava-file> file;
+>                            editor-init;
+>                            ast       := <analyse> input;
+>                            jbc-files := <to-jbc(|<double-quote>
+>     <base-filename> file)> ast ;
+>     <map(write-jbc-file(| "."))> jbc-files
+>                    )
+>
+>     I ripped this example from a MiniJava plugin. It uses a helper
+>     strategy xtc-input-wrap() to process command-line arguments: if
+>     you pass it a command-line argument '-i FILENAME' then it will
+>     assign that FILENAME to the file variable.
+>
+>     You can then compile it by adding option '-m main-minijava' to the
+>     build.main.xml file, build.stratego.args variable.
+>
+>     The STRSGLR_open_parse_table error you get is a strange one. That
+>     would indicate the JSGLR compatibility library wasn't loaded. How
+>     exactly did you run your plugin? If you compile it like above it
+>     should work like 'java -jar myplugin.jar'?
+>
+>     - Lennart
+>
+>
+>     On 9/26/11 23:49 , Radu Mereuta wrote:
+>
+>         I know that I can extract only the parser. The problem was to
+>         make it work from within stratego, as a command line tool. I
+>         like the simplicity of it, it's very convenient. Plus that I
+>         can get location information...
+>         I've been playing with strategoxt.jar and I've managed to
+>         compile some str files, but when I call a rule like this:
+>
+>         <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>
+>         in a java file, I get an exception like this:
+>            Exception in thread "main"
+>         org.strategoxt.lang.StrategoException: Primitive not defined:
+>         STRSGLR_open_parse_table
+>            at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>            at
+>         org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>
+>         On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres
+>         <torres.giorgio at gmail.com <mailto:torres.giorgio at gmail.com>
+>         <mailto:torres.giorgio at gmail.com
+>         <mailto:torres.giorgio at gmail.com>>> wrote:
+>
+>            I don`t know what are you trying to do, but you can have the
+>            parser of your
+>            grammar. I`ve already done this, but programmatically in
+>         Java, and
+>            without the stratego transforms.
+>
+>            To get the sdf parser,
+>
+>            When you write the grammar of your language in the specific sdf
+>            file, and build the project, so it generates a new editor,
+>         it also
+>            generates a tbl file. I`m not sure, but it is something like
+>         <yourlanguagesname>.tbl. It`s in some directory of your project,
+>            you just have to search it.
+>
+>            Then, in the library files, you can get the JSGLR parser as
+>         a jar,
+>            that you must pass to it that tbl file you just found before.
+>
+>            Now that you have the both, create a new Java project and
+>         put the
+>            JSGLR into your imported libs, and your tbl file as an
+>         input. For
+>            more information, try to search about the use of the JSGLR.
+>
+>            Then, you have your parser, and you can parse any files
+>         described
+>            in that language of yours, just passing them as args in the
+>         Java`s
+>            main fuction.
+>
+>            I don`t know if there is another easiest way. But i`ve been
+>            through this, and that`s how i`ve done.
+>
+>            I hope it could help you.
+>
+>
+>            On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta
+>         <headness13 at gmail.com <mailto:headness13 at gmail.com>
+>         <mailto:headness13 at gmail.com <mailto:headness13 at gmail.com>>>
+>         wrote:
+>
+>                Hi,
+>
+>                I am using Spoofax - the eclipse plugin - for a while.
+>         I wrote
+>                an SDF grammar and a stratego function to process my input
+>                into some XML.
+>                Is there any way to export the parser and the stratego
+>         files
+>                so I can use them in command line?
+>                I would like to have something like this: "cat input.txt |
+>                some_tool > out.xml".
+>
+>                I see that you have incorporated some of the tools from
+>                Spoofax in strategoxt.jar, but I couldn't find the proper
+>                documentation on how to use it. I could find something
+>         on the
+>                manual, but I believe this is for an older version of
+>         the tool
+>                and don't really match up.
+>
+>                I could really appreciate it, if you could help me with
+>         this,
+>                or point me to the right documentation.
+>
+>                Thanks,
+>                Radu Mereuta - Research Assistant - FII UAIC
+>
+>
+>
+>                _______________________________________________
+>                Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         <mailto:Users at strategoxt.org <mailto:Users at strategoxt.org>>
+>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>            --     Giorgio Pr?mola F. G. Torres
+>            Graduando em Ci?ncia da Computa??o
+>            Universidade Federal de Vi?osa
+>
+>         <http://www.facebook.com/giorgio.torres>
+>         <http://br.linkedin.com/in/giorgiotorres>
+>         <http://www.twitter.com/gprimola>
+>         <http://www.flickr.com/photos/bygior>
+>         <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>
+>            _______________________________________________
+>            Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         <mailto:Users at strategoxt.org <mailto:Users at strategoxt.org>>
+>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+>         _______________________________________________
+>         Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+
+
+From torres.giorgio at gmail.com  Tue Sep 27 18:56:12 2011
+From: torres.giorgio at gmail.com (Giorgio Torres)
+Date: Tue, 27 Sep 2011 13:56:12 -0300
+Subject: [Stratego Users] Spoofax command line?
+In-Reply-To: <CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+References: <CAFu+mo+gfFSjsdpNFcv7CBUCSrCu-irsV9_oaCVVMnnydXHbYg@mail.gmail.com>
+	<CAFu+moLAosuwxvZeJGuL7cbg6c8=dvFAKrbdO5-zAO9KbD0Juw@mail.gmail.com>
+	<CA+5itiOx9ZVg8632v62M=s_WbBYK8NJquu0PVqHw-d-W2Yan0g@mail.gmail.com>
+	<CAFu+mo+Hi7SkgxwUu0+8jjgPGka3HoAD0o6-Dn5ry6byc75VKQ@mail.gmail.com>
+Message-ID: <CA+5itiNci-dVYsAjHyFEMjSodVAHcnVYZ29BwC_J-46VsTYfYg@mail.gmail.com>
+
+Have you searched in the stratego documentation?
+I`m new with stratego and spoofax, i`m not exactly the best person to give
+you any information about it.
+
+In my mind, stratego is only for program transformation. As I could notice
+from the sort of entrance you`d like to use, you`re trying to transform some
+unstructured data to xml.
+Check out this link <http://strategoxt.org/Stratego/StrategoDocumentation>,
+it leads you to the stratego documentation. There you can see some libs for
+those who want to use the stratego API.
+
+I think it`s the closest I get to help you.
+
+
+On Mon, Sep 26, 2011 at 6:49 PM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> I know that I can extract only the parser. The problem was to make it work
+> from within stratego, as a command line tool. I like the simplicity of it,
+> it's very convenient. Plus that I can get location information...
+> I've been playing with strategoxt.jar and I've managed to compile some str
+> files, but when I call a rule like this:
+>
+>     <parse-file-pt(|<import-term(include/KSyntax.tbl)>)> "example.k"
+>
+> in a java file, I get an exception like this:
+>     Exception in thread "main" org.strategoxt.lang.StrategoException:
+> Primitive not defined: STRSGLR_open_parse_table
+>     at org.strategoxt.lang.Context.invokePrimitive(Context.java)
+>     at
+> org.strategoxt.stratego_sglr.open_parse_table_0_0.invoke(open_parse_table_0_0.java)
+>
+> On Mon, Sep 26, 2011 at 5:44 PM, Giorgio Torres <torres.giorgio at gmail.com>wrote:
+>
+>> I don`t know what are you trying to do, but you can have the parser of
+>> your
+>> grammar. I`ve already done this, but programmatically in Java, and without
+>> the stratego transforms.
+>>
+>> To get the sdf parser,
+>>
+>> When you write the grammar of your language in the specific sdf file, and
+>> build the project, so it generates a new editor, it also generates a tbl
+>> file. I`m not sure, but it is something like <yourlanguagesname>.tbl. It`s
+>> in some directory of your project, you just have to search it.
+>>
+>> Then, in the library files, you can get the JSGLR parser as a jar, that
+>> you must pass to it that tbl file you just found before.
+>>
+>> Now that you have the both, create a new Java project and put the JSGLR
+>> into your imported libs, and your tbl file as an input. For more
+>> information, try to search about the use of the JSGLR.
+>>
+>> Then, you have your parser, and you can parse any files described in that
+>> language of yours, just passing them as args in the Java`s main fuction.
+>>
+>> I don`t know if there is another easiest way. But i`ve been through this,
+>> and that`s how i`ve done.
+>>
+>> I hope it could help you.
+>>
+>>
+>> On Mon, Sep 26, 2011 at 10:30 AM, Radu Mereuta <headness13 at gmail.com>wrote:
+>>
+>>> Hi,
+>>>
+>>> I am using Spoofax - the eclipse plugin - for a while. I wrote an SDF
+>>> grammar and a stratego function to process my input into some XML.
+>>> Is there any way to export the parser and the stratego files so I can use
+>>> them in command line?
+>>> I would like to have something like this: "cat input.txt | some_tool >
+>>> out.xml".
+>>>
+>>> I see that you have incorporated some of the tools from Spoofax in
+>>> strategoxt.jar, but I couldn't find the proper documentation on how to use
+>>> it. I could find something on the manual, but I believe this is for an older
+>>> version of the tool and don't really match up.
+>>>
+>>> I could really appreciate it, if you could help me with this, or point me
+>>> to the right documentation.
+>>>
+>>> Thanks,
+>>> Radu Mereuta - Research Assistant - FII UAIC
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>>
+>> --
+>> Giorgio Pr?mola F. G. Torres
+>> Graduando em Ci?ncia da Computa??o
+>> Universidade Federal de Vi?osa
+>>
+>> <http://www.facebook.com/giorgio.torres> <http://br.linkedin.com/in/giorgiotorres>
+>>   <http://www.twitter.com/gprimola> <http://www.flickr.com/photos/bygior>
+>>   <http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Giorgio Pr?mola F. G. Torres
+Graduando em Ci?ncia da Computa??o
+Universidade Federal de Vi?osa
+
+<http://www.facebook.com/giorgio.torres>
+<http://br.linkedin.com/in/giorgiotorres>
+  <http://www.twitter.com/gprimola>
+<http://www.flickr.com/photos/bygior>
+<http://www.orkut.com.br/Main#Profile?uid=5773068796254932973>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110927/b8b1a053/attachment.html>
+
+From scott.finnie at gmail.com  Thu Sep 29 22:23:11 2011
+From: scott.finnie at gmail.com (Scott Finnie)
+Date: Thu, 29 Sep 2011 21:23:11 +0100
+Subject: [Stratego Users] Is spoofax still under active development?
+Message-ID: <CAEDkRuyWLNTpN+h2JQgXAfxEAiBx1Be99fdKrD3oAZjY6+7auA@mail.gmail.com>
+
+Hi
+
+I'm looking at language workbench options just now.  Spoofax looks
+interesting - but the mailing list is quiet and there doesn't seem to be
+much activity in development.
+
+Is it still under active development?
+
+Thanks,
+Scott.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110929/8a350af4/attachment.html>
+

@@ -1,0 +1,407 @@
+From eelcovis at gmail.com  Mon Mar  2 17:46:09 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Mon, 2 Mar 2015 17:46:09 +0100
+Subject: [Stratego Users] Fwd: [TYPES/announce] 3rd Workshop on
+ Domain-Specific Language Design and Implementation (DSLDI'15)
+In-Reply-To: <6BC47190-1422-49FF-B780-893A19103CE3@cwi.nl>
+References: <6BC47190-1422-49FF-B780-893A19103CE3@cwi.nl>
+Message-ID: <CAFaCHU1gdLhB=BYKbzFWbBGFW+rYdqJudtWnfhM9UULTfKqa7Q@mail.gmail.com>
+
+*********************************************************************
+FIRST CALL FOR TALK PROPOSALS
+
+DSLDI 2015
+
+Third Workshop on
+Domain-Specific Language Design and Implementation
+
+July 7, 2015
+Prague, Czech Republic
+Co-located with ECOOP
+
+http://2015.ecoop.org/track/dsldi-2015-papers
+*********************************************************************
+
+Deadline for talk proposals: 2nd of April, 2015
+
+If designed and implemented well, domain-specific languages (DSLs) combine
+the best features of general-purpose programming languages (e.g.,
+performance) with high productivity (e.g., ease of programming).
+
+*** Workshop Goal ***
+
+The goal of the DSLDI workshop is to bring together researchers and
+practitioners interested in sharing ideas on how DSLs should be designed,
+implemented, supported by tools, and applied in realistic application
+contexts. We are both interested in discovering how already known domains
+such as graph processing or machine learning can be best supported by DSLs,
+but also in exploring new domains that could be targeted by DSLs. More
+generally, we are interested in building a community that can drive forward
+the development of modern DSLs.
+
+*** Workshop Format ***
+
+DSLDI is a single-day workshop and will consist of a series of short talks
+whose main goal is to trigger exchange of opinion and discussions. The
+talks should be on the topics within DSLDI's area of interest, which
+include but are not limited to the following ones:
+
+* DSL implementation techniques, including compiler-level and runtime-level
+solutions
+* utilization of domain knowledge for driving optimizations of DSL
+implementations
+* utilizing DSLs for managing parallelism and hardware heterogeneity
+* DSL performance and scalability studies
+* DSL tools, such as DSL editors and editor plugins, debuggers, refactoring
+tools, etc.
+* applications of DSLs to existing as well as emerging domains, for
+  example graph processing, image processing, machine learning, analytics,
+robotics, etc.
+* practitioners reports, for example descriptions of DSL deployment i  a
+real-life production setting
+
+*** Call for Submissions ***
+
+We solicit talk proposals in the form of short abstracts (max. 2 pages). A
+good talk proposal describes an interesting position, demonstration, or
+early achievement. The submissions will be reviewed on relevance and
+clarity, and used to plan the mostly interactive sessions of the workshop
+day. Publication of accepted abstracts and slides on the website is
+voluntary.
+
+* Deadline for talk proposals: April 2nd, 2015
+* Notification: May 1st, 2015
+* Workshop: July 7th, 2015
+* Submission website: https://easychair.org/conferences/?conf=dsldi2015
+
+*** Workshop Organization ***
+
+Organizers
+
+* Tijs van der Storm (storm at cwi.nl), CWI, The Netherlands
+* Sebastian Erdweg (erdweg at informatik.tu-darmstadt.de), TU Darmstadt,
+Germany
+
+Follow us on Twitter at https://twitter.com/wsdsldi
+
+Program committee
+
+* Emilie Balland
+* Martin Bravenboer (LogicBlox)
+* Hassan Chafi (Oracle Labs)
+* William Cook (UT Austin)
+* Shriram Krishnamurthi (Brown University)
+* Heather Miller (EPFL)
+* Bruno Oliveira (University of Hong Kong)
+* Cyrus Omar (CMU)
+* Richard Paige (University of York)
+* Tony Sloane (Macquarie University)
+* Emma S?derberg (Google)
+* Emma Tosch (University of Massachusetts, Amherst)
+* Jurgen Vinju (CWI)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150302/a5e902a0/attachment.html>
+
+From erdweg at informatik.tu-darmstadt.de  Thu Mar  5 11:14:44 2015
+From: erdweg at informatik.tu-darmstadt.de (Sebastian Erdweg)
+Date: Thu, 5 Mar 2015 11:14:44 +0100
+Subject: [Stratego Users] CFP: Workshop on Generic Programming 2015 -
+	Deadline May 15
+Message-ID: <98F4B102-9317-4734-8229-0E0CFE2156FA@informatik.tu-darmstadt.de>
+
+======================================================================
+                          CALL FOR PAPERS
+
+                              WGP 2015
+
+           11th ACM SIGPLAN Workshop on Generic Programming
+                         Vancouver, Canada
+                       Sunday, August 30, 2015
+
+                   http://www.wgp-sigplan.org/2015
+
+                         Co-located with the
+   International Conference on Functional Programming (ICFP 2015)
+======================================================================
+
+
+Goals of the workshop
+---------------------
+
+Generic programming is about making programs more adaptable by making
+them more general. Generic programs often embody non-traditional kinds
+of polymorphism; ordinary programs are obtained from them by suitably
+instantiating their parameters. In contrast with normal programs, the
+parameters of a generic program are often quite rich in structure; for
+example they may be other programs, types or type constructors, class
+hierarchies, or even programming paradigms.
+
+Generic programming techniques have always been of interest, both to
+practitioners and to theoreticians, and, for at least 20 years,
+generic programming techniques have been a specific focus of research
+in the functional and object-oriented programming communities. Generic
+programming has gradually spread to more and more mainstream
+languages, and today is widely used in industry. This workshop brings
+together leading researchers and practitioners in generic programming
+from around the world, and features papers capturing the state of the
+art in this important area.
+
+We welcome contributions on all aspects, theoretical as well as
+practical, of
+
+ * generic programming,
+ * programming with (C++) concepts,
+ * meta-programming,
+ * programming with type classes,
+ * programming with modules,
+ * programming with dependent types,
+ * type systems for generic programming,
+ * polytypic programming,
+ * adaptive object-oriented programming,
+ * component-based programming,
+ * strategic programming,
+ * aspect-oriented programming,
+ * family polymorphism,
+ * object-oriented generic programming,
+ * implementation of generic programming languages,
+ * static and dynamic analyses of generic programs,
+ * and so on.
+
+Program Committee
+-----------------
+
+ * Patrick Bahr (co-chair), University of Copenhagen
+ * Sebastian Erdweg (co-chair), Technical University of Darmstadt
+ * Edwin Brady, University of St Andrews
+ * Edsko de Vries, Well-Typed LLP
+ * Mauro Jaskelioff, National University of Rosario
+ * Johan Jeuring, Utrecht University
+ * Pieter Koopman, Radboud University Nijmegen
+ * Bruno C. d. S. Oliveira, University of Hong Kong
+ * Nicolas Pouillard, IT University of Copenhagen
+ * Sukyoung Ryu, Korea Advanced Institute of Science and Technology
+ * Sibylle Schupp, Hamburg University of Technology
+ * Sam Tobin-Hochstadt, Indiana University
+
+Proceedings and Copyright
+-------------------------
+
+We plan to have formal proceedings, published by the ACM. Accepted
+papers will be included in the ACM Digital Library. Authors must grant
+ACM publication rights upon acceptance
+(http://authors.acm.org/main.html), but may retain copyright if they
+wish. Authors are encouraged to publish auxiliary material with their
+paper (source code, test data, and so forth). The proceedings will be
+freely available for download from the ACM Digital Library from one
+week before the start of the conference until two weeks after the
+conference.
+
+Submission details
+------------------
+
+ * Submission deadline:  Fri, 15th May 2015
+ * Author notification:  Fri, 26th June 2015
+ * Final version due:    Sun, 19th July 2015
+ * Workshop:             Sun, 30th August 2015
+
+Submitted papers should fall into one of two categories:
+
+ * Regular research papers (12 pages)
+ * Short papers: case studies, tool demos, generic pearls (6 pages)
+
+Regular research papers are expected to present novel and interesting
+research results. Short papers need not present novel or fully polished
+results. Good candidates for short papers are those that report on 
+interesting case studies of generic programming in open source or 
+industry, present demos of generic programming tools or libraries, 
+or discuss elegant and illustrative uses of generic programming ('pearls').
+
+All submissions should be in portable document format (PDF), formatted
+using the ACM SIGPLAN style guidelines (two-column, 9pt). Regular 
+research papers must not exceed 12 pages. Short papers must not exceed 
+6 pages. If applicable, papers should be marked with one of the labels
+'case study, 'tool demo' or 'generic pearl' in the title at the time 
+of submission.
+
+Papers should be submitted via HotCRP at
+
+ https://icfp-wgp15.hotcrp.com/
+
+
+
+Travel Support
+--------------
+
+Student attendees with accepted papers can apply for a SIGPLAN PAC grant
+to help cover travel expenses. PAC also offers other support, such as
+for child-care expenses during the meeting or for travel costs for
+companions of SIGPLAN members with physical disabilities, as well as for
+travel from locations outside of North America and Europe. For details
+on the PAC program, see its web page (http://www.sigplan.org/PAC.htm).
+
+History of the Workshop on Generic Programming
+----------------------------------------------
+
+Earlier Workshops on Generic Programming have been held in
+
+ * Gothenburg, Sweden 2014 (affiliated with ICFP),
+ * Boston, Massachusetts, US 2013 (affiliated with ICFP),
+ * Copenhagen, Denmark 2012 (affiliated with ICFP),
+ * Tokyo, Japan 2011 (affiliated with ICFP),
+ * Baltimore, Maryland, US 2010 (affiliated with ICFP),
+ * Edinburgh, UK 2009 (affiliated with ICFP),
+ * Victoria, BC, Canada 2008 (affiliated with ICFP),
+ * Portland 2006 (affiliated with ICFP),
+ * Ponte de Lima 2000 (affiliated with MPC),
+ * Marstrand 1998 (affiliated with MPC).
+
+Furthermore, there were a few informal workshops
+
+ * Utrecht 2005 (informal workshop),
+ * Dagstuhl 2002 (IFIP WG2.1 Working Conference),
+ * Nottingham 2001 (informal workshop).
+
+There were also (closely related) DGP workshops in Oxford (June
+3-4 2004), and a Spring School on DGP in Nottingham (April 24-27
+2006, which had a half-day workshop attached).
+
+WGP Steering Committee
+----------------------
+
+ * Andres L?h
+ * Ronald Garcia
+ * Jacques Carette
+ * Jeremiah Willcock
+ * Jos? Pedro Magalh?es
+ * Tiark Rompf
+ * Tarmo Uustalo
+ * Stephanie Weirich
+ * Fritz Henglein
+
+
+
+From canslow at ucalgary.ca  Tue Mar 10 00:50:41 2015
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Mon, 9 Mar 2015 23:50:41 +0000
+Subject: [Stratego Users] SPLASH 2015: 2nd Call for Contributions: OOPSLA,
+ Onward!, Workshops, Dynamic Languages Symposium
+Message-ID: <D1239C00.23718%canslow@ucalgary.ca>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+            Software for Humanity (SPLASH'15)
+
+       Pittsburgh, Pennsylvania, USA
+       25th-30th October, 2015
+
+       http://www.splashcon.org<http://www.splashcon.org/>
+
+       Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+COMBINED CALL FOR CONTRIBUTIONS
+OOPSLA
+Onward!
+Workshops
+Dynamic Languages Symposium (DLS)
+/************************************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and Applications: Software for Humanity (SPLASH) embraces all aspects of software construction and delivery to make it the premier conference at the intersection of programming, languages, and software engineering. SPLASH is now accepting submissions. We invite high quality submissions describing original and unpublished work.
+
+
+** OOPSLA Research Papers **
+Papers that address any aspect of software development are welcome, including requirements, modeling, prototyping, design, implementation, generation, analysis, verification, testing, evaluation, maintenance, reuse, replacement, and retirement of software systems. Papers may address these topics in a variety of ways, including new tools (such as languages, program analyses, and runtime systems), new techniques (such as methodologies, design processes, code organization approaches, and management techniques), and new evaluations (such as formalisms and proofs, corpora analyses, user studies, and surveys).
+
+Submissions Due: 25 March, 2015
+http://2015.splashcon.org/track/oopsla2015
+
+
+** Onward! Research Papers **
+Onward! is a premier multidisciplinary conference focused on everything to do with programming and software: including processes, methods, languages, communities, and applications. Onward! is more radical, more visionary, and more open than other conferences to ideas that are well-argued but not yet proven. We welcome different ways of thinking about, approaching, and reporting on programming language and software engineering research.
+
+Submissions Due: 2 April, 2015
+http://2015.splashcon.org/track/onward2015-papers
+
+
+** Onward! Essays **
+Onward! Essays is looking for clear and compelling pieces of writing about topics important to the software community. An essay can be an exploration of a topic, its impact, or the circumstances of its creation; it can present a personal view of what is, explore a terrain, or lead the reader in an act of discovery; it can be a philosophical digression or a deep analysis. It can describe a personal journey, perhaps that by which the author reached an understanding of such a topic. The subject area should be interpreted broadly and can include the relationship of software to human endeavors, or its philosophical, sociological, psychological, historical, or anthropological underpinnings.
+
+Submissions Due: 2 April, 2015
+http://2015.splashcon.org/track/onward2015-essays
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops, allowing their participants to meet and discuss research questions with peers, to mature new and exciting ideas, and to build up communities and start new collaborations. SPLASH workshops complement the main tracks of the conference and provide meetings in a smaller and more specialized setting. Workshops cultivate new ideas and concepts for the future, optionally recorded in formal proceedings.
+
+Early Phase Submissions Due: 25 March, 2015
+Late Phase Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-workshops
+
+
+** Dynamic Languages Symposium (DLS) **
+DLS is the premier forum for researchers and practitioners to share knowledge and research on dynamic languages, their implementation, and applications. The influence of dynamic languages ? from Lisp to Smalltalk to Python to Javascript ? on real-world practice, and research, continues to grow. We invite high quality papers reporting original research, innovative contributions, or experience related to dynamic languages, their implementation, and applications.
+
+Submissions Due: 7 June, 2015
+http://2015.splashcon.org/track/dls2015-papers
+
+
+** Co-Located Events **
+
+8th International ACM SIGPLAN Conference on Software Language Engineering (SLE)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/sle2015
+
+14th International Conference on Generative Programming: Concepts & Experiences (GPCE)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/gpce2015
+
+22nd International Conference on Pattern Languages of Programming (PLoP)
+Submissions Due: 4 May, 2015
+http://conf.researchr.org/home/plop2015
+
+15th Symposium on Database Programming Languages (DBPL)
+Submissions Due: 10 June, 2015
+http://conf.researchr.org/home/dbpl-2015
+
+Information:
+SPLASH Early Registration Deadline: 25 September, 2015
+Contact: info at splashcon.org<mailto:info at splashcon.org>
+Website: http://2015.splashcon.org<http://2015.splashcon.org/>
+
+Location:
+Sheraton Station Square Hotel
+Pittsburgh, Pennsylvania, United States
+
+Organization:
+SPLASH General Chair: Jonathan Aldrich (Carnegie Mellon University)
+OOPSLA Papers Chair: Patrick Eugster (Purdue University)
+Onward! Papers Chair: Gail Murphy (University of British Columbia)
+Onward! Essays Chair: Guy Steele (Oracle Labs)
+DLS Papers Chair: Manuel Serrano (INRIA)
+
+Artifact Evaluation Co-Chairs: Robby Findler (Northwestern University) and Michael Hind (IBM Research)
+Demos Co-Chairs: Igor Peshansky (Google) and Pietro Ferrara (IBM Research)
+Inspirations Co-Chairs: Darya Kurilova (Carnegie Mellon University), Zach Tatlock (University of Washington), and Crista Lopes (UC Irvine)
+Local Arrangements Chair: Claire Le Goues (Carnegie Mellon University)
+Posters Chair: Nick Sumner (Simon Fraser University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Publicity and Web Co-Chairs: Craig Anslow (University of Calgary) and Tijs van der Storm (CWI)
+SPLASH-E Chair: Eli Tilevich (Virginia Tech)
+SPLASH-I Co-Chairs: Tijs van der Storm (CWI) and Jan Vitek (Northeastern University)
+Sponsorship Chair: Tony Hosking (Purdue University)
+Student Research Competition Co-Chairs: Sam Guyer (Tufts University) and Patrick Lam (University of Waterloo)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco Harkes (TU Delft)
+Wavefront Co-Chairs: Dennis Mancl (Alcatel-Lucent)
+Web Technology Chair: Eelco Visser (TU Delft)
+Workshops Co-Chairs: Du Li (Carnegie Mellon University) and Jan Rellermeyer (IBM Research)
+
+SLE General Chair: Richard Paige (University of York)
+GPCE General Chair: Christian K?stner (Carnegie Mellon University)
+PLoP General Chair: Filipe Correia (University of Porto)
+DBPL General Chairs: James Cheney (University of Edinburgh) and Thomas Neumann (TU Munich)
+/************************************************************************************/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150309/f07e4b70/attachment-0001.html>
+

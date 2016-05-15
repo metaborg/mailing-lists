@@ -1,0 +1,721 @@
+From sanxiyn at gmail.com  Thu Apr  2 04:48:48 2009
+From: sanxiyn at gmail.com (Seo Sanghyeon)
+Date: Thu, 2 Apr 2009 11:48:48 +0900
+Subject: [Stratego Users] Python indentation
+Message-ID: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+
+How does one implement Python's indentation syntax in SDF?
+
+-- 
+Seo Sanghyeon
+
+From zef at zefhemel.com  Thu Apr  2 09:02:47 2009
+From: zef at zefhemel.com (Zef Hemel)
+Date: Thu, 2 Apr 2009 09:02:47 +0200
+Subject: [Stratego Users] Python indentation
+In-Reply-To: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+References: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+Message-ID: <1ede90ed0904020002mde23eb1p9473f202ea8d9f9c@mail.gmail.com>
+
+Hi Seo,
+
+I'm not a parsing expert at all, but from what they've been telling me
+it would be very difficult if not impossible to parse languages where
+indentation is significant using SGLR (and with that, SDF).
+
+Because I wanted to generate Python code using Stratego I defined a
+very liberal variant of Python in SDF that I call "ugly python" that
+uses braces to represent indentation. The pretty printer that comes
+with it does not print the braces but only the indentation so that
+upon pretty printing actually valid Python code is produced. In case
+you're interested (note that this is only suitable for code generation
+and not that much for parsing) you can find the syntax files and
+pretty print table here:
+https://svn.strategoxt.org/repos/StrategoXT/pil/trunk/src/pil/backend/python/syntax/
+
+Best,
+
+Zef
+
+On Thu, Apr 2, 2009 at 4:48 AM, Seo Sanghyeon <sanxiyn at gmail.com> wrote:
+> How does one implement Python's indentation syntax in SDF?
+>
+> --
+> Seo Sanghyeon
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Zef Hemel
+E-Mail: zef at zefhemel.com
+Phone: (+31) (0)6 156 19 280
+Blog: http://zef.me
+Dutch? http://zef.nu
+Twitter: http://twitter.com/zef
+
+From martin.bravenboer at gmail.com  Thu Apr  2 15:19:01 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Thu, 2 Apr 2009 09:19:01 -0400
+Subject: [Stratego Users] Python indentation
+In-Reply-To: <1ede90ed0904020002mde23eb1p9473f202ea8d9f9c@mail.gmail.com>
+References: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+	<1ede90ed0904020002mde23eb1p9473f202ea8d9f9c@mail.gmail.com>
+Message-ID: <2074242c0904020619x1d701bb4h7e977165c8fa3e7b@mail.gmail.com>
+
+Hi Seo,
+
+There is an SDF Python grammar somewhere (CC: Jurgen, he probably
+knows more). I don't know too much about the experience with it, but I
+seem to remember that it parses Python ambiguously, and then requires
+post-processing to implement the indentation rule. I have not seen an
+evaluation of the performance impact of that approach.
+
+Hope this helps.
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+
+From hendrik at topoi.pooq.com  Fri Apr  3 05:01:11 2009
+From: hendrik at topoi.pooq.com (hendrik at topoi.pooq.com)
+Date: Thu, 2 Apr 2009 23:01:11 -0400
+Subject: [Stratego Users] Python indentation
+In-Reply-To: <2074242c0904020619x1d701bb4h7e977165c8fa3e7b@mail.gmail.com>
+References: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+	<1ede90ed0904020002mde23eb1p9473f202ea8d9f9c@mail.gmail.com>
+	<2074242c0904020619x1d701bb4h7e977165c8fa3e7b@mail.gmail.com>
+Message-ID: <20090403030111.GA14471@topoi.pooq.com>
+
+On Thu, Apr 02, 2009 at 09:19:01AM -0400, Martin Bravenboer wrote:
+> Hi Seo,
+> 
+> There is an SDF Python grammar somewhere (CC: Jurgen, he probably
+> knows more). I don't know too much about the experience with it, but I
+> seem to remember that it parses Python ambiguously, and then requires
+> post-processing to implement the indentation rule. I have not seen an
+> evaluation of the performance impact of that approach.
+
+It seems to me that a Python grammar could be achievable if a 
+preprocessor were to replace each increase in indentation by a string of 
+brackets -- one bracket for each space that the indentation increases.  
+Similarly, a decrese in indentation becomes a close bracket for each 
+space that the indentation decreases.  All brackets would then match, 
+and profer the correct grouping.
+
+Something like this was used to implement operator priorities in one of 
+the early arithmetic expression parsers in the fifties.  (My I seem to 
+have a long memory, but actually, it was my university's periodicals 
+room that had the long memory).
+
+-- hendrik
+
+From martin.bravenboer at gmail.com  Tue Apr 21 04:40:14 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Mon, 20 Apr 2009 22:40:14 -0400
+Subject: [Stratego Users] Python indentation
+In-Reply-To: <20090403030111.GA14471@topoi.pooq.com>
+References: <5b0248170904011948s5269768flb30fdf0f8cc1ab79@mail.gmail.com>
+	<1ede90ed0904020002mde23eb1p9473f202ea8d9f9c@mail.gmail.com>
+	<2074242c0904020619x1d701bb4h7e977165c8fa3e7b@mail.gmail.com>
+	<20090403030111.GA14471@topoi.pooq.com>
+Message-ID: <2074242c0904201940w483a2096sf881a781178ca477@mail.gmail.com>
+
+Hi Hendrik,
+
+> It seems to me that a Python grammar could be achievable if a
+> preprocessor were to replace each increase in indentation by a string of
+> brackets -- one bracket for each space that the indentation increases.
+> Similarly, a decrese in indentation becomes a close bracket for each
+> space that the indentation decreases.  All brackets would then match,
+> and profer the correct grouping.
+
+Yes, that's true, and I've seen systems that work in this way, but
+it's a bit more complicated if you still want to support all the
+embedding and language combination scenario's that we typically want
+to support with SDF. To support language combinations, the analysis of
+the indentation would have to be combined with the parser to give the
+scanner some knowledge about the context in the source file.
+
+For a stand-alone parser this would be a fine solution though.
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+
+From a.serebrenik at tue.nl  Tue Apr 21 10:35:13 2009
+From: a.serebrenik at tue.nl (Serebrenik, A.)
+Date: Tue, 21 Apr 2009 10:35:13 +0200
+Subject: [Stratego Users] Second Call for Papers: 2nd International
+ Conference on Software Language Engineering
+Message-ID: <7DF2365FF07C0E4E89419D65CCC93C9E015F34315DAE@EXCHANGE11.campus.tue.nl>
+
+
+__________________________________________________________________
+                       Call for Papers - SLE 2009
+
+    2nd International Conference on Software Language Engineering
+
+                     http://planet-sl.org/sle2009
+
+                 Denver, Colorado, October 5-6, 2009
+
+___________________________________________________________________
+
+           Co-located with 12th International Conference on
+    Model-Driven Engineering Languages and Systems (MODELS 2009)
+                and 8th International Conference on
+     Generative Programming and Component Engineering (GPCE 2009)
+
+Proceedings will be published in the LNCS series (subject to
+Springer's approval).
+
+The 2nd International Conference on Software Language Engineering (SLE)
+is devoted to topics related to artificial languages in software
+engineering. SLE's foremost mission is to encourage and organize
+communication between communities that have traditionally looked
+at software languages from different, more specialized, and yet
+complementary perspectives. SLE emphasizes the fundamental notion
+of languages as opposed to any realization in specific "technical
+spaces". SLE 2009 will be co-located with the 12th IEEE/ACM
+International Conference on Model-Driven Engineering Languages and
+Systems (MODELS 2009).
+
+
+Scope
+-----
+
+The term 'software language' comprises all sorts of artificial
+languages used in software development including general-purpose
+programming languages, domain-specific languages, modeling and
+meta-modeling languages, data models, and ontologies. Used in its
+broadest sense, examples include modeling languages such as
+UML-based and domain-specific modeling languages, business process
+modeling languages, and web application modeling languages.  The
+term 'software language' also comprises APIs and collections of
+design patterns that are implicitly defined languages.
+
+Software language engineering is the application of a systematic,
+disciplined, quantifiable approach to the development, use, and
+maintenance of these languages. Thus, the SLE conference is
+concerned with all phases of the life cycle of software languages;
+these include the design, implementation, documentation, testing,
+deployment, evolution, recovery, and retirement of languages. Of
+special interest are tools, techniques, methods and formalisms that
+support these activities. In particular, tools are often based on
+or even automatically generated from a formal description of the
+language. Hence, of special interest is the treatment of language
+descriptions as software artifacts, akin to programs - while paying
+attention to the special status of language descriptions, subject
+to tailored engineering principles and methods for modularization,
+refactoring, refinement, composition, versioning, co-evolution,
+and analysis.
+
+
+Topics of interest
+------------------
+
+We solicit high-quality contributions in the area of SLE ranging
+from theoretical and conceptual contributions to tools, techniques
+and frameworks that support the aforementioned life cycle activities.
+Some examples of tools, techniques, applications, and problems are
+listed below in order to clarify the types of contributions sought
+by SLE.
+
+* Formalisms used in designing and specifying languages and tools
+  that analyze such language descriptions.
+
+* Language implementation techniques, grammar-based and
+  metamodel-based.
+
+
+* Program and model transformation tools.
+
+* Composition, integration, and mapping tools for managing different
+  aspects of software languages or different manifestations of a
+  given language.
+
+* Language evolution.
+
+* Approaches to the elicitation, specification, and verification of
+  requirements for software languages.
+
+* Language development frameworks, methodologies, techniques, best
+  practices, and tools for the broader language life cycle covering
+  phases such as analysis, testing, and documentation.
+
+* Design challenges in SLE.
+
+* Applications of languages including innovative domain-specific
+  languages or "little" languages
+
+Do note that this list is not exclusive and many examples of tools,
+techniques, approaches have not been listed. Please visit the
+conference web site to see a more elaborate description of the
+topics of interests. The program committee chairs encourage potential
+contributors to contact them with questions about the scope and
+topics of interest of SLE.
+
+
+Paper Submission
+----------------
+
+We solicit the following types of papers:
+
+ * Research papers. These should report a substantial research
+   contribution to SLE and/or successful application of SLE
+   techniques. Full paper submissions must not exceed 20 pages.
+
+ * Short papers. These may describe interesting or thought-provoking
+   concepts that are not yet fully developed or evaluated, make an
+   initial contribution to challenging research issues in SLE, or
+   discuss and analyze controversial issues in the field. These papers
+   must not exceed 10 pages.
+
+ * Tool demonstration papers. Because of SLE's ample interest in
+   tools, we seek papers that present software tools related to the
+   field of SLE. These papers will accompany a tool demonstration to
+   be given at the conference. These papers must not exceed 10
+   pages. The selection criteria include the originality of the tool,
+   its innovative aspects, the relevance of the tool to SLE, and the
+   maturity of the tool. Submissions may also include an appendix
+   (that will not be published) containing additional screen-shots and
+   discussion of the proposed demonstration.
+
+ * Mini-tutorial papers. SLE is composed of various research areas,
+   such as grammarware, modelware, language schemas, and semantic
+   technologies. The cross product of attendees at SLE creates a
+   situation where the contribution from one session may be difficult
+   to understand by those not initiated to the area. To help unite the
+   various communitues of SLE 2009, mini-tutorials are solicited
+   that provide discussion points for mapping common ideas between the
+   area and differentiating among variations. A mini-tutorial submisson
+   should be between 15 and 20 pages.
+
+Submitted articles must not have been previously published or currently
+be submitted for publication elsewhere. All submitted papers will be
+closely reviewed by at least three members of the program committee. All
+accepted papers will be made available at the conference in the
+pre-proceedings and published in the post-proceedings of the conference,
+which will appear in Springer's Lecture Notes in Computer Science series.
+Authors will have the opportunity to revise their accepted paper for the
+pre- and post-proceedings.
+
+All papers must be formatted by following Springer's LNCS style and
+must be submitted using EasyChair (open early June):
+
+     http://www.easychair.org/conferences/?conf=sle09
+
+Further details regarding submission can be found on the SLE web page:
+
+     http://planet-sl.org/sle2009
+
+
+Invited Speakers
+----------------
+James Cordy, Queens University, Canada
+Jean Bezivin, University of Nantes, France
+
+
+Important Dates
+---------------
+ * Initial abstract submission (required)              July  3, 2009
+ * Paper submission:                                   July 10, 2009
+ * Author notification:                                August 21, 2009
+ * Paper submission for pre-proceedings:               September 14, 2009
+ * Conference:                                         October 5-6, 2009
+ * Camera-ready paper submission for post-proceedings: December 7, 2009
+ * LNCS post-proceedings mailed to authors (approx.):  February 2010
+
+
+Organization
+------------
+
+General Chair
+ * Dragan Gasevic, Athabasca University, Canada
+
+Program Committee Co-Chairs
+ * Mark van den Brand, TU Eindhoven, The Netherlands
+ * Jeff Gray, University of Alabama at Birmingham, USA
+
+Program Committee
+ * Colin Atkinson, Universit?t Mannheim, Germany
+ * Don Batory, University of Texas at Austin, USA
+ * Paulo Borba, Universidade Federal de Pernambuco, Brazil
+ * John Boyland, University of Wisconsin, Milwaukee, USA
+ * Marco Brambilla, Politecnico di Milano, Italy
+ * Shigeru Chiba, Tokyo Institute of Technology, Japan
+ * Charles Consel, LaBRI / INRIA, France
+ * Gregor Engels, Universit?t Paderborn, Germany
+ * Stephen A. Edwards, Columbia University, USA
+ * Robert Fuhrer, IBM T.J. Watson Research, USA
+ * Martin Gogolla, University of Bremen, Germany
+ * Giancarlo Guizzardi, Federal University of Esp?rito Santo, Brazil
+ * Reiko Heckel, University of Leicester, UK
+ * Fr?d?ric Jouault, INRIA & Ecole des Mines de Nantes, France
+ * Nicholas Kraft, University of Alabama, USA
+ * Thomas K?hne, Victoria University of Wellington, New Zealand
+ * Julia Lawall, University of Copenhagen, Denmark
+ * Timothy Lethbridge, University Ottawa, Canada
+ * Brian Malloy, Clemson University, USA
+ * Kim Mens, Universit? catholique de Louvain, Belgium
+ * Marjan Mernik, University of Maribor, Slovenia
+ * Todd Millstein, University of California, Los Angeles, USA
+ * Pierre-Etienne Moreau, INRIA Nancy - Grand Est, France
+ * Pierre-Alain Muller, University of Haute-Alsace, France
+ * Daniel Oberle, SAP Research, Germany
+ * Richard Paige, University of York, UK
+ * James Power, National University of Ireland, Ireland
+ * Jo?o Saraiva, Universidade do Minho, Portugal
+ * Mary Lou Soffa, University of Virginia, USA
+ * Juha-Pekka Tolvanen, MetaCase, Finland
+ * Alexander Serebrenik, Eindhoven University of Technology, Netherlands
+ * Tony Sloane, Macquarie University, Australia
+ * Steffen Staab, Universit?t Koblenz-Landau, Germany
+ * Jun Suzuki, University of Massachusetts, Boston, USA
+ * Walid Taha, Rice University, USA
+ * Eli Tilevich, Virginia Tech, USA
+ * Jurgen Vinju, CWI, Netherlands
+ * Eelco Visser, Delft University of Technology, Netherlands
+ * Ren? Witte, Concordia University, Canada
+
+Organization Committee
+ * Bardia Mohabbati, Simon Fraser University, Canada (Web Chair)
+ * Alexander Serebrenik, TU Eindhoven, The Netherlands (Publicity co-Chair)
+ * James Hill, Vanderbilt University, USA (Publicity co-Chair)
+
+
+
+
+From dflynn at ireland.com  Thu Apr 23 11:01:53 2009
+From: dflynn at ireland.com (dflynn)
+Date: Thu, 23 Apr 2009 10:01:53 +0100
+Subject: [Stratego Users] Dryad Tool Runtime Error Message
+Message-ID: <003701c9c3f2$25ec12a0$ad0ca8c0@CSE.local>
+
+Hi, I have written a transformation tool using dryad. However, when I try to
+run it I get the following error message. 
+
+ 
+
+[ xmpl | error ] No XTC registration for rt.classes found
+[ xmpl | error ] No XTC registration for rt.classes found
+
+ 
+
+I have registered rt.classes with my build time repository, but that has not
+solved the issue. Any help would be greatly appreciated. Thank you.
+
+ 
+
+Diarmuid Flynn
+
+ 
+
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090423/df6397cf/attachment.html 
+
+From margus at cyber.ee  Fri Apr 24 14:05:33 2009
+From: margus at cyber.ee (Margus Freudenthal)
+Date: Fri, 24 Apr 2009 15:05:33 +0300
+Subject: [Stratego Users] Beginner problem with ambiguous grammars
+Message-ID: <49F1AB0D.40903@cyber.ee>
+
+Hello.
+
+I just started looking at Stratego and I have troube defining 
+unambiguous syntax descriptions.
+
+My syntax module looks like this:
+
+----- begin WhitespaceTest.def
+module WhitespaceTest
+exports
+   sorts Identifier Keyword Program Statement Action
+
+   lexical syntax
+     [\ \t\n\r\12] -> LAYOUT
+     [a-zA-Z][a-zA-Z0-9\_\-]* -> Identifier
+
+     "error" -> Keyword
+     "warning" -> Keyword
+
+     Keyword -> Identifier {reject}
+
+   lexical restrictions
+         Identifier -/- [a-zA-Z0-9\_\-]
+     "error" "warning" -/- [a-zA-Z0-9\_\-]
+
+   context-free start-symbols Program
+   context-free syntax
+     Statement* -> Program
+
+     Identifier Action -> Statement {cons("Statement")}
+     {("error" | "warning") ","}* -> Action {cons("Action")}
+----- end WhitespaceTest.def
+
+This is a degenerate test case. The program is supposed to consist of 
+identifier followed by comma-separated list of "error" and "warning" 
+strings.
+
+When list is present, everything parses OK:
+
+foobar error, warning
+
+gives:
+
+[ Statement(
+     "foobar"
+   , Action([alt(1, []), alt(2, [])])
+   )
+]
+
+However, if I omit the optional parts, I get ambiguous result.
+
+foobar
+
+gives:
+
+amb(
+   [ [Statement("foobar", Action([]))]
+   , [Statement("foobar", Action([]))]
+   ]
+)
+
+When looking at the original syntax tree, the only difference between 
+these two options seems to be whitespace (which is not reflected in the 
+AST displayed here). Shouldn't the context-free parser ignore the LAYOUT 
+part of the program?
+
+Of course, I could make grammar unambiguous by adding production
+
+     Identifier -> Statement {cons("Statement")}
+
+However, this would create new constructor with different arity. And in 
+any case, I cannot see why this should be necessary. I did not find any 
+information about this behaviour in the manual and would appreciate 
+hints about how to resolve this situation.
+
+-- 
+Margus
+
+From martin.bravenboer at gmail.com  Fri Apr 24 16:51:21 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Fri, 24 Apr 2009 10:51:21 -0400
+Subject: [Stratego Users] Beginner problem with ambiguous grammars
+In-Reply-To: <49F1AB0D.40903@cyber.ee>
+References: <49F1AB0D.40903@cyber.ee>
+Message-ID: <2074242c0904240751qe69a302o2e62188f6639bff8@mail.gmail.com>
+
+Hi Margus,
+
+> When looking at the original syntax tree, the only difference between
+> these two options seems to be whitespace (which is not reflected in the
+> AST displayed here). Shouldn't the context-free parser ignore the LAYOUT
+> part of the program?
+
+You could argue that the difference doesn't matter yes, but to the
+parser layout is no different than any other symbol. The parser
+produces a parse tree, which represents layout. If layout is
+ambiguous, then the result will be a parse forest. When imploding the
+parse tree to an abstract syntax tree, the layout ambiguity is
+preserved in this case. We could solve a few of these cases by
+checking if the ambiguous ASTs nodes are equivalent, but this might
+not make you aware of this ambiguity, which is undesirable (e.g. for
+performance).
+
+The solution is to force layout to be recognized as early as possible.
+You can do this using a follow restriction:
+
+-------------------------------------
+context-free restrictions
+  LAYOUT? -/- [\ \t\12\n\r]
+-------------------------------------
+
+This reads as 'optional layout cannot be followed  by any of the
+layout character'.
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+
+From martin.bravenboer at gmail.com  Fri Apr 24 16:58:54 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Fri, 24 Apr 2009 10:58:54 -0400
+Subject: [Stratego Users] Dryad Tool Runtime Error Message
+In-Reply-To: <003701c9c3f2$25ec12a0$ad0ca8c0@CSE.local>
+References: <003701c9c3f2$25ec12a0$ad0ca8c0@CSE.local>
+Message-ID: <2074242c0904240758w1a7255fcxae8cc55a75fd4aca@mail.gmail.com>
+
+Hi Diarmuid,
+
+> [ xmpl | error ] No XTC registration for rt.classes found
+> [ xmpl | error ] No XTC registration for rt.classes found
+>
+> I have registered rt.classes with my build time repository, but that has not
+> solved the issue. Any help would be greatly appreciated. Thank you.
+
+Hm, if you did register rt.classes in some repository, then the most
+likely problem is that this is not the repository that is being used
+by your tool. It's difficult to guess why this happens, since this
+largely depends on how your tool is invoked (e.g. from make, after
+install, before install, etc).
+
+A few things you could check:
+
+1) Is XTC_REPOSITORY set to your build-time XTC repository?
+
+2) Double-check which repository is used using the strategy
+'xtc-location'. Print this to the stdout and then you get the filename
+of the repos.
+
+3) Double-check that rt.classes is in that repository.
+
+Hope this brings you closer to finding the problem :) .
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+
+From margus at cyber.ee  Mon Apr 27 10:20:56 2009
+From: margus at cyber.ee (Margus Freudenthal)
+Date: Mon, 27 Apr 2009 11:20:56 +0300
+Subject: [Stratego Users] Beginner problem with ambiguous grammars
+In-Reply-To: <2074242c0904240751qe69a302o2e62188f6639bff8@mail.gmail.com>
+References: <49F1AB0D.40903@cyber.ee>
+	<2074242c0904240751qe69a302o2e62188f6639bff8@mail.gmail.com>
+Message-ID: <49F56AE8.2010505@cyber.ee>
+
+Hi
+
+Martin Bravenboer wrote:
+> 
+> The solution is to force layout to be recognized as early as possible.
+> You can do this using a follow restriction:
+> 
+> -------------------------------------
+> context-free restrictions
+>   LAYOUT? -/- [\ \t\12\n\r]
+> -------------------------------------
+> 
+> This reads as 'optional layout cannot be followed  by any of the
+> layout character'.
+> 
+Thanks, this did the trick. I saw this construct in some of the 
+examples, but somehow could not make it work.
+
+-- 
+Margus
+
+From dflynn at ireland.com  Tue Apr 28 13:12:51 2009
+From: dflynn at ireland.com (dflynn)
+Date: Tue, 28 Apr 2009 12:12:51 +0100
+Subject: [Stratego Users] Dryad Tool Runtime Error Message
+In-Reply-To: <2074242c0904240758w1a7255fcxae8cc55a75fd4aca@mail.gmail.com>
+References: <003701c9c3f2$25ec12a0$ad0ca8c0@CSE.local>
+	<2074242c0904240758w1a7255fcxae8cc55a75fd4aca@mail.gmail.com>
+Message-ID: <000901c9c7f2$45949bf0$ad0ca8c0@CSE.local>
+
+Martin, thanks for that. I was unable to solve this "rt.classes" problem by
+doing what you suggested. However, I think I had inadvertently messed up my
+installation of Stratego, so I reinstalled using NIX again. Once I did this
+I no longer got this "rt.classes" error. I think I had corrupted some of my
+repositories, using some incorrect xtc import commands, that's the only
+thing I can think of.
+
+To get my tool running I did what you suggested and set XTC_REPOSITORY to be
+my build-time XTC repository and that seemed to fix things.
+
+Thanks again,
+Regards,
+Diarmuid Flynn
+
+-----Original Message-----
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Martin Bravenboer
+Sent: 24 April 2009 15:59
+To: A list for questions and discussions about the Stratego/XT
+transformationlanguage and system.
+Subject: Re: [Stratego Users] Dryad Tool Runtime Error Message
+
+Hi Diarmuid,
+
+> [ xmpl | error ] No XTC registration for rt.classes found
+> [ xmpl | error ] No XTC registration for rt.classes found
+>
+> I have registered rt.classes with my build time repository, but that has
+not
+> solved the issue. Any help would be greatly appreciated. Thank you.
+
+Hm, if you did register rt.classes in some repository, then the most
+likely problem is that this is not the repository that is being used
+by your tool. It's difficult to guess why this happens, since this
+largely depends on how your tool is invoked (e.g. from make, after
+install, before install, etc).
+
+A few things you could check:
+
+1) Is XTC_REPOSITORY set to your build-time XTC repository?
+
+2) Double-check which repository is used using the strategy
+'xtc-location'. Print this to the stdout and then you get the filename
+of the repos.
+
+3) Double-check that rt.classes is in that repository.
+
+Hope this brings you closer to finding the problem :) .
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From martin.bravenboer at gmail.com  Tue Apr 28 14:11:37 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Tue, 28 Apr 2009 08:11:37 -0400
+Subject: [Stratego Users] Dryad Tool Runtime Error Message
+In-Reply-To: <000901c9c7f2$45949bf0$ad0ca8c0@CSE.local>
+References: <003701c9c3f2$25ec12a0$ad0ca8c0@CSE.local>
+	<2074242c0904240758w1a7255fcxae8cc55a75fd4aca@mail.gmail.com>
+	<000901c9c7f2$45949bf0$ad0ca8c0@CSE.local>
+Message-ID: <2074242c0904280511p1924c7am67b729b162212ba4@mail.gmail.com>
+
+Hi Diarmuid,
+
+Okay, glad you got things to run!
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+

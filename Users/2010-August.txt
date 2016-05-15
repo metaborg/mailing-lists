@@ -1,0 +1,1860 @@
+From mestrejoaoricardo at gmail.com  Wed Aug  4 21:54:13 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Wed, 4 Aug 2010 20:54:13 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+Message-ID: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+
+Hi,
+
+I'm looking for *java-front-0.9pre16621* and
+*aspectj-front-0.1pre15717*(since these versions produce different
+output from the newer versions).
+
+How can I get these?
+Regards.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100804/611bbfe6/attachment.html 
+
+From E.Visser at tudelft.nl  Wed Aug  4 22:46:07 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 4 Aug 2010 22:46:07 +0200
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+Message-ID: <AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+
+Hi,
+
+> I'm looking for?java-front-0.9pre16621 and aspectj-front-0.1pre15717 (since
+> these versions produce different output from the newer versions).
+
+The numbers after pre indicate subversion revisions. Look for the
+appropriate subdirectories of
+
+  https://svn.strategoxt.org/repos/StrategoXT/
+
+probably get the appropriate revisions of the trunks of these projects
+(pre-releases are built from trunk).
+
+cheers,
+
+-- Eelco
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From mestrejoaoricardo at gmail.com  Fri Aug  6 15:14:43 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Fri, 6 Aug 2010 14:14:43 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+Message-ID: <AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+
+These older subversion versions, however, don't have the configure and make
+files. How can I install them?
+
+Thanks.
+
+
+On 4 August 2010 21:46, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi,
+>
+> > I'm looking for java-front-0.9pre16621 and aspectj-front-0.1pre15717
+> (since
+> > these versions produce different output from the newer versions).
+>
+> The numbers after pre indicate subversion revisions. Look for the
+> appropriate subdirectories of
+>
+>  https://svn.strategoxt.org/repos/StrategoXT/
+>
+> probably get the appropriate revisions of the trunks of these projects
+> (pre-releases are built from trunk).
+>
+> cheers,
+>
+> -- Eelco
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100806/251ac576/attachment.html 
+
+From E.Visser at tudelft.nl  Fri Aug  6 15:29:24 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 6 Aug 2010 15:29:24 +0200
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com> 
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com> 
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+Message-ID: <AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+
+You need automake and autoconf to create makefiles and configure. If
+you have the right versions of these tools installed then it should be
+a matter of running the ./bootstrap script.
+
+-- Eelco
+
+On Fri, Aug 6, 2010 at 3:14 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+> These older subversion versions, however, don't have the configure and make
+> files. How can I install them?
+> Thanks.
+>
+> On 4 August 2010 21:46, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi,
+>>
+>> > I'm looking for?java-front-0.9pre16621 and aspectj-front-0.1pre15717
+>> > (since
+>> > these versions produce different output from the newer versions).
+>>
+>> The numbers after pre indicate subversion revisions. Look for the
+>> appropriate subdirectories of
+>>
+>> ?https://svn.strategoxt.org/repos/StrategoXT/
+>>
+>> probably get the appropriate revisions of the trunks of these projects
+>> (pre-releases are built from trunk).
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From mestrejoaoricardo at gmail.com  Fri Aug  6 17:19:33 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Fri, 6 Aug 2010 16:19:33 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+	<AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+Message-ID: <AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+
+Thanks.
+
+I've installed Java-front from the source file, now I want to install
+aspectj-front from a subversion revision. Java-front is perfectly installed.
+
+However, when I run the bootstrap script form the aspectj-front revision, I
+get the following error:
+
+*[ identity crisis | error ] No XTC registration for java-front.m4 found
+auto-java-front: rewriting failed*
+
+Any idea what this could be? I have correctly configured the PKG_CONFIG_PATH
+variable...
+
+
+Regards.
+
+
+On 6 August 2010 14:29, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> You need automake and autoconf to create makefiles and configure. If
+> you have the right versions of these tools installed then it should be
+> a matter of running the ./bootstrap script.
+>
+> -- Eelco
+>
+> On Fri, Aug 6, 2010 at 3:14 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+> > These older subversion versions, however, don't have the configure and
+> make
+> > files. How can I install them?
+> > Thanks.
+> >
+> > On 4 August 2010 21:46, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> >>
+> >> Hi,
+> >>
+> >> > I'm looking for java-front-0.9pre16621 and aspectj-front-0.1pre15717
+> >> > (since
+> >> > these versions produce different output from the newer versions).
+> >>
+> >> The numbers after pre indicate subversion revisions. Look for the
+> >> appropriate subdirectories of
+> >>
+> >>  https://svn.strategoxt.org/repos/StrategoXT/
+> >>
+> >> probably get the appropriate revisions of the trunks of these projects
+> >> (pre-releases are built from trunk).
+> >>
+> >> cheers,
+> >>
+> >> -- Eelco
+> >>
+> >>
+> >>
+> >> --
+> >> http://eelcovisser.org
+> >> http://twitter.com/eelcovisser
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100806/a8d28460/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Aug 10 11:20:54 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 10 Aug 2010 10:20:54 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+	<AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+	<AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+Message-ID: <AANLkTimp3VUQOeCTm=d2SS=wzdEgkHV3C6Vt-daj=upK@mail.gmail.com>
+
+I thought the error:
+
+*[ identity crisis | error ] No XTC registration for java-front.m4 found
+auto-java-front: rewriting failed*
+
+I get when running the AspectJ-Front bootstrap script could be derived from
+the fact that I have installed Java-Front via a source distribution and not
+via svn, so tried re-installing Java-Front via svn.
+These steps run without problems:
+
+*./bootstrap*
+*./configure --enable-bootstrap*
+
+However, when I get to run make, I get the following error:
+
+...
+/usr/local/bin/gen-sdf-mix -i Java-15.def --main languages/java-15/Main
+--name languages/java-15/JavaMix -o languages/java-15/JavaMix.sdf
+SdfChecker:error: Main module not defined
+--- Main
+SdfChecker:error: symbol is not defined by any production
+--- FooStringChars [file: Java-15.def line: 1204 col: 5]
+SdfChecker:warning: bracket attribute should be applied to productions of
+the form '"..." X "..." -> X'
+--- "?" Expr ":" -> CondMid { bracket } [file: Java-15.def line: 174 col: 4]
+SdfChecker:warning: bracket attribute should be applied to productions of
+the form '"..." X "..." -> X'
+--- "[" Expr "]" -> ArraySubscript { bracket } [file: Java-15.def line: 241
+col:4]
+SdfChecker:warning: bracket attribute should be applied to productions of
+the form '"..." X "..." -> X'
+--- "(" { Expr "," } * ")" -> EnumConstArgs { bracket } [file: Java-15.def
+line:558 col: 4]
+readFromTextFile: parse error at line 0, col 0
+not a valid term
+/usr/local/libexec/sdf-desugar: rewriting failed
+/usr/local/bin/gen-sdf-mix: rewriting failed
+make[2]: *** [languages/java-15/JavaMix.sdf] Error 1
+make[2]: Leaving directory `/cygdrive/c/Users/<dir_name>
+/java-front/syntax/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/cygdrive/c/Users/<dir_name>/java-front/syntax'
+make: *** [all-recursive] Error 1
+
+
+Any idea what could be going wrong?
+
+Thanks.
+
+Having a source distribution of aspectj-front-0.1pre15717 would probably
+help. Can anyone send it to me?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100810/555609a6/attachment.html 
+
+From hausbacher at web.de  Tue Aug 10 19:58:19 2010
+From: hausbacher at web.de (Otto Hausbacher)
+Date: Tue, 10 Aug 2010 19:58:19 +0200
+Subject: [Stratego Users] Spoofax
+Message-ID: <4C61933B.40900@web.de>
+
+  Hi,
+
+I started with Spoofax just some days ago, so may be I just did not 
+do/know things right...
+
+    * Language-Colorer
+
+       1. Idx: yellow orange  // gives syntax error
+       2. Idx: orange bold    // gives syntax error
+
+    But: Idx: :   0 128   0   255 255 240 bold  // works fine
+
+    * AST-nodes - cons attibute - lexical syntax
+
+    Reading the docu 'The Syntax Definition Formalism SDF', page 15, I read:
+    lexical syntax
+             "a" -> A
+    .. automatically linked by SDF by the following transformation:
+    "a"     -> <A-LEX>
+    <A-LEX> -> <A-CF>
+    So I thought, that
+    lexical syntax
+    "a" -> A {cons("A")}
+    would be transormed the same way, means that A would be in the
+    namespace -CF (context free syntax) and node A in the AST would be
+    resolveable. But this not the case. I achieved this only by the
+    following cumbersome construction:
+    lexical syntax
+             "a" -> LA
+         context-free syntax
+             LA  -> A {cons("A")}
+    In the exports section sorts then would stay LA and A.
+    Question: is there a better way (lexical restrictions etc also
+    possible for LA)?
+
+    * Error Markers
+
+       1. It seems that the error-detection of testfiles is only
+          started, when the file is loaded into the editor.
+       2. If errors are detected and not corrected, then this markers
+          keep on beeing present even if the testfiles are renamed to a
+          extension, for what the editor was not intended.
+
+    * Swapping until freeze
+
+    Accidentally I deleted a line of my grammar file and started the
+    build. Then Spoofax worked with full power and swapped out more and
+    more until about 3.5 GB, then eclipse freezed. The process was not
+    stoppable.
+
+        * Error Log
+
+        An internal error occurred during: "myxy ParserScheduler for
+        example.def".
+
+        * Exception Stack trace
+
+        java.lang.OutOfMemoryError: Java heap space
+        at java.util.AbstractList.iterator(Unknown Source)
+        at
+        org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:393)
+        at
+        org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:362)
+        at
+        org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+        at
+        org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+        at
+        org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+        at
+        org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+        ... and so on
+
+    * Wishes
+
+       1. If Spoofax is in an endless loop of the Disambiguator.filter*
+          it should be possible at least to manually stop that process.
+       2. It would be very useful beeing able to explicitely start
+          error-detection for all testfiles, even if they are not
+          loaded. Then in some way it should be signalized that the
+          check is finished (or maybe still running).
+       3. It would be nice that sdf-files in the syntax folder, which
+          are not imported by the grammar, are i.e. greyed out in the
+          package explorer.
+       4. Automatic generation of completion-proposals according to the
+          grammar-definition.
+       5. Proven programming conventions for Spoofax.
+       6. Some proven project templates for Spoofax - for small, medium
+          and big size projects.
+       7. Guide for migration of C-stratego-xt projects to spoofax.
+       8. Completion-templates: Jumping with Tab to the next template
+          paramater as in JDE
+
+    * Miscellaneous
+
+    Spoofax is super 8-)
+
+Thank You very much,
+
+Otto Hausbacher
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100810/908d3683/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Wed Aug 11 14:17:05 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 11 Aug 2010 14:17:05 +0200
+Subject: [Stratego Users] Spoofax
+In-Reply-To: <4C61933B.40900@web.de>
+References: <4C61933B.40900@web.de>
+Message-ID: <201008111217.o7BCH5BA013954@smtp1.infopact.nl>
+
+Hi Otto,
+
+@ 07:58 PM 8/10/2010, Otto Hausbacher wrote:
+>Hi,
+>
+>I started with Spoofax just some days ago, so may be I just did not do/know things right...
+>
+>    * Language-Colorer  
+>        * Idx: yellow orange  // gives syntax error 
+>        * Idx: orange bold    // gives syntax error But:  Idx: :   0 128   0   255 255 240 bold  // works fine
+
+Yes, this is a known limitation of the current colorer language design. Each "color" yellow, orange, etc. actually specifies a foreground color, a background color, and font styles, and you can't compose them like that. I added a comment to http://yellowgrass.org/issue/Spoofax/54 about this issue.
+
+>    * AST-nodes - cons attibute - lexical syntax 
+>Reading the docu 'The Syntax Definition Formalism SDF', page 15, I read:
+>    lexical syntax
+>        "a" -> A
+>.. automatically linked by SDF by the following transformation:
+>    "a"     -> <A-LEX>
+>   <A-LEX> -> <A-CF>
+>So I thought, that
+>lexical syntax
+>    "a" -> A {cons("A")}
+>would be transormed the same way, means that A would be in the namespace -CF (context free syntax) and node A in the AST would be resolveable. But this not the case. I achieved this only by the following cumbersome construction:
+>    lexical syntax
+>        "a" -> LA
+>    context-free syntax
+>        LA  -> A {cons("A")}
+>In the exports section sorts then would stay LA and A.
+>Question: is there a better way (lexical restrictions etc also possible for LA)?
+
+You can also write something like this instad:
+
+  context-free syntax
+    "a" -> A {cons("A")}
+    A   -> B
+
+  lexical restrictions %% restrictions for "a", "b", and "c":
+    "a" "b" "c" ~/~ [A-Za-z0-9]
+
+  context-free restrictions %% restrictions for A
+    A -/- [A-Za-z0-9]
+>    * Error Markers 
+>        * It seems that the error-detection of testfiles is only started, when the file is loaded into the editor. 
+>        * If errors are detected and not corrected, then this markers keep on beeing present even if the testfiles are renamed to a extension, for what the editor was not intended. 
+
+This is an open issue (Spoofax/224).
+
+>    * Swapping until freeze 
+>Accidentally I deleted a line of my grammar file and started the build. Then Spoofax worked with full power and swapped out more and more until about 3.5 GB, then eclipse freezed. The process was not stoppable. 
+>Error Log 
+>An internal error occurred during: "myxy ParserScheduler for example.def".
+>
+>    * Exception Stack trace 
+>java.lang.OutOfMemoryError: Java heap space
+>at java.util.AbstractList.iterator(Unknown Source)
+>at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:393)
+>at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:362)
+>at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>... and so on
+
+This sounds like a bug that I haven't heard from before. Could you post an issue report at the bug tracker with the grammar that caused it? Or at least with the complete stack trace?
+
+>    * Wishes 
+>        * If Spoofax is in an endless loop of the Disambiguator.filter* it should be possible at least to manually stop that process. 
+>        * It would be very useful beeing able to explicitely start error-detection for all testfiles, even if they are not loaded. Then in some way it should be signalized that the check is finished (or maybe still running). 
+>        * It would be nice that sdf-files in the syntax folder, which are not imported by the grammar, are i.e. greyed out in the package explorer. 
+>        * Automatic generation of completion-proposals according to the grammar-definition. 
+>        * Proven programming conventions for Spoofax. 
+>        * Some proven project templates for Spoofax - for small, medium and big size projects. 
+>        * Guide for migration of C-stratego-xt projects to spoofax. 
+>        * Completion-templates: Jumping with Tab to the next template paramater as in JDE 
+
+Your wishes sound reasonable; we've considered some of these ourselves. Could you post them to the issue tracker though, for future reference?
+
+>    * Miscellaneous 
+>Spoofax is super 8-) 
+
+:)
+
+cheers,
+
+Lennart 
+
+
+From E.Visser at tudelft.nl  Wed Aug 11 19:03:55 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 11 Aug 2010 19:03:55 +0200
+Subject: [Stratego Users] [AspectJ-Front] Getting the source
+ distribution of an old revision version
+In-Reply-To: <AANLkTinfGH0o0+ayKjHuUJXsSsX5zCFzOC5ZK3NLSeuu@mail.gmail.com>
+References: <AANLkTikWTAqa_qzarm5KJsXb3GpK_vzjMs25G=3+mq6m@mail.gmail.com>
+	<AANLkTinfGH0o0+ayKjHuUJXsSsX5zCFzOC5ZK3NLSeuu@mail.gmail.com>
+Message-ID: <AANLkTim1APJbwnXJHsD5cEwxc10TifGvmsj_uTFKhm+d@mail.gmail.com>
+
+Hi,
+
+Unfortunately, I don't have time to manually build source
+distributions for old versions of our software. Perhaps the buildfarm
+can be configured up to do that (Rob)? Otherwise, I'd advise you to
+try to build the distribution in a (virtual) Linux machine rather than
+under Cygwin.
+
+cheers,
+
+-- Eelco
+
+On Tue, Aug 10, 2010 at 11:34 AM, A G <mestrejoaoricardo at gmail.com> wrote:
+> Greetings Professor Eelco Visser,
+>
+> I've been trying to install aspectj-front-0.1pre15717 in my Windows machine,
+> via Cygwin.
+> However, I'm not managing to do it, via the ./bootstrap script.
+> Thanks to your help in the mailing list, I've manage to advance a little,
+> but I still haven't solved this problem.
+>
+> Could I kindly ask you to send me a source distribution of
+> aspectj-front-0.1pre15717.
+> I probably won't have any problems installing that version.
+> That would speed a lot my research.
+> Thanks.
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+From hausbacher at web.de  Wed Aug 11 19:43:58 2010
+From: hausbacher at web.de (Otto Hausbacher)
+Date: Wed, 11 Aug 2010 19:43:58 +0200
+Subject: [Stratego Users] Spoofax
+In-Reply-To: <201008111217.o7BCH5BA013954@smtp1.infopact.nl>
+References: <4C61933B.40900@web.de>
+	<201008111217.o7BCH5BA013954@smtp1.infopact.nl>
+Message-ID: <4C62E15E.2070906@web.de>
+
+  Hi Lennart,
+
+thank You very much for the fast and professional reply/help.
+>>     * Swapping until freeze
+>> Accidentally I deleted a line of my grammar file and started the build. Then Spoofax worked with full power and swapped out more and more until about 3.5 GB, then eclipse freezed. The process was not stoppable.
+>> Error Log
+>> An internal error occurred during: "myxy ParserScheduler for example.def".
+>>
+>>     * Exception Stack trace
+>> java.lang.OutOfMemoryError: Java heap space
+>> at java.util.AbstractList.iterator(Unknown Source)
+>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:393)
+>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:362)
+>> at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>> at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>> ... and so on
+> This sounds like a bug that I haven't heard from before. Could you post an issue report at the bug tracker with the grammar that caused it? Or at least with the complete stack trace?
+
+I have tried already two times to register to YellowGrass, but without 
+avail. The site always says 'text entered did not match text in image' 
+though I am sure I entered the correct text. So I cannot post an issue 
+report at the bug tracker.
+
+Unfortunately I cannot restore that grammar anymore. I already deleted 
+the error log, but the rest of the stack trace were just a a lot of 
+repetitions of the two lines:
+
+	at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+	at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+
+>>     * Wishes
+>>         * If Spoofax is in an endless loop of the Disambiguator.filter* it should be possible at least to manually stop that process.
+>>         * It would be very useful beeing able to explicitely start error-detection for all testfiles, even if they are not loaded. Then in some way it should be signalized that the check is finished (or maybe still running).
+>>         * It would be nice that sdf-files in the syntax folder, which are not imported by the grammar, are i.e. greyed out in the package explorer.
+>>         * Automatic generation of completion-proposals according to the grammar-definition.
+>>         * Proven programming conventions for Spoofax.
+>>         * Some proven project templates for Spoofax - for small, medium and big size projects.
+>>         * Guide for migration of C-stratego-xt projects to spoofax.
+>>         * Completion-templates: Jumping with Tab to the next template paramater as in JDE
+> Your wishes sound reasonable; we've considered some of these ourselves. Could you post them to the issue tracker though, for future reference?
+I cannot post them, because I am unable to register to Yellowgrass.
+
+Cheers,
+
+Otto
+
+From sandervermolen at gmail.com  Wed Aug 11 20:18:38 2010
+From: sandervermolen at gmail.com (Sander Vermolen)
+Date: Wed, 11 Aug 2010 20:18:38 +0200
+Subject: [Stratego Users] Spoofax
+In-Reply-To: <4C62E15E.2070906@web.de>
+References: <4C61933B.40900@web.de>
+	<201008111217.o7BCH5BA013954@smtp1.infopact.nl>
+	<4C62E15E.2070906@web.de>
+Message-ID: <AANLkTimqwA314m-FV1gmUYDWFoDx5tCTi=zW8PckP5b3@mail.gmail.com>
+
+Hi Otto,
+
+With respect to the registration in YellowGrass:
+
+As you already figured out: The error message 'text entered did not
+match text in image' is incorrect. If you look higher up in the form,
+there should be one or more other error messages near the name, user
+name, password or email input box. Please correct these, enter the new
+text shown in the image and try again.
+The error message for the matching text is always triggered whenever
+registration fails. This is a known bug.
+
+Sorry for the trouble,
+Sander Vermolen
+
+
+
+
+On Wed, Aug 11, 2010 at 7:43 PM, Otto Hausbacher <hausbacher at web.de> wrote:
+> ?Hi Lennart,
+>
+> thank You very much for the fast and professional reply/help.
+>>> ? ? * Swapping until freeze
+>>> Accidentally I deleted a line of my grammar file and started the build. Then Spoofax worked with full power and swapped out more and more until about 3.5 GB, then eclipse freezed. The process was not stoppable.
+>>> Error Log
+>>> An internal error occurred during: "myxy ParserScheduler for example.def".
+>>>
+>>> ? ? * Exception Stack trace
+>>> java.lang.OutOfMemoryError: Java heap space
+>>> at java.util.AbstractList.iterator(Unknown Source)
+>>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:393)
+>>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:362)
+>>> at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>>> at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+>>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>>> ... and so on
+>> This sounds like a bug that I haven't heard from before. Could you post an issue report at the bug tracker with the grammar that caused it? Or at least with the complete stack trace?
+>
+> I have tried already two times to register to YellowGrass, but without
+> avail. The site always says 'text entered did not match text in image'
+> though I am sure I entered the correct text. So I cannot post an issue
+> report at the bug tracker.
+>
+> Unfortunately I cannot restore that grammar anymore. I already deleted
+> the error log, but the rest of the stack trace were just a a lot of
+> repetitions of the two lines:
+>
+> ? ? ? ?at org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+> ? ? ? ?at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+>
+>>> ? ? * Wishes
+>>> ? ? ? ? * If Spoofax is in an endless loop of the Disambiguator.filter* it should be possible at least to manually stop that process.
+>>> ? ? ? ? * It would be very useful beeing able to explicitely start error-detection for all testfiles, even if they are not loaded. Then in some way it should be signalized that the check is finished (or maybe still running).
+>>> ? ? ? ? * It would be nice that sdf-files in the syntax folder, which are not imported by the grammar, are i.e. greyed out in the package explorer.
+>>> ? ? ? ? * Automatic generation of completion-proposals according to the grammar-definition.
+>>> ? ? ? ? * Proven programming conventions for Spoofax.
+>>> ? ? ? ? * Some proven project templates for Spoofax - for small, medium and big size projects.
+>>> ? ? ? ? * Guide for migration of C-stratego-xt projects to spoofax.
+>>> ? ? ? ? * Completion-templates: Jumping with Tab to the next template paramater as in JDE
+>> Your wishes sound reasonable; we've considered some of these ourselves. Could you post them to the issue tracker though, for future reference?
+> I cannot post them, because I am unable to register to Yellowgrass.
+>
+> Cheers,
+>
+> Otto
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Sander Vermolen
+
+Department of Software Technology
+Faculty of Electrical Engineering, Mathematics, and Computer Science
+Delft University of Technology
+
+phone: +31 15 2785175
+mobile: +31 6 49042621
+e-mail: S.D.Vermolen at tudelft.nl
+www: http://www.sandervermolen.nl
+photos: http://www.flickr.com/photos/sandervermolen
+http://yellowgrass.org
+
+
+From dgroenewegen at gmail.com  Thu Aug 12 10:04:02 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Thu, 12 Aug 2010 10:04:02 +0200
+Subject: [Stratego Users] Spoofax
+In-Reply-To: <AANLkTimqwA314m-FV1gmUYDWFoDx5tCTi=zW8PckP5b3@mail.gmail.com>
+References: <4C61933B.40900@web.de>
+	<201008111217.o7BCH5BA013954@smtp1.infopact.nl>
+	<4C62E15E.2070906@web.de>
+	<AANLkTimqwA314m-FV1gmUYDWFoDx5tCTi=zW8PckP5b3@mail.gmail.com>
+Message-ID: <AANLkTinYBXbFHe=h7LoRVKYQ3SRT8ts5mR=W9YqSFY2o@mail.gmail.com>
+
+@Sander
+This is fixed in the WebDSL trunk, the problem will go away in the next
+plugin release.
+
+On Wed, Aug 11, 2010 at 8:18 PM, Sander Vermolen
+<sandervermolen at gmail.com>wrote:
+
+> Hi Otto,
+>
+> With respect to the registration in YellowGrass:
+>
+> As you already figured out: The error message 'text entered did not
+> match text in image' is incorrect. If you look higher up in the form,
+> there should be one or more other error messages near the name, user
+> name, password or email input box. Please correct these, enter the new
+> text shown in the image and try again.
+> The error message for the matching text is always triggered whenever
+> registration fails. This is a known bug.
+>
+> Sorry for the trouble,
+> Sander Vermolen
+>
+>
+>
+>
+> On Wed, Aug 11, 2010 at 7:43 PM, Otto Hausbacher <hausbacher at web.de>
+> wrote:
+> >  Hi Lennart,
+> >
+> > thank You very much for the fast and professional reply/help.
+> >>>     * Swapping until freeze
+> >>> Accidentally I deleted a line of my grammar file and started the build.
+> Then Spoofax worked with full power and swapped out more and more until
+> about 3.5 GB, then eclipse freezed. The process was not stoppable.
+> >>> Error Log
+> >>> An internal error occurred during: "myxy ParserScheduler for
+> example.def".
+> >>>
+> >>>     * Exception Stack trace
+> >>> java.lang.OutOfMemoryError: Java heap space
+> >>> at java.util.AbstractList.iterator(Unknown Source)
+> >>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:393)
+> >>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:362)
+> >>> at
+> org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+> >>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+> >>> at
+> org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+> >>> at org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+> >>> ... and so on
+> >> This sounds like a bug that I haven't heard from before. Could you post
+> an issue report at the bug tracker with the grammar that caused it? Or at
+> least with the complete stack trace?
+> >
+> > I have tried already two times to register to YellowGrass, but without
+> > avail. The site always says 'text entered did not match text in image'
+> > though I am sure I entered the correct text. So I cannot post an issue
+> > report at the bug tracker.
+> >
+> > Unfortunately I cannot restore that grammar anymore. I already deleted
+> > the error log, but the rest of the stack trace were just a a lot of
+> > repetitions of the two lines:
+> >
+> >        at
+> org.spoofax.jsglr.Disambiguator.filterAmbiguities(Disambiguator.java:704)
+> >        at
+> org.spoofax.jsglr.Disambiguator.filterTree(Disambiguator.java:356)
+> >
+> >>>     * Wishes
+> >>>         * If Spoofax is in an endless loop of the Disambiguator.filter*
+> it should be possible at least to manually stop that process.
+> >>>         * It would be very useful beeing able to explicitely start
+> error-detection for all testfiles, even if they are not loaded. Then in some
+> way it should be signalized that the check is finished (or maybe still
+> running).
+> >>>         * It would be nice that sdf-files in the syntax folder, which
+> are not imported by the grammar, are i.e. greyed out in the package
+> explorer.
+> >>>         * Automatic generation of completion-proposals according to the
+> grammar-definition.
+> >>>         * Proven programming conventions for Spoofax.
+> >>>         * Some proven project templates for Spoofax - for small, medium
+> and big size projects.
+> >>>         * Guide for migration of C-stratego-xt projects to spoofax.
+> >>>         * Completion-templates: Jumping with Tab to the next template
+> paramater as in JDE
+> >> Your wishes sound reasonable; we've considered some of these ourselves.
+> Could you post them to the issue tracker though, for future reference?
+> > I cannot post them, because I am unable to register to Yellowgrass.
+> >
+> > Cheers,
+> >
+> > Otto
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Sander Vermolen
+>
+> Department of Software Technology
+> Faculty of Electrical Engineering, Mathematics, and Computer Science
+> Delft University of Technology
+>
+> phone: +31 15 2785175
+> mobile: +31 6 49042621
+> e-mail: S.D.Vermolen at tudelft.nl
+> www: http://www.sandervermolen.nl
+> photos: http://www.flickr.com/photos/sandervermolen
+> http://yellowgrass.org
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100812/12092ca5/attachment-0001.html 
+
+From mestrejoaoricardo at gmail.com  Thu Aug 12 15:28:24 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Thu, 12 Aug 2010 14:28:24 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTimp3VUQOeCTm=d2SS=wzdEgkHV3C6Vt-daj=upK@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+	<AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+	<AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+	<AANLkTimp3VUQOeCTm=d2SS=wzdEgkHV3C6Vt-daj=upK@mail.gmail.com>
+Message-ID: <AANLkTikGHMuVPtxiJNjHDVcFnW1TfEJAJG3TPgUC_vCp@mail.gmail.com>
+
+Finally got the version I needed. However, installing AspectJ-Front failed
+once again... What's strange is that Java-Front was installed without any
+problems and it is working.
+
+I'm able to run AJFront's  ./configure (but, even though the variable
+PKG_CONFIG_PATH is correctly set, I still had to use the
+--with-aterm=/usr/local --with-sdf=/usr/local --with-strategoxt=/usr/local
+flags, so that I didn't get an error).
+
+After ./configure, I used ./make and got this error:
+
+...
+--- MethodConstrPattern [file: aspectj.def line: 14 col: 20]
+SdfChecker:warning: undeclared sort
+--- PointcutName [file: aspectj.def line: 5 col: 24]
+SdfChecker:warning: undeclared sort
+--- PrimPointcutName [file: aspectj.def line: 5 col: 4]
+readFromTextFile: parse error at line 0, col 0
+implodePT: could not open file /tmp/StrategoXTmT7aMM
+readFromTextFile: parse error at line 0, col 0
+not a valid term
+/usr/local/libexec/sdf-desugar: rewriting failed
+/usr/local/bin/parse-rtgreadFromTextFile: parse error at line : rewriting
+failed
+0, col
+0
+not a valid term
+/usr/local/libexec/rtg-reduce: rewriting failed
+readFromTextFile: parse error at line 0, col 0
+not a valid term
+/usr/local/libexec/rtg-group: rewriting failed
+readFromTextFile: parse error at line 0, col 0
+not a valid term
+/usr/local/bin/pp-rtg: rewriting failed
+make[1]: *** [aspectj.rtg] Error 1
+make[1]: Leaving directory `/cygdrive/c/Users/<dir>/aspectj-front-15717/syn'
+make: *** [all-recursive] Error 1
+
+Was the installation procedure for older sdf/stratego bundles different?
+
+Thanks.
+
+
+
+On 10 August 2010 10:20, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> I thought the error:
+>
+> *[ identity crisis | error ] No XTC registration for java-front.m4 found
+> auto-java-front: rewriting failed*
+>
+> I get when running the AspectJ-Front bootstrap script could be derived from
+> the fact that I have installed Java-Front via a source distribution and not
+> via svn, so tried re-installing Java-Front via svn.
+> These steps run without problems:
+>
+> *./bootstrap*
+> *./configure --enable-bootstrap*
+>
+> However, when I get to run make, I get the following error:
+>
+> ...
+> /usr/local/bin/gen-sdf-mix -i Java-15.def --main languages/java-15/Main
+> --name languages/java-15/JavaMix -o languages/java-15/JavaMix.sdf
+> SdfChecker:error: Main module not defined
+> --- Main
+> SdfChecker:error: symbol is not defined by any production
+> --- FooStringChars [file: Java-15.def line: 1204 col: 5]
+> SdfChecker:warning: bracket attribute should be applied to productions of
+> the form '"..." X "..." -> X'
+> --- "?" Expr ":" -> CondMid { bracket } [file: Java-15.def line: 174 col:
+> 4]
+> SdfChecker:warning: bracket attribute should be applied to productions of
+> the form '"..." X "..." -> X'
+> --- "[" Expr "]" -> ArraySubscript { bracket } [file: Java-15.def line: 241
+> col:4]
+> SdfChecker:warning: bracket attribute should be applied to productions of
+> the form '"..." X "..." -> X'
+> --- "(" { Expr "," } * ")" -> EnumConstArgs { bracket } [file: Java-15.def
+> line:558 col: 4]
+> readFromTextFile: parse error at line 0, col 0
+> not a valid term
+> /usr/local/libexec/sdf-desugar: rewriting failed
+> /usr/local/bin/gen-sdf-mix: rewriting failed
+> make[2]: *** [languages/java-15/JavaMix.sdf] Error 1
+> make[2]: Leaving directory `/cygdrive/c/Users/<dir_name>
+> /java-front/syntax/src'
+> make[1]: *** [all-recursive] Error 1
+> make[1]: Leaving directory `/cygdrive/c/Users/<dir_name>
+> /java-front/syntax'
+> make: *** [all-recursive] Error 1
+>
+>
+> Any idea what could be going wrong?
+>
+> Thanks.
+>
+> Having a source distribution of aspectj-front-0.1pre15717 would probably
+> help. Can anyone send it to me?
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100812/9fdeff49/attachment.html 
+
+From karltk at strategoxt.org  Mon Aug 16 13:34:50 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Mon, 16 Aug 2010 13:34:50 +0200
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTikGHMuVPtxiJNjHDVcFnW1TfEJAJG3TPgUC_vCp@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+	<AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+	<AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+	<AANLkTimp3VUQOeCTm=d2SS=wzdEgkHV3C6Vt-daj=upK@mail.gmail.com>
+	<AANLkTikGHMuVPtxiJNjHDVcFnW1TfEJAJG3TPgUC_vCp@mail.gmail.com>
+Message-ID: <AANLkTi=6FvCznbniLOwFufuynoeo1gcV8W04Z9e7Wkga@mail.gmail.com>
+
+> Was the installation procedure for older sdf/stratego bundles different?
+
+No, but there might be some subtle incompatibilities between your
+aspectj 15717 source drop and the latest sdf2-bundle release (if
+that's what you're compiling against).
+
+Looking at your output, it's not obvious what the problem for failed
+compilation is. The undeclared sort warnings are benign. The missing
+/tmp/StrategoXTmT7aMM is fatal. The reason for a missing file like
+this is sometimes a segfault in the program that was supposed to
+create /tmp/StrategoXTmT7aMM. That might be hidden inside the make
+output somewhere. I suspect the rest of the errors you see is because
+/tmp/StrategoXTmT7aMM was never created.
+
+Perhaps using strace would help? Is that available on cygwin?
+
+strace -f make
+
+You probably want to pipe the output through grep,  to look for "-o
+/tmp/StrategoXTmT7aMM" or "-i /tmp/StrategoXTmT7aMM". This should give
+you an idea of which programs write/read to the tmp file, and might
+give us some further clues.
+
+Cheers,
+
+-- Karl T
+
+From mestrejoaoricardo at gmail.com  Wed Aug 18 12:11:22 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Wed, 18 Aug 2010 11:11:22 +0100
+Subject: [Stratego Users] How to get the source of older Java/AJ-Front
+	versions?
+In-Reply-To: <AANLkTi=6FvCznbniLOwFufuynoeo1gcV8W04Z9e7Wkga@mail.gmail.com>
+References: <AANLkTino4n2dzw+xiwpLq7tST=nqHM+N_8mw0RghYZn7@mail.gmail.com>
+	<AANLkTi=jwZ06kmpNDowyFmKERi1S4FdQFyr-gbU1P_Ud@mail.gmail.com>
+	<AANLkTi=AOiAUqjXO8-qDCQkRzGR_AiVugqtvECONBkrv@mail.gmail.com>
+	<AANLkTimQ0D0FsL13sozGtr53QCxq8E+t-3Ya4yTdnYQs@mail.gmail.com>
+	<AANLkTin2i4V3kF_TOLgwuub1CON42Ki7qP_tcsMjNV93@mail.gmail.com>
+	<AANLkTimp3VUQOeCTm=d2SS=wzdEgkHV3C6Vt-daj=upK@mail.gmail.com>
+	<AANLkTikGHMuVPtxiJNjHDVcFnW1TfEJAJG3TPgUC_vCp@mail.gmail.com>
+	<AANLkTi=6FvCznbniLOwFufuynoeo1gcV8W04Z9e7Wkga@mail.gmail.com>
+Message-ID: <AANLkTin2Rz6Dfj=q8qOpka2grv=2FUQNYENb=Jgb4A6X@mail.gmail.com>
+
+Couldn't find any "/tmp/STrategoXT------" references (the actual
+filename changes everytime make is run) in the strace -f make output.
+
+But I thought about incompatibilities between aspectj 15717 and the
+latest sdf2-bundle release. I was told to install an older version of
+the sdf2-bundle (2.3.4pre15345), but I couldn't install it, so I
+installed the newest version. Maybe installing the older version would
+solve the problem.
+
+I got this error, when installing sd2f-bundle:
+
+
+
+sed 's at __BINDIR__@/usr/local/bin at g;\
+             s at __ACTIVATE__@1 at g;\
+             s at __SGLR__@/cygdrive/c/Users/<my_dir>/sdf2-bundle/local-install/sglr/usr/local at g;\
+             s at __PT_SUPPORT__@/cygdrive/c/Users/<my_dir>/sdf2-bundle/local-install/pt-support/usr/local at g;\
+             s at __DATADIR__@/usr/local/share/pgen at g;' < sdf2table.src > sdf2table
+ && \
+        chmod +x sdf2table
+sed: -e expression #1, char 413: unterminated address regex
+make[2]: *** [sdf2table] Error 1
+make[2]: Leaving directory `/cygdrive/c/Users/<my_dir>/sdf2-bundle/pgen/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/cygdrive/c/Users/<my_dir>/sdf2-bundle/pgen'
+make: *** [all-recursive] Error 1
+
+
+How can I solve this?
+
+Thanks.
+
+On 16/08/2010, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+>> Was the installation procedure for older sdf/stratego bundles different?
+>
+> No, but there might be some subtle incompatibilities between your
+> aspectj 15717 source drop and the latest sdf2-bundle release (if
+> that's what you're compiling against).
+>
+> Looking at your output, it's not obvious what the problem for failed
+> compilation is. The undeclared sort warnings are benign. The missing
+> /tmp/StrategoXTmT7aMM is fatal. The reason for a missing file like
+> this is sometimes a segfault in the program that was supposed to
+> create /tmp/StrategoXTmT7aMM. That might be hidden inside the make
+> output somewhere. I suspect the rest of the errors you see is because
+> /tmp/StrategoXTmT7aMM was never created.
+>
+> Perhaps using strace would help? Is that available on cygwin?
+>
+> strace -f make
+>
+> You probably want to pipe the output through grep,  to look for "-o
+> /tmp/StrategoXTmT7aMM" or "-i /tmp/StrategoXTmT7aMM". This should give
+> you an idea of which programs write/read to the tmp file, and might
+> give us some further clues.
+>
+> Cheers,
+>
+> -- Karl T
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+From mestrejoaoricardo at gmail.com  Sun Aug 22 09:47:28 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sun, 22 Aug 2010 08:47:28 +0100
+Subject: [Stratego Users] How to get the source of older SDF2 Bundle
+	versions?
+Message-ID: <AANLkTikav-4qTLm1x2o8_-U0Di3SceCOj4qdvAGd9M+L@mail.gmail.com>
+
+Hi,
+
+I'm looking for an older revision of sdf2-bundle. What's the SVN address for
+sdf2-bundle?
+
+Regards.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100822/6975dd95/attachment.html 
+
+From hausbacher at web.de  Sun Aug 22 23:19:32 2010
+From: hausbacher at web.de (Otto Hausbacher)
+Date: Sun, 22 Aug 2010 23:19:32 +0200
+Subject: [Stratego Users] How to get the source of older SDF2
+	Bundle	versions?
+In-Reply-To: <AANLkTikav-4qTLm1x2o8_-U0Di3SceCOj4qdvAGd9M+L@mail.gmail.com>
+References: <AANLkTikav-4qTLm1x2o8_-U0Di3SceCOj4qdvAGd9M+L@mail.gmail.com>
+Message-ID: <4C719464.20103@web.de>
+
+  Am 22.08.2010 09:47, schrieb A G:
+> Hi,
+>
+> I'm looking for an older revision of sdf2-bundle. What's the SVN 
+> address for sdf2-bundle?
+>
+> Regards.
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+Hi,
+
+maybe this will help You?
+
+     http://buildfarm.st.ewi.tudelft.nl/releases/full-index-sdf2-bundle.html
+
+Regards,
+
+Otto
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100822/10e81fad/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Mon Aug 23 00:12:53 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sun, 22 Aug 2010 23:12:53 +0100
+Subject: [Stratego Users] How to get the source of older SDF2 Bundle
+	versions?
+In-Reply-To: <4C719464.20103@web.de>
+References: <AANLkTikav-4qTLm1x2o8_-U0Di3SceCOj4qdvAGd9M+L@mail.gmail.com>
+	<4C719464.20103@web.de>
+Message-ID: <AANLkTi=TbCM_GK3YHneNCSHJR0oOmDqjLXs1xdBQt-zq@mail.gmail.com>
+
+Unfortunately, I'm looking for an even older version of sdf2-bundle.
+
+For instance, the source repository of Java-front is:
+https://svn.strategoxt.org/repos/StrategoXT/java-front/
+
+Is there a similar address for sdf2-bundle?
+
+
+
+On 22 August 2010 22:19, Otto Hausbacher <hausbacher at web.de> wrote:
+
+>  Am 22.08.2010 09:47, schrieb A G:
+>
+> Hi,
+>
+> I'm looking for an older revision of sdf2-bundle. What's the SVN address
+> for sdf2-bundle?
+>
+>  Regards.
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.orghttps://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>  Hi,
+>
+> maybe this will help You?
+>
+>
+> http://buildfarm.st.ewi.tudelft.nl/releases/full-index-sdf2-bundle.html
+>
+> Regards,
+>
+> Otto
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100822/3220d360/attachment.html 
+
+From aotani at jaist.ac.jp  Wed Aug 25 10:06:26 2010
+From: aotani at jaist.ac.jp (AOTANI Tomoyuki)
+Date: Wed, 25 Aug 2010 17:06:26 +0900
+Subject: [Stratego Users] Enabling Stratego-Box in Spoofax
+Message-ID: <4C74CF02.4040503@jaist.ac.jp>
+
+Hi,
+
+Thank you for releasing Spoofax. It is really a nice environment to develop my own DSLs!
+
+I am developing my DSL that is a tiny extension to Java, and I want to use the pretty printer modules provided by the java-front package bundled with Stratego/XT 0.17 to get plain Java code with less effort. Simply importing the modules does not work because Spoofax cannot understand "Stratego-Box".
+
+How can I use/enable "Stratego-Box" in Spoofax?
+
+Thanks,
+
+Tomoyuki Aotani
+
+From L.C.L.Kats at tudelft.nl  Fri Aug 27 15:31:31 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Fri, 27 Aug 2010 15:31:31 +0200
+Subject: [Stratego Users] Enabling Stratego-Box in Spoofax
+In-Reply-To: <4C74CF02.4040503@jaist.ac.jp>
+References: <4C74CF02.4040503@jaist.ac.jp>
+Message-ID: <201008271331.o7RDVVEQ000779@smtp1.infopact.nl>
+
+Hi,
+
+To use the box language embedding in Stratego, you need to have the Stratego-Box parse table in your workspace. You can download it here: http://hydra.nixos.org/build/608298. Just put the .tbl file anywhere in the workspace and be sure it's visible in the package explorer. Then you need a .meta file for each .str file where you use the syntax (if you don't have one already). For example, if you have a foo.str file, you need a foo.meta file in the same directory with the following contents:
+
+  Meta([Syntax("Stratego-Box")])
+
+hth,
+
+Lennart
+
+@ 10:06 AM 8/25/2010, AOTANI Tomoyuki wrote:
+>Hi,
+>
+>Thank you for releasing Spoofax. It is really a nice environment to develop my own DSLs!
+>
+>I am developing my DSL that is a tiny extension to Java, and I want to use the pretty printer modules provided by the java-front package bundled with Stratego/XT 0.17 to get plain Java code with less effort. Simply importing the modules does not work because Spoofax cannot understand "Stratego-Box".
+>
+>How can I use/enable "Stratego-Box" in Spoofax?
+>
+>Thanks,
+>
+>Tomoyuki Aotani
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From aotani at jaist.ac.jp  Fri Aug 27 17:02:51 2010
+From: aotani at jaist.ac.jp (AOTANI Tomoyuki)
+Date: Sat, 28 Aug 2010 00:02:51 +0900
+Subject: [Stratego Users] Enabling Stratego-Box in Spoofax
+In-Reply-To: <201008271331.o7RDVVEQ000779@smtp1.infopact.nl>
+References: <4C74CF02.4040503@jaist.ac.jp>
+	<201008271331.o7RDVVEQ000779@smtp1.infopact.nl>
+Message-ID: <4C77D39B.8010008@jaist.ac.jp>
+
+  Hi Lennart,
+
+Many thanks! Now it looks like everything goes well ;)
+Again thank you for releasing such a nice wonderful application!
+
+Thanks,
+Tomoyuki
+
+(2010?08?27? 22:31), Lennart Kats wrote:
+> Hi,
+>
+> To use the box language embedding in Stratego, you need to have the Stratego-Box parse table in your workspace. You can download it here: http://hydra.nixos.org/build/608298. Just put the .tbl file anywhere in the workspace and be sure it's visible in the package explorer. Then you need a .meta file for each .str file where you use the syntax (if you don't have one already). For example, if you have a foo.str file, you need a foo.meta file in the same directory with the following contents:
+>
+>    Meta([Syntax("Stratego-Box")])
+>
+> hth,
+>
+> Lennart
+>
+> @ 10:06 AM 8/25/2010, AOTANI Tomoyuki wrote:
+>> Hi,
+>>
+>> Thank you for releasing Spoofax. It is really a nice environment to develop my own DSLs!
+>>
+>> I am developing my DSL that is a tiny extension to Java, and I want to use the pretty printer modules provided by the java-front package bundled with Stratego/XT 0.17 to get plain Java code with less effort. Simply importing the modules does not work because Spoofax cannot understand "Stratego-Box".
+>>
+>> How can I use/enable "Stratego-Box" in Spoofax?
+>>
+>> Thanks,
+>>
+>> Tomoyuki Aotani
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From mestrejoaoricardo at gmail.com  Sat Aug 28 22:17:09 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sat, 28 Aug 2010 21:17:09 +0100
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+Message-ID: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+
+Trying to install aspectj-front from svn (the latest version ofr instance).
+
+I have correctly installed all the needed dependencies (aterm, java-front,
+etc.)
+
+When I run the ./bootstrap script, I always get the following error when
+trying to run the *auto-java-front* executable (located in <java-front
+install folder>/bin):
+
+[ identity crisis | error ] No XTC registration for java-front.m4 found
+auto-java-front: rewriting failed, trace:
+main_0_0
+main_auto_java_front_0_0
+install_java_front_m4_0_0
+xtc_find_file_0_0
+xtc_find_0_0
+
+Do I need to install anything else or make anything else to register
+java-front.m4 in XTC? Has anyone successfully installed an aspectj-front
+version by svn checkout?
+
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100828/655beb8b/attachment.html 
+
+From rob.vermaas at gmail.com  Sat Aug 28 23:26:35 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Sat, 28 Aug 2010 23:26:35 +0200
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+Message-ID: <9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+
+Hi,
+
+Did you use --enable-bootstrap in the configure flags? According to the buildfarm we use, svn should build without problems.
+
+Gr, Rob
+
+On Aug 28, 2010, at 10:17 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> Trying to install aspectj-front from svn (the latest version ofr instance).
+> 
+> I have correctly installed all the needed dependencies (aterm, java-front, etc.)
+> 
+> When I run the ./bootstrap script, I always get the following error when trying to run the auto-java-front executable (located in <java-front install folder>/bin):
+> 
+> [ identity crisis | error ] No XTC registration for java-front.m4 found
+> auto-java-front: rewriting failed, trace:
+> main_0_0
+> main_auto_java_front_0_0
+> install_java_front_m4_0_0
+> xtc_find_file_0_0
+> xtc_find_0_0
+> 
+> Do I need to install anything else or make anything else to register java-front.m4 in XTC? Has anyone successfully installed an aspectj-front version by svn checkout?
+> 
+> 
+> Thanks.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From mestrejoaoricardo at gmail.com  Sat Aug 28 23:48:49 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sat, 28 Aug 2010 22:48:49 +0100
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+Message-ID: <AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+
+I can't even pass the ./bootstrap step. The error appears when I run
+./bootstrap.
+
+Can you tell me exactly what steps do you use to build? Or can I somehow
+install your buildfarm?
+
+Or do I need to install something else?
+
+Regards.
+
+
+
+On 28 August 2010 22:26, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi,
+>
+> Did you use --enable-bootstrap in the configure flags? According to the
+> buildfarm we use, svn should build without problems.
+>
+> Gr, Rob
+>
+> On Aug 28, 2010, at 10:17 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+> > Trying to install aspectj-front from svn (the latest version ofr
+> instance).
+> >
+> > I have correctly installed all the needed dependencies (aterm,
+> java-front, etc.)
+> >
+> > When I run the ./bootstrap script, I always get the following error when
+> trying to run the auto-java-front executable (located in <java-front install
+> folder>/bin):
+> >
+> > [ identity crisis | error ] No XTC registration for java-front.m4 found
+> > auto-java-front: rewriting failed, trace:
+> > main_0_0
+> > main_auto_java_front_0_0
+> > install_java_front_m4_0_0
+> > xtc_find_file_0_0
+> > xtc_find_0_0
+> >
+> > Do I need to install anything else or make anything else to register
+> java-front.m4 in XTC? Has anyone successfully installed an aspectj-front
+> version by svn checkout?
+> >
+> >
+> > Thanks.
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100828/a1c4f643/attachment.html 
+
+From rob.vermaas at gmail.com  Mon Aug 30 16:07:26 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Mon, 30 Aug 2010 16:07:26 +0200
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+	<AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+Message-ID: <AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+
+This is unknown behaviour. Could you tell me exactly the version you
+have installed from all the dependencies and on which system you are
+running. Also how you have configured the deps.
+
+gr,
+Rob
+
+On Sat, Aug 28, 2010 at 23:48, A G <mestrejoaoricardo at gmail.com> wrote:
+> I can't even pass the ./bootstrap step. The error appears when I run
+> ./bootstrap.
+>
+> Can you tell me exactly what steps do you use to build? Or can I somehow
+> install your buildfarm?
+> Or do I need to install something else?
+> Regards.
+>
+>
+> On 28 August 2010 22:26, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> Did you use --enable-bootstrap in the configure flags? According to the
+>> buildfarm we use, svn should build without problems.
+>>
+>> Gr, Rob
+>>
+>> On Aug 28, 2010, at 10:17 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+>>
+>> > Trying to install aspectj-front from svn (the latest version ofr
+>> > instance).
+>> >
+>> > I have correctly installed all the needed dependencies (aterm,
+>> > java-front, etc.)
+>> >
+>> > When I run the ./bootstrap script, I always get the following error when
+>> > trying to run the auto-java-front executable (located in <java-front install
+>> > folder>/bin):
+>> >
+>> > [ identity crisis | error ] No XTC registration for java-front.m4 found
+>> > auto-java-front: rewriting failed, trace:
+>> > main_0_0
+>> > main_auto_java_front_0_0
+>> > install_java_front_m4_0_0
+>> > xtc_find_file_0_0
+>> > xtc_find_0_0
+>> >
+>> > Do I need to install anything else or make anything else to register
+>> > java-front.m4 in XTC? Has anyone successfully installed an aspectj-front
+>> > version by svn checkout?
+>> >
+>> >
+>> > Thanks.
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+
+From rob.vermaas at gmail.com  Mon Aug 30 16:07:26 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Mon, 30 Aug 2010 16:07:26 +0200
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+	<AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+Message-ID: <AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+
+This is unknown behaviour. Could you tell me exactly the version you
+have installed from all the dependencies and on which system you are
+running. Also how you have configured the deps.
+
+gr,
+Rob
+
+On Sat, Aug 28, 2010 at 23:48, A G <mestrejoaoricardo at gmail.com> wrote:
+> I can't even pass the ./bootstrap step. The error appears when I run
+> ./bootstrap.
+>
+> Can you tell me exactly what steps do you use to build? Or can I somehow
+> install your buildfarm?
+> Or do I need to install something else?
+> Regards.
+>
+>
+> On 28 August 2010 22:26, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> Did you use --enable-bootstrap in the configure flags? According to the
+>> buildfarm we use, svn should build without problems.
+>>
+>> Gr, Rob
+>>
+>> On Aug 28, 2010, at 10:17 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+>>
+>> > Trying to install aspectj-front from svn (the latest version ofr
+>> > instance).
+>> >
+>> > I have correctly installed all the needed dependencies (aterm,
+>> > java-front, etc.)
+>> >
+>> > When I run the ./bootstrap script, I always get the following error when
+>> > trying to run the auto-java-front executable (located in <java-front install
+>> > folder>/bin):
+>> >
+>> > [ identity crisis | error ] No XTC registration for java-front.m4 found
+>> > auto-java-front: rewriting failed, trace:
+>> > main_0_0
+>> > main_auto_java_front_0_0
+>> > install_java_front_m4_0_0
+>> > xtc_find_file_0_0
+>> > xtc_find_0_0
+>> >
+>> > Do I need to install anything else or make anything else to register
+>> > java-front.m4 in XTC? Has anyone successfully installed an aspectj-front
+>> > version by svn checkout?
+>> >
+>> >
+>> > Thanks.
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+
+From mestrejoaoricardo at gmail.com  Mon Aug 30 17:12:52 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Mon, 30 Aug 2010 16:12:52 +0100
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+	<AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+	<AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+Message-ID: <AANLkTimg5xPL53o_4b23U28horXjpkuP-wZ2aswzC=M5@mail.gmail.com>
+
+I'm running Ubuntu 10.04 LTS.
+
+I installed *aterm-2.5* from a source package with ./configure
+--prefix=/opt/aterm; make ; make install,
+
+*sdf2-bundle-2.4* from a source package with ./configure
+--prefix=/opt/sdf2-bundle --with-aterm=/opt/aterm; make; make install,
+
+*strategoxt-0.17pre18583* from a source package with ./configure
+--prefix=/opt/strategoxt --with-aterm=/opt/aterm
+--with-sdf=/opt/sdf2-bundle; make; make install,
+
+*java-front-0.9pre18737 *from a source package with:
+export
+PKG_CONFIG_PATH=/opt/strategoxt/lib/pkgconfig:/opt/aterm/lib/pkgconfig:/opt/sdf2-bundle/lib/pkgconfig
+./configure --prefix=/opt/java-front; make; make install
+
+
+
+The above steps were all completed successfully.  Then, downloaded *
+aspectj-front-0.2pre17697* via SVN, added what I had to add to the path:
+
+export
+PATH=$PATH:/opt/strategoxt/bin:/opt/aterm/bin:/opt/sdf2-bundle/bin:/opt/java-front/bin
+
+and run the bootstrap script (./bootstrap), which originates the error I had
+previously reported:
+
+[ identity crisis | error ] No XTC registration for java-front.m4 found
+auto-java-front: rewriting failed, trace:
+main_0_0
+main_auto_java_front_0_0
+install_java_front_m4_0_0
+xtc_find_file_0_0
+xtc_find_0_0
+
+
+
+
+On 30 August 2010 15:07, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> This is unknown behaviour. Could you tell me exactly the version you
+> have installed from all the dependencies and on which system you are
+> running. Also how you have configured the deps.
+>
+> gr,
+> Rob
+>
+> On Sat, Aug 28, 2010 at 23:48, A G <mestrejoaoricardo at gmail.com> wrote:
+> > I can't even pass the ./bootstrap step. The error appears when I run
+> > ./bootstrap.
+> >
+> > Can you tell me exactly what steps do you use to build? Or can I somehow
+> > install your buildfarm?
+> > Or do I need to install something else?
+> > Regards.
+> >
+> >
+> > On 28 August 2010 22:26, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> >>
+> >> Hi,
+> >>
+> >> Did you use --enable-bootstrap in the configure flags? According to the
+> >> buildfarm we use, svn should build without problems.
+> >>
+> >> Gr, Rob
+> >>
+> >> On Aug 28, 2010, at 10:17 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+> >>
+> >> > Trying to install aspectj-front from svn (the latest version ofr
+> >> > instance).
+> >> >
+> >> > I have correctly installed all the needed dependencies (aterm,
+> >> > java-front, etc.)
+> >> >
+> >> > When I run the ./bootstrap script, I always get the following error
+> when
+> >> > trying to run the auto-java-front executable (located in <java-front
+> install
+> >> > folder>/bin):
+> >> >
+> >> > [ identity crisis | error ] No XTC registration for java-front.m4
+> found
+> >> > auto-java-front: rewriting failed, trace:
+> >> > main_0_0
+> >> > main_auto_java_front_0_0
+> >> > install_java_front_m4_0_0
+> >> > xtc_find_file_0_0
+> >> > xtc_find_0_0
+> >> >
+> >> > Do I need to install anything else or make anything else to register
+> >> > java-front.m4 in XTC? Has anyone successfully installed an
+> aspectj-front
+> >> > version by svn checkout?
+> >> >
+> >> >
+> >> > Thanks.
+> >> > _______________________________________________
+> >> > Users mailing list
+> >> > Users at strategoxt.org
+> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100830/08d289aa/attachment.html 
+
+From karltk at strategoxt.org  Mon Aug 30 19:11:11 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Mon, 30 Aug 2010 19:11:11 +0200
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTimg5xPL53o_4b23U28horXjpkuP-wZ2aswzC=M5@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+	<AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+	<AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+	<AANLkTimg5xPL53o_4b23U28horXjpkuP-wZ2aswzC=M5@mail.gmail.com>
+Message-ID: <AANLkTimkq5NL=Z_41PTWPCU4iC0rv8HB7+ueXWr3fm8a@mail.gmail.com>
+
+I probably missed something important here, so excuse me for
+suggesting something so banal: If you're installing this on Linux
+anyway, why don't you just install the Nix packages for everything
+instead of building it from source[1]? Would probably save you a
+bundle of trouble:)
+
+Alternatively, use the Nix-built packages for Ubuntu.
+
+Cheers,
+
+-- Karl T
+
+
+[1] http://releases.strategoxt.org/strategoxt-packages/strategoxt-packages-stable/
+
+From mestrejoaoricardo at gmail.com  Mon Aug 30 19:36:28 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Mon, 30 Aug 2010 18:36:28 +0100
+Subject: [Stratego Users] Installing AspectJ-Front from SVN repository
+In-Reply-To: <AANLkTimkq5NL=Z_41PTWPCU4iC0rv8HB7+ueXWr3fm8a@mail.gmail.com>
+References: <AANLkTi=y6NdVDYdXq8fpiVcf2YjW=Mp-FExcsv0ZjEN8@mail.gmail.com>
+	<9FA59DFC-D899-4918-AD1A-651C0CA216B8@gmail.com>
+	<AANLkTin5G9eSHygEotVm5Nwme3b=m7OGeCJfm+e4Q3Tp@mail.gmail.com>
+	<AANLkTimxH6_0-RTuXWACQTxfneEeHzN_S1R1q_cfi5wA@mail.gmail.com>
+	<AANLkTimg5xPL53o_4b23U28horXjpkuP-wZ2aswzC=M5@mail.gmail.com>
+	<AANLkTimkq5NL=Z_41PTWPCU4iC0rv8HB7+ueXWr3fm8a@mail.gmail.com>
+Message-ID: <AANLkTinqOX7=S3FARWBrkayXFV8LYH4t3bfSkdKWHmGO@mail.gmail.com>
+
+The problem's that I'm not interested in using the latest versions of
+aspectj-front, but specific revisions (for which there are no built
+packages). :-(
+
+
+
+On 30 August 2010 18:11, Karl Trygve Kalleberg <karltk at strategoxt.org>wrote:
+
+> I probably missed something important here, so excuse me for
+> suggesting something so banal: If you're installing this on Linux
+> anyway, why don't you just install the Nix packages for everything
+> instead of building it from source[1]? Would probably save you a
+> bundle of trouble:)
+>
+> Alternatively, use the Nix-built packages for Ubuntu.
+>
+>  C
+> -- Karl T
+>
+>
+> [1]
+> http://releases.strategoxt.org/strategoxt-packages/strategoxt-packages-stable/
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100830/f01dbefa/attachment-0001.html 
+

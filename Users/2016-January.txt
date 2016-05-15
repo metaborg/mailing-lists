@@ -1,0 +1,826 @@
+From storm at cwi.nl  Sat Jan  2 13:28:50 2016
+From: storm at cwi.nl (Tijs van der Storm)
+Date: Sat, 2 Jan 2016 13:28:50 +0100
+Subject: [Stratego Users] SPLASH'16: 1st Call for Workshop Proposals
+Message-ID: <CAOzQwNOsQ6Jcvxmu4iE_YgbJ4VqteRQwZpjSWHWaFFV0Ggnsng@mail.gmail.com>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+          Software for Humanity (SPLASH'16)
+
+      Amsterdam, The Netherlands
+      30th of October - 4th of November 2016
+
+      http://2016.splashcon.org
+
+      Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+CALL FOR WORKSHOP PROPOSALS
+
+Early Deadline: January 15th, 2016
+Late Deadline: March 4th, 2016
+
+/************************************************************************************/
+
+# SPLASH'16 Call for Workshop Proposals
+
+Following its long-standing tradition, SPLASH 2016 will host a variety of
+high-quality workshops, allowing their participants to meet and discuss
+research questions with peers, to mature new and exciting ideas, and to
+build up communities and start new collaborations. SPLASH workshops
+complement the main tracks of the conference and provide meetings in a
+smaller and more specialized setting. Workshops cultivate new ideas and
+concepts for the future, optionally recorded in formal proceedings.
+
+# SUBMISSION SUMMARY
+
+Early Submissions Due: January 15, 2016
+Notification: February 12, 2016
+Late Submissions Due: March 4, 2016
+Notification: April 1, 2016
+Format: ACM SIGPLAN Proceedings format
+Submit to: https://splash16workshops.hotcrp.com/
+Chairs: Jan Rellermeyer and Craig Anslow
+Contact: workshops at splashcon.org
+
+** Please note the earlier submission deadline than in previous years. **
+
+### TOPICS
+
+We encourage proposals for workshops on any topic relevant to SPLASH. If
+there is a topic relevant to SPLASH that you feel passionate about, and you
+want to connect with others who have similar interests, you should consider
+submitting a proposal to organize a workshop! The exact format of the
+workshop can be defined by the proposal submitters, and we more than
+welcome new, and unconventional ideas for workshop formats. The following
+suggestions may serve as a starting point:
+
+Mini-conferences provide their participants the possibility to present
+their work to other domain experts. The smaller and more specialized
+setting of the workshop allows for more extensive Q&A sessions and
+facilitates ample discussions, which may continue after the workshop.
+Typically, presentations of work-in-progress as well as of completed
+projects are welcome. The workshop may or may not produce formal
+proceedings.
+
+Retreats act as a platform for domain experts to gather with the purpose of
+tackling the issues of a predetermined research agenda. Retreats are highly
+interactive and goal-oriented, allowing their participants to address open
+challenges in their domain, to explore new, uncharted ideas, and to (maybe
+even) uncover new, promising research domains.
+
+Agenda-setting workshops provide a forum for domain experts to determine a
+research agenda for a sub-field, and may include collaborations on an
+agenda document that is published after the workshop is over.
+
+Other common activities at workshops include poster sessions, hands-on
+practical work, and focus groups. Proposal submitters should feel free to
+direct questions about workshop formats to the workshop chairs. Workshops
+that include presentation of research papers, and that implement a
+SIGPLAN-approved selection process, may be archived as formal proceedings
+in the ACM Digital Library; note that this option is available only to
+submitters to the early phase.
+
+# WORKSHOP SELECTION
+
+### Reviewing Phases
+
+This year, SPLASH provides two submission phases to accommodate different
+schedules, a early round in January and a late round of proposals in March.
+Since space is limited at the venue, the PC will consider prospective
+attendance as one of the selection criteria.
+
+### Proposal Content
+
+SPLASH workshop proposals should not exceed 6 pages, and must include the
+following information:
+
+Title and desired abbreviation: if the workshop is accepted, this will be
+used for advertising purposes.
+
+Theme, goals and format: the main topic and goals of the workshop, the
+workshop's relevance to the SPLASH community, as well as the workshop's
+format (e.g., mini-conference, retreat, agenda-setting workshop).
+
+Abstract: a 150-word abstract that summarizes the theme and goals of the
+workshop. If the workshop is accepted, this abstract will be used for
+advertising purposes.
+
+Organizers: workshop organizers are responsible for advertising the
+workshop (e.g., creating the anchoring website for the workshop and sending
+CFPs to relevant mailing lists), organizing the reviewing process (e.g., by
+forming a small program committee), running the workshop, and collating any
+results of the workshop for dissemination. The proposal should indicate the
+names, affiliations, and contact details of the workshop organizers as well
+as a primary organizer and contact person (primary organizer and contact
+person do not need to be the same). For each organizer, the proposal should
+describe his/her background (expertise in the area and previous experience
+in running workshops) and also identify his/her responsibilities for the
+workshop.
+
+Anticipated attendance: the ideal, minimum, and maximum expected number of
+participants. Please note that there will be an additional charge for
+workshop registration at SPLASH 2015. The SPLASH organizing committee
+reserves the right to cancel any workshops that do not meet attendance
+goals.
+
+Advertisement: the planned advertisement for the workshop to ensure
+sufficient participation.
+
+Participant preparation: what preparation is expected from workshop
+participants, including how attendees gain access to the workshop (e.g.,
+submission of a full paper, an extended abstract, a position paper).
+
+Activities and format: the format of the workshop and a timetable. All
+SPLASH 2015 workshops must be planned for one or two full days of
+activities. For example, the proposal should describe whether there will be
+introductory material, paper presentations, panel discussions, debates,
+hands-on sessions, or focus groups, and how such groups will report back to
+the other participants.
+
+Post-workshop activities: what results are expected, and how these will be
+disseminated to the wider public after the workshop. Workshops that result
+in peer-reviewed papers and implement an ACM SIGPLAN-approved selection
+process can submit formal proceedings to the ACM Digital Library. To get
+the approval, the workshop has to meet the usual requirements defined for
+ACM SIGPLAN events (i.e., approval of workshop proposal and workshop
+program committee by ACM SIGPLAN). The approval process is coordinated by
+the SPLASH organizers.
+
+Special requirements: any special requirements you might have, in terms of
+room configuration, audio and video equipment, etc.
+
+### Format
+
+Submissions should use the SIGPLAN Proceedings Format, 10 point font. Note
+that by default the SIGPLAN Proceedings Format produces papers in 9 point
+font. If you are formatting your paper using LaTeX, you will need to set
+the 10pt option in the \documentclass command. If you are formatting your
+paper using Word, you may wish to use the provided Word template that
+supports this font size. Please include page numbers in your submission.
+
+### Publication
+
+If your workshop chooses to have published proceedings, be aware that
+accepted papers will be available in the ACM Digital Library as early as
+September 23, 2016. The official publication date is the date the
+proceedings are made available in the ACM Digital Library. The official
+publication date affects the deadline for any patent filings related to
+published work. It is therefore vital that this information will be
+communicated to participants in your workshop.
+
+### Evaluation criteria
+
+Workshop proposals will be selected based on the quality of the proposal
+and according to the space available at SPLASH. The following questions may
+be helpful in devising a high-quality proposal:
+
+Are there at least two organizers and do they represent a reasonably varied
+cross-section of the community close to the topic?
+
+Does the abstract present a compelling case for the importance of the topic
+area?
+
+Are the goals of the workshop expressed clearly?
+
+Is the topic likely to be attractive to SPLASH attendees?
+
+Does the chosen format encourage a high level of interaction between the
+participants?
+
+Is a workshop the right forum to address the theme and goals or does the
+proposal fit better into another type of SPLASH event?
+
+Workshop chairs
+
+For additional information, clarification, or answers to questions please
+contact workshops at splashcon.org
+
+
+-- 
+Researcher Centrum Wiskunde & Informatica (CWI)
+Master of Software Engineering Universiteit van Amsterdam (UvA)
+
+Dr. Tijs van der Storm @ Centrum Wiskunde & Informatica (CWI)
+Office: L225    | Phone: +31 (0)20 5924164 | Address: Science Park 123
+P.O. Box 94079  | Postal code: 1090 GB     | Amsterdam, The Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160102/1d51914d/attachment.html>
+
+From daniele.gianni at gmail.com  Sat Jan  9 11:14:15 2016
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Sat, 9 Jan 2016 11:14:15 +0100
+Subject: [Stratego Users] [CfP] 5th IEEE Track on Collaborative Modeling and
+	Simulation (Comets 2016)
+Message-ID: <CAOCNFM4Vr+MY24EJR5TxOkTOirdkFX-tbM7LR+KDh5-yx4FY9w@mail.gmail.com>
+
+(Please accept our apologies if you receive multiple copies of this
+message)
+
+#################################################################
+                       IEEE WETICE 2016
+     5th IEEE Track on Collaborative Modeling and Simulation
+                        (Comets 2016)
+
+             in cooperation with (approval pending)
+                         INCOSE Italy
+               MIMOS (Italian Association for M&S)
+
+                       CALL FOR PAPERS
+
+#################################################################
+
+June 13-16, 2016 - Paris (France)
+http://www.sel.uniroma2.it/comets16
+
+#################################################################
+# Papers Due: February 15, 2016
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and will be submitted for
+# indexing through INSPEC, Compendex, Scopus, Thomson Reuters,
+# DBLP, Google Scholar and EI Index.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices in the field of
+collaborative engineering platforms. These platforms are continuously
+becoming more complex, and therefore their design requires
+systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non-exhaustive list of topics of interest includes:
+
+* collaborative requirements modeling
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* business process modeling for collaborative environments
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance analysis of collaborative engineering
+platforms
+* model-driven approaches for collaborative engineering
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+* collaborative DEVS M&S
+* multi-method M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'16 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format (http://www.ieee.org/conferences_events/conferences/
+publishing/templates.html). All submissions should be submitted
+in PDF format and will be peer-reviewed by at least three program
+committee members.
+
+Accepted papers will be included in the proceedings and
+published by the IEEE Computer Society Press.
+Please note that at least one author for each accepted paper should
+register to attend WETICE 2016 (http://www.wetice.org) to have the
+paper published in the proceedings.
+
+Interested authors and participants may contact the organizers for
+expression of interests and content appropriateness at any time.
+
+Papers and posters can be submitted in PDF format at the conference
+submission site (https://www.easychair.org/conferences/?
+conf=wetice2016), by selecting the ?Collaborative Modeling and
+Simulation? track.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission Deadline: February 15, 2016
+* Notification to authors: March 28, 2016
+* Camera Ready to IEEE: April 11, 2016
+* Conference date: June 13-16, 2016
+
++++++++++++++++++
+Program co-chairs
++++++++++++++++++
+
+Andrea D'Ambrogio, University of Roma TorVergata, Italy
+Gregory Zacharewicz, University of Bordeaux, France
+Daniele Gianni, Guglielmo Marconi University, Italy
+
+*** Contact Information ***
+Andrea D'Ambrogio (track co-chair)
+Email: dambro at uniroma2.it
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160109/41f74311/attachment.html>
+
+From tamarit27 at gmail.com  Sat Jan  9 12:56:41 2016
+From: tamarit27 at gmail.com (Salvador Tamarit)
+Date: Sat, 9 Jan 2016 12:56:41 +0100
+Subject: [Stratego Users] CfP: Workshop on Program Transformation for
+ Programmability in Heterogeneous Architectures (Co-located with CGO16);
+ Deadline Jan 15
+Message-ID: <CANuSBjix6yjeXkEhgG4Sg6hBz93O4L0hfX-+ipFyq5kK_t5+tg@mail.gmail.com>
+
+[Apologies if you receive multiple copies of this announcement.]
+
+*********************************************************************************
+
+PROHA 2016, CALL FOR PAPERS
+
+First Workshop on
+Program Transformation for Programmability in Heterogeneous Architectures
+
+http://goo.gl/RzGbzY
+
+Barcelona, 12th March 2016, in conjunction with the CGO'16 Conference
+
+*********************************************************************************
+
+Important Dates:
+
+Paper submission deadline: 15 January 2016 23:59 (UTC)
+Author notification: 5 February 2016
+Final manuscript due: 26 February 2016
+
+
+Scope:
+
+Developing and maintaining high-performance applications and libraries
+for heterogeneous architectures is a difficult task, usually requiring
+code transformations performed by an expert.
+
+Tools assisting in and, if possible, automating such transformations
+are of course of great interest. However, such tools require
+significant knowledge and reasoning capabilities. For example, the
+former could be a machine-understandable descriptions of what a piece
+of code is expected to do, while the latter could be a set of
+transformations and a corresponding logical context in which they are
+applicable, respectively. Furthermore, strategies to identify the
+sequence of transformations leading to the best resulting code need to
+be elaborated.
+
+This workshop will focus on techniques and foundations which make it
+possible to perform source code transformations, which preserve the
+intended semantics of the original code and improve efficiency,
+portability or maintainability.
+
+The topics of interest for the workshop include, but are not limited to:
+
+* Program annotations to capture algorithmic properties and intended
+  code semantics.
+
+* Programming paradigms able to express underlying (mathematical)
+  properties of code.
+
+* Usage of dynamic and static mechanisms to infer relevant code
+  properties.
+
+* Transformations which preserve intended semantics.
+
+* Strategies to apply transformations.
+
+* Heuristics to guide program transformation and techniques to
+  synthesize / learn these heuristics.
+
+* Tools
+
+
+Submission Guidelines:
+
+Submissions are to be written in English and not exceed 10 pages,
+including bibliography.  Submissions should be written in ACM
+double-column format using a 10-point type.  Authors should follow the
+information for formatting ACM SIGPLAN conference papers, which can be
+found at http://www.sigplan.org/Resources/Author .
+
+Authors should submit their papers in pdf format using the EasyChair
+submission website https://easychair.org/conferences/?conf=proha2016 .
+
+
+Publication:
+
+The proceedings will be made publicly available through ArXiV.
+
+
+Workshop Organizers:
+
+- Manuel Carro, IMDEA Software Institute and Technical University of Madrid
+
+- Colin W. Glass, University of Stuttgart
+
+- Jan Kuper, University of Twente
+
+- Julio Mari?o, Technical University of Madrid
+
+- Lutz Schubert, University of Ulm
+
+- Guillermo Vigueras, IMDEA Software Institute
+
+- Salvador Tamarit, Technical University of Madrid
+
+If you have any questions, please contact the program chair at
+manuel.carro at imdea.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160109/94cfd841/attachment.html>
+
+From filipencavalcante at gmail.com  Thu Jan 14 01:52:44 2016
+From: filipencavalcante at gmail.com (Filipe Cavalcante)
+Date: Wed, 13 Jan 2016 21:52:44 -0300
+Subject: [Stratego Users] Java-front in SDF3
+Message-ID: <CAFC1ppXQyisP802ReCnwP4rasYZ_8vArZxwCeKs59rWnZBJ49A@mail.gmail.com>
+
+Hello,
+
+I'm developing one Stratego project in eclipse using SDF3, and I need to
+use Java-Front, but I'm having difficult to integrate it with my project.
+
+Someone could help me?
+
+Cheers.
+
+Filipe Cavalcante (filipencavalcante at gmail.com)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160113/1d46ce2f/attachment.html>
+
+From tamarit27 at gmail.com  Sat Jan 16 21:14:48 2016
+From: tamarit27 at gmail.com (Salvador Tamarit)
+Date: Sat, 16 Jan 2016 21:14:48 +0100
+Subject: [Stratego Users] CfP: Workshop on Program Transformation for
+ Programmability in Heterogeneous Architectures (Co-located with CGO16);
+ Deadline Jan 22 [Extended]
+Message-ID: <CANuSBjhmtHA0R0W+48TJS45g93ESDAqq3Yc78cBeAo3idLsHHA@mail.gmail.com>
+
+[Apologies if you receive multiple copies of this announcement.]
+
+*********************************************************************************
+
+PROHA 2016, CALL FOR PAPERS -- Deadline extension
+
+First Workshop on
+Program Transformation for Programmability in Heterogeneous Architectures
+
+http://goo.gl/RzGbzY
+
+Barcelona, 12th March 2016, in conjunction with the CGO'16 Conference
+
+*********************************************************************************
+
+Important Dates:
+
+Paper submission deadline: 22 January 2016 23:59 (UTC)  [Extended]
+Author notification: 5 February 2016
+Final manuscript due: 26 February 2016
+
+
+Scope:
+
+Developing and maintaining high-performance applications and libraries
+for heterogeneous architectures is a difficult task, usually requiring
+code transformations performed by an expert.
+
+Tools assisting in and, if possible, automating such transformations
+are of course of great interest. However, such tools require
+significant knowledge and reasoning capabilities. For example, the
+former could be a machine-understandable descriptions of what a piece
+of code is expected to do, while the latter could be a set of
+transformations and a corresponding logical context in which they are
+applicable, respectively. Furthermore, strategies to identify the
+sequence of transformations leading to the best resulting code need to
+be elaborated.
+
+This workshop will focus on techniques and foundations which make it
+possible to perform source code transformations, which preserve the
+intended semantics of the original code and improve efficiency,
+portability or maintainability.
+
+The topics of interest for the workshop include, but are not limited to:
+
+* Program annotations to capture algorithmic properties and intended
+  code semantics.
+
+* Programming paradigms able to express underlying (mathematical)
+  properties of code.
+
+* Usage of dynamic and static mechanisms to infer relevant code
+  properties.
+
+* Transformations which preserve intended semantics.
+
+* Strategies to apply transformations.
+
+* Heuristics to guide program transformation and techniques to
+  synthesize / learn these heuristics.
+
+* Tools
+
+
+Submission Guidelines:
+
+Submissions are to be written in English and not exceed 10 pages,
+including bibliography.  Submissions should be written in ACM
+double-column format using a 10-point type.  Authors should follow the
+information for formatting ACM SIGPLAN conference papers, which can be
+found at http://www.sigplan.org/Resources/Author .
+
+Authors should submit their papers in pdf format using the EasyChair
+submission website https://easychair.org/conferences/?conf=proha2016 .
+
+
+Publication:
+
+The proceedings will be made publicly available through ArXiV.
+
+
+Workshop Organizers:
+
+- Manuel Carro, IMDEA Software Institute and Technical University of Madrid
+
+- Colin W. Glass, University of Stuttgart
+
+- Jan Kuper, University of Twente
+
+- Julio Mari?o, Technical University of Madrid
+
+- Lutz Schubert, University of Ulm
+
+- Guillermo Vigueras, IMDEA Software Institute
+
+- Salvador Tamarit, Technical University of Madrid
+
+If you have any questions, please contact the program chair at
+manuel.carro at imdea.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160116/3ece83eb/attachment.html>
+
+From storm at cwi.nl  Tue Jan 19 14:41:01 2016
+From: storm at cwi.nl (Tijs van der Storm)
+Date: Tue, 19 Jan 2016 14:41:01 +0100
+Subject: [Stratego Users] 1st Call for Contributions for SPLASH'16: OOPSLA,
+ Onward!, Workshops, DLS, SLE, GPCE
+Message-ID: <CAOzQwNMqAuSNG19HYdcNU5GO3y54U4X5KZPdwA33NHw1FizDiA@mail.gmail.com>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+Software for Humanity (SPLASH'16)
+
+Amsterdam, The Netherlands
+Sun 30th October - Fri 4th November , 2016
+
+http://2016.splashcon.org
+
+Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+
+FIRST COMBINED CALL FOR CONTRIBUTIONS:
+OOPSLA
+Onward!
+Workshops
+Doctoral Symposium
+Posters
+Dynamic Languages Symposium (DLS)
+Software Language Engineering (SLE)
+Generative Programming: Concepts & Experiences (GPCE)
+
+/************************************************************************************/
+
+
+# SPLASH 2016
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH) embraces all aspects of
+software construction, to make it the premier conference at the
+intersection of programming, languages, systems, and software engineering.
+We invite high quality submissions describing original and unpublished work.
+
+
+## OOPSLA Research Papers
+
+Papers that address any aspect of software development are welcome,
+including requirements, modeling, prototyping, design, implementation,
+generation, analysis, verification, testing, evaluation, maintenance,
+reuse, replacement, and retirement of software systems. Papers may address
+these topics in a variety of ways, including new tools (such as languages,
+program analyses, and runtime systems), new techniques (such as
+methodologies, design processes, code organization approaches, and
+management techniques), and new evaluations (such as formalisms and proofs,
+corpora analyses, user studies, and surveys).
+
+Submissions due: Wed 23 March, 2016
+http://2016.splashcon.org/track/splash-2016-oopsla
+
+
+## Onward! Research Papers
+
+Onward! is a premier multidisciplinary conference focused on everything to
+do with programming and software: including processes, methods, languages,
+communities, and applications. Onward! is more radical, more visionary, and
+more open than other conferences to ideas that are well-argued but not yet
+proven. We welcome different ways of thinking about, approaching, and
+reporting on programming language and software engineering research.
+
+Submissions due: Fri 1 April, 2016
+http://2016.splashcon.org/track/onward2016/onward-2016-papers
+
+
+## Onward! Essays
+
+Onward! Essays is looking for clear and compelling pieces of writing about
+topics important to the software community. An essay can be an exploration
+of a topic, its impact, or the circumstances of its creation; it can
+present a personal view of what is, explore a terrain, or lead the reader
+in an act of discovery; it can be a philosophical digression or a deep
+analysis. It can describe a personal journey, perhaps by which the author
+reached an understanding of such a topic. The subject area should be
+interpreted broadly and can include the relationship of software to human
+endeavors, or its philosophical, sociological, psychological, historical,
+or anthropological underpinnings.
+
+Submissions due: Fri 1 April, 2016
+http://2016.splashcon.org/track/onward2016/onward2016-essays
+
+## Workshops
+
+The SPLASH Workshops track will host a variety of high-quality workshops,
+allowing their participants to meet and discuss research questions with
+peers, to mature new and exciting ideas, and to build up communities and
+start new collaborations. SPLASH workshops complement the main tracks of
+the conference and provide meetings in a smaller and more specialized
+setting. Workshops cultivate new ideas and concepts for the future,
+optionally recorded in formal proceedings.
+
+Late Phase Submissions of Workshop Proposals due: Fri 4 Mar, 2016
+http://2016.splashcon.org/track/splash2016-workshops
+
+
+## Doctoral Symposium
+
+The SPLASH Doctoral Symposium provides students with useful guidance for
+completing their dissertation research and beginning their research
+careers. The Symposium will provide an interactive forum for doctoral
+students who have progressed far enough in their research to have a
+structured proposal, but will not be defending their dissertation in the
+next 12 months.
+
+Submissions due: Thu 30 Jun, 2016
+http://2016.splashcon.org/track/splash-2016-ds
+
+
+## Posters
+
+The SPLASH Poster track provides an excellent forum for authors to present
+their recent or ongoing projects in an interactive setting, and receive
+feedback from the community. We invite submissions covering any aspect of
+programming, systems, languages and applications. The goal of the poster
+session is to encourage and facilitate small groups of individuals
+interested in a technical area to gather and interact.
+
+Poster submissions due: Fri 8 Jul, 2016
+http://2016.splashcon.org/track/splash-2016-posters
+
+## Dynamic Languages Symposium (DLS)
+
+DLS is the premier forum for researchers and practitioners to share
+knowledge and research on dynamic languages, their implementation, and
+applications. The influence of dynamic languages ? from Lisp to Smalltalk
+to Python to Javascript ? on real-world practice, and research, continues
+to grow. We invite high quality papers reporting original research,
+innovative contributions, or experience related to dynamic languages, their
+implementation, and applications.
+
+Submissions due: Fri 10 June, 2016
+http://2016.splashcon.org/track/dls-2016/dls-2016-papers
+
+
+## Software Language Engineering (SLE)
+
+Software Language Engineering (SLE) is the application of systematic,
+disciplined, and measurable approaches to the development, use, deployment,
+and maintenance of software languages. The term ?software language? is used
+broadly, and includes: general-purpose programming languages;
+domain-specific languages (e.g. BPMN, Simulink, Modelica); modeling and
+metamodeling languages (e.g. SysML and UML); data models and ontologies
+(e.g. XML-based and OWL-based languages and vocabularies). SLE solicits
+high-quality contributions in areas ranging from theoretical and conceptual
+contributions to tools, techniques, and frameworks in the domain of
+language engineering.
+
+Submissions due: Fri 17 June, 2016 (abstracts); Fri 24 June, 2016 (papers)
+http://2016.splashcon.org/track/sle-2016/sle-2016-papers
+
+## Generative Programming: Concepts & Experiences (GPCE)
+
+The International Conference on Generative Programming: Concepts &
+Experiences (GPCE) is a venue for researchers and practitioners interested
+in techniques that use program generation, domain-specific languages, and
+component deployment to increase programmer productivity, improve software
+quality, and shorten the time-to-market of software products. In addition
+to exploring cutting-edge techniques of generative software, our goal is to
+foster further cross-fertilization between the software engineering and the
+programming languages research communities.
+
+Submissions due: Fri 17 June, 2016 (abstracts); Fri 24 June, 2016 (papers)
+http://2016.splashcon.org/track/gpce-2016/gpce-2016-papers
+
+
+## Information
+
+Contact: publicity at splashcon.org
+Website: http://2016.splashcon.org
+
+Location: M?venpick Hotel Amsterdam City Centre
+Amsterdam, The Netherlands
+
+
+## Organization:
+
+SPLASH General Chair: Eelco Visser (TU Delft)
+OOPSLA Papers Chair: Yannis Smaragdakis (University of Athens)
+Onward! Papers Chair: Emerson Murphy-Hill (North Carolina State University)
+Onward! Essays Chair: Crista Lopes (University of California, Irvine)
+DLS PC Chair: Roberto Ierusalimschy (PUC-Rio)
+SLE PC Co-Chairs: Emilie Balland (Sensational AG) and Daniel Varro
+(Budapest University of Technology and Economics)
+GPCE PC Chair: Ina Schaefer (TU Braunschweig)
+Doctoral Symposium Chair: Matthew Flatt (University of Utah)
+SPLASH-E Co-Chair: Matthias Hauswirth (University of Lugano) and Steve
+Blackburn (Australian National University)
+SPLASH-I Co-Chairs: Eelco Visser (TU Delft) and Tijs van der Storm (CWI)
+Artifacts Co-Chairs: Michael Hind (IBM Research) and Michael Bond (Ohio
+State University)
+Workshops Co-Chairs: Jan Rellermeyer (IBM Research) and Craig Anslow
+(Middlesex University, London)
+Posters Co-Chairs: Sebastian Erdweg (TU Darmstadt) and Jeff Huang (Texas
+A&M University)
+Student Research Competition Co-Chairs: Patrick Lam (University of
+Waterloo) and Sam Guyer (Tufts University)
+Student Volunteer Co-Chairs: Daco Harkes (TU Delft) and Giovanni Viviani
+(University of British Columbia)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Sponsorship Chair: Jurgen Vinju (Purdue University)
+Publicity and Web Co-Chairs: Tijs van der Storm (CWI) and Ron Garcia
+(University of British Columbia)
+Web Technology Chair: Eelco Visser (TU Delft)
+
+/************************************************************************************/
+
+
+-- 
+Researcher Centrum Wiskunde & Informatica (CWI)
+Master of Software Engineering Universiteit van Amsterdam (UvA)
+
+Dr. Tijs van der Storm @ Centrum Wiskunde & Informatica (CWI)
+Office: L225    | Phone: +31 (0)20 5924164 | Address: Science Park 123
+P.O. Box 94079  | Postal code: 1090 GB     | Amsterdam, The Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160119/5548847d/attachment.html>
+

@@ -1,0 +1,1210 @@
+From seba at informatik.uni-marburg.de  Wed Sep 15 11:31:00 2010
+From: seba at informatik.uni-marburg.de (Sebastian Erdweg)
+Date: Wed, 15 Sep 2010 11:31:00 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty printing
+Message-ID: <5C4758CE-FBCB-4364-958A-B1C5C31A7DFB@informatik.uni-marburg.de>
+
+HI everybody,
+
+recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+
+First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+
+If I now parse the SDF module
+
+> module Test
+> exports
+>   sorts Bar
+>   context-free syntax
+>     "foo" -> Bar {cons("Baz")}
+
+
+and pretty-print it again, I get
+
+> module Test
+> exports
+>   sorts Bar
+> 
+>   context-free syntax
+>     ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+
+
+When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+
+Second, annotations of productions are parsed into term nodes, for instance
+> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+
+For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+
+So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+
+Best regards,
+Sebastian
+
+
+[1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+[2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+
+
+
+From E.Visser at tudelft.nl  Wed Sep 15 14:54:44 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 15 Sep 2010 14:54:44 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty printing
+In-Reply-To: <5C4758CE-FBCB-4364-958A-B1C5C31A7DFB@informatik.uni-marburg.de>
+References: <5C4758CE-FBCB-4364-958A-B1C5C31A7DFB@informatik.uni-marburg.de>
+Message-ID: <AANLkTimmCTbSF-K_j9QTp49msPyeyRKVie+dkaEv281Q@mail.gmail.com>
+
+Hi Sebastian,
+
+It depends on the assumptions the pretty-printer makes about the AST
+it consumes. Apparently pp-sdf doesn't play well with the output of
+sglri. However, parse-sdf is much better behaved:
+
+$ parse-sdf
+module Test
+exports
+ sorts Bar
+ context-free syntax
+    "foo" -> Bar {cons("Baz")}
+
+module(unparameterized("Test"),[],[exports(conc-grammars(sorts([sort("Bar")]),context-free-syntax([prod([lit("foo")],sort("Bar"),attrs([term(cons("Baz"))]))])))])
+
+$ parse-sdf | pp-sdf
+module Test
+exports
+ sorts Bar
+ context-free syntax
+    "foo" -> Bar {cons("Baz")}
+
+module Test
+exports
+  sorts Bar
+
+  context-free syntax
+    "foo" -> Bar {cons("Baz")}
+
+
+cheers,
+
+-- Eelco
+
+
+
+On Wed, Sep 15, 2010 at 11:31 AM, Sebastian Erdweg
+<seba at informatik.uni-marburg.de> wrote:
+> HI everybody,
+>
+> recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+>
+> First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+>
+> If I now parse the SDF module
+>
+>> module Test
+>> exports
+>> ? sorts Bar
+>> ? context-free syntax
+>> ? ? "foo" -> Bar {cons("Baz")}
+>
+>
+> and pretty-print it again, I get
+>
+>> module Test
+>> exports
+>> ? sorts Bar
+>>
+>> ? context-free syntax
+>> ? ? ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+>
+>
+> When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+>
+> Second, annotations of productions are parsed into term nodes, for instance
+>> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+>
+> For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+>
+> So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+>
+> Best regards,
+> Sebastian
+>
+>
+> [1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+> [2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From seba at informatik.uni-marburg.de  Fri Sep 17 13:03:57 2010
+From: seba at informatik.uni-marburg.de (Sebastian Erdweg)
+Date: Fri, 17 Sep 2010 13:03:57 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty printing
+In-Reply-To: <3DAF9785-5C00-4E35-88DE-E3ACAF69D1E0@informatik.uni-marburg.de>
+References: <07E1F4A2-8728-4701-A46F-8FAFA37A6156@informatik.uni-marburg.de>
+	<3DAF9785-5C00-4E35-88DE-E3ACAF69D1E0@informatik.uni-marburg.de>
+Message-ID: <5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marburg.de>
+
+Hi Eelco,
+
+thanks for your reply. I believe I need to make my question more precise by providing more information on what I am trying to parse SDF for.
+
+Our overall goal is to allow programmers to implement and employ syntactic extensions of the language they are currently using (quite similar to Cardelli, Matthes, and Abadi's report from 1994). In particular, we want to support deploying a syntactic extension as part of a library; and using a syntactic extension should be just as easy as using a library.
+
+We have developed a prototype implementation for the Java programming language which employs the ideas of Metaborg for defining extensions. A simple example is an extension for pairs, taken from your OOPSLA'04 paper "Concrete Syntax for Objects":
+
+> package pair;
+> 
+> import extjava.Extension;
+> import extjava.languages.Java;
+> 
+> public extension Syntax {
+>   context-free syntax
+>     "(" JavaExpr "," JavaExpr ")" -> JavaExpr {cons("Pair")}
+>   
+>   assimilations
+>     assimilatePair
+>   
+>   rules
+>     assimilatePair : expr |[ (e1, e2) ]| -> |[ new Pair(e1, e2) ]|
+> }
+
+
+> package foo;
+> 
+> import pair.Pair;
+> import pair.Syntax;
+> 
+> public class Foo {
+>   private Pair<Integer, Integer> = (12, 34);
+> }
+
+
+The first file introduces the syntax and assimilation rules for pair expressions (note the "extension" keyword). This extension is imported into the second file by using a standard Java import statement. The import statement has the side-effect of extending the grammar used for parsing the remainder of the file.
+
+The extension defined in the former file consists of SDF and Stratego statements, as well as a notion for declaring the strategy used for assimilation. This brings me back to my original question. In order to parse an extension, we have defined a grammar joining SDF, Stratego and assimilation statements. We thus cannot employ parse-sdf, also because our grammar grows due to import statements.
+
+Therefore, we exhibit the problem of incorrect SDF syntax after pretty-printing parsed SDF statements. 
+
+In your previous reply you wrote that pp-sdf and sglri don't go well together. Could this problem be overcome by manually applying implode-asfix in a more meaningful manner? Or lies the problem in the syntax definition of SDF already? How does parse-sdf circumvent the problem?
+
+
+Best regards,
+Sebastian
+
+
+
+On 15.09.10, at 14:54, Eelco Visser wrote:
+
+> Hi Sebastian,
+> 
+> It depends on the assumptions the pretty-printer makes about the AST
+> it consumes. Apparently pp-sdf doesn't play well with the output of
+> sglri. However, parse-sdf is much better behaved:
+> 
+> $ parse-sdf
+> module Test
+> exports
+> sorts Bar
+> context-free syntax
+>    "foo" -> Bar {cons("Baz")}
+> 
+> module(unparameterized("Test"),[],[exports(conc-grammars(sorts([sort("Bar")]),context-free-syntax([prod([lit("foo")],sort("Bar"),attrs([term(cons("Baz"))]))])))])
+> 
+> $ parse-sdf | pp-sdf
+> module Test
+> exports
+> sorts Bar
+> context-free syntax
+>    "foo" -> Bar {cons("Baz")}
+> 
+> module Test
+> exports
+>  sorts Bar
+> 
+>  context-free syntax
+>    "foo" -> Bar {cons("Baz")}
+> 
+> 
+> cheers,
+> 
+> -- Eelco
+> 
+> 
+> 
+> On Wed, Sep 15, 2010 at 11:31 AM, Sebastian Erdweg
+> <seba at informatik.uni-marburg.de> wrote:
+>> HI everybody,
+>> 
+>> recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+>> 
+>> First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+>> 
+>> If I now parse the SDF module
+>> 
+>>> module Test
+>>> exports
+>>>   sorts Bar
+>>>   context-free syntax
+>>>     "foo" -> Bar {cons("Baz")}
+>> 
+>> 
+>> and pretty-print it again, I get
+>> 
+>>> module Test
+>>> exports
+>>>   sorts Bar
+>>> 
+>>>   context-free syntax
+>>>     ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+>> 
+>> 
+>> When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+>> 
+>> Second, annotations of productions are parsed into term nodes, for instance
+>>> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+>> 
+>> For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+>> 
+>> So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+>> 
+>> Best regards,
+>> Sebastian
+>> 
+>> 
+>> [1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+>> [2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+>> 
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+> 
+> 
+> 
+> -- 
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+> http://researchr.org/profile/eelcovisser
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From mestrejoaoricardo at gmail.com  Fri Sep 17 18:27:16 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Fri, 17 Sep 2010 17:27:16 +0100
+Subject: [Stratego Users] [AspectJ-Front] What are the advantages of using
+	AJF instead of AJC
+Message-ID: <AANLkTimsHF9A_zr_-mdHpR=-x01_AMrDxCY3s3zE7MNP@mail.gmail.com>
+
+Hi, is there any advantage of using the AJF compiler (that produces <amb>
+nodes) over the AJC?
+
+This is for a case where I don't know what kind of input files I will be
+parsing.
+
+
+Regards.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100917/7a33a93a/attachment.html 
+
+From E.Visser at tudelft.nl  Fri Sep 17 22:11:05 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 17 Sep 2010 22:11:05 +0200
+Subject: [Stratego Users] [AspectJ-Front] What are the advantages of
+ using AJF instead of AJC
+In-Reply-To: <AANLkTimsHF9A_zr_-mdHpR=-x01_AMrDxCY3s3zE7MNP@mail.gmail.com>
+References: <AANLkTimsHF9A_zr_-mdHpR=-x01_AMrDxCY3s3zE7MNP@mail.gmail.com>
+Message-ID: <AANLkTin3vMRg9uyJUVuPuMGmz-w7XncfE_qBT_CZBYW2@mail.gmail.com>
+
+Hi,
+
+> Hi, is there any advantage of using the AJF compiler (that produces <amb>
+> nodes) over the AJC?
+>
+> This is for a case where I don't know what kind of input files I will be
+> parsing.
+
+I'm sure what the question is. They are quite different tools. With
+AJC you can actually compile AspectJ programs. Really depends on the
+use case, I suppose.
+
+cheers,
+
+-- Eelco
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+From L.C.L.Kats at tudelft.nl  Mon Sep 20 12:12:12 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Mon, 20 Sep 2010 12:12:12 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty  printing
+In-Reply-To: <5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marbur g.de>
+References: <07E1F4A2-8728-4701-A46F-8FAFA37A6156@informatik.uni-marburg.de>
+	<3DAF9785-5C00-4E35-88DE-E3ACAF69D1E0@informatik.uni-marburg.de>
+	<5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marburg.de>
+Message-ID: <201009201012.o8KACIKK031227@mc-smtp1.infopact.nl>
+
+Hi Sebastian,
+
+There are two Stratego strategies you can try: sdf-ppfix (defined in libstratego-sdf). This one should make it possible to pretty print SDF after it's parsed by making some minor changes to the AST. The other is sdf-desugar, which fully desugars SDF, and is available as a command-line tool. There is no library for it, but you can copy the source file from https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/src/sdf2imp/lib/sdf-desugar.str to use it from Stratego.
+
+cheers,
+
+Lennart
+
+@ 01:03 PM 9/17/2010, Sebastian Erdweg wrote:
+>Hi Eelco,
+>
+>thanks for your reply. I believe I need to make my question more precise by providing more information on what I am trying to parse SDF for.
+>
+>Our overall goal is to allow programmers to implement and employ syntactic extensions of the language they are currently using (quite similar to Cardelli, Matthes, and Abadi's report from 1994). In particular, we want to support deploying a syntactic extension as part of a library; and using a syntactic extension should be just as easy as using a library.
+>
+>We have developed a prototype implementation for the Java programming language which employs the ideas of Metaborg for defining extensions. A simple example is an extension for pairs, taken from your OOPSLA'04 paper "Concrete Syntax for Objects":
+>
+>> package pair;
+>> 
+>> import extjava.Extension;
+>> import extjava.languages.Java;
+>> 
+>> public extension Syntax {
+>>   context-free syntax
+>>     "(" JavaExpr "," JavaExpr ")" -> JavaExpr {cons("Pair")}
+>>   
+>>   assimilations
+>>     assimilatePair
+>>   
+>>   rules
+>>     assimilatePair : expr |[ (e1, e2) ]| -> |[ new Pair(e1, e2) ]|
+>> }
+>
+>
+>> package foo;
+>> 
+>> import pair.Pair;
+>> import pair.Syntax;
+>> 
+>> public class Foo {
+>>   private Pair<Integer, Integer> = (12, 34);
+>> }
+>
+>
+>The first file introduces the syntax and assimilation rules for pair expressions (note the "extension" keyword). This extension is imported into the second file by using a standard Java import statement. The import statement has the side-effect of extending the grammar used for parsing the remainder of the file.
+>
+>The extension defined in the former file consists of SDF and Stratego statements, as well as a notion for declaring the strategy used for assimilation. This brings me back to my original question. In order to parse an extension, we have defined a grammar joining SDF, Stratego and assimilation statements. We thus cannot employ parse-sdf, also because our grammar grows due to import statements.
+>
+>Therefore, we exhibit the problem of incorrect SDF syntax after pretty-printing parsed SDF statements. 
+>
+>In your previous reply you wrote that pp-sdf and sglri don't go well together. Could this problem be overcome by manually applying implode-asfix in a more meaningful manner? Or lies the problem in the syntax definition of SDF already? How does parse-sdf circumvent the problem?
+>
+>
+>Best regards,
+>Sebastian
+>
+>
+>
+>On 15.09.10, at 14:54, Eelco Visser wrote:
+>
+>> Hi Sebastian,
+>> 
+>> It depends on the assumptions the pretty-printer makes about the AST
+>> it consumes. Apparently pp-sdf doesn't play well with the output of
+>> sglri. However, parse-sdf is much better behaved:
+>> 
+>> $ parse-sdf
+>> module Test
+>> exports
+>> sorts Bar
+>> context-free syntax
+>>    "foo" -> Bar {cons("Baz")}
+>> 
+>> module(unparameterized("Test"),[],[exports(conc-grammars(sorts([sort("Bar")]),context-free-syntax([prod([lit("foo")],sort("Bar"),attrs([term(cons("Baz"))]))])))])
+>> 
+>> $ parse-sdf | pp-sdf
+>> module Test
+>> exports
+>> sorts Bar
+>> context-free syntax
+>>    "foo" -> Bar {cons("Baz")}
+>> 
+>> module Test
+>> exports
+>>  sorts Bar
+>> 
+>>  context-free syntax
+>>    "foo" -> Bar {cons("Baz")}
+>> 
+>> 
+>> cheers,
+>> 
+>> -- Eelco
+>> 
+>> 
+>> 
+>> On Wed, Sep 15, 2010 at 11:31 AM, Sebastian Erdweg
+>> <seba at informatik.uni-marburg.de> wrote:
+>>> HI everybody,
+>>> 
+>>> recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+>>> 
+>>> First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+>>> 
+>>> If I now parse the SDF module
+>>> 
+>>>> module Test
+>>>> exports
+>>>>   sorts Bar
+>>>>   context-free syntax
+>>>>     "foo" -> Bar {cons("Baz")}
+>>> 
+>>> 
+>>> and pretty-print it again, I get
+>>> 
+>>>> module Test
+>>>> exports
+>>>>   sorts Bar
+>>>> 
+>>>>   context-free syntax
+>>>>     ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+>>> 
+>>> 
+>>> When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+>>> 
+>>> Second, annotations of productions are parsed into term nodes, for instance
+>>>> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+>>> 
+>>> For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+>>> 
+>>> So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+>>> 
+>>> Best regards,
+>>> Sebastian
+>>> 
+>>> 
+>>> [1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+>>> [2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+>>> 
+>>> 
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> 
+>> 
+>> 
+>> 
+>> -- 
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>> http://researchr.org/profile/eelcovisser
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From shirren2010 at gmail.com  Wed Sep 22 10:05:41 2010
+From: shirren2010 at gmail.com (Shirren)
+Date: Wed, 22 Sep 2010 18:05:41 +1000
+Subject: [Stratego Users] Research Request
+Message-ID: <27DFD8AE-F7CF-4DBE-9919-DCBC72504D25@gmail.com>
+
+Hello All,
+
+      I am a postgraduate student at Macquarie University in Sydney
+Australia. As part of my program I have taken on a major information
+technology project under the supervision of Associate Professor Anthony
+Sloane. We are planning to compare the performance of
+different strategic programming approaches to tree processing, the
+following link provides a summary of our project
+(http://www.comp.mq.edu.au/units/itec810/projects/#sloane02).
+
+As part of this project our plan is to collect sample Stratego programs
+and sample source programs to apply Stratego to. Our aim over the past
+few weeks has been to develop a fundamental understanding of Stratego
+and how it works, however as our focus is to compare the efficiency of
+Kiama (http://code.google.com/p/kiama/) to Stratego when applying
+transformations our hope is that someone with experience will be able to
+help by either providing us with the sample Stratego programs and source
+programs to apply Stratego to or by pointing us in the correct direction. 
+These samples will help us go a long way into our study.
+
+If anyone has further questions, I'd be more than happy to answer any,
+professor Sloane as the supervisor of this project will also be
+available to answer any questions you might have, he may be reached at 
+anthony.sloane at mq.edu.au. We would like to thank you all in advance for
+your help.
+
+Kind Regards
+Shirren Premaratne
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100922/57d15ad7/attachment.html 
+
+From karltk at strategoxt.org  Wed Sep 22 15:48:18 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Wed, 22 Sep 2010 15:48:18 +0200
+Subject: [Stratego Users] Research Request
+In-Reply-To: <27DFD8AE-F7CF-4DBE-9919-DCBC72504D25@gmail.com>
+References: <27DFD8AE-F7CF-4DBE-9919-DCBC72504D25@gmail.com>
+Message-ID: <AANLkTimsf-PJG7Q+A_7kB4eGK-d=p1CTLa-XO620mzPG@mail.gmail.com>
+
+The following JavaFront tutorial might be of interest to you:
+
+http://hydra.nixos.org/build/639441/download/1/manual/chunk-chapter/java-front.html
+
+Once you've managed to install Stratego/XT and JavaFront, the tutorial
+should provide a nice starting point for playing around with
+source-to-source transformations of Java code using Stratego. A lot of
+the more advanced examples and projects, such as Dryad [1] are based
+on JavaFront.
+
+-- Karl T
+
+[1] http://strategoxt.org/Stratego/TheDryad
+
+From shirren2010 at gmail.com  Thu Sep 23 15:11:46 2010
+From: shirren2010 at gmail.com (Shirren)
+Date: Thu, 23 Sep 2010 23:11:46 +1000
+Subject: [Stratego Users] Research Request (Shirren Premaratne)
+In-Reply-To: <mailman.3.1285236001.21536.users@strategoxt.org>
+References: <mailman.3.1285236001.21536.users@strategoxt.org>
+Message-ID: <1285247506.1666.7.camel@Maya>
+
+Hi Karl,
+
+	Thanks for sending those links to Java-front and Dryad. I am
+at present going through the StrategoXT tutorial (all 30 chapters), I
+will look into Java-front and Dryad after completing the Stratego
+tutorial.
+
+I believe after completing those tutorials I will be in a position to
+write some rather simplistic Stratego programs, however my aim as part
+of our research is to compare the effective performance of Kiama to
+Stratego. Our plan after obtaining a good cross section of programs
+written in Stratego is to write the equivalent programs using the Kiama
+library. As we are not Stratego experts we hope that someone in the
+community will be able to help us in our endeavour.
+
+Kind Regards
+Shirren Premaratne 
+
+On Thu, 2010-09-23 at 12:00 +0200, users-request at strategoxt.org wrote:
+> Send Users mailing list submissions to
+> 	users at strategoxt.org
+> 
+> To subscribe or unsubscribe via the World Wide Web, visit
+> 	https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+> 	users-request at strategoxt.org
+> 
+> You can reach the person managing the list at
+> 	users-owner at strategoxt.org
+> 
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+> 
+> 
+> Today's Topics:
+> 
+>    1. Re: Research Request (Karl Trygve Kalleberg)
+> 
+> 
+> ----------------------------------------------------------------------
+> 
+> Message: 1
+> Date: Wed, 22 Sep 2010 15:48:18 +0200
+> From: Karl Trygve Kalleberg <karltk at strategoxt.org>
+> Subject: Re: [Stratego Users] Research Request
+> To: "Stratego/XT Users" <users at strategoxt.org>
+> Message-ID:
+> 	<AANLkTimsf-PJG7Q+A_7kB4eGK-d=p1CTLa-XO620mzPG at mail.gmail.com>
+> Content-Type: text/plain; charset=ISO-8859-1
+> 
+> The following JavaFront tutorial might be of interest to you:
+> 
+> http://hydra.nixos.org/build/639441/download/1/manual/chunk-chapter/java-front.html
+> 
+> Once you've managed to install Stratego/XT and JavaFront, the tutorial
+> should provide a nice starting point for playing around with
+> source-to-source transformations of Java code using Stratego. A lot of
+> the more advanced examples and projects, such as Dryad [1] are based
+> on JavaFront.
+> 
+> -- Karl T
+> 
+> [1] http://strategoxt.org/Stratego/TheDryad
+> 
+> 
+> ------------------------------
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> End of Users Digest, Vol 21, Issue 6
+> ************************************
+
+
+
+From mestrejoaoricardo at gmail.com  Fri Sep 24 19:51:30 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Fri, 24 Sep 2010 18:51:30 +0100
+Subject: [Stratego Users] [AspectJ/Java-Front] Is there a detailed manual
+ explaining the syntax definition implemented
+Message-ID: <AANLkTinMBtC6OskZgkNuCzpNL5YsK08ScPbpUhaT5Zh=@mail.gmail.com>
+
+Hi, I was just browsing the syntax definition of AspectJ/Java.
+
+Is there a manual explaining what each abbreviation means (e.g. AspectCtx).
+
+Thanks.
+
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100924/c4e03b62/attachment.html 
+
+From shirren2010 at gmail.com  Sat Sep 25 10:20:57 2010
+From: shirren2010 at gmail.com (Shirren)
+Date: Sat, 25 Sep 2010 18:20:57 +1000
+Subject: [Stratego Users] A question about Java-Front
+Message-ID: <BEE28A22-848D-478E-97F4-A723B1E9CD6F@gmail.com>
+
+Hi All,
+
+	I wanted to try Java-Front, I have installed StrategoXT and it's associated packages with success. My install of Java-Front appeared to be successful (Version 0.9), but when I try to parse a simple Java class using parse-java no matter what I do I get a segmentation fault, even the following command parse-java -i Foo.java --verbose vomit only displays a simple segmentation fault message. I have been having trouble accessing the YellowGrass issues tracking website, will installing the latest version of Java-Front resolve this issue? I am hesitant to try it as it depends on a nightly build of Stratego and not the public v0.17 release.
+
+Any recommendations?
+
+I am running on a Mac with OS 10.6 and Java 6 installed (I tried -1.5 java-parse flag, but that does not work either). By the way I have not had any issues with sdf and stratego so far, it seems to work fine.
+
+Regards
+Shirren
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100925/12eb8378/attachment.html 
+
+From rob.vermaas at gmail.com  Sat Sep 25 12:48:26 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Sat, 25 Sep 2010 12:48:26 +0200
+Subject: [Stratego Users] A question about Java-Front
+In-Reply-To: <BEE28A22-848D-478E-97F4-A723B1E9CD6F@gmail.com>
+References: <BEE28A22-848D-478E-97F4-A723B1E9CD6F@gmail.com>
+Message-ID: <AANLkTimy_QQhaCppTkK9NvSCxhTr9n38PT=JC-xQ8fCY@mail.gmail.com>
+
+Hi,
+
+> I wanted to try Java-Front, I have installed StrategoXT and it's associated
+> packages with success. My install of Java-Front appeared to be successful
+> (Version 0.9), but when I try to parse a simple Java class using parse-java
+> no matter what I do I get a segmentation fault, even the following command
+> parse-java -i Foo.java --verbose vomit only displays a simple segmentation
+> fault message. I have been having trouble accessing the YellowGrass issues
+> tracking website, will installing the latest version of Java-Front resolve
+> this issue? I am hesitant to try it as it depends on a nightly build of
+> Stratego and not the public v0.17 release.
+> Any recommendations?
+> I am running on a Mac with OS 10.6 and Java 6 installed (I tried -1.5
+> java-parse flag, but that does not work either). By the way I have not had
+> any issues with sdf and stratego so far, it seems to work fine.
+
+Please try to add 'ulimit -s 64000' to your .profile or .bashrc (or
+run it in the shell you are running parse-java from). On 64 bit, the
+default stack size of 8192 is not enough for parsing bigger grammars
+like Java and AspectJ.
+
+gr,
+Rob
+
+From shirren2010 at gmail.com  Sun Sep 26 13:03:46 2010
+From: shirren2010 at gmail.com (Shirren)
+Date: Sun, 26 Sep 2010 21:03:46 +1000
+Subject: [Stratego Users] A question about Java-Front
+In-Reply-To: <AANLkTimy_QQhaCppTkK9NvSCxhTr9n38PT=JC-xQ8fCY@mail.gmail.com>
+References: <BEE28A22-848D-478E-97F4-A723B1E9CD6F@gmail.com>
+	<AANLkTimy_QQhaCppTkK9NvSCxhTr9n38PT=JC-xQ8fCY@mail.gmail.com>
+Message-ID: <59E2B5C3-08DC-420D-BAB9-CB32BC312332@gmail.com>
+
+Hi Rob,
+
+	Thanks for that!! Works now.
+
+Regards
+Shirren
+
+On 25/09/2010, at 8:48 PM, Rob Vermaas wrote:
+
+> Hi,
+> 
+>> I wanted to try Java-Front, I have installed StrategoXT and it's associated
+>> packages with success. My install of Java-Front appeared to be successful
+>> (Version 0.9), but when I try to parse a simple Java class using parse-java
+>> no matter what I do I get a segmentation fault, even the following command
+>> parse-java -i Foo.java --verbose vomit only displays a simple segmentation
+>> fault message. I have been having trouble accessing the YellowGrass issues
+>> tracking website, will installing the latest version of Java-Front resolve
+>> this issue? I am hesitant to try it as it depends on a nightly build of
+>> Stratego and not the public v0.17 release.
+>> Any recommendations?
+>> I am running on a Mac with OS 10.6 and Java 6 installed (I tried -1.5
+>> java-parse flag, but that does not work either). By the way I have not had
+>> any issues with sdf and stratego so far, it seems to work fine.
+> 
+> Please try to add 'ulimit -s 64000' to your .profile or .bashrc (or
+> run it in the shell you are running parse-java from). On 64 bit, the
+> default stack size of 8192 is not enough for parsing bigger grammars
+> like Java and AspectJ.
+> 
+> gr,
+> Rob
+
+
+
+From E.Visser at tudelft.nl  Mon Sep 27 12:28:40 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 27 Sep 2010 12:28:40 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty printing
+In-Reply-To: <5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marburg.de>
+References: <07E1F4A2-8728-4701-A46F-8FAFA37A6156@informatik.uni-marburg.de>
+	<3DAF9785-5C00-4E35-88DE-E3ACAF69D1E0@informatik.uni-marburg.de>
+	<5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marburg.de>
+Message-ID: <AANLkTi=NmynAYkZopD5T3SjrhTqj7fxLuaSndZ8uSY3F@mail.gmail.com>
+
+Hi Sebastian,
+
+The general issue is that there is a distance between parse trees
+(asfix) produced by SGLR and the ASTs one wants to use in
+transformation with Stratego. Typically, parse trees are imploded to
+an AST. The generic implosion transformations typically do not
+(cannot) deal with specific syntactic sorts such as Strings, since
+their definition is not language independent. Therefore, String
+literals typically retain the "s. One approach to deal with the
+'extra' "s is by applying a language specific desugaring
+transformation. Generated pretty-printers assume trees produced by
+generic imploders, but pretty-printers for further desugared ASTs may
+need to do some extra work, such as re-inserting "s. So, you need
+parser, desugaring, and pretty-printer to align.
+
+Have a look at the sources that Lennart pointed to, and you'll figure it out.
+
+cheers,
+
+-- Eelco
+
+There is some (small) distance between ASTs typically used in Stratego
+and the ASTs produced by
+
+On Fri, Sep 17, 2010 at 1:03 PM, Sebastian Erdweg
+<seba at informatik.uni-marburg.de> wrote:
+> Hi Eelco,
+>
+> thanks for your reply. I believe I need to make my question more precise by providing more information on what I am trying to parse SDF for.
+>
+> Our overall goal is to allow programmers to implement and employ syntactic extensions of the language they are currently using (quite similar to Cardelli, Matthes, and Abadi's report from 1994). In particular, we want to support deploying a syntactic extension as part of a library; and using a syntactic extension should be just as easy as using a library.
+>
+> We have developed a prototype implementation for the Java programming language which employs the ideas of Metaborg for defining extensions. A simple example is an extension for pairs, taken from your OOPSLA'04 paper "Concrete Syntax for Objects":
+>
+>> package pair;
+>>
+>> import extjava.Extension;
+>> import extjava.languages.Java;
+>>
+>> public extension Syntax {
+>> ? context-free syntax
+>> ? ? "(" JavaExpr "," JavaExpr ")" -> JavaExpr {cons("Pair")}
+>>
+>> ? assimilations
+>> ? ? assimilatePair
+>>
+>> ? rules
+>> ? ? assimilatePair : expr |[ (e1, e2) ]| -> |[ new Pair(e1, e2) ]|
+>> }
+>
+>
+>> package foo;
+>>
+>> import pair.Pair;
+>> import pair.Syntax;
+>>
+>> public class Foo {
+>> ? private Pair<Integer, Integer> = (12, 34);
+>> }
+>
+>
+> The first file introduces the syntax and assimilation rules for pair expressions (note the "extension" keyword). This extension is imported into the second file by using a standard Java import statement. The import statement has the side-effect of extending the grammar used for parsing the remainder of the file.
+>
+> The extension defined in the former file consists of SDF and Stratego statements, as well as a notion for declaring the strategy used for assimilation. This brings me back to my original question. In order to parse an extension, we have defined a grammar joining SDF, Stratego and assimilation statements. We thus cannot employ parse-sdf, also because our grammar grows due to import statements.
+>
+> Therefore, we exhibit the problem of incorrect SDF syntax after pretty-printing parsed SDF statements.
+>
+> In your previous reply you wrote that pp-sdf and sglri don't go well together. Could this problem be overcome by manually applying implode-asfix in a more meaningful manner? Or lies the problem in the syntax definition of SDF already? How does parse-sdf circumvent the problem?
+>
+>
+> Best regards,
+> Sebastian
+>
+>
+>
+> On 15.09.10, at 14:54, Eelco Visser wrote:
+>
+>> Hi Sebastian,
+>>
+>> It depends on the assumptions the pretty-printer makes about the AST
+>> it consumes. Apparently pp-sdf doesn't play well with the output of
+>> sglri. However, parse-sdf is much better behaved:
+>>
+>> $ parse-sdf
+>> module Test
+>> exports
+>> sorts Bar
+>> context-free syntax
+>> ? ?"foo" -> Bar {cons("Baz")}
+>>
+>> module(unparameterized("Test"),[],[exports(conc-grammars(sorts([sort("Bar")]),context-free-syntax([prod([lit("foo")],sort("Bar"),attrs([term(cons("Baz"))]))])))])
+>>
+>> $ parse-sdf | pp-sdf
+>> module Test
+>> exports
+>> sorts Bar
+>> context-free syntax
+>> ? ?"foo" -> Bar {cons("Baz")}
+>>
+>> module Test
+>> exports
+>> ?sorts Bar
+>>
+>> ?context-free syntax
+>> ? ?"foo" -> Bar {cons("Baz")}
+>>
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>>
+>>
+>> On Wed, Sep 15, 2010 at 11:31 AM, Sebastian Erdweg
+>> <seba at informatik.uni-marburg.de> wrote:
+>>> HI everybody,
+>>>
+>>> recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+>>>
+>>> First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+>>>
+>>> If I now parse the SDF module
+>>>
+>>>> module Test
+>>>> exports
+>>>> ? sorts Bar
+>>>> ? context-free syntax
+>>>> ? ? "foo" -> Bar {cons("Baz")}
+>>>
+>>>
+>>> and pretty-print it again, I get
+>>>
+>>>> module Test
+>>>> exports
+>>>> ? sorts Bar
+>>>>
+>>>> ? context-free syntax
+>>>> ? ? ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+>>>
+>>>
+>>> When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+>>>
+>>> Second, annotations of productions are parsed into term nodes, for instance
+>>>> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+>>>
+>>> For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+>>>
+>>> So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+>>>
+>>> Best regards,
+>>> Sebastian
+>>>
+>>>
+>>> [1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+>>> [2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>> http://researchr.org/profile/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+
+
+From seba at informatik.uni-marburg.de  Wed Sep 29 13:11:53 2010
+From: seba at informatik.uni-marburg.de (Sebastian Erdweg)
+Date: Wed, 29 Sep 2010 13:11:53 +0200
+Subject: [Stratego Users] Interplay of SDF parsing and pretty printing
+In-Reply-To: <AANLkTi=NmynAYkZopD5T3SjrhTqj7fxLuaSndZ8uSY3F@mail.gmail.com>
+References: <07E1F4A2-8728-4701-A46F-8FAFA37A6156@informatik.uni-marburg.de>
+	<3DAF9785-5C00-4E35-88DE-E3ACAF69D1E0@informatik.uni-marburg.de>
+	<5A04E03D-4CDB-4AB9-8A0D-3606A3C639BA@informatik.uni-marburg.de>
+	<AANLkTi=NmynAYkZopD5T3SjrhTqj7fxLuaSndZ8uSY3F@mail.gmail.com>
+Message-ID: <D1E229C0-155C-4BC6-8F6A-F0C3ADA56AC5@informatik.uni-marburg.de>
+
+Hi Eelco, hi Lennart,
+
+I just incorporated the sdf-desugar code which woks fine, thanks.
+
+Best regards,
+Sebastian
+
+
+On 27.09.10, at 12:28, Eelco Visser wrote:
+
+> Hi Sebastian,
+> 
+> The general issue is that there is a distance between parse trees
+> (asfix) produced by SGLR and the ASTs one wants to use in
+> transformation with Stratego. Typically, parse trees are imploded to
+> an AST. The generic implosion transformations typically do not
+> (cannot) deal with specific syntactic sorts such as Strings, since
+> their definition is not language independent. Therefore, String
+> literals typically retain the "s. One approach to deal with the
+> 'extra' "s is by applying a language specific desugaring
+> transformation. Generated pretty-printers assume trees produced by
+> generic imploders, but pretty-printers for further desugared ASTs may
+> need to do some extra work, such as re-inserting "s. So, you need
+> parser, desugaring, and pretty-printer to align.
+> 
+> Have a look at the sources that Lennart pointed to, and you'll figure it out.
+> 
+> cheers,
+> 
+> -- Eelco
+> 
+> There is some (small) distance between ASTs typically used in Stratego
+> and the ASTs produced by
+> 
+> On Fri, Sep 17, 2010 at 1:03 PM, Sebastian Erdweg
+> <seba at informatik.uni-marburg.de> wrote:
+>> Hi Eelco,
+>> 
+>> thanks for your reply. I believe I need to make my question more precise by providing more information on what I am trying to parse SDF for.
+>> 
+>> Our overall goal is to allow programmers to implement and employ syntactic extensions of the language they are currently using (quite similar to Cardelli, Matthes, and Abadi's report from 1994). In particular, we want to support deploying a syntactic extension as part of a library; and using a syntactic extension should be just as easy as using a library.
+>> 
+>> We have developed a prototype implementation for the Java programming language which employs the ideas of Metaborg for defining extensions. A simple example is an extension for pairs, taken from your OOPSLA'04 paper "Concrete Syntax for Objects":
+>> 
+>>> package pair;
+>>> 
+>>> import extjava.Extension;
+>>> import extjava.languages.Java;
+>>> 
+>>> public extension Syntax {
+>>>   context-free syntax
+>>>     "(" JavaExpr "," JavaExpr ")" -> JavaExpr {cons("Pair")}
+>>> 
+>>>   assimilations
+>>>     assimilatePair
+>>> 
+>>>   rules
+>>>     assimilatePair : expr |[ (e1, e2) ]| -> |[ new Pair(e1, e2) ]|
+>>> }
+>> 
+>> 
+>>> package foo;
+>>> 
+>>> import pair.Pair;
+>>> import pair.Syntax;
+>>> 
+>>> public class Foo {
+>>>   private Pair<Integer, Integer> = (12, 34);
+>>> }
+>> 
+>> 
+>> The first file introduces the syntax and assimilation rules for pair expressions (note the "extension" keyword). This extension is imported into the second file by using a standard Java import statement. The import statement has the side-effect of extending the grammar used for parsing the remainder of the file.
+>> 
+>> The extension defined in the former file consists of SDF and Stratego statements, as well as a notion for declaring the strategy used for assimilation. This brings me back to my original question. In order to parse an extension, we have defined a grammar joining SDF, Stratego and assimilation statements. We thus cannot employ parse-sdf, also because our grammar grows due to import statements.
+>> 
+>> Therefore, we exhibit the problem of incorrect SDF syntax after pretty-printing parsed SDF statements.
+>> 
+>> In your previous reply you wrote that pp-sdf and sglri don't go well together. Could this problem be overcome by manually applying implode-asfix in a more meaningful manner? Or lies the problem in the syntax definition of SDF already? How does parse-sdf circumvent the problem?
+>> 
+>> 
+>> Best regards,
+>> Sebastian
+>> 
+>> 
+>> 
+>> On 15.09.10, at 14:54, Eelco Visser wrote:
+>> 
+>>> Hi Sebastian,
+>>> 
+>>> It depends on the assumptions the pretty-printer makes about the AST
+>>> it consumes. Apparently pp-sdf doesn't play well with the output of
+>>> sglri. However, parse-sdf is much better behaved:
+>>> 
+>>> $ parse-sdf
+>>> module Test
+>>> exports
+>>> sorts Bar
+>>> context-free syntax
+>>>    "foo" -> Bar {cons("Baz")}
+>>> 
+>>> module(unparameterized("Test"),[],[exports(conc-grammars(sorts([sort("Bar")]),context-free-syntax([prod([lit("foo")],sort("Bar"),attrs([term(cons("Baz"))]))])))])
+>>> 
+>>> $ parse-sdf | pp-sdf
+>>> module Test
+>>> exports
+>>> sorts Bar
+>>> context-free syntax
+>>>    "foo" -> Bar {cons("Baz")}
+>>> 
+>>> module Test
+>>> exports
+>>>  sorts Bar
+>>> 
+>>>  context-free syntax
+>>>    "foo" -> Bar {cons("Baz")}
+>>> 
+>>> 
+>>> cheers,
+>>> 
+>>> -- Eelco
+>>> 
+>>> 
+>>> 
+>>> On Wed, Sep 15, 2010 at 11:31 AM, Sebastian Erdweg
+>>> <seba at informatik.uni-marburg.de> wrote:
+>>>> HI everybody,
+>>>> 
+>>>> recently I tried to first parse an SDF module and then pretty-print it. Surprisingly, the result was not a valid SDF module again. This is contrary to the intuition that the composition of parsing and pretty-printing preserves programs up to isomorphisms.
+>>>> 
+>>>> First, let me explain my setup. I am using the latests nix deployments of sdf2Bundle and strategoxt from channels [1] and [2], respectively. For parsing, I use the Sdf2 grammar contained in sdf2Bundle, and for pretty-printing the tool "pp-sdf" contained in strategoxt.
+>>>> 
+>>>> If I now parse the SDF module
+>>>> 
+>>>>> module Test
+>>>>> exports
+>>>>>   sorts Bar
+>>>>>   context-free syntax
+>>>>>     "foo" -> Bar {cons("Baz")}
+>>>> 
+>>>> 
+>>>> and pretty-print it again, I get
+>>>> 
+>>>>> module Test
+>>>>> exports
+>>>>>   sorts Bar
+>>>>> 
+>>>>>   context-free syntax
+>>>>>     ""foo"" -> Bar {default(appl(unquoted("cons"),[[fun(quoted("\"Baz\""))]]))}.
+>>>> 
+>>>> 
+>>>> When inspecting the module's AST, two problems become apparent. First, string constants are parsed into literal nodes containing the string with explicit quotes. For example, the node lit("\"foo\"") is generated for "foo" in the above example. Pretty-printing such a literal seems to add another pair of quotes, which appears to be inappropriate.
+>>>> 
+>>>> Second, annotations of productions are parsed into term nodes, for instance
+>>>>> term(default(appl(unquoted("cons"), [fun(quoted("\"Baz\""))]))).
+>>>> 
+>>>> For pretty-printing these term nodes seem to act as an escape for the wrapped syntax tree, which thus is simply printed in ATerm format.
+>>>> 
+>>>> So, is it a bug or a feature that pretty-printing after parsing does not preserve syntactic correctness? And are there more cases where pretty-printing the just-parsed SDF module produces invalid SDF syntax?
+>>>> 
+>>>> Best regards,
+>>>> Sebastian
+>>>> 
+>>>> 
+>>>> [1] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/sdf2Bundle/channel/latest
+>>>> [2] http://hydra.nixos.org/job/strategoxt/strategoxt-packages/strategoxt/channel/latest
+>>>> 
+>>>> 
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>> 
+>>> 
+>>> 
+>>> 
+>>> --
+>>> http://eelcovisser.org
+>>> http://twitter.com/eelcovisser
+>>> http://researchr.org/profile/eelcovisser
+>>> 
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+> 
+> 
+> 
+> -- 
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+> http://researchr.org/profile/eelcovisser
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+

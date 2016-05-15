@@ -1,0 +1,4399 @@
+From marcoscamelo20 at gmail.com  Sat Jun  5 03:25:49 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Fri, 4 Jun 2010 22:25:49 -0300
+Subject: [Stratego Users] Transformation using concrete syntax with Spoofax
+Message-ID: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+
+Hi everyone,
+ I'm a science computer student from Brazil and I'm developing an
+application to my graduate job. It consists on a DSL, that extends the
+Haskell language, to allow the implementation of variations on a software
+product line.
+I've finished the process of parsing the language with Stratego and it is
+working properly, but now I need to generate the Haskell code by applying
+the rules and strategies of transformation.
+I'm developing with the eclipse plugin SpooFax (
+http://strategoxt.org/Spoofax), it offers me some interesting features. When
+you create a new project with spoofax, it automatically generates a complete
+example to you, with the SDF, and the rules to transform and generate code.
+I put my own SDF on it and began to edit the rules, but it uses the abstract
+syntax, on the left side, to transform the code. I can generate code with
+abstract syntax, but my professor asked me to use the concrete syntax
+because it is more clear to understand.
+Does anyone had already use concrete syntax with spoofax? Because when I
+tried to create a new module, where I'd declare the terms and meta
+variables, it didn't work. In an example I found I need to to something like
+this:
+
+module MetaVariables
+
+imports
+
+  StrategoMix[StrategoHost]
+
+  Transforamtion
+
+
+exports
+
+  context-free start-symbols Module[[StrategoHost]]
+
+
+
+  context-free syntax
+
+    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+
+But when I build the project it does not recognize the module StrategoMix,
+actually I'm not sure it's really necessary  to allow me to use the
+quotations "|[" and "]|" in the rules to represent the concrete syntax. I
+read this chapter
+http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.htmlon
+the Stratego manual, but it could not help me. I'd appreciate if
+anyone
+could say what I need to do to implement transformation using concrete
+syntax with Spoofax.
+
+I have no idea where do I put the meta file related to the module, that the
+Stratego manual mentions, and what I need to do to the build.xml recognizes
+it.
+
+
+Many thanks,
+
+
+Marcos Augusto
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100604/cdc97cd3/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Sat Jun  5 19:25:07 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sat, 05 Jun 2010 19:25:07 +0200
+Subject: [Stratego Users] Transformation using concrete syntax with
+ Spoofax
+In-Reply-To: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.c
+ om>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+Message-ID: <201006051725.o55HPAMS001369@smtp1.infopact.nl>
+
+Hi Marcos,
+
+Spoofax supports concrete object syntax, but it does not yet provide any assistance in setting up your project to use it. We're very much interested in this topic and want to make it much easier to use concrete syntax with Spoofax in the future (keep an eye on http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up the syntax and create a parse table yourself, following the steps below.
+
+You already created a syntax definition module. The next step is to build a parse table for the syntax. To do this you have to adapt the build.main.xml file:
+
+- change the "all" target and add a "meta-syntax" target as follows:
+
+  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+      <target name="meta-syntax">
+      <antcall target="sdf2table">
+            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+                <param name="build.sdf.imports" value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+                <param name="include" value="${lib}"/>
+        </antcall>
+    </target>
+
+- make sure the build.stratego.args property contains -I &quot;${lib}&quot;
+
+In the example above, Stratego-YOURLANG would be the module that defines the Stratego embedding of your syntax. Instead of naming it MetaVariables, please give it a name that starts with "Stratego-" so it gets used by the Stratego editor.
+
+The current Spoofax release appears to have a small bug that would break your build if you change your Ant file to build the concrete syntax. To fix this, download the latest strategoxt.jar from http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar and place it in your eclipse/plugins/org.strategoxt.strj*/java directory, overwriting the existing jar file. Make sure you restart Eclipse.
+
+One final thing you need is the StrategoMix module. For now you can download it from
+https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def. Put it in the 'lib' directory of your project.
+
+To actually use concrete syntax in a file, you have to create a small meta-descriptor for it. For example, if you have a file foo.str, you should create a foo.meta file with the following contents:
+
+  Meta([Syntax("Stratego-YOURLANG")])
+
+If you do this and Spoofax can find the Stratego-YOURLANG table in your workspace, it will automatically use that syntax for the file. If not, an error will be shown in the error log (menu Window>Show View>Error log).
+
+Let me know if you run into any trouble.
+
+cheers,
+
+Lennart
+
+@ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+>Hi everyone,
+> I'm a science computer student from Brazil and I'm developing an application to my graduate job. It consists on a DSL, that extends the Haskell language, to allow the implementation of variations on a software product line.
+>I've finished the process of parsing the language with Stratego and it is working properly, but now I need to generate the Haskell code by applying the rules and strategies of transformation. 
+>I'm developing with the eclipse plugin SpooFax (<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers me some interesting features. When you create a new project with spoofax, it automatically generates a complete example to you, with the SDF, and the rules to transform and generate code.
+>I put my own SDF on it and began to edit the rules, but it uses the abstract syntax, on the left side, to transform the code. I can generate code with abstract syntax, but my professor asked me to use the concrete syntax because it is more clear to understand.
+>Does anyone had already use concrete syntax with spoofax? Because when I tried to create a new module, where I'd declare the terms and meta variables, it didn't work. In an example I found I need to to something like this:
+>
+>module MetaVariables
+>
+>imports
+>
+>  StrategoMix[StrategoHost]
+>
+>  Transforamtion
+>
+>
+>exports
+>
+>  context-free start-symbols Module[[StrategoHost]]
+>
+>  
+>
+>  context-free syntax
+>
+>    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+>    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+>
+>But when I build the project it does not recognize the module StrategoMix, actually I'm not sure it's really necessary  to allow me to use the quotations "|[" and "]|" in the rules to represent the concrete syntax. I read this chapter <http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html on the Stratego manual, but it could not help me. I'd appreciate if anyone could say what I need to do to implement transformation using concrete syntax with Spoofax.
+>
+>I have no idea where do I put the meta file related to the module, that the Stratego manual mentions, and what I need to do to the build.xml recognizes it.
+>
+>
+>Many thanks,
+>
+>
+>Marcos Augusto
+
+
+From marcoscamelo20 at gmail.com  Sun Jun  6 02:14:06 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Sat, 5 Jun 2010 21:14:06 -0300
+Subject: [Stratego Users] Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <201006051725.o55HPAMS001369@smtp1.infopact.nl>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com> 
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+Message-ID: <AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+
+Hi Lennart,
+Thanks very much for the explanation. I'll try it and I'll give a feedback
+as soon as possible.
+
+best regards,
+
+Marcos Augusto
+
+On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> Spoofax supports concrete object syntax, but it does not yet provide any
+> assistance in setting up your project to use it. We're very much interested
+> in this topic and want to make it much easier to use concrete syntax with
+> Spoofax in the future (keep an eye on
+> http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up
+> the syntax and create a parse table yourself, following the steps below.
+>
+> You already created a syntax definition module. The next step is to build a
+> parse table for the syntax. To do this you have to adapt the build.main.xml
+> file:
+>
+> - change the "all" target and add a "meta-syntax" target as follows:
+>
+>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+>      <target name="meta-syntax">
+>      <antcall target="sdf2table">
+>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+>                <param name="build.sdf.imports" value="${build.sdf.imports}
+> -Idef ${lib}/StrategoMix.def"/>
+>                <param name="include" value="${lib}"/>
+>        </antcall>
+>    </target>
+>
+> - make sure the build.stratego.args property contains -I &quot;${lib}&quot;
+>
+> In the example above, Stratego-YOURLANG would be the module that defines
+> the Stratego embedding of your syntax. Instead of naming it MetaVariables,
+> please give it a name that starts with "Stratego-" so it gets used by the
+> Stratego editor.
+>
+> The current Spoofax release appears to have a small bug that would break
+> your build if you change your Ant file to build the concrete syntax. To fix
+> this, download the latest strategoxt.jar from
+> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jarand place it in your eclipse/plugins/org.strategoxt.strj*/java directory,
+> overwriting the existing jar file. Make sure you restart Eclipse.
+>
+> One final thing you need is the StrategoMix module. For now you can
+> download it from
+>
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def.
+> Put it in the 'lib' directory of your project.
+>
+> To actually use concrete syntax in a file, you have to create a small
+> meta-descriptor for it. For example, if you have a file foo.str, you should
+> create a foo.meta file with the following contents:
+>
+>  Meta([Syntax("Stratego-YOURLANG")])
+>
+> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+> workspace, it will automatically use that syntax for the file. If not, an
+> error will be shown in the error log (menu Window>Show View>Error log).
+>
+> Let me know if you run into any trouble.
+>
+> cheers,
+>
+> Lennart
+>
+> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+> >Hi everyone,
+> > I'm a science computer student from Brazil and I'm developing an
+> application to my graduate job. It consists on a DSL, that extends the
+> Haskell language, to allow the implementation of variations on a software
+> product line.
+> >I've finished the process of parsing the language with Stratego and it is
+> working properly, but now I need to generate the Haskell code by applying
+> the rules and strategies of transformation.
+> >I'm developing with the eclipse plugin SpooFax (<
+> http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers me
+> some interesting features. When you create a new project with spoofax, it
+> automatically generates a complete example to you, with the SDF, and the
+> rules to transform and generate code.
+> >I put my own SDF on it and began to edit the rules, but it uses the
+> abstract syntax, on the left side, to transform the code. I can generate
+> code with abstract syntax, but my professor asked me to use the concrete
+> syntax because it is more clear to understand.
+> >Does anyone had already use concrete syntax with spoofax? Because when I
+> tried to create a new module, where I'd declare the terms and meta
+> variables, it didn't work. In an example I found I need to to something like
+> this:
+> >
+> >module MetaVariables
+> >
+> >imports
+> >
+> >  StrategoMix[StrategoHost]
+> >
+> >  Transforamtion
+> >
+> >
+> >exports
+> >
+> >  context-free start-symbols Module[[StrategoHost]]
+> >
+> >
+> >
+> >  context-free syntax
+> >
+> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >
+> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >
+> >
+> >But when I build the project it does not recognize the module StrategoMix,
+> actually I'm not sure it's really necessary  to allow me to use the
+> quotations "|[" and "]|" in the rules to represent the concrete syntax. I
+> read this chapter <
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.htmlon the Stratego manual, but it could not help me. I'd appreciate if anyone
+> could say what I need to do to implement transformation using concrete
+> syntax with Spoofax.
+> >
+> >I have no idea where do I put the meta file related to the module, that
+> the Stratego manual mentions, and what I need to do to the build.xml
+> recognizes it.
+> >
+> >
+> >Many thanks,
+> >
+> >
+> >Marcos Augusto
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100605/37defcdf/attachment.html 
+
+From thomas.kalka at googlemail.com  Mon Jun  7 10:20:34 2010
+From: thomas.kalka at googlemail.com (Thomas Kalka)
+Date: Mon, 7 Jun 2010 10:20:34 +0200
+Subject: [Stratego Users] java to python translation with java-front
+Message-ID: <AANLkTil_QOzQMGiX9Unk8FGm1jvidkInWsi-9HmnmOta@mail.gmail.com>
+
+Hello.
+
+I am trying to do language translation from java to python for
+the pyjamas project using stratego / java-front.
+
+I took java-front and changed the pp code to output python code,
+which works quite well (sources are at http://github.com/thoka/java2python ).
+
+For complete translation some more complicated java->java
+transformations are missing:
+
+- add "self." prefix to class variables and class methods
+- move inner classes out
+- move class variable definitions / presets into a constructor
+- transform java comments to python comments
+- translate comment in front of a class and method definition to a docstring
+- merge constructors with different calling signatures
+- merge overloaded methods
+
+First I try to understand the first task:
+- add "self." prefix to class variables and class methods
+
+
+class Test {
+  Other o;
+  int classvar = 1;
+
+  void ownmethod() { }
+
+  void test() {
+    int localvar = 2;
+    localvar = 3;
+    classvar = 4;
+    ownmethod();
+    o.other();
+  }
+}
+
+should be translated to
+
+class Test {
+  Other o;
+  int classvar = 1;
+
+  void ownmethod() { }
+
+  void test() {
+    int localvar = 2;
+    localvar = 3;
+    this.classvar = 4;
+    this.ownmethod();
+    this.o.other();
+  }
+}
+
+
+An algorithm for this seems like
+
+  for every variable v inside a block:
+    if v is class var:
+       add this. to the variable name
+
+  for every method m inside a class
+     if m is class method
+       add this. to m name
+
+I imagine, I have the following problems to understand.
+
+1) find patterns for variable/method usage
+2) find a way to do the test
+
+
+I am browsing the docs, but have no right clue, how to do this in stratego.
+
+Thank you,
+Thomas Kalka
+
+From thomas.kalka at googlemail.com  Mon Jun  7 10:35:52 2010
+From: thomas.kalka at googlemail.com (Thomas Kalka)
+Date: Mon, 7 Jun 2010 10:35:52 +0200
+Subject: [Stratego Users] java to python translation with java-front
+In-Reply-To: <AANLkTil_QOzQMGiX9Unk8FGm1jvidkInWsi-9HmnmOta@mail.gmail.com>
+References: <AANLkTil_QOzQMGiX9Unk8FGm1jvidkInWsi-9HmnmOta@mail.gmail.com>
+Message-ID: <AANLkTiktxxJabqEPHmztNFn-mMpYJEN1a73Lai9YJhl8@mail.gmail.com>
+
+> 1) find patterns for variable/method usage
+
+After sleeping, at least 1) seems easy:
+
+module add-this
+imports libstratego-lib libjava-front
+strategies
+
+  main =
+    io-wrap(add-this)
+
+  add-this =
+     bottomup(try(AddThis))
+
+rules
+
+  AddThis:
+    ExprName(Id(s)) -> Field(This(), Id(s))
+
+  AddThis:
+    Method(MethodName(Id(s))) -> Method(This(), None(), Id(s))
+
+> 2) find a way to do the test
+
+still no clue for that
+
+From dgroenewegen at gmail.com  Mon Jun  7 11:07:58 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Mon, 7 Jun 2010 11:07:58 +0200
+Subject: [Stratego Users] java to python translation with java-front
+In-Reply-To: <AANLkTiktxxJabqEPHmztNFn-mMpYJEN1a73Lai9YJhl8@mail.gmail.com>
+References: <AANLkTil_QOzQMGiX9Unk8FGm1jvidkInWsi-9HmnmOta@mail.gmail.com>
+	<AANLkTiktxxJabqEPHmztNFn-mMpYJEN1a73Lai9YJhl8@mail.gmail.com>
+Message-ID: <AANLkTim_qRBttjnsDX0JfnlUc1UtEs23n6nYnCsWT5KU@mail.gmail.com>
+
+Hi Thomas,
+
+Dynamic rules are used in stratego for such analysis, here is a rough
+example (didn't test it, and constructors are probably more complex in
+java-front):
+
+main =
+  io-wrap(transform)
+
+transform =
+  {| IsClassMethod: //dynamic rule scope
+    alltd(analyze); alltd(add-this)
+  |}
+
+rules
+
+  analyze :
+    c at Class(name,cbds) -> c
+    where <map(try(declare-class-element(|name)))> cbds
+
+  declare-class-element(|c):
+    m at MethodDecl(name,body) -> m
+    where rules(IsClassMethod : (c,name) ) //dynamic rule creation,
+could also return a value, such as the method decl: (c,name) -> m
+
+rules
+
+  add-this:
+    Class(name,cbds) -> Class(name,cbds1)
+    where cbds1 := <alltd(add-this(|name))> cbds
+
+  add-this(|c):
+    Method(MethodName(Id(s))) -> Method(This(), None(), Id(s))
+    where <IsClassMethod> (c,s) //dynamic rule call, fails if no
+dynamic rule was created for the (c,s) tuple
+
+
+I left out the fields, and this example also doesn't handle inheritance.
+
+-- Danny
+
+On Mon, Jun 7, 2010 at 10:35 AM, Thomas Kalka
+<thomas.kalka at googlemail.com> wrote:
+>> 1) find patterns for variable/method usage
+>
+> After sleeping, at least 1) seems easy:
+>
+> module add-this
+> imports libstratego-lib libjava-front
+> strategies
+>
+> ?main =
+> ? ?io-wrap(add-this)
+>
+> ?add-this =
+> ? ? bottomup(try(AddThis))
+>
+> rules
+>
+> ?AddThis:
+> ? ?ExprName(Id(s)) -> Field(This(), Id(s))
+>
+> ?AddThis:
+> ? ?Method(MethodName(Id(s))) -> Method(This(), None(), Id(s))
+>
+>> 2) find a way to do the test
+>
+> still no clue for that
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From marcoscamelo20 at gmail.com  Mon Jun  7 17:29:07 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 7 Jun 2010 12:29:07 -0300
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com> 
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+Message-ID: <AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com>
+
+Hello,
+
+I had some problems when I tried to use the concrete syntax in fact.
+
+I followed the steps you wrote,
+- changed the build.main.xml
+- replaced the strategox.jar by the newer one
+- added the StrategoMix.sdf to the right place
+- created the meta files
+
+So I build the project and it worked properly, but now I don't know how to
+use it.
+Let me give you an overview about my project. I had two sdf files Commom.sdf
+with the lexical syntax
+and transkell.sdf  (the main module with context-free syntax that imports
+Common). So my transkell.def contains these two modules.
+Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf file,
+that contains something like this:
+
+
+module Stratego-Transkell
+
+imports
+
+  StrategoMix[StrategoHost]
+
+  transkell
+
+
+exports
+
+  context-free start-symbols Module[[StrategoHost]]
+
+
+
+  context-free syntax
+
+    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+
+
+variables
+
+    "tname"[0-9]*  -> TransfName     {prefer}
+
+    "body"[0-9]*     -> Body         {prefer}
+
+
+I've also created 3 meta files with the names of each module and put them at
+the same folder of the sdf files:
+
+- Commom.meta
+
+- Stratego-Transkell.meta
+
+- transkell.meta
+
+
+They have the same content:  Meta([Syntax("Stratego-Transkell")])
+
+So I built the project and tried to use the concrete syntax on
+transformations. But it didn't recognises the symbol "|[" neither the
+meta-variables I've defined before.
+In my generate.str file I have something like this:
+
+module generate
+
+
+imports
+
+  libstratego-lib
+
+  libstratego-gpp
+
+  libstratego-aterm
+
+  include/traskell
+
+  lib/editor-common.generated
+
+
+rules
+
+
+ to-hakell:
+
+ |[ Transformation tname body |] -> $[ teste]
+
+
+
+So I got these erros on the editor:
+
+- Syntax error, '|' not expected here
+
+- Syntax error, 'body' not expected
+
+ here
+
+- Syntax error, 'tname' not expected
+
+ here
+
+- Syntax error, '|' not expected here
+
+
+In addict to this, when I build the project I got the following warning:
+
+Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+Stratego-Transkell)
+
+java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+(unsupported language: Stratego-Transkell)
+at org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+ at
+org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+at
+org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+ at
+org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+at
+org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+ at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+Could anybody help me. Did I forget any step?
+I don't know if I should change the build.xml, to the main module became
+Stratego-Transkell instead of transkell, and how do I change this. Or if I
+put the meta files in a wrong place.
+
+Thanks in advance,
+
+Marcos Augusto
+
+
+
+On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <marcoscamelo20 at gmail.com>wrote:
+
+> Hi Lennart,
+> Thanks very much for the explanation. I'll try it and I'll give a feedback
+> as soon as possible.
+>
+> best regards,
+>
+> Marcos Augusto
+>
+>
+> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <L.C.L.Kats at tudelft.nl>wrote:
+>
+>> Hi Marcos,
+>>
+>> Spoofax supports concrete object syntax, but it does not yet provide any
+>> assistance in setting up your project to use it. We're very much interested
+>> in this topic and want to make it much easier to use concrete syntax with
+>> Spoofax in the future (keep an eye on
+>> http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set
+>> up the syntax and create a parse table yourself, following the steps below.
+>>
+>> You already created a syntax definition module. The next step is to build
+>> a parse table for the syntax. To do this you have to adapt the
+>> build.main.xml file:
+>>
+>> - change the "all" target and add a "meta-syntax" target as follows:
+>>
+>>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+>>      <target name="meta-syntax">
+>>      <antcall target="sdf2table">
+>>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+>>                <param name="build.sdf.imports" value="${build.sdf.imports}
+>> -Idef ${lib}/StrategoMix.def"/>
+>>                <param name="include" value="${lib}"/>
+>>        </antcall>
+>>    </target>
+>>
+>> - make sure the build.stratego.args property contains -I
+>> &quot;${lib}&quot;
+>>
+>> In the example above, Stratego-YOURLANG would be the module that defines
+>> the Stratego embedding of your syntax. Instead of naming it MetaVariables,
+>> please give it a name that starts with "Stratego-" so it gets used by the
+>> Stratego editor.
+>>
+>> The current Spoofax release appears to have a small bug that would break
+>> your build if you change your Ant file to build the concrete syntax. To fix
+>> this, download the latest strategoxt.jar from
+>> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jarand place it in your eclipse/plugins/org.strategoxt.strj*/java directory,
+>> overwriting the existing jar file. Make sure you restart Eclipse.
+>>
+>> One final thing you need is the StrategoMix module. For now you can
+>> download it from
+>>
+>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def.
+>> Put it in the 'lib' directory of your project.
+>>
+>> To actually use concrete syntax in a file, you have to create a small
+>> meta-descriptor for it. For example, if you have a file foo.str, you should
+>> create a foo.meta file with the following contents:
+>>
+>>  Meta([Syntax("Stratego-YOURLANG")])
+>>
+>> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+>> workspace, it will automatically use that syntax for the file. If not, an
+>> error will be shown in the error log (menu Window>Show View>Error log).
+>>
+>> Let me know if you run into any trouble.
+>>
+>> cheers,
+>>
+>> Lennart
+>>
+>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+>> >Hi everyone,
+>> > I'm a science computer student from Brazil and I'm developing an
+>> application to my graduate job. It consists on a DSL, that extends the
+>> Haskell language, to allow the implementation of variations on a software
+>> product line.
+>> >I've finished the process of parsing the language with Stratego and it is
+>> working properly, but now I need to generate the Haskell code by applying
+>> the rules and strategies of transformation.
+>> >I'm developing with the eclipse plugin SpooFax (<
+>> http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers
+>> me some interesting features. When you create a new project with spoofax, it
+>> automatically generates a complete example to you, with the SDF, and the
+>> rules to transform and generate code.
+>> >I put my own SDF on it and began to edit the rules, but it uses the
+>> abstract syntax, on the left side, to transform the code. I can generate
+>> code with abstract syntax, but my professor asked me to use the concrete
+>> syntax because it is more clear to understand.
+>> >Does anyone had already use concrete syntax with spoofax? Because when I
+>> tried to create a new module, where I'd declare the terms and meta
+>> variables, it didn't work. In an example I found I need to to something like
+>> this:
+>> >
+>> >module MetaVariables
+>> >
+>> >imports
+>> >
+>> >  StrategoMix[StrategoHost]
+>> >
+>> >  Transforamtion
+>> >
+>> >
+>> >exports
+>> >
+>> >  context-free start-symbols Module[[StrategoHost]]
+>> >
+>> >
+>> >
+>> >  context-free syntax
+>> >
+>> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>> >
+>> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>> >
+>> >
+>> >But when I build the project it does not recognize the module
+>> StrategoMix, actually I'm not sure it's really necessary  to allow me to use
+>> the quotations "|[" and "]|" in the rules to represent the concrete syntax.
+>> I read this chapter <
+>> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+>> >
+>> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.htmlon the Stratego manual, but it could not help me. I'd appreciate if anyone
+>> could say what I need to do to implement transformation using concrete
+>> syntax with Spoofax.
+>> >
+>> >I have no idea where do I put the meta file related to the module, that
+>> the Stratego manual mentions, and what I need to do to the build.xml
+>> recognizes it.
+>> >
+>> >
+>> >Many thanks,
+>> >
+>> >
+>> >Marcos Augusto
+>>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100607/8eff4319/attachment.html 
+
+From E.Visser at tudelft.nl  Mon Jun  7 20:12:31 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 7 Jun 2010 20:12:31 +0200
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com> 
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com> 
+	<AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com>
+Message-ID: <AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com>
+
+Hi Marcos,
+
+Try to put
+
+    Meta([Syntax("Stratego-Transkell")])
+
+in generate.meta. The meta file describes the syntax of the
+corresponding .str file.
+
+-- Eelco
+
+
+
+On Mon, Jun 7, 2010 at 5:29 PM, Marcos Augusto <marcoscamelo20 at gmail.com> wrote:
+> Hello,
+>
+> I had some problems when I tried to use the concrete syntax in fact.
+>
+> I followed the steps you wrote,
+> - changed the build.main.xml
+> - replaced the strategox.jar by the newer one
+> - added the StrategoMix.sdf to the right place
+> - created the meta files
+>
+> So I build the project and it worked properly, but now I don't know how to
+> use it.
+> Let me give you an overview about my project. I had two sdf files Commom.sdf
+> with the lexical syntax
+> and transkell.sdf? (the main module with context-free syntax that imports
+> Common). So my transkell.def contains these two modules.
+> Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf file,
+> that contains something like this:
+>
+>
+> module Stratego-Transkell
+>
+> imports
+>
+> ? StrategoMix[StrategoHost]
+>
+> ? transkell
+>
+> exports
+>
+> ? context-free start-symbols Module[[StrategoHost]]
+>
+>
+>
+> ? context-free syntax
+>
+> ? ? "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+> ? ? "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>
+> variables
+>
+> ? ? "tname"[0-9]*? -> TransfName ? ? {prefer}
+>
+> ? ? "body"[0-9]* ? ? -> Body ? ? ? ? {prefer}
+>
+> I've also created 3 meta files with the names of each module and put them at
+> the same folder of the sdf files:
+>
+> - Commom.meta
+>
+> - Stratego-Transkell.meta
+>
+> - transkell.meta
+>
+> They have the same content:? Meta([Syntax("Stratego-Transkell")])
+>
+> So I built the project and tried to use the concrete syntax on
+> transformations. But it didn't recognises the symbol "|[" neither the
+> meta-variables I've defined before.
+> In my generate.str file I have something like this:
+>
+> module generate
+>
+> imports
+>
+> ? libstratego-lib
+>
+> ? libstratego-gpp
+>
+> ? libstratego-aterm
+>
+> ? include/traskell
+>
+> ? lib/editor-common.generated
+>
+> rules
+>
+> to-hakell:
+>
+> |[ Transformation tname body |] -> $[ teste]
+>
+> So I got these erros on the editor:
+>
+> - Syntax error, '|' not expected here
+>
+> - Syntax error, 'body' not expected
+>
+> here
+>
+> - Syntax error, 'tname' not expected
+>
+> here
+>
+> - Syntax error, '|' not expected here
+>
+> In addict to this, when I build the project I got the following warning:
+>
+> Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+> Stratego-Transkell)
+> java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+> (unsupported language: Stratego-Transkell)
+> at org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+> at
+> org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+> at
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+> at
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+> at
+> org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+> at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+> at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+>
+> Could anybody help me. Did I forget any step?
+> I don't know if I should change the build.xml, to the main module became
+> Stratego-Transkell instead of transkell, and how do I change this. Or if I
+> put the meta files in a wrong place.
+>
+> Thanks in advance,
+>
+> Marcos Augusto
+>
+>
+>
+> On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <marcoscamelo20 at gmail.com>
+> wrote:
+>>
+>> Hi Lennart,
+>> Thanks very much for the explanation. I'll try it and I'll give a feedback
+>> as soon as possible.
+>> best regards,
+>> Marcos Augusto
+>>
+>> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <L.C.L.Kats at tudelft.nl>
+>> wrote:
+>>>
+>>> Hi Marcos,
+>>>
+>>> Spoofax supports concrete object syntax, but it does not yet provide any
+>>> assistance in setting up your project to use it. We're very much interested
+>>> in this topic and want to make it much easier to use concrete syntax with
+>>> Spoofax in the future (keep an eye on
+>>> http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up
+>>> the syntax and create a parse table yourself, following the steps below.
+>>>
+>>> You already created a syntax definition module. The next step is to build
+>>> a parse table for the syntax. To do this you have to adapt the
+>>> build.main.xml file:
+>>>
+>>> - change the "all" target and add a "meta-syntax" target as follows:
+>>>
+>>> ?<target name="all" depends="meta-syntax, spoofaximp.default"/>
+>>> ? ? ?<target name="meta-syntax">
+>>> ? ? ?<antcall target="sdf2table">
+>>> ? ? ? ? ? ?<param name="sdfmodule" value="Stratego-YOURLANG"/>
+>>> ? ? ? ? ? ? ? ?<param name="build.sdf.imports"
+>>> value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+>>> ? ? ? ? ? ? ? ?<param name="include" value="${lib}"/>
+>>> ? ? ? ?</antcall>
+>>> ? ?</target>
+>>>
+>>> - make sure the build.stratego.args property contains -I
+>>> &quot;${lib}&quot;
+>>>
+>>> In the example above, Stratego-YOURLANG would be the module that defines
+>>> the Stratego embedding of your syntax. Instead of naming it MetaVariables,
+>>> please give it a name that starts with "Stratego-" so it gets used by the
+>>> Stratego editor.
+>>>
+>>> The current Spoofax release appears to have a small bug that would break
+>>> your build if you change your Ant file to build the concrete syntax. To fix
+>>> this, download the latest strategoxt.jar from
+>>> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+>>> and place it in your eclipse/plugins/org.strategoxt.strj*/java directory,
+>>> overwriting the existing jar file. Make sure you restart Eclipse.
+>>>
+>>> One final thing you need is the StrategoMix module. For now you can
+>>> download it from
+>>>
+>>> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def.
+>>> Put it in the 'lib' directory of your project.
+>>>
+>>> To actually use concrete syntax in a file, you have to create a small
+>>> meta-descriptor for it. For example, if you have a file foo.str, you should
+>>> create a foo.meta file with the following contents:
+>>>
+>>> ?Meta([Syntax("Stratego-YOURLANG")])
+>>>
+>>> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+>>> workspace, it will automatically use that syntax for the file. If not, an
+>>> error will be shown in the error log (menu Window>Show View>Error log).
+>>>
+>>> Let me know if you run into any trouble.
+>>>
+>>> cheers,
+>>>
+>>> Lennart
+>>>
+>>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+>>> >Hi everyone,
+>>> > I'm a science computer student from Brazil and I'm developing an
+>>> > application to my graduate job. It consists on a DSL, that extends the
+>>> > Haskell language, to allow the implementation of variations on a software
+>>> > product line.
+>>> >I've finished the process of parsing the language with Stratego and it
+>>> > is working properly, but now I need to generate the Haskell code by applying
+>>> > the rules and strategies of transformation.
+>>> >I'm developing with the eclipse plugin SpooFax
+>>> > (<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers me
+>>> > some interesting features. When you create a new project with spoofax, it
+>>> > automatically generates a complete example to you, with the SDF, and the
+>>> > rules to transform and generate code.
+>>> >I put my own SDF on it and began to edit the rules, but it uses the
+>>> > abstract syntax, on the left side, to transform the code. I can generate
+>>> > code with abstract syntax, but my professor asked me to use the concrete
+>>> > syntax because it is more clear to understand.
+>>> >Does anyone had already use concrete syntax with spoofax? Because when I
+>>> > tried to create a new module, where I'd declare the terms and meta
+>>> > variables, it didn't work. In an example I found I need to to something like
+>>> > this:
+>>> >
+>>> >module MetaVariables
+>>> >
+>>> >imports
+>>> >
+>>> > ?StrategoMix[StrategoHost]
+>>> >
+>>> > ?Transforamtion
+>>> >
+>>> >
+>>> >exports
+>>> >
+>>> > ?context-free start-symbols Module[[StrategoHost]]
+>>> >
+>>> >
+>>> >
+>>> > ?context-free syntax
+>>> >
+>>> > ? ?"|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>> >
+>>> > ? ?"|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>> >
+>>> >
+>>> >But when I build the project it does not recognize the module
+>>> > StrategoMix, actually I'm not sure it's really necessary ?to allow me to use
+>>> > the quotations "|[" and "]|" in the rules to represent the concrete syntax.
+>>> > I read this chapter
+>>> > <http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+>>> > on the Stratego manual, but it could not help me. I'd appreciate if anyone
+>>> > could say what I need to do to implement transformation using concrete
+>>> > syntax with Spoofax.
+>>> >
+>>> >I have no idea where do I put the meta file related to the module, that
+>>> > the Stratego manual mentions, and what I need to do to the build.xml
+>>> > recognizes it.
+>>> >
+>>> >
+>>> >Many thanks,
+>>> >
+>>> >
+>>> >Marcos Augusto
+>>>
+>>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From marcoscamelo20 at gmail.com  Mon Jun  7 20:59:37 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 7 Jun 2010 15:59:37 -0300
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com> 
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com> 
+	<AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com> 
+	<AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com>
+Message-ID: <AANLkTinFUvicNAo-XiinDUSHFdeFb09XI21YKo4zagvK@mail.gmail.com>
+
+Hi Eelco,
+
+I tried this solution, but now when I build the project I have the following
+error:
+
+stratego.jvm.helper:
+
+        [java] cannot find the parse table for syntax "Stratego-Transkell"
+in the include path
+
+        [java] parse error in
+/Users/marcosaugustoxavier/Documents/workspace/HephaestusTransformation/trans/generate.str
+
+
+BUILD FAILED
+
+
+I had modified the build.xml to create such parse table, replacing the
+original target tag by this one:
+
+
+ <target name="all" depends="meta-syntax, spoofaximp.default"/>
+
+     <target name="meta-syntax">
+
+     <antcall target="sdf2table">
+
+           <param name="sdfmodule" value="Stratego-Transkell"/>
+
+               <param name="build.sdf.imports" value="${build.sdf.imports}
+-Idef ${lib}/StrategoMix.def"/>
+
+               <param name="include" value="${lib}"/>
+
+       </antcall>
+
+   </target>
+
+
+But I still have the same problem on the editor ( it does not recognize the
+concrete syntax) and now this error on build :/
+
+
+Thanks,
+
+
+Marcos Augusto
+
+
+On Mon, Jun 7, 2010 at 3:12 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> Try to put
+>
+>    Meta([Syntax("Stratego-Transkell")])
+>
+> in generate.meta. The meta file describes the syntax of the
+> corresponding .str file.
+>
+> -- Eelco
+>
+>
+>
+> On Mon, Jun 7, 2010 at 5:29 PM, Marcos Augusto <marcoscamelo20 at gmail.com>
+> wrote:
+> > Hello,
+> >
+> > I had some problems when I tried to use the concrete syntax in fact.
+> >
+> > I followed the steps you wrote,
+> > - changed the build.main.xml
+> > - replaced the strategox.jar by the newer one
+> > - added the StrategoMix.sdf to the right place
+> > - created the meta files
+> >
+> > So I build the project and it worked properly, but now I don't know how
+> to
+> > use it.
+> > Let me give you an overview about my project. I had two sdf files
+> Commom.sdf
+> > with the lexical syntax
+> > and transkell.sdf  (the main module with context-free syntax that imports
+> > Common). So my transkell.def contains these two modules.
+> > Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf
+> file,
+> > that contains something like this:
+> >
+> >
+> > module Stratego-Transkell
+> >
+> > imports
+> >
+> >   StrategoMix[StrategoHost]
+> >
+> >   transkell
+> >
+> > exports
+> >
+> >   context-free start-symbols Module[[StrategoHost]]
+> >
+> >
+> >
+> >   context-free syntax
+> >
+> >     "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >
+> >     "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >
+> > variables
+> >
+> >     "tname"[0-9]*  -> TransfName     {prefer}
+> >
+> >     "body"[0-9]*     -> Body         {prefer}
+> >
+> > I've also created 3 meta files with the names of each module and put them
+> at
+> > the same folder of the sdf files:
+> >
+> > - Commom.meta
+> >
+> > - Stratego-Transkell.meta
+> >
+> > - transkell.meta
+> >
+> > They have the same content:  Meta([Syntax("Stratego-Transkell")])
+> >
+> > So I built the project and tried to use the concrete syntax on
+> > transformations. But it didn't recognises the symbol "|[" neither the
+> > meta-variables I've defined before.
+> > In my generate.str file I have something like this:
+> >
+> > module generate
+> >
+> > imports
+> >
+> >   libstratego-lib
+> >
+> >   libstratego-gpp
+> >
+> >   libstratego-aterm
+> >
+> >   include/traskell
+> >
+> >   lib/editor-common.generated
+> >
+> > rules
+> >
+> > to-hakell:
+> >
+> > |[ Transformation tname body |] -> $[ teste]
+> >
+> > So I got these erros on the editor:
+> >
+> > - Syntax error, '|' not expected here
+> >
+> > - Syntax error, 'body' not expected
+> >
+> > here
+> >
+> > - Syntax error, 'tname' not expected
+> >
+> > here
+> >
+> > - Syntax error, '|' not expected here
+> >
+> > In addict to this, when I build the project I got the following warning:
+> >
+> > Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+> > Stratego-Transkell)
+> > java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+> > (unsupported language: Stratego-Transkell)
+> > at
+> org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+> > at
+> >
+> org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+> > at
+> >
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+> > at
+> >
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+> > at
+> >
+> org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+> > at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+> > at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+> >
+> > Could anybody help me. Did I forget any step?
+> > I don't know if I should change the build.xml, to the main module became
+> > Stratego-Transkell instead of transkell, and how do I change this. Or if
+> I
+> > put the meta files in a wrong place.
+> >
+> > Thanks in advance,
+> >
+> > Marcos Augusto
+> >
+> >
+> >
+> > On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <marcoscamelo20 at gmail.com
+> >
+> > wrote:
+> >>
+> >> Hi Lennart,
+> >> Thanks very much for the explanation. I'll try it and I'll give a
+> feedback
+> >> as soon as possible.
+> >> best regards,
+> >> Marcos Augusto
+> >>
+> >> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <L.C.L.Kats at tudelft.nl>
+> >> wrote:
+> >>>
+> >>> Hi Marcos,
+> >>>
+> >>> Spoofax supports concrete object syntax, but it does not yet provide
+> any
+> >>> assistance in setting up your project to use it. We're very much
+> interested
+> >>> in this topic and want to make it much easier to use concrete syntax
+> with
+> >>> Spoofax in the future (keep an eye on
+> >>> http://yellowgrass.org/issue/Spoofax/55). For now, you just have to
+> set up
+> >>> the syntax and create a parse table yourself, following the steps
+> below.
+> >>>
+> >>> You already created a syntax definition module. The next step is to
+> build
+> >>> a parse table for the syntax. To do this you have to adapt the
+> >>> build.main.xml file:
+> >>>
+> >>> - change the "all" target and add a "meta-syntax" target as follows:
+> >>>
+> >>>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+> >>>      <target name="meta-syntax">
+> >>>      <antcall target="sdf2table">
+> >>>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+> >>>                <param name="build.sdf.imports"
+> >>> value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+> >>>                <param name="include" value="${lib}"/>
+> >>>        </antcall>
+> >>>    </target>
+> >>>
+> >>> - make sure the build.stratego.args property contains -I
+> >>> &quot;${lib}&quot;
+> >>>
+> >>> In the example above, Stratego-YOURLANG would be the module that
+> defines
+> >>> the Stratego embedding of your syntax. Instead of naming it
+> MetaVariables,
+> >>> please give it a name that starts with "Stratego-" so it gets used by
+> the
+> >>> Stratego editor.
+> >>>
+> >>> The current Spoofax release appears to have a small bug that would
+> break
+> >>> your build if you change your Ant file to build the concrete syntax. To
+> fix
+> >>> this, download the latest strategoxt.jar from
+> >>>
+> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+> >>> and place it in your eclipse/plugins/org.strategoxt.strj*/java
+> directory,
+> >>> overwriting the existing jar file. Make sure you restart Eclipse.
+> >>>
+> >>> One final thing you need is the StrategoMix module. For now you can
+> >>> download it from
+> >>>
+> >>>
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def
+> .
+> >>> Put it in the 'lib' directory of your project.
+> >>>
+> >>> To actually use concrete syntax in a file, you have to create a small
+> >>> meta-descriptor for it. For example, if you have a file foo.str, you
+> should
+> >>> create a foo.meta file with the following contents:
+> >>>
+> >>>  Meta([Syntax("Stratego-YOURLANG")])
+> >>>
+> >>> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+> >>> workspace, it will automatically use that syntax for the file. If not,
+> an
+> >>> error will be shown in the error log (menu Window>Show View>Error log).
+> >>>
+> >>> Let me know if you run into any trouble.
+> >>>
+> >>> cheers,
+> >>>
+> >>> Lennart
+> >>>
+> >>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+> >>> >Hi everyone,
+> >>> > I'm a science computer student from Brazil and I'm developing an
+> >>> > application to my graduate job. It consists on a DSL, that extends
+> the
+> >>> > Haskell language, to allow the implementation of variations on a
+> software
+> >>> > product line.
+> >>> >I've finished the process of parsing the language with Stratego and it
+> >>> > is working properly, but now I need to generate the Haskell code by
+> applying
+> >>> > the rules and strategies of transformation.
+> >>> >I'm developing with the eclipse plugin SpooFax
+> >>> > (<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it
+> offers me
+> >>> > some interesting features. When you create a new project with
+> spoofax, it
+> >>> > automatically generates a complete example to you, with the SDF, and
+> the
+> >>> > rules to transform and generate code.
+> >>> >I put my own SDF on it and began to edit the rules, but it uses the
+> >>> > abstract syntax, on the left side, to transform the code. I can
+> generate
+> >>> > code with abstract syntax, but my professor asked me to use the
+> concrete
+> >>> > syntax because it is more clear to understand.
+> >>> >Does anyone had already use concrete syntax with spoofax? Because when
+> I
+> >>> > tried to create a new module, where I'd declare the terms and meta
+> >>> > variables, it didn't work. In an example I found I need to to
+> something like
+> >>> > this:
+> >>> >
+> >>> >module MetaVariables
+> >>> >
+> >>> >imports
+> >>> >
+> >>> >  StrategoMix[StrategoHost]
+> >>> >
+> >>> >  Transforamtion
+> >>> >
+> >>> >
+> >>> >exports
+> >>> >
+> >>> >  context-free start-symbols Module[[StrategoHost]]
+> >>> >
+> >>> >
+> >>> >
+> >>> >  context-free syntax
+> >>> >
+> >>> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>> >
+> >>> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>> >
+> >>> >
+> >>> >But when I build the project it does not recognize the module
+> >>> > StrategoMix, actually I'm not sure it's really necessary  to allow me
+> to use
+> >>> > the quotations "|[" and "]|" in the rules to represent the concrete
+> syntax.
+> >>> > I read this chapter
+> >>> > <
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >>> > on the Stratego manual, but it could not help me. I'd appreciate if
+> anyone
+> >>> > could say what I need to do to implement transformation using
+> concrete
+> >>> > syntax with Spoofax.
+> >>> >
+> >>> >I have no idea where do I put the meta file related to the module,
+> that
+> >>> > the Stratego manual mentions, and what I need to do to the build.xml
+> >>> > recognizes it.
+> >>> >
+> >>> >
+> >>> >Many thanks,
+> >>> >
+> >>> >
+> >>> >Marcos Augusto
+> >>>
+> >>
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100607/3602d84f/attachment-0001.html 
+
+From L.C.L.Kats at tudelft.nl  Mon Jun  7 23:19:48 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Mon, 07 Jun 2010 23:19:48 +0200
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+ Spoofax
+In-Reply-To: <AANLkTinFUvicNAo-XiinDUSHFdeFb09XI21YKo4zagvK@mail.gmail.c
+ om>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+	<AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com>
+	<AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com>
+	<AANLkTinFUvicNAo-XiinDUSHFdeFb09XI21YKo4zagvK@mail.gmail.com>
+Message-ID: <201006072119.o57LJntM008049@smtp1.infopact.nl>
+
+Hi Marcos,
+
+This message indicates that the compiler cannot find the Stratego-Transkell parse table. Did you change the build.stratego.args property in build.main.xml? It should contain:
+
+  -I &quot;${lib}&quot;
+
+Also, in your example, make sure you use ]| to end quotations, not |].
+
+- Lennart
+
+@ 08:59 PM 6/7/2010, Marcos Augusto wrote:
+>Hi Eelco, 
+>
+>I tried this solution, but now when I build the project I have the following error:
+>
+>stratego.jvm.helper:
+>
+>        [java] cannot find the parse table for syntax "Stratego-Transkell" in the include path
+>
+>        [java] parse error in /Users/marcosaugustoxavier/Documents/workspace/HephaestusTransformation/trans/generate.str
+>
+>
+>BUILD FAILED
+>
+>
+>I had modified the build.xml to create such parse table, replacing the original target tag by this one:
+>
+>
+><target name="all" depends="meta-syntax, spoofaximp.default"/>
+>
+>    <target name="meta-syntax">
+>
+>    <antcall target="sdf2table">
+>
+>          <param name="sdfmodule" value="Stratego-Transkell"/>
+>
+>              <param name="build.sdf.imports" value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+>
+>              <param name="include" value="${lib}"/>
+>
+>      </antcall>
+>
+>  </target>
+>
+>
+>But I still have the same problem on the editor ( it does not recognize the concrete syntax) and now this error on build :/
+>
+>
+>Thanks,
+>
+>
+>Marcos Augusto
+>
+>
+>On Mon, Jun 7, 2010 at 3:12 PM, Eelco Visser <<mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:
+>Hi Marcos,
+>
+>Try to put
+>
+>   Meta([Syntax("Stratego-Transkell")])
+>
+>in generate.meta. The meta file describes the syntax of the
+>corresponding .str file.
+>
+>-- Eelco
+>
+>
+>
+>On Mon, Jun 7, 2010 at 5:29 PM, Marcos Augusto <<mailto:marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com> wrote:
+>> Hello,
+>>
+>> I had some problems when I tried to use the concrete syntax in fact.
+>>
+>> I followed the steps you wrote,
+>> - changed the build.main.xml
+>> - replaced the strategox.jar by the newer one
+>> - added the StrategoMix.sdf to the right place
+>> - created the meta files
+>>
+>> So I build the project and it worked properly, but now I don't know how to
+>> use it.
+>> Let me give you an overview about my project. I had two sdf files Commom.sdf
+>> with the lexical syntax
+>> and transkell.sdf  (the main module with context-free syntax that imports
+>> Common). So my transkell.def contains these two modules.
+>> Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf file,
+>> that contains something like this:
+>>
+>>
+>> module Stratego-Transkell
+>>
+>> imports
+>>
+>>   StrategoMix[StrategoHost]
+>>
+>>   transkell
+>>
+>> exports
+>>
+>>   context-free start-symbols Module[[StrategoHost]]
+>>
+>>
+>>
+>>   context-free syntax
+>>
+>>     "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>
+>>     "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>
+>> variables
+>>
+>>     "tname"[0-9]*  -> TransfName     {prefer}
+>>
+>>     "body"[0-9]*     -> Body         {prefer}
+>>
+>> I've also created 3 meta files with the names of each module and put them at
+>> the same folder of the sdf files:
+>>
+>> - Commom.meta
+>>
+>> - Stratego-Transkell.meta
+>>
+>> - transkell.meta
+>>
+>> They have the same content:  Meta([Syntax("Stratego-Transkell")])
+>>
+>> So I built the project and tried to use the concrete syntax on
+>> transformations. But it didn't recognises the symbol "|[" neither the
+>> meta-variables I've defined before.
+>> In my generate.str file I have something like this:
+>>
+>> module generate
+>>
+>> imports
+>>
+>>   libstratego-lib
+>>
+>>   libstratego-gpp
+>>
+>>   libstratego-aterm
+>>
+>>   include/traskell
+>>
+>>   lib/editor-common.generated
+>>
+>> rules
+>>
+>> to-hakell:
+>>
+>> |[ Transformation tname body |] -> $[ teste]
+>>
+>> So I got these erros on the editor:
+>>
+>> - Syntax error, '|' not expected here
+>>
+>> - Syntax error, 'body' not expected
+>>
+>> here
+>>
+>> - Syntax error, 'tname' not expected
+>>
+>> here
+>>
+>> - Syntax error, '|' not expected here
+>>
+>> In addict to this, when I build the project I got the following warning:
+>>
+>> Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+>> Stratego-Transkell)
+>> java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+>> (unsupported language: Stratego-Transkell)
+>> at org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+>> at
+>> org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+>> at
+>> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+>> at
+>> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+>> at
+>> org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+>> at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+>> at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+>>
+>> Could anybody help me. Did I forget any step?
+>> I don't know if I should change the build.xml, to the main module became
+>> Stratego-Transkell instead of transkell, and how do I change this. Or if I
+>> put the meta files in a wrong place.
+>>
+>> Thanks in advance,
+>>
+>> Marcos Augusto
+>>
+>>
+>>
+>> On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <<mailto:marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com>
+>> wrote:
+>>>
+>>> Hi Lennart,
+>>> Thanks very much for the explanation. I'll try it and I'll give a feedback
+>>> as soon as possible.
+>>> best regards,
+>>> Marcos Augusto
+>>>
+>>> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl>
+>>> wrote:
+>>>>
+>>>> Hi Marcos,
+>>>>
+>>>> Spoofax supports concrete object syntax, but it does not yet provide any
+>>>> assistance in setting up your project to use it. We're very much interested
+>>>> in this topic and want to make it much easier to use concrete syntax with
+>>>> Spoofax in the future (keep an eye on
+>>>> <http://yellowgrass.org/issue/Spoofax/55>http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up
+>>>> the syntax and create a parse table yourself, following the steps below.
+>>>>
+>>>> You already created a syntax definition module. The next step is to build
+>>>> a parse table for the syntax. To do this you have to adapt the
+>>>> build.main.xml file:
+>>>>
+>>>> - change the "all" target and add a "meta-syntax" target as follows:
+>>>>
+>>>>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+>>>>      <target name="meta-syntax">
+>>>>      <antcall target="sdf2table">
+>>>>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+>>>>                <param name="build.sdf.imports"
+>>>> value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+>>>>                <param name="include" value="${lib}"/>
+>>>>        </antcall>
+>>>>    </target>
+>>>>
+>>>> - make sure the build.stratego.args property contains -I
+>>>> &quot;${lib}&quot;
+>>>>
+>>>> In the example above, Stratego-YOURLANG would be the module that defines
+>>>> the Stratego embedding of your syntax. Instead of naming it MetaVariables,
+>>>> please give it a name that starts with "Stratego-" so it gets used by the
+>>>> Stratego editor.
+>>>>
+>>>> The current Spoofax release appears to have a small bug that would break
+>>>> your build if you change your Ant file to build the concrete syntax. To fix
+>>>> this, download the latest strategoxt.jar from
+>>>> <http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar>http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+>>>> and place it in your eclipse/plugins/org.strategoxt.strj*/java directory,
+>>>> overwriting the existing jar file. Make sure you restart Eclipse.
+>>>>
+>>>> One final thing you need is the StrategoMix module. For now you can
+>>>> download it from
+>>>>
+>>>> <https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def>https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def.
+>>>> Put it in the 'lib' directory of your project.
+>>>>
+>>>> To actually use concrete syntax in a file, you have to create a small
+>>>> meta-descriptor for it. For example, if you have a file foo.str, you should
+>>>> create a foo.meta file with the following contents:
+>>>>
+>>>>  Meta([Syntax("Stratego-YOURLANG")])
+>>>>
+>>>> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+>>>> workspace, it will automatically use that syntax for the file. If not, an
+>>>> error will be shown in the error log (menu Window>Show View>Error log).
+>>>>
+>>>> Let me know if you run into any trouble.
+>>>>
+>>>> cheers,
+>>>>
+>>>> Lennart
+>>>>
+>>>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+>>>> >Hi everyone,
+>>>> > I'm a science computer student from Brazil and I'm developing an
+>>>> > application to my graduate job. It consists on a DSL, that extends the
+>>>> > Haskell language, to allow the implementation of variations on a software
+>>>> > product line.
+>>>> >I've finished the process of parsing the language with Stratego and it
+>>>> > is working properly, but now I need to generate the Haskell code by applying
+>>>> > the rules and strategies of transformation.
+>>>> >I'm developing with the eclipse plugin SpooFax
+>>>> > (<<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers me
+>>>> > some interesting features. When you create a new project with spoofax, it
+>>>> > automatically generates a complete example to you, with the SDF, and the
+>>>> > rules to transform and generate code.
+>>>> >I put my own SDF on it and began to edit the rules, but it uses the
+>>>> > abstract syntax, on the left side, to transform the code. I can generate
+>>>> > code with abstract syntax, but my professor asked me to use the concrete
+>>>> > syntax because it is more clear to understand.
+>>>> >Does anyone had already use concrete syntax with spoofax? Because when I
+>>>> > tried to create a new module, where I'd declare the terms and meta
+>>>> > variables, it didn't work. In an example I found I need to to something like
+>>>> > this:
+>>>> >
+>>>> >module MetaVariables
+>>>> >
+>>>> >imports
+>>>> >
+>>>> >  StrategoMix[StrategoHost]
+>>>> >
+>>>> >  Transforamtion
+>>>> >
+>>>> >
+>>>> >exports
+>>>> >
+>>>> >  context-free start-symbols Module[[StrategoHost]]
+>>>> >
+>>>> >
+>>>> >
+>>>> >  context-free syntax
+>>>> >
+>>>> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>> >
+>>>> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>> >
+>>>> >
+>>>> >But when I build the project it does not recognize the module
+>>>> > StrategoMix, actually I'm not sure it's really necessary  to allow me to use
+>>>> > the quotations "|[" and "]|" in the rules to represent the concrete syntax.
+>>>> > I read this chapter
+>>>> > <<http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+>>>> > on the Stratego manual, but it could not help me. I'd appreciate if anyone
+>>>> > could say what I need to do to implement transformation using concrete
+>>>> > syntax with Spoofax.
+>>>> >
+>>>> >I have no idea where do I put the meta file related to the module, that
+>>>> > the Stratego manual mentions, and what I need to do to the build.xml
+>>>> > recognizes it.
+>>>> >
+>>>> >
+>>>> >Many thanks,
+>>>> >
+>>>> >
+>>>> >Marcos Augusto
+>>>>
+>>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> <mailto:Users at strategoxt.org>Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+>
+>--
+><http://eelcovisser.org>http://eelcovisser.org
+>http://twitter.com/eelcovisser
+>
+>_______________________________________________
+>Users mailing list
+><mailto:Users at strategoxt.org>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From marcoscamelo20 at gmail.com  Tue Jun  8 00:28:07 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 7 Jun 2010 19:28:07 -0300
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+	Spoofax
+In-Reply-To: <201006072119.o57LJntM008049@smtp1.infopact.nl>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com> 
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com> 
+	<AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com> 
+	<AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com> 
+	<AANLkTinFUvicNAo-XiinDUSHFdeFb09XI21YKo4zagvK@mail.gmail.com> 
+	<201006072119.o57LJntM008049@smtp1.infopact.nl>
+Message-ID: <AANLkTinxcxXjkw2gC6jlWXxzAHlwzzkV6NkKdCzvz3f7@mail.gmail.com>
+
+Hi Lennart,
+the problem was exactly this, I changed the build.main.xml and now it is
+working correctly.
+
+Thanks a lot,
+
+Marcos Augusto
+
+On Mon, Jun 7, 2010 at 6:19 PM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> This message indicates that the compiler cannot find the Stratego-Transkell
+> parse table. Did you change the build.stratego.args property in
+> build.main.xml? It should contain:
+>
+>  -I &quot;${lib}&quot;
+>
+> Also, in your example, make sure you use ]| to end quotations, not |].
+>
+> - Lennart
+>
+> @ 08:59 PM 6/7/2010, Marcos Augusto wrote:
+> >Hi Eelco,
+> >
+> >I tried this solution, but now when I build the project I have the
+> following error:
+> >
+> >stratego.jvm.helper:
+> >
+> >        [java] cannot find the parse table for syntax "Stratego-Transkell"
+> in the include path
+> >
+> >        [java] parse error in
+> /Users/marcosaugustoxavier/Documents/workspace/HephaestusTransformation/trans/generate.str
+> >
+> >
+> >BUILD FAILED
+> >
+> >
+> >I had modified the build.xml to create such parse table, replacing the
+> original target tag by this one:
+> >
+> >
+> ><target name="all" depends="meta-syntax, spoofaximp.default"/>
+> >
+> >    <target name="meta-syntax">
+> >
+> >    <antcall target="sdf2table">
+> >
+> >          <param name="sdfmodule" value="Stratego-Transkell"/>
+> >
+> >              <param name="build.sdf.imports" value="${build.sdf.imports}
+> -Idef ${lib}/StrategoMix.def"/>
+> >
+> >              <param name="include" value="${lib}"/>
+> >
+> >      </antcall>
+> >
+> >  </target>
+> >
+> >
+> >But I still have the same problem on the editor ( it does not recognize
+> the concrete syntax) and now this error on build :/
+> >
+> >
+> >Thanks,
+> >
+> >
+> >Marcos Augusto
+> >
+> >
+> >On Mon, Jun 7, 2010 at 3:12 PM, Eelco Visser <<mailto:E.Visser at tudelft.nl
+> >E.Visser at tudelft.nl> wrote:
+> >Hi Marcos,
+> >
+> >Try to put
+> >
+> >   Meta([Syntax("Stratego-Transkell")])
+> >
+> >in generate.meta. The meta file describes the syntax of the
+> >corresponding .str file.
+> >
+> >-- Eelco
+> >
+> >
+> >
+> >On Mon, Jun 7, 2010 at 5:29 PM, Marcos Augusto <<mailto:
+> marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com> wrote:
+> >> Hello,
+> >>
+> >> I had some problems when I tried to use the concrete syntax in fact.
+> >>
+> >> I followed the steps you wrote,
+> >> - changed the build.main.xml
+> >> - replaced the strategox.jar by the newer one
+> >> - added the StrategoMix.sdf to the right place
+> >> - created the meta files
+> >>
+> >> So I build the project and it worked properly, but now I don't know how
+> to
+> >> use it.
+> >> Let me give you an overview about my project. I had two sdf files
+> Commom.sdf
+> >> with the lexical syntax
+> >> and transkell.sdf  (the main module with context-free syntax that
+> imports
+> >> Common). So my transkell.def contains these two modules.
+> >> Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf
+> file,
+> >> that contains something like this:
+> >>
+> >>
+> >> module Stratego-Transkell
+> >>
+> >> imports
+> >>
+> >>   StrategoMix[StrategoHost]
+> >>
+> >>   transkell
+> >>
+> >> exports
+> >>
+> >>   context-free start-symbols Module[[StrategoHost]]
+> >>
+> >>
+> >>
+> >>   context-free syntax
+> >>
+> >>     "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>
+> >>     "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>
+> >> variables
+> >>
+> >>     "tname"[0-9]*  -> TransfName     {prefer}
+> >>
+> >>     "body"[0-9]*     -> Body         {prefer}
+> >>
+> >> I've also created 3 meta files with the names of each module and put
+> them at
+> >> the same folder of the sdf files:
+> >>
+> >> - Commom.meta
+> >>
+> >> - Stratego-Transkell.meta
+> >>
+> >> - transkell.meta
+> >>
+> >> They have the same content:  Meta([Syntax("Stratego-Transkell")])
+> >>
+> >> So I built the project and tried to use the concrete syntax on
+> >> transformations. But it didn't recognises the symbol "|[" neither the
+> >> meta-variables I've defined before.
+> >> In my generate.str file I have something like this:
+> >>
+> >> module generate
+> >>
+> >> imports
+> >>
+> >>   libstratego-lib
+> >>
+> >>   libstratego-gpp
+> >>
+> >>   libstratego-aterm
+> >>
+> >>   include/traskell
+> >>
+> >>   lib/editor-common.generated
+> >>
+> >> rules
+> >>
+> >> to-hakell:
+> >>
+> >> |[ Transformation tname body |] -> $[ teste]
+> >>
+> >> So I got these erros on the editor:
+> >>
+> >> - Syntax error, '|' not expected here
+> >>
+> >> - Syntax error, 'body' not expected
+> >>
+> >> here
+> >>
+> >> - Syntax error, 'tname' not expected
+> >>
+> >> here
+> >>
+> >> - Syntax error, '|' not expected here
+> >>
+> >> In addict to this, when I build the project I got the following warning:
+> >>
+> >> Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+> >> Stratego-Transkell)
+> >> java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+> >> (unsupported language: Stratego-Transkell)
+> >> at
+> org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+> >> at
+> >>
+> org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+> >> at
+> >>
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+> >> at
+> >>
+> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+> >> at
+> >>
+> org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+> >> at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+> >> at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+> >>
+> >> Could anybody help me. Did I forget any step?
+> >> I don't know if I should change the build.xml, to the main module became
+> >> Stratego-Transkell instead of transkell, and how do I change this. Or if
+> I
+> >> put the meta files in a wrong place.
+> >>
+> >> Thanks in advance,
+> >>
+> >> Marcos Augusto
+> >>
+> >>
+> >>
+> >> On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <<mailto:
+> marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com>
+> >> wrote:
+> >>>
+> >>> Hi Lennart,
+> >>> Thanks very much for the explanation. I'll try it and I'll give a
+> feedback
+> >>> as soon as possible.
+> >>> best regards,
+> >>> Marcos Augusto
+> >>>
+> >>> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <<mailto:
+> L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl>
+> >>> wrote:
+> >>>>
+> >>>> Hi Marcos,
+> >>>>
+> >>>> Spoofax supports concrete object syntax, but it does not yet provide
+> any
+> >>>> assistance in setting up your project to use it. We're very much
+> interested
+> >>>> in this topic and want to make it much easier to use concrete syntax
+> with
+> >>>> Spoofax in the future (keep an eye on
+> >>>> <http://yellowgrass.org/issue/Spoofax/55>
+> http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up
+> >>>> the syntax and create a parse table yourself, following the steps
+> below.
+> >>>>
+> >>>> You already created a syntax definition module. The next step is to
+> build
+> >>>> a parse table for the syntax. To do this you have to adapt the
+> >>>> build.main.xml file:
+> >>>>
+> >>>> - change the "all" target and add a "meta-syntax" target as follows:
+> >>>>
+> >>>>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+> >>>>      <target name="meta-syntax">
+> >>>>      <antcall target="sdf2table">
+> >>>>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+> >>>>                <param name="build.sdf.imports"
+> >>>> value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+> >>>>                <param name="include" value="${lib}"/>
+> >>>>        </antcall>
+> >>>>    </target>
+> >>>>
+> >>>> - make sure the build.stratego.args property contains -I
+> >>>> &quot;${lib}&quot;
+> >>>>
+> >>>> In the example above, Stratego-YOURLANG would be the module that
+> defines
+> >>>> the Stratego embedding of your syntax. Instead of naming it
+> MetaVariables,
+> >>>> please give it a name that starts with "Stratego-" so it gets used by
+> the
+> >>>> Stratego editor.
+> >>>>
+> >>>> The current Spoofax release appears to have a small bug that would
+> break
+> >>>> your build if you change your Ant file to build the concrete syntax.
+> To fix
+> >>>> this, download the latest strategoxt.jar from
+> >>>> <
+> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+> >
+> http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+> >>>> and place it in your eclipse/plugins/org.strategoxt.strj*/java
+> directory,
+> >>>> overwriting the existing jar file. Make sure you restart Eclipse.
+> >>>>
+> >>>> One final thing you need is the StrategoMix module. For now you can
+> >>>> download it from
+> >>>>
+> >>>> <
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def
+> >
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def
+> .
+> >>>> Put it in the 'lib' directory of your project.
+> >>>>
+> >>>> To actually use concrete syntax in a file, you have to create a small
+> >>>> meta-descriptor for it. For example, if you have a file foo.str, you
+> should
+> >>>> create a foo.meta file with the following contents:
+> >>>>
+> >>>>  Meta([Syntax("Stratego-YOURLANG")])
+> >>>>
+> >>>> If you do this and Spoofax can find the Stratego-YOURLANG table in
+> your
+> >>>> workspace, it will automatically use that syntax for the file. If not,
+> an
+> >>>> error will be shown in the error log (menu Window>Show View>Error
+> log).
+> >>>>
+> >>>> Let me know if you run into any trouble.
+> >>>>
+> >>>> cheers,
+> >>>>
+> >>>> Lennart
+> >>>>
+> >>>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+> >>>> >Hi everyone,
+> >>>> > I'm a science computer student from Brazil and I'm developing an
+> >>>> > application to my graduate job. It consists on a DSL, that extends
+> the
+> >>>> > Haskell language, to allow the implementation of variations on a
+> software
+> >>>> > product line.
+> >>>> >I've finished the process of parsing the language with Stratego and
+> it
+> >>>> > is working properly, but now I need to generate the Haskell code by
+> applying
+> >>>> > the rules and strategies of transformation.
+> >>>> >I'm developing with the eclipse plugin SpooFax
+> >>>> > (<<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax>
+> http://strategoxt.org/Spoofax), it offers me
+> >>>> > some interesting features. When you create a new project with
+> spoofax, it
+> >>>> > automatically generates a complete example to you, with the SDF, and
+> the
+> >>>> > rules to transform and generate code.
+> >>>> >I put my own SDF on it and began to edit the rules, but it uses the
+> >>>> > abstract syntax, on the left side, to transform the code. I can
+> generate
+> >>>> > code with abstract syntax, but my professor asked me to use the
+> concrete
+> >>>> > syntax because it is more clear to understand.
+> >>>> >Does anyone had already use concrete syntax with spoofax? Because
+> when I
+> >>>> > tried to create a new module, where I'd declare the terms and meta
+> >>>> > variables, it didn't work. In an example I found I need to to
+> something like
+> >>>> > this:
+> >>>> >
+> >>>> >module MetaVariables
+> >>>> >
+> >>>> >imports
+> >>>> >
+> >>>> >  StrategoMix[StrategoHost]
+> >>>> >
+> >>>> >  Transforamtion
+> >>>> >
+> >>>> >
+> >>>> >exports
+> >>>> >
+> >>>> >  context-free start-symbols Module[[StrategoHost]]
+> >>>> >
+> >>>> >
+> >>>> >
+> >>>> >  context-free syntax
+> >>>> >
+> >>>> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>>> >
+> >>>> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+> >>>> >
+> >>>> >
+> >>>> >But when I build the project it does not recognize the module
+> >>>> > StrategoMix, actually I'm not sure it's really necessary  to allow
+> me to use
+> >>>> > the quotations "|[" and "]|" in the rules to represent the concrete
+> syntax.
+> >>>> > I read this chapter
+> >>>> > <<
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >
+> http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+> >>>> > on the Stratego manual, but it could not help me. I'd appreciate if
+> anyone
+> >>>> > could say what I need to do to implement transformation using
+> concrete
+> >>>> > syntax with Spoofax.
+> >>>> >
+> >>>> >I have no idea where do I put the meta file related to the module,
+> that
+> >>>> > the Stratego manual mentions, and what I need to do to the build.xml
+> >>>> > recognizes it.
+> >>>> >
+> >>>> >
+> >>>> >Many thanks,
+> >>>> >
+> >>>> >
+> >>>> >Marcos Augusto
+> >>>>
+> >>>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> <mailto:Users at strategoxt.org>Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >>
+> >
+> >
+> >
+> >--
+> ><http://eelcovisser.org>http://eelcovisser.org
+> >http://twitter.com/eelcovisser
+> >
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100607/44f533c7/attachment-0001.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Jun 10 12:05:15 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 10 Jun 2010 12:05:15 +0200
+Subject: [Stratego Users] Fwd: Transformation using concrete syntax with
+ Spoofax
+In-Reply-To: <AANLkTinxcxXjkw2gC6jlWXxzAHlwzzkV6NkKdCzvz3f7@mail.gmail.c
+ om>
+References: <AANLkTilAqgeIich4Ai9emaJ7LACjxd-yHwRT6_WvfRs2@mail.gmail.com>
+	<201006051725.o55HPAMS001369@smtp1.infopact.nl>
+	<AANLkTimqZRX5Vh-FHReoizF1Ubsl9GZTWgvfwLXAPL77@mail.gmail.com>
+	<AANLkTimcUJ_502C9D0VkdCLRoqKoS0FFxP6fhfPhfwf-@mail.gmail.com>
+	<AANLkTimGyLiDSopVznKDQ5TeVlv__bnU16n9yUqg_8HI@mail.gmail.com>
+	<AANLkTinFUvicNAo-XiinDUSHFdeFb09XI21YKo4zagvK@mail.gmail.com>
+	<201006072119.o57LJntM008049@smtp1.infopact.nl>
+	<AANLkTinxcxXjkw2gC6jlWXxzAHlwzzkV6NkKdCzvz3f7@mail.gmail.com>
+Message-ID: <201006101005.o5AA5GxG007040@smtp1.infopact.nl>
+
+Hi,
+
+Good to thear that it's working :) Guido Wachsmuth pointed out there's one more thing you have to do to get this 100% working: you have to refresh the "lib" directory after the concrete syntax parse table is generated. The easiest way to automate this is by adding the following lines at the end of the "all" target in build.main.xml that we changed before:
+
+    <eclipse.convertPath fileSystemPath="${basedir}" property="projectdir" />
+    <eclipse.refreshLocal resource="${projectdir}/lib" depth="infinite" />
+
+In version 0.5.1 I'll make sure to automate most of these steps.
+
+- Lennart
+
+@ 12:28 AM 6/8/2010, Marcos Augusto wrote:
+>Hi Lennart, 
+>the problem was exactly this, I changed the build.main.xml and now it is working correctly. 
+>
+>Thanks a lot,
+>
+>Marcos Augusto
+>
+>On Mon, Jun 7, 2010 at 6:19 PM, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+>Hi Marcos,
+>
+>This message indicates that the compiler cannot find the Stratego-Transkell parse table. Did you change the build.stratego.args property in build.main.xml? It should contain:
+>
+> -I &quot;${lib}&quot;
+>
+>Also, in your example, make sure you use ]| to end quotations, not |].
+>
+>- Lennart
+>
+>@ 08:59 PM 6/7/2010, Marcos Augusto wrote:
+>>Hi Eelco,
+>>
+>>I tried this solution, but now when I build the project I have the following error:
+>>
+>>stratego.jvm.helper:
+>>
+>>        [java] cannot find the parse table for syntax "Stratego-Transkell" in the include path
+>>
+>>        [java] parse error in /Users/marcosaugustoxavier/Documents/workspace/HephaestusTransformation/trans/generate.str
+>>
+>>
+>>BUILD FAILED
+>>
+>>
+>>I had modified the build.xml to create such parse table, replacing the original target tag by this one:
+>>
+>>
+>><target name="all" depends="meta-syntax, spoofaximp.default"/>
+>>
+>>    <target name="meta-syntax">
+>>
+>>    <antcall target="sdf2table">
+>>
+>>          <param name="sdfmodule" value="Stratego-Transkell"/>
+>>
+>>              <param name="build.sdf.imports" value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+>>
+>>              <param name="include" value="${lib}"/>
+>>
+>>      </antcall>
+>>
+>>  </target>
+>>
+>>
+>>But I still have the same problem on the editor ( it does not recognize the concrete syntax) and now this error on build :/
+>>
+>>
+>>Thanks,
+>>
+>>
+>>Marcos Augusto
+>>
+>>
+>>On Mon, Jun 7, 2010 at 3:12 PM, Eelco Visser <<mailto:E.Visser at tudelft.nl><mailto:E.Visser at tudelft.nl>E.Visser at tudelft.nl> wrote:
+>>Hi Marcos,
+>>
+>>Try to put
+>>
+>>   Meta([Syntax("Stratego-Transkell")])
+>>
+>>in generate.meta. The meta file describes the syntax of the
+>>corresponding .str file.
+>>
+>>-- Eelco
+>>
+>>
+>>
+>>On Mon, Jun 7, 2010 at 5:29 PM, Marcos Augusto <<mailto:marcoscamelo20 at gmail.com><mailto:marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com> wrote:
+>>> Hello,
+>>>
+>>> I had some problems when I tried to use the concrete syntax in fact.
+>>>
+>>> I followed the steps you wrote,
+>>> - changed the build.main.xml
+>>> - replaced the strategox.jar by the newer one
+>>> - added the StrategoMix.sdf to the right place
+>>> - created the meta files
+>>>
+>>> So I build the project and it worked properly, but now I don't know how to
+>>> use it.
+>>> Let me give you an overview about my project. I had two sdf files Commom.sdf
+>>> with the lexical syntax
+>>> and transkell.sdf  (the main module with context-free syntax that imports
+>>> Common). So my transkell.def contains these two modules.
+>>> Now I added the module Stratego-Transkell in the Stratego-Traskell.sdf file,
+>>> that contains something like this:
+>>>
+>>>
+>>> module Stratego-Transkell
+>>>
+>>> imports
+>>>
+>>>   StrategoMix[StrategoHost]
+>>>
+>>>   transkell
+>>>
+>>> exports
+>>>
+>>>   context-free start-symbols Module[[StrategoHost]]
+>>>
+>>>
+>>>
+>>>   context-free syntax
+>>>
+>>>     "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>
+>>>     "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>
+>>> variables
+>>>
+>>>     "tname"[0-9]*  -> TransfName     {prefer}
+>>>
+>>>     "body"[0-9]*     -> Body         {prefer}
+>>>
+>>> I've also created 3 meta files with the names of each module and put them at
+>>> the same folder of the sdf files:
+>>>
+>>> - Commom.meta
+>>>
+>>> - Stratego-Transkell.meta
+>>>
+>>> - transkell.meta
+>>>
+>>> They have the same content:  Meta([Syntax("Stratego-Transkell")])
+>>>
+>>> So I built the project and tried to use the concrete syntax on
+>>> transformations. But it didn't recognises the symbol "|[" neither the
+>>> meta-variables I've defined before.
+>>> In my generate.str file I have something like this:
+>>>
+>>> module generate
+>>>
+>>> imports
+>>>
+>>>   libstratego-lib
+>>>
+>>>   libstratego-gpp
+>>>
+>>>   libstratego-aterm
+>>>
+>>>   include/traskell
+>>>
+>>>   lib/editor-common.generated
+>>>
+>>> rules
+>>>
+>>> to-hakell:
+>>>
+>>> |[ Transformation tname body |] -> $[ teste]
+>>>
+>>> So I got these erros on the editor:
+>>>
+>>> - Syntax error, '|' not expected here
+>>>
+>>> - Syntax error, 'body' not expected
+>>>
+>>> here
+>>>
+>>> - Syntax error, 'tname' not expected
+>>>
+>>> here
+>>>
+>>> - Syntax error, '|' not expected here
+>>>
+>>> In addict to this, when I build the project I got the following warning:
+>>>
+>>> Meta file ignored for Stratego-Transkell.sdf (unsupported language:
+>>> Stratego-Transkell)
+>>> java.lang.RuntimeException: Meta file ignored for Stratego-Transkell.sdf
+>>> (unsupported language: Stratego-Transkell)
+>>> at org.strategoxt.imp.runtime.Environment.logWarning(Environment.java:317)
+>>> at
+>>> org.strategoxt.imp.runtime.parser.SGLRParseController.processMetaFile(SGLRParseController.java:315)
+>>> at
+>>> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:229)
+>>> at
+>>> org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseController.java:1)
+>>> at
+>>> org.strategoxt.imp.runtime.dynamicloading.DynamicParseController.parse(DynamicParseController.java:163)
+>>> at org.eclipse.imp.editor.ParserScheduler.run(ParserScheduler.java:85)
+>>> at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+>>>
+>>> Could anybody help me. Did I forget any step?
+>>> I don't know if I should change the build.xml, to the main module became
+>>> Stratego-Transkell instead of transkell, and how do I change this. Or if I
+>>> put the meta files in a wrong place.
+>>>
+>>> Thanks in advance,
+>>>
+>>> Marcos Augusto
+>>>
+>>>
+>>>
+>>> On Sat, Jun 5, 2010 at 9:14 PM, Marcos Augusto <<mailto:marcoscamelo20 at gmail.com><mailto:marcoscamelo20 at gmail.com>marcoscamelo20 at gmail.com>
+>>> wrote:
+>>>>
+>>>> Hi Lennart,
+>>>> Thanks very much for the explanation. I'll try it and I'll give a feedback
+>>>> as soon as possible.
+>>>> best regards,
+>>>> Marcos Augusto
+>>>>
+>>>> On Sat, Jun 5, 2010 at 2:25 PM, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl><mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl>
+>>>> wrote:
+>>>>>
+>>>>> Hi Marcos,
+>>>>>
+>>>>> Spoofax supports concrete object syntax, but it does not yet provide any
+>>>>> assistance in setting up your project to use it. We're very much interested
+>>>>> in this topic and want to make it much easier to use concrete syntax with
+>>>>> Spoofax in the future (keep an eye on
+>>>>> <<http://yellowgrass.org/issue/Spoofax/55>http://yellowgrass.org/issue/Spoofax/55>http://yellowgrass.org/issue/Spoofax/55). For now, you just have to set up
+>>>>> the syntax and create a parse table yourself, following the steps below.
+>>>>>
+>>>>> You already created a syntax definition module. The next step is to build
+>>>>> a parse table for the syntax. To do this you have to adapt the
+>>>>> build.main.xml file:
+>>>>>
+>>>>> - change the "all" target and add a "meta-syntax" target as follows:
+>>>>>
+>>>>>  <target name="all" depends="meta-syntax, spoofaximp.default"/>
+>>>>>      <target name="meta-syntax">
+>>>>>      <antcall target="sdf2table">
+>>>>>            <param name="sdfmodule" value="Stratego-YOURLANG"/>
+>>>>>                <param name="build.sdf.imports"
+>>>>> value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+>>>>>                <param name="include" value="${lib}"/>
+>>>>>        </antcall>
+>>>>>    </target>
+>>>>>
+>>>>> - make sure the build.stratego.args property contains -I
+>>>>> &quot;${lib}&quot;
+>>>>>
+>>>>> In the example above, Stratego-YOURLANG would be the module that defines
+>>>>> the Stratego embedding of your syntax. Instead of naming it MetaVariables,
+>>>>> please give it a name that starts with "Stratego-" so it gets used by the
+>>>>> Stratego editor.
+>>>>>
+>>>>> The current Spoofax release appears to have a small bug that would break
+>>>>> your build if you change your Ant file to build the concrete syntax. To fix
+>>>>> this, download the latest strategoxt.jar from
+>>>>> <<http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar>http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar>http://hydra.nixos.org/job/strategoxt-java/strc-java-trunk/build/latest/download-by-type/file/jar
+>>>>> and place it in your eclipse/plugins/org.strategoxt.strj*/java directory,
+>>>>> overwriting the existing jar file. Make sure you restart Eclipse.
+>>>>>
+>>>>> One final thing you need is the StrategoMix module. For now you can
+>>>>> download it from
+>>>>>
+>>>>> <<https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def>https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def>https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/lib/StrategoMix.def.
+>>>>> Put it in the 'lib' directory of your project.
+>>>>>
+>>>>> To actually use concrete syntax in a file, you have to create a small
+>>>>> meta-descriptor for it. For example, if you have a file foo.str, you should
+>>>>> create a foo.meta file with the following contents:
+>>>>>
+>>>>>  Meta([Syntax("Stratego-YOURLANG")])
+>>>>>
+>>>>> If you do this and Spoofax can find the Stratego-YOURLANG table in your
+>>>>> workspace, it will automatically use that syntax for the file. If not, an
+>>>>> error will be shown in the error log (menu Window>Show View>Error log).
+>>>>>
+>>>>> Let me know if you run into any trouble.
+>>>>>
+>>>>> cheers,
+>>>>>
+>>>>> Lennart
+>>>>>
+>>>>> @ 03:25 AM 6/5/2010, Marcos Augusto wrote:
+>>>>> >Hi everyone,
+>>>>> > I'm a science computer student from Brazil and I'm developing an
+>>>>> > application to my graduate job. It consists on a DSL, that extends the
+>>>>> > Haskell language, to allow the implementation of variations on a software
+>>>>> > product line.
+>>>>> >I've finished the process of parsing the language with Stratego and it
+>>>>> > is working properly, but now I need to generate the Haskell code by applying
+>>>>> > the rules and strategies of transformation.
+>>>>> >I'm developing with the eclipse plugin SpooFax
+>>>>> > (<<<http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax>http://strategoxt.org/Spoofax), it offers me
+>>>>> > some interesting features. When you create a new project with spoofax, it
+>>>>> > automatically generates a complete example to you, with the SDF, and the
+>>>>> > rules to transform and generate code.
+>>>>> >I put my own SDF on it and began to edit the rules, but it uses the
+>>>>> > abstract syntax, on the left side, to transform the code. I can generate
+>>>>> > code with abstract syntax, but my professor asked me to use the concrete
+>>>>> > syntax because it is more clear to understand.
+>>>>> >Does anyone had already use concrete syntax with spoofax? Because when I
+>>>>> > tried to create a new module, where I'd declare the terms and meta
+>>>>> > variables, it didn't work. In an example I found I need to to something like
+>>>>> > this:
+>>>>> >
+>>>>> >module MetaVariables
+>>>>> >
+>>>>> >imports
+>>>>> >
+>>>>> >  StrategoMix[StrategoHost]
+>>>>> >
+>>>>> >  Transforamtion
+>>>>> >
+>>>>> >
+>>>>> >exports
+>>>>> >
+>>>>> >  context-free start-symbols Module[[StrategoHost]]
+>>>>> >
+>>>>> >
+>>>>> >
+>>>>> >  context-free syntax
+>>>>> >
+>>>>> >    "|[" Transf "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>>> >
+>>>>> >    "|[" Body "]|" -> Term [[StrategoHost]] {cons("ToMetaExpr")}
+>>>>> >
+>>>>> >
+>>>>> >But when I build the project it does not recognize the module
+>>>>> > StrategoMix, actually I'm not sure it's really necessary  to allow me to use
+>>>>> > the quotations "|[" and "]|" in the rules to represent the concrete syntax.
+>>>>> > I read this chapter
+>>>>> > <<<http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html>http://hydra.nixos.org/build/431774/download/1/manual/chunk-chapter/stratego-concrete-syntax.html
+>>>>> > on the Stratego manual, but it could not help me. I'd appreciate if anyone
+>>>>> > could say what I need to do to implement transformation using concrete
+>>>>> > syntax with Spoofax.
+>>>>> >
+>>>>> >I have no idea where do I put the meta file related to the module, that
+>>>>> > the Stratego manual mentions, and what I need to do to the build.xml
+>>>>> > recognizes it.
+>>>>> >
+>>>>> >
+>>>>> >Many thanks,
+>>>>> >
+>>>>> >
+>>>>> >Marcos Augusto 
+
+
+From gre at ecs.soton.ac.uk  Thu Jun 10 14:08:18 2010
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Thu, 10 Jun 2010 13:08:18 +0100
+Subject: [Stratego Users] Meta-vars in embedded concrete syntax
+In-Reply-To: <AANLkTimhFvaebS0xGjZxayKP30LeVBZo-brdxjwtJ06y@mail.gmail.com>
+References: <AANLkTimhFvaebS0xGjZxayKP30LeVBZo-brdxjwtJ06y@mail.gmail.com>
+Message-ID: <AANLkTinNV7um52GUOihfw-MIU1EpOHKMhMxJ2CYlFp4D@mail.gmail.com>
+
+Hi all,
+
+I want to use stratego to generate some stratego containing the concrete
+syntax of webdsl. I've managed to embed the webdsl concrete syntax in the
+stratego concrete syntax, but the meta variables in the webdsl concrete
+syntax are causing me a problem. Take the following as an example:
+
+rules
+  Restrict :
+    pattern -> |[ rules
+                       Modify :
+                         webdsl |[ navigate(user){elem*} ]|  -> webdsl |[ if
+(test()) { "Denied" } else { navigate(user){elem*} } ]|
+                   ]|
+
+I'm getting an error because the meta variable elem* isn't bound to
+anything. Instead of it being bound to a value here, I want it to appear in
+the generated stratego as it is, where it will be correctly bound. Is there
+a way to make this work, or do I need to modify the stratego implementation?
+
+Cheers,
+Rob
+
+-- 
+Dr Giorgios Robert Economopoulos
+School of Electronics and Computer Science
+University of Southampton
+Southampton
+SO17 1BJ
+United Kingdom
+
+Phone: +44 (0)238 059 3123
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100610/5398acb6/attachment.html 
+
+From bernhard.merkle at googlemail.com  Fri Jun 11 14:38:32 2010
+From: bernhard.merkle at googlemail.com (Bernhard Merkle)
+Date: Fri, 11 Jun 2010 14:38:32 +0200
+Subject: [Stratego Users] metamodel aware editors for Editor Services *.esv
+Message-ID: <AANLkTin8UEJHWTfaefLzHglZFZAUSi0kcdPoIRKLTf0C@mail.gmail.com>
+
+Hi
+stratego/IMP is really nice.
+I like the dynamic approach which avoids codegen as much as possible and
+dynamic usage of plugin on the fly (no restart :-)
+
+question: would it be possible to make the *.esv editors meta model aware so
+that I have also editor support there.
+e.g. I would expect that in the colorer i can use CTRL-space and then select
+"Entity" as the meta type which should get another color.
+ATM is seems that the *.esv editors do not really know about the
+modelelements from MY meta model.
+
+2nd question: the editor-support described in  Syntax highlighting in the
+tutorial does not work at all here.
+I have a fresh 3.5.2 SDK installation and installed spoofax/IMP 0.5 but it
+does not work as described.
+What is the magic there ? (I have also reloaded the example file but it does
+not color it)
+
+thanks,
+Berni
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100611/84c53d8b/attachment.html 
+
+From bernhard.merkle at googlemail.com  Fri Jun 11 15:02:07 2010
+From: bernhard.merkle at googlemail.com (Bernhard Merkle)
+Date: Fri, 11 Jun 2010 15:02:07 +0200
+Subject: [Stratego Users] Conflicts with external definition of 'analyze'
+	after Rebuild in check.str
+Message-ID: <AANLkTinnSuTaR06O9U9xaZVM5OquXHLwRFDSlex9gDv9@mail.gmail.com>
+
+I generated Java Code with the example. fine.
+
+I changed the editor service and rebuild with build.main.xml and it works
+now. fine
+(answering my own question nr.2 from previous mail :-)
+
+however I get the following (after rebuild) error in check.str:
+Conflicts with external definition of 'analyze'
+Conflicts with external definition of 'record-entity'
+
+etc.etc.
+
+what is the problem here ?
+
+thanks,
+Berni.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100611/ab75b1b0/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Fri Jun 11 19:26:12 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Fri, 11 Jun 2010 19:26:12 +0200
+Subject: [Stratego Users] metamodel aware editors for Editor Services
+ *.esv
+In-Reply-To: <AANLkTin8UEJHWTfaefLzHglZFZAUSi0kcdPoIRKLTf0C@mail.gmail.c
+ om>
+References: <AANLkTin8UEJHWTfaefLzHglZFZAUSi0kcdPoIRKLTf0C@mail.gmail.com>
+Message-ID: <20100611172613.2168A118378@mailrelay.hotspotsvankpn.com>
+
+Hi Berni,
+
+Nice to hear you're enthusiastic and thanks for the input you provided on the paper! Making the .esv editors aware of the meta model is definitely something we plan to do. Right now, improving the SDF editor, providing better documentation, and making it easier to do syntax-safe transformations with concrete syntax are higher on our agenda though. 
+
+As for the coloring, the example should definitely work. Did you press control-alt-B (command-option-B on OSX) to apply your changes? If you're just changing the .esv's, it doesn't really have to rebuild anything, but doing this will load your changes into the environment. I'll change the Tour to make this more clear.
+
+cheers,
+Lennart
+
+@ 02:38 PM 6/11/2010, Bernhard Merkle wrote:
+>Hi 
+>stratego/IMP is really nice. 
+>I like the dynamic approach which avoids codegen as much as possible and dynamic usage of plugin on the fly (no restart :-)
+>
+>question: would it be possible to make the *.esv editors meta model aware so that I have also editor support there.
+>e.g. I would expect that in the colorer i can use CTRL-space and then select "Entity" as the meta type which should get another color.
+>ATM is seems that the *.esv editors do not really know about the modelelements from MY meta model.
+>
+>2nd question: the editor-support described in  Syntax highlighting in the tutorial does not work at all here.
+>I have a fresh 3.5.2 SDK installation and installed spoofax/IMP 0.5 but it does not work as described.
+>What is the magic there ? (I have also reloaded the example file but it does not color it)
+>
+>thanks,
+>Berni
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From bernhard.merkle at googlemail.com  Fri Jun 11 19:56:14 2010
+From: bernhard.merkle at googlemail.com (Bernhard Merkle)
+Date: Fri, 11 Jun 2010 19:56:14 +0200
+Subject: [Stratego Users] metamodel aware editors for Editor Services
+	*.esv
+In-Reply-To: <20100611172613.2168A118378@mailrelay.hotspotsvankpn.com>
+References: <AANLkTin8UEJHWTfaefLzHglZFZAUSi0kcdPoIRKLTf0C@mail.gmail.com>
+	<20100611172613.2168A118378@mailrelay.hotspotsvankpn.com>
+Message-ID: <AANLkTikF3CyQHy-AdppG7S_knWfsBSbA5xJ15tmqlgVt@mail.gmail.com>
+
+On Fri, Jun 11, 2010 at 19:26, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+>
+> As for the coloring, the example should definitely work. Did you press
+> control-alt-B (command-option-B on OSX) to apply your changes? If you're
+> just changing the .esv's, it doesn't really have to rebuild anything, but
+> doing this will load your changes into the environment. I'll change the Tour
+> to make this more clear.
+>
+
+yes it would help to know in the tour when
+-project build (control-alt B) and when
+-ant build.main.xml (Alt-Shift-X Q)
+is required.
+
+thank and kind regards,
+Berni.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100611/3eeb8795/attachment.html 
+
+From bernhard.merkle at googlemail.com  Fri Jun 11 20:20:43 2010
+From: bernhard.merkle at googlemail.com (Bernhard Merkle)
+Date: Fri, 11 Jun 2010 20:20:43 +0200
+Subject: [Stratego Users] searching the "editor" and "aterm" language as
+	examples
+Message-ID: <AANLkTim_MmSC3-TPrvyLNWG-f5PDrgP-Qt_7cwHtmxAi@mail.gmail.com>
+
+I was curious to see the sdf and esv files of the editor themself and the
+aterm language.
+So I imported "org.strategoxt.imp.editors.aterm" and
+"org.strategoxt.imp.editors.editorservice"
+as Source Project (from the plugins view).
+
+however i am missing the "usual" spoofax/Imp project structure
+(editor/include/styntax/trans etc)
+There is only "include" and the files there have different extensions (e.g.
+def instead of sdf)
+
+- Is this a packed format or the resulting format for spoofax/Imp plugins ?
+- Where can I find the "real" source of the langauge for the editor and
+aterm ? in SVN  ?
+
+thanks,
+Berni.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100611/0119013d/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Sat Jun 12 12:41:42 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sat, 12 Jun 2010 12:41:42 +0200
+Subject: [Stratego Users] Conflicts with external definition of
+ 'analyze' after Rebuild in check.str
+In-Reply-To: <AANLkTinnSuTaR06O9U9xaZVM5OquXHLwRFDSlex9gDv9@mail.gmail.c
+ om>
+References: <AANLkTinnSuTaR06O9U9xaZVM5OquXHLwRFDSlex9gDv9@mail.gmail.com>
+Message-ID: <201006121041.o5CAfgeL026510@smtp1.infopact.nl>
+
+Hi Berni,
+
+I guess I missed your second email before :) Yes, by rebuilding the project these services are loaded. Note that using control-alt-B or "Build project" from the Eclipse project menu are equivalent to invoking the Ant builder by hand. (I still have to adapt the Tour to make this more clear.)
+
+Your other problem seems very strange. In the past, we have seen a similar problem on Windows caused by using NIO preventing files from being deleted on Windows (http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4715154). I reopened the issue at http://yellowgrass.org/issue/Spoofax/107. Could you provide some more details? Is this a recurring problem? Which OS are you using? Do you have an include/yourlang.rtree file in your project by any chance? In the past this problem was caused by this file not being deleted by the builder.
+
+- Lennart
+
+@ 03:02 PM 6/11/2010, Bernhard Merkle wrote:
+>I generated Java Code with the example. fine.
+>
+>I changed the editor service and rebuild with build.main.xml and it works now. fine 
+>(answering my own question nr.2 from previous mail :-)
+>
+>however I get the following (after rebuild) error in check.str:
+>Conflicts with external definition of 'analyze'
+>Conflicts with external definition of 'record-entity'
+>
+>etc.etc.
+>
+>what is the problem here ?
+>
+>thanks,
+>Berni.
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From L.C.L.Kats at tudelft.nl  Sat Jun 12 12:52:00 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sat, 12 Jun 2010 12:52:00 +0200
+Subject: [Stratego Users] searching the "editor" and "aterm" language as
+ examples
+In-Reply-To: <AANLkTim_MmSC3-TPrvyLNWG-f5PDrgP-Qt_7cwHtmxAi@mail.gmail.c
+ om>
+References: <AANLkTim_MmSC3-TPrvyLNWG-f5PDrgP-Qt_7cwHtmxAi@mail.gmail.com>
+Message-ID: <201006121052.o5CAq0O9027082@smtp1.infopact.nl>
+
+Hi,
+
+Those editors may not be the best of examples as they are based on languages that were developed before Spoofax. What I think is an excellent example of a project developed with Spoofax is the mobl language at http://mobl-lang.org/. It provides a close to full-featured editor and the source looks clean and well-organized. Still, if you want to have a look at the grammars of those included languages, you can find the SDF syntax for the ESV language at https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.generator/src/syntax and for SDF at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/trunk/sdf-front/syn. The syntax for the ATerm language can be found at https://svn.strategoxt.org/repos/StrategoXT/strategoxt/trunk/aterm-front/syn.
+
+cheers,
+
+Lennart
+
+@ 08:20 PM 6/11/2010, Bernhard Merkle wrote:
+>I was curious to see the sdf and esv files of the editor themself and the aterm language.
+>So I imported "org.strategoxt.imp.editors.aterm" and "org.strategoxt.imp.editors.editorservice"
+>as Source Project (from the plugins view).
+>
+>however i am missing the "usual" spoofax/Imp project structure (editor/include/styntax/trans etc)
+>There is only "include" and the files there have different extensions (e.g. def instead of sdf)
+>
+>- Is this a packed format or the resulting format for spoofax/Imp plugins ?
+>- Where can I find the "real" source of the langauge for the editor and aterm ? in SVN  ?
+>
+>thanks,
+>Berni.
+
+
+From L.C.L.Kats at tudelft.nl  Sat Jun 12 14:03:48 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sat, 12 Jun 2010 14:03:48 +0200
+Subject: [Stratego Users] Meta-vars in embedded concrete syntax
+In-Reply-To: <AANLkTinNV7um52GUOihfw-MIU1EpOHKMhMxJ2CYlFp4D@mail.gmail.c
+ om>
+References: <AANLkTimhFvaebS0xGjZxayKP30LeVBZo-brdxjwtJ06y@mail.gmail.com>
+	<AANLkTinNV7um52GUOihfw-MIU1EpOHKMhMxJ2CYlFp4D@mail.gmail.com>
+Message-ID: <201006121203.o5CC3muv031395@smtp1.infopact.nl>
+
+Hi Rob,
+
+That's an interesting case, generating Stratego code with embedded concrete syntax :) I can see how there could be problems with that. Are you getting this error in the compiler, or in the editor? If the problem is in the compiler, then my guess would be that it's a problem with the 'meta-explode' tool that translates embedded concrete syntax fragments to Stratego term operations. For example consider the following:
+
+$ echo 'module foo rules bar = !compilation-unit |[ class x {} ]|' | sglri -p `locate1 Stratego-Java-15.tbl` | pp-aterm
+
+would print something with a CompilationUnit(...) constructor, while
+
+$ echo 'module foo rules bar = !compilation-unit |[ class x {} ]|' | sglri -p `locate1 Stratego-Java-15.tbl` | meta-explode | pp-aterm
+
+shows an Op("CompilationUnit", ...) term. It may be the case that meta-explode simply cannot handle this case. Try it with your syntax and see what happens: it probably gets confused. In that case meta-explode would have to be changed to handle it.
+
+hth,
+
+Lennart
+
+@ 02:08 PM 6/10/2010, Rob Economopoulos wrote:
+>Hi all,
+>
+>I want to use stratego to generate some stratego containing the concrete syntax of webdsl. I've managed to embed the webdsl concrete syntax in the stratego concrete syntax, but the meta variables in the webdsl concrete syntax are causing me a problem. Take the following as an example:
+>
+>rules 
+>  Restrict : 
+>    pattern -> |[ rules 
+>                       Modify :
+>                         webdsl |[ navigate(user){elem*} ]|  -> webdsl |[ if (test()) { "Denied" } else { navigate(user){elem*} } ]|
+>                   ]|
+>
+>I'm getting an error because the meta variable elem* isn't bound to anything. Instead of it being bound to a value here, I want it to appear in the generated stratego as it is, where it will be correctly bound. Is there a way to make this work, or do I need to modify the stratego implementation?
+>
+>Cheers,
+>Rob
+>
+>-- 
+>Dr Giorgios Robert Economopoulos
+>School of Electronics and Computer Science
+>University of Southampton
+>Southampton
+>SO17 1BJ
+>United Kingdom
+>
+>Phone: +44 (0)238 059 3123
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From kutsia at risc.uni-linz.ac.at  Tue Jun 15 12:45:29 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Tue, 15 Jun 2010 12:45:29 +0200
+Subject: [Stratego Users] LOPSTR/PPDP 2010 Early Registration Deadline: June
+	21
+Message-ID: <4C1759C9.1090808@risc.uni-linz.ac.at>
+
+[Apologize for multiple copies]
+====================================================================
+
+                *** CALL FOR PARTICIPATION ***
+
+                           LOPSTR 2010
+                20th International Symposium on
+        Logic-Based Program Synthesis and Transformation
+         http://www.risc.jku.at/conferences/lopstr2010/
+                       July 23-25, 2010
+
+                           PPDP 2010
+          12th International ACM SIGPLAN Symposium on
+       Principles and Practice of Declarative Programming
+          http://www.risc.jku.at/conferences/ppdp2010/
+                        July 26-28, 2010
+
+                       Hagenberg, Austria
+
+====================================================================
+
+IMPORTANT INFORMATION
+
+Early registration deadline (for both conferences): June 21, 2010
+
+--------------------------------------------------------------------
+
+LOPSTR 2010 INVITED SPEAKERS:
+
+  - Bruno Buchberger (RISC, Johannes Kepler University Linz, Austria)
+  - Olivier Danvy (University of Aarhus, Denmark)
+  - Johann Schumann (RIACS/NASA Ames Research Center, USA)
+
+LOPSTR 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/lopstr2010/program.html
+
+--------------------------------------------------------------------
+
+PPDP 2010 INVITED SPEAKERS:
+
+  - Maria Paola Bonacina (University of Verona, Italy)
+  - Sumit Gulwani (Microsoft Research)
+
+PPDP 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/ppdp2010/program.html
+
+--------------------------------------------------------------------
+
+
+From marcoscamelo20 at gmail.com  Mon Jun 21 06:09:23 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 21 Jun 2010 01:09:23 -0300
+Subject: [Stratego Users] Doubts about Stratego transformation
+Message-ID: <AANLkTinA8r2YpckPDQSbI-fE8po8jBNL_8XRBwh60xfL@mail.gmail.com>
+
+Hi everyone, I was trying to do some manipulations on Strings but I didn't
+find a good way to do that: 1- Delete the word "parse" from the begin of the
+word, for example if a have parseXml the result will be Xml. I applied this
+rule: <ltrim-chars(?'p') ; ltrim-chars(?'a'); ltrim-chars(?'r');
+ltrim-chars(?'s'); ltrim-chars(?'e')>name where name is the input string. It
+is working properly, but I'd like to know if there is another way to do
+this, for example, take a substring. 2 - Transform the first letter of a
+word to lower-case, so if I have the input TransformXml the output will be
+transformXml: I solved this with many transformation:
+<concat-strings>[(<explode-string; take(|1); implode-string;
+lower-case>(<to-java>tname)),<explode-string; reverse;
+take(<sum>[(<explode-string;length>(<to-java>tname)),-1]); reverse;
+implode-string>(<to-java>tname)] Where tname is the input. Basically I took
+the first character of the word, transformed it to lower-case. After this I
+concatenated it with the other characters of the word. It is also working,
+but I believe that it is not a good solution for a so simple problem. If
+someone has a better solution, it would be great. Thanks in advance, Marcos
+Augusto.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100621/7d249a69/attachment.html 
+
+From dgroenewegen at gmail.com  Mon Jun 21 10:06:51 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Mon, 21 Jun 2010 10:06:51 +0200
+Subject: [Stratego Users] Doubts about Stratego transformation
+In-Reply-To: <AANLkTinA8r2YpckPDQSbI-fE8po8jBNL_8XRBwh60xfL@mail.gmail.com>
+References: <AANLkTinA8r2YpckPDQSbI-fE8po8jBNL_8XRBwh60xfL@mail.gmail.com>
+Message-ID: <AANLkTimJD5ztySt4XZuGN8JA4cGjU-vGC1UviBSv2Cxg@mail.gmail.com>
+
+Hi Marcos,
+
+1 I don't know a short way, but you can at least make it reusable:
+remove-prefix(|prefix) = if string-starts-with(|prefix) then
+explode-string;reverse;take(|<subti> (<length>,<string-length>
+prefix));reverse;implode-string end
+
+2 lower-first = string-as-chars([to-lower | id])
+string-as-chars takes care of explode-string/implode-string, and the
+strategy [to-lower|id] is a congruence (read about congruences here:
+http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/one-page/index.html#id1243372
+)
+
+Example is in attachment, run with 'str -i test.str':
+
+module test
+
+imports
+  libstratego-lib
+
+strategies
+
+ main=
+   !"parseXML"
+ ; remove-prefix(|"parse")
+ ; debug(!1)
+ ; !"TransformXml"
+ ; lower-first
+ ; debug(!2)
+
+ remove-prefix(|prefix) = if string-starts-with(|prefix) then
+explode-string;reverse;take(|<subti> (<length>,<string-length>
+prefix));reverse;implode-string end
+
+ lower-first = string-as-chars([to-lower | id])
+
+
+-- Danny
+
+On Mon, Jun 21, 2010 at 6:09 AM, Marcos Augusto
+<marcoscamelo20 at gmail.com> wrote:
+> Hi everyone, I was trying to do some manipulations on Strings but I didn't
+> find a good way to do that: 1- Delete the word "parse" from the begin of the
+> word, for example if a have parseXml the result will be Xml. I applied this
+> rule: <ltrim-chars(?'p') ; ltrim-chars(?'a'); ltrim-chars(?'r');
+> ltrim-chars(?'s'); ltrim-chars(?'e')>name where name is the input string. It
+> is working properly, but I'd like to know if there is another way to do
+> this, for example, take a substring. 2 - Transform the first letter of a
+> word to lower-case, so if I have the input TransformXml the output will be
+> transformXml: I solved this with many transformation:
+> <concat-strings>[(<explode-string; take(|1); implode-string;
+> lower-case>(<to-java>tname)),<explode-string; reverse;
+> take(<sum>[(<explode-string;length>(<to-java>tname)),-1]); reverse;
+> implode-string>(<to-java>tname)] Where tname is the input. Basically I took
+> the first character of the word, transformed it to lower-case. After this I
+> concatenated it with the other characters of the word. It is also working,
+> but I believe that it is not a good solution for a so simple problem. If
+> someone has a better solution, it would be great. Thanks in advance, Marcos
+> Augusto.
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: temp.str
+Type: application/octet-stream
+Size: 373 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100621/c1f0b659/attachment.obj 
+
+From lastbug at gmail.com  Mon Jun 21 12:28:24 2010
+From: lastbug at gmail.com (Seyed)
+Date: Mon, 21 Jun 2010 11:28:24 +0100
+Subject: [Stratego Users] Redirecting an Error Handling
+Message-ID: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+
+Hello Everyone,
+
+I'm learning Stratego and doing an experiment with it.
+
+I want to modify a very small part of the error handling mechanism in
+the compiler of WebDSL. It relates to "derive crud -entityName-"
+(derive-crud.str).
+
+I would like to change the following code. So that the WebDSL compiler
+doesn't give an error, when "derive crud" is calling a non-existing
+entity. Instead it should call a template named doSomething (not
+important for now).
+
+Before Modification:
+
+ constraint-error-crud :
+   DeriveCrud(ent) ->
+   where not( ent)
+
+After:
+
+constraint-error-crud :
+   DeriveCrud(ent) ->
+    where not( ent)
+
+    ;  doSomething
+
+
+
+I do not get an error while installing the WebDSL compiler with the
+new modification; but I do get an iternal error while compiling the
+WebDSL code.
+
+I have replaced with and RemoveMe(), but still got an internal error
+while compiling the WebDSL code.
+
+I also used a combinator as there is another error message with the
+same name and still got the error.
+
+I would appritiate it if something could give me a guidance about the
+error. And for the quick reference the following is the full source
+code inside derive-crud.str.
+
+------------------  derive-crud.str ----------
+
+module org/webdsl/dsl/modules/derive-crud
+
+imports
+ libstrategolib
+ libwebdsl-front
+
+strategies
+
+rules
+
+ constraint-error = constraint-error-crud
+
+ constraint-error-crud :
+   DeriveCrud(ent) ->
+   where not( ent)
+
+rules
+
+ constraint-error-crud :
+   DeriveCrud(ent) ->
+   where props := ent
+       ; props
+
+ constraint-error-crud-prop(|ent) :
+   prop ->
+   where srt := prop
+       ; srtentname := ) <+ ?GenericSort(_,[SimpleSort()])> srt
+       ; SimpleSort(srtentname)
+       ; page := srtentname
+       ; not( page)
+
+rules
+
+ desugar = desugar-crud
+
+ desugar-crud :
+   DeriveCrud(ent) -> RemoveMe()
+   with  (x_create, x_view, x_edit, x_manage) := ent
+       ; srt := SimpleSort(ent)
+       ; x_ent := ent
+       ; create-body-template-if-not-defined
+       ; create-main-template-if-not-defined
+       ; def|[
+           define page x_create(){
+             var temp := x_ent{}
+             //derive createPage from temp
+             main()
+             define body() {
+               header{"Create " output(temp.name) }
+               form {
+                 group("Details") {
+                   derive editRows from temp
+                 }
+                 group() {
+                   action("Save", save())
+                 }
+               }
+               action save() {
+                 temp.save();
+                 return x_manage();
+               }
+             }
+           }
+         ]|
+       ; def|[
+           define page x_view(arg : srt){
+             derive viewPage from arg
+           }
+         ]|
+       ; def|[
+           define page x_edit(arg : srt){
+             //derive editPage from arg
+             main()
+             define body() {
+               header{"Edit " output(arg.name) }
+               form {
+                 group("Details") {
+                   derive editRows from arg
+                 }
+                 group() {
+                   action("Save", save())
+                 }
+               }
+               action save() {
+                 arg.save();
+                 return x_manage();
+               }
+             }
+           }
+         ]|
+       ; def|[
+           define page x_manage(){
+             main()
+             define body(){
+               navigate(x_create()){ "create" }
+               list{
+                 for(elem : srt){
+                   listitem{
+                     output(elem)
+                     " "
+                     navigate(x_edit(elem)){ "edit" }
+                     " "
+                     form{action("remove",remove(elem))}
+                   }
+                 }
+               }
+               action remove(arg :srt){
+                 arg.delete();
+               }
+             }
+           }
+         ]|
+rules
+
+ declare = declare-crud
+
+ declare-crud :
+   DeriveCrud(ent) -> DeriveCrud(ent)
+   with  (x_create, x_view, x_edit, x_manage) := ent
+       ; srt := SimpleSort(ent)
+       ; def|[ define page x_create(){} ]|
+       ; def|[ define page x_view(arg : srt){} ]|
+       ; def|[ define page x_edit(arg : srt){} ]|
+       ; def|[ define page x_manage(){} ]|
+
+rules //util
+
+ crud-page-names :
+   ent -> (create, view, edit, manage)
+   with  create := ["create",ent]
+       ; view := ent
+       ; edit := ["edit",ent]
+       ; manage := ["manage",ent]
+
+rules
+
+ create-body-template-if-not-defined = get-body-template <+
+default-body-template
+
+ get-body-template  = ! "body"
+
+ default-body-template =
+   def|[
+     define body(){
+       "default body"
+     }
+   ]|
+
+ create-main-template-if-not-defined = get-main-template <+
+default-main-template
+
+ get-main-template  = ! "main"
+
+ default-main-template =
+   def|[
+     define main(){
+       body
+     }
+   ]|
+
+From marcoscamelo20 at gmail.com  Mon Jun 21 14:22:31 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 21 Jun 2010 09:22:31 -0300
+Subject: [Stratego Users] Doubts about Stratego transformation
+In-Reply-To: <AANLkTimJD5ztySt4XZuGN8JA4cGjU-vGC1UviBSv2Cxg@mail.gmail.com>
+References: <AANLkTinA8r2YpckPDQSbI-fE8po8jBNL_8XRBwh60xfL@mail.gmail.com> 
+	<AANLkTimJD5ztySt4XZuGN8JA4cGjU-vGC1UviBSv2Cxg@mail.gmail.com>
+Message-ID: <AANLkTimn6I0oQR3gi4kFnDmGzAeCqVrZYsO1lJC2UFdS@mail.gmail.com>
+
+Hi Danny,
+
+Thanks for your response,
+I`ll will try it it here :)
+
+On Mon, Jun 21, 2010 at 5:06 AM, Danny Groenewegen
+<dgroenewegen at gmail.com>wrote:
+
+> Hi Marcos,
+>
+> 1 I don't know a short way, but you can at least make it reusable:
+> remove-prefix(|prefix) = if string-starts-with(|prefix) then
+> explode-string;reverse;take(|<subti> (<length>,<string-length>
+> prefix));reverse;implode-string end
+>
+> 2 lower-first = string-as-chars([to-lower | id])
+> string-as-chars takes care of explode-string/implode-string, and the
+> strategy [to-lower|id] is a congruence (read about congruences here:
+>
+> http://hydra.nixos.org/job/strategoxt-docs/strategoxt-manual/html/latest/download/1/manual/one-page/index.html#id1243372
+> )
+>
+> Example is in attachment, run with 'str -i test.str':
+>
+> module test
+>
+> imports
+>  libstratego-lib
+>
+> strategies
+>
+>  main=
+>   !"parseXML"
+>  ; remove-prefix(|"parse")
+>  ; debug(!1)
+>  ; !"TransformXml"
+>  ; lower-first
+>  ; debug(!2)
+>
+>  remove-prefix(|prefix) = if string-starts-with(|prefix) then
+> explode-string;reverse;take(|<subti> (<length>,<string-length>
+> prefix));reverse;implode-string end
+>
+>  lower-first = string-as-chars([to-lower | id])
+>
+>
+> -- Danny
+>
+> On Mon, Jun 21, 2010 at 6:09 AM, Marcos Augusto
+> <marcoscamelo20 at gmail.com> wrote:
+> > Hi everyone, I was trying to do some manipulations on Strings but I
+> didn't
+> > find a good way to do that: 1- Delete the word "parse" from the begin of
+> the
+> > word, for example if a have parseXml the result will be Xml. I applied
+> this
+> > rule: <ltrim-chars(?'p') ; ltrim-chars(?'a'); ltrim-chars(?'r');
+> > ltrim-chars(?'s'); ltrim-chars(?'e')>name where name is the input string.
+> It
+> > is working properly, but I'd like to know if there is another way to do
+> > this, for example, take a substring. 2 - Transform the first letter of a
+> > word to lower-case, so if I have the input TransformXml the output will
+> be
+> > transformXml: I solved this with many transformation:
+> > <concat-strings>[(<explode-string; take(|1); implode-string;
+> > lower-case>(<to-java>tname)),<explode-string; reverse;
+> > take(<sum>[(<explode-string;length>(<to-java>tname)),-1]); reverse;
+> > implode-string>(<to-java>tname)] Where tname is the input. Basically I
+> took
+> > the first character of the word, transformed it to lower-case. After this
+> I
+> > concatenated it with the other characters of the word. It is also
+> working,
+> > but I believe that it is not a good solution for a so simple problem. If
+> > someone has a better solution, it would be great. Thanks in advance,
+> Marcos
+> > Augusto.
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100621/e92319f1/attachment.html 
+
+From dgroenewegen at gmail.com  Tue Jun 22 12:03:11 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Tue, 22 Jun 2010 12:03:11 +0200
+Subject: [Stratego Users] Redirecting an Error Handling
+In-Reply-To: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+References: <AANLkTim4xRwOSJAnYBvw-B7tjtx1j4GckHo66vhso-Wj@mail.gmail.com>
+Message-ID: <AANLkTimlTWLydY3RjpXCTeWS0IV1eahUcMmTSF-hA52X@mail.gmail.com>
+
+Hi Seyed,
+
+In the WebDSL compiler we use the following conventions:
+
+- constraint rules don't generate code, if they succeed, they produce
+an error (call to add-error) or warning (call to add-warning).
+- desugar rules transform definitions, they can also emit new
+definitions (call emit-webdsl-code, the passed in definitions are
+added to the AST and further desugared automatically), or remove
+definitions (by rewriting to RemoveMe(), which is automatically
+removed from the AST).
+
+In your case, there shouldn't be any constraint rules, since you no
+longer want the 'entity not defined' error. There should be two
+desugar rule variants which are chosen based on whether the entity is
+defined or not:
+
+ desugar-crud :
+   DeriveCrud(ent) -> RemoveMe()
+  where <IsEntity> ent
+  with  (x_create, x_view, x_edit, x_manage) := ent
+           ......
+
+ desugar-crud :
+   DeriveCrud(ent) -> .......
+  where not(<IsEntity> ent)
+  with   ......
+
+
+You can read more about the WebDSL compiler architecture in the
+journal article 'Code generation by model transformation: a case study
+in transformation modularity':
+http://dx.doi.org/10.1007/s10270-009-0136-1
+
+-- Danny
+
+On Mon, Jun 21, 2010 at 12:28 PM, Seyed <lastbug at gmail.com> wrote:
+> Hello Everyone,
+>
+> I'm learning Stratego and doing an experiment with it.
+>
+> I want to modify a very small part of the error handling mechanism in
+> the compiler of WebDSL. It relates to "derive crud -entityName-"
+> (derive-crud.str).
+>
+> I would like to change the following code. So that the WebDSL compiler
+> doesn't give an error, when "derive crud" is calling a non-existing
+> entity. Instead it should call a template named doSomething (not
+> important for now).
+>
+> Before Modification:
+>
+> ?constraint-error-crud :
+> ? DeriveCrud(ent) ->
+> ? where not( ent)
+>
+> After:
+>
+> constraint-error-crud :
+> ? DeriveCrud(ent) ->
+> ? ?where not( ent)
+>
+> ? ?; ?doSomething
+>
+>
+>
+> I do not get an error while installing the WebDSL compiler with the
+> new modification; but I do get an iternal error while compiling the
+> WebDSL code.
+>
+> I have replaced with and RemoveMe(), but still got an internal error
+> while compiling the WebDSL code.
+>
+> I also used a combinator as there is another error message with the
+> same name and still got the error.
+>
+> I would appritiate it if something could give me a guidance about the
+> error. And for the quick reference the following is the full source
+> code inside derive-crud.str.
+>
+> ------------------ ?derive-crud.str ----------
+>
+> module org/webdsl/dsl/modules/derive-crud
+>
+> imports
+> ?libstrategolib
+> ?libwebdsl-front
+>
+> strategies
+>
+> rules
+>
+> ?constraint-error = constraint-error-crud
+>
+> ?constraint-error-crud :
+> ? DeriveCrud(ent) ->
+> ? where not( ent)
+>
+> rules
+>
+> ?constraint-error-crud :
+> ? DeriveCrud(ent) ->
+> ? where props := ent
+> ? ? ? ; props
+>
+> ?constraint-error-crud-prop(|ent) :
+> ? prop ->
+> ? where srt := prop
+> ? ? ? ; srtentname := ) <+ ?GenericSort(_,[SimpleSort()])> srt
+> ? ? ? ; SimpleSort(srtentname)
+> ? ? ? ; page := srtentname
+> ? ? ? ; not( page)
+>
+> rules
+>
+> ?desugar = desugar-crud
+>
+> ?desugar-crud :
+> ? DeriveCrud(ent) -> RemoveMe()
+> ? with ?(x_create, x_view, x_edit, x_manage) := ent
+> ? ? ? ; srt := SimpleSort(ent)
+> ? ? ? ; x_ent := ent
+> ? ? ? ; create-body-template-if-not-defined
+> ? ? ? ; create-main-template-if-not-defined
+> ? ? ? ; def|[
+> ? ? ? ? ? define page x_create(){
+> ? ? ? ? ? ? var temp := x_ent{}
+> ? ? ? ? ? ? //derive createPage from temp
+> ? ? ? ? ? ? main()
+> ? ? ? ? ? ? define body() {
+> ? ? ? ? ? ? ? header{"Create " output(temp.name) }
+> ? ? ? ? ? ? ? form {
+> ? ? ? ? ? ? ? ? group("Details") {
+> ? ? ? ? ? ? ? ? ? derive editRows from temp
+> ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? ? group() {
+> ? ? ? ? ? ? ? ? ? action("Save", save())
+> ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? action save() {
+> ? ? ? ? ? ? ? ? temp.save();
+> ? ? ? ? ? ? ? ? return x_manage();
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? }
+> ? ? ? ? ? }
+> ? ? ? ? ]|
+> ? ? ? ; def|[
+> ? ? ? ? ? define page x_view(arg : srt){
+> ? ? ? ? ? ? derive viewPage from arg
+> ? ? ? ? ? }
+> ? ? ? ? ]|
+> ? ? ? ; def|[
+> ? ? ? ? ? define page x_edit(arg : srt){
+> ? ? ? ? ? ? //derive editPage from arg
+> ? ? ? ? ? ? main()
+> ? ? ? ? ? ? define body() {
+> ? ? ? ? ? ? ? header{"Edit " output(arg.name) }
+> ? ? ? ? ? ? ? form {
+> ? ? ? ? ? ? ? ? group("Details") {
+> ? ? ? ? ? ? ? ? ? derive editRows from arg
+> ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? ? group() {
+> ? ? ? ? ? ? ? ? ? action("Save", save())
+> ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? action save() {
+> ? ? ? ? ? ? ? ? arg.save();
+> ? ? ? ? ? ? ? ? return x_manage();
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? }
+> ? ? ? ? ? }
+> ? ? ? ? ]|
+> ? ? ? ; def|[
+> ? ? ? ? ? define page x_manage(){
+> ? ? ? ? ? ? main()
+> ? ? ? ? ? ? define body(){
+> ? ? ? ? ? ? ? navigate(x_create()){ "create" }
+> ? ? ? ? ? ? ? list{
+> ? ? ? ? ? ? ? ? for(elem : srt){
+> ? ? ? ? ? ? ? ? ? listitem{
+> ? ? ? ? ? ? ? ? ? ? output(elem)
+> ? ? ? ? ? ? ? ? ? ? " "
+> ? ? ? ? ? ? ? ? ? ? navigate(x_edit(elem)){ "edit" }
+> ? ? ? ? ? ? ? ? ? ? " "
+> ? ? ? ? ? ? ? ? ? ? form{action("remove",remove(elem))}
+> ? ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? ? action remove(arg :srt){
+> ? ? ? ? ? ? ? ? arg.delete();
+> ? ? ? ? ? ? ? }
+> ? ? ? ? ? ? }
+> ? ? ? ? ? }
+> ? ? ? ? ]|
+> rules
+>
+> ?declare = declare-crud
+>
+> ?declare-crud :
+> ? DeriveCrud(ent) -> DeriveCrud(ent)
+> ? with ?(x_create, x_view, x_edit, x_manage) := ent
+> ? ? ? ; srt := SimpleSort(ent)
+> ? ? ? ; def|[ define page x_create(){} ]|
+> ? ? ? ; def|[ define page x_view(arg : srt){} ]|
+> ? ? ? ; def|[ define page x_edit(arg : srt){} ]|
+> ? ? ? ; def|[ define page x_manage(){} ]|
+>
+> rules //util
+>
+> ?crud-page-names :
+> ? ent -> (create, view, edit, manage)
+> ? with ?create := ["create",ent]
+> ? ? ? ; view := ent
+> ? ? ? ; edit := ["edit",ent]
+> ? ? ? ; manage := ["manage",ent]
+>
+> rules
+>
+> ?create-body-template-if-not-defined = get-body-template <+
+> default-body-template
+>
+> ?get-body-template ?= ! "body"
+>
+> ?default-body-template =
+> ? def|[
+> ? ? define body(){
+> ? ? ? "default body"
+> ? ? }
+> ? ]|
+>
+> ?create-main-template-if-not-defined = get-main-template <+
+> default-main-template
+>
+> ?get-main-template ?= ! "main"
+>
+> ?default-main-template =
+> ? def|[
+> ? ? define main(){
+> ? ? ? body
+> ? ? }
+> ? ]|
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From gre at ecs.soton.ac.uk  Thu Jun 24 15:31:25 2010
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Thu, 24 Jun 2010 14:31:25 +0100
+Subject: [Stratego Users] GPCE'10 Call for Tutorial Lectures
+Message-ID: <AANLkTimXqAo6268RHIrq-kWV0S5Jwpdp9jZKaZQxqJ8W@mail.gmail.com>
+
+----------------------------------------------------------------------------------
+                  Call for Tutorial Lectures
+             Ninth International Conference on
+    Generative Programming and Component Engineering
+                     (GPCE 2010)
+
+                  October 10-13, 2010
+                Eindhoven, The Netherlands
+                (co-located with SLE 2010)
+
+                   http://www.gpce.org
+---------------------------------------------------------------------------------
+
+As an experiment, GPCE and SLE have organized a joint tutorial day on
+Sunday, October 2010.
+
+The day will consist of a single plenary track with about six lectures
+about topics of interest to the audience of GPCE and SLE.
+
+The lectures will be about an hour in length; much longer than a
+regular conference talk, but much shorter than the customary half or
+even full day tutorials at other conferences.
+
+In contrast to research talks, tutorials do not (have to) present
+original new research material, but should rather focus on putting
+research into perspective for a broader audience.
+
+In contrast to longer tutorials, these lectures cannot be very
+interactive or rely on the audience participating by using tools.
+Rather they should aim to be 'keynote' style presentations,
+emphasizing the essence (but not avoiding depth).
+
+Another difference is that we will not charge separately for each
+tutorial, as this appears to be the reason for low attendance of
+tutorials at academic conferences. We will charge a single, low fee
+for the entire day that gives access to all tutorials and the FOSD
+workshop that will be held in parallel. We hope that this will ensure
+high impact of the tutorials. Tutorial presenters get free admission
+to the tutorials day, but due to the low fee we will not be able to
+provide a honorarium; if the day is successful, we will consider
+sharing any profits with tutorial presenters.
+
+SUBMISSION
+
+If you are interested in presenting a tutorial at GPCE/SLE, please
+send a short proposal (about two pages) to e.visser at tudelft.nl by July
+6, 2010. The proposal should consist of
+
+  1. title
+  2. abstract (250 words)
+  3. name of presenter
+  4. short bio (250 words)
+  5. brief outline of tutorial
+  6. relevance for GPCE/SLE audience
+
+Items 1 to 4 should be usable on the website.
+
+We will make a selection of tutorials based on relevance (topic-wise)
+for the conference and expected interest in the tutorial. Tutorial
+proposers will be notified of the decision by August 6, 2010.
+
+From marcoscamelo20 at gmail.com  Mon Jun 28 16:12:39 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Mon, 28 Jun 2010 11:12:39 -0300
+Subject: [Stratego Users] Problems with IO (append text to existing file)
+Message-ID: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.com>
+
+Hi everyone,
+
+
+I created a DSL to do a software product line, and I`m generating Haskell
+code with Stratego/XT. I`m doing everything with Spoofax. Now I need to
+output the code to some files in order to create new products. But I just
+can write on a file overwriting the existing text, but I need to append many
+pieces of code in the same file. I tried to do the following:
+
+ <fputs> ((<transformBody>tbody),  <fopen>
+("/Users/marcosaugustoxavier/Documents/TG/Output.hs", "a")); fclose
+
+
+where "(<transformBody>tbody)" is a transformation that generates a piece of
+code. But I get this error:
+
+org.strategoxt.lang.StrategoException: Exception in execution of primitive
+'SSL_fclose'
+
+
+I've also tried another code that I found in the internet:
+
+
+
+  close-file =
+    ?name; prim("SSL_close_file", name)
+
+  open-file =
+    ?(name, mode); prim("SSL_open_file", name, mode)
+
+  /**
+   * @obsolete use <open-file> (file, mode)
+   */
+  open-file =
+    ?name; not(?(_, _))
+    ; obsolete(!"<open-file> file; use <open-file> (file, mode)")
+    ; <open-file> (name, "w")
+
+  append-file =
+    <open-file> (<id>, "a")
+
+
+but when I call the transformation:
+
+
+<append-file> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs")
+
+
+I get this error:
+
+
+No such function : 'SSL_open_file'
+
+
+Could anybody help me with this?
+
+
+thanks in advance,
+
+
+Marcos Augusto
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100628/fb1f6598/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Mon Jun 28 23:06:07 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Mon, 28 Jun 2010 23:06:07 +0200
+Subject: [Stratego Users] Problems with IO (append text to existing file)
+In-Reply-To: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.c
+ om>
+References: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.com>
+Message-ID: <201006282106.o5SL6Am8004326@smtp1.infopact.nl>
+
+Hi Marcos,
+
+The Java runtime does not seem to support appending files at this time. Apparently none of the unit tests use this (barely documented) feature, and we haven't had other reports that it was missing. You can post a issue report about this at http://yellowgrass.org/project/StrategoXT. For now I would just write the entire file in one go when possible, rather than writing it in small chunks. Can't you collect all the transformation results and write them to a file all at once? The SSL_open_file primitive you found sounds like something from an older version of Stratego.
+
+- Lennart
+
+@ 04:12 PM 6/28/2010, Marcos Augusto wrote:
+
+>Hi everyone,
+>
+>
+>I created a DSL to do a software product line, and I`m generating Haskell code with Stratego/XT. I`m doing everything with Spoofax. Now I need to output the code to some files in order to create new products. But I just can write on a file overwriting the existing text, but I need to append many pieces of code in the same file. I tried to do the following:
+>
+> <fputs> ((<transformBody>tbody),  <fopen> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs", "a")); fclose
+>
+>
+>where "(<transformBody>tbody)" is a transformation that generates a piece of code. But I get this error:
+>
+>org.strategoxt.lang.StrategoException: Exception in execution of primitive 'SSL_fclose'
+>
+>
+>I've also tried another code that I found in the internet:
+>
+>
+>
+>
+>
+>  close-file = 
+>    ?name; prim("SSL_close_file", name)
+>
+>  open-file =
+>    ?(name, mode); prim("SSL_open_file", name, mode)
+>
+>  /**
+>   * @obsolete use <open-file> (file, mode)
+>   */
+>  open-file =
+>    ?name; not(?(_, _))
+>    ; obsolete(!"<open-file> file; use <open-file> (file, mode)")
+>    ; <open-file> (name, "w")
+>
+>  append-file = 
+>    <open-file> (<id>, "a")
+>
+>
+>but when I call the transformation:
+>
+><append-file> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs")
+>
+>
+>I get this error:
+>
+>
+>No such function : 'SSL_open_file'
+>
+>
+>Could anybody help me with this?
+>
+>
+>thanks in advance,
+>
+>
+>Marcos Augusto
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From marcoscamelo20 at gmail.com  Tue Jun 29 05:49:04 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Tue, 29 Jun 2010 00:49:04 -0300
+Subject: [Stratego Users] Problems with IO (append text to existing file)
+In-Reply-To: <201006282106.o5SL6Am8004326@smtp1.infopact.nl>
+References: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.com> 
+	<201006282106.o5SL6Am8004326@smtp1.infopact.nl>
+Message-ID: <AANLkTinnhpdxJmHYwlb8li8tvbJisbAIrCuVLoDw7P9Y@mail.gmail.com>
+
+Hi Lennart,
+
+I'm creating a product line, so there is a core and I generate blocks of
+code,
+those code need to be appended to different existing files. I'd do it with
+Stratego transformations, but unfortunately there is no support . So I'll do
+as you said me. I'll create a single file with all piece of code, and
+after that I'll run another program that will separate and append the pieces
+to the appropriated files.
+
+Thanks,
+
+Marcos Augusto
+
+On Mon, Jun 28, 2010 at 6:06 PM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> The Java runtime does not seem to support appending files at this time.
+> Apparently none of the unit tests use this (barely documented) feature, and
+> we haven't had other reports that it was missing. You can post a issue
+> report about this at http://yellowgrass.org/project/StrategoXT. For now I
+> would just write the entire file in one go when possible, rather than
+> writing it in small chunks. Can't you collect all the transformation results
+> and write them to a file all at once? The SSL_open_file primitive you found
+> sounds like something from an older version of Stratego.
+>
+> - Lennart
+>
+> @ 04:12 PM 6/28/2010, Marcos Augusto wrote:
+>
+> >Hi everyone,
+> >
+> >
+> >I created a DSL to do a software product line, and I`m generating Haskell
+> code with Stratego/XT. I`m doing everything with Spoofax. Now I need to
+> output the code to some files in order to create new products. But I just
+> can write on a file overwriting the existing text, but I need to append many
+> pieces of code in the same file. I tried to do the following:
+> >
+> > <fputs> ((<transformBody>tbody),  <fopen>
+> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs", "a")); fclose
+> >
+> >
+> >where "(<transformBody>tbody)" is a transformation that generates a piece
+> of code. But I get this error:
+> >
+> >org.strategoxt.lang.StrategoException: Exception in execution of primitive
+> 'SSL_fclose'
+> >
+> >
+> >I've also tried another code that I found in the internet:
+> >
+> >
+> >
+> >
+> >
+> >  close-file =
+> >    ?name; prim("SSL_close_file", name)
+> >
+> >  open-file =
+> >    ?(name, mode); prim("SSL_open_file", name, mode)
+> >
+> >  /**
+> >   * @obsolete use <open-file> (file, mode)
+> >   */
+> >  open-file =
+> >    ?name; not(?(_, _))
+> >    ; obsolete(!"<open-file> file; use <open-file> (file, mode)")
+> >    ; <open-file> (name, "w")
+> >
+> >  append-file =
+> >    <open-file> (<id>, "a")
+> >
+> >
+> >but when I call the transformation:
+> >
+> ><append-file> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs")
+> >
+> >
+> >I get this error:
+> >
+> >
+> >No such function : 'SSL_open_file'
+> >
+> >
+> >Could anybody help me with this?
+> >
+> >
+> >thanks in advance,
+> >
+> >
+> >Marcos Augusto
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100629/6c134d45/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Wed Jun 30 09:51:34 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 30 Jun 2010 09:51:34 +0200
+Subject: [Stratego Users] Problems with IO (append text to existing file)
+In-Reply-To: <AANLkTinnhpdxJmHYwlb8li8tvbJisbAIrCuVLoDw7P9Y@mail.gmail.c
+ om>
+References: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.com>
+	<201006282106.o5SL6Am8004326@smtp1.infopact.nl>
+	<AANLkTinnhpdxJmHYwlb8li8tvbJisbAIrCuVLoDw7P9Y@mail.gmail.com>
+Message-ID: <201006300751.o5U7pY5c018205@smtp1.infopact.nl>
+
+Hi Marcos,
+
+I added an issue report at http://yellowgrass.org/issue/StrategoXT/830. You can sign up and subscribe to get notified as soon as we implement this (which will likely be somehwere next month).
+
+cheers,
+
+Lennart
+
+@ 05:49 AM 6/29/2010, Marcos Augusto wrote:
+>Hi Lennart,
+>
+>I'm creating a product line, so there is a core and I generate blocks of code,
+>those code need to be appended to different existing files. I'd do it with Stratego transformations, but unfortunately there is no support . So I'll do as you said me. I'll create a single file with all piece of code, and
+>after that I'll run another program that will separate and append the pieces to the appropriated files.
+>
+>Thanks,
+>
+>Marcos Augusto
+>
+>On Mon, Jun 28, 2010 at 6:06 PM, Lennart Kats <<mailto:L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+>Hi Marcos,
+>
+>The Java runtime does not seem to support appending files at this time. Apparently none of the unit tests use this (barely documented) feature, and we haven't had other reports that it was missing. You can post a issue report about this at <http://yellowgrass.org/project/StrategoXT>http://yellowgrass.org/project/StrategoXT. For now I would just write the entire file in one go when possible, rather than writing it in small chunks. Can't you collect all the transformation results and write them to a file all at once? The SSL_open_file primitive you found sounds like something from an older version of Stratego.
+>
+>- Lennart
+>
+>@ 04:12 PM 6/28/2010, Marcos Augusto wrote:
+>
+>>Hi everyone,
+>>
+>>
+>>I created a DSL to do a software product line, and I`m generating Haskell code with Stratego/XT. I`m doing everything with Spoofax. Now I need to output the code to some files in order to create new products. But I just can write on a file overwriting the existing text, but I need to append many pieces of code in the same file. I tried to do the following:
+>>
+>> <fputs> ((<transformBody>tbody),  <fopen> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs", "a")); fclose
+>>
+>>
+>>where "(<transformBody>tbody)" is a transformation that generates a piece of code. But I get this error:
+>>
+>>org.strategoxt.lang.StrategoException: Exception in execution of primitive 'SSL_fclose'
+>>
+>>
+>>I've also tried another code that I found in the internet:
+>>
+>>
+>>
+>>
+>>
+>>  close-file =
+>>    ?name; prim("SSL_close_file", name)
+>>
+>>  open-file =
+>>    ?(name, mode); prim("SSL_open_file", name, mode)
+>>
+>>  /**
+>>   * @obsolete use <open-file> (file, mode)
+>>   */
+>>  open-file =
+>>    ?name; not(?(_, _))
+>>    ; obsolete(!"<open-file> file; use <open-file> (file, mode)")
+>>    ; <open-file> (name, "w")
+>>
+>>  append-file =
+>>    <open-file> (<id>, "a")
+>>
+>>
+>>but when I call the transformation:
+>>
+>><append-file> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs")
+>>
+>>
+>>I get this error:
+>>
+>>
+>>No such function : 'SSL_open_file'
+>>
+>>
+>>Could anybody help me with this?
+>>
+>>
+>>thanks in advance,
+>>
+>>
+>>Marcos Augusto
+>>
+>>_______________________________________________
+>>Users mailing list
+>><mailto:Users at strategoxt.org>Users at strategoxt.org
+>>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>_______________________________________________
+>Users mailing list
+><mailto:Users at strategoxt.org>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From marcoscamelo20 at gmail.com  Wed Jun 30 18:38:12 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Wed, 30 Jun 2010 13:38:12 -0300
+Subject: [Stratego Users] Problems with IO (append text to existing file)
+In-Reply-To: <201006300751.o5U7pY5c018205@smtp1.infopact.nl>
+References: <AANLkTin9y24oLEvkNrovPqXmfIwYdDqNXF0LNp98Ddyj@mail.gmail.com> 
+	<201006282106.o5SL6Am8004326@smtp1.infopact.nl>
+	<AANLkTinnhpdxJmHYwlb8li8tvbJisbAIrCuVLoDw7P9Y@mail.gmail.com> 
+	<201006300751.o5U7pY5c018205@smtp1.infopact.nl>
+Message-ID: <AANLkTilwWqRdtFcHl-f40Ep-03m-JbN7Jzw-OJkwaxR8@mail.gmail.com>
+
+Ok Lennart, I'll do it,
+
+Thanks very much,
+
+Marcos
+
+On Wed, Jun 30, 2010 at 4:51 AM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> I added an issue report at http://yellowgrass.org/issue/StrategoXT/830.
+> You can sign up and subscribe to get notified as soon as we implement this
+> (which will likely be somehwere next month).
+>
+> cheers,
+>
+> Lennart
+>
+> @ 05:49 AM 6/29/2010, Marcos Augusto wrote:
+> >Hi Lennart,
+> >
+> >I'm creating a product line, so there is a core and I generate blocks of
+> code,
+> >those code need to be appended to different existing files. I'd do it with
+> Stratego transformations, but unfortunately there is no support . So I'll do
+> as you said me. I'll create a single file with all piece of code, and
+> >after that I'll run another program that will separate and append the
+> pieces to the appropriated files.
+> >
+> >Thanks,
+> >
+> >Marcos Augusto
+> >
+> >On Mon, Jun 28, 2010 at 6:06 PM, Lennart Kats <<mailto:
+> L.C.L.Kats at tudelft.nl>L.C.L.Kats at tudelft.nl> wrote:
+> >Hi Marcos,
+> >
+> >The Java runtime does not seem to support appending files at this time.
+> Apparently none of the unit tests use this (barely documented) feature, and
+> we haven't had other reports that it was missing. You can post a issue
+> report about this at <http://yellowgrass.org/project/StrategoXT>
+> http://yellowgrass.org/project/StrategoXT. For now I would just write the
+> entire file in one go when possible, rather than writing it in small chunks.
+> Can't you collect all the transformation results and write them to a file
+> all at once? The SSL_open_file primitive you found sounds like something
+> from an older version of Stratego.
+>  >
+> >- Lennart
+> >
+> >@ 04:12 PM 6/28/2010, Marcos Augusto wrote:
+> >
+> >>Hi everyone,
+> >>
+> >>
+> >>I created a DSL to do a software product line, and I`m generating Haskell
+> code with Stratego/XT. I`m doing everything with Spoofax. Now I need to
+> output the code to some files in order to create new products. But I just
+> can write on a file overwriting the existing text, but I need to append many
+> pieces of code in the same file. I tried to do the following:
+> >>
+> >> <fputs> ((<transformBody>tbody),  <fopen>
+> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs", "a")); fclose
+> >>
+> >>
+> >>where "(<transformBody>tbody)" is a transformation that generates a piece
+> of code. But I get this error:
+> >>
+> >>org.strategoxt.lang.StrategoException: Exception in execution of
+> primitive 'SSL_fclose'
+> >>
+> >>
+> >>I've also tried another code that I found in the internet:
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>  close-file =
+> >>    ?name; prim("SSL_close_file", name)
+> >>
+> >>  open-file =
+> >>    ?(name, mode); prim("SSL_open_file", name, mode)
+> >>
+> >>  /**
+> >>   * @obsolete use <open-file> (file, mode)
+> >>   */
+> >>  open-file =
+> >>    ?name; not(?(_, _))
+> >>    ; obsolete(!"<open-file> file; use <open-file> (file, mode)")
+> >>    ; <open-file> (name, "w")
+> >>
+> >>  append-file =
+> >>    <open-file> (<id>, "a")
+> >>
+> >>
+> >>but when I call the transformation:
+> >>
+> >><append-file> ("/Users/marcosaugustoxavier/Documents/TG/Output.hs")
+> >>
+> >>
+> >>I get this error:
+> >>
+> >>
+> >>No such function : 'SSL_open_file'
+> >>
+> >>
+> >>Could anybody help me with this?
+> >>
+> >>
+> >>thanks in advance,
+> >>
+> >>
+> >>Marcos Augusto
+> >>
+> >>_______________________________________________
+> >>Users mailing list
+> >><mailto:Users at strategoxt.org>Users at strategoxt.org
+> >>https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >_______________________________________________
+> >Users mailing list
+> ><mailto:Users at strategoxt.org>Users at strategoxt.org
+>  >https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100630/4cf11f54/attachment.html 
+

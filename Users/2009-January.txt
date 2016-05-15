@@ -1,0 +1,331 @@
+From P.V.Anita at Tudelft.nl  Wed Jan 21 14:57:05 2009
+From: P.V.Anita at Tudelft.nl (Paulo Anita)
+Date: Wed, 21 Jan 2009 14:57:05 +0100
+Subject: [Users] Test
+Message-ID: <005a01c97bd0$24c60120$6e520360$@V.Anita@Tudelft.nl>
+
+TEst
+
+
+From E.Visser at tudelft.nl  Wed Jan 21 15:15:37 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Jan 2009 15:15:37 +0100
+Subject: [Users] test 2
+Message-ID: <1232547337.18692.4.camel@dutiga>
+
+test 2
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Wed Jan 21 15:20:46 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Jan 2009 15:20:46 +0100
+Subject: [Users] test 4
+Message-ID: <1232547646.18692.8.camel@dutiga>
+
+test 4
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Wed Jan 21 15:23:57 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Jan 2009 15:23:57 +0100
+Subject: [Users] test 5
+Message-ID: <1232547837.18692.10.camel@dutiga>
+
+test 5
+-- 
+http://eelcovisser.org
+
+
+From P.V.Anita at Tudelft.nl  Wed Jan 21 15:38:30 2009
+From: P.V.Anita at Tudelft.nl (Paulo Anita)
+Date: Wed, 21 Jan 2009 15:38:30 +0100
+Subject: [Users] Test
+Message-ID: <006901c97bd5$edd37ac0$c97a7040$@V.Anita@Tudelft.nl>
+
+TEst
+
+
+From P.V.Anita at Tudelft.nl  Wed Jan 21 15:43:36 2009
+From: P.V.Anita at Tudelft.nl (Paulo Anita)
+Date: Wed, 21 Jan 2009 15:43:36 +0100
+Subject: [Users] Test
+Message-ID: <007001c97bd6$a454d2d0$ecfe7870$@V.Anita@Tudelft.nl>
+
+
+
+
+From P.V.Anita at Tudelft.nl  Wed Jan 21 15:45:07 2009
+From: P.V.Anita at Tudelft.nl (Paulo Anita)
+Date: Wed, 21 Jan 2009 15:45:07 +0100
+Subject: [Users] Test
+Message-ID: <007101c97bd6$da2d7600$8e886200$@V.Anita@Tudelft.nl>
+
+Test naamgeving
+
+
+From P.V.Anita at Tudelft.nl  Wed Jan 21 15:47:46 2009
+From: P.V.Anita at Tudelft.nl (Paulo Anita)
+Date: Wed, 21 Jan 2009 15:47:46 +0100
+Subject: [Users] Test
+Message-ID: <007201c97bd7$3959a090$ac0ce1b0$@V.Anita@Tudelft.nl>
+
+Test naar strategoxt
+
+
+From E.Visser at tudelft.nl  Wed Jan 21 16:34:33 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Jan 2009 16:34:33 +0100
+Subject: [Users] test 7
+Message-ID: <1232552073.18692.25.camel@dutiga>
+
+test 7
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Wed Jan 21 16:38:47 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Jan 2009 16:38:47 +0100
+Subject: [Stratego Users] test 8
+Message-ID: <1232552327.18692.30.camel@dutiga>
+
+test 8
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Thu Jan 22 09:14:36 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 22 Jan 2009 09:14:36 +0100
+Subject: [Stratego Users] [Users] test 7
+In-Reply-To: <1232552073.18692.25.camel@dutiga>
+References: <1232552073.18692.25.camel@dutiga>
+Message-ID: <1232612076.6601.2.camel@dutiga>
+
+On Wed, 2009-01-21 at 16:34 +0100, Eelco Visser wrote:
+> test 7
+
+test 9
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Thu Jan 22 13:04:53 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 22 Jan 2009 13:04:53 +0100
+Subject: [Stratego Users] test 10
+Message-ID: <1232625894.6601.21.camel@dutiga>
+
+test 10
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Mon Jan 26 22:02:31 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 26 Jan 2009 22:02:31 +0100
+Subject: [Stratego Users] test 13
+Message-ID: <1233003751.9910.122.camel@dutiga>
+
+final test before subscribing users
+-- 
+http://eelcovisser.org
+
+
+From E.Visser at tudelft.nl  Mon Jan 26 22:18:13 2009
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 26 Jan 2009 22:18:13 +0100
+Subject: [Stratego Users] new mailinglist address
+Message-ID: <1233004693.9910.131.camel@dutiga>
+
+Dear Stratego list members,
+
+The stratego at cs.uu.nl mailing list is moving to a new address under the
+strategoxt.org domain. (We thank Utrecht University for hosting the list
+all these years.) Please send your questions and discussions from now on
+to
+
+  users at strategoxt.org
+
+All members of the old list should have received an email confirming
+subscription to the new list. Follow the instructions in the email to
+unsubscribe if you're no longer interested.
+
+The other stratego lists will be moved soon as well.
+
+cheers,
+
+-- Eelco 
+http://eelcovisser.org
+
+
+From gre at ecs.soton.ac.uk  Fri Jan 30 16:48:15 2009
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 30 Jan 2009 15:48:15 +0000
+Subject: [Stratego Users] GPCE'09 Call for Papers
+In-Reply-To: <c9757bb60901300710j152ebdf8p7f5daf412ae968c1@mail.gmail.com>
+References: <c9757bb60901300710j152ebdf8p7f5daf412ae968c1@mail.gmail.com>
+Message-ID: <c9757bb60901300748k2d85ded2l7c4f9acf5635c3aa@mail.gmail.com>
+
+                                  Call for Papers
+
+                      Eighth International Conference on
+ Generative Programming and Component Engineering (GPCE 2009)
+
+                               October 4-5, 2009
+                                Denver, Colorado
+               (co-located with MODELS 2009 and SLE 2009)
+
+                             http://www.gpce.org
+
+
+Important Dates
+---------------
+
+* Submission of abstracts: May 11, 2009
+* Submission: May 18, 2009
+* Notification: June 30, 2009
+
+Workshops and tutorials (submission via MODELS 2009)
+* Workshop Proposals: March 15, 2009
+* Tutorial Proposals: April 19, 2009
+
+
+Scope
+-----
+
+Generative and component approaches are revolutionizing software
+development similar to how automation and components revolutionized
+manufacturing. Generative Programming (developing programs that
+synthesize other programs), Component Engineering (raising the level
+of modularization and analysis in application design), and
+Domain-Specific Languages (DSLs) (elevating program specifications to
+compact domain-specific notations that are easier to write, maintain,
+and analyze) are key technologies for automating program development.
+
+The International Conference on Generative Programming and Component
+Engineering provides a venue for researchers and practitioners
+interested in techniques for enhancing the productivity, quality, and
+time-to-market in software development that stems from deploying
+components and automating program generation. In addition to exploring
+cutting-edge techniques for developing generative and component-based
+software, our goal is to foster further cross-fertilization between
+the software engineering research community and the programming
+languages community.
+
+
+Submissions
+-----------
+
+Research papers:
+
+10 pages in SIGPLAN proceedings style (sigplanconf.cls) reporting
+original research results that contribute to scientific knowledge in
+the areas listed below (the PC chair can advise on appropriateness).
+
+Tool demonstrations:
+
+Tool demonstrations should present available tools that implement novel
+generative and component-based software engineering techniques. Any of the
+GPCE'09 topics of interest are appropriate areas for research demonstrations
+but purely commercial tool demonstrations will not be accepted. Submissions
+should contain a tool description of 4 pages in SIGPLAN proceedings style
+(sigplanconf.cls) that will be published in the proceedings, and a
+demonstration outline of up to 2 pages text plus 2 pages screen shots that
+will be used by the PC to evaluate the submission.
+
+Tutorials and Workshops:
+
+Tutorials and workshops of interest to the GPCE audience can be
+submitted to MODELS 2009. Please contact the corresponding MODELS
+chairs for submission details. Accepted MODELS tutorials and workshops
+that are primarily aimed at the GPCE audience will preferably be
+scheduled for Tuesday, October 6, 2009.
+
+MODELS 2009 Tutorial Chair:
+* Thomas Weigert (Missouri University of Science and Technology, USA)
+
+MODELS 2009 Workshop Chair:
+* James Bieman (Colorado State University, USA)
+
+
+Topics
+------
+
+GPCE seeks contributions in software engineering and in programming
+languages related (but not limited) to:
+
+* Generative programming
+ o Reuse, meta-programming, partial evaluation, multi-stage and
+   multi-level languages, step-wise refinement, generic programming
+ o Semantics, type systems, symbolic computation, linking and
+   explicit substitution, in-lining and macros, templates,
+   program transformation
+ o Runtime code generation, compilation, active libraries,
+   synthesis from specifications, development methods,
+   generation of non-code artifacts, formal methods, reflection
+* Generative techniques for
+ o Product-line architectures
+ o Distributed, real-time and embedded systems
+ o Model-driven development and architecture
+ o Resource bounded/safety critical systems.
+* Component-based software engineering
+ o Reuse, distributed platforms and middleware, distributed
+   systems, evolution, patterns, development methods,
+   deployment and configuration techniques, formal methods
+* Integration of generative and component-based approaches
+* Domain engineering and domain analysis
+ o Domain-specific languages including visual and UML-based DSLs
+* Separation of concerns
+ o Aspect-oriented and feature-oriented programming,
+ o Intentional programming and multi-dimensional separation of
+   concerns
+* Industrial applications of the above
+
+Submissions must adhere to SIGPLAN's republication policy. Please
+contact the program chair if you have any questions about how this
+policy applies to your paper (chair09 at gpce.org).
+
+
+Organization
+------------
+
+General Chair:   Jeremy Siek (University of Colorado at Boulder, USA)
+Program Chair:  Bernd Fischer (University of Southampton, UK)
+Publicity Chair:  Giorgios Economopoulos (University of Southampton, UK)
+
+Program Committee:
+* Sven Apel (University of Passau, Germany)
+* Ira D. Baxter (Semantic Designs, USA)
+* Martin Bravenboer (University of Massachusetts Amherst, USA)
+* Tomas Bures (Charles University in Prague, Czech Republic)
+* Charles Consel (INRIA / LaBRI, France)
+* Ivica Crnkovic (Malardalen University, Sweden)
+* Krzysztof Czarnecki (University of Waterloo, Canada)
+* Ewen Denney (RIACS / NASA Ames, USA)
+* Martin Erwig (Oregon State University, USA)
+* Ronald Garcia (Rice University, USA)
+* Kevin Hammond (University of St Andrews, UK)
+* Magne Haveraaen (University of Bergen, Norway)
+* Shan Shan Huang (Georgia Institute of Technology, USA)
+* Jaakko Jarvi (Texas A&M University, USA)
+* Sam Kamin (University of Illinois, USA)
+* Kung-Kiu Lau (University of Manchester, UK)
+* Julia Lawall (University of Copenhagen, Denmark)
+* Christian Lengauer (University of Passau, Germany)
+* Andrew Lumsdaine (Indiana University, USA)
+* Klaus Ostermann (University of Aarhus, Denmark)
+* Zoltan Porkolab (Eotvos Lorand University, Hungary)
+* Bran V. Selic (Malina Software, Canada)
+* Doug Smith (Kestrel Institute, USA)
+* Tetsuo Tamai (University of Tokyo, Japan)
+* Juha-Pekka Tolvanen (MetaCase, Finland)
+* Eelco Visser (Delft University of Technology, The Netherlands)
+* Markus Voelter (itemis AG, Germany)
+* Eric Van Wyk (University of Minnesota, USA)
+* Steffen Zschaler (Lancaster University, UK)
+

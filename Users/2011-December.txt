@@ -1,0 +1,229 @@
+From E.Visser at tudelft.nl  Sun Dec 11 22:31:48 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 11 Dec 2011 22:31:48 +0100
+Subject: [Stratego Users] Symposium on Software Language Design and
+	Engineering 13/12/2011
+Message-ID: <CAFaCHU2WJ35pCztG3Gpucwfnvdxy9iR17y8U=MfmQLHe5pQ+-A@mail.gmail.com>
+
+You are cordially invited to attend the symposium on software language
+design and engineering that the TU Delft Software Engineering Research
+Group organizes on the occasion of the doctoral thesis defense of
+Lennart Kats on Tuesday, December 13, 2011.
+
+You can find this information also at: http://bit.ly/uyWARA
+
+## Schedule
+
+Symposium in EWI, Snijderszaal (LB 01.010)
+
+10:00 Peter Mosses (Swansea University)
+  PLanCompS: Programming Language Components and Specifications
+10:40 Oscar Nierstrasz (University of Bern)
+  Parsing by Example
+11:20 Paul Klint (CWI, Amsterdam)
+  Towards a One-Stop-Shop for Analysis, Transformation
+  and Visualization of Software
+
+12:00 Lunch in EWI canteen
+
+Thesis Defense Lennart Kats in Aula TU Delft
+  Building Blocks for Language Workbenches
+14:30 Lekenpraatje
+15:00 Thesis Defense
+16:45 Reception
+
+## PLanCompS: Programming Language Components and Specifications
+
+Speaker: Prof. Dr. Peter D. Mosses, Swansea University
+
+Abstract: The PLanCompS project [www.plancomps.org] aims to establish
+a component-based framework for the design, specification and
+implementation of programming and domain-specific languages. The main
+novelty will be the the creation of a substantial open-ended
+collection of highly reusable language components called 'funcons'
+(fundamental constructs). The semantics of each funcon will be
+specified independently, using frameworks such as Modular SOS;
+languages will be defined by specifying their translation to funcons,
+introducing new funcons when needed.
+
+## Parsing by Example
+
+Speaker: Prof. Dr. Oscar Nierstrasz, University of Bern
+
+Abstract: In order to perform certain analyses on complex software
+systems, one must first parse these systems to build appropriate
+models. Building a custom parser for a real programming language is
+non-trivial and time-consuming task. However, parsers already exist
+(for the compiler and development tools), lots of example code exists,
+and precise parsers are not required to construct useful models of
+software. Can these facts be exploited to rapidly construct the needed
+parsers? We review related work, and recount three separate
+experiments to solve this problem. We conclude with some challenges
+for future work.
+
+## Towards a One-Stop-Shop for Analysis, Transformation and
+Visualization of Software
+
+Speaker: Prof. Dr. Paul Klint, CWI Amsterdam
+
+Abstract: Over the last few years we have been developing the
+meta-programming language Rascal [www.rascal-mpl.org] that aims at
+providing a concise and effective language for performing
+meta-programming tasks such as the analysis and transformation of
+existing source code and models, and the implementation of
+domain-specific languages.
+
+However, meta-programming tasks also require seamlessly integrated
+visualization facilities. We are therefore now aiming at a
+"One-Stop-Shop" for analysis, transformation and visualization. I will
+give a status report on this ongoing effort and sketch the
+requirements for an interactive visualization framework and describe
+the solutions we came up with. In brief, we propose a coordinate-free,
+compositional, visualization framework, with fully automatic
+placement, scaling and alignment. It also provides user interaction.
+The current framework can handle various kinds of charts, trees, and
+graphs and can be easily extended to more advanced layouts. This work
+can be seen as a study in domain engineering that will eventually
+enable us to create a domain-specific language (DSL)  for software
+visualization.
+
+The presentation concludes with examples that emphasize the
+integration of analysis and visualization.
+
+## Building Blocks for Language Workbenches
+
+Defended by Lennart C. L. Kats
+
+This dissertation presents research on techniques, methods, and tool
+support for domain-specific language engineering. Domain-specific
+language engineering is the discipline of designing, developing, and
+maintaining domain-specific programming languages. The focus of this
+thesis is the architecture of language workbenches their underlying
+technologies. Language workbenches are tools that make language
+engineering more efficient by providing an integrated development
+environment for language engineering tasks. In particular, we
+introduce the Spoofax language workbench, and describe its techniques
+for high-level, portable language definitions, language composition,
+interactive support for defining languages, and language testing.
+
+## Venue
+
+The morning session will be at the EEMCS faculty:
+Mekelweg 4, 2628CD Delft in the Snijderszaal (LB 01.010)
+
+A route can be found at
+
+  http://swerl.tudelft.nl/bin/view/Main/ContactDetails
+
+And a map at http://g.co/maps/5hn9h
+
+The thesis defense takes place in the Aula of Delft University of
+Technology: Mekelweg 5, 2628 CC, Delft http://g.co/maps/du4dk
+
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From steve_nunez at yahoo.com  Fri Dec 16 00:15:57 2011
+From: steve_nunez at yahoo.com (Steven Nunez)
+Date: Thu, 15 Dec 2011 15:15:57 -0800 (PST)
+Subject: [Stratego Users] Anyone Here?
+Message-ID: <1323990957.15773.YahooMailNeo@web36805.mail.mud.yahoo.com>
+
+Seasons Greetings Everyone,
+
+Just wondering if this list is alive. I joined because I'm beginning a small project that involves program transformation, and was hoping to learn something about the topic here. We're actually going to put the project out to eLance, but it occurred to me that someone here might have experience and need some small project work.
+
+If anyone has experience in program transformation, and is interested in a bit of work, please contact me for details.
+
+Regards,
+- SteveN
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111215/0f417e94/attachment.html>
+
+From l.c.l.kats at tudelft.nl  Fri Dec 16 16:47:11 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Fri, 16 Dec 2011 16:47:11 +0100
+Subject: [Stratego Users] Anyone Here?
+In-Reply-To: <1323990957.15773.YahooMailNeo@web36805.mail.mud.yahoo.com>
+References: <1323990957.15773.YahooMailNeo@web36805.mail.mud.yahoo.com>
+Message-ID: <4EEB67FF.7030601@tudelft.nl>
+
+Hi Steven,
+
+We forwarded your message to some students and others interested in 
+transformations.
+
+-- Lennart
+
+On 12/16/11 24:15 , Steven Nunez wrote:
+> Seasons Greetings Everyone,
+>
+> Just wondering if this list is alive. I joined because I'm beginning a
+> small project that involves program transformation, and was hoping to
+> learn something about the topic here. We're actually going to put the
+> project out to eLance, but it occurred to me that someone here might
+> have experience and need some small project work.
+>
+> If anyone has experience in program transformation, and is interested in
+> a bit of work, please contact me for details.
+>
+> Regards,
+> - SteveN
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From l.c.l.kats at tudelft.nl  Wed Dec 28 12:38:12 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Wed, 28 Dec 2011 12:38:12 +0100
+Subject: [Stratego Users] Spoofax 1.0
+Message-ID: <4EFAFFA4.9090605@tudelft.nl>
+
+Hi all,
+
+We're pleased to announce the release of Spoofax 1.0! A number of 
+significant new features have been added since the last stable release, 
+a long list of bugs has been fixed, and various minor improvements were 
+introduced.
+
+Highlights of the release include:
+
+    * Support for writing tests for language definitions
+    * Support for refactorings
+    * Major improvements to content completion
+    * Support for using rewrite rules to disambiguate syntax
+
+Details are available at http://strategoxt.org/Spoofax/News/.
+
+The new version can be installed from the update site at 
+http://spoofax.org/update/stable
+
+In addition to the features listed above, we've been actively working on 
+improving Spoofax with new features. In particular, we are now working 
+on providing full support for debugging, on an interactive shell for 
+Stratego and custom languages, and a new meta-language called 
+SpoofaxLang to define languages in a more modular fashion.
+
+A full list of feature requests and issues addressed in the new version 
+is provided at http://yellowgrass.org/tag/Spoofax/1.0/.
+
+cheers,
+
+Lennart Kats
+

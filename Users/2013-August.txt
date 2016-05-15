@@ -1,0 +1,230 @@
+From jianliang.j at gmail.com  Thu Aug  1 09:16:32 2013
+From: jianliang.j at gmail.com (=?UTF-8?B?6JKL5bu65Lqu?=)
+Date: Thu, 1 Aug 2013 15:16:32 +0800
+Subject: [Stratego Users] How to locate error causes
+In-Reply-To: <2BD7F9EC-4E21-4789-9BFE-E7BE8349A632@tudelft.nl>
+References: <CAB4JRkcu4eKQ7+M55JPP7q_c3UsR9TMLjPURxnERfzA2ZZ6fdw@mail.gmail.com>
+	<2BD7F9EC-4E21-4789-9BFE-E7BE8349A632@tudelft.nl>
+Message-ID: <CAB4JRkdfC=-E3AZ_jNdTXK=jvBtnZJivsNSvW+B4o_XaE=axnw@mail.gmail.com>
+
+Thanks. It turned out that something is wrong with strategy rule.
+Strategy <list-to-args> can convert a list of boxes to a box, this strategy
+is left.
+
+2013/7/31 Guido Wachsmuth - EWI <G.H.Wachsmuth at tudelft.nl>
+
+>  Hi.
+>
+>  The trace tells you that pretty-printing fails. Typically, this is
+> caused by an erroneous AST, which contains terms which cannot be handled by
+> the pretty-printer. To find such terms, you can use the following code:
+>
+>          output := <the-pp-strategy> input
+>   <+ <bottomup(try(not(is-string) ; not(is-list) ; not(the-pp-strategy) ;
+> debug(!"cannot pp "))); fail> input
+>
+> Make sure to replace the-pp-strategy with your actual pretty-printing
+> strategy. The second line performs a bottomup traversal and tries to
+> find terms which cannot be pretty-printed and reports those terms to the
+> console (debug).
+>
+>  I also created question for this on Yellowgrass:
+> http://yellowgrass.org/question/Spoofax/28
+>
+>  -- Guido Wachsmuth
+>
+>  On Jul 23, 2013, at 15:38 , ??? <jianliang.j at gmail.com> wrote:
+>
+> Dear Stratext-Users:
+>
+>  I try to transform DSL to another language. Parsing the source file into
+> ATerm is OK. But rewriting fails.
+> And I try to find out where the error is. Rule "genPcd" is defined. And to
+> my knowledge, pp_java and so
+> on may be related to tools such as *ast2abox* and *abox2text*. So How can
+> I locate errors ?
+>
+>  PS: This DSL transformer is developed with libjava-front and
+> libaspectj-front. To be specific, This DSL
+> extends Java and is transformed to AspectJ with the help of Spoofax.
+>
+>  Best Wishes
+>
+>  Console output attached:
+> -------------------------------------------
+>  EventCJ: rewriting failed, trace:
+> generate_java_0_0
+> to_java_0_0
+> map_1_0
+> map_1_0
+> genPcd_0_3
+> pp_java_string_0_0
+> pp_java5_to_string_0_0
+> box2text_string_0_1
+> abox2text_0_1
+> abox2text_1_2
+> abox2text_list_1_2
+> [ EventCJ | critical ] Internal error: with clause failed unexpectedly in
+> rule 'generate-java'
+>
+>  (CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),[],CompilationUnit(Some(PackageDec([],PackageName([Id("main")]))),[],[Direction(Id("SwitchPositionDevice"),[EventDecl(Id("GPSEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("WifiEvent"),[Param([],ClassOrInterfaceType(TypeName(Id("Navigation")),None),Id("n")),Param([],Int,Id("s"))],AndComp(ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("Navigation")),"onStatusChanged"),[RefTypePattern(NamePattern("s"))],None))),TargetSelector(ClassOrInterfaceType(TypeName(Id("n")),None))),Some(SendTo(ExprName(Id("n"))))),EventDecl(Id("Boarding"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeEntered"),[],None))),None),EventDecl(Id("Arriving"),[],ActionSelector(AfterTiming,Call(MethodPattern(AnnoPattern([]),ModPattern([]),Void,MemberName(RefTypePattern(NamePattern("*")),"cabinModeExit"),[],None))),None),TransitionRuleDecl(Id("GPSEvent"),[],TransitionRuleComposition(SwitchLayer(Id("WifiNavi"),Id("GPSNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("GPSNavi")))),TransitionRuleDecl(Id("WifiEvent"),[],TransitionRuleComposition(SwitchLayer(Id("GPSNavi"),Id("WifiNavi")),ActivateLayer(IfNotActive(Id("onBoard")),Id("WifiNavi")))),TransitionRuleDecl(Id("Boarding"),[],SwitchLayer(AnnonLayer,Id("OnBoard"))),TransitionRuleDecl(Id("Arriving"),[],SwitchLayer(Id("OnBoard"),NoLayer))]),ClassDec(ClassDecHead([],Id("Navigation"),None,Some(SuperDec(ClassType(TypeName(Id("MapActivity")),None))),Some(ImplementsDec([InterfaceType(TypeName(Id("Runnable")),None),InterfaceType(TypeName(Id("LocationListener")),None)]))),ClassBody([FieldDec([],ClassOrInterfaceType(TypeName(Id("MapView")),None),[VarDec(Id("mapView"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("MyLocationOverlay")),None),[VarDec(Id("overlay"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("WifiManager")),None),[VarDec(Id("wifiManager"))]),FieldDec([],ClassOrInterfaceType(TypeName(Id("BuildingGuide")),None),[VarDec(Id("buildingGuide"))]),MethodDec(MethodDecHead([],None,Void,Id("onStatusChanged"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("run"),[],None),Block([])),MethodDec(MethodDecHead([],None,Void,Id("onCreate"),[Param([],ClassOrInterfaceType(TypeName(Id("Bundle")),None),Id("status"))],None),Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("runOnFirstFix"))),[This]))])),Layer(Id("GPSNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("gps")]))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("gps")]))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(Invoke(Method(MethodName(AmbName(Id("mapView")),Id("getController"))),[]),None,Id("animateTo")),[ExprName(Id("loc"))]))]))]),Layer(Id("WifiNavi"),[Activation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderEnabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(True))]))])),Deactivation(Block([ExprStm(Invoke(Method(MethodName(AmbName(Id("overlay")),Id("onProviderDisabled"))),[Lit(String([Chars("Network")]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("wifiManager")),Id("setWifiEnable"))),[Lit(Bool(False))]))])),PartialMethodDec(PartialMethodHead(None,AfterTiming,Void,Id("run"),[],None),Block([LocalVarDecStm(LocalVarDec([],ClassOrInterfaceType(TypeName(Id("Location")),None),[VarDec(Id("loc"),Invoke(Method(MethodName(AmbName(Id("overlay")),Id("getMyLocation"))),[]))])),ExprStm(Invoke(Method(MethodName(AmbName(Id("buildingGuide")),Id("updateFloorPlan"))),[ExprName(Id("loc"))]))]))])]))]),"test/SwitchPositionDevice.ecj","E:/zzzzz/eventcj-src-pkg/eventcj-src-pkg/eventcj")
+> org.spoofax.interpreter.core.InterpreterException: Exception during
+> evaluation
+> at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:117)
+> at org.spoofax.interpreter.core.Interpreter.invoke(Interpreter.java:82)
+> at org.strategoxt.HybridInterpreter.invoke(HybridInterpreter.java:424)
+> at
+> org.strategoxt.imp.debug.core.str.launching.DebuggableHybridInterpreter.invoke(DebuggableHybridInterpreter.java:150)
+> at org.strategoxt.imp.runtime.Environment$2.invoke(Environment.java:193)
+> at
+> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:701)
+> at
+> org.strategoxt.imp.runtime.services.StrategoObserver.invoke(StrategoObserver.java:670)
+> at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.invokeObserver(StrategoBuilder.java:327)
+> at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.execute(StrategoBuilder.java:193)
+> at
+> org.strategoxt.imp.runtime.services.StrategoBuilder.access$1(StrategoBuilder.java:177)
+> at
+> org.strategoxt.imp.runtime.services.StrategoBuilder$1.run(StrategoBuilder.java:164)
+> at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+> Caused by: org.spoofax.interpreter.core.InterpreterErrorExit: Internal
+> error: with clause failed unexpectedly in rule 'generate-java'
+> 1
+> at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:194)
+> at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:183)
+> at
+> org.strategoxt.lang.InteropSDefT$StrategyBody.evaluate(InteropSDefT.java:245)
+> at
+> org.strategoxt.lang.InteropSDefT$StrategyBody.eval(InteropSDefT.java:238)
+> at org.spoofax.interpreter.stratego.Strategy.evaluate(Strategy.java:76)
+> at org.spoofax.interpreter.core.Interpreter.evaluate(Interpreter.java:109)
+> ... 11 more
+> Caused by: org.strategoxt.lang.StrategoErrorExit: Internal error: with
+> clause failed unexpectedly in rule 'generate-java'
+> 1
+> at
+> org.strategoxt.lang.compat.report_failure_compat_1_0.invoke(report_failure_compat_1_0.java:53)
+> at
+> org.strategoxt.stratego_lib.report_with_failure_0_2.invoke(report_with_failure_0_2.java)
+> at org.strategoxt.lang.Strategy.invokeDynamic(Strategy.java:32)
+> at org.strategoxt.lang.InteropSDefT.evaluate(InteropSDefT.java:192)
+> ... 16 more
+>
+>  --
+> Jianliang Jiang
+> Institute of Computer Software
+> Nanjing University
+> China
+>
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130801/394ef6db/attachment-0001.html>
+
+From jianliang.j at gmail.com  Mon Aug  5 03:42:08 2013
+From: jianliang.j at gmail.com (=?UTF-8?B?6JKL5bu65Lqu?=)
+Date: Mon, 5 Aug 2013 09:42:08 +0800
+Subject: [Stratego Users] Spoofax version problem
+In-Reply-To: <7CA6AD68-C20F-4D81-8825-FAA4391F0DF9@tudelft.nl>
+References: <CAB4JRkdG_A+LPAAUmFYnhier4prYX+3PH=axMeSkS8_mLb08jg@mail.gmail.com>
+	<7CA6AD68-C20F-4D81-8825-FAA4391F0DF9@tudelft.nl>
+Message-ID: <CAB4JRkdM5cv0zSgu927mPT9P2XFgVA72n1ZkA17=yOLArem0KQ@mail.gmail.com>
+
+Thank you for replying. I have moved to another specific issues and post to
+the mail list. Again Thanks!
+
+2013/7/31 Guido Wachsmuth - EWI <G.H.Wachsmuth at tudelft.nl>
+
+>  Hi,
+>
+>  can you provide more information? Which tool do you like to rebuild?
+> What are the errors?
+>
+>  -- Guido Wachsmuth
+>
+>  On Jul 11, 2013, at 03:51 , ??? <jianliang.j at gmail.com> wrote:
+>
+> Hi,
+>    I want to rebuild one program transformation tools which is implemented
+> with the help of Spoofax. But it reports errors when I import the project.
+> The project owner said it might be Spoofax's version is not compatible with
+> the project developed. And I want to know does Spoofax v1.1.0 can import
+> programs developed with v0.6.0 or v1.0.0 ?
+>
+>  --
+> Jianliang Jiang
+> Institute of Computer Software
+> Nanjing University
+> China
+>
+>  _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Jianliang Jiang
+Institute of Computer Software
+Nanjing University
+China
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130805/372d7bad/attachment.html>
+
+From ropf at itu.dk  Wed Aug 14 13:50:59 2013
+From: ropf at itu.dk (Rolf-Helge Pfeiffer)
+Date: Wed, 14 Aug 2013 11:50:59 +0000
+Subject: [Stratego Users] How To References and Constraints Across Languages?
+Message-ID: <9CB4CECB-7C53-498F-A45C-D68C87E71008@itu.dk>
+
+Dear all,
+
+I am new to Spoofax and currently evaluating it for a project involving different languages.
+
+Before I decide for the use of Spoofax I would like to know if it is possible and how to express references and constraints across different languages. Think of a setup in which two Spoofax editor projects exist. Both languages can refer to each other  and I would like to be able to express constraints between them.
+
+To express references between the languages, I expect  that I have to import the grammar of one language into the other. In the Java example, I see, that the grammar is modularized and that modules import each other. But all these modules are in the same Spoofax language project. Is there an example demonstrating how to scatter grammar modules over multiple projects?
+
+Similarly for constraints between two languages, how do I formulate constraints across language boundaries (across languages in different projects)? What do I have to import and where to import that? Is there an example illustrating cross-language constraints, which I can study?
+
+Best regards,
+Helge
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 495 bytes
+Desc: Message signed with OpenPGP using GPGMail
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130814/4ed42b5c/attachment.sig>
+

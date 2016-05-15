@@ -1,0 +1,744 @@
+From E.Visser at tudelft.nl  Wed May  1 11:52:58 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 1 May 2013 11:52:58 +0200
+Subject: [Stratego Users] WebDSL programmer position at TU Delft
+Message-ID: <CAFaCHU0wOCKQvRXD-KhpePB-P1-132EuR5vMH04bLf+_hT1tCQ@mail.gmail.com>
+
+The Department of Software and Computer Technology of TU Delft has a
+full-time position for a Web(DSL) programmer to help us improve and
+expand 'The Department', a suite of web applications for organizing
+academic workflows developed using the state-of-the-art WebDSL web
+programming language.
+
+Apply by May 17, 2013 at
+
+http://department.st.ewi.tudelft.nl/jobs/job/2
+
+# The Department of Software and Computer Technology
+
+The Department of Software and Computer Technology (SCT) of the
+Faculty of Electrical Engineering, Mathematics and Computer Science
+(EEMCS) of TU Delft comprises the research groups working on core
+computer science topics. The department is responsible for a large
+part of the curriculum of the BSc and MSc programmes in Computer
+Science. The department?s research mission is to perform excellent
+research at an internationally recognised level in the design,
+construction and analysis of complex, concurrent and co-operative
+computer and information systems. Inspiration for the research topics
+is derived largely from technical ICT problems in industry and
+society. The department currently consists of the following groups:
+Parallel and Distributed Systems, Software Engineering, Embedded
+Software, Algorithms, Web Information Systems, and Computer
+Engineering.
+
+# The Department
+
+Within SCT, the Software Engineering Research Group is developing 'The
+Department', a suite of web applications for organizing academic
+workflows. The suite includes WebLab, a learning management system
+that supports programming education by allowing students to solve
+programming assignments directly in the browser. These applications
+are used by students and staff of the faculty. Some of the
+applications are also (starting to be) used at other faculties and
+even outside TU Delft. The applications are developed using the
+state-of-the-art domain-specific web programming language WebDSL,
+designed by the Software Language Design and Engineering group at TU
+Delft.
+
+# The Position
+
+We are looking for a Web(DSL) programmer to help us improve and expand
+these applications, with as primary focus the WebLab application,
+which is rapidly being expanded to more courses. Your tasks will
+consist of
+
+* Developing new and evolving existing applications
+* Assisting users of these applications (or better, improving the
+applications such that users can help themselves)
+* Organizing and maintaining deployment of applications on production
+servers including backup strategies
+* Contributing to the development of the WebDSL language, libraries,
+and documentation
+
+# We Seek
+
+An enthusiastic software developer with an MSc degree in Computer
+Science with demonstrable experience in web application development
+(experience with WebDSL is a plus), awareness of current
+state-of-the-art solutions in web application programming,
+self-motivated and team oriented, interested in working with cutting
+edge technology emerging from research.
+
+Starting date: as soon as possible.
+
+# We Offer
+
+A full-time position (38 hrs/week) as software developer in a
+stimulating environment. The appointment will be for one year
+initially. A possible extension depends on funding and performance.
+Salary depends on experience and includes Holiday allowance (8%) and
+end-of-year bonus (8.3%). In addition, TU Delft offers an attractive
+benefits package, including a flexible work week, and the option of
+assembling a customised compensation and benefits package (the 'IKA').
+Salary and benefits are in accordance with the Collective Labour
+Agreement for Dutch Universities.
+
+# Further Information
+
+For more information about this position please contact Eelco Visser
+(http://eelcovisser.org) by phone: +31 (0)15-2787088 or by e-mail:
+e.visser at tudelft.nl.
+
+# Application
+
+To apply, please submit the following materials by May 17, 2013 at
+
+http://department.st.ewi.tudelft.nl/jobs/job/2
+
+* Cover letter explaining your specific interests and qualifications
+* Full Curriculum Vitae
+* Name and contact details of one reference
+
+To meet the early application deadline please apply before May 17
+2013. Submissions received after May 17 will be also considered until
+the position has been filled.
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From E.Visser at tudelft.nl  Wed May  1 12:57:34 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 1 May 2013 12:57:34 +0200
+Subject: [Stratego Users] PhD position in Programming Language Verification
+	at TU Delft
+Message-ID: <CAFaCHU3GathjVfMMRQU_-zVTFu_nD_rSGaOf4F9bp2ZVEEuhFg@mail.gmail.com>
+
+PhD position in Programming Language Verification at TU Delft
+
+The Department of Software and Computer Technology of TU Delft has a
+four year PhD position in Programming Language Verification in the NWO
+VICI project "The Language Designer's Workbench. Automating the
+Verification of Language Definition" of Eelco Visser. The focus of
+this particular position is on proof engineering for verification of
+programming languages. But candidates interested in all aspects of the
+project are invited to apply.
+
+For more information about the position see
+
+http://department.st.ewi.tudelft.nl/jobs/job/3
+
+To meet the early application deadline please apply at the page above
+before June 15. Submissions received after June 15 will be also
+considered until the position has been filled.
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From kutsia at risc.jku.at  Thu May  2 10:22:29 2013
+From: kutsia at risc.jku.at (Temur Kutsia)
+Date: Thu, 02 May 2013 10:22:29 +0200
+Subject: [Stratego Users] SCSS 2013 - Deadline Extension
+Message-ID: <51822245.3080701@risc.jku.at>
+
+
+[Please post - apologies for multiple copies.]
+
+Deadline extension
+=================================================
+SCSS 2013
+Symbolic Computation in Software Science
+5th International Symposium
+
+Castle of Hagenberg, Austria, July 5-6, 2013
+Research Institute for Symbolic Computation (RISC)
+Johannes Kepler University Linz
+http://www.risc.jku.at/conferences/scss2013/
+=================================================
+
+Important Dates
+---------------
+May 10, 2013: Abstract submission deadline (extended)
+May 13, 2013: Paper submission deadline (extended)
+June 3, 2013: Notification of acceptance
+June 17, 2013: Camera-ready copy deadline
+July 5-6, 2013: The symposium
+
+Scope
+--------
+The purpose of SCSS 2013 is to promote research on theoretical and practical
+aspects of symbolic computation in software science. The symposium provides
+a forum for active dialog between researchers from several fields of 
+computer
+algebra, algebraic geometry, algorithmic combinatorics, computational logic,
+and software analysis and verification.
+
+SCSS 2013 solicits both regular and tool papers on all aspects of symbolic
+computation and their applications in software science. The topics of the
+symposium include, but are not limited to the following:
+
+- automated reasoning
+- algorithm (program) synthesis and/or verification
+- formal methods for the analysis of network security
+- termination analysis and complexity analysis of algorithms (programs)
+- extraction of specifications from algorithms (programs)
+- theorem proving methods and techniques
+- proof carrying code
+- generation of inductive assertion for algorithm (programs)
+- algorithm (program) transformations
+- formalization and computerization of knowledge (maths, medicine, 
+economy, etc.)
+- component-based programming
+- computational origami
+- query languages (in particular for XML documents)
+- semantic web and cloud computing
+
+Invited Speakers
+----------------
+Bruno Buchberger (RISC, Johannes Kepler University Linz, Austria)
+Wei Li (Beihang University, China)
+Joel Ouaknine (Oxford University, UK)
+
+Program Chair
+--------------
+Laura Kovacs (Vienna University of Technology, Austria and Chalmers 
+University of
+Technology, Sweden)
+
+Program Committee
+------------------
+
+Mar?a Alpuente (Technical University of Valencia, Spain)
+Serge Autexier (DFKI, Germany)
+Nikolaj Bjorner (Microsoft Research)
+Adel Bouhoula (Higher School of Communications of Tunis, Tunisia)
+Iliano Cervesato (Carnegie Mellon University ? Qatar Campus)
+Horatiu Cirstea (Loria, France)
+J?rgen Giesl (RWTH Aachen, Germany)
+Tetsuo Ida (University of Tsukuba, Japan)
+Paul Jackson (University of Edinburgh, UK)
+Tudor Jebelean (RISC, Johannes Kepler University Linz, Austria)
+Cezary Kaliszyk (University of Innsbruck, Austria)
+Fairouz Kamareddine (Heriot-Watt University, UK)
+Temur Kutsia (RISC, Johannes Kepler University Linz, Austria)
+Stephan Merz (INRIA Lorraine, France)
+Ali Mili (New Jersey Institute of Technology, USA)
+Yasuhiko Minamide (University of Tsukuba, Japan)
+Pierre-Etienne Moreau (INRIA-LORIA Nancy, France)
+Andr? Platzer (Carnegie Mellon University, USA)
+Stefan Ratschan (Czech Academy of Sciences)
+Rachid Rebiha (University of Lugano, Switzerland and IC Unicamp, Brazil)
+Enric Rodr?guez Carbonell (Technical University of Catalonia, Spain)
+Sorin Stratulat (University of Lorraine, Metz, France)
+Thomas Sturm (Max Planck Institute for Informatics, Germany)
+
+Symposium Chair
+---------------
+Temur Kutsia (RISC, Johannes Kepler University Linz, Austria)
+
+Submission
+----------
+Submission is via EasyChair:
+
+  https://www.easychair.org/conferences/?conf=scss2013.
+
+Submissions are invited in two categories: regular research papers and tool
+papers.
+
+- Regular research papers must not exceed 12 pages in the EasyChair 
+Class format,
+with up to 3 additional pages for technical appendices.
+- Tool papers must not exceed 6 pages in the EasyChair Class format.
+
+Publication
+----------
+The proceedings of SCSS 2013 will be published as a RISC technical report.
+After the symposium, authors of accepted papers at SCSS 2013 will be 
+invited to
+submit an extended version of their paper to the special issue of the
+Journal of Symbolic Computation on SCSS. Submitted papers to the JSC special
+issue will undergo an additional reviewing.
+
+From v.vergu at gmail.com  Sat May  4 15:05:53 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Sat, 4 May 2013 15:05:53 +0200
+Subject: [Stratego Users] migration svn -> git of spoofax, jsglr, terms,
+	interpreter !!
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+Message-ID: <E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+
+Dear all,
+
+This email concerns the migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+
+
+
+Dear developers,
+
+
+You are receiving this email because (1) i'm migrating many of Spoofax and Stratego related projects to Git, (2) i need your assistance and (3) it is likely that it concerns your current/previous work. 
+
+
+For the past week or so i've been working on migrating to GitHub everything that is in the spoofax and spoofax-imp directories of the StrategoXT SVN repository. At the same time i've split the two folders up into 18 separate Git repositories each with its own history. This was/is a non-trivial endeavour requiring understanding of each project's history for the last decade and lots of regular expressions, thus very error prone. As far as I can tell all history is preserved and things appear to be complete.
+
+
+My first request to you is that you carefully review the contents and histories of the resulting Git repositories (below) and report any irregularities that you discover. It is crucial that the new repositories preserve history and your feedback is therefore invaluable. Please look at code you have contributed to as well as to the rest of the codebase to check for continuity, missing files, etc. I've attached a diagram that explains how each folder from the spoofax/trunk/spoofax and spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to check these repositories by coming Tuesday and report any issues you discover, no matter how minor or major.
+
+After i've fixed the problems that you report i will (1) make the spoofax and spoofax-imp directories read-only on SVN and (2) create new Git repositories based on the then latest revisions.
+
+Before anything: Do not develop anything against the Git repositories mentioned below. They are temporary and only for review. After i've received all of your comments I will delete these repositories and i will make new ones based on the latest SVN revisions and according to the planning below. You can distinguish the temporary from the permanent repositories by the presence/absence of the MIG- prefix in their names.
+
+The new (temporary) repositories are hosted on GitHub at the following addresses:
+
+https://github.com/metaborg-testing/MIG-jsglr
+https://github.com/metaborg-testing/MIG-mb-exec
+https://github.com/metaborg-testing/MIG-mb-exec-deps
+https://github.com/metaborg-testing/MIG-mb-rep
+https://github.com/metaborg-testing/MIG-aster
+https://github.com/metaborg-testing/MIG-esv
+https://github.com/metaborg-testing/MIG-sdf
+https://github.com/metaborg-testing/MIG-nabl
+https://github.com/metaborg-testing/MIG-box
+https://github.com/metaborg-testing/MIG-spx
+https://github.com/metaborg-testing/MIG-spt
+https://github.com/metaborg-testing/MIG-stratego
+https://github.com/metaborg-testing/MIG-tdl
+https://github.com/metaborg-testing/MIG-rtg
+https://github.com/metaborg-testing/MIG-spoofax
+https://github.com/metaborg-testing/MIG-spoofax-debug
+https://github.com/metaborg-testing/MIG-spoofax-deploy
+https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+
+
+The final repositories will also be hosted on GitHub, under the Metaborg organisation.
+
+
+There a few known issues with the new repositories:
+
+1. Branches that could never non-destructively be merged into back into the trunk have been archived as tags. The are those SVN branches that branched on a particular directory of the trunk instead of the entire trunk. This was a standard practice in the SVN-era but it results in Git branch commits that delete everything that was not branched. The net effect of merging those back into master would be that of deleting everything else but your work. The tags that archive these branches preserve history of the branch and the branches can later be revived if necessary.
+
+2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as tags. This was intentional. If you happen to spot a previously deleted branch which is not tagged, please report it. Branch-deletion in Git is destructive and history would be lost unless we tag the deleted branches.
+
+3. The old Spoofax editor (first version started in ~2005) is not yet migrated. This is the big red-colored repository in the diagram. This will be migrated later, separately, as one big read-only Git repository. 
+
+
+To summarise, i kindly ask you to:
+
+1. Examine and give feedback on the health of the MIG- repositories by cob of coming Tuesday. Do pay special attention to missing or corrupted files, branches, tags, history or committer-info. 
+
+2. Avoid branching/merging in the spoofax and spoofax-imp directories. If you do so, then (1) branch the entire trunk of the respective folder (this will ensure merge-able branches) and (2) notify me. The migration is like a white-list so anything not explicitly mentioned in it does not get copied. 
+
+3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ] roots. If you do, please let me know. Things will not be copied over unless I explicitly mention them in the migration script. Making changes to subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other words, you can safely continue your work but don't start new things in the SVN repository. 
+
+
+This migration has a few more steps, here's the tentative plan (depending on the problems you discover):
+
+1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on SVN read-only. At this stage you shouldn't have any uncommitted changes anymore. 
+2. Wed 08-05 12:00 PM : all your reported issues should be fixed in the migration scripts.
+3. Wed 08-05 1:30 PM : final Git repositories published at GitHub Metaborg organisation.
+4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first build results available based on the Git repositories. This means builds of the stable, master and unstable branches.
+5. Thu 09-05 8:00 PM : all Spoofax update sites should be pointing/containing builds based on the Git repositories.
+
+
+I'll email you again (1) if something changes in the above plan and (2) after steps 3 and 5 are completed.
+
+Thank you for your help.
+
+
+Cheers,
+
+Vlad
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130504/ab25b09e/attachment-0002.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: migration_diagram.pdf
+Type: application/pdf
+Size: 166448 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130504/ab25b09e/attachment-0001.pdf>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130504/ab25b09e/attachment-0003.html>
+
+From kralikba at msn.com  Tue May  7 21:25:16 2013
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Tue, 7 May 2013 21:25:16 +0200
+Subject: [Stratego Users] Cryptic JSGLR error -
+	java.lang.IllegalStateException: Unkown node type
+Message-ID: <BAY175-DS46A25B50972F9B5D8E7FBD0BA0@phx.gbl>
+
+Hi,
+
+ 
+
+I'm constantly getting this error when trying to analyse my source file
+based on an sdf generated from a tmpl file. I'm using nightly on Oracle JRE
+7 u4, x64, under Windows.
+
+ 
+
+Am I doing something wrong? Is this really an internal error? Or a known
+compatibility bug?
+
+ 
+
+Thanks
+
+Barnab?s
+
+ 
+
+ps. here is the complete stack trace:
+
+java.lang.IllegalStateException: Unkown node type
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeAmb(TreeBuilder.java:
+421)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:308)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:279)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:304)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:279)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:304)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:279)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:304)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:304)
+
+                at
+org.spoofax.jsglr.client.ParseNode.toTreeTopdown(ParseNode.java:309)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTreeNode(TreeBuilder.java
+:304)
+
+                at
+org.spoofax.jsglr.client.imploder.TopdownTreeBuilder.buildTree(TopdownTreeBu
+ilder.java:28)
+
+                at
+org.spoofax.jsglr.client.imploder.TreeBuilder.buildTree(TreeBuilder.java:161
+)
+
+                at
+org.spoofax.jsglr.client.Disambiguator.yieldTree(Disambiguator.java:338)
+
+                at
+org.spoofax.jsglr.client.Disambiguator.yieldTreeTop(Disambiguator.java:351)
+
+                at
+org.spoofax.jsglr.client.Disambiguator.applyFilters(Disambiguator.java:291)
+
+                at
+org.spoofax.jsglr.client.Disambiguator.applyFilters(Disambiguator.java:255)
+
+                at org.spoofax.jsglr.client.SGLR.sglrParse(SGLR.java:570)
+
+                at org.spoofax.jsglr.client.SGLR.parse(SGLR.java:510)
+
+                at org.spoofax.jsglr.client.SGLR.parse(SGLR.java:313)
+
+                at
+org.strategoxt.imp.runtime.parser.JSGLRI.doParse(JSGLRI.java:170)
+
+                at
+org.strategoxt.imp.runtime.parser.AbstractSGLRI.parse(AbstractSGLRI.java:113
+)
+
+                at
+org.strategoxt.imp.runtime.parser.SGLRParseController.doParse(SGLRParseContr
+oller.java:370)
+
+                at
+org.strategoxt.imp.runtime.parser.SGLRParseController.parse(SGLRParseControl
+ler.java:298)
+
+                at
+org.strategoxt.imp.runtime.services.StrategoObserverBackgroundUpdateJob.anal
+yzeFile(StrategoObserverBackgroundUpdateJob.java:112)
+
+                at
+org.strategoxt.imp.runtime.services.StrategoObserverBackgroundUpdateJob.anal
+yze(StrategoObserverBackgroundUpdateJob.java:64)
+
+                at
+org.strategoxt.imp.runtime.services.StrategoAnalysisQueue$UpdateJob.run(Stra
+tegoAnalysisQueue.java:83)
+
+                at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130507/fb4d6c1d/attachment.html>
+
+From v.vergu at gmail.com  Wed May  8 11:02:59 2013
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Wed, 8 May 2013 11:02:59 +0200
+Subject: [Stratego Users] migration svn -> git of spoofax, jsglr, terms,
+	interpreter !!
+In-Reply-To: <E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+References: <CC500A18-2B00-4562-B1B4-3E0B61D8BCD7@gmail.com>
+	<E5FC2445-3135-4A6B-8719-C186745B690B@gmail.com>
+Message-ID: <B70935EB-38DA-4119-8AFA-E4E2CA5B8887@gmail.com>
+
+Dear all,
+
+This email is an update on migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+
+
+
+Dear developers,
+
+I am writing as promised to update you on the progress of the migration from SVN to Git.
+
+Everything is on or ahead of schedule. Thank you for your comments and suggestions on the health of the Git repositories; they are all implemented in the new repositories. I'm attaching an updated diagram to help you track down where everything is. All repositories have been migrated to GitHub under the Metaborg organisation. 
+
+The links to the new repositories are:
+
+git://github.com/metaborg/jsglr
+git://github.com/metaborg/mb-exec
+git://github.com/metaborg/mb-exec-deps
+git://github.com/metaborg/mb-rep
+git://github.com/metaborg/aster
+git://github.com/metaborg/esv
+git://github.com/metaborg/sdf
+git://github.com/metaborg/nabl
+git://github.com/metaborg/box
+git://github.com/metaborg/spx
+git://github.com/metaborg/spt
+git://github.com/metaborg/stratego
+git://github.com/metaborg/tdl
+git://github.com/metaborg/rtg
+git://github.com/metaborg/spoofax
+git://github.com/metaborg/spoofax-debug
+git://github.com/metaborg/spoofax-deploy
+git://github.com/metaborg/spoofax-imp-patches
+git://github.com/metaborg/spoofax-imp-archive
+
+You may begin pushing commits to these. The SVN aster, spoofax, spoofax-imp, sglr-recovery/trunk/permissive-grammars directories do not accept any new commits.
+
+The updated plan for the remaining things:
+
+1. Next few hours: Expected Spoofax nightly update site to become available again, containing the last builds from SVN.
+2. Wed 08-05 15:00: First nightly builds based on the Git repositories available.
+3. Wed 08-05 18:00: Stable update site contains stable version built from Git.
+4. Wed 08-05 22:00: Other CI jobs (e.g: interpreter, jsglr, spoofax-mdsd, spoofax-unstable) switched over to Git sources and producing builds.
+
+I will email you again (1) if something drastic changes and (2) after step 3 is completed.
+
+Cheers,
+
+Vlad 
+
+
+On May 4, 2013, at 3:05 PM, Vlad Vergu <v.vergu at gmail.com> wrote:
+
+> Dear all,
+> 
+> This email concerns the migration of source code repositories for the Stratego and Spoofax projects. It is directed at developers of Stratego and Spoofax. If you are a user and not a developer you can safely ignore this email as this migration will be transparent to you.
+> 
+> 
+> 
+> Dear developers,
+> 
+> 
+> You are receiving this email because (1) i'm migrating many of Spoofax and Stratego related projects to Git, (2) i need your assistance and (3) it is likely that it concerns your current/previous work. 
+> 
+> 
+> For the past week or so i've been working on migrating to GitHub everything that is in the spoofax and spoofax-imp directories of the StrategoXT SVN repository. At the same time i've split the two folders up into 18 separate Git repositories each with its own history. This was/is a non-trivial endeavour requiring understanding of each project's history for the last decade and lots of regular expressions, thus very error prone. As far as I can tell all history is preserved and things appear to be complete.
+> 
+> 
+> My first request to you is that you carefully review the contents and histories of the resulting Git repositories (below) and report any irregularities that you discover. It is crucial that the new repositories preserve history and your feedback is therefore invaluable. Please look at code you have contributed to as well as to the rest of the codebase to check for continuity, missing files, etc. I've attached a diagram that explains how each folder from the spoofax/trunk/spoofax and spoofax-imp/trunk directories corresponds to Git repos. I kindly ask you to check these repositories by coming Tuesday and report any issues you discover, no matter how minor or major.
+> 
+> After i've fixed the problems that you report i will (1) make the spoofax and spoofax-imp directories read-only on SVN and (2) create new Git repositories based on the then latest revisions.
+> 
+> Before anything: Do not develop anything against the Git repositories mentioned below. They are temporary and only for review. After i've received all of your comments I will delete these repositories and i will make new ones based on the latest SVN revisions and according to the planning below. You can distinguish the temporary from the permanent repositories by the presence/absence of the MIG- prefix in their names.
+> 
+> The new (temporary) repositories are hosted on GitHub at the following addresses:
+> 
+> https://github.com/metaborg-testing/MIG-jsglr
+> https://github.com/metaborg-testing/MIG-mb-exec
+> https://github.com/metaborg-testing/MIG-mb-exec-deps
+> https://github.com/metaborg-testing/MIG-mb-rep
+> https://github.com/metaborg-testing/MIG-aster
+> https://github.com/metaborg-testing/MIG-esv
+> https://github.com/metaborg-testing/MIG-sdf
+> https://github.com/metaborg-testing/MIG-nabl
+> https://github.com/metaborg-testing/MIG-box
+> https://github.com/metaborg-testing/MIG-spx
+> https://github.com/metaborg-testing/MIG-spt
+> https://github.com/metaborg-testing/MIG-stratego
+> https://github.com/metaborg-testing/MIG-tdl
+> https://github.com/metaborg-testing/MIG-rtg
+> https://github.com/metaborg-testing/MIG-spoofax
+> https://github.com/metaborg-testing/MIG-spoofax-debug
+> https://github.com/metaborg-testing/MIG-spoofax-deploy
+> https://github.com/metaborg-testing/MIG-spoofax-imp-patches
+> https://github.com/metaborg-testing/MIG-spoofax-imp-archive
+> 
+> 
+> The final repositories will also be hosted on GitHub, under the Metaborg organisation.
+> 
+> 
+> There a few known issues with the new repositories:
+> 
+> 1. Branches that could never non-destructively be merged into back into the trunk have been archived as tags. The are those SVN branches that branched on a particular directory of the trunk instead of the entire trunk. This was a standard practice in the SVN-era but it results in Git branch commits that delete everything that was not branched. The net effect of merging those back into master would be that of deleting everything else but your work. The tags that archive these branches preserve history of the branch and the branches can later be revived if necessary.
+> 
+> 2. Some deleted branches (e.g: spoofax-new-terms) have reappeared as tags. This was intentional. If you happen to spot a previously deleted branch which is not tagged, please report it. Branch-deletion in Git is destructive and history would be lost unless we tag the deleted branches.
+> 
+> 3. The old Spoofax editor (first version started in ~2005) is not yet migrated. This is the big red-colored repository in the diagram. This will be migrated later, separately, as one big read-only Git repository. 
+> 
+> 
+> To summarise, i kindly ask you to:
+> 
+> 1. Examine and give feedback on the health of the MIG- repositories by cob of coming Tuesday. Do pay special attention to missing or corrupted files, branches, tags, history or committer-info. 
+> 
+> 2. Avoid branching/merging in the spoofax and spoofax-imp directories. If you do so, then (1) branch the entire trunk of the respective folder (this will ensure merge-able branches) and (2) notify me. The migration is like a white-list so anything not explicitly mentioned in it does not get copied. 
+> 
+> 3. Avoid deleting, creating or renaming folders at the spoofax/[ trunk | branches | tags ]/spoofax or spoofax-imp/[ trunk | branches | tags ] roots. If you do, please let me know. Things will not be copied over unless I explicitly mention them in the migration script. Making changes to subdirectories, such as spoofax/trunk/spoofax/foobar/, is fine. In other words, you can safely continue your work but don't start new things in the SVN repository. 
+> 
+> 
+> This migration has a few more steps, here's the tentative plan (depending on the problems you discover):
+> 
+> 1. Wed 08-05 8:00 AM : make the spoofax and spoofax-imp directories on SVN read-only. At this stage you shouldn't have any uncommitted changes anymore. 
+> 2. Wed 08-05 12:00 PM : all your reported issues should be fixed in the migration scripts.
+> 3. Wed 08-05 1:30 PM : final Git repositories published at GitHub Metaborg organisation.
+> 4. Wed 08-05 6:00 PM : the Hydra build-farm should have the first build results available based on the Git repositories. This means builds of the stable, master and unstable branches.
+> 5. Thu 09-05 8:00 PM : all Spoofax update sites should be pointing/containing builds based on the Git repositories.
+> 
+> 
+> I'll email you again (1) if something changes in the above plan and (2) after steps 3 and 5 are completed.
+> 
+> Thank you for your help.
+> 
+> 
+> Cheers,
+> 
+> Vlad
+>> 
+> <migration_diagram.pdf>
+> 
+> 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130508/c1bb5ec8/attachment-0002.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: migration.pdf
+Type: application/pdf
+Size: 171861 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130508/c1bb5ec8/attachment-0001.pdf>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130508/c1bb5ec8/attachment-0003.html>
+
+From adalberto.cajueiro at gmail.com  Tue May 21 14:07:06 2013
+From: adalberto.cajueiro at gmail.com (Adalberto Cajueiro)
+Date: Tue, 21 May 2013 09:07:06 -0300
+Subject: [Stratego Users] Invoking transformations from an arbitrary Java
+	class
+Message-ID: <CALXG_iCZyDckL+=+y3_2x7EtvXiTPymDtnsLRT9n2BFay6JCNA@mail.gmail.com>
+
+Hi colegues from Stratego community,
+
+I?m facing the problem of using a transformation (implemented in a Spoofax
+project) in an external Java class. For example, my Spoofax project has a
+parser implemented and a transformation of my interest. I?d like to know if
+it is possible to use the parser and the transformation in another Java
+class. I followed the steps to compile my project to java and Spoofax
+generated a lot of Java classes containing strategies (one for my
+transformation, other named parse, and a lot of others). I just want to
+invoke the parse to analyse a file and build the AST, and then, I want to
+invoke the transformation over the AST.
+
+I saw a related discussion about using strategies implemented in Java
+(extending the class Strategy) in Spoofax (as an external strategy). But I
+don't need my project be a Spoofax project. Actually, I need to invoke the
+parse and the transformation directly from a Java class instead ot the
+"Transform" menu.
+
+My spoofax project is intended to be used in a wider context: a model
+checker that analyses specifications and produces an outputs that are
+transformed by my stratego project into a graph (reachability,
+conterexample, and so on).
+
+I would be grateful if someone could help me with that (a complete simple
+example would be very welcome).
+
+My thanks in advance.
+
+Adalberto.
+
+
+
+-- 
+---------------------------------------------
+Adalberto Cajueiro de Farias
+Federal University of Campina Grande
+Brazil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130521/4bcdd7e5/attachment.html>
+

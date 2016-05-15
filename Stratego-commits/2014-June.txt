@@ -1,0 +1,242 @@
+From gabrielkonat at gmail.com  Fri Jun 13 16:26:22 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Fri, 13 Jun 2014 14:26:22 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26210 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140613142622.1563.43076@buildfarm.st.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Fri Jun 13 14:26:22 2014
+New Revision: 26210
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26210&sc=1
+
+Log:
+Don't separately call java.jar target, it is part of the main language build.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Apr  9 14:04:44 2014	(r26209)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 13 14:26:22 2014	(r26210)
+@@ -335,11 +335,10 @@
+       </dependencies>
+       <executions>
+          <execution>
+-           <id>generate-sources</id>
++           <id>build-spoofax-language</id>
+            <phase>generate-sources</phase>
+            <configuration>
+               <tasks>
+-                <echo>Running ant script</echo>
+                 <property name="externaljarx" refid="maven.compile.classpath"/>
+                 <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+                 <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+@@ -349,25 +348,6 @@
+                 </ant>
+               </tasks>
+            </configuration>
+-           <goals>
+-              <goal>run</goal>
+-           </goals>
+-         </execution>
+-         <execution>
+-           <id>process-classes</id>
+-           <phase>process-classes</phase>
+-           <configuration>
+-              <tasks>
+-                <echo>Running ant script</echo>
+-                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+-                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+-                <property name="eclipse.home" value="${eclipse}/eclipse"/>
+-                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+-                <ant antfile="build.main.xml" inheritRefs="true">
+-                  <target name="java.jar"/> 
+-                </ant>
+-              </tasks>
+-           </configuration>
+            <goals>
+               <goal>run</goal>
+            </goals>
+
+From gabrielkonat at gmail.com  Fri Jun 13 17:56:27 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Fri, 13 Jun 2014 15:56:27 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26211 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140613155627.63362.79664@wendy.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Fri Jun 13 15:56:26 2014
+New Revision: 26211
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26211&sc=1
+
+Log:
+Set externaljarx property in java.jar target.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 13 14:26:22 2014	(r26210)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 13 15:56:26 2014	(r26211)
+@@ -335,10 +335,11 @@
+       </dependencies>
+       <executions>
+          <execution>
+-           <id>build-spoofax-language</id>
++           <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+               <tasks>
++                <echo>Running ant script</echo>
+                 <property name="externaljarx" refid="maven.compile.classpath"/>
+                 <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+                 <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+@@ -348,6 +349,26 @@
+                 </ant>
+               </tasks>
+            </configuration>
++           <goals>
++              <goal>run</goal>
++           </goals>
++         </execution>
++         <execution>
++           <id>process-classes</id>
++           <phase>process-classes</phase>
++           <configuration>
++              <tasks>
++                <echo>Running ant script</echo>
++                <property name="externaljarx" refid="maven.compile.classpath"/>
++                <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
++                <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
++                <property name="eclipse.home" value="${eclipse}/eclipse"/>
++                <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
++                <ant antfile="build.main.xml" inheritRefs="true">
++                  <target name="java.jar"/> 
++                </ant>
++              </tasks>
++           </configuration>
+            <goals>
+               <goal>run</goal>
+            </goals>
+
+From gabrielkonat at gmail.com  Tue Jun 17 09:50:51 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 17 Jun 2014 07:50:51 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26212 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140617075051.22383.66342@wendy.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Tue Jun 17 07:50:51 2014
+New Revision: 26212
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26212&sc=1
+
+Log:
+Undo that, seems to destroy the build..
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 13 15:56:26 2014	(r26211)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Tue Jun 17 07:50:51 2014	(r26212)
+@@ -359,7 +359,6 @@
+            <configuration>
+               <tasks>
+                 <echo>Running ant script</echo>
+-                <property name="externaljarx" refid="maven.compile.classpath"/>
+                 <property name="eclipse.spoofaximp.jars" value="''${basedir}/../org.strategoxt.imp.generator/dist/"/>
+                 <property name="eclipse.spoofaximp.strategojar" value="''${basedir}/../org.strategoxt.strj/java/strategoxt.jar"/>
+                 <property name="eclipse.home" value="${eclipse}/eclipse"/>
+
+From v.vergu+vc at gmail.com  Thu Jun 19 10:17:04 2014
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 19 Jun 2014 08:17:04 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26213 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140619081704.29819.42604@buildfarm.st.ewi.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 19 08:17:04 2014
+New Revision: 26213
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26213&sc=1
+
+Log:
+Trying out Nix expression for updated generator
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Tue Jun 17 07:50:51 2014	(r26212)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jun 19 08:17:04 2014	(r26213)
+@@ -208,7 +208,7 @@
+       name = "spoofax-imp-generator-s${spoofaxRev}";
+       inherit (jobs) src;
+ 
+-      buildInputs = with pkgs; [strategoPackages.sdf strategoPackages.javafront ecj openjdk ];
++      buildInputs = with pkgs; [strategoPackages.sdf ecj openjdk ];
+ 
+       preConfigure = ''
+         cd org.strategoxt.imp.generator
+@@ -216,17 +216,12 @@
+       '';
+ 
+       postUnpack = ''
+-        echo ${pkgs.strategoPackages.strategoxt}
+-        echo ${pkgs.strategoPackages.sdf}
+-        echo ${pkgs.strategoPackages.javafront}
+       '';
+ 
+       antTargets = [ "install" ];
+       antProperties = [
+-	{ name = "sdf2bundle"; value = pkgs.strategoPackages.sdf; }
+-        { name = "strategoxt"; value = "${pkgs.strategoPackages.strategoxt}/share"; }
+-        { name = "sdf"; value = pkgs.strategoPackages.sdf; }
+-        { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
++        { name = "nativepath"; value = "${pkgs.strategoPackages.sdf}/bin; }
++        { name = "strategoxt-distrib"; value = (pkgs.lib.concatStrings [strj "/share/strategoxt" ]) }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+       antBuildInputs = [ pkgs.ecj strj ];
+
+From gabrielkonat at gmail.com  Thu Jun 19 10:32:59 2014
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Thu, 19 Jun 2014 08:32:59 -0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26214 -
+	hydra/jobs/spoofax-git
+Message-ID: <20140619083259.48598.52455@wendy.ewi.tudelft.nl>
+
+Author: gkonat
+Date: Thu Jun 19 08:32:58 2014
+New Revision: 26214
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26214&sc=1
+
+Log:
+Fix generator section of Nix expr
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jun 19 08:17:04 2014	(r26213)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Thu Jun 19 08:32:58 2014	(r26214)
+@@ -220,8 +220,8 @@
+ 
+       antTargets = [ "install" ];
+       antProperties = [
+-        { name = "nativepath"; value = "${pkgs.strategoPackages.sdf}/bin; }
+-        { name = "strategoxt-distrib"; value = (pkgs.lib.concatStrings [strj "/share/strategoxt" ]) }
++        { name = "nativepath"; value = "${pkgs.strategoPackages.sdf}/bin/"; }
++        { name = "strategoxt-distrib"; value = (pkgs.lib.concatStrings [ strj ]); }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+       antBuildInputs = [ pkgs.ecj strj ];
+

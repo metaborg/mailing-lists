@@ -1,0 +1,249 @@
+From housel at acm.org  Wed Jan 22 07:47:33 2014
+From: housel at acm.org (Peter Housel)
+Date: Tue, 21 Jan 2014 22:47:33 -0800
+Subject: [Stratego Users] Spoofax 1.1 or pre-1.2 for new project?
+Message-ID: <7049E716-EC17-46D0-97C3-4DE65A4AA8C5@acm.org>
+
+I?m about to start a new project. This project, like my previous one, will involve building a standalone command-line compiler as well as an editor plugin. In the past, updating those aspects of my project to accomodate API changes has been a bit painful, and I?d like to avoid that if possible.
+
+So, I need to decide if I should start my project with the released 1.1, or try to begin with the nightly pre-1.2 snapshots. I?ve noticed that when building an editor project using the new project wizard, a lot of errors and warnings are noted? nothing serious perhaps, but fairly distracting.
+
+Do the developers currently have a release date for 1.2 in mind? If not, how about a suggestion of what the tradeoffs for starting with 1.1 vs. starting with 1.2 snapshots might be?
+
+Thanks,
+-Peter S. Housel- housel at acm.org
+
+
+
+From abdoulla at cs.uni-bonn.de  Fri Jan 31 13:00:06 2014
+From: abdoulla at cs.uni-bonn.de (Houssam Abdoullah)
+Date: Fri, 31 Jan 2014 13:00:06 +0100
+Subject: [Stratego Users] Using Java code Patterns in Stratego
+Message-ID: <12F7EBA2EF0646529BBAD7B5EB8B94BF@HoussamPC>
+
+Dear Java Front and Stratego developers;
+
+I?m a master student at the university of Bonn and I have some questions about Stratego:
+
+As I understood so far, I might be able to write transformations that actually query my java code. I can run some pattern detection transformation where the left hand side is the pattern I want to detect and the right hand side is just a procedure that show the results. 
+As I understood from what I read about Stratego that using this technique has the limitation that we are only matching on the syntactic level. 
+for example 
+
+--------------------------------------------------------------------------------
+
+MyQuery:
+|[
+class ~expr:ClassName extends Component {
+        
+       ~*fieldDeclaration:fieldDeclarations
+
+                    ~*methodDeclaration:methodDeclarations
+
+       ~*expr:modList ~expr:type acceptVisitor(~expr:t ~expr:v) {
+
+         System.out.println(~expr:string);
+
+         ~expr:v.~expr:visitMethod(this);
+       }
+     }
+   }
+]|
+->
+Showresult(~expr:ClassName)
+
+--------------------------------------------------------------------------------
+
+this query can miss many candidates such as :
+
+--------------------------------------------------------------------------------
+
+
+public class SuperLogLeaf extends Component {
+
+  public void acceptVisitor(ComponentVisitor v) {
+
+    System.out.println(~expr:string);
+
+    ;//just an empty statement
+
+    v.visitSuperLogLeaf(this);
+  }
+}
+
+--------------------------------------------------------------------------------
+
+because of the empty statement. 
+
+And this one
+
+--------------------------------------------------------------------------------
+
+public class SuperLogLeaf extends Component {
+
+  public void acceptVisitor(ComponentVisitor v) {
+
+    System.out.println(~expr:string);
+
+
+    v.visitSuperLogLeaf(this);
+  }
+
+private int dummyfield; // this field declartion will not match our query and thus this class won?t be detected. 
+}
+
+--------------------------------------------------------------------------------
+
+because of the field declaration after the method declaration and this is not in our pattern.
+So in order to match all candidates I have to enumerate all possible situation.
+
+Is my understanding for this issue correct? 
+
+If yes, Has anyone tried to overcome this issue?
+
+Thanks a lot for your help.
+
+best regards,
+Houssam Abdoullah 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140131/8bfde4c7/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Fri Jan 31 13:33:04 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 31 Jan 2014 13:33:04 +0100
+Subject: [Stratego Users] Using Java code Patterns in Stratego
+In-Reply-To: <12F7EBA2EF0646529BBAD7B5EB8B94BF@HoussamPC>
+References: <12F7EBA2EF0646529BBAD7B5EB8B94BF@HoussamPC>
+Message-ID: <CAFaCHU1OvJBOHWWdBETEy=Oo3mpyskeTruiwycYN3e8nySOqDw@mail.gmail.com>
+
+Hi Houssam,
+
+Indeed, expressing such queries with tree templates is tricky. Rather than
+writing a single pattern, I'd probably rather break it down into a
+composition of separate more basic queries
+
+- finding classes that extend Component
+- finding acceptVisitor methods in such classes
+- checking that the method has a call to println
+
+Instead of writing list match patterns, I'd rather write collecting
+traversals and projection rules. For example,
+
+  super-class-of : Class(_, _, _, name, _, _) -> name
+
+  extending-component = collect(where(super-class-of => "Component"))
+
+  etc.
+
+Our recent work on name binding opens up new ways for querying programs, by
+querying the name index rather than the abstract syntax tree.
+
+cheers,
+
+-- Eelco
+
+
+
+
+On Fri, Jan 31, 2014 at 1:00 PM, Houssam Abdoullah
+<abdoulla at cs.uni-bonn.de>wrote:
+
+>   Dear Java Front and Stratego developers;
+>
+> I?m a master student at the university of Bonn and I have some questions
+> about Stratego:
+>
+> As I understood so far, I might be able to write transformations that
+> actually query my java code. I can run some pattern detection
+> transformation where the left hand side is the pattern I want to detect and
+> the right hand side is just a procedure that show the results.
+> As I understood from what I read about Stratego that using this technique
+> has the limitation that we are only matching on the syntactic level.
+> for example
+> ------------------------------
+> MyQuery:
+> |[
+> *class* ~expr:ClassName *extends* Component {
+>
+>        ~*fieldDeclaration:fieldDeclarations
+>
+>                     ~*methodDeclaration:methodDeclarations
+>
+>        ~*expr:modList ~expr:type acceptVisitor(~expr:t ~expr:v) {
+>
+>          System.out.println(~expr:string);
+>
+>          ~expr:v.~expr:visitMethod(*this*);
+>        }
+>      }
+>    }
+> ]|
+> ->
+> Showresult(~expr:ClassName)
+> ------------------------------
+> this query can miss many candidates such as :
+> ------------------------------
+>
+> *public* *class* SuperLogLeaf *extends* Component {
+>
+>   *public* *void* acceptVisitor(ComponentVisitor v) {
+>
+>     System.out.println(~expr:string);
+>
+>     ;//just an empty statement
+>
+>     v.visitSuperLogLeaf(*this*);
+>   }
+> }
+> ------------------------------
+> because of the empty statement.
+>
+> And this one
+> ------------------------------
+> *public* *class* SuperLogLeaf *extends* Component {
+>
+>   *public* *void* acceptVisitor(ComponentVisitor v) {
+>
+>     System.out.println(~expr:string);
+>
+>
+>     v.visitSuperLogLeaf(*this*);
+>   }
+>
+> private int dummyfield; // this field declartion will not match our query
+> and thus this class won?t be detected.
+> }
+> ------------------------------
+> because of the field declaration after the method declaration and this is
+> not in our pattern.
+> So in order to match all candidates I have to enumerate all possible
+> situation.
+>
+> *Is my understanding for this issue correct?*
+>
+> If yes, Has anyone tried to overcome this issue?
+>
+> Thanks a lot for your help.
+>
+> best regards,
+> Houssam Abdoullah
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140131/f35773eb/attachment.html>
+

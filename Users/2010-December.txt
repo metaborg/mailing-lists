@@ -1,0 +1,766 @@
+From E.Visser at tudelft.nl  Wed Dec  1 01:06:49 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 30 Nov 2010 19:06:49 -0500
+Subject: [Stratego Users] CFP: International Workshop on Intermediate
+	Representations (WIR 2011)
+Message-ID: <AANLkTinRDsrF_sdQQzhU5paozqS+++Cx19V59+z46sGK@mail.gmail.com>
+
+Call for Papers
+
+International Workshop on Intermediate Representations (WIR 2011)
+
+Co-located with CGO 2011, April 2/3 2011 in Chamonix, France
+
+http://researchr.org/conference/wir-2011
+
+Description
+===========
+
+The intermediate representation is the core of any program
+transformation tool. Its
+design has a significant impact on the simplicity, efficiency, and
+effectiveness of
+program transformations. The developments in concurrent programming, integrated
+development environments, and domain-specific languages pose new requirements on
+intermediate representations. This workshop provides a forum to discuss current
+trends and experiences in the design, implementation, and application
+of intermediate
+representations.  Topics of Interest
+
+The list of topics includes, but is not limited to:
+
+    * intermediate representations for
+          o parallelism and concurrency
+          o instrumentation
+          o JIT compilation
+          o compiler verification
+          o domain-specific languages
+          o refactoring
+          o integrated development environments
+    * functional intermediate representations for imperative programs
+    * translation to, and code generation from an IR
+    * modeling low-level machine details in IRs
+    * impact of IR on the precision of static analyzers
+    * representing static analysis results in an IR
+    * origin tracking
+
+Submission
+==========
+
+We sollicit submission of original papers on topics relevant to intermediate
+representations. Papers should be formatted in SIGPLAN Proceedings
+Format, 9 point
+font, and be at most 8 pages in length.
+
+    * http://www.acm.org/sigs/sigplan/authorInformation.htm
+
+Selected papers will be published in the ACM digital library (to be confirmed).
+
+Papers should be submitted electronically with easychair:
+
+    * http://www.easychair.org/conferences/?conf=wir2011
+
+Important Dates
+===============
+
+    * Submission: January 21, 2011
+    * Notification: February 25, 2011
+    * Camera-ready: March 18, 2011
+    * Workshop: April 2/3, 2011
+
+Organizers
+==========
+
+    * Florent Bouchez
+    * Sebastian Hack
+    * Eelco Visser
+
+Program Committee
+=================
+
+    * Florent Bouchez
+    * Martin Bravenboer
+    * Albert Cohen
+    * Fran?ois de Ferri?re
+    * Robert Fuhrer
+    * Sebastian Hack
+    * Sorin Lerner
+    * Nathaniel Nystrom
+    * Tijs van der Storm
+    * Eelco Visser
+
+
+From camila.sa.da.fonseca at gmail.com  Fri Dec  3 01:54:03 2010
+From: camila.sa.da.fonseca at gmail.com (=?ISO-8859-1?Q?Camila_S=E1?=)
+Date: Thu, 2 Dec 2010 21:54:03 -0300
+Subject: [Stratego Users] How to eliminate spaces
+Message-ID: <AANLkTikeLhUnP4PF9SPd7vnTwojuOHJjqSabbyYWLZMm@mail.gmail.com>
+
+Hello everyone, probably that`s a stupid question, but I've tried a lot of
+things but couldn't make it work!
+Well... I made my grammar, transformed an archive to aterm, made the
+transformations and then came back to my language (with the created
+pretty-print)! Don't know why, but this process adds a space (" ") in some
+places! For example:
+
+<Element becomes < Element
+
+However there ain't no spaces on grammar definition:
+"<"ElementName  and, in this case, no transformations is being applied!
+
+I would really appreciate some help!
+
+Att.
+
+-- 
+Camila S? da Fonseca
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101202/8ffc9622/attachment.html 
+
+From lex.spoon at logicblox.com  Tue Dec  7 17:39:39 2010
+From: lex.spoon at logicblox.com (Lex Spoon)
+Date: Tue, 7 Dec 2010 11:39:39 -0500
+Subject: [Stratego Users] completion on incomplete ASTs?
+Message-ID: <AANLkTikB7O48JJCkhc2u4KpQ1pcgQy06dLUGnWmCrngK@mail.gmail.com>
+
+How are people approaching content completion for programs that don't
+yet generate a complete AST? If the answer is through error recovery,
+are there any pointers on how error recovery is specified in Spoofax?
+I found a description in the research papers, but they just say that
+Spoofax supports it. I haven't been able to find documentation or
+examples for the concrete syntax used in sdf files.
+
+To give a concrete example, here's a complete line of code that a user
+might type:
+
+ ancestorof(x, y) <- ancestor(x, z), parent(z, y).
+
+With content completion, the user shouldn't have to type all those
+characters. They might type just this much, and then hit
+control-space:
+
+ ancestorof(x, y) <- anc
+
+
+My attempts to support this aren't going well so far. It works if I
+use completion on an AST that is already fully formed. However, if the
+AST is incomplete, which is going to be more common, what I see is
+that my completion rules run, but the editor doesn't pop up any of the
+results I pass back.
+
+I expect the cleanest solution is to guide the error recovery somehow.
+Given code like the above, I could tell it to insert "()" and then "."
+to get a fully formed AST to work against. At this point, though, I
+don't know how to even get started with error recovery. Any tips are
+pointers would be very welcome.
+
+
+Lex Spoon
+
+From tobivollebregt at gmail.com  Wed Dec  8 11:44:38 2010
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 8 Dec 2010 11:44:38 +0100
+Subject: [Stratego Users] completion on incomplete ASTs?
+In-Reply-To: <AANLkTikB7O48JJCkhc2u4KpQ1pcgQy06dLUGnWmCrngK@mail.gmail.com>
+References: <AANLkTikB7O48JJCkhc2u4KpQ1pcgQy06dLUGnWmCrngK@mail.gmail.com>
+Message-ID: <AANLkTinYpXsm_sYMYRYG-ZSDt-DgisFecT8gWgEb04W1@mail.gmail.com>
+
+One way to solve it is to add special productions to the grammar to
+parse these invalid constructs, and unconditionally mark those
+constructs as errors in a later step.
+
+E.g., in the SDF:
+
+    Appl "<-" ID -> Foo {cons("Foo-RECOVER")}
+
+And then in check.str something like this:
+
+    constraint-error:
+      Foo-RECOVER(_, x) -> (x, $[Syntax error])
+
+This way a complete AST can be formed even though the parentheses and
+the dot are still missing, which should allow content completion to
+work. How well this works probably depends on whether these extra
+productions result in ambiguities, though.
+
+Tobi Vollebregt
+
+On 7 December 2010 17:39, Lex Spoon <lex.spoon at logicblox.com> wrote:
+> How are people approaching content completion for programs that don't
+> yet generate a complete AST? If the answer is through error recovery,
+> are there any pointers on how error recovery is specified in Spoofax?
+> I found a description in the research papers, but they just say that
+> Spoofax supports it. I haven't been able to find documentation or
+> examples for the concrete syntax used in sdf files.
+>
+> To give a concrete example, here's a complete line of code that a user
+> might type:
+>
+> ?ancestorof(x, y) <- ancestor(x, z), parent(z, y).
+>
+> With content completion, the user shouldn't have to type all those
+> characters. They might type just this much, and then hit
+> control-space:
+>
+> ?ancestorof(x, y) <- anc
+>
+>
+> My attempts to support this aren't going well so far. It works if I
+> use completion on an AST that is already fully formed. However, if the
+> AST is incomplete, which is going to be more common, what I see is
+> that my completion rules run, but the editor doesn't pop up any of the
+> results I pass back.
+>
+> I expect the cleanest solution is to guide the error recovery somehow.
+> Given code like the above, I could tell it to insert "()" and then "."
+> to get a fully formed AST to work against. At this point, though, I
+> don't know how to even get started with error recovery. Any tips are
+> pointers would be very welcome.
+>
+>
+> Lex Spoon
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From L.C.L.Kats at tudelft.nl  Wed Dec  8 13:27:14 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 08 Dec 2010 13:27:14 +0100
+Subject: [Stratego Users] completion on incomplete ASTs?
+In-Reply-To: <AANLkTinYpXsm_sYMYRYG-ZSDt-DgisFecT8gWgEb04W1@mail.gmail.c
+ om>
+References: <AANLkTikB7O48JJCkhc2u4KpQ1pcgQy06dLUGnWmCrngK@mail.gmail.com>
+	<AANLkTinYpXsm_sYMYRYG-ZSDt-DgisFecT8gWgEb04W1@mail.gmail.com>
+Message-ID: <201012081227.oB8CREl6018478@mc-smtp1.infopact.nl>
+
+Hi,
+
+Indeed, for many languages you need to add some additional grammar rules to deal with syntax incorrect programs. While error recovery for the most part is transparent, it is aimed at always creating a correct abstract syntax tree that corresponds to the grammar. For content complete, you may also want incomplete abstract syntax trees. There's three ways to do this.
+
+The first is to add additional production rules that look like normal rules but parse an incomplete construct, for example:
+
+    Delta? FunctorExpr -> Atom {cons("AtomIncomplete")}
+
+Just give it a special constructor so that you know in the semantic analysis that it indicates an error.
+
+The second way to handle these cases is with actual recover rules, by including a 'recover' annotation:
+
+    Delta? FunctorExpr -> Atom {cons("AtomIncomplete"), recover}
+
+In this case, the production rule is really only applied when there is a syntax error, and not when there would be an ambiguity. Unfortunately, the current parser implementation doesn't do anything to prioritize handwritten recover rules, so you have to experiment a bit with these two approaches to see what works best for your grammar. The key thing is that every {recover} annotation adds a certain cost value to the recovery, and the parser looks for a minimum-cost solution, which means that having a combination of multiple of these handwritten rules may not always be the cheapest solution.
+
+Finally, you can also add "normal" recovery rules, similar to the ones that are generated in the include/YOURLANG-Permissive.def file:
+
+    -> "." {cons("INSERTION"), recover}
+
+The form of these rules is documented in our paper at http://lclnet.nl/publications/error-recovery/. This particular rule says that the empty string can also be parsed as a "." literal.
+
+I looked into your particular case, and it looks you need a combination of the "AtomIncomplete" rule without the {recover} annotation and the insertion rule for the ".". There's probably other combinations that would work here, but I hope with these pointers you get an idea of how to tackle this problem.
+
+In a future Spoofax version we want to make content completion easier by automatically deriving content completion grammar rules.
+
+cheers,
+
+Lennart
+
+
+@ 11:44 AM 12/8/2010, Tobi Vollebregt wrote:
+>One way to solve it is to add special productions to the grammar to
+>parse these invalid constructs, and unconditionally mark those
+>constructs as errors in a later step.
+>
+>E.g., in the SDF:
+>
+>    Appl "<-" ID -> Foo {cons("Foo-RECOVER")}
+>
+>And then in check.str something like this:
+>
+>    constraint-error:
+>      Foo-RECOVER(_, x) -> (x, $[Syntax error])
+>
+>This way a complete AST can be formed even though the parentheses and
+>the dot are still missing, which should allow content completion to
+>work. How well this works probably depends on whether these extra
+>productions result in ambiguities, though.
+>
+>Tobi Vollebregt
+>
+>On 7 December 2010 17:39, Lex Spoon <lex.spoon at logicblox.com> wrote:
+>> How are people approaching content completion for programs that don't
+>> yet generate a complete AST? If the answer is through error recovery,
+>> are there any pointers on how error recovery is specified in Spoofax?
+>> I found a description in the research papers, but they just say that
+>> Spoofax supports it. I haven't been able to find documentation or
+>> examples for the concrete syntax used in sdf files.
+>>
+>> To give a concrete example, here's a complete line of code that a user
+>> might type:
+>>
+>>  ancestorof(x, y) <- ancestor(x, z), parent(z, y).
+>>
+>> With content completion, the user shouldn't have to type all those
+>> characters. They might type just this much, and then hit
+>> control-space:
+>>
+>>  ancestorof(x, y) <- anc
+>>
+>>
+>> My attempts to support this aren't going well so far. It works if I
+>> use completion on an AST that is already fully formed. However, if the
+>> AST is incomplete, which is going to be more common, what I see is
+>> that my completion rules run, but the editor doesn't pop up any of the
+>> results I pass back.
+>>
+>> I expect the cleanest solution is to guide the error recovery somehow.
+>> Given code like the above, I could tell it to insert "()" and then "."
+>> to get a fully formed AST to work against. At this point, though, I
+>> don't know how to even get started with error recovery. Any tips are
+>> pointers would be very welcome.
+>>
+>>
+>> Lex Spoon
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From L.C.L.Kats at tudelft.nl  Wed Dec  8 14:07:13 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Wed, 08 Dec 2010 14:07:13 +0100
+Subject: [Stratego Users] How to eliminate spaces
+In-Reply-To: <AANLkTikeLhUnP4PF9SPd7vnTwojuOHJjqSabbyYWLZMm@mail.gmail.c
+ om>
+References: <AANLkTikeLhUnP4PF9SPd7vnTwojuOHJjqSabbyYWLZMm@mail.gmail.com>
+Message-ID: <201012081307.oB8D7Dmk025493@mc-smtp1.infopact.nl>
+
+Hi,
+
+It sounds like your pretty printer is adding spaces. I suppose you're using the box pretty printing language (i.e., a .pp file)? Then you can use the hs=0 attribute as follows:
+
+  H hs=0 [ _1 _2 ]
+
+for rules where you don't want it to insert horizontal spaces (hs).
+
+hth,
+
+Lennart
+
+@ 01:54 AM 12/3/2010, U wrote:
+>Hello everyone, probably that`s a stupid question, but I've tried a lot of things but couldn't make it work!
+>Well... I made my grammar, transformed an archive to aterm, made the transformations and then came back to my language (with the created pretty-print)! Don't know why, but this process adds a space (" ") in some places! For example:
+>
+><Element becomes < Element
+>
+>However there ain't no spaces on grammar definition:
+>"<"ElementName  and, in this case, no transformations is being applied!
+>
+>I would really appreciate some help!
+>
+>Att.
+>
+>-- 
+>Camila S? da Fonseca
+>
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From Magne.Haveraaen at ii.uib.no  Fri Dec 10 08:31:21 2010
+From: Magne.Haveraaen at ii.uib.no (Magne Haveraaen)
+Date: Fri, 10 Dec 2010 01:31:21 -0600
+Subject: [Stratego Users] PhD position available on the DMPL project at
+ Bergen Language Design Laboratory (BLDL)
+Message-ID: <4D01D749.4020303@ii.uib.no>
+
+A PhD scholarship is currently available on the project "Design of a 
+Mouldable Programming Language" (DMPL) financed by the Research Council 
+of Norway.
+
+DMPL is a research project at the Bergen Language Design Laboratory 
+(BLDL) within the Department of Informatics at the University of Bergen. 
+The project centres around exploring ideas of flexibility, adaptability, 
+genericity and robustness (in short, mouldability) in programming 
+languages. As part of the project, we are designing and implementing the 
+prototype mouldable language Magnolia, and also putting it to real life 
+testing by developing applications using the language.
+http://bldl.ii.uib.no/dmpl.html
+
+Application deadline 2010-12-19 CET through the form at (click in the 
+upper right corner for English):
+http://www.jobbnorge.no/job.aspx?jobid=70684
+Note that the online application procedure is somewhat cumbersome, so 
+start filling in the application well before the deadline.
+
+
+For more information on positions at BLDL:
+http://bldl.ii.uib.no/vacancies.html
+
+
+-- 
+Magne Haveraaen
+https://www.ii.uib.no/~magne/
+http://bldl.ii.uib.no/
+
+From camila.sa.da.fonseca at gmail.com  Thu Dec 16 07:15:10 2010
+From: camila.sa.da.fonseca at gmail.com (=?ISO-8859-1?Q?Camila_S=E1?=)
+Date: Thu, 16 Dec 2010 03:15:10 -0300
+Subject: [Stratego Users] How to eliminate spaces
+In-Reply-To: <201012081307.oB8D7Dmk025493@mc-smtp1.infopact.nl>
+References: <AANLkTikeLhUnP4PF9SPd7vnTwojuOHJjqSabbyYWLZMm@mail.gmail.com>
+	<201012081307.oB8D7Dmk025493@mc-smtp1.infopact.nl>
+Message-ID: <AANLkTikQ8nNMiLuXrbnf+KhekwGjMGCQAk_YzKULbUcu@mail.gmail.com>
+
+Thanks, Lennart!
+
+On Wed, Dec 8, 2010 at 10:07 AM, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+
+> Hi,
+>
+> It sounds like your pretty printer is adding spaces. I suppose you're using
+> the box pretty printing language (i.e., a .pp file)? Then you can use the
+> hs=0 attribute as follows:
+>
+>  H hs=0 [ _1 _2 ]
+>
+> for rules where you don't want it to insert horizontal spaces (hs).
+>
+> hth,
+>
+> Lennart
+>
+> @ 01:54 AM 12/3/2010, U wrote:
+> >Hello everyone, probably that`s a stupid question, but I've tried a lot of
+> things but couldn't make it work!
+> >Well... I made my grammar, transformed an archive to aterm, made the
+> transformations and then came back to my language (with the created
+> pretty-print)! Don't know why, but this process adds a space (" ") in some
+> places! For example:
+> >
+> ><Element becomes < Element
+> >
+> >However there ain't no spaces on grammar definition:
+> >"<"ElementName  and, in this case, no transformations is being applied!
+> >
+> >I would really appreciate some help!
+> >
+> >Att.
+> >
+> >--
+> >Camila S? da Fonseca
+> >
+> >_______________________________________________
+> >Users mailing list
+> >Users at strategoxt.org
+> >https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Camila S? da Fonseca
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101216/bd7b53b0/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Dec 16 19:12:25 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 16 Dec 2010 19:12:25 +0100
+Subject: [Stratego Users] Spoofax 0.6
+Message-ID: <201012161812.oBGICQFZ020026@mc-smtp1.infopact.nl>
+
+Hi list,
+
+We just released Spoofax 0.6.0! This is mainly a bugfix release; a detailed changelog can be found below:
+
+http://yellowgrass.org/tag/Spoofax/0.6.0
+
+Some highlights:
+
+- Interfacing with Java is now easier (Spoofax/210)
+- Syntactic content completions are now context-sensitive (Spoofax/223)
+- The ESV editor now does some analyses based on the SDF syntax
+- Improved syntax highlighting for the Stratego editor
+- Many bug fixes
+
+More info on the website at http://www.spoofax.org/.
+
+cheers,
+
+Lennart
+
+
+From sescobar at dsic.upv.es  Wed Dec 22 15:32:07 2010
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Wed, 22 Dec 2010 15:32:07 +0100
+Subject: [Stratego Users] CfP: WRS 2011 - 10th International Workshop on
+	Reduction Strategies in Rewriting and Programming
+References: <C5FD25AE-349E-4236-B4EA-D4A392DB86A0@dsic.upv.es>
+Message-ID: <FCC73F5B-79A1-4BC4-8D6B-80532052E552@dsic.upv.es>
+
+                    Call for Papers
+
+                       WRS 2011
+            10th International Workshop on 
+    Reduction Strategies in Rewriting and Programming 
+        http://www.dsic.upv.es/workshops/wrs2011
+             29 May 2011, Novi Sad, Serbia
+
+                An RDP 2011 workshop 
+Federated Conference on Rewriting, Deduction, and Programming
+
+
+This workshop promotes research and collaboration in the area of 
+reduction strategies. It encourages the presentation of new 
+directions, developments, and results as well as surveys and 
+tutorials on existing knowledge in this area. Reduction strategies 
+define which (sub)expression(s) should be selected for evaluation 
+and which rule(s) should be applied. These choices affect fundamental 
+properties of computations such as laziness, strictness, completeness, 
+and efficiency, to name a few. For this reason programming languages 
+such as Elan, Maude, OBJ, Stratego, and TOM allow the explicit 
+definition of the evaluation strategy, whereas languages such as 
+Clean, Curry, and Haskell allow its modification. In addition to 
+strategies in rewriting and programming, WRS also covers the use of 
+strategies and tactics in other areas such as theorem and termination 
+proving. 
+
+Previous editions of the workshop were held in Utrecht (2001), 
+Copenhagen (2002), Valencia (2003), Aachen (2004), Nara (2005), 
+Seattle (2006), Paris (2007), Hagenberg (2008), Brasilia (2009), 
+and Edinburgh (2010); the last one as a joint workshop with the 
+STRATEGIES workshop. Further information can be found at the 
+permanent site for WRS <http://www.dsic.upv.es/~wrs/>.
+
+WRS 2011 is planned to be co-located with RTA 2011 (22nd International 
+Conference on Rewriting Techniques and Applications), as a satellite 
+event of RDP, the Federated Conference on Rewriting, Deduction, and 
+Programming. WRS 2011 will be held at Novi Sad, Serbia on 29 May 2011.
+
+Submissions and Publication: Before the workshop, authors are 
+invited to submit an extended abstract (max. 5 pages) to be 
+formatted in the EasyChair class style through the EasyChair submission site. 
+Accepted abstracts will be presented at the workshop and included in the 
+preliminary proceedings, available at the workshop. After the workshop, 
+authors will be invited to submit a full paper of their presentation 
+(typically a 15-pages paper), which will be refereed and considered 
+for publication in an electronic journal, such as Electronic Proceedings 
+in Theoretical Computer Science. 
+
+Beyond original ideas and recent results not published nor submitted 
+elsewhere, we also invite authors to submit a 5-pages abstract 
+describing relevant work that has been or will be published elsewhere, 
+or work in progress. These submissions will be only considered for 
+presentation at the workshop and inclusion in the preliminary 
+proceedings but not in the final proceedings.
+
+We envisage publication of a special issue of a journal dedicated to WRS
+after the event.
+
+Important Dates:
+# Submission: 20 March 2011
+# Notification: 11 April 2011
+# Preliminary proceedings version due: 15 April 2011
+# Workshop: 29 May 2011
+# Submission for final proceedings: 12 September 2011
+# Notification: 7 November 2011
+# Final version: 21 November 2011
+
+Programme Committee:
+# Dan Dougherty, Worcester Polytechnic Institute, USA
+# Santiago Escobar, Universidad Polit?cnica de Valencia, Spain (chair)
+# Maribel Fern?ndez, King's College London, UK
+# J?rgen Giesl, RWTH Aachen, Germany
+# Bernhard Gramlich, Technische Universit?t Wien, Austria
+# H?l?ne Kirchner, Centre de Recherche INRIA Bordeaux, France
+# Francisco Javier L?pez Fraguas, Universidad Complutense de Madrid, Spain
+# Salvador Lucas, Universidad Polit?cnica de Valencia, Spain
+# Aart Middeldorp, University of Innsbruck, Austria
+# Jaco van de Pol, University of Twente, The Netherlands
+# Masahiko Sakai, Nagoya University, Japan
+# Manfred Schmidt-Schauss, Johann Wolfgang Goethe-Universit?t, Germany 
+
+For more information, please contact
+Santiago Escobar
+Universidad Polit?cnica de Valencia, Spain
+Email: sescobar at dsic.upv.es
+
+
+
+From jphaas at gmail.com  Fri Dec 31 03:45:03 2010
+From: jphaas at gmail.com (Joshua Haas)
+Date: Thu, 30 Dec 2010 18:45:03 -0800
+Subject: [Stratego Users] context-sensitive syntax?
+Message-ID: <AANLkTinjqusnFe-NZx-k0zsa8w7=ujNypAOYVgj_fTmc@mail.gmail.com>
+
+Hi all--
+
+I'm trying to parse Python-like syntax, which is tricky because the meaning
+of indent characters is context-sensitive.  There's a section of the
+Stratego tutorial called "context-sensitive lexical syntax" which sounds
+promising, but right now it's just a stub.
+
+I suppose one thing I could do is pre-process the code and insert "indent"
+and "deindent" markers in appropriate places, but ideally I'd be able to
+parse it without leaving SDF so that I can work with it in Sppofax.
+
+Does anyone know if this is possible in SDF?  I'd appreciate any kind of
+push in the right direction!
+
+Thanks,
+
+Josh
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101230/e090b4c7/attachment.html 
+
+From karltk at strategoxt.org  Fri Dec 31 13:37:53 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Fri, 31 Dec 2010 13:37:53 +0100
+Subject: [Stratego Users] context-sensitive syntax?
+In-Reply-To: <AANLkTinjqusnFe-NZx-k0zsa8w7=ujNypAOYVgj_fTmc@mail.gmail.com>
+References: <AANLkTinjqusnFe-NZx-k0zsa8w7=ujNypAOYVgj_fTmc@mail.gmail.com>
+Message-ID: <AANLkTikdYAOggHNkQZnkMBJwWn=9nuuncm=euw2KisEQ@mail.gmail.com>
+
+Hi Josh
+
+> I'm trying to parse Python-like syntax, which is tricky because the meaning
+> of indent characters is context-sensitive.
+
+Indeed. The SGLR algorithm does not support this.
+
+> I suppose one thing I could do is pre-process the code and insert "indent"
+> and "deindent" markers in appropriate places, but ideally I'd be able to
+> parse it without leaving SDF so that I can work with it in Sppofax.
+
+This grammar is designed exactly like that. It assumes you insert
+"#NL# for newlines, "#INDENT#" and "#DEDENT#" for indents and dedents,
+respectively:
+
+http://devel.se.wtb.tue.nl/trac/chi-tooling/browser/trunk/chi-py-language/asfsdf/python/python-syntax.sdf
+
+We have thought and hacked a bit on support for off-side rule
+languages (Python-like indentation) for JSGLR (the implementation of
+SGLR used by Spoofax), but nothing useful has made it into any release
+yet.
+
+Our basic idea is to leave the SGLR algo unchanged, except we
+designate two special characters as dedent/indent tokens. Using a
+plugin-interface, you can write (in Java) your own stub that inserts
+these specific indent/dedent tokens into the stream. You must
+architect your grammar to understand the indent/dedent tokens where
+appropriate, c.f. the Python grammar above. The SGLR algo will skip
+indent/dedent tokens when counting offsets, so that text locations
+remain correct. The idea is to provide a ready-made default indent
+analyzer that would work for Python, that you can just enable. If your
+off-side rule language has trickier rules, you must write your own
+analyzer.
+
+If you're in a hurry, you're free to help out. There shouldn't be much
+left to do. I can supply you with pointers to source code if you want
+to hack. No more than what could be achieved over a productive weekend
+anyway:)
+
+If it's less urgent for you, we'll get to indentation when we've
+merged the JSSGLR (SGLR running on JavaScript) branch into JSGLR.
+
+
+Cheers,
+
+-- Karl T
+
+From jphaas at gmail.com  Fri Dec 31 20:04:57 2010
+From: jphaas at gmail.com (Joshua Haas)
+Date: Fri, 31 Dec 2010 11:04:57 -0800
+Subject: [Stratego Users] context-sensitive syntax?
+In-Reply-To: <AANLkTikdYAOggHNkQZnkMBJwWn=9nuuncm=euw2KisEQ@mail.gmail.com>
+References: <AANLkTinjqusnFe-NZx-k0zsa8w7=ujNypAOYVgj_fTmc@mail.gmail.com>
+	<AANLkTikdYAOggHNkQZnkMBJwWn=9nuuncm=euw2KisEQ@mail.gmail.com>
+Message-ID: <AANLkTi=__CRvGGkPmRuk=268QVS5gLwTF=bLHRC3+EvJ@mail.gmail.com>
+
+Thanks, Karl.  It's not super-urgent to me, but if you give me pointers to
+the source code I'll take a look and see if it's something I think I can do.
+ It feels a little weird to me to make off-side rules a special case like
+that, but as I think about it I can't come up with any other plausible
+examples of why you'd really want context-sensitive lexical syntax...
+
+On Fri, Dec 31, 2010 at 4:37 AM, Karl Trygve Kalleberg <
+karltk at strategoxt.org> wrote:
+
+> Hi Josh
+>
+> > I'm trying to parse Python-like syntax, which is tricky because the
+> meaning
+> > of indent characters is context-sensitive.
+>
+> Indeed. The SGLR algorithm does not support this.
+>
+> > I suppose one thing I could do is pre-process the code and insert
+> "indent"
+> > and "deindent" markers in appropriate places, but ideally I'd be able to
+> > parse it without leaving SDF so that I can work with it in Sppofax.
+>
+> This grammar is designed exactly like that. It assumes you insert
+> "#NL# for newlines, "#INDENT#" and "#DEDENT#" for indents and dedents,
+> respectively:
+>
+>
+> http://devel.se.wtb.tue.nl/trac/chi-tooling/browser/trunk/chi-py-language/asfsdf/python/python-syntax.sdf
+>
+> We have thought and hacked a bit on support for off-side rule
+> languages (Python-like indentation) for JSGLR (the implementation of
+> SGLR used by Spoofax), but nothing useful has made it into any release
+> yet.
+>
+> Our basic idea is to leave the SGLR algo unchanged, except we
+> designate two special characters as dedent/indent tokens. Using a
+> plugin-interface, you can write (in Java) your own stub that inserts
+> these specific indent/dedent tokens into the stream. You must
+> architect your grammar to understand the indent/dedent tokens where
+> appropriate, c.f. the Python grammar above. The SGLR algo will skip
+> indent/dedent tokens when counting offsets, so that text locations
+> remain correct. The idea is to provide a ready-made default indent
+> analyzer that would work for Python, that you can just enable. If your
+> off-side rule language has trickier rules, you must write your own
+> analyzer.
+>
+> If you're in a hurry, you're free to help out. There shouldn't be much
+> left to do. I can supply you with pointers to source code if you want
+> to hack. No more than what could be achieved over a productive weekend
+> anyway:)
+>
+> If it's less urgent for you, we'll get to indentation when we've
+> merged the JSSGLR (SGLR running on JavaScript) branch into JSGLR.
+>
+>
+> Cheers,
+>
+> -- Karl T
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20101231/ffd04730/attachment.html 
+

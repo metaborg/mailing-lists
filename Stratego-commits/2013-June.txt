@@ -1,0 +1,571 @@
+From gabrielkonat at gmail.com  Tue Jun 18 06:42:34 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 18 Jun 2013 04:42:34 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26131 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130618044234.A6E097F802A@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Tue Jun 18 04:42:34 2013
+New Revision: 26131
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26131&sc=1
+
+Log:
+Use new NaBL project name
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Sun May 19 17:06:34 2013	(r26130)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Tue Jun 18 04:42:34 2013	(r26131)
+@@ -18,7 +18,6 @@
+ , spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
+ , spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
+ , spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
+-
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ , strategoxt ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+@@ -142,7 +141,7 @@
+                  ${spx}/org.spoofax.interpreter.library.language \
+                  ${spx}/org.strategoxt.imp.editors.spoofax.configuration \
+                  ${spx}/org.strategoxt.imp.spoofax.generator \
+-                 ${nabl}/org.strategoxt.imp.names \
++                 ${nabl}/org.metaborg.meta.lang.nabl \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+                  ${spoofax}/org.strategoxt.imp.generator \
+
+From gabrielkonat at gmail.com  Tue Jun 18 07:44:06 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 18 Jun 2013 05:44:06 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26132 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130618054406.E4DE52B8004@mx2.tudelft.nl>
+
+Author: gkonat
+Date: Tue Jun 18 05:44:06 2013
+New Revision: 26132
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26132&sc=1
+
+Log:
+Use new NaBL project name
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+   hydra/jobs/spoofax-git/spoofax-master-w-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Tue Jun 18 04:42:34 2013	(r26131)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Tue Jun 18 05:44:06 2013	(r26132)
+@@ -153,7 +153,7 @@
+                  ${spx}/org.spoofax.interpreter.library.language \
+                  ${spx}/org.strategoxt.imp.editors.spoofax.configuration \
+                  ${spx}/org.strategoxt.imp.spoofax.generator \
+-                 ${nabl}/org.strategoxt.imp.names \
++                 ${nabl}/org.metaborg.meta.lang.nabl \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+                  ${spoofax}/org.strategoxt.imp.generator \
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-w-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-w-strj.nix	Tue Jun 18 04:42:34 2013	(r26131)
++++ hydra/jobs/spoofax-git/spoofax-master-w-strj.nix	Tue Jun 18 05:44:06 2013	(r26132)
+@@ -150,7 +150,7 @@
+                  ${spx}/org.spoofax.interpreter.library.language \
+                  ${spx}/org.strategoxt.imp.editors.spoofax.configuration \
+                  ${spx}/org.strategoxt.imp.spoofax.generator \
+-                 ${nabl}/org.strategoxt.imp.names \
++                 ${nabl}/org.metaborg.meta.lang.nabl \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+                  ${spoofax}/org.strategoxt.imp.generator \
+
+From v.vergu+vc at gmail.com  Thu Jun 27 18:34:59 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 16:34:59 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26133 - hydra/jobs
+Message-ID: <20130627163459.DB3FD7F8039@mx1.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 16:34:59 2013
+New Revision: 26133
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26133&sc=1
+
+Log:
+Nix expression for bootstrapped strj is now with the codebase
+
+Deleted:
+   hydra/jobs/strategoxt-java-bootstrap.nix
+
+From v.vergu+vc at gmail.com  Thu Jun 27 19:26:54 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 17:26:54 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26134 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130627172654.A36F47F8039@mx1.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 17:26:54 2013
+New Revision: 26134
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26134&sc=1
+
+Log:
+Fix a path maybe?
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 16:34:59 2013	(r26133)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 17:26:54 2013	(r26134)
+@@ -91,7 +91,7 @@
+       strcJavaCheckout = strategoxtCVersion;
+     }).build { system = "i686-linux"; };
+ 
+-  strj = (import ../strategoxt-java-bootstrap.nix {
++  strj = (import strategoxt/strategoxt/strategoxt-java-bootstrap.nix {
+     inherit nixpkgs hydraConfig javaFront;
+     strategoxtJava = strategoxt;
+     baseline = strcj;
+
+From v.vergu+vc at gmail.com  Thu Jun 27 19:36:19 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 17:36:19 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26135 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130627173619.C1161CC1ED@mx4.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 17:36:19 2013
+New Revision: 26135
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26135&sc=1
+
+Log:
+Trial & error take 2
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 17:26:54 2013	(r26134)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 17:36:19 2013	(r26135)
+@@ -91,7 +91,7 @@
+       strcJavaCheckout = strategoxtCVersion;
+     }).build { system = "i686-linux"; };
+ 
+-  strj = (import strategoxt/strategoxt/strategoxt-java-bootstrap.nix {
++  strj = (import ${strategoxt}/strategoxt/strategoxt-java-bootstrap.nix {
+     inherit nixpkgs hydraConfig javaFront;
+     strategoxtJava = strategoxt;
+     baseline = strcj;
+
+From v.vergu+vc at gmail.com  Thu Jun 27 20:52:25 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 18:52:25 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26136 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130627185225.B6837CC2B3@mx4.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 18:52:25 2013
+New Revision: 26136
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26136&sc=1
+
+Log:
+Fix paths
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 17:36:19 2013	(r26135)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 18:52:25 2013	(r26136)
+@@ -1,34 +1,33 @@
+ {
+   nixpkgs ? ../../../nixpkgs
+ 
+-, jsglr ? ../../../jsglr
+-, mbexec ? ../../../mb-exec
+-, mbexecdeps ? ../../../mb-exec-deps
+-, mbrep ? ../../../mb-rep
+-, nabl ? ../../../nabl
+-, sdf ? ../../../sdf
+-, esv ? ../../../esv
+-, aster ? ../../../aster
+-, box ? ../../../box
+-, spx ? ../../../spx
+-, rtg ? ../../../rtg
+-, stratego ? ../../../stratego
+-, spt ? ../../../spt
+-, tdl ? ../../../tdl
+-, spoofax ? { outPath = ../../../spoofax ; shortRev= 1234; }
+-, spoofaxdebug ? ../../../spoofax-debug
+-, spoofaxdeploy ? ../../../spoofax-deploy
+-, spoofaximppatches ? ../../../spoofax-imp-patches
++, jsglr ? { outPath = ../../../jsglr ; revCount = 9999; }
++, mbexec ? { outPath = ../../../mb-exec ; revCount = 9999; }
++, mbexecdeps ? { outPath = ../../../mb-exec-deps ; revCount = 9999; }
++, mbrep ? { outPath = ../../../mb-rep ; revCount = 9999; }
++, nabl ? { outPath = ../../../nabl ; revCount = 9999; }
++, sdf ? { outPath = ../../../sdf ; revCount = 9999; }
++, esv ? { outPath = ../../../esv ; revCount = 9999; }
++, aster ? { outPath = ../../../aster ; revCount = 9999; }
++, box ? { outPath = ../../../box ; revCount = 9999; }
++, spx ? { outPath = ../../../spx ; revCount = 9999; }
++, rtg ? { outPath = ../../../rtg ; revCount = 9999; }
++, stratego ? { outPath = ../../../stratego ; revCount = 9999; }
++, spt ? { outPath = ../../../spt ; revCount = 9999; }
++, tdl ? { outPath = ../../../tdl ; revCount = 9999; }
++, spoofax ? { outPath = ../../../spoofax ; revCount = 9999; }
++, spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
++, spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
++, spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
+ 
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 1234; }
+-, metaborgRuntime ? ../../../runtime-libraries
++, metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ 
+-, strategoxt ? { outPath = ../../../strategoxt ; rev = 1234; }
+-, strategoxtCVersion ? ../../../strategoxt-cver
+-, javaFront ? ../../../java-front
+-
+-, hydraConfig ? { outPath = ../../.; rev = 1234; }
++, strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
++, strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
++, javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
++, hydraConfig ? { outPath = ../../. ; revCount = 9999; }
+ }:
+ let
+   plus = a : b : ( builtins.add a b );
+@@ -91,8 +90,8 @@
+       strcJavaCheckout = strategoxtCVersion;
+     }).build { system = "i686-linux"; };
+ 
+-  strj = (import ${strategoxt}/strategoxt/strategoxt-java-bootstrap.nix {
+-    inherit nixpkgs hydraConfig javaFront;
++  strj = (import ../../../strategoxt/strategoxt/strategoxt-java-bootstrap.nix {
++    inherit nixpkgs javaFront;
+     strategoxtJava = strategoxt;
+     baseline = strcj;
+   }).bootstrap3;
+
+From v.vergu+vc at gmail.com  Thu Jun 27 22:17:50 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 20:17:50 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26137 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130627201750.812F4CC237@mx4.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 20:17:50 2013
+New Revision: 26137
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26137&sc=1
+
+Log:
+More path fixing
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 18:52:25 2013	(r26136)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 20:17:50 2013	(r26137)
+@@ -24,6 +24,7 @@
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ 
+ , strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
++, strategoxtNix ? { outPath = ../../../strategoxt/strategoxt/strategoxt-java-bootstrap.nix ; revCount = 9999; }
+ , strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+ , javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
+@@ -90,7 +91,7 @@
+       strcJavaCheckout = strategoxtCVersion;
+     }).build { system = "i686-linux"; };
+ 
+-  strj = (import ../../../strategoxt/strategoxt/strategoxt-java-bootstrap.nix {
++  strj = (import strategoxtNix {
+     inherit nixpkgs javaFront;
+     strategoxtJava = strategoxt;
+     baseline = strcj;
+
+From v.vergu+vc at gmail.com  Thu Jun 27 23:33:10 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Thu, 27 Jun 2013 21:33:10 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26138 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130627213310.AAFD5CC202@mx4.tudelft.nl>
+
+Author: VladVergu
+Date: Thu Jun 27 21:33:10 2013
+New Revision: 26138
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26138&sc=1
+
+Log:
+More trial and error. No pain, no gain.
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 20:17:50 2013	(r26137)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Thu Jun 27 21:33:10 2013	(r26138)
+@@ -24,7 +24,6 @@
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ 
+ , strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
+-, strategoxtNix ? { outPath = ../../../strategoxt/strategoxt/strategoxt-java-bootstrap.nix ; revCount = 9999; }
+ , strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+ , javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
+ 
+@@ -91,7 +90,10 @@
+       strcJavaCheckout = strategoxtCVersion;
+     }).build { system = "i686-linux"; };
+ 
+-  strj = (import strategoxtNix {
++
++  strategoxtNixExpr = pkgs.lib.concatStrings [strategoxt.outPath "/strategoxt/strategoxt-java-bootstrap.nix" ] ;
++
++  strj = (import strategoxtNixExpr {
+     inherit nixpkgs javaFront;
+     strategoxtJava = strategoxt;
+     baseline = strcj;
+
+From R.B.Vermaas at tudelft.nl  Fri Jun 28 09:53:02 2013
+From: R.B.Vermaas at tudelft.nl (Rob Vermaas)
+Date: Fri, 28 Jun 2013 07:53:02 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26139 - hydra
+Message-ID: <20130628075302.7A3C7CC21C@mx4.tudelft.nl>
+
+Author: rob
+Date: Fri Jun 28 07:53:02 2013
+New Revision: 26139
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26139&sc=1
+
+Log:
+Change permission after each spoofax build, as sometimes permissions get messed up.
+
+Modified:
+   hydra/spoofax-fun.nix
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Thu Jun 27 21:33:10 2013	(r26138)
++++ hydra/spoofax-fun.nix	Fri Jun 28 07:53:02 2013	(r26139)
+@@ -150,6 +150,8 @@
+     echo "file tar $out/${name}.tar.gz" >> $out/nix-support/hydra-build-products
+     echo "file site $out/site" >> $out/nix-support/hydra-build-products
+     echo "file txt mobl/log.txt" >>  $out/nix-support/hydra-build-products
++
++    chmod ug+w -R $M2_REPO
+   '';
+           
+   __noChroot = true;
+
+From v.vergu+vc at gmail.com  Fri Jun 28 18:42:01 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Fri, 28 Jun 2013 16:42:01 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26140 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130628164201.C03427F8050@mx1.tudelft.nl>
+
+Author: VladVergu
+Date: Fri Jun 28 16:42:01 2013
+New Revision: 26140
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26140&sc=1
+
+Log:
+Include the Java bootstrapped StrategoXT.jar in Spoofax nightly
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Fri Jun 28 07:53:02 2013	(r26139)
++++ hydra/jobs/spoofax-git/spoofax-master-i-strj.nix	Fri Jun 28 16:42:01 2013	(r26140)
+@@ -19,8 +19,7 @@
+ , spoofaxdebug ? { outPath = ../../../spoofax-debug ; revCount = 9999; }
+ , spoofaxdeploy ? { outPath = ../../../spoofax-deploy ; revCount = 9999; }
+ , spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
+-
+-, lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 1234; }
++, lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+ 
+ , strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
+@@ -207,7 +206,7 @@
+       '';
+     };
+ 
+-        generator = pkgs.releaseTools.antBuild {
++    generator = pkgs.releaseTools.antBuild {
+       name = "spoofax-imp-generator-s${spoofaxRev}";
+       inherit (jobs) src;
+ 
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 28 07:53:02 2013	(r26139)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 28 16:42:01 2013	(r26140)
+@@ -1,5 +1,6 @@
+ {
+   nixpkgs ? ../../../nixpkgs
++
+ , jsglr ? { outPath = ../../../jsglr ; revCount = 9999; }
+ , mbexec ? { outPath = ../../../mb-exec ; revCount = 9999; }
+ , mbexecdeps ? { outPath = ../../../mb-exec-deps ; revCount = 9999; }
+@@ -20,9 +21,12 @@
+ , spoofaximppatches ? { outPath = ../../../spoofax-imp-patches ; revCount = 9999; }
+ , lpgRuntime ? { outPath = ../../../lpg.runtime.java ; rev = 9999; }
+ , metaborgRuntime ? { outPath = ../../../runtime-libraries ; revCount = 9999; }
+-, strategoxt ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
+-, hydraConfig ? { outPath = ../../.; revCount = 9999; }
+ 
++, strategoxt ? { outPath = ../../../strategoxt ; revCount = 9999; }
++, strategoxtCVersion ? { outPath = ../../../strategoxt-cver ; revCount = 9999; }
++, javaFront ? { outPath = ../../../java-front ; revCount = 9999; }
++
++, hydraConfig ? { outPath = ../../. ; revCount = 9999; }
+ }:
+ let
+   plus = a : b : ( builtins.add a b );
+@@ -80,11 +84,20 @@
+     dontInstall = true;
+   }; 
+ 
+-  strcJava = (import ../strc-java.nix {
+-    inherit nixpkgs hydraConfig;
+-    strcJavaCheckout = strategoxt;
+-  }).build { system = "i686-linux"; };
+-    
++  strcj = (import ../strc-java.nix {
++      inherit nixpkgs hydraConfig;
++      strcJavaCheckout = strategoxtCVersion;
++    }).build { system = "i686-linux"; };
++
++
++  strategoxtNixExpr = pkgs.lib.concatStrings [strategoxt.outPath "/strategoxt/strategoxt-java-bootstrap.nix" ] ;
++
++  strj = (import strategoxtNixExpr {
++    inherit nixpkgs javaFront;
++    strategoxtJava = strategoxt;
++    baseline = strcj;
++  }).bootstrap3;
++
+   jobs = with pkgs.lib; {
+     tests.install = eclipseTest;
+     src = pkgs.stdenv.mkDerivation {
+@@ -167,7 +180,7 @@
+ 
+         cp -R ${shrike} com.ibm.wala.shrike
+         cp -R ${lpgRuntime} lpg.runtime.java
+-        cp -R ${strategoxt}/strategoxt-java-backend org.strategoxt.strj
++        cp -R ${strategoxt}/strategoxt/stratego-libraries/java-backend org.strategoxt.strj
+         
+         chmod -R +w .
+         ensureDir org.spoofax.interpreter.externaldeps/lib
+@@ -219,7 +232,7 @@
+         { name = "java-front"; value = "${pkgs.strategoPackages.javafront}/share/java-front"; }
+         { name = "install-prefix"; value = "$out/dist"; }
+       ];
+-      antBuildInputs = [ pkgs.ecj strcJava ];
++      antBuildInputs = [ pkgs.ecj strcj ];
+ 
+       ANT_OPTS="-Xss16m -Xmx1024m -server -XX:+UseParallelGC -XX:MaxPermSize=256m";
+ 
+@@ -232,7 +245,7 @@
+       inherit (jobs) src;
+       inherit (jobs) generator;
+           
+-      buildInputs = with pkgs; [ maven3 strcJava pkgconfig which ecj openjdk apacheAntOpenJDK];
++      buildInputs = with pkgs; [ maven3 strcj pkgconfig which ecj openjdk apacheAntOpenJDK strategoPackages.sdf ];
+       mvnFlags = "-Dversion=1.0.0-SNAPSHOT -DgroupId=spoofax -Dtycho.targetPlatform=${eclipse}/eclipse -Dmaven.repo.local=/tmp/m3";
+ 
+       M2_REPO="/tmp/m3";
+@@ -251,9 +264,9 @@
+         mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms ${mvnFlags}
+ 
+         mkdir -p org.strategoxt.strj/java
+-        cp ${strcJava}/share/strc-java/strategoxt.jar org.strategoxt.strj/java/
++        cp ${strj}/share/strategoxt/strategoxt.jar org.strategoxt.strj/java/
+ 
+-	header "Copying back org.strategoxt.imp.generator"
++        header "Copying back org.strategoxt.imp.generator"
+         cp -r ${generator}/dist org.strategoxt.imp.generator/
+ 
+         stopNest
+
+From v.vergu+vc at gmail.com  Fri Jun 28 19:43:01 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Fri, 28 Jun 2013 17:43:01 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26141 - in
+	hydra/jobs/spoofax-git: . _cellar
+Message-ID: <20130628174301.4DA3FCC21B@mx4.tudelft.nl>
+
+Author: VladVergu
+Date: Fri Jun 28 17:43:00 2013
+New Revision: 26141
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26141&sc=1
+
+Log:
+Archived old expressions for Spoofax master which includes Strj (now in Nightly).
+
+Added:
+   hydra/jobs/spoofax-git/_cellar/
+   hydra/jobs/spoofax-git/_cellar/spoofax-master-i-strj.nix
+      - copied, changed from r26140, hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+Deleted:
+   hydra/jobs/spoofax-git/spoofax-master-i-strj.nix
+
+Copied and modified: hydra/jobs/spoofax-git/_cellar/spoofax-master-i-strj.nix (from r26140, hydra/jobs/spoofax-git/spoofax-master-i-strj.nix)
+==============================================================================
+
+From v.vergu+vc at gmail.com  Sat Jun 29 01:31:03 2013
+From: v.vergu+vc at gmail.com (Vlad Vergu)
+Date: Fri, 28 Jun 2013 23:31:03 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26142 -
+	hydra/jobs/spoofax-git
+Message-ID: <20130628233103.35432108C028@mx3.tudelft.nl>
+
+Author: VladVergu
+Date: Fri Jun 28 23:31:02 2013
+New Revision: 26142
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26142&sc=1
+
+Log:
+Add Java-Front and Hydra config as factors in the build-version
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 28 17:43:00 2013	(r26141)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Fri Jun 28 23:31:02 2013	(r26142)
+@@ -32,7 +32,12 @@
+   plus = a : b : ( builtins.add a b );
+   sumrev = xs : pkgs.lib.foldl plus 0 xs ;
+   
+-  spoofaxRev = toString (sumrev [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount spx.revCount rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount spoofaxdebug.revCount spoofaxdeploy.revCount spoofaximppatches.revCount strategoxt.revCount metaborgRuntime.revCount]) ;
++  spoofaxRev = toString (sumrev 
++      [lpgRuntime.rev jsglr.revCount mbexec.revCount mbexecdeps.revCount mbrep.revCount
++        nabl.revCount sdf.revCount esv.revCount aster.revCount box.revCount spx.revCount 
++        rtg.revCount stratego.revCount spt.revCount tdl.revCount spoofax.revCount 
++        spoofaxdebug.revCount spoofaxdeploy.revCount spoofaximppatches.revCount strategoxt.revCount 
++        metaborgRuntime.revCount javaFront.revCount hydraConfig.revCount]) ;
+ 
+   pkgs = import nixpkgs { system = "i686-linux"; };
+ 
+

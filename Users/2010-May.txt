@@ -1,0 +1,474 @@
+From gre at ecs.soton.ac.uk  Fri May  7 13:56:30 2010
+From: gre at ecs.soton.ac.uk (Rob Economopoulos)
+Date: Fri, 7 May 2010 12:56:30 +0100
+Subject: [Stratego Users] GPCE'10 Last Call for Papers
+Message-ID: <m2lc9757bb61005070456r3cc2a8e4oa84015257aa9788c@mail.gmail.com>
+
+------------------------------------------------------------------------
+                       CALL FOR PAPERS
+
+               Ninth International Conference on
+        Generative Programming and Component Engineering
+                      (GPCE 2010)
+
+                   October 10-13, 2010
+                 Eindhoven, The Netherlands
+                 (co-located with SLE 2010)
+
+                    http://www.gpce.org
+------------------------------------------------------------------------
+
+IMPORTANT DATES
+
+* Submission of abstracts: May 17, 2010
+* Submission of papers: May 24, 2010
+* Author notification: Jul 5, 2010
+
+SCOPE
+
+Generative and component approaches are revolutionizing software
+development similar to how automation and components revolutionized
+manufacturing. Generative Programming (concerning programs that
+synthesize other programs), Component Engineering (concerning
+modularity in application design), and Domain-Specific Languages
+(DSLs) (concerning compact domain-specific notations for expressing
+programs) are key technologies for automating program development.
+
+The International Conference on Generative Programming and Component
+Engineering is a venue for researchers and practitioners interested in
+techniques that, through deploying components and program generation,
+increase programmer productivity, improve software quality, and
+shorten the time-to-market of software products.  In addition to
+exploring cutting-edge techniques of generative and component-based
+software, our goal is to foster further cross-fertilization between
+the software engineering and the programming languages research
+communities.
+
+SUBMISSIONS
+
+Research papers:
+
+10 pages in SIGPLAN proceedings style (sigplanconf.cls) reporting
+original research results that contribute to scientific knowledge in
+the areas listed below (the PC chair can advise on appropriateness).
+
+Tool demonstrations:
+
+Tool demonstrations should present tools that implement novel
+generative and component-based software engineering techniques, and
+are available for use. Any of the GPCE'10 topics of interest are
+appropriate areas for research demonstrations.  Purely commercial tool
+demonstrations will not be accepted. Submissions should contain a tool
+description of 4 pages in SIGPLAN proceedings style (sigplanconf.cls)
+and a demonstration outline of up to 2 pages text plus 2 pages screen
+shots. The four page description will, if the demonstration is accepted,
+be published in the proceedings. The 2+2 page demonstration outline
+will only be used by the PC for evaluating the submission.
+
+TOPICS
+
+GPCE seeks contributions in software engineering and in programming
+languages related (but not limited) to:
+
+* Generative programming
+   o Reuse, meta-programming, partial evaluation, multi-stage and
+     multi-level languages, step-wise refinement, generic programming
+   o Semantics, type systems, symbolic computation, linking and
+     explicit substitution, in-lining and macros, templates,
+     program transformation
+   o Runtime code generation, compilation, active libraries,
+     synthesis from specifications, development methods,
+     generation of non-code artifacts, formal methods, reflection
+* Generative techniques for
+   o Product-line architectures
+   o Distributed, real-time and embedded systems
+   o Model-driven development and architecture
+   o Resource bounded/safety critical systems.
+* Component-based software engineering
+   o Reuse, distributed platforms and middleware, distributed
+     systems, evolution, patterns, development methods,
+     deployment and configuration techniques, formal methods
+* Integration of generative and component-based approaches
+* Domain engineering and domain analysis
+   o Domain-specific languages including visual and UML-based DSLs
+* Separation of concerns
+   o Aspect-oriented and feature-oriented programming,
+   o Intentional programming and multi-dimensional separation of
+     concerns
+* Industrial applications of the above
+
+Submissions must adhere to SIGPLAN's republication policy. Please
+contact the program chair if you have any questions about how this
+policy applies to your paper (chairs at gpce.org).
+
+ORGANIZATION
+
+General Chair:    Eelco Visser (Delft University of Technology, The
+Netherlands)
+Program Chair:    Jaakko J?rvi (Texas A&M University, USA)
+Publicity Chair:  Giorgios Economopoulos (University of Southampton, UK)
+Treasurer:  Alexander Serebrenik (Eindhoven University of Technology, The
+Netherlands)
+
+Program Committee
+
+* Sven Apel (University of Passau, Germany)
+* Don Batory (University of Texas, USA)
+* Martin Bravenboer (LogicBlox, USA)
+* Krzysztof Czarnecki (University of Waterloo, Canada)
+* Charles Consel (INRIA / LaBRI, France)
+* Gabriel Dos Reis (Texas A&M University, USA)
+* Ewen Denney (RIACS/NASA Ames, USA)
+* Ronald Garcia (Carnegie Mellon University, USA)
+* Magne Haveraaen (University of Bergen, Norway)
+* Johan Lilius (?bo Akademi University, Finland)
+* Andres L?h (Utrecht University, The Netherlands)
+* Mat Marcus (Canyonlands Software Design, USA)
+* Marjan Mernik (University of Maribor, Slovenia)
+* Klaus Ostermann (University of Marburg, Germany)
+* Bruno C. d. S. Oliveira (Seoul National University, Korea)
+* Hridesh Rajan (Iowa State University, USA)
+* Sukyoung Ryu (Korea Advanced Institute of Science and Technology)
+* Jo?o Saraiva (Minho University, Portugal)
+* Sibylle Schupp (Hamburg University of Technology, Germany)
+* Kwang Yi (Seoul National University, Korea)
+* Mirko Viroli (University of Bologna, Italy)
+* Alessandro Warth (Viewpoints Research Institute, USA)
+* Edwin Westbrook (Rice University, USA)
+* Jeremiah Willcock (Indiana University, USA)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100507/494221bd/attachment.html 
+
+From sheng.lu at student.adelaide.edu.au  Wed May 12 12:04:03 2010
+From: sheng.lu at student.adelaide.edu.au (Sheng Lu)
+Date: Wed, 12 May 2010 19:34:03 +0930
+Subject: [Stratego Users] I am stuck at install strategoxt_0.17 in building
+	xtc package(during make)
+In-Reply-To: <mailman.306.1273646284.1145.users@strategoxt.org>
+References: <mailman.306.1273646284.1145.users@strategoxt.org>
+Message-ID: <AANLkTimffK4mXy0_VXARQlj-l5gIQbTBr0tDYPfKP2iw@mail.gmail.com>
+
+hi, admin
+
+I just want to use strategoxt to solve some GP problem. But I stucked during
+install strategoxt source code. My system is Ubuntu 10.04 desk, my CPU is
+intel T7300(32bit intel). I download the all the source code on your web
+follow the install instruction to setup aterm-2.5, sdf2-bundle-2.4 and
+strategoxt-0.17. I also use "apt-get install libtool" install libtool. But
+from certain step, my computer is just stop at the make.
+after I input
+
+$ tar zxf strategoxt-*version*.tar.gz
+$ cd strategoxt-*version*
+$ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+$ make
+after the make command, the execute process always stuck at link in xtc package.
+this is the error:
+
+libtool: link: ( cd ".libs" && rm -f "libstratego-sdf.la" && ln -s
+"../libstratego-sdf.la" "libstratego-sdf.la" )
+
+make[3]: Leaving directory
+`/downloadtmp/strategoxt-0.17/stratego-libraries/sdf/lib'
+make[3]: Entering directory
+`/downloadtmp/strategoxt-0.17/stratego-libraries/sdf'
+make[3]: Nothing to be done for `all-am'.
+
+make[3]: Leaving directory `/downloadtmp/strategoxt-0.17/stratego-libraries/sdf'
+make[2]: Leaving directory `/downloadtmp/strategoxt-0.17/stratego-libraries/sdf'
+make[2]: Entering directory `/downloadtmp/strategoxt-0.17/stratego-libraries'
+
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/downloadtmp/strategoxt-0.17/stratego-libraries'
+make[1]: Leaving directory `/downloadtmp/strategoxt-0.17/stratego-libraries'
+Making all in xtc
+
+make[1]: Entering directory `/downloadtmp/strategoxt-0.17/xtc'
+Making all in src
+make[2]: Entering directory `/downloadtmp/strategoxt-0.17/xtc/src'
+gcc -DPACKAGE_NAME=\"xtc\" -DPACKAGE_TARNAME=\"xtc\"
+-DPACKAGE_VERSION=\"0.17\" -DPACKAGE_STRING=\"xtc\ 0.17\"
+-DPACKAGE_BUGREPORT=\"stratego at cs.uu.nl\" -DPACKAGE=\"xtc\"
+-DVERSION=\"0.17\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1
+-DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1
+-DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1
+-DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DSIZEOF_VOID_P=4 -DSIZEOF_INT=4
+-DSIZEOF_LONG=4 -DSIZEOF_DOUBLE=8 -DHAVE_DLFCN_H=1
+-DLT_OBJDIR=\".libs/\" -I.
+-I/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native
+-I/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-I/usr/local/include
+-I/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-I/usr/local/include   -I/usr/local/include  -Wall -Wno-unused-label
+-Wno-unused-variable -Wno-unused-function -Wno-unused-parameter
+-DDEFAULT_XTC_REPOSITORY="\"/usr/local/share/strategoxt/XTC\"" -g -O2
+-MT xtc.o -MD -MP -MF .deps/xtc.Tpo -c -o xtc.o xtc.c
+
+mv -f .deps/xtc.Tpo .deps/xtc.Po
+/bin/bash ../libtool --tag=CC   --mode=link gcc -Wall
+-Wno-unused-label -Wno-unused-variable -Wno-unused-function
+-Wno-unused-parameter
+-DDEFAULT_XTC_REPOSITORY="\"/usr/local/share/strategoxt/XTC\"" -g -O2
+ -o xtc xtc.o -L/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib -lstratego-xtc -lstratego-lib -lstratego-lib-native
+-lstratego-runtime -lm -lATerm   -L/usr/local/lib -lATerm -lm
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib -lstratego-xtc -lstratego-lib -lstratego-lib-native
+-lstratego-runtime -lm -lATerm
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib -lstratego-lib -lstratego-lib-native
+-lstratego-runtime -lm -lATerm
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib -lstratego-runtime -lm -lATerm   -L/usr/local/lib
+-lATerm -lm
+
+libtool: link: gcc -Wall -Wno-unused-label -Wno-unused-variable
+-Wno-unused-function -Wno-unused-parameter
+-DDEFAULT_XTC_REPOSITORY=\"/usr/local/share/strategoxt/XTC\" -g -O2 -o
+.libs/xtc xtc.o
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib
+/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib/.libs/libstratego-xtc.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec/.libs/libstratego-lib.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib/.libs/libstratego-lib-native.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib/.libs/libstratego-runtime.so
+/usr/local/lib/libATerm.so -lm -Wl,-rpath -Wl,/usr/local/lib
+
+You can see I just stuck at the link process.
+At this place, one of my CPU is working 20 minutes without any reply,
+just stuck here.
+
+After I interrupted the process, I can manually execute command
+gcc -Wall -Wno-unused-label -Wno-unused-variable -Wnuo-unused-function
+-Wno-unused-parameter
+-DDEFAULT_XTC_REPOSITORY=\"/usr/local/share/strategoxt/XTC\" -g -O2 -o
+.libs/xtc xtc.o
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec
+-L/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib
+-L/usr/local/lib
+/downloadtmp/strategoxt-0.17/stratego-libraries/xtc/lib/.libs/libstratego-xtc.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/lib/spec/.libs/libstratego-lib.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/lib/native/stratego-lib/.libs/libstratego-lib-native.so
+/downloadtmp/strategoxt-0.17/stratego-libraries/runtime/lib/.libs/libstratego-runtime.so
+/usr/local/lib/libATerm.so -lm -Wl,-rpath -Wl,/usr/local/lib
+
+It is ok. But, I still could not go further of "make", I mean after
+that, I try to execute the program again, the make process is still
+stuck after enterning
+`/downloadtmp/strategoxt-0.17/xtc/src'
+
+
+below, I'll attached the makefile in /xtc/src directory and config.log
+in strategoxt-0.17 directory
+
+Best regards
+Sheng Lu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100512/39a70479/attachment-0001.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Makefile
+Type: application/octet-stream
+Size: 32107 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100512/39a70479/attachment-0003.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Makefile.am
+Type: application/octet-stream
+Size: 1061 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100512/39a70479/attachment-0004.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Makefile.in
+Type: application/octet-stream
+Size: 29986 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100512/39a70479/attachment-0005.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: config.log
+Type: text/x-log
+Size: 28749 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100512/39a70479/attachment-0001.bin 
+
+From numerodix at gmail.com  Fri May 21 10:46:06 2010
+From: numerodix at gmail.com (Martin Matusiak)
+Date: Fri, 21 May 2010 10:46:06 +0200
+Subject: [Stratego Users] Stratego with Delphi?
+Message-ID: <AANLkTilYCLyVP-IBbxwWXzX_Y3PAgl2kCsZmEJFZjLlP@mail.gmail.com>
+
+Hello,
+
+I'm doing a master thesis at Utrecht University and my topic is
+transforming a sizeable Delphi application (~200k lines). The basic
+idea is to try and untangle the gui part of the code from the rest,
+producing a client/server model. The determination would be done based
+on type information. I was wondering if Stratego might be a good fit
+for this job. What would be needed to use Stratego with Delphi in this
+way and do you know of anyone using Stratego with Delphi?
+
+
+Regards,
+Martin Matusiak
+
+From E.Visser at tudelft.nl  Fri May 21 16:47:32 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 21 May 2010 16:47:32 +0200
+Subject: [Stratego Users] Stratego with Delphi?
+In-Reply-To: <AANLkTilYCLyVP-IBbxwWXzX_Y3PAgl2kCsZmEJFZjLlP@mail.gmail.com>
+References: <AANLkTilYCLyVP-IBbxwWXzX_Y3PAgl2kCsZmEJFZjLlP@mail.gmail.com>
+Message-ID: <AANLkTikMOGj7t6fe1G5kKoSM-SRVamGS91Kf-YSdJ8Ik@mail.gmail.com>
+
+Hi Martin,
+
+You would need an SDF definition for Delphi.
+
+Next, you'd need to write a type checker. No idea how hard that would
+be (depends on size of the language and difficulty of the type
+system).
+
+There is a nice idiom for developing type systems now and making an
+interactive IDE that might be useful in your re-engineering task:
+
+    http://strategoxt.org/Spoofax
+
+Whether the task is feasible at all depends more on the properties of
+the code base than the transformation tool you would use.
+
+cheers,
+
+-- Eelco
+
+On Fri, May 21, 2010 at 10:46 AM, Martin Matusiak <numerodix at gmail.com> wrote:
+> Hello,
+>
+> I'm doing a master thesis at Utrecht University and my topic is
+> transforming a sizeable Delphi application (~200k lines). The basic
+> idea is to try and untangle the gui part of the code from the rest,
+> producing a client/server model. The determination would be done based
+> on type information. I was wondering if Stratego might be a good fit
+> for this job. What would be needed to use Stratego with Delphi in this
+> way and do you know of anyone using Stratego with Delphi?
+>
+>
+> Regards,
+> Martin Matusiak
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+From kutsia at risc.uni-linz.ac.at  Tue May 25 18:01:07 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Tue, 25 May 2010 18:01:07 +0200
+Subject: [Stratego Users] LOPSTR/PPDP 2010 Call for Participation
+Message-ID: <4BFBF443.6070302@risc.uni-linz.ac.at>
+
+[Apologize for multiple copies]
+====================================================================
+
+                *** CALL FOR PARTICIPATION ***
+
+                           LOPSTR 2010
+                20th International Symposium on
+        Logic-Based Program Synthesis and Transformation
+         http://www.risc.jku.at/conferences/lopstr2010/
+                       July 23-25, 2010
+
+                           PPDP 2010
+          12th International ACM SIGPLAN Symposium on
+       Principles and Practice of Declarative Programming
+          http://www.risc.jku.at/conferences/ppdp2010/
+                        July 26-28, 2010
+
+                       Hagenberg, Austria
+
+====================================================================
+
+IMPORTANT INFORMATION
+
+Early registration deadline (for both conferences): June 21, 2010
+
+--------------------------------------------------------------------
+
+LOPSTR 2010 INVITED SPEAKERS:
+
+  - Bruno Buchberger (RISC, Johannes Kepler University Linz, Austria)
+  - Olivier Danvy (University of Aarhus, Denmark)
+  - Johann Schumann (RIACS/NASA Ames Research Center, USA)
+
+LOPSTR 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/lopstr2010/program.html
+
+--------------------------------------------------------------------
+
+PPDP 2010 INVITED SPEAKERS:
+
+  - Maria Paola Bonacina (University of Verona, Italy)
+  - Sumit Gulwani (Microsoft Research)
+
+PPDP 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/ppdp2010/program.html
+
+--------------------------------------------------------------------
+
+
+
+
+From L.C.L.Kats at tudelft.nl  Fri May 28 18:08:09 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Fri, 28 May 2010 18:08:09 +0200
+Subject: [Stratego Users] The Spoofax Language Workbench and Stratego for
+	Java
+Message-ID: <201005281608.o4SG8Abv022615@smtp1.infopact.nl>
+
+Hi list,
+
+It's been a while since we had a big announcement here, but there have been many exciting recent developments that we would like share with you.
+
+=== Stratego and SDF for Java ===
+
+Stratego and SDF have now gained new Java implementations in the form of STRJ and JSGLR (both available from strategoxt.org). STRJ generates Java code from Stratego programs, and JSGLR is a Java-based parser for SDF parse tables. While JSGLR existed for a while, it is now considered mature enough for interactive use. These implementations won't necessarily replace the existing C-based versions, but their portability can make them attractive alternatives.
+
+=== Building languages and transformations in Eclipse with Spoofax ===
+
+We're pleased to announce the 0.5 release of the Spoofax language workbench, an Eclipse plugin that integrates Java versions of Stratego and SDF into Eclipse. Spoofax can be used to develop new languages and transformations based on SDF and Stratego in the Eclipse environment.
+
+IDE support has become essential for developers to be productive with programming languages. Spoofax provides IDE support for Stratego and SDF for developers of languages and transformations. It can show the abstract syntax of code fragments, apply transformations to any input, etc. It also aids in the development of IDE support for new languages: from the first version of an SDF grammar, an editor can be instantiated for the language and used *side-by-side* with the definition in Eclipse. Using Stratego, the editor can be enhanced with transformations and semantic editor services such as reference resolving and content completion.
+
+Spoofax can be downloaded from http://www.spoofax.org and includes Stratego and SDF. When installed in Eclipse, the plugin provides a "New project" wizard that creates a new skeleton project illustrating some of the Spoofax features. The website also includes a tour (http://strategoxt.org/Spoofax/Tour) further showcasing the features of the workbench. For migrating C-based Stratego projects to Spoofax, please read the FAQ at http://strategoxt.org/Spoofax/FAQ or just post here or on the #stratego IRC channel in case of other questions. 
+
+An overview of the architecture of Spoofax and how Spoofax can be used in the development of new languages and IDE services is given in the paper The Spoofax Language Workbench: Rules for Declarative Specification of Languages and IDEs by myself and Eelco Visser, accepted for publication at SPLASH/OOPSLA 2010 (http://researchr.org/publication/KatsVisser2010). Further documentation can be found on the Spoofax website.
+
+cheers,
+
+Lennart
+
+

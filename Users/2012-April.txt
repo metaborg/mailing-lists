@@ -1,0 +1,371 @@
+From sescobar at dsic.upv.es  Mon Apr  2 12:39:58 2012
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Mon, 2 Apr 2012 12:39:58 +0200
+Subject: [Stratego Users] 6th International School on Rewriting (ISR),
+	July 16-20, 2012
+References: <3BF4288F-C37B-4F6F-868B-7C35D38E6384@dsic.upv.es>
+Message-ID: <0BFE7CD1-0009-43F9-B3EA-2608FCA7273B@dsic.upv.es>
+
+
+                    Call for Participation
+
+                           ISR 2012
+             6th International School on Rewriting
+
+                http://www.dsic.upv.es/~isr2012
+
+                       July 16th - 20th
+
+             Universitat Politecnica de Valencia
+                        Valencia, Spain
+
+
+Rewriting is a branch of computer science whose origins go back 
+to the origins of computer science itself (with Thue, Church, 
+Post, and many other prominent researchers). It has strong links 
+with mathematics, algebra, and logic, and it is the basis of 
+well-known programming paradigms like functional and equational 
+programming, which are taught at the universitary level in many 
+countries. In these programming paradigms and corresponding 
+languages, the notions of reduction, pattern matching, 
+confluence, termination, strategy, etc., are essential. 
+Rewriting provides a solid framework for understanding, using, 
+and teaching all these notions. Rewriting techniques are also 
+used in many other areas of software engineering (scripting, 
+prototyping, automated transformation of legacy systems, 
+refactoring, web services, etc.) and are implemented in popular 
+systems like Mathematica, Autocad, and others. Rewriting 
+techniques play a relevant role in computing research, 
+education, and industry.
+
+The International School on Rewriting is promoted by the IFIP 
+Working Group 1.6 Term Rewriting. The school is aimed at master 
+and PhD students, researchers, and practitioners interested in 
+the study of rewriting concepts and their applications.
+
+Two tracks are offered, including the lectures and the courses:
+
+- Track A: for newcomers in the field, or just for people 
+          who want to obtain a new, updated exposure.
+
+ * Jose Meseguer. Introduction to Term Rewriting
+ * Albert Rubio. Termination of Rewriting: Foundations and 
+   Automation
+ * Santiago Escobar. A Rewriting-Based Specification and 
+   Programming Language: Maude
+ * Beatriz Alarcon & Raul Gutierrez. Exercises on Term 
+   Rewriting
+
+- Track B: for those who want to get deeper in the most 
+          recent developments and applications of rewriting.
+
+ * Maria Alpuente: Narrowing Techniques and Applications 
+ * Temur Kutsia: Matching, unification, and generalizations 
+ * Pierre Lescanne: Lambda Calculus: extensions and 
+   applications 
+ * Narciso Marti-Oliet: Rewriting Logic and Applications 
+ * Georg Moser: Automated Complexity Analysis of Term 
+   Rewriting Systems 
+ * Albert Oliveras: SAT and SMT techniques in Proof and 
+   Verification 
+ * Sophie Tison: Tree Automata, Turing Machines and Term 
+   Rewriting 
+ * Xavier Urbain: Certification of Rewriting Properties 
+ * Andrei Voronkov: Automated Reasoning and Theorem Proving 
+
+Registration fees:
+
+ 250 euro (early registration, before June 15, 2012)
+ 350 euro (late registration, after June 15, 2012)
+
+Visit our web site for more information about registration and
+accommodation. The registration will be open in few weeks.
+
+For more information, please visit our web site or contact 
+
+  isr2012 at dsic.upv.es
+
+Organizing Committee:
+
+Salvador Lucas (chair)
+
+Beatriz Alarcon
+Santiago Escobar
+Marco A. Feliu
+Raul Gutierrez
+Sonia Santiago
+Alicia Villanueva
+
+
+
+From ajay at csc.lsu.edu  Fri Apr 13 02:41:06 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Thu, 12 Apr 2012 17:41:06 -0700
+Subject: [Stratego Users] Spoofax Stack Overflow Error with ATerm Parser
+	Scheduler
+Message-ID: <CALgJuAqbv1J_KhuUJxy1Pt4cBQQ9gbs9cy28LgAarRi0DzL=ag@mail.gmail.com>
+
+Hello,
+
+When I open up a large .aterm file with the spoofax editor
+
+An internal error occurred during: "ATerm ParserScheduler for foo.aterm".
+java.lang.StackOverflowError
+
+The settings in eclipse.ini are as follows
+
+-vmargs
+-Xss128m
+-Xms512m
+-Xmx1024m
+-XX:MaxPermSize=1024m
+-server
+-Djava.net.preferIPv4Stack=true
+
+
+I am using Eclipse Version: 3.7.2
+
+Thanks
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120412/ec87a9b9/attachment.html>
+
+From joliebig at fim.uni-passau.de  Fri Apr 20 10:02:58 2012
+From: joliebig at fim.uni-passau.de (=?UTF-8?B?SsO2cmcgTGllYmln?=)
+Date: Fri, 20 Apr 2012 10:02:58 +0200
+Subject: [Stratego Users] Customize Plugin Generation
+Message-ID: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+
+Hi,
+I started using Spoofax (last version from the eclipse update site) with
+Eclipse 3.7. I want to generate my own plugins for the mobl language (
+http://www.mobl-lang.org/). The generation works but I was wondering, if
+it's possible to skip parts of the Spoofax features (
+http://strategoxt.org/Spoofax/Features), e.g., skip support for rewrite
+rules for code generation or live abstract syntax view.
+
+Is it possible to do that in Eclipse with Spoofax?
+
+jl
+
+-- 
+J?rg Liebig
+University of Passau
+http://www.infosun.fim.uni-passau.de/cl/staff/liebig/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120420/41bbebc4/attachment.html>
+
+From E.Visser at tudelft.nl  Fri Apr 20 12:01:19 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 20 Apr 2012 12:01:19 +0200
+Subject: [Stratego Users] Customize Plugin Generation
+In-Reply-To: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+References: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+Message-ID: <CAFaCHU3xYUbRLH-jjJxOHZRzJ5Q_E9UKSLEM0sProsYAGMi+Sg@mail.gmail.com>
+
+Hi J?rg,
+
+> I started using Spoofax (last version from the eclipse update site) with
+> Eclipse 3.7. I want to generate my own plugins for the mobl language
+> (http://www.mobl-lang.org/). The generation works but I was wondering, if
+> it's possible to skip parts of the Spoofax features
+> (http://strategoxt.org/Spoofax/Features), e.g., skip support for rewrite
+> rules for code generation or live abstract syntax view.
+>
+> Is it possible to do that in Eclipse with Spoofax?
+
+I suppose you can just turn off those features in the editor
+descriptors (esv files) of the mobl language.
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From marcus.marto at googlemail.com  Mon Apr 23 13:24:47 2012
+From: marcus.marto at googlemail.com (Marcus Marto)
+Date: Mon, 23 Apr 2012 13:24:47 +0200
+Subject: [Stratego Users] Following all branches in a non-confluent
+	transformation system
+Message-ID: <CAJjbr66S-GJq5BMMuFh0AYn4tt12m5=GEj9qW-GVPV=9pCsezg@mail.gmail.com>
+
+Hello,
+
+I have to implement a source-to-source transformation where the
+transformation rules are context-sensitive. Stratego's Dynamic Rules
+offer me an easy way to build those rules during runtime. The
+application of those rules is always terminating but not confluent.
+
+1) Is there a way to generate all possible results, e.i. follow each
+possible branch?
+2) From all possible results there is at least one result which is
+"better" than the others (results can be compared by calculating a
+single number for each result, the lower the better). Is it possible
+to select a "best" result?
+
+Thanks,
+Marcus
+
+From E.Visser at tudelft.nl  Mon Apr 23 15:00:13 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 23 Apr 2012 15:00:13 +0200
+Subject: [Stratego Users] Following all branches in a non-confluent
+ transformation system
+In-Reply-To: <CAJjbr66S-GJq5BMMuFh0AYn4tt12m5=GEj9qW-GVPV=9pCsezg@mail.gmail.com>
+References: <CAJjbr66S-GJq5BMMuFh0AYn4tt12m5=GEj9qW-GVPV=9pCsezg@mail.gmail.com>
+Message-ID: <CAFaCHU3oSfEdmF6UZJzFiCsMTSXG2DdUhpUSe-LKP18_8S4OTA@mail.gmail.com>
+
+Hi Marcus,
+
+> I have to implement a source-to-source transformation where the
+> transformation rules are context-sensitive. Stratego's Dynamic Rules
+> offer me an easy way to build those rules during runtime. The
+> application of those rules is always terminating but not confluent.
+>
+> 1) Is there a way to generate all possible results, e.i. follow each
+> possible branch?
+
+The short answer is no. Stratego was designed to support strategies
+that make a choice at run-time from the possibilities of non-confluent
+rewrite system. So it has no built in support for backtracking over
+all possible rewrites. If you want arbitrary backtracking you should
+probably look at systems that support that.
+
+However, depending on transformation problem and rules your are
+dealing with, it may be possible to implement a suitable strategy.
+
+> 2) From all possible results there is at least one result which is
+> "better" than the others (results can be compared by calculating a
+> single number for each result, the lower the better). Is it possible
+> to select a "best" result?
+
+Surely, if you find a way to transform a program to N result programs
+you can compute the metric for each such program and then select the
+one with the lowest value. This depends of course on a suitable and
+meaningful definition of a comparison metric. Implementation of metric
+computation should generally not be a problem in Stratego.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From joliebig at fim.uni-passau.de  Tue Apr 24 15:50:59 2012
+From: joliebig at fim.uni-passau.de (=?UTF-8?B?SsO2cmcgTGllYmln?=)
+Date: Tue, 24 Apr 2012 15:50:59 +0200
+Subject: [Stratego Users] Customize Plugin Generation
+In-Reply-To: <CAFaCHU3xYUbRLH-jjJxOHZRzJ5Q_E9UKSLEM0sProsYAGMi+Sg@mail.gmail.com>
+References: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+	<CAFaCHU3xYUbRLH-jjJxOHZRzJ5Q_E9UKSLEM0sProsYAGMi+Sg@mail.gmail.com>
+Message-ID: <CAEFuO3ZR0Zydcbbu=+-QatZkJTc=SPMYzf8B_QM61Ux_B4xvoA@mail.gmail.com>
+
+I've a follow up question.
+
+I suppose you can just turn off those features in the editor
+> descriptors (esv files) of the mobl language.
+>
+I commented out the import of e.g., MoBL-Colorer, and others in the
+MoBL.main.esv file. After rebuilding the project and generating the mobl
+plugin I was wondering why the mobl-plugin was almost the same size (<
+300KB) as it was with all the tool support. I thought the entire editor
+support is generated per configuration and therefore should have a larger
+impact on the resulting jar file.
+
+jl
+
+-- 
+J?rg Liebig
+University of Passau
+http://www.infosun.fim.uni-passau.de/cl/staff/liebig/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120424/157de478/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Apr 24 22:38:39 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 24 Apr 2012 22:38:39 +0200
+Subject: [Stratego Users] Customize Plugin Generation
+In-Reply-To: <CAEFuO3ZR0Zydcbbu=+-QatZkJTc=SPMYzf8B_QM61Ux_B4xvoA@mail.gmail.com>
+References: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+	<CAFaCHU3xYUbRLH-jjJxOHZRzJ5Q_E9UKSLEM0sProsYAGMi+Sg@mail.gmail.com>
+	<CAEFuO3ZR0Zydcbbu=+-QatZkJTc=SPMYzf8B_QM61Ux_B4xvoA@mail.gmail.com>
+Message-ID: <CAFaCHU1hVretfCr5nyU1WYO1WL9mJNfmymJB2Fg29oDaYHhcdQ@mail.gmail.com>
+
+Hi Jorg,
+
+>> I suppose you can just turn off those features in the editor
+>> descriptors (esv files) of the mobl language.
+>
+> I commented out the import of e.g., MoBL-Colorer, and others in the
+> MoBL.main.esv file. After rebuilding the project and generating the mobl
+> plugin I was wondering why the mobl-plugin was almost the same size (<
+> 300KB) as it was with all the tool support. I thought the entire editor
+> support is generated per configuration and therefore should have a larger
+> impact on the resulting jar file.
+
+The editor services DSLs are interpreted by the Spoofax run-time
+system. So there's not a large amount of Java code that gets
+generated, and that you can save by turning off those features.
+
+What are you trying to achieve?
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From joliebig at fim.uni-passau.de  Tue Apr 24 22:57:39 2012
+From: joliebig at fim.uni-passau.de (=?UTF-8?B?SsO2cmcgTGllYmln?=)
+Date: Tue, 24 Apr 2012 22:57:39 +0200
+Subject: [Stratego Users] Customize Plugin Generation
+In-Reply-To: <CAFaCHU1hVretfCr5nyU1WYO1WL9mJNfmymJB2Fg29oDaYHhcdQ@mail.gmail.com>
+References: <CAEFuO3bGZPbheE_BFnRQ+Uxw2BzGEVKq-wdb+LGdhWTQtntoHQ@mail.gmail.com>
+	<CAFaCHU3xYUbRLH-jjJxOHZRzJ5Q_E9UKSLEM0sProsYAGMi+Sg@mail.gmail.com>
+	<CAEFuO3ZR0Zydcbbu=+-QatZkJTc=SPMYzf8B_QM61Ux_B4xvoA@mail.gmail.com>
+	<CAFaCHU1hVretfCr5nyU1WYO1WL9mJNfmymJB2Fg29oDaYHhcdQ@mail.gmail.com>
+Message-ID: <CAEFuO3boyW2ZrHHhk0GAC8Bd8GWFWSm5UbfLP=okJXFpzdTb+g@mail.gmail.com>
+
+>
+> What are you trying to achieve?
+>
+I'm trying to generate a customized mobl plugin, leaving out specific
+language features of mobl and try to generate a tailor-made IDE for that
+language.
+
+Thx for Your help. The last post answers all further questions regarding
+spoofax.
+
+jl
+
+-- 
+J?rg Liebig
+University of Passau
+http://www.infosun.fim.uni-passau.de/cl/staff/liebig/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120424/db790fe0/attachment.html>
+

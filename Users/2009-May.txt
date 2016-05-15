@@ -1,0 +1,231 @@
+From dflynn at ireland.com  Tue May 12 10:41:24 2009
+From: dflynn at ireland.com (dflynn)
+Date: Tue, 12 May 2009 09:41:24 +0100
+Subject: [Stratego Users] JDK version for Dryad
+Message-ID: <000301c9d2dd$6fad3f00$ad0ca8c0@CSE.local>
+
+Hi, 
+
+I notice that on the Dryad page, http://strategoxt.org/Stratego/TheDryad it
+mentions that JDK 5.0 is required when building Dryad from source. However,
+from the configuration log of the latest integrated release it appears JDK
+6.0 is required.
+
+http://releases.strategoxt.org/dryad/dryad-0.2pre1835518355-zbqfh1rm/1-sourc
+e-tarball-logs-3_configurePhase.html
+
+ 
+
+Does the web page need to be updated?
+
+ 
+
+Thanks
+
+Diarmuid Flynn
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090512/bbfc1d2b/attachment.html 
+
+From dflynn at ireland.com  Thu May 14 12:06:24 2009
+From: dflynn at ireland.com (dflynn)
+Date: Thu, 14 May 2009 11:06:24 +0100
+Subject: [Stratego Users] Refactoring Precondition Checker -  using Dryad
+Message-ID: <000d01c9d47b$a3fea3d0$7a01010a@CSE.local>
+
+Hi, I am trying to write a precondition and postcondition checker for
+automated refactorings using Dryad. At the moment I am trying to read input
+from a Java source file. I am basing my code on the dryad-front module, I
+hope to have all dryad-front input options available in my tool also. 
+
+ 
+
+The tool calls dryad-front first and then will use the output from
+dryad-front  as input to a strategy which will check for refactoring
+preconditions. 
+
+I would like to be able to check for preconditions by running : "checker -i
+Foo.java" and also have the ability to call "checker Foo -O Foo.class",
+basically use same input options as dryad-front.
+
+ 
+
+Does this seem like a good way of tackling this problem ? (See code below)
+I have had some issues in getting this to work, but before I get into all of
+that, I just want to make sure that  my general approach is correct.  Any
+advice would be much appreciated.
+
+ 
+
+Thank you 
+
+Diarmuid Flynn
+
+ 
+
+module checker
+imports
+  libdryad
+  libstratego-xtc
+  libstratego-lib
+  tool-doc
+  strategoxt-xtc-tools
+
+strategies
+
+  main-checker = where(init-config);
+    xtc-multi-io-wrap(
+      checker-options
+    , checker-usage
+    , checker-about
+    , observables-wrap(dryad-front; precondition-checker)
+//precondition-checker strategy not shown.
+    )
+
+  checker-options =
+     observable-classes-option
+  <+ dryad-tc-switch
+  <+ loose-option
+
+  dryad-tc-switch =
+    SwitchOption(|"tc", "off", "Switch to turn type checking on or off")
+
+strategies
+
+  init-config =
+    <set-config> ("output-description", "Write resulting jtrees to files")
+    ; <set-config> ("input-description", "Process Java source in files")
+
+  checker-usage = <tool-doc> 
+    [ Usage("checker [options] -i file... -o file... [options]")
+    , Summary(
+        "")
+    , OptionUsage()
+    , Description([
+       ""
+        ])
+    , AutoReportBugs()
+    ]
+
+  checker-about = <tool-doc>
+    [ AutoProgram()
+    , Author(Person("", ""))
+    , GNU_LGPL("2004-2006", "")
+    , Config([
+        DefaultXTCRepository()
+      , CurrentXTCRepository()
+      ])
+    ]
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20090514/90693954/attachment.html 
+
+From martin.bravenboer at gmail.com  Mon May 18 02:39:21 2009
+From: martin.bravenboer at gmail.com (Martin Bravenboer)
+Date: Sun, 17 May 2009 20:39:21 -0400
+Subject: [Stratego Users] Refactoring Precondition Checker - using Dryad
+In-Reply-To: <000d01c9d47b$a3fea3d0$7a01010a@CSE.local>
+References: <000d01c9d47b$a3fea3d0$7a01010a@CSE.local>
+Message-ID: <2074242c0905171739p1f0345aahc8a865b137aeabf5@mail.gmail.com>
+
+Hi Diarmuid,
+
+> Does this seem like a good way of tackling this problem ? (See code below)
+>  I have had some issues in getting this to work, but before I get into all
+> of that, I just want to make sure that  my general approach is correct.  Any
+> advice would be much appreciated.
+
+Sure, it looks reasonable to me. It looks like the standard template
+for a Java transformation tool based on Dryad, and you can add
+anything to the pipeline you want, which includes pre/post condition
+checkers.
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+
+From dflynn at ireland.com  Tue May 19 14:53:26 2009
+From: dflynn at ireland.com (dflynn)
+Date: Tue, 19 May 2009 13:53:26 +0100
+Subject: [Stratego Users] Refactoring Precondition Checker - using Dryad
+In-Reply-To: <2074242c0905171739p1f0345aahc8a865b137aeabf5@mail.gmail.com>
+References: <000d01c9d47b$a3fea3d0$7a01010a@CSE.local>
+	<2074242c0905171739p1f0345aahc8a865b137aeabf5@mail.gmail.com>
+Message-ID: <003601c9d880$cd950a00$ad0ca8c0@CSE.local>
+
+Martin, thanks for that. When I sent this question in last week, I was
+having trouble getting this "template" to work in a tool I built myself.
+
+However the problem was related to having a different version of gcc on my
+$PATH, than the version of gcc installed with NIX. So when I built my tool
+it wouldn't run properly when using certain Dryad library functions. 
+
+Regards,
+Diarmuid Flynn
+
+-----Original Message-----
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Martin Bravenboer
+Sent: 18 May 2009 01:39
+To: Stratego/XT Users
+Subject: Re: [Stratego Users] Refactoring Precondition Checker - using Dryad
+
+Hi Diarmuid,
+
+> Does this seem like a good way of tackling this problem ? (See code below)
+>  I have had some issues in getting this to work, but before I get into all
+> of that, I just want to make sure that  my general approach is correct.
+Any
+> advice would be much appreciated.
+
+Sure, it looks reasonable to me. It looks like the standard template
+for a Java transformation tool based on Dryad, and you can add
+anything to the pipeline you want, which includes pre/post condition
+checkers.
+
+Cheers,
+-- 
+Martin Bravenboer
+---------------------------------------------------------------------
+Department of Computer Science
+University of Massachusetts Amherst
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From karltk at strategoxt.org  Tue May 19 22:06:03 2009
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Tue, 19 May 2009 22:06:03 +0200
+Subject: [Stratego Users] Refactoring Precondition Checker - using Dryad
+In-Reply-To: <003601c9d880$cd950a00$ad0ca8c0@CSE.local>
+References: <000d01c9d47b$a3fea3d0$7a01010a@CSE.local>	<2074242c0905171739p1f0345aahc8a865b137aeabf5@mail.gmail.com>
+	<003601c9d880$cd950a00$ad0ca8c0@CSE.local>
+Message-ID: <4A13112B.6050203@strategoxt.org>
+
+dflynn wrote:
+> Martin, thanks for that. When I sent this question in last week, I was
+> having trouble getting this "template" to work in a tool I built myself.
+> 
+> However the problem was related to having a different version of gcc on my
+> $PATH, than the version of gcc installed with NIX. So when I built my tool
+> it wouldn't run properly when using certain Dryad library functions. 
+
+This is a know problem and it's pretty ugly, too.
+
+$ CC=$HOME/.nix-profile/bin/gcc ./configure ....
+
+usually solves this problem by using the gcc provided by Nix instead of 
+the one supplied by your distro.
+
+
+-- Karl T
+

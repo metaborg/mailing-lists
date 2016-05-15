@@ -1,0 +1,593 @@
+From gabrielkonat at gmail.com  Wed Sep  2 01:35:51 2015
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Tue, 1 Sep 2015 16:35:51 -0700
+Subject: [Stratego Users] Spoofax all-in-one fails on startup (linux)
+In-Reply-To: <55E4A4C9.7040108@gmail.com>
+References: <55E385BD.4020401@gmail.com>
+ <CAPvsMmB-cAxeLKkKofsMYOdynzijjW=toe8jtVgYmpq1UOAN6g@mail.gmail.com>
+ <CAOyetXQYpmr4=MExNjrb9Q_7uQEme3=o4=L3dZ7vjf9kx3yt7g@mail.gmail.com>
+ <55E4A4C9.7040108@gmail.com>
+Message-ID: <CAOipTugb+pxQRH55mUBMckT_KQBuBKYN47WY9MC9C3WcTAbEPg@mail.gmail.com>
+
+Thanks for the report, I've changed our build to generate tar.gz files for
+Linux and OSX:
+http://buildfarm.metaborg.org/job/spoofax-master/lastSuccessfulBuild/artifact/dist/eclipse/.
+I tested the OSX versions, the Linux x86_64 versions in a VM, and the
+Windows versions in a VM, and they have the correct symlinks and
+permissions now. I could not test the Linux x86 versions because I don't
+have a 32 bits Linux installation, would be great if someone else could
+test that.
+
+On 31 August 2015 at 12:02, Scott Finnie <scott.finnie at gmail.com> wrote:
+
+> Oskar, Jeff, thanks for the responses.
+>
+> On 31/08/15 07:12, Oskar wrote:
+>
+> Hi Scott,
+>
+> I think you can fix this by doing:
+>
+> chmod +x spoofax-linux-x64/eclipse
+> chmod +x spoofax-linux-x64/jre/bin/*
+>
+>
+> Yes indeed, that works - thanks Oskar.
+>
+> [..]
+>
+>
+>>    1. I noticed the missing execute permissions too. I mentioned it to a
+>>    maintainer, and he said it?s probably a wrong argument to the zip command
+>>    that?s used on the build server. A not very high priority bug :)
+>>
+>> It depends how you define 'priority'.  Anyone new coming to Spoofax - for
+> example via Eelco's book - will be stumped.  It's not exactly an intuitive
+> error.  It might be a trivial fix, but the impact on perceived quality is
+> anything but.
+>
+> For the record, I don't think it's possible to preserve permissions in zip
+> files, though tar will.
+>
+>  -Scott.
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150901/447c8b1c/attachment.html>
+
+From scott.finnie at gmail.com  Wed Sep  2 22:49:05 2015
+From: scott.finnie at gmail.com (Scott Finnie)
+Date: Wed, 2 Sep 2015 21:49:05 +0100
+Subject: [Stratego Users] Spoofax all-in-one fails on startup (linux)
+In-Reply-To: <CAOipTugb+pxQRH55mUBMckT_KQBuBKYN47WY9MC9C3WcTAbEPg@mail.gmail.com>
+References: <55E385BD.4020401@gmail.com>
+ <CAPvsMmB-cAxeLKkKofsMYOdynzijjW=toe8jtVgYmpq1UOAN6g@mail.gmail.com>
+ <CAOyetXQYpmr4=MExNjrb9Q_7uQEme3=o4=L3dZ7vjf9kx3yt7g@mail.gmail.com>
+ <55E4A4C9.7040108@gmail.com>
+ <CAOipTugb+pxQRH55mUBMckT_KQBuBKYN47WY9MC9C3WcTAbEPg@mail.gmail.com>
+Message-ID: <55E760C1.1050807@gmail.com>
+
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150902/b93722cc/attachment.html>
+
+From storm at cwi.nl  Mon Sep 21 11:08:15 2015
+From: storm at cwi.nl (Tijs van der Storm)
+Date: Mon, 21 Sep 2015 11:08:15 +0200
+Subject: [Stratego Users] SPLASH 2015 - 2nd Call For Participation
+Message-ID: <CAOzQwNNriFu_g2NqdkiXvCnEkkRe69jaq2QuF-d2AwWz=ksevw@mail.gmail.com>
+
+/*************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+          Software for Humanity (SPLASH'15)
+
+      Pittsburgh, Pennsylvania, USA
+      25th-30th October, 2015
+
+      http://www.splashcon.org
+      https://twitter.com/splashcon
+      https://www.facebook.com/SPLASHCon
+
+      Sponsored by ACM SIGPLAN
+
+/**************************************************************
+2nd CALL FOR PARTICIPATION
+**************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH) embraces all aspects of
+software construction and delivery to make it the premier conference at the
+intersection of programming, languages, and software engineering. SPLASH is
+now inviting calls for participation.
+
+
+** REGISTRATION **
+28 September 2015 (Early Deadline)
+Contact: info at splashcon.org
+http://2015.splashcon.org/attending/registration
+
+
+** CONFERENCE PROGRAM **
+http://2015.splashcon.org/program/program-splash2015
+
+
+** KEYNOTE Speakers **
+
+We are delighted to announce the following keynote speakers at SPLASH 2015:
+
+- Nick Feamster (Princeton University): Tomorrow?s Network Operators Will
+Be Programmers
+- Lars Bak (Google): How Dart Learned From Past Object-Oriented Systems
+- Rob DeLine (Microsoft Research): Modern software is all about data.
+Development environments should be, too.
+
+http://2015.splashcon.org/track/splash2015-keynotes
+
+
+**SPLASH-I Speakers **
+
+SPLASH-I is a series of industrial research talks that address topics
+relevant to the SPLASH community. Speakers are world-class experts in their
+field, selected and invited by the organizers. The SPLASH-I talks series is
+held in parallel with the OOPSLA main track. Talks are open to all
+attendees.
+
+- Avik Chaudhuri (Facebook): Flow: a static type checker for JavaScript
+- Hassan Chafi (Oracle Labs): Domain Specific Languages @ Oracle Labs:
+Current Experiences, Future Hopes
+- Chris Granger: Eve
+- Shan Shan Huang (LogicBlox): Model, Execute, Deploy: Answering the Hard
+Questions about End-user Programming
+- Lindsey Kuper (Intel Labs): Prospect: Finding and Exploiting Parallelism
+in a Productivity Language for Scientific Computing
+- Simon Marlow (Facebook): Fighting Spam with Haskell
+- Mark S. Miller (Google): Security as Extreme Modularity: A Standards
+Shaping Approach
+- Eliot Miranda (Cadence): Spur: Efficient Support for Live Programming in
+Dynamic Languages
+- Markus Voelter (independent): Language-Oriented Business Applications:
+Helping End Users become Programmers
+- Josh Watzman (Facebook): Changing Engines in Flight: Facebook's
+Conversion to Hack
+- Peng Wu (Huawei America Lab): When CT meets IT: Programming Challenges in
+the age of ICT Convergence
+
+http://2015.splashcon.org/track/splash2015-splash-i
+
+
+** OOPSLA Research Papers**
+Papers that address any aspect of software development are welcome,
+including requirements, modeling, prototyping, design, implementation,
+generation, analysis, verification, testing, evaluation, maintenance,
+reuse, replacement, and retirement of software systems. Papers may address
+these topics in a variety of ways, including new tools (such as languages,
+program analyses, and runtime systems), new techniques (such as
+methodologies, design processes, code organization approaches, and
+management techniques), and new evaluations (such as formalisms and proofs,
+corpora analyses, user studies, and surveys).
+
+http://2015.splashcon.org/track/oopsla2015
+
+** Onward! Research Papers **
+Onward! is a premier multidisciplinary conference focused on everything to
+do with programming and software: including processes, methods, languages,
+communities, and applications. Onward! is more radical, more visionary, and
+more open than other conferences to ideas that are well-argued but not yet
+proven. We welcome different ways of thinking about, approaching, and
+reporting on programming language and software engineering research.
+
+http://2015.splashcon.org/track/onward2015-papers
+
+
+** Onward! Essays **
+Onward! Essays is looking for clear and compelling pieces of writing about
+topics important to the software community. An essay can be an exploration
+of a topic, its impact, or the circumstances of its creation; it can
+present a personal view of what is, explore a terrain, or lead the reader
+in an act of discovery; it can be a philosophical digression or a deep
+analysis. It can describe a personal journey, perhaps that by which the
+author reached an understanding of such a topic. The subject area should be
+interpreted broadly and can include the relationship of software to human
+endeavors, or its philosophical, sociological, psychological, historical,
+or anthropological underpinnings.
+
+http://2015.splashcon.org/track/onward2015-essays
+
+** DLS - Dynamic Languages Symposium **
+DLS is the premier forum for researchers and practitioners to share
+knowledge and research on dynamic languages, their implementation, and
+applications. The influence of dynamic languages ? from Lisp to Smalltalk
+to Python to Javascript ? on real-world practice, and research, continues
+to grow. We invite high quality papers reporting original research,
+innovative contributions, or experience related to dynamic languages, their
+implementation, and applications.
+
+Keynote: Declare Your Language
+Speaker: Eelco Visser (Delft University of Technology)
+
+http://2015.splashcon.org/track/dls2015
+
+** Panels **
+The Panels track offers exciting discussion about topics related to SPLASH.
+
+Panel: Software Professionalism ? Is it ?Good Enough??
+With: Dennis Mancl, Nancy Mead, Mary Shaw, Werner Wild
+http://2015.splashcon.org/event/splash2015-panels-software-professionalism-is-it-good-enough-
+
+Panel: The Future of Programming Languages and Programmers
+With: Lars Bak, Rob DeLine, Nick Feamster, Lindsey Kuper, Crista Lopes,
+Peng Wu
+http://2015.splashcon.org/event/splash2015-panels-the-future-of-programming-languages-and-programmers
+
+** SPLASH-E **
+The SPLASH-E track brings together researchers and educators to share
+educational results, ideas, and challenges centered in Software and
+Programming Languages. Submission formats vary, including papers, tool
+demos, lightning talks, challenge-topics for discussion, and suggested
+themes for "unconference" sessions.  Help us create an engaging forum for
+educational issues related to SPLASH!
+
+http://2015.splashcon.org/track/splash-e
+
+
+** Artifacts **
+The Artifact Evaluation process is a service provided by the community to
+help authors of accepted papers provide more substantial supplements to
+their papers so future researchers can more effectively build on and
+compare with previous work. The Artifact Evaluation Committee has been
+formed to assess how well paper authors prepare artifacts in support of
+such future researchers. Roughly, authors of papers who wish to participate
+are invited to submit an artifact that supports the conclusions of the
+paper.
+
+http://2015.splashcon.org/track/splash2015-artifacts
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops
+(13 in total), allowing their participants to meet and discuss research
+questions with peers, to mature new and exciting ideas, and to build up
+communities and start new collaborations. SPLASH workshops complement the
+main tracks of the conference and provide meetings in a smaller and more
+specialized setting. Workshops cultivate new ideas and concepts for the
+future, optionally recorded in formal proceedings.
+
+http://2015.splashcon.org/track/splash2015-workshops
+
+Selected Workshop keynotes:
+
+- AGERE! Daniel Wendel,
+  Concurrent, Distributed Thinking for First-time Programmers in StarLogo
+Nova
+
+- MobileDeLi: Robert Seacord
+  Mobile Security
+
+- PLATEAU: Mary Beth Rosson
+  Computational Thinking for All: Expanding the Boundaries of Computing for
+Nonprogrammers
+
+- Parsing at SLE: Christian K?stner
+  Parsing Unpreprocessed C Code - The TypeChef Experience
+
+- WODA: Koushik Sen
+  Concolic Testing: A Decade Later
+
+
+** Tutorials **
+The SPLASH Tutorials track will consist of prestigious tutorials on current
+topics in software, systems, and languages research. The scope of the
+tutorials is the same as the conference itself: all aspects of software
+construction and delivery at the intersection of programming, languages,
+and software engineering. The tutorials in particular focus on the nexus
+between research and practice, including work that takes inspiration from
+or builds connections to areas not commonly considered at SPLASH. Tutorials
+should introduce researchers to current research in an area, or show
+important new tools that can be used in research.
+
+http://2015.splashcon.org/track/splash2015-tutorials
+
+
+** Demos **
+The SPLASH Demonstrations track is an excellent vehicle for sharing your
+latest work with an experienced and technically savvy audience. Live
+demonstrations show the impact of software innovation. Demonstrations are
+not product sales pitches, but rather an opportunity to highlight, explain,
+and present interesting technical aspects of running applications in a
+dynamic and highly interactive setting. Presenters are encouraged to
+actively solicit feedback from the audience, which should lead to very
+interesting and entertaining demonstration sessions.
+
+http://2015.splashcon.org/track/splash2015-demos
+
+
+** Posters **
+The SPLASH Poster track provides an excellent forum for authors to present
+their recent or ongoing projects in an interactive setting, and receive
+feedback from the community. We invite submissions covering any aspect of
+programming, systems, languages and applications. The goal of the poster
+session is to encourage and facilitate small groups of individuals
+interested in a technical area to gather and interact. It is held early in
+the conference, to promote continued discussion among interested parties.
+Posters can be independent presentations or associated with one of the
+other parts of SPLASH.
+
+http://2015.splashcon.org/track/splash2015-posters
+
+
+** Doctoral Symposium **
+The SPLASH Doctoral Symposium provides students with useful guidance for
+completing their dissertation research and beginning their research
+careers. The Symposium will provide an interactive forum for doctoral
+students who have progressed far enough in their research to have a
+structured proposal, but will not be defending their dissertation in the
+next 12 months.
+
+http://2015.splashcon.org/track/splash2015-ds
+
+
+** Student Research Competition **
+The ACM SIGPLAN Student Research Competition (ACM SRC) is an
+internationally-recognized venue that enables undergraduate and graduate
+students to experience the research world, share their research results
+with other students and SPLASH attendees. The competition has separate
+categories for undergraduate and graduate students and awards prizes to the
+top three students in each category. The ACM SIGPLAN Student Research
+Competition shares the Poster session?s goal to facilitate interaction with
+researchers and industry practitioners; providing both sides with the
+opportunity to learn of ongoing, current research.
+
+http://2015.splashcon.org/track/splash2015-src
+
+
+** PLMW - Programming Languages Mentoring Workshop **
+
+The purpose of Programming Languages Mentoring Workshop (PLMW) is to give
+promising undergraduate students from around Pittsburgh who consider
+pursuing a graduate degree in this field an overview of what research in
+this field looks like and how to get into and succeed in graduate school.
+In other words, a combination whirlwind tour of this research area,
+networking opportunity, and how-to-succeed guide. The program of PLMW will
+include talks by prominent researchers of the field of programming
+languages and software engineering providing an insight in their research.
+
+http://2015.splashcon.org/track/splash2015-plmw
+
+
+** RPG Richard's Pretty Good Talks **
+
+RPG is my micro-conference. RPG is sporadically held, suddenly announced,
+and leaves little but mental limps and frustration / aka instability?take
+it as step #1 toward getting you decanalized. I choose the speakers and I
+don?t care what you think; I choose the topics and I always choose first
+loves. I want people telling me about things they cherish / not about how
+they make their living. Here?s what I?ve got going this year for the third
+edition.
+
+- Crista Lopes & Annette Vee, Programming as Writing (and vice versa?)
+- Billy Price & William Pollak, Singing the Blues / What is a Song?
+
+http://2015.splashcon.org/track/splash2015-rpg
+
+
+/**************************************************************
+Workshops
+**************************************************************/
+
+AGERE! - Programming based on Actors, Agents, and Decentralized Control
+http://2015.splashcon.org/track/agere2015
+
+DSM - Domain-Specific Modeling
+http://2015.splashcon.org/track/dsm2015
+
+ETX - Eclipse Technology eXchange
+http://2015.splashcon.org/track/etx2015
+
+FPW - Future Programming Workshop
+http://2015.splashcon.org/track/fpw2015
+
+MobileDeLi - Mobile Development Lifecycle
+http://2015.splashcon.org/track/mobiledeli2015
+
+NOOL - New Object-Oriented Languages
+http://2015.splashcon.org/track/nool2015
+
+PLATEAU - Evaluation and Usability of Programming Languages and Tools
+Keynote: Mary Beth Rosson (Pennsylvania State University)
+http://2015.splashcon.org/track/plateau2015
+
+Parsing - Parsing @ SLE 2015
+http://2015.splashcon.org/track/ParsingAtSLE2015
+
+PROMOTO - Programming for Mobile and Touch
+http://2015.splashcon.org/track/promoto2015
+
+REBLS - Reactive and Event-based Languages & Systems
+http://2015.splashcon.org/track/rebls2015
+
+SMART - Smart Software Strategies
+http://2015.splashcon.org/track/SmartSoftwareStrategies2015
+
+SEPS - Software Engineering for Parallel Systems
+http://2015.splashcon.org/track/seps2015
+
+WODA - Workshop on Dynamic Analysis
+http://2015.splashcon.org/track/woda2015
+
+/**************************************************************
+Co-Located Events
+**************************************************************/
+
+** SLE - 8th International ACM SIGPLAN Conference on Software Language
+Engineering **
+
+Software Language Engineering (SLE) is the application of systematic,
+disciplined, and measurable approaches to the development, use, deployment,
+and maintenance of software languages. The term ?software language? is used
+broadly, and includes: general-purpose programming languages;
+domain-specific languages (e.g. BPMN, Simulink, Modelica); modeling and
+metamodeling languages (e.g. SysML and UML); data models and ontologies
+(e.g. XML-based and OWL-based languages and vocabularies).
+
+Keynote Speaker: Stephane Ducasse (Inria)
+
+http://2015.splashcon.org/track/sle2015
+
+
+** GPCE - 14th International Conference on Generative Programming: Concepts
+& Experiences **
+
+The International Conference on Generative Programming: Concepts &
+Experiences (GPCE) is a venue for researchers and practitioners interested
+in techniques that use program generation, domain-specific languages, and
+component deployment to increase programmer productivity, improve software
+quality, and shorten the time-to-market of software products. In addition
+to exploring cutting-edge techniques of generative software, our goal is to
+foster further cross-fertilization between the software engineering and the
+programming languages research communities.
+
+Keynote Speaker: Priya Narasimhan (Carnegie Mellon University)
+
+http://2015.splashcon.org/track/gpce2015
+
+
+** DBPL - 15th Symposium on Database Programming Languages **
+
+For over 25 years, DBPL has established itself as the principal venue for
+publishing and discussing new ideas at the intersection of databases and
+programming languages. Many key contributions in query languages for
+object-oriented data, persistent databases, nested relational data, and
+semistructured data, as well as fundamental ideas in types for query
+languages, were first announced at DBPL. This creative research area is
+broadening into a subfield of data-centric computation, currently scattered
+among a range of venues. DBPL is an established destination for such new
+ideas and solicits submissions from researchers in databases, programming
+languages or any other community interested in the design, implementation
+or foundations of data-centric computation.
+
+Keynote: Gremlin: A Stream-Based Functional Language for OLTP and OLAP
+Graph Computing
+Speaker: Marko A. Rodriguez (DataStax)
+
+http://2015.splashcon.org/track/dbpl2015
+
+
+** PLoP - 22nd International Conference on Pattern Languages of Programming
+**
+
+The Pattern Languages of Programs (PLoP) conference is a premier event for
+pattern authors and pattern enthusiasts to gather, discuss and learn more
+about patterns and software development. The conference promotes
+development of pattern languages on all aspects of software, including
+design and programming, software architecture, user interface design,
+domain modeling, software processes, project management, and more. The
+program offers pattern authors an unique opportunity to have their pattern
+languages reviewed by fellow authors, which occurs mainly in the form of
+Writers? Workshops.
+
+Keynote: Progress Toward an Engineering Discipline of Software
+Speaker: Mary Shaw (Carnegie Mellon University)
+
+http://2015.splashcon.org/track/plop2015
+
+/**************************************************************
+Supporters
+**************************************************************/
+
+We gratefully acknowledge the generosity of our corporate supporters:
+
+Silver:
+- Microsoft http://www.microsoft.com/
+- Oracle: http://www.oracle.com/
+- NSF: http://www.nsf.gov/
+
+Bronze:
+- IBM Research: http://www.research.ibm.com/
+- Samsung: http://www.samsung.com/
+- Intel: http://www.intel.com/
+- Google: http://www.google.com/
+- HP: http://www.hp.com/
+- Huawei: http://www.huawei.com/
+
+Other:
+- DePaul University: http://www.depaul.edu/
+- The Royal Society Publishing:
+http://rsos.royalsocietypublishing.org/content/computer-science
+
+
+/**************************************************************
+Information and Organization
+**************************************************************/
+
+Information:
+SPLASH Early Registration Deadline: 28 September, 2015
+Contact: info at splashcon.org
+Website: http://2015.splashcon.org
+
+Location:
+Sheraton Station Square Hotel
+Pittsburgh, Pennsylvania, United States
+
+Organization:
+SPLASH General Chair: Jonathan Aldrich (Carnegie Mellon University)
+OOPSLA Papers Chair: Patrick Eugster (Purdue University)
+Onward! Papers Chair: Gail Murphy (University of British Columbia)
+Onward! Essays Chair: Guy Steele Jr. (Oracle Labs)
+DLS Papers Chair: Manuel Serrano (INRIA)
+
+Artifacts Co-Chairs: Robby Findler (Northwestern University) and Michael
+Hind (IBM Research)
+Demos Co-Chair: Igor Peshansky (Google) and Pietro Ferrara (IBM Research)
+Doctoral Symposium Chair: Yu David Liu, State University of New York (SUNY)
+Binghamton
+Local Arrangements Chair: Claire Le Goues (Carnegie Mellon University)
+Panels Chair: Steven D. Fraser (Independent Consultatnt)
+PLMW Workshop Co-Chairs: Darya Kurilova (Carnegie Mellon University),
+Zachary Tatlock (University of Washington), and Crista Lopes (UC Irvine)
+Posters Co-Chairs: Nick Sumner (Simon Fraser University) and Jeff Huang
+(Texas A&M University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Publicity and Web Co-Chairs: Craig Anslow (Middlesex University) and Tijs
+van der Storm (CWI)
+SPLASH-E Chair: Eli Tilevich (Virginia Tech)
+SPLASH-I Co-Chairs: Tijs van der Storm (CWI) and Jan Vitek (Northeastern
+University)
+Student Research Competition Co-Chairs: Sam Guyer (Tufts University) and
+Patrick Lam (University of Waterloo)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco
+Harkes (TU Delft)
+Sponsorship Chair: Tony Hosking (Purdue University)
+Tutorials Co-Chair: Romain Robbes (University of Chile) and Ronald Garcia
+(University of British Columbia)
+Video Chair: Michael Hilton (Oregon State University)
+Video Previews Czar: Thomas LaToza (George Mason University)
+Wavefront Co-Chairs: Dennis Mancl (Alcatel-Lucent) and Joe Kiniry (Galois)
+Web Technology Chair: Eelco Visser (TU Delft)
+Workshop Co-Chairs: Du Li (Carnegie Mellon University) and Jan Rellermeyer
+(IBM Research)
+
+SLE General Chair: Richard Paige (University of York)
+GPCE General Chair: Christian K?stner (Carnegie Mellon University)
+PLoP General Chair: Filipe Correia (University of Porto)
+DBPL General Chair: James Cheney (University of Edinburgh) and Thomas
+Neumann (TU Munich)
+
+
+
+-- 
+Researcher Centrum Wiskunde & Informatica (CWI)
+Master of Software Engineering Universiteit van Amsterdam (UvA)
+
+Dr. Tijs van der Storm @ Centrum Wiskunde & Informatica (CWI)
+Office: L225    | Phone: +31 (0)20 5924164 | Address: Science Park 123
+P.O. Box 94079  | Postal code: 1090 GB     | Amsterdam, The Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150921/82709d93/attachment-0001.html>
+

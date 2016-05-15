@@ -1,0 +1,19 @@
+From gabrielkonat at gmail.com  Tue Dec  9 17:27:45 2014
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Tue, 9 Dec 2014 17:27:45 +0100
+Subject: [Stratego Users] Spoofax 1.3.1 released
+Message-ID: <CAOipTug8+jFcA=WBcctduKQqTYv1q47Rf0bJ=yOoN36_HsXe2w@mail.gmail.com>
+
+Hi all,
+
+We're happy to announce the release of Spoofax 1.3.1, a maintenance release
+which fixes several issues in SDF3, and compatibility with Eclipse 4.3
+(Kepler). The download links and changelog can be found at
+https://github.com/metaborg/doc/blob/master/releases/spoofax/1.3.1.md.
+
+Cheers,
+Gabriel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20141209/a23c61b2/attachment.html>
+

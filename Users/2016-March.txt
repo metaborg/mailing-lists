@@ -1,0 +1,318 @@
+From eelcovis at gmail.com  Wed Mar  2 23:52:34 2016
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Wed, 2 Mar 2016 23:52:34 +0100
+Subject: [Stratego Users] Changing License of MetaBorg (Spoofax, Stratego, XT,
+	...) to Apache 2.0
+Message-ID: <CAFaCHU2doQDSYnAAHd3H5WR-AgvrhQKf+Ygxcx5+0psktVzEOQ@mail.gmail.com>
+
+We are in the process of changing the license for Spoofax, Stratego, XT,
+and related components from LGPL to Apache 2.0 to encourage further
+adoption by industry.
+
+We have sent the questionnaire below to all developers recorded as
+contributors in the various github repositories, which were migrated from
+our subversion repository (which was migrated from a CVS repository!). In
+case you did not receive a direct request, but contributed to one of the
+Spoofax/Stratego/XT components, please fill in the questionnaire below and
+send it back directly to me, preferably this week.
+
+thanks,
+
+-- Eelco Visser
+
+Professor of Computer Science, TU Delft
+
+http://eelcovisser.org
+
+
+Dear Spoofax / Stratego / XT Contributor,
+
+Spoofax is gaining interest from industry. However, the current LGPL
+license proves to be an obstacle for adoption. Therefore, we want to
+license all MetaBorg projects under the Apache License 2.0.
+
+We ask you to fill in the questionnaire below in order to realize the
+change of license to Apache 2.0 for all MetaBorg software. We would be
+pleased if you can return your answer as soon as possible, preferably by
+February 26, 2016.
+
+Scope:  In this email we use ?MetaBorg? to refer to all software projects
+in the MetaBorg ecosystem as hosted in the github MetaBorg organization (
+https://github.com/metaborg <https://github.com/metaborg/spoofax-releng>)
+including all components of the Spoofax Language Workbench such as Spoofax,
+Stratego, XT, SDF, JSGLR, and other meta-languages (see list of
+repositories below).
+
+If you have any questions, please contact me.
+
+Thanks!
+
+-- Eelco Visser
+
+
+Professor of Computer Science, TU Delft
+
+http://eelcovisser.org
+
+
+---------------------------------------------------------------
+
+Please carefully answer the following questions concerning your
+contribution to MetaBorg.
+
+(0) What is your full name and what are your current contact details (email
+and mailing address)?
+
+Answer:
+
+(1) Do you agree to license your contributions to the MetaBorg projects as
+open source under the Apache 2.0 license agreement  (
+http://www.apache.org/licenses/LICENSE-2.0)?
+
+Answer:
+
+(2) Is the code you contributed to the MetaBorg ecosystem your own original
+creation?
+
+Answer:
+
+(3) Does anyone else have rights to the code you contributed? [For example,
+did you have an agreement with an employer giving the employer rights to
+all code you wrote during that time?]
+
+Answer:
+
+(4) Can you estimate how much code you contributed to MetaBorg projects?
+[For example, #LOC; or if that's too difficult, percentage.]
+
+Answer:
+
+*Optional:  (5) Do you know of any contributions to the MetaBorg projects
+which were improperly copied from someone else?
+
+Answer:
+
+*Optional:  (6) Do you know of any code in MetaBorg projects to which a
+third party has rights inconsistent with the new Apache 2.0 license?
+
+Answer:
+
+
+Thanks for your answers!
+
+Affected RepositoriesSpoofax
+
+Spoofax (legacy Eclipse plugin and core):
+https://github.com/metaborg/spoofax
+
+Spoofax Eclipse: https://github.com/metaborg/spoofax-eclipse
+
+Spoofax IntelliJ: https://github.com/metaborg/spoofax-intellij
+
+Spoofax Maven: https://github.com/metaborg/spoofax-maven
+
+Spoofax Sunshine: https://github.com/metaborg/spoofax-sunshine
+
+Spoofax deploy: https://github.com/metaborg/spoofax-deploy
+
+Spoofax modelware: https://github.com/metaborg/spoofax-modelware
+
+Spoofax debug: https://github.com/metaborg/spoofax-debug
+
+Spoofax benchmark: https://github.com/metaborg/spoofax-benchmark
+
+Spoofax ANTLR integration: https://github.com/metaborg/spoofax-antlr
+
+Spoofax Netbeans: https://github.com/metaborg/spoofax-netbeans
+SDF
+
+SDF language: https://github.com/metaborg/sdf
+
+JSGLR parser: https://github.com/metaborg/jsglr
+StrategoXT
+
+StrategoXT: https://github.com/metaborg/strategoxt
+
+Stratego editor: https://github.com/metaborg/stratego
+Meta-languages
+
+Aster: https://github.com/metaborg/aster
+
+Box: https://github.com/metaborg/box
+
+Dynsem: https://github.com/metaborg/dynsem
+
+ESV: https://github.com/metaborg/esv
+
+NaBL: https://github.com/metaborg/nabl
+
+RTG: https://github.com/metaborg/rtg
+
+SPT: https://github.com/metaborg/spt
+
+TS: https://github.com/metaborg/ts
+
+TDL: https://github.com/metaborg/tdl
+
+SpoofaxLang: https://github.com/metaborg/spx
+Representation
+
+ATerms and index: https://github.com/metaborg/mb-rep
+Execution
+
+Analysis libraries and task engine:
+https://github.com/metaborg/runtime-libraries
+
+Stratego interpreter and utilities: https://github.com/metaborg/mb-exec
+Otherjava-front: https://github.com/metaborg/java-front
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160302/384f3a38/attachment-0001.html>
+
+From storm at cwi.nl  Wed Mar  9 21:08:06 2016
+From: storm at cwi.nl (Tijs van der Storm)
+Date: Wed, 9 Mar 2016 21:08:06 +0100
+Subject: [Stratego Users] Upcoming deadlines SPLASH'16 in Amsterdam: OOPSLA
+	& Onward!
+Message-ID: <CAOzQwNOE=PCJe6KP1MJR=XxLdqFnGSftENNXrVEJCfK83cSbog@mail.gmail.com>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+Software for Humanity (SPLASH'16)
+
+Amsterdam, The Netherlands
+Sun 30th October - Fri 4th November , 2016
+
+http://2016.splashcon.org
+
+Sponsored by ACM SIGPLAN
+/************************************************************************************/
+
+
+# Important dates
+
+OOPSLA Papers:
+ * Submissions due: March 23, 2016
+ * Author Response: May 19 - May 21, 2016
+ * Author Notification: June 1, 2016
+ * Camera Ready: August 26, 2016
+
+Onward! Papers & Essays:
+ * Submissions due: April 1, 2016
+ * First notification: May 20, 2016
+ * Revised papers: July 15, 2016
+ * Final notification: July 31, 2016
+ * Camera ready: August 26, 2016
+
+
+# SPLASH 2016
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH) embraces all aspects of
+software construction, to make it the premier conference at the
+intersection of programming, languages, systems, and software engineering.
+We invite high quality submissions describing original and unpublished work.
+
+
+## OOPSLA Research Papers
+
+Papers that address any aspect of software development are welcome,
+including requirements, modeling, prototyping, design, implementation,
+generation, analysis, verification, testing, evaluation, maintenance,
+reuse, replacement, and retirement of software systems. Papers may address
+these topics in a variety of ways, including new tools (such as languages,
+program analyses, and runtime systems), new techniques (such as
+methodologies, design processes, code organization approaches, and
+management techniques), and new evaluations (such as formalisms and proofs,
+corpora analyses, user studies, and surveys).
+
+Submissions due: Wed 23 March, 2016
+http://2016.splashcon.org/track/splash-2016-oopsla
+
+
+## Onward! Research Papers
+
+Onward! is a premier multidisciplinary conference focused on everything to
+do with programming and software: including processes, methods, languages,
+communities, and applications. Onward! is more radical, more visionary, and
+more open than other conferences to ideas that are well-argued but not yet
+proven. We welcome different ways of thinking about, approaching, and
+reporting on programming language and software engineering research.
+
+Submissions due: Fri 1 April, 2016
+http://2016.splashcon.org/track/onward2016/onward-2016-papers
+
+
+## Onward! Essays
+
+Onward! Essays is looking for clear and compelling pieces of writing about
+topics important to the software community. An essay can be an exploration
+of a topic, its impact, or the circumstances of its creation; it can
+present a personal view of what is, explore a terrain, or lead the reader
+in an act of discovery; it can be a philosophical digression or a deep
+analysis. It can describe a personal journey, perhaps by which the author
+reached an understanding of such a topic. The subject area should be
+interpreted broadly and can include the relationship of software to human
+endeavors, or its philosophical, sociological, psychological, historical,
+or anthropological underpinnings.
+
+Submissions due: Fri 1 April, 2016
+http://2016.splashcon.org/track/onward2016/onward2016-essays
+
+## More information
+
+Contact: publicity at splashcon.org
+Website: http://2016.splashcon.org
+
+Location: M?venpick Hotel Amsterdam City Centre
+Amsterdam, The Netherlands
+
+## Organization:
+
+SPLASH General Chair: Eelco Visser (TU Delft)
+OOPSLA Papers Chair: Yannis Smaragdakis (University of Athens)
+Onward! Papers Chair: Emerson Murphy-Hill (North Carolina State University)
+Onward! Essays Chair: Crista Lopes (University of California, Irvine)
+Artifacts Co-Chairs: Michael Hind (IBM Research) and Michael Bond (Ohio
+State University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Sponsorship Chair: Jurgen Vinju (Purdue University)
+Publicity and Web Co-Chairs: Tijs van der Storm (CWI) and Ron Garcia
+(University of British Columbia)
+Web Technology Chair: Eelco Visser (TU Delft)
+
+/************************************************************************************/
+
+
+-- 
+Researcher Centrum Wiskunde & Informatica (CWI)
+Master of Software Engineering Universiteit van Amsterdam (UvA)
+
+Dr. Tijs van der Storm @ Centrum Wiskunde & Informatica (CWI)
+Office: L225    | Phone: +31 (0)20 5924164 | Address: Science Park 123
+P.O. Box 94079  | Postal code: 1090 GB     | Amsterdam, The Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20160309/60d17e43/attachment.html>
+
+From Magne.Haveraaen at ii.uib.no  Fri Mar 11 14:44:47 2016
+From: Magne.Haveraaen at ii.uib.no (Magne Haveraaen)
+Date: Fri, 11 Mar 2016 14:44:47 +0100
+Subject: [Stratego Users] Available phd and postdoc positions in Bergen
+Message-ID: <E1199167-AB8F-48CE-A3BC-85B71DFC9446@ii.uib.no>
+
+Can you distribute the availability of phd and postdoc scholarships to any relevant students?
+Deadline is April 1st for the phd positions and April 15 for the post doctor position.
+
+https://www.jobbnorge.no/en/available-jobs/job/122667/research-fellows-phd-candidates-in-informatics-computer-science-2-positions?p=1&reset=1
+https://www.jobbnorge.no/en/available-jobs/job/123227/postdoctoral-fellow-in-informatics
+
+Magne
+
+--
+Magne Haveraaen
+https://www.ii.uib.no/~magne/
+https://bldl.ii.uib.no/
+
+
+

@@ -1,0 +1,190 @@
+From gabrielkonat at gmail.com  Tue Oct 22 10:14:15 2013
+From: gabrielkonat at gmail.com (Gabriël Konat)
+Date: Tue, 22 Oct 2013 08:14:15 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26155 -
+	hydra/jobs/spoofax-git
+Message-ID: <20131022081415.BAF3C7F8035@mx1.tudelft.nl>
+
+Author: gkonat
+Date: Tue Oct 22 08:14:15 2013
+New Revision: 26155
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26155&sc=1
+
+Log:
+Add type system language to build
+
+Modified:
+   hydra/jobs/spoofax-git/spoofax-master.nix
+
+Modified: hydra/jobs/spoofax-git/spoofax-master.nix
+==============================================================================
+--- hydra/jobs/spoofax-git/spoofax-master.nix	Wed Sep 25 13:10:30 2013	(r26154)
++++ hydra/jobs/spoofax-git/spoofax-master.nix	Tue Oct 22 08:14:15 2013	(r26155)
+@@ -6,6 +6,7 @@
+ , mbexecdeps ? { outPath = ../../../mb-exec-deps ; revCount = 9999; }
+ , mbrep ? { outPath = ../../../mb-rep ; revCount = 9999; }
+ , nabl ? { outPath = ../../../nabl ; revCount = 9999; }
++, ts ? { outPath = ../../../ts ; revCount = 9999; }
+ , sdf ? { outPath = ../../../sdf ; revCount = 9999; }
+ , esv ? { outPath = ../../../esv ; revCount = 9999; }
+ , aster ? { outPath = ../../../aster ; revCount = 9999; }
+@@ -154,6 +155,7 @@
+                  ${box}/org.strategoxt.imp.editors.pp \
+                  ${rtg}/org.strategoxt.imp.editors.rtg \
+                  ${nabl}/org.metaborg.meta.lang.nabl \
++                 ${ts}/org.metaborg.meta.lang.ts \
+                  ${spt}/org.strategoxt.imp.testing \
+                  ${spt}/org.strategoxt.imp.testing.ui \
+                  ${spoofax}/org.strategoxt.imp.generator \
+
+From chrismelman at hotmail.com  Wed Oct 30 12:35:01 2013
+From: chrismelman at hotmail.com (Chris Melman)
+Date: Wed, 30 Oct 2013 11:35:01 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26156 - hydra/webdsl
+Message-ID: <20131030113501.3A696108C009@mx3.tudelft.nl>
+
+Author: ChrisMelman
+Date: Wed Oct 30 11:35:00 2013
+New Revision: 26156
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26156&sc=1
+
+Log:
+some extra open webdsl applications that can be tested with hydra
+
+added by elmer
+
+Modified:
+   hydra/webdsl/tests.nix
+
+Modified: hydra/webdsl/tests.nix
+==============================================================================
+--- hydra/webdsl/tests.nix	Tue Oct 22 08:14:15 2013	(r26155)
++++ hydra/webdsl/tests.nix	Wed Oct 30 11:35:00 2013	(r26156)
+@@ -56,6 +56,11 @@
+   # researchr   = { researchrSrc ? { outPath = ../../researchr; rev = 1234; } }     : build "researchr" researchrSrc [];
+   webdslorg   = { webdslorgSrc ? { outPath = ../../webdslorg; rev = 1234; } }     : build "webdslorg" webdslorgSrc [];
+   yellowgrass = { yellowgrassSrc ? { outPath = ../../yellowgrass; rev = 1234; } } : build "yellowgrass" yellowgrassSrc ["chrismelman at hotmail.com""s.d.vermolen at tudelft.nl"] ;
+-  reposearch  = { reposearchSrc ? { outPath = ../../webdslorg; rev = 1234; } }    : build "reposearch" reposearchSrc [];
+-  feedback    = { feedbackSrc ? { outPath = ../../feedback; rev = 1234; } }       : build "evaluaties" feedbackSrc ["chrismelman at hotmail.com"];
++  reposearch  = { reposearchSrc ? { outPath = ../../reposearch; rev = 1234; } }    : build "reposearch" reposearchSrc [];
++  # feedback    = { feedbackSrc ? { outPath = ../../feedback; rev = 1234; } }       : build "evaluaties" feedbackSrc ["chrismelman at hotmail.com"];
++  eelcos-blog = { blogSrc ? { outPath = ../../eelcos-blog; rev = 1234; } } : build "blog" blogSrc [];
++  pdf-inspector = { pdfInspectorSrc ? { outPath = ../../pdf-inspector; rev = 1234; } } : build "pdf-inspector" pdfInspectorSrc [];
++  qa-app = { QASrc ? { outPath = ../../qa-app; rev = 1234; } } : build "qa" QASrc [];
++  shop = { shopSrc ? { outPath = ../../shop; rev = 1234; } } : build "shop" shopSrc [];
++  wordSearch = { wordSearchSrc ? { outPath = ../../wordsearch; rev = 1234; } } : build "wordsearch" wordSearchSrc [];
+ }
+
+From dgroenewegen at gmail.com  Wed Oct 30 14:37:42 2013
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Wed, 30 Oct 2013 13:37:42 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26157 - in hydra: .
+	webdsl
+Message-ID: <20131030133742.485A07F806F@mx1.tudelft.nl>
+
+Author: dgroenewegen
+Date: Wed Oct 30 13:37:41 2013
+New Revision: 26157
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26157&sc=1
+
+Log:
+Fix WebDSL updatesites, work around SWT dependency issue by using previous Eclipse to build plugin for now http://yellowgrass.org/issue/WebDSL/760
+
+Modified:
+   hydra/spoofax-fun.nix
+   hydra/webdsl/editor.nix
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Wed Oct 30 11:35:00 2013	(r26156)
++++ hydra/spoofax-fun.nix	Wed Oct 30 13:37:41 2013	(r26157)
+@@ -5,6 +5,7 @@
+ , updatesite ? "http://www.lclnet.nl/update/unstable"
+ , updatesites ? [ updatesite ]
+ , installIUs ? [ "org.strategoxt.imp.feature.group" ]
++, eclipseSrc
+ , ...
+ } @ args :
+ let 
+@@ -13,6 +14,7 @@
+   eclipse = 
+     eclipseFun {
+       name = "spoofax-unstable";
++      src = eclipseSrc;
+       inherit installIUs updatesites;
+     }; 
+     bsf =       
+
+Modified: hydra/webdsl/editor.nix
+==============================================================================
+--- hydra/webdsl/editor.nix	Wed Oct 30 11:35:00 2013	(r26156)
++++ hydra/webdsl/editor.nix	Wed Oct 30 13:37:41 2013	(r26157)
+@@ -18,6 +18,10 @@
+       name = "webdsl";
+       version = "1.0.0";
+       src = webdslEditor;
++      eclipseSrc = pkgs.fetchurl {
++        url = http://download.springsource.com/release/ECLIPSE/helios/SR1/eclipse-SDK-3.6.1-linux-gtk-x86_64.tar.gz ;
++        sha256 = "1cg9rrb5w978sdqbzz9lnli1lds9zhb6wfsj3wp725bqf1i6v9lg";
++      };
+       buildInputs = [ pkgs.strategoPackages.sdf ];
+       updatesites = if nightly then [ "http://download.spoofax.org/update/nightly" "http://download.eclipse.org/releases/helios/"] else [ "http://download.spoofax.org/update/stable"  "http://download.eclipse.org/releases/helios/"];
+       
+
+From dgroenewegen at gmail.com  Wed Oct 30 17:57:36 2013
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Wed, 30 Oct 2013 16:57:36 +0000
+Subject: [Stratego-commits] SVN commit: StrategoXT - r26158 - hydra
+Message-ID: <20131030165736.D29D47F800C@mx1.tudelft.nl>
+
+Author: dgroenewegen
+Date: Wed Oct 30 16:57:36 2013
+New Revision: 26158
+URL: https://svn.strategoxt.org/websvn/StrategoXT/?rev=26158&sc=1
+
+Log:
+use local maven repo and tmp directory to avoid interference from other builds
+
+Modified:
+   hydra/spoofax-fun.nix
+
+Modified: hydra/spoofax-fun.nix
+==============================================================================
+--- hydra/spoofax-fun.nix	Wed Oct 30 13:37:41 2013	(r26157)
++++ hydra/spoofax-fun.nix	Wed Oct 30 16:57:36 2013	(r26158)
+@@ -33,17 +33,21 @@
+ 
+   buildPhase = 
+   let
+-    mvnFlags = "-Dmaven.repo.local=/tmp/m3";
++    mvnFlags = "-Dmaven.repo.local=tmp/m3 -Djava.io.tmpdir=tmp";
+   in ''
+-    export M2_REPO=/tmp/m3
++    # local tmp directory to avoid interference from other builds
++    mkdir tmp
++    mkdir tmp/m3
++  
++    export M2_REPO=tmp/m3
+     ulimit -s unlimited
+-	export ANT_ARGS="-lib $bsf"
++    export ANT_ARGS="-lib $bsf"
+     export MAVEN_OPTS="-Xss8m -Xmx2048m -XX:MaxPermSize=256m"
+     mkdir -p utils 
+     cp -v $eclipse/eclipse/plugins/org.strategoxt.imp.generator_*/lib/StrategoMix.def utils/
+     sed -Ei 's|\.[0-9]{12}|.qualifier|g' */site.xml
+     sed -Ei 's/(version="([0-9]+\.){3,}[0-9]+)"/\1-r${toString src.rev}"/' */site.xml
+-
++    
+     mvn org.sonatype.tycho:maven-tycho-plugin:generate-poms -Dversion=${version}-SNAPSHOT -DgroupId=${name} -Dtycho.targetPlatform=${eclipse}/eclipse ${mvnFlags}
+ 
+     for d in */build.main.xml ; do
+@@ -152,8 +156,6 @@
+     echo "file tar $out/${name}.tar.gz" >> $out/nix-support/hydra-build-products
+     echo "file site $out/site" >> $out/nix-support/hydra-build-products
+     echo "file txt mobl/log.txt" >>  $out/nix-support/hydra-build-products
+-
+-    chmod ug+w -R $M2_REPO
+   '';
+           
+   __noChroot = true;
+

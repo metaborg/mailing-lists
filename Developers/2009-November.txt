@@ -1,0 +1,220 @@
+From nicolas.b.pierron at gmail.com  Sun Nov  8 15:27:58 2009
+From: nicolas.b.pierron at gmail.com (Nicolas Pierron)
+Date: Sun, 8 Nov 2009 15:27:58 +0100
+Subject: [Stratego Developers] [Stratego-commits] SVN commit: StrategoXT
+	- 20202 - LennartKats -
+	spoofax-imp/trunk/org.strategoxt.imp.generator/src/sdf2imp/project
+	strategoxt/trunk/strc-core/lib/stratego/strc/front
+	strategoxt/trunk/strc-core/lib/stratego/strc/match strategoxt/
+Message-ID: <787b29b90911080627s8f2bf66m20cc1137c7d3e462@mail.gmail.com>
+
+Hi Lennart,
+
+On Sun, Nov 8, 2009 at 11:09, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+> Date: 2009-11-08 10:09:00 +0000 (Sun, 08 Nov 2009)
+> New Revision: 20202
+>
+> Log:
+> Changing Stratego Law (only for Java builds): without maximal sharing, ?x; !x cannot be simplified unless x is unbound.
+> This change eliminates the need for the dynamic rule hack seen in the Spoofax/IMP entities example.
+
+I don't understand your explanation.  Unless I don't understand
+Stratego's semantic, " ?x; !x " can always be simplified to " ?x ".
+Maximal sharing is entirely orthogonal and has nothing to do with this
+rule.
+
+?x:
+- input:
+* current term t
+- output:
+* failure, if x is bound to a term which is not t.
+* current term t, if x is bound to the term t.
+* current term t & x bound to t, if x was unbound.
+
+If this operator succeed, x is bound.
+
+!x:
+- input:
+* current term t
+- output:
+* failure, if x is unbound [1]
+* current term (term of x), if x is bound.
+
+?x; !x:
+- input:
+* current term t
+- output:
+* failure, if x is bound to a term which is not t.
+* current term t, if x is bound to the term t.
+* current term t & x bound to t, if x was unbound.
+
+The case where x is unbound does not appear because x is always bound
+when " ?x " succeed.  You can remark that the output of " ?x " is
+identical to the output of " ?x; !x ".
+
+
+I recommend you to verify your Java implementation of the Match
+operator should not change the current term when it succeed.
+
+
+[1] This case happens when you have something like:
+
+{x: (s <+ ?x); !x < s1 + s2 }
+
+-- 
+Nicolas Pierron
+http://www.linkedin.com/in/nicolasbpierron - http://nbp.name/
+Albert Einstein - Never memorize what you can look up on books.
+
+From L.C.L.Kats at tudelft.nl  Sun Nov  8 16:56:02 2009
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sun, 08 Nov 2009 16:56:02 +0100
+Subject: [Stratego Developers] [term equality vs. identity]
+In-Reply-To: <787b29b90911080627s8f2bf66m20cc1137c7d3e462@mail.gmail.com
+ >
+References: <787b29b90911080627s8f2bf66m20cc1137c7d3e462@mail.gmail.com>
+Message-ID: <200911081556.nA8Fu2uS007317@smtp1.infopact.nl>
+
+Hi Nicolas,
+
+@ 15:27 8-11-2009, Nicolas Pierron wrote:
+>> Changing Stratego Law (only for Java builds): without maximal sharing, ?x; !x cannot be simplified unless x is unbound.
+>> This change eliminates the need for the dynamic rule hack seen in the Spoofax/IMP entities example.
+>
+>I don't understand your explanation.  Unless I don't understand
+>Stratego's semantic, " ?x; !x " can always be simplified to " ?x ".
+>Maximal sharing is entirely orthogonal and has nothing to do with this
+>rule.
+ 
+Well, that's no longer the case. Having non-maximally shared ATerms means that object equality does not follow from reference equality. On Java, any class can implement the IStrategoTerm and related interfaces, and can specify how their own equals() method. This can lead to a situation where you may have two terms ExprName(Id("x")) and ExprName(Id("x")), both of them equal according to equals(), but the actual Java objects that implement them may not be the same. One of them could be a "normal" StrategoTerm, while the other may be a wrapper object around an AST node from the Eclipse JDT or a Spoofax/IMP WrappedAstNode that includes position information. In short, term equality does not mean that terms are indentical and that they can be used interchangeably.
+
+If you look at the "entities" example you can see a case where this distinction between equality and identity is important:
+
+  record-entity:
+    Entity(x, body) -> Entity(x, body)
+    with
+      rules(
+        GetEntity :+ x -> x
+      )
+
+Before I changed the Stratego laws, this dynamic rule would be optimized to (essentially) the following:
+
+  record-entity:
+    Entity(x, body) -> Entity(x, body)
+    with
+      rules(
+        GetEntity :+ a at x -> a
+      )
+
+This means that when GetEntity is called, it will return the *input* term 'a' and not the declaration term 'x'. (Under the hood, this simplifies the aux-GetEntity rule somewhat and safes a bit of space.) However, if I call GetEntity I do not *want* my input term back; I want the declaration term from record-entity. That term 'x' includes position information from the entity declaration. I don't want the position information from the reference to the term declaration. Given the correct position information, the editor can then move the cursor to the right spot when you control-click on a reference.
+
+>[...]
+>
+>The case where x is unbound does not appear because x is always bound
+>when " ?x " succeed.  You can remark that the output of " ?x " is
+>identical to the output of " ?x; !x ".
+
+In the case where x is unbound, the whole equality/identity story isn't important, so I still do the optimization in that case. (The Java back-end also includes a related optimization that eliminates some of the other unused match and build operations.)
+
+>I recommend you to verify your Java implementation of the Match
+>operator should not change the current term when it succeed.
+
+I did :) It bootstraps and runs all the standard Stratego unit tests, and can now build things like Aster, PIL, and WebDSL. An official release announcement is coming soon to a mailing list near you! ;)
+
+- Lennart 
+
+
+From nicolas.b.pierron at gmail.com  Sun Nov  8 17:29:51 2009
+From: nicolas.b.pierron at gmail.com (Nicolas Pierron)
+Date: Sun, 8 Nov 2009 17:29:51 +0100
+Subject: [Stratego Developers] [term equality vs. identity]
+In-Reply-To: <200911081556.nA8Fu2uS007317@smtp1.infopact.nl>
+References: <787b29b90911080627s8f2bf66m20cc1137c7d3e462@mail.gmail.com> 
+	<200911081556.nA8Fu2uS007317@smtp1.infopact.nl>
+Message-ID: <787b29b90911080829l61ac71aco85152c9680907faf@mail.gmail.com>
+
+On Sun, Nov 8, 2009 at 16:56, Lennart Kats <L.C.L.Kats at tudelft.nl> wrote:
+> @ 15:27 8-11-2009, Nicolas Pierron wrote:
+>>> Changing Stratego Law (only for Java builds): without maximal sharing, ?x; !x cannot be simplified unless x is unbound.
+>>> This change eliminates the need for the dynamic rule hack seen in the Spoofax/IMP entities example.
+>>
+>>I don't understand your explanation. ?Unless I don't understand
+>>Stratego's semantic, " ?x; !x " can always be simplified to " ?x ".
+>>Maximal sharing is entirely orthogonal and has nothing to do with this
+>>rule.
+>
+> Well, that's no longer the case. Having non-maximally shared ATerms means that object equality does not follow from reference equality. On Java, any class can implement the IStrategoTerm and related interfaces, and can specify how their own equals() method. This can lead to a situation where you may have two terms ExprName(Id("x")) and ExprName(Id("x")), both of them equal according to equals(), but the actual Java objects that implement them may not be the same. One of them could be a "normal" StrategoTerm, while the other may be a wrapper object around an AST node from the Eclipse JDT or a Spoofax/IMP WrappedAstNode that includes position information. In short, term equality does not mean that terms are indentical and that they can be used interchangeably.
+>
+
+Then what you want is some kind of ATerm Blobs for Java.  When we
+interface C with Stratego, we often use Blobs to store some data
+structure.  Of course we do not have a similar equal function to
+compare terms with the data structure, but you can create strategies
+to do this comparison between your Blob and your term.
+
+Did you measure the impact of such modification?  I don't remember any
+need for such equal function while developing C-Stratego extensions.
+I admit this function could be useful, but it can easily be
+implemented in Stratego.  So I don't understand why you want to remove
+an optimization of a pattern which is generated a HUGE number of times
+by the Stratego compiler.  Don't forget that each time " ?x; !x "
+appears, this create one additional line in the generated code (at
+least in C) compared to " ?x ".  Most of the time, this line can be
+removed by the compiler, but I wonder how many minutes you have added
+to the compilation of Transformers.
+
+-- 
+Nicolas Pierron
+http://www.linkedin.com/in/nicolasbpierron - http://nbp.name/
+If you are doing something twice then you should try to do it once.
+
+
+From L.C.L.Kats at tudelft.nl  Sun Nov  8 18:34:29 2009
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Sun, 08 Nov 2009 18:34:29 +0100
+Subject: [Stratego Developers] [term equality vs. identity]
+In-Reply-To: <787b29b90911080829l61ac71aco85152c9680907faf@mail.gmail.co
+ m>
+References: <787b29b90911080627s8f2bf66m20cc1137c7d3e462@mail.gmail.com>
+	<200911081556.nA8Fu2uS007317@smtp1.infopact.nl>
+	<787b29b90911080829l61ac71aco85152c9680907faf@mail.gmail.com>
+Message-ID: <200911081734.nA8HYUJX014550@smtp1.infopact.nl>
+
+@ 17:29 8-11-2009, U wrote:
+>> [...]
+>>
+>> Well, that's no longer the case. Having non-maximally shared ATerms means that object equality does not follow from reference equality. On Java, any class can implement the IStrategoTerm and related interfaces, and can specify how their own equals() method. This can lead to a situation where you may have two terms ExprName(Id("x")) and ExprName(Id("x")), both of them equal according to equals(), but the actual Java objects that implement them may not be the same. One of them could be a "normal" StrategoTerm, while the other may be a wrapper object around an AST node from the Eclipse JDT or a Spoofax/IMP WrappedAstNode that includes position information. In short, term equality does not mean that terms are indentical and that they can be used interchangeably.
+>>
+>
+>Then what you want is some kind of ATerm Blobs for Java.  When we
+>interface C with Stratego, we often use Blobs to store some data
+>structure.  Of course we do not have a similar equal function to
+>compare terms with the data structure, but you can create strategies
+>to do this comparison between your Blob and your term.
+
+It's a bit like that, except that the blobs are normal terms that can be used with match and build operations :)
+
+>Did you measure the impact of such modification?
+
+I did not. But at some point I implemented a complete data-flow analysis in STRJ to eliminate any unnecessary builds an matches, which was quite expensive at compile-time with the dependent dynamic rules and what not. The runtime performance effect, however, was zilch. I just ran  some tests, and it seems that the effect of disabling this match/build optimization likewise has no measurable effect. Compiler optimizations are funny that way (especially when interacting with other optimizations such as those in STRJ and the JIT).
+
+>  I don't remember any
+>need for such equal function while developing C-Stratego extensions.
+>I admit this function could be useful, but it can easily be
+>implemented in Stratego.
+
+Well the thing about this approach is that it is completely transparent: you don't have to do anything special in your Stratego program to get this kind of special behavior. The program just gets an input AST or may use the standard parsing strategies, and then the AST itself takes care of the position information and origin tracking.
+
+>  So I don't understand why you want to remove
+>an optimization of a pattern which is generated a HUGE number of times
+>by the Stratego compiler.  Don't forget that each time " ?x; !x "
+>appears, this create one additional line in the generated code (at
+>least in C) compared to " ?x ".  Most of the time, this line can be
+>removed by the compiler, but I wonder how many minutes you have added
+>to the compilation of Transformers.
+
+Well, my commit message may not have been clear about this, but I only disabled this optimization for the Java platform (or when option -F is used). So in the end, it really shouldn't affect either the C backend (no changes) or the Java backend (no measurable performance changes).
+
+- Lennart 
+
+

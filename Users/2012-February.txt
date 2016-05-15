@@ -1,0 +1,1329 @@
+From sumsel2000-mailinglist at yahoo.de  Fri Feb  3 12:10:24 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Fri, 03 Feb 2012 12:10:24 +0100
+Subject: [Stratego Users] Questions concerning strategoxt.jar
+Message-ID: <4F2BC0A0.3010701@yahoo.de>
+
+Dear Sir or Madam,
+
+for my master thesis I'm looking for a GLR parser generator and I found 
+Stratego/XT.
+Just for testing I created an SDF description with the use of 
+sdf2Table.exe [1] and strategoxt.jar [2] I could parse some input file 
+by using the command line. This worked fine. For my master thesis I 
+would prefer having a jar which can be called from a Java class.
+
+When I searched for a possibility to create a parse table I found strj 
+[3]. When I had a look at the strategoxt.jar I found a package with the 
+name strj, too. So I tried
+
+org.strategoxt.strj.Main.main(new String[] { "-i", "D:\\Program.def", 
+"-la", "stratego-lib" });
+
+in a main method of a Java class. But I always received the error messages:
+
+[ Main | error ] module D:\Program.def not found
+[ Main | error ]
+
+The Program.def exists at the given path. I tried out a relative path as 
+well, but the result was the same.
+
+1) Which parameters do I have to use?
+2) If it would not work with strj, exists a possibility to generate a 
+parse table from an sdf definition without calling sdf2Table.exe? I 
+would prefer staying in Java.
+
+Some further questions concerning the parsing of some Input by using a 
+generated parse table:
+3) Is there an documentation or Javadoc of the strategoxt.jar which is 
+up to date?
+4) Exists a documentation for the resulting parseforest?
+6) Is it possible to use my own node types in the creation process of 
+the parse forest?
+
+Thanks for your answers.
+
+Yours faithfully,
+Daniel
+
+[1] 
+https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.nativebundle/native
+[2] http://hydra.nixos.org/build/1842300/download/2/strategoxt.jar
+[3] http://www.program-transformation.org/Stratego/STRJ
+
+From headness13 at gmail.com  Fri Feb  3 12:40:07 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Fri, 3 Feb 2012 13:40:07 +0200
+Subject: [Stratego Users] Questions concerning strategoxt.jar
+In-Reply-To: <4F2BC0A0.3010701@yahoo.de>
+References: <4F2BC0A0.3010701@yahoo.de>
+Message-ID: <CAFu+moK5FugECd46iyGuDBAR3XmGswUCQ9Ns=KkPZjP1jGuKmA@mail.gmail.com>
+
+Hi Daniel,
+
+I'm also working on something similar. I have to generate a new parse table
+at runtime, because I have to parse a self defined language.
+The only way to generate the table is by calling sdf2table, which is an
+external tool that runs natively. Fortunately, there are 3 versions of
+these (one for each major OSs: win, linux, mac), so this might partially
+solve portability issues.
+I've written most of my processing code in stratego and then compiled it
+into java. I've also managed to integrate the 3 versions of sdf2table into
+the jar file and I can extract the proper version at runtime into a
+temporary directory. The final result is a single jar file that
+incorporates everything that I need.
+
+Regarding your other questions. You can start by trying Spoofax which
+helped me a great deal when I started to learn how SDF works. It basically
+provides a GUI for SDF and Stratego.
+
+If you have any more questions, don't hesitate to ask.
+
+Radu Mereuta
+PhD Student at Faculty of Computer Science, Iasi, Romania
+
+
+On Fri, Feb 3, 2012 at 1:10 PM, Daniel <sumsel2000-mailinglist at yahoo.de>wrote:
+
+> Dear Sir or Madam,
+>
+> for my master thesis I'm looking for a GLR parser generator and I found
+> Stratego/XT.
+> Just for testing I created an SDF description with the use of
+> sdf2Table.exe [1] and strategoxt.jar [2] I could parse some input file by
+> using the command line. This worked fine. For my master thesis I would
+> prefer having a jar which can be called from a Java class.
+>
+> When I searched for a possibility to create a parse table I found strj
+> [3]. When I had a look at the strategoxt.jar I found a package with the
+> name strj, too. So I tried
+>
+> org.strategoxt.strj.Main.main(new String[] { "-i", "D:\\Program.def",
+> "-la", "stratego-lib" });
+>
+> in a main method of a Java class. But I always received the error messages:
+>
+> [ Main | error ] module D:\Program.def not found
+> [ Main | error ]
+>
+> The Program.def exists at the given path. I tried out a relative path as
+> well, but the result was the same.
+>
+> 1) Which parameters do I have to use?
+> 2) If it would not work with strj, exists a possibility to generate a
+> parse table from an sdf definition without calling sdf2Table.exe? I would
+> prefer staying in Java.
+>
+> Some further questions concerning the parsing of some Input by using a
+> generated parse table:
+> 3) Is there an documentation or Javadoc of the strategoxt.jar which is up
+> to date?
+> 4) Exists a documentation for the resulting parseforest?
+> 6) Is it possible to use my own node types in the creation process of the
+> parse forest?
+>
+> Thanks for your answers.
+>
+> Yours faithfully,
+> Daniel
+>
+> [1]
+> https://svn.strategoxt.org/repos/StrategoXT/spoofax-imp/trunk/org.strategoxt.imp.nativebundle/native
+> [2] http://hydra.nixos.org/build/1842300/download/2/strategoxt.jar
+> [3] http://www.program-transformation.org/Stratego/STRJ
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120203/2e1671d7/attachment.html>
+
+From pj.dewitte at gmail.com  Sat Feb  4 14:42:48 2012
+From: pj.dewitte at gmail.com (Pieter-Jan Dewitte)
+Date: Sat, 4 Feb 2012 14:42:48 +0100
+Subject: [Stratego Users] parsing offside rule languages: alternative
+	approach
+In-Reply-To: <4F212ECA.8060607@tudelft.nl>
+References: <CA+zdwESbWv6k6+bmHy5Uw5PgE-GJYGdTTeW-h_2h4HHQ3fcyjg@mail.gmail.com>
+	<4F212ECA.8060607@tudelft.nl>
+Message-ID: <CA+zdwESUa6ATL7SnS030sBgZ6=FMOMoSaYf2DJwBSdSFyMhJmA@mail.gmail.com>
+
+Hi Lennart,
+
+Thank you for your response! My replay is somewhat delayed due to exams.
+
+I gave the idea another thought, and decided to try yet another approach,
+which does not require messing around with the source code. For those
+interested: to describe the offside rule, I would need rules like:
+
+"\t"*#N "if" Exp ":" NewLine Block(#N+1)
+   -> IndentedStatement(#N)
+"\t"*#N "if" Exp ":" NewLine Block(#N+1) "\t"*#N "else" ":" NewLine
+Block(#N+1) -> IndentedStatement(#N)
+
+(IndentedStatement(#N) LineEnd)+ -> Block(#N)
+
+Which is not possible in SDF. But with an upper limit on N, you can
+transform these rules and write them down for each N (guess which tool I
+used for this :-).
+
+This approach eventually did work, but was complicated by several layout
+issues: what is layout depends on where it occurs (e.g. tabs are allowed
+between "if" and Exp, but not between "\t"*#N and "if").  The result is not
+as pure as the lines above, and the transformation is not fool-proof, but
+it is very suited for the particular task at hand, so I'm happy with it.
+
+I haven't done much performance testing yet, but "compiling" with N <= 20
+worked fine even on large files. Parsing only slowed down when I actually
+entered code with excessive indentation levels (>10-15), which is a bad
+idea anyway.
+
+The bottom line is that it is possible this way, but does require some
+puzzling!
+
+Kind regards,
+
+Pieter-Jan
+
+PS I don't consider my code to be beautiful, but if anyone is trying to do
+the same, I'd be glad to share the code.
+
+
+2012/1/26 Lennart Kats <l.c.l.kats at tudelft.nl>
+
+> Hi Pieter-Jan,
+>
+> A preprocessor approach to support the offside rule is perhaps the most
+> straightforward way of getting it working with SDF. But yes, unfortunately
+> it interferes with the position information that is used in the parser and
+> the editor. In the past there were many components that would analyze the
+> parse tree and use the position information that can be inferred from
+> there. And once one of these was off, all editor services from syntax
+> highlighting to error marking would break...
+>
+> It's been a while since we looked into this, but it might actually be a
+> bit easier now, since we now have a new tokenizer infrastructure
+> responsible for processing this information: the org.spoofax.jsglr.client.
+> **imploder.Tokenizer class is normally used to create tokens with
+> position information, and forms the basis for syntax error marking, syntax
+> highlighting, and IIRC the other services as well. So unless I'm missing
+> something else, you could experiment with creating a subclass of the
+> tokenizer that corrects for these special characters.
+>
+> I think you were on the right path with the TestingParseController, which
+> is used in the testing language to do a bit of post-processing and parser
+> customization. But if you're making your own language, say, YourLang, you'd
+> have to change your own parse controller: org.strategoxt.imp.editors.**
+> yourlang.**YourLangParseController.java. From there, you should be able
+> to preprocess the string, and set a different TreeBuilder with
+> getWrapped().getParser().**getParser().setTreeBuilder(). The TreeBuilder
+> is responsible for creating and using a Tokenizer.
+>
+> hth,
+>
+> Lennart Kats
+>
+>
+>
+> On 1/22/12 18:28 , Pieter-Jan Dewitte wrote:
+>
+>> Hi all,
+>>
+>> I found a previous topic in this mailing list, about parsing offside
+>> rule languages like Python in Spoofax. The suggestion was to follow the
+>> approach of Ardlang: parse the indentation into the AST and do
+>> post-processing to match e.g. "if" blocks with "else" blocks, and to
+>> find errors.
+>>
+>> In the language I would like to parse the statements have a different
+>> syntax depending on the type of block they are in. Those blocks can also
+>> be nested. I would like to use the power of a declarative syntax
+>> definition to define what is valid and what not, rather than parsing
+>> everything and do extensive post-processing to find syntax errors.
+>>
+>> I think I could do this by performing some limited pre-processing on the
+>> input (basically placing "{" and "}" on the end of lines, based on
+>> indentation). Among the automatically generated files in the project, I
+>> found the java classes TestLanguageParseController.**java and
+>> TestLanguageParseControllerGen**erated.java (in editor/java). In a first
+>> attempt, I tried to override the parse method in
+>> TestLanguageParseController.**java, but this doesn't seem to do anything.
+>>
+>> I'm wondering what you think about the pre-processing idea and where it
+>> can be implemented in Spoofax. Also, I wonder whether this kind of
+>> pre-processing (only altering line ends) would interfere with the
+>> origin-tracking used to display error markers in the editor?
+>>
+>> Kind regards,
+>>
+>> Pieter-Jan Dewitte
+>>
+>>
+>> ______________________________**_________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120204/14a4bef8/attachment.html>
+
+From sumsel2000-mailinglist at yahoo.de  Sat Feb  4 17:24:12 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Sat, 04 Feb 2012 17:24:12 +0100
+Subject: [Stratego Users] Supported encodings for input files
+Message-ID: <4F2D5BAC.807@yahoo.de>
+
+Dear Sir or Madam,
+
+I want to know which encodings for the SDF files are supported? I've 
+tried some German letters in a SDF definition like ?, ?, ? and ? but got 
+the error message
+
+sdf-load:error: parse error, '?' unexpected
+--- input string [file: ./test/Identifier.sdf line: 8 col: 24]
+
+when I try to create a parse table via sdf2Table from command line. The 
+used SDF files are attached.
+
+Yours faithfully,
+Daniel
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: Identifier.sdf
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120204/f50d40b4/attachment.ksh>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: Whitespace.sdf
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120204/f50d40b4/attachment-0001.ksh>
+
+From tobivollebregt at gmail.com  Sat Feb  4 19:37:53 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Sat, 4 Feb 2012 19:37:53 +0100
+Subject: [Stratego Users] Supported encodings for input files
+In-Reply-To: <4F2D5BAC.807@yahoo.de>
+References: <4F2D5BAC.807@yahoo.de>
+Message-ID: <CAOPyLrGpP=DjiGCzaDVO03=2iTofyzvKe5Kk5NaEc+-6XYMANA@mail.gmail.com>
+
+Hi Daniel,
+
+Currently SDF files are limited to 8-bit encodings, as the parse table
+format does not support more than 256 characters.
+However, in JSGLR (Java version of SGLR) there is a hack in place to
+allow parsing of Unicode characters, see
+http://yellowgrass.org/issue/Spoofax/337 for details.
+
+Regards,
+Tobi
+
+On 4 February 2012 17:24, Daniel <sumsel2000-mailinglist at yahoo.de> wrote:
+> Dear Sir or Madam,
+>
+> I want to know which encodings for the SDF files are supported? I've tried
+> some German letters in a SDF definition like ?, ?, ? and ? but got the error
+> message
+>
+> sdf-load:error: parse error, '?' unexpected
+> --- input string [file: ./test/Identifier.sdf line: 8 col: 24]
+>
+> when I try to create a parse table via sdf2Table from command line. The used
+> SDF files are attached.
+>
+> Yours faithfully,
+> Daniel
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From l.c.l.kats at tudelft.nl  Sun Feb  5 14:37:39 2012
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Sun, 05 Feb 2012 14:37:39 +0100
+Subject: [Stratego Users] parsing offside rule languages: alternative
+ approach
+In-Reply-To: <CA+zdwESUa6ATL7SnS030sBgZ6=FMOMoSaYf2DJwBSdSFyMhJmA@mail.gmail.com>
+References: <CA+zdwESbWv6k6+bmHy5Uw5PgE-GJYGdTTeW-h_2h4HHQ3fcyjg@mail.gmail.com>
+	<4F212ECA.8060607@tudelft.nl>
+	<CA+zdwESUa6ATL7SnS030sBgZ6=FMOMoSaYf2DJwBSdSFyMhJmA@mail.gmail.com>
+Message-ID: <4F2E8623.8090904@tudelft.nl>
+
+Hi Pieter-Jan,
+
+That's a pretty neat trick! :) Glad to hear you got it working.
+
+cheers,
+
+Lennart
+
+On 2/4/12 14:42 , Pieter-Jan Dewitte wrote:
+> Hi Lennart,
+>
+> Thank you for your response! My replay is somewhat delayed due to exams.
+>
+> I gave the idea another thought, and decided to try yet another 
+> approach, which does not require messing around with the source code. 
+> For those interested: to describe the offside rule, I would need rules 
+> like:
+>
+> "\t"*#N "if" Exp ":" NewLine 
+> Block(#N+1)                                        -> 
+> IndentedStatement(#N)
+> "\t"*#N "if" Exp ":" NewLine Block(#N+1) "\t"*#N "else" ":" NewLine 
+> Block(#N+1) -> IndentedStatement(#N)
+>
+> (IndentedStatement(#N) LineEnd)+ -> Block(#N)
+>
+> Which is not possible in SDF. But with an upper limit on N, you can 
+> transform these rules and write them down for each N (guess which tool 
+> I used for this :-).
+>
+> This approach eventually did work, but was complicated by several 
+> layout issues: what is layout depends on where it occurs (e.g. tabs 
+> are allowed between "if" and Exp, but not between "\t"*#N and "if").  
+> The result is not as pure as the lines above, and the transformation 
+> is not fool-proof, but it is very suited for the particular task at 
+> hand, so I'm happy with it.
+>
+> I haven't done much performance testing yet, but "compiling" with N <= 
+> 20 worked fine even on large files. Parsing only slowed down when I 
+> actually entered code with excessive indentation levels (>10-15), 
+> which is a bad idea anyway.
+>
+> The bottom line is that it is possible this way, but does require some 
+> puzzling!
+>
+> Kind regards,
+>
+> Pieter-Jan
+>
+> PS I don't consider my code to be beautiful, but if anyone is trying 
+> to do the same, I'd be glad to share the code.
+>
+>
+> 2012/1/26 Lennart Kats <l.c.l.kats at tudelft.nl 
+> <mailto:l.c.l.kats at tudelft.nl>>
+>
+>     Hi Pieter-Jan,
+>
+>     A preprocessor approach to support the offside rule is perhaps the
+>     most straightforward way of getting it working with SDF. But yes,
+>     unfortunately it interferes with the position information that is
+>     used in the parser and the editor. In the past there were many
+>     components that would analyze the parse tree and use the position
+>     information that can be inferred from there. And once one of these
+>     was off, all editor services from syntax highlighting to error
+>     marking would break...
+>
+>     It's been a while since we looked into this, but it might actually
+>     be a bit easier now, since we now have a new tokenizer
+>     infrastructure responsible for processing this information: the
+>     org.spoofax.jsglr.client.imploder.Tokenizer class is normally used
+>     to create tokens with position information, and forms the basis
+>     for syntax error marking, syntax highlighting, and IIRC the other
+>     services as well. So unless I'm missing something else, you could
+>     experiment with creating a subclass of the tokenizer that corrects
+>     for these special characters.
+>
+>     I think you were on the right path with the
+>     TestingParseController, which is used in the testing language to
+>     do a bit of post-processing and parser customization. But if
+>     you're making your own language, say, YourLang, you'd have to
+>     change your own parse controller:
+>     org.strategoxt.imp.editors.yourlang.YourLangParseController.java.
+>     From there, you should be able to preprocess the string, and set a
+>     different TreeBuilder with
+>     getWrapped().getParser().getParser().setTreeBuilder(). The
+>     TreeBuilder is responsible for creating and using a Tokenizer.
+>
+>     hth,
+>
+>     Lennart Kats
+>
+>
+>
+>     On 1/22/12 18:28 , Pieter-Jan Dewitte wrote:
+>
+>         Hi all,
+>
+>         I found a previous topic in this mailing list, about parsing
+>         offside
+>         rule languages like Python in Spoofax. The suggestion was to
+>         follow the
+>         approach of Ardlang: parse the indentation into the AST and do
+>         post-processing to match e.g. "if" blocks with "else" blocks,
+>         and to
+>         find errors.
+>
+>         In the language I would like to parse the statements have a
+>         different
+>         syntax depending on the type of block they are in. Those
+>         blocks can also
+>         be nested. I would like to use the power of a declarative syntax
+>         definition to define what is valid and what not, rather than
+>         parsing
+>         everything and do extensive post-processing to find syntax errors.
+>
+>         I think I could do this by performing some limited
+>         pre-processing on the
+>         input (basically placing "{" and "}" on the end of lines, based on
+>         indentation). Among the automatically generated files in the
+>         project, I
+>         found the java classes TestLanguageParseController.java and
+>         TestLanguageParseControllerGenerated.java (in editor/java). In
+>         a first
+>         attempt, I tried to override the parse method in
+>         TestLanguageParseController.java, but this doesn't seem to do
+>         anything.
+>
+>         I'm wondering what you think about the pre-processing idea and
+>         where it
+>         can be implemented in Spoofax. Also, I wonder whether this kind of
+>         pre-processing (only altering line ends) would interfere with the
+>         origin-tracking used to display error markers in the editor?
+>
+>         Kind regards,
+>
+>         Pieter-Jan Dewitte
+>
+>
+>         _______________________________________________
+>         Users mailing list
+>         Users at strategoxt.org <mailto:Users at strategoxt.org>
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+
+
+From l.c.l.kats at tudelft.nl  Wed Feb 15 16:18:03 2012
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Wed, 15 Feb 2012 16:18:03 +0100
+Subject: [Stratego Users] Spoofax 1.0.2 maintenance release
+Message-ID: <4F3BCCAB.9080701@tudelft.nl>
+
+Hi all,
+
+Today we're releasing a minor maintenance release of Spoofax, version 
+1.0.2. This release fixes a memory leak that was introduced in the 1.0 
+release. There are no new features in this release, those will be 
+included in the upcoming 1.1 release instead.
+
+Spoofax can be updated using the Eclipse update manager, using
+the http://spoofax.org/update/stable update site.
+
+cheers,
+
+Lennart Kats
+
+From ajay at csc.lsu.edu  Wed Feb 22 16:43:47 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Wed, 22 Feb 2012 07:43:47 -0800
+Subject: [Stratego Users] sdf - ambiguity in parameter lists
+In-Reply-To: <mailman.11.1329897014.2532.users@strategoxt.org>
+References: <mailman.11.1329897014.2532.users@strategoxt.org>
+Message-ID: <CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+
+Hello,
+
+I am trying to write a small SDF module that recognizes
+just a function declaration along with its parameters.
+
+I am new to stratego and I started with the following simple test
+
+*echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl*
+
+I get the following result
+
+*
+function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+*
+
+I am not sure why the ambiguity is occurring. I tried different ways of
+rewriting the rules
+along the lines of many available examples but could not remove the
+ambiguity.
+
+Could someone please point out the possible reasons for this.
+
+The modules are as follows:
+
+
+*module Test*
+
+imports Common
+
+exports
+
+context-free start-symbols
+Start
+
+*context-free syntax*
+    FUNCTION ID ArgList                -> Start {cons("function")}
+    LPAREN ID (COMMA ID)* RPAREN -> ArgList {cons("Alist"),bracket}
+    LPAREN RPAREN                          -> ArgList {cons("Elist")}
+
+
+*module Common*
+
+exports
+
+*lexical syntax*
+
+[a-zA-Z][a-zA-Z0-9\_]* -> ID
+FUNCTION-> ID {reject}
+"function" -> FUNCTION
+","           -> COMMA
+"("          -> LPAREN
+")"          -> RPAREN
+-> EOF
+
+ [\ \t\n\r] -> LAYOUT
+
+[\*] -> CommentChar
+"/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+"//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+
+* lexical restrictions*
+*
+*
+CommentChar -/- [\/]
+ID -/- [a-zA-Z0-9\_]
+
+EOF -/- ~[]
+
+context-free restrictions
+
+LAYOUT? -/- [\ \t\n\r]
+LAYOUT? -/- [\/].[\/]
+LAYOUT? -/- [\/].[\*]
+
+
+Thank You
+Ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120222/ee189da2/attachment.html>
+
+From headness13 at gmail.com  Wed Feb 22 21:59:02 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Wed, 22 Feb 2012 22:59:02 +0200
+Subject: [Stratego Users] sdf - ambiguity in parameter lists
+In-Reply-To: <CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+References: <mailman.11.1329897014.2532.users@strategoxt.org>
+	<CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+Message-ID: <CAFu+moLmeTgFa7WfudztHGW982pUfoSdkzRHBuTyfv+Z4CfCTQ@mail.gmail.com>
+
+Here is a nice and simple way of parsing function declarations:
+
+>>>> SDF
+context-free syntax
+"function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+lexical syntax
+[a-zA-Z][a-zA-Z0-9\_]* -> ID
+"function" -> ID {reject}
+<<<< SDF
+
+If you plan on learning SDF, you should use the Spoofax plugin. It extends
+eclipse and is really easy to use. It helped me a lot.
+
+Also, there is this page which has a few tips and tricks on how to read
+ambiguities and how to get rid of them:
+http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+
+Best of luck,
+Radu M. PhD student, FII, UAIC, Romania
+
+On Wed, Feb 22, 2012 at 5:43 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+
+> Hello,
+>
+> I am trying to write a small SDF module that recognizes
+> just a function declaration along with its parameters.
+>
+> I am new to stratego and I started with the following simple test
+>
+> *echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl*
+>
+> I get the following result
+>
+> *
+> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+> *
+>
+> I am not sure why the ambiguity is occurring. I tried different ways of
+> rewriting the rules
+> along the lines of many available examples but could not remove the
+> ambiguity.
+>
+> Could someone please point out the possible reasons for this.
+>
+> The modules are as follows:
+>
+>
+> *module Test*
+>
+> imports Common
+>
+> exports
+>
+> context-free start-symbols
+> Start
+>
+> *context-free syntax*
+>     FUNCTION ID ArgList                -> Start {cons("function")}
+>     LPAREN ID (COMMA ID)* RPAREN -> ArgList {cons("Alist"),bracket}
+>     LPAREN RPAREN                          -> ArgList {cons("Elist")}
+>
+>
+> *module Common*
+>
+> exports
+>
+> *lexical syntax*
+>
+> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+> FUNCTION-> ID {reject}
+> "function" -> FUNCTION
+> ","           -> COMMA
+> "("          -> LPAREN
+> ")"          -> RPAREN
+> -> EOF
+>
+>  [\ \t\n\r] -> LAYOUT
+>
+> [\*] -> CommentChar
+> "/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+> "//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+>
+> * lexical restrictions*
+> *
+> *
+> CommentChar -/- [\/]
+> ID -/- [a-zA-Z0-9\_]
+>
+> EOF -/- ~[]
+>
+> context-free restrictions
+>
+> LAYOUT? -/- [\ \t\n\r]
+> LAYOUT? -/- [\/].[\/]
+> LAYOUT? -/- [\/].[\*]
+>
+>
+> Thank You
+> Ajay
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120222/d4f733f6/attachment.html>
+
+From ajay at csc.lsu.edu  Wed Feb 22 22:12:43 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Wed, 22 Feb 2012 13:12:43 -0800
+Subject: [Stratego Users] sdf - ambiguity in parameter lists
+In-Reply-To: <CAFu+moLmeTgFa7WfudztHGW982pUfoSdkzRHBuTyfv+Z4CfCTQ@mail.gmail.com>
+References: <mailman.11.1329897014.2532.users@strategoxt.org>
+	<CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+	<CAFu+moLmeTgFa7WfudztHGW982pUfoSdkzRHBuTyfv+Z4CfCTQ@mail.gmail.com>
+Message-ID: <CALgJuArQ78D0Rn6qTFbHdp2KiueiFNPoLh6QiDA9GWuSeEJ6Hw@mail.gmail.com>
+
+Hello,
+
+>>>> SDF
+context-free syntax
+"function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+
+That was the first thing I tried. When I parse an example,
+it shows tons of ambiguities.
+
+If you plan on learning SDF, you should use the Spoofax plugin. It extends
+eclipse and is really easy to use. It helped me a lot.
+
+I am using Spoofax from the start.
+
+Also, there is this page which has a few tips and tricks on how to read
+ambiguities and how to get rid of them:
+http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+
+I have seen this already and understood the different mechanisms for
+disambiguation,
+but could not see why there is ambiguity in the following simple example.
+
+echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl
+
+I get the following result
+
+function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+
+Thank You
+Ajay
+
+
+
+On Wed, Feb 22, 2012 at 12:59 PM, Radu Mereuta <headness13 at gmail.com> wrote:
+
+> Here is a nice and simple way of parsing function declarations:
+>
+> >>>> SDF
+> context-free syntax
+> "function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+>
+> lexical syntax
+> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+> "function" -> ID {reject}
+> <<<< SDF
+>
+> If you plan on learning SDF, you should use the Spoofax plugin. It extends
+> eclipse and is really easy to use. It helped me a lot.
+>
+> Also, there is this page which has a few tips and tricks on how to read
+> ambiguities and how to get rid of them:
+> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+>
+> Best of luck,
+> Radu M. PhD student, FII, UAIC, Romania
+>
+> On Wed, Feb 22, 2012 at 5:43 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>
+>> Hello,
+>>
+>> I am trying to write a small SDF module that recognizes
+>> just a function declaration along with its parameters.
+>>
+>> I am new to stratego and I started with the following simple test
+>>
+>> *echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl*
+>>
+>> I get the following result
+>>
+>> *
+>> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+>> *
+>>
+>> I am not sure why the ambiguity is occurring. I tried different ways of
+>> rewriting the rules
+>> along the lines of many available examples but could not remove the
+>> ambiguity.
+>>
+>> Could someone please point out the possible reasons for this.
+>>
+>> The modules are as follows:
+>>
+>>
+>> *module Test*
+>>
+>> imports Common
+>>
+>> exports
+>>
+>> context-free start-symbols
+>> Start
+>>
+>> *context-free syntax*
+>>     FUNCTION ID ArgList                -> Start {cons("function")}
+>>     LPAREN ID (COMMA ID)* RPAREN -> ArgList {cons("Alist"),bracket}
+>>     LPAREN RPAREN                          -> ArgList {cons("Elist")}
+>>
+>>
+>> *module Common*
+>>
+>> exports
+>>
+>> *lexical syntax*
+>>
+>> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+>> FUNCTION-> ID {reject}
+>> "function" -> FUNCTION
+>> ","           -> COMMA
+>> "("          -> LPAREN
+>> ")"          -> RPAREN
+>> -> EOF
+>>
+>>  [\ \t\n\r] -> LAYOUT
+>>
+>> [\*] -> CommentChar
+>> "/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+>> "//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+>>
+>> * lexical restrictions*
+>> *
+>> *
+>> CommentChar -/- [\/]
+>> ID -/- [a-zA-Z0-9\_]
+>>
+>> EOF -/- ~[]
+>>
+>> context-free restrictions
+>>
+>> LAYOUT? -/- [\ \t\n\r]
+>> LAYOUT? -/- [\/].[\/]
+>> LAYOUT? -/- [\/].[\*]
+>>
+>>
+>> Thank You
+>> Ajay
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120222/04f13806/attachment-0001.html>
+
+From tobivollebregt at gmail.com  Wed Feb 22 22:22:49 2012
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Wed, 22 Feb 2012 22:22:49 +0100
+Subject: [Stratego Users] sdf - ambiguity in parameter lists
+In-Reply-To: <CALgJuArQ78D0Rn6qTFbHdp2KiueiFNPoLh6QiDA9GWuSeEJ6Hw@mail.gmail.com>
+References: <mailman.11.1329897014.2532.users@strategoxt.org>
+	<CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+	<CAFu+moLmeTgFa7WfudztHGW982pUfoSdkzRHBuTyfv+Z4CfCTQ@mail.gmail.com>
+	<CALgJuArQ78D0Rn6qTFbHdp2KiueiFNPoLh6QiDA9GWuSeEJ6Hw@mail.gmail.com>
+Message-ID: <CAOPyLrGGUsnzFyKpyLgFFMPH1Qk0A2O4SA_j5zOkR7BYe9eYdA@mail.gmail.com>
+
+Hi Ajay,
+
+Do you happen to be using the parse table file generated by Spoofax
+for the command line sglri parser?
+
+If so, then this explains the ambiguities: Spoofax builds the parse
+table from a grammar modified to include recovery productions. In the
+JSGLR parser (the one integrated in Spoofax), these recovery
+productions are enabled only after a parse error has occurred using
+non-recovery productions. However, the sglri tool does not have this
+functionality, and so it always uses the recovery productions, even
+when not recovering. This could explain the ambiguities.
+
+You can try making a parse table file from the Test.def file using:
+sdf2table -i Test.def -m Test. The resulting Test.tbl file should give
+the expected result when used with sglri.
+
+Cheers,
+Tobi
+
+On 22 February 2012 22:12, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> Hello,
+>
+>>>>> SDF
+> context-free syntax
+> "function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+>
+> That was the first thing I tried. When I parse an example,
+> it shows tons of ambiguities.
+>
+> If you plan on learning SDF, you should use the Spoofax plugin. It extends
+> eclipse and is really easy to use. It helped me a lot.
+>
+> I am using Spoofax from the start.
+>
+> Also, there is this page which has a few tips and tricks on how to read
+> ambiguities and how to get rid of them:
+> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+>
+> I have seen this already and understood the different mechanisms for
+> disambiguation,
+> but could not see why there is ambiguity in the following simple example.
+>
+> echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl
+>
+> I get the following result
+>
+> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+>
+> Thank You
+> Ajay
+>
+>
+>
+> On Wed, Feb 22, 2012 at 12:59 PM, Radu Mereuta <headness13 at gmail.com> wrote:
+>>
+>> Here is a nice and simple way of parsing function declarations:
+>>
+>> >>>> SDF
+>> context-free syntax
+>> "function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+>>
+>> lexical syntax
+>> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+>> "function" -> ID {reject}
+>> <<<< SDF
+>>
+>> If you plan on learning SDF, you should use the Spoofax plugin. It extends
+>> eclipse and is really easy to use. It helped me a lot.
+>>
+>> Also, there is this page which has a few tips and tricks on how to read
+>> ambiguities and how to get rid of them:
+>> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+>>
+>> Best of luck,
+>> Radu M. PhD student, FII, UAIC, Romania
+>>
+>> On Wed, Feb 22, 2012 at 5:43 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+>>>
+>>> Hello,
+>>>
+>>> I am trying to write a small SDF module that recognizes
+>>> just a function declaration along with its parameters.
+>>>
+>>> I am new to stratego and I started with the following simple test
+>>>
+>>> echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl
+>>>
+>>> I get the following result
+>>>
+>>>
+>>> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+>>>
+>>> I am not sure why the ambiguity is occurring. I tried different ways of
+>>> rewriting the rules
+>>> along the lines of many available examples but could not remove the
+>>> ambiguity.
+>>>
+>>> Could someone please point out the possible reasons for this.
+>>>
+>>> The modules are as follows:
+>>>
+>>>
+>>> module Test
+>>>
+>>> imports Common
+>>>
+>>> exports
+>>>
+>>> context-free start-symbols
+>>> Start
+>>>
+>>> context-free syntax
+>>> ? ? FUNCTION ID ArgList ? ? ? ? ? ? ? ?-> Start {cons("function")}
+>>> ? ? LPAREN ID (COMMA ID)* RPAREN -> ArgList {cons("Alist"),bracket}
+>>> ? ? LPAREN RPAREN ? ? ? ? ? ? ? ? ? ? ? ? ?-> ArgList {cons("Elist")}
+>>>
+>>>
+>>> module Common
+>>>
+>>> exports
+>>>
+>>> lexical syntax
+>>>
+>>> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+>>> FUNCTION-> ID {reject}
+>>> "function" -> FUNCTION
+>>> "," ? ? ? ? ? -> COMMA
+>>> "(" ? ? ? ? ?-> LPAREN
+>>> ")" ? ? ? ? ?-> RPAREN
+>>> -> EOF
+>>>
+>>> [\ \t\n\r] -> LAYOUT
+>>>
+>>> [\*] -> CommentChar
+>>> "/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+>>> "//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+>>>
+>>> lexical restrictions
+>>>
+>>> CommentChar -/- [\/]
+>>> ID -/- [a-zA-Z0-9\_]
+>>>
+>>> EOF -/- ~[]
+>>>
+>>> context-free restrictions
+>>>
+>>> LAYOUT? -/- [\ \t\n\r]
+>>> LAYOUT? -/- [\/].[\/]
+>>> LAYOUT? -/- [\/].[\*]
+>>>
+>>>
+>>> Thank You
+>>> Ajay
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+From ajay at csc.lsu.edu  Wed Feb 22 22:47:39 2012
+From: ajay at csc.lsu.edu (Ajay Panyala)
+Date: Wed, 22 Feb 2012 13:47:39 -0800
+Subject: [Stratego Users] sdf - ambiguity in parameter lists
+In-Reply-To: <CAOPyLrGGUsnzFyKpyLgFFMPH1Qk0A2O4SA_j5zOkR7BYe9eYdA@mail.gmail.com>
+References: <mailman.11.1329897014.2532.users@strategoxt.org>
+	<CALgJuAoBXmy2vwAEbXm-Y3g0vE_r_7SGqTDVk87J4bAqpxRTww@mail.gmail.com>
+	<CAFu+moLmeTgFa7WfudztHGW982pUfoSdkzRHBuTyfv+Z4CfCTQ@mail.gmail.com>
+	<CALgJuArQ78D0Rn6qTFbHdp2KiueiFNPoLh6QiDA9GWuSeEJ6Hw@mail.gmail.com>
+	<CAOPyLrGGUsnzFyKpyLgFFMPH1Qk0A2O4SA_j5zOkR7BYe9eYdA@mail.gmail.com>
+Message-ID: <CALgJuAqj=Kz7L5Hg_Ytzzt6gA5dc3KXAsbyE7jZpaHT_8bzHkA@mail.gmail.com>
+
+Hi Tobi,
+
+Do you happen to be using the parse table file generated by Spoofax
+for the command line sglri parser?
+
+Exactly. That is what I am doing.
+
+If so, then this explains the ambiguities: Spoofax builds the parse
+table from a grammar modified to include recovery productions. In the
+JSGLR parser (the one integrated in Spoofax), these recovery
+productions are enabled only after a parse error has occurred using
+non-recovery productions. However, the sglri tool does not have this
+functionality, and so it always uses the recovery productions, even
+when not recovering. This could explain the ambiguities.
+
+Thanks. I was not aware of this.
+
+You can try making a parse table file from the Test.def file using:
+sdf2table -i Test.def -m Test. The resulting Test.tbl file should give
+the expected result when used with sglri.
+
+It works now.
+
+
+Thank You
+Ajay
+
+
+On Wed, Feb 22, 2012 at 1:22 PM, Tobi Vollebregt
+<tobivollebregt at gmail.com>wrote:
+
+> Hi Ajay,
+>
+> Do you happen to be using the parse table file generated by Spoofax
+> for the command line sglri parser?
+>
+> If so, then this explains the ambiguities: Spoofax builds the parse
+> table from a grammar modified to include recovery productions. In the
+> JSGLR parser (the one integrated in Spoofax), these recovery
+> productions are enabled only after a parse error has occurred using
+> non-recovery productions. However, the sglri tool does not have this
+> functionality, and so it always uses the recovery productions, even
+> when not recovering. This could explain the ambiguities.
+>
+> You can try making a parse table file from the Test.def file using:
+> sdf2table -i Test.def -m Test. The resulting Test.tbl file should give
+> the expected result when used with sglri.
+>
+> Cheers,
+> Tobi
+>
+> On 22 February 2012 22:12, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> > Hello,
+> >
+> >>>>> SDF
+> > context-free syntax
+> > "function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+> >
+> > That was the first thing I tried. When I parse an example,
+> > it shows tons of ambiguities.
+> >
+> > If you plan on learning SDF, you should use the Spoofax plugin. It
+> extends
+> > eclipse and is really easy to use. It helped me a lot.
+> >
+> > I am using Spoofax from the start.
+> >
+> > Also, there is this page which has a few tips and tricks on how to read
+> > ambiguities and how to get rid of them:
+> >
+> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+> >
+> > I have seen this already and understood the different mechanisms for
+> > disambiguation,
+> > but could not see why there is ambiguity in the following simple example.
+> >
+> > echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl
+> >
+> > I get the following result
+> >
+> >
+> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+> >
+> > Thank You
+> > Ajay
+> >
+> >
+> >
+> > On Wed, Feb 22, 2012 at 12:59 PM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+> >>
+> >> Here is a nice and simple way of parsing function declarations:
+> >>
+> >> >>>> SDF
+> >> context-free syntax
+> >> "function" ID "(" {ID ","}* ")" -> Start {cons("Function")}
+> >>
+> >> lexical syntax
+> >> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+> >> "function" -> ID {reject}
+> >> <<<< SDF
+> >>
+> >> If you plan on learning SDF, you should use the Spoofax plugin. It
+> extends
+> >> eclipse and is really easy to use. It helped me a lot.
+> >>
+> >> Also, there is this page which has a few tips and tricks on how to read
+> >> ambiguities and how to get rid of them:
+> >>
+> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html
+> >>
+> >> Best of luck,
+> >> Radu M. PhD student, FII, UAIC, Romania
+> >>
+> >> On Wed, Feb 22, 2012 at 5:43 PM, Ajay Panyala <ajay at csc.lsu.edu> wrote:
+> >>>
+> >>> Hello,
+> >>>
+> >>> I am trying to write a small SDF module that recognizes
+> >>> just a function declaration along with its parameters.
+> >>>
+> >>> I am new to stratego and I started with the following simple test
+> >>>
+> >>> echo "FUNCTION converge(d_f1,ds_i0)" | sglri -p Test.tbl
+> >>>
+> >>> I get the following result
+> >>>
+> >>>
+> >>>
+> function("FUNCTION","converge",amb([Alist("(","d_f1",[],")"),Alist("(","d_f1",[(",","ds_i0")],")"),Alist("(","d_f1",[],")")]))
+> >>>
+> >>> I am not sure why the ambiguity is occurring. I tried different ways of
+> >>> rewriting the rules
+> >>> along the lines of many available examples but could not remove the
+> >>> ambiguity.
+> >>>
+> >>> Could someone please point out the possible reasons for this.
+> >>>
+> >>> The modules are as follows:
+> >>>
+> >>>
+> >>> module Test
+> >>>
+> >>> imports Common
+> >>>
+> >>> exports
+> >>>
+> >>> context-free start-symbols
+> >>> Start
+> >>>
+> >>> context-free syntax
+> >>>     FUNCTION ID ArgList                -> Start {cons("function")}
+> >>>     LPAREN ID (COMMA ID)* RPAREN -> ArgList {cons("Alist"),bracket}
+> >>>     LPAREN RPAREN                          -> ArgList {cons("Elist")}
+> >>>
+> >>>
+> >>> module Common
+> >>>
+> >>> exports
+> >>>
+> >>> lexical syntax
+> >>>
+> >>> [a-zA-Z][a-zA-Z0-9\_]* -> ID
+> >>> FUNCTION-> ID {reject}
+> >>> "function" -> FUNCTION
+> >>> ","           -> COMMA
+> >>> "("          -> LPAREN
+> >>> ")"          -> RPAREN
+> >>> -> EOF
+> >>>
+> >>> [\ \t\n\r] -> LAYOUT
+> >>>
+> >>> [\*] -> CommentChar
+> >>> "/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
+> >>> "//" ~[\n\r]* ([\n\r] | EOF) -> LAYOUT
+> >>>
+> >>> lexical restrictions
+> >>>
+> >>> CommentChar -/- [\/]
+> >>> ID -/- [a-zA-Z0-9\_]
+> >>>
+> >>> EOF -/- ~[]
+> >>>
+> >>> context-free restrictions
+> >>>
+> >>> LAYOUT? -/- [\ \t\n\r]
+> >>> LAYOUT? -/- [\/].[\/]
+> >>> LAYOUT? -/- [\/].[\*]
+> >>>
+> >>>
+> >>> Thank You
+> >>> Ajay
+> >>>
+> >>> _______________________________________________
+> >>> Users mailing list
+> >>> Users at strategoxt.org
+> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Ajay Panyala                              | Email: ajay at csc.lsu.edu
+Department of Computer Science | Phone: +1 (225) 907 9501
+Louisiana State University           |  www.csc.lsu.edu/~ajay
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120222/961e04b2/attachment.html>
+

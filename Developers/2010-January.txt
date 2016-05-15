@@ -1,0 +1,246 @@
+From E.Visser at tudelft.nl  Sat Jan 30 07:52:18 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 30 Jan 2010 07:52:18 +0100
+Subject: [Stratego Developers] Fwd: help installing strategoxt
+In-Reply-To: <7d0c05ac1001291647m6125c0a3l4ffd2275ce527382@mail.gmail.com>
+References: <7d0c05ac1001291605q5a2f4a61g8a0dc2b9c9fc4eff@mail.gmail.com> 
+	<ed55b7d91001291619o34c73a09t7fe7cfc25dcd5c15@mail.gmail.com> 
+	<7d0c05ac1001291622w180f2147u81c6bc6dd31e1ccd@mail.gmail.com> 
+	<ed55b7d91001291639k53f9b2ffod99e7418e45556c5@mail.gmail.com> 
+	<7d0c05ac1001291647m6125c0a3l4ffd2275ce527382@mail.gmail.com>
+Message-ID: <ed55b7d91001292252s2e1a6f25x814a2ec7fa214d40@mail.gmail.com>
+
+Rob, what's the status of stratego-shell?
+
+-- Eelco
+
+---------- Forwarded message ----------
+From: Mathew Yeates <mat.yeates at gmail.com>
+Date: Sat, Jan 30, 2010 at 1:47 AM
+Subject: Re: help installing strategoxt
+To: Eelco Visser <E.Visser at tudelft.nl>
+
+
+I tried both versions available. 0.4-1 and 0.5-1
+
+
+On Fri, Jan 29, 2010 at 4:39 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>
+> Hi Matthew,
+>
+> > when? try and install with
+> > yum install stratego-shell-0.4-1.i386.rpm
+>
+> Which version of stratego do you have? stratego-shell 0.4 is old.
+> There have been later releases. It is probably best to install the
+> latest version of Stratego. You may have to build stratego-shell from
+> a source tarball.
+>
+> -- Eelco
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From E.Visser at tudelft.nl  Sat Jan 30 11:31:44 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 30 Jan 2010 11:31:44 +0100
+Subject: [Stratego Developers] Fwd:  Fwd: help installing strategoxt
+In-Reply-To: <5a9e75b11001300003y1c6b058buf4bee034cc60e295@mail.gmail.com>
+References: <7d0c05ac1001291605q5a2f4a61g8a0dc2b9c9fc4eff@mail.gmail.com> 
+	<ed55b7d91001291619o34c73a09t7fe7cfc25dcd5c15@mail.gmail.com> 
+	<7d0c05ac1001291622w180f2147u81c6bc6dd31e1ccd@mail.gmail.com> 
+	<ed55b7d91001291639k53f9b2ffod99e7418e45556c5@mail.gmail.com> 
+	<7d0c05ac1001291647m6125c0a3l4ffd2275ce527382@mail.gmail.com> 
+	<ed55b7d91001292252s2e1a6f25x814a2ec7fa214d40@mail.gmail.com> 
+	<5a9e75b11001300003y1c6b058buf4bee034cc60e295@mail.gmail.com>
+Message-ID: <ed55b7d91001300231p642940ccx707df3763b229278@mail.gmail.com>
+
+Hi Mathew,
+
+Seems you should get a more recent stratego-shell:
+
+
+---------- Forwarded message ----------
+From: Rob Vermaas <rob.vermaas at gmail.com>
+Date: Sat, Jan 30, 2010 at 9:03 AM
+Subject: Re: [Stratego Developers] Fwd: help installing strategoxt
+To: Eelco Visser <E.Visser at tudelft.nl>
+
+
+stratego-shell is at version 0.7 at the moment and can be downloaded
+here: http://strategoxt.org/Stratego/StrategoShellRelease07 .
+
+Here you can find rpm/deb packages for all stratego-shell and all
+dependencies (aterm, sdf, strategoxt-0.17).
+
+Rob
+
+On 30 January 2010 07:52, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Rob, what's the status of stratego-shell?
+>
+> -- Eelco
+>
+> ---------- Forwarded message ----------
+> From: Mathew Yeates <mat.yeates at gmail.com>
+> Date: Sat, Jan 30, 2010 at 1:47 AM
+> Subject: Re: help installing strategoxt
+> To: Eelco Visser <E.Visser at tudelft.nl>
+>
+>
+> I tried both versions available. 0.4-1 and 0.5-1
+>
+>
+> On Fri, Jan 29, 2010 at 4:39 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Matthew,
+>>
+>> > when? try and install with
+>> > yum install stratego-shell-0.4-1.i386.rpm
+>>
+>> Which version of stratego do you have? stratego-shell 0.4 is old.
+>> There have been later releases. It is probably best to install the
+>> latest version of Stratego. You may have to build stratego-shell from
+>> a source tarball.
+>>
+>> -- Eelco
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+
+
+
+--
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From mat.yeates at gmail.com  Sun Jan 31 03:08:43 2010
+From: mat.yeates at gmail.com (Mathew Yeates)
+Date: Sat, 30 Jan 2010 18:08:43 -0800
+Subject: [Stratego Developers] Fwd: help installing strategoxt
+In-Reply-To: <ed55b7d91001300231p642940ccx707df3763b229278@mail.gmail.com>
+References: <7d0c05ac1001291605q5a2f4a61g8a0dc2b9c9fc4eff@mail.gmail.com>
+	<ed55b7d91001291619o34c73a09t7fe7cfc25dcd5c15@mail.gmail.com>
+	<7d0c05ac1001291622w180f2147u81c6bc6dd31e1ccd@mail.gmail.com>
+	<ed55b7d91001291639k53f9b2ffod99e7418e45556c5@mail.gmail.com>
+	<7d0c05ac1001291647m6125c0a3l4ffd2275ce527382@mail.gmail.com>
+	<ed55b7d91001292252s2e1a6f25x814a2ec7fa214d40@mail.gmail.com>
+	<5a9e75b11001300003y1c6b058buf4bee034cc60e295@mail.gmail.com>
+	<ed55b7d91001300231p642940ccx707df3763b229278@mail.gmail.com>
+Message-ID: <7d0c05ac1001301808n1840ebcate07953d87feafd60@mail.gmail.com>
+
+Thanks. I was able to compile the source files in
+http://strategoxt.org/Stratego/StrategoShellRelease07
+
+-Mathew
+
+On Sat, Jan 30, 2010 at 2:31 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Mathew,
+>
+> Seems you should get a more recent stratego-shell:
+>
+>
+> ---------- Forwarded message ----------
+> From: Rob Vermaas <rob.vermaas at gmail.com>
+> Date: Sat, Jan 30, 2010 at 9:03 AM
+> Subject: Re: [Stratego Developers] Fwd: help installing strategoxt
+> To: Eelco Visser <E.Visser at tudelft.nl>
+>
+>
+> stratego-shell is at version 0.7 at the moment and can be downloaded
+> here: http://strategoxt.org/Stratego/StrategoShellRelease07 .
+>
+> Here you can find rpm/deb packages for all stratego-shell and all
+> dependencies (aterm, sdf, strategoxt-0.17).
+>
+> Rob
+>
+> On 30 January 2010 07:52, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> > Rob, what's the status of stratego-shell?
+> >
+> > -- Eelco
+> >
+> > ---------- Forwarded message ----------
+> > From: Mathew Yeates <mat.yeates at gmail.com>
+> > Date: Sat, Jan 30, 2010 at 1:47 AM
+> > Subject: Re: help installing strategoxt
+> > To: Eelco Visser <E.Visser at tudelft.nl>
+> >
+> >
+> > I tried both versions available. 0.4-1 and 0.5-1
+> >
+> >
+> > On Fri, Jan 29, 2010 at 4:39 PM, Eelco Visser <E.Visser at tudelft.nl>
+> wrote:
+> >>
+> >> Hi Matthew,
+> >>
+> >> > when  try and install with
+> >> > yum install stratego-shell-0.4-1.i386.rpm
+> >>
+> >> Which version of stratego do you have? stratego-shell 0.4 is old.
+> >> There have been later releases. It is probably best to install the
+> >> latest version of Stratego. You may have to build stratego-shell from
+> >> a source tarball.
+> >>
+> >> -- Eelco
+> >> http://eelcovisser.org
+> >> http://twitter.com/eelcovisser
+> >
+> >
+> >
+> >
+> > --
+> > http://eelcovisser.org
+> > http://twitter.com/eelcovisser
+> >
+> > _______________________________________________
+> > Developers mailing list
+> > Developers at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >
+>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100130/d51af18d/attachment.html 
+

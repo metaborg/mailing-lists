@@ -1,0 +1,373 @@
+From spider.vz at gmail.com  Sat Jun 20 00:53:27 2015
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Sat, 20 Jun 2015 00:53:27 +0200
+Subject: [Stratego Users] GTTSE 2015 -- Call for Participation
+Message-ID: <CAPK1G9EzKafz8MLjkYAwUMjaJSu2QKtwa8UwnqYkY4Gt1kN0uA@mail.gmail.com>
+
+GTTSE 2015 -- Call for Participation
+
+The 5th Summer School on
+Grand Timely Topics in Software Engineering (GTTSE)
+
+Sunday 23 Aug - Saturday 29 Aug, 2015, Braga, Portugal
+
+http://gttse.wikidot.com/
+
+Registration is open for participants!
+
+http://gttse.wikidot.com/2015:registration
+
+There is a students' workshop to which one may submit.
+
+http://gttse.wikidot.com/2015:students-workshop
+
+
+List of speakers
+================
+
+* Matthew Dwyer (University of Nebraska, USA): Probabilistic program analysis
+* Cesar Gonzalez-Perez (Spanish National Research Council (CSIC),
+Spain): How ontologies can help in software engineering
+* Stefan Hanenberg (University of Duisburg-Essen, Germany): Empirical
+Evaluation of Programming and Programming Language Constructs
+* Fr?d?ric Jouault (ESEO Institute of Science and Technology, France):
+Model Synchronization
+* Julia Rubin (MIT, USA): To merge or not to merge: managing software
+product families
+* Leif Singer (University of Victoria, Canada): People Analytics in
+Software Development
+* Ulrik Pagh Schultz (University of Southern Denmark, Denmark): DSLs
+in Robotics: A Case Study in Programming Self-reconfigurable Robots
+* Yannis Smaragdakis (University of Athens, Greece): Structured
+Program Generation Techniques
+* Friedrich Steimann (FernUniversit?t in Hagen, Germany): Refactoring and beyond
+* Nikolai Tillmann (Microsoft Research, USA): Software Engineering
+Processes in the Cloud
+* Guido Wachsmuth (Delft University of Technology, The Netherlands):
+Name Binding: Paradigms, Representation and Specification
+
+
+Scope
+=====
+
+Historically, in the first four editions of GTTSE, the school series
+focused on generative and transformational techniques in software
+engineering, as evident from the original acronym (GTTSE - Generative
+and Transformational Techniques in Software Engineering). With the
+rise of the Software Language Engineering conference, the school
+series also covered that field. As of the 5th edition, a broader scope
+is applied to include additional areas of software engineering, e.g.,
+software analysis, empirical research, modularity, and product
+lines. Thus, the new expansion of the GTTSE acronym: Grand Timely
+Topics in Software Engineering. The notion of timely topics is
+inspired by the ICSE conference which, in its 2015 edition, features
+technical briefings as "a venue for communicating the current state of
+a timely topic related to software engineering".
+
+
+Format
+======
+
+The school's scientific program of GTTSE 2015 consists of 10 briefings
+for different timely topics in software engineering. Each briefing is
+based on a relatively short paper which combines aspects of surveying
+and tutorial. The surveying aspect is realized specifically by the
+design constraint for the briefings to dedicate 50% to the analysis of
+related work. The remaining 50% are typically dedicated to the more
+specific research of the presenters. Each briefing gets allotted 2-3
+sessions with up to 3 hours in total. The speakers for the briefings
+are established authorities in their respective fields.
+
+GTTSE 2015 also features a students' workshop. These presentations may
+be refined into submissions of short papers (6-8 pages LNCS style) to
+be peer-reviewed and considered for inclusion in the post-proceedings
+past the school.
+
+All material presented at the school will be collected in informal
+proceedings to be handed out solely to the participants. Formal and
+public post-proceedings will be compiled after the summer school where
+all contributions are subjected to reviewing. The post-proceedings of
+the school will be published in a volume of the Lecture Notes in
+Computer Science series of Springer International Publishing. The
+post-proceedings of the previous four instances of the summer school
+were published as LNCS 4143 (GTTSE 2005), LNCS 5235 (GTTSE 2007), LNCS
+6491 (GTTSE 2009) and LNCS 7680 (GTTSE 2011).
+
+
+Important dates
+===============
+
+* 3 July: Early Registration Deadline
+* 7 August: Late Registration Deadline
+* 23-29 August: Summer School
+* 15 October: Submission deadline for post-proceedings
+* 15 December: Notifications of authors
+* 1 February: Camera-ready submissions
+
+
+Organization committee
+======================
+
+* J?come Cunha (Universidade Nova de Lisboa, Portugal) - Organization Chair
+* Jo?o Paulo Fernandes (Universidade da Beira Interior, Portugal) -
+Program Chair
+* Ralf L?mmel (Universit?t Koblenz-Landau, Germany) - Briefings Chair
+* Jo?o Saraiva (Universidade do Minho, Portugal) - General Chair
+* Joost Visser (Software Improvement Group, The Netherlands) - Industry Chair
+* Vadim Zaytsev (Universiteit van Amsterdam, The Netherlands) - Publicity Chair
+
+
+Scientific committee
+====================
+
+* Bram Adams (?cole Polytechnique de Montr?al)
+* Benoit Baudry (INRIA)
+* Xavier Blanc (Bordeaux 1 University)
+* Darius Blasband (RainCode)
+* Paulo Borba (Federal University of Pernambuco)
+* Mark van den Brand (Eindhoven University of Technology)
+* Martin Bravenboer (LogicBlox Inc.)
+* Jordi Cabot (INRIA-?cole des Mines de Nantes)
+* Jo?o Cardoso (FEUP/Universidade do Porto)
+* Michel Chaudron (Chalmers & Gothenborg University)
+* Anthony Cleve (University of Namur)
+* Beno?t Combemale (Universit? de Rennes 1)
+* Alcino Cunha (Universidade de Minho)
+* J?come Cunha (Universidade Nova de Lisboa)
+* Juan De Lara (Universidad Autonoma de Madrid)
+* Andrea De Lucia (University of Salerno)
+* Coen De Roover (Vrije Universiteit Brussel)
+* Davide Di Ruscio (Universit? degli Studi dell'Aquila)
+* Zinovy Diskin (McMaster University / University of Waterloo)
+* Rudolf Ferenc (University of Szeged)
+* Jo?o M. Fernandes (Universidade do Minho)
+* Jo?o Paulo Fernandes (Universidade da Beira Interior)
+* Jo?o Saraiva (Universidade do Minho)
+* Mike Godfrey (University of Waterloo)
+* Martin Gogolla (University of Bremen)
+* Jeff Gray (University of Alabama)
+* Mark Grechanik (University of Illinois at Chicago)
+* Yann-Ga?l Gu?h?neuc (?cole Polytechnique de Montr?al)
+* Gorel Hedin (Lund University)
+* Florian Heidenreich (DevBoost GmbH)
+* Pedro Rangel Henriques (Universidade do Minho)
+* Felienne Hermans (Delft University of Technology)
+* Dirk Heuzeroth (Hochschule Heilbronn)
+* Robert Hirschfeld (Hasso-Plattner-Institut)
+* Zhenjiang Hu (NII)
+* Marianne Huchard (Universit? Montpellier 2 et CNRS)
+* Jean-Marc J?z?quel (University of Rennes 1)
+* Foutse Khomh (?cole Polytechnique de Montr?al)
+* Holger Kienle (Freier Informatiker)
+* Dimitris Kolovos (University of York)
+* Nicholas A. Kraft (ABB Corporate Research)
+* Jens Krinke (University College London)
+* Christian K?stner (Carnegie Mellon University)
+* Paul Klint (Centrum Wiskunde & Informatica)
+* Ralf L?mmel (Universit?t Koblenz-Landau)
+* Michele Lanza (University of Lugano)
+* Timothy Lethbridge (University of Ottawa)
+* David Lo (Singapore Management University)
+* Tiziana Margaria (Lero)
+* Erik Meijer (Delft University of Technology)
+* Marjan Mernik (University of Maribor)
+* Ana Moreira (Universidade Nova de Lisboa)
+* Jos? Nuno Oliveira (Universidade do Minho)
+* Rocco Oliveto (University of Molise)
+* Richard Paige (University of York)
+* Alfonso Pierantonio (Universit? degli Studi dell'Aquila)
+* Juergen Rilling (Concordia University)
+* Sibylle Schupp (Hamburg University of Technology)
+* Bran Selic (Malina Software Corp.)
+* Alexander Serebrenik (Eindhoven University of Technology)
+* Tony Sloane (Macquarie University)
+* Sim?o Melo de Sousa (Universidade da Beira Interior)
+* Tijs van der Storm (Centrum Wiskunde & Informatica)
+* James Terwilliger (Microsoft Corporation)
+* Laurence Tratt (King's College London)
+* Antonio Vallecillo (Universidad de M?laga)
+* Eric Van Wyk (University of Minnesota)
+* Jurgen Vinju (Centrum Wiskunde & Informatica)
+* Joost Visser (Radboud University Nijmegen)
+* Markus V?lter (independent)
+* Tanja E. J. Vos (Universidad Polit?cnica de Valencia)
+* Andreas Winter (Carl von Ossietzky University)
+* Victor Winter (University of Nebraska at Omaha)
+* Andy Zaidman (Delft University of Technology)
+* Vadim Zaytsev (Universiteit van Amsterdam)
+
+
+From canslow at ucalgary.ca  Sun Jun 21 18:12:51 2015
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Sun, 21 Jun 2015 16:12:51 +0000
+Subject: [Stratego Users] SPLASH 2015 - 2nd Combined Call for Contributions
+Message-ID: <D1ACA112.29080%canslow@ucalgary.ca>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+            Software for Humanity (SPLASH'15)
+
+       Pittsburgh, Pennsylvania, USA
+       25th-30th October, 2015
+
+       http://www.splashcon.org<http://www.splashcon.org/>
+
+       Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+COMBINED CALL FOR CONTRIBUTIONS
+ Demos
+   Doctoral Symposium
+ Dynamic Languages Symposium (DLS)
+ OOPSLA Artifacts
+ Posters
+ SPLASH-E
+ Student Research Competition
+ Student Volunteers
+ Tutorials
+ Wavefront
+ Workshops
+
+Co-Located Conferences: SLE, GPCE, DBPL, PLoP
+ /************************************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and Applications: Software for Humanity (SPLASH) embraces all aspects of software construction and delivery to make it the premier conference at the intersection of programming, languages, and software engineering. SPLASH is now accepting submissions. We invite high quality submissions describing original and unpublished work.
+
+Most of the following tracks have submissions due: 30 JUNE
+
+** Demos **
+The SPLASH Demonstrations track is an excellent vehicle for sharing your latest work with an experienced and technically savvy audience. Live demonstrations show the impact of software innovation. Demonstrations are not product sales pitches, but rather an opportunity to highlight, explain, and present interesting technical aspects of running applications in a dynamic and highly interactive setting. Presenters are encouraged to actively solicit feedback from the audience, which should lead to very interesting and entertaining demonstration sessions.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-demos
+
+
+** Doctoral Symposium **
+The SPLASH Doctoral Symposium provides students with useful guidance for completing their dissertation research and beginning their research careers. The Symposium will provide an interactive forum for doctoral students who have progressed far enough in their research to have a structured proposal, but will not be defending their dissertation in the next 12 months.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-ds
+
+
+** Dynamic Languages Symposium (DLS) **
+The 11th Dynamic Languages Symposium (DLS) at SPLASH 2015 is the premier forum for researchers and practitioners to share knowledge and research on dynamic languages, their implementation, and applications. The influence of dynamic languages ? from Lisp to Smalltalk to Python to Javascript ? on real-world practice and research continues to grow.
+
+Submissions Due: 15 June, 2015
+http://2015.splashcon.org/track/dls2015-papers
+
+
+** OOPSLA Artifacts **
+The Artifact Evaluation process is a service provided by the community to help authors of accepted papers provide more substantial supplements to their papers so future researchers can more effectively build on and compare with previous work. The Artifact Evaluation Committee has been formed to assess how well paper authors prepare artifacts in support of such future researchers. Roughly, authors of papers who wish to participate are invited to submit an artifact that supports the conclusions of the paper.
+
+Submissions Due: 9 June, 2015
+http://2015.splashcon.org/track/splash2015-artifacts
+
+
+** Posters **
+The SPLASH Poster track provides an excellent forum for authors to present their recent or ongoing projects in an interactive setting, and receive feedback from the community. We invite submissions covering any aspect of programming, systems, languages and applications. The goal of the poster session is to encourage and facilitate small groups of individuals interested in a technical area to gather and interact. It is held early in the conference, to promote continued discussion among interested parties. Posters can be independent presentations or associated with one of the other parts of SPLASH.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-posters
+
+
+** SPLASH-E **
+The SPLASH-E track brings together researchers and educators to share educational results, ideas, and challenges centered in Software and Programming Languages. Submission formats vary, including papers, tool demos, lightning talks, challenge-topics for discussion, and suggested themes for "unconference" sessions.  Help us create an engaging forum for educational issues related to SPLASH!
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-splash-e
+
+
+** Student Research Competition **
+The ACM SIGPLAN Student Research Competition (ACM SRC) is an internationally-recognized venue that enables undergraduate and graduate students to experience the research world, share their research results with other students and SPLASH attendees. The competition has separate categories for undergraduate and graduate students and awards prizes to the top three students in each category. The ACM SIGPLAN Student Research Competition shares the Poster session?s goal to facilitate interaction with researchers and industry practitioners; providing both sides with the opportunity to learn of ongoing, current research.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-src
+
+
+** Student Volunteers **
+The SPLASH Student Volunteer program provides an opportunity for students from around the world to associate with some of the leading personalities in industry and research in the following areas: programming languages, object-oriented technology and software development. Student volunteers contribute to the smooth running of the conference by performing tasks such as: assisting with registration, providing information about the conference to attendees, assisting session organizers and monitoring sessions.
+
+Submissions Due: 7 August, 2015
+http://2015.splashcon.org/track/splash2015-sv
+
+
+** Tutorials **
+The SPLASH 2015 Tutorials programme will consist of prestigious tutorials on current topics in software, systems, and languages research. The scope of Tutorials is the same as the conference itself: all aspects of software construction and delivery at the intersection of programming, languages, and software engineering. Tutorials in particular focus on the nexus between research and practice, including work that takes inspiration from or builds connections to areas not commonly considered at SPLASH. Tutorials should introduce researchers to current research in an area, or show important new tools that can be used in research.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-tutorials
+
+
+** Wavefront **
+The SPLASH Wavefront track is looking for presentations and technology talks of interest to the software community, particularly to software professionals working in companies large and small. Wavefront is a forum for presenting experience reports and tutorials about innovative tools, technologies, and software practices.
+
+Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-wavefront
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops, allowing their participants to meet and discuss research questions with peers, to mature new and exciting ideas, and to build up communities and start new collaborations. SPLASH workshops complement the main tracks of the conference and provide meetings in a smaller and more specialized setting. Workshops cultivate new ideas and concepts for the future, optionally recorded in formal proceedings.
+
+Late Phase Submissions Due: 30 June, 2015
+http://2015.splashcon.org/track/splash2015-workshops
+
+
+** Co-Located Events **
+
+SLE - 8th International Conference on Software Language Engineering (SLE)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/sle2015
+
+GPCE - 14th International Conference on Generative Programming: Concepts & Experiences (GPCE)
+Submissions Due: 21 June, 2015
+http://conf.researchr.org/home/gpce2015
+
+DBPL - 15th Symposium on Database Programming Languages (DBPL)
+Submissions Due: 15 June, 2015
+http://conf.researchr.org/home/dbpl2015
+
+PLoP - 22nd International Conference on Pattern Languages of Programming (PLoP)
+Submissions Due: 12 May, 2015
+http://www.hillside.net/plop/2015/
+
+
+Information:
+SPLASH Early Registration Deadline: 25 September, 2015
+Contact: info at splashcon.org<mailto:info at splashcon.org>
+Website: http://2015.splashcon.org<http://2015.splashcon.org/>
+
+Location:
+Sheraton Station Square Hotel
+Pittsburgh, Pennsylvania, United States
+
+Organization:
+SPLASH General Chair: Jonathan Aldrich (Carnegie Mellon University)
+OOPSLA Papers Chair: Patrick Eugster (Purdue University)
+Onward! Papers Chair: Gail Murphy (University of British Columbia)
+Onward! Essays Chair: Guy Steele (Oracle Labs)
+DLS Papers Chair: Manuel Serrano (INRIA)
+Artifacts Co-Chairs: Robby Findler (Northwestern University) and Michael Hind (IBM Research)
+Demos Co-Chair: Igor Peshansky (Google) and Pietro Ferrara (IBM Research)
+Doctoral Symposium Chair: Yu David Liu, State University of New York (SUNY) Binghamton
+Local Arrangements Chair: Claire Le Goues (Carnegie Mellon University)
+PLMW Workshop Co-Chairs: Darya Kurilova (Carnegie Mellon University) and Zachary Tatlock (University of Washington)
+Posters Co-Chairs: Nick Sumner (Simon Fraser University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Publicity and Web Co-Chairs: Craig Anslow (University of Calgary) and Tijs van der Storm (CWI)
+SPLASH-E Chair: Eli Tilevich (Virginia Tech)
+SPLASH-I Co-Chairs: Tijs van der Storm (CWI) and Jan Vitek (Northeastern University)
+Student Research Competition Co-Chairs: Sam Guyer (Tufts University) and Patrick Lam (University of Waterloo)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco Harkes (TU Delft)
+Sponsorship Chair: Tony Hosking (Purdue University)
+Tutorials Co-Chair: Romain Robbes (University of Chile) and Ronald Garcia (University of British Columbia)
+Video Chair: Michael Hilton (Oregon State University)
+Videos Previews Czar: Thomas LaToza (University of California, Irvine)
+Wavefront Co-Chairs: Dennis Mancl (Alcatel-Lucent) and Joe Kiniry (Galois)
+Web Technology Chair: Eelco Visser (TU Delft)
+Workshop Co-Chairs: Du Li (Carnegie Mellon University) and Jan Rellermeyer (IBM Research)
+/************************************************************************************/
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150621/e4a2385e/attachment-0001.html>
+

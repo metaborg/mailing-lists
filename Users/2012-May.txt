@@ -1,0 +1,784 @@
+From sescobar at dsic.upv.es  Thu May 10 16:24:01 2012
+From: sescobar at dsic.upv.es (Santiago Escobar)
+Date: Thu, 10 May 2012 16:24:01 +0200
+Subject: [Stratego Users] 6th International School on Rewriting (ISR),
+	Valencia, July 16-20, 2012
+References: <1C141D88-3ACB-48DC-8493-38CADA017BCC@dsic.upv.es>
+Message-ID: <6EFA353F-B80C-437B-B0EB-DB9BF1084042@dsic.upv.es>
+
+
+                   Call for Participation
+
+                          ISR 2012
+            6th International School on Rewriting
+
+               http://www.dsic.upv.es/~isr2012
+
+                      July 16th - 20th 
+                       Valencia, Spain
+
+          Early registration before June 15, 2012!
+
+Rewriting is a branch of computer science whose origins go back 
+to the origins of computer science itself (with Thue, Church, 
+Post, and many other prominent researchers). It has strong links 
+with mathematics, algebra, and logic, and it is the basis of 
+well-known programming paradigms like functional and equational 
+programming, which are taught at the universitary level in many 
+countries. In these programming paradigms and corresponding 
+languages, the notions of reduction, pattern matching, 
+confluence, termination, strategy, etc., are essential. 
+Rewriting provides a solid framework for understanding, using, 
+and teaching all these notions. Rewriting techniques are also 
+used in many other areas of software engineering (scripting, 
+prototyping, automated transformation of legacy systems, 
+refactoring, web services, etc.) and are implemented in popular 
+systems like Mathematica, Autocad, and others. Rewriting 
+techniques play a relevant role in computing research, 
+education, and industry.
+
+Two tracks are offered, including the lectures and the courses:
+
+- Track A: for newcomers in the field, or just for people 
+         who want to obtain a new, updated exposure.
+
+* Jose Meseguer. Introduction to Term Rewriting
+* Albert Rubio. Termination of Rewriting: Foundations and 
+  Automation
+* Santiago Escobar. A Rewriting-Based Specification and 
+  Programming Language: Maude
+* Beatriz Alarcon & Raul Gutierrez. Exercises on Term 
+  Rewriting
+
+- Track B: for those who want to get deeper in the most 
+         recent developments and applications of rewriting.
+
+* Maria Alpuente: Narrowing Techniques and Applications 
+* Temur Kutsia: Matching, unification, and generalizations 
+* Pierre Lescanne: Lambda Calculus: extensions and 
+  applications 
+* Narciso Marti-Oliet: Rewriting Logic and Applications 
+* Georg Moser: Automated Complexity Analysis of Term 
+  Rewriting Systems 
+* Albert Oliveras: SAT and SMT techniques in Proof and 
+  Verification 
+* Sophie Tison: Tree Automata, Turing Machines and Term 
+  Rewriting 
+* Xavier Urbain: Certification of Rewriting Properties 
+* Andrei Voronkov: Automated Reasoning and Theorem Proving 
+
+For more information, please contact
+Salvador Lucas <slucas at dsic.upv.es>
+
+From sumsel2000-mailinglist at yahoo.de  Tue May 22 13:47:13 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Tue, 22 May 2012 13:47:13 +0200
+Subject: [Stratego Users] Supported encodings for input files
+Message-ID: <4FBB7CC1.8000907@yahoo.de>
+
+Dear Sir or Madam,
+
+I had a look at org.spoofax.jsglr.client.SGLR and I recognized, that the 
+internal result of the parsing process is a parse tree (parse forest or 
+DAG) consisting of AbstractParseNodes (in the following called "internal 
+parse tree"). Then an ITreeBuilder is used to transform the internal 
+parse tree into a result.
+
+When you parse some input which could not be recognized by a defined 
+grammer, then you get an error message like:
+"Syntax error near unexpected character 's' at line 3, column 18"
+
+I think, that during the parsing process the internal parse tree is built.
+
+In case of an unexpected character I want to draw the internal parse 
+tree to support the debugging of a grammar. How could the root of the 
+internal parse tree be accessed during the parsing process?
+
+Yours faithfully,
+Daniel
+
+
+From sumsel2000-mailinglist at yahoo.de  Tue May 22 16:06:49 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Tue, 22 May 2012 16:06:49 +0200
+Subject: [Stratego Users] Access to parse tree during parse process
+Message-ID: <4FBB9D79.5060005@yahoo.de>
+
+Dear Sir or Madam,
+
+I had a look at org.spoofax.jsglr.client.SGLR and I recognized, that the 
+internal result of the parsing process is a parse tree (parse forest or 
+DAG) consisting of AbstractParseNodes (in the following called "internal 
+parse tree"). Then an ITreeBuilder is used to transform the internal 
+parse tree into a result.
+
+When you parse some input which could not be recognized by a defined 
+grammer, then you get an error message like:
+"Syntax error near unexpected character 's' at line 3, column 18"
+
+I think, that during the parsing process the internal parse tree is built.
+
+In case of an unexpected character I want to draw the internal parse 
+tree to support the debugging of a grammar. How could the root of the 
+internal parse tree be accessed during the parsing process?
+
+Yours faithfully,
+Daniel
+
+PS: I'm sorry to send this mail again, but last time I used the wrong 
+subject.
+
+
+From E.Visser at tudelft.nl  Wed May 23 22:37:40 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 23 May 2012 22:37:40 +0200
+Subject: [Stratego Users] Access to parse tree during parse process
+In-Reply-To: <4FBB9D79.5060005@yahoo.de>
+References: <4FBB9D79.5060005@yahoo.de>
+Message-ID: <CAFaCHU19ZcGmAaXN86TqXPL_-CEtGvNqvOrNy0WcDB_KR+_tAg@mail.gmail.com>
+
+Hi Daniel,
+
+> I had a look at org.spoofax.jsglr.client.SGLR and I recognized, that the
+> internal result of the parsing process is a parse tree (parse forest or DAG)
+> consisting of AbstractParseNodes (in the following called "internal parse
+> tree"). Then an ITreeBuilder is used to transform the internal parse tree
+> into a result.
+>
+> When you parse some input which could not be recognized by a defined
+> grammer, then you get an error message like:
+> "Syntax error near unexpected character 's' at line 3, column 18"
+>
+> I think, that during the parsing process the internal parse tree is built.
+>
+> In case of an unexpected character I want to draw the internal parse tree to
+> support the debugging of a grammar. How could the root of the internal parse
+> tree be accessed during the parsing process?
+
+You're touching on a delicate aspect of (S)GLR parsing. A GLR parser
+explores a number of possible parses in parallell. Each of these
+options is represented by a stack. An option dies when no more parse
+actions can be made for it. A parse error is encountered when no
+action exists for any stack. The problem is that as part of this
+process, failing stacks are discarded. Thus, at the point that a parse
+error is discovered, no stacks are available. So, it is fundamentally
+problematic to get access to 'the tree'. First you'd have to adapt the
+algorithm to keep track of discarded stacks (which is potentially
+expensive). And then it will be hard to say which stacks were
+discarded for a good reason, or which ones explain the error.
+
+A technical detail: if in regular LR parsing, where there is a single
+stack at the point of failure, there is not really a tree; only tree
+fragments corresponding to the parts of the string already
+successfully parsed are pointed to from stack edges. From that
+information you may be able to reconstruct a partial parse tree, but
+the (SG)LR data structures are not necessarily designed to make that
+easy.
+
+With SDF we tend not debug grammars by tracing parse actions. Rather
+we like to look at the parse trees or abstract syntax trees produced
+by a parser. For example, this tends be helpful to diagnose
+ambiguities. (See our Onward 2010 essay on Pure and Declarative Syntax
+Definition.)
+
+Of course, in the case of a parse failure there is no tree.
+
+A measure that may help in that case is parse error recovery as
+implemented by the version of SGLR that is included in Spoofax. With
+Spoofax you can still get a tree for a text with syntactic errors. See
+our OOPSLA 2009 and SLE 2009 papers.
+
+In a sense, that approach produces the parse tree at the point of
+failure, and a possible/likely tree for the rest of the string as
+well.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From headness13 at gmail.com  Thu May 24 12:00:01 2012
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Thu, 24 May 2012 13:00:01 +0300
+Subject: [Stratego Users] Access to parse tree during parse process
+In-Reply-To: <CAFaCHU19ZcGmAaXN86TqXPL_-CEtGvNqvOrNy0WcDB_KR+_tAg@mail.gmail.com>
+References: <4FBB9D79.5060005@yahoo.de>
+	<CAFaCHU19ZcGmAaXN86TqXPL_-CEtGvNqvOrNy0WcDB_KR+_tAg@mail.gmail.com>
+Message-ID: <CAFu+moLOADOWeXXc7JDZEikA8Nnd2mgLuBDW3TUyGrt_y62xfA@mail.gmail.com>
+
+Hi Eelco,
+
+Is the SGLR parser that accepts recovery available in strategoxt.jar?
+Because I would like to use that in an external tool.
+I managed to use parse-string to get the AST or error messages, but I was
+unable to make it work with the Permissive grammars.
+
+Thanks,
+Radu Mereuta
+
+PhD student at Faculty of Computer Science, Iasi, Romania
+
+On Wed, May 23, 2012 at 11:37 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Daniel,
+>
+> > I had a look at org.spoofax.jsglr.client.SGLR and I recognized, that the
+> > internal result of the parsing process is a parse tree (parse forest or
+> DAG)
+> > consisting of AbstractParseNodes (in the following called "internal parse
+> > tree"). Then an ITreeBuilder is used to transform the internal parse tree
+> > into a result.
+> >
+> > When you parse some input which could not be recognized by a defined
+> > grammer, then you get an error message like:
+> > "Syntax error near unexpected character 's' at line 3, column 18"
+> >
+> > I think, that during the parsing process the internal parse tree is
+> built.
+> >
+> > In case of an unexpected character I want to draw the internal parse
+> tree to
+> > support the debugging of a grammar. How could the root of the internal
+> parse
+> > tree be accessed during the parsing process?
+>
+> You're touching on a delicate aspect of (S)GLR parsing. A GLR parser
+> explores a number of possible parses in parallell. Each of these
+> options is represented by a stack. An option dies when no more parse
+> actions can be made for it. A parse error is encountered when no
+> action exists for any stack. The problem is that as part of this
+> process, failing stacks are discarded. Thus, at the point that a parse
+> error is discovered, no stacks are available. So, it is fundamentally
+> problematic to get access to 'the tree'. First you'd have to adapt the
+> algorithm to keep track of discarded stacks (which is potentially
+> expensive). And then it will be hard to say which stacks were
+> discarded for a good reason, or which ones explain the error.
+>
+> A technical detail: if in regular LR parsing, where there is a single
+> stack at the point of failure, there is not really a tree; only tree
+> fragments corresponding to the parts of the string already
+> successfully parsed are pointed to from stack edges. From that
+> information you may be able to reconstruct a partial parse tree, but
+> the (SG)LR data structures are not necessarily designed to make that
+> easy.
+>
+> With SDF we tend not debug grammars by tracing parse actions. Rather
+> we like to look at the parse trees or abstract syntax trees produced
+> by a parser. For example, this tends be helpful to diagnose
+> ambiguities. (See our Onward 2010 essay on Pure and Declarative Syntax
+> Definition.)
+>
+> Of course, in the case of a parse failure there is no tree.
+>
+> A measure that may help in that case is parse error recovery as
+> implemented by the version of SGLR that is included in Spoofax. With
+> Spoofax you can still get a tree for a text with syntactic errors. See
+> our OOPSLA 2009 and SLE 2009 papers.
+>
+> In a sense, that approach produces the parse tree at the point of
+> failure, and a possible/likely tree for the rest of the string as
+> well.
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120524/b06f1155/attachment.html>
+
+From lennart at lclnet.nl  Sun May 27 15:39:27 2012
+From: lennart at lclnet.nl (Lennart Kats)
+Date: Sun, 27 May 2012 15:39:27 +0200
+Subject: [Stratego Users] Access to parse tree during parse process
+In-Reply-To: <CAFu+moLOADOWeXXc7JDZEikA8Nnd2mgLuBDW3TUyGrt_y62xfA@mail.gmail.com>
+References: <4FBB9D79.5060005@yahoo.de>
+	<CAFaCHU19ZcGmAaXN86TqXPL_-CEtGvNqvOrNy0WcDB_KR+_tAg@mail.gmail.com>
+	<CAFu+moLOADOWeXXc7JDZEikA8Nnd2mgLuBDW3TUyGrt_y62xfA@mail.gmail.com>
+Message-ID: <4FC22E8F.7070708@lclnet.nl>
+
+Hi Radu,
+
+Recovery is disabled by default, but you can enable it by calling 
+SGLR.setUseStructureRecovery(). When enabled, it works best with 
+permissive grammars. Inside Stratego, you can enable it by calling 
+either set-recovery(true) or prim("STRSGLR_set_recovery_on").
+
+cheers,
+
+Lennart
+
+On 5/24/12 12:00 , Radu Mereuta wrote:
+> Hi Eelco,
+>
+> Is the SGLR parser that accepts recovery available in strategoxt.jar?
+> Because I would like to use that in an external tool.
+> I managed to use parse-string to get the AST or error messages, but I
+> was unable to make it work with the Permissive grammars.
+>
+> Thanks,
+> Radu Mereuta
+>
+> PhD student at Faculty of Computer Science, Iasi, Romania
+>
+> On Wed, May 23, 2012 at 11:37 PM, Eelco Visser <E.Visser at tudelft.nl
+> <mailto:E.Visser at tudelft.nl>> wrote:
+>
+>     Hi Daniel,
+>
+>      > I had a look at org.spoofax.jsglr.client.SGLR and I recognized,
+>     that the
+>      > internal result of the parsing process is a parse tree (parse
+>     forest or DAG)
+>      > consisting of AbstractParseNodes (in the following called
+>     "internal parse
+>      > tree"). Then an ITreeBuilder is used to transform the internal
+>     parse tree
+>      > into a result.
+>      >
+>      > When you parse some input which could not be recognized by a defined
+>      > grammer, then you get an error message like:
+>      > "Syntax error near unexpected character 's' at line 3, column 18"
+>      >
+>      > I think, that during the parsing process the internal parse tree
+>     is built.
+>      >
+>      > In case of an unexpected character I want to draw the internal
+>     parse tree to
+>      > support the debugging of a grammar. How could the root of the
+>     internal parse
+>      > tree be accessed during the parsing process?
+>
+>     You're touching on a delicate aspect of (S)GLR parsing. A GLR parser
+>     explores a number of possible parses in parallell. Each of these
+>     options is represented by a stack. An option dies when no more parse
+>     actions can be made for it. A parse error is encountered when no
+>     action exists for any stack. The problem is that as part of this
+>     process, failing stacks are discarded. Thus, at the point that a parse
+>     error is discovered, no stacks are available. So, it is fundamentally
+>     problematic to get access to 'the tree'. First you'd have to adapt the
+>     algorithm to keep track of discarded stacks (which is potentially
+>     expensive). And then it will be hard to say which stacks were
+>     discarded for a good reason, or which ones explain the error.
+>
+>     A technical detail: if in regular LR parsing, where there is a single
+>     stack at the point of failure, there is not really a tree; only tree
+>     fragments corresponding to the parts of the string already
+>     successfully parsed are pointed to from stack edges. From that
+>     information you may be able to reconstruct a partial parse tree, but
+>     the (SG)LR data structures are not necessarily designed to make that
+>     easy.
+>
+>     With SDF we tend not debug grammars by tracing parse actions. Rather
+>     we like to look at the parse trees or abstract syntax trees produced
+>     by a parser. For example, this tends be helpful to diagnose
+>     ambiguities. (See our Onward 2010 essay on Pure and Declarative Syntax
+>     Definition.)
+>
+>     Of course, in the case of a parse failure there is no tree.
+>
+>     A measure that may help in that case is parse error recovery as
+>     implemented by the version of SGLR that is included in Spoofax. With
+>     Spoofax you can still get a tree for a text with syntactic errors. See
+>     our OOPSLA 2009 and SLE 2009 papers.
+>
+>     In a sense, that approach produces the parse tree at the point of
+>     failure, and a possible/likely tree for the rest of the string as
+>     well.
+>
+>     cheers,
+>
+>     -- Eelco
+>
+>     Associate Professor at Delft University of Technology
+>
+>     Group:          Software Language Design and Engineering
+>     Email: e.visser at tudelft.nl <mailto:e.visser at tudelft.nl>
+>     Homepage: http://eelcovisser.org
+>     Publications: http://researchr.org/profile/eelcovisser
+>     News: http://twitter.com/eelcovisser
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From acaciocenteno at gmail.com  Tue May 29 18:00:51 2012
+From: acaciocenteno at gmail.com (=?ISO-8859-1?Q?Ac=E1cio_Centeno?=)
+Date: Tue, 29 May 2012 13:00:51 -0300
+Subject: [Stratego Users] Help figuring out if Stratego/Spoofax is the way
+	to go
+Message-ID: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>
+
+Hello,
+
+I'm willing to write a DSL that should be interpreted on a production
+environment. I was reading Fowler's book about the subject and googling for
+some tools when I found out Spoofax.
+
+I found Spoofax's eclipse integration awesome and would be really helpfull
+in our project, in which sysadmins would manipulate the DSL. So, having a
+complete IDE to help them, with syntax highlighting, integrated
+error-handling, etc would be a lot easier then editing with vi and applying
+an external tool for validation.
+
+Reading through the documentation, I've found out that stratego could be
+used to generate C code, and as the system we're trying to add this DSL to
+is written in C, that is a must.
+
+However, given our project's nature, in which sysadmins will use the DSL,
+I'd really like to interpret the language and not use it to generate some C
+code that would need to be compiled on a development environment and then
+deployed.
+
+So my question is if it's possible to use Spoofax/Stratego to create DSL
+interpreters instead of code generators. If so, is there any documentation
+about how to do it?
+
+Thanks in advance.
+
+-- 
+Atenciosamente,
+Luiz Ac?cio Centeno Cordeiro Jr
+(51) 8118-9947
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120529/5c83065c/attachment.html>
+
+From E.Visser at tudelft.nl  Tue May 29 21:24:52 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 29 May 2012 21:24:52 +0200
+Subject: [Stratego Users] Help figuring out if Stratego/Spoofax is the
+ way to go
+In-Reply-To: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>
+References: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>
+Message-ID: <CAFaCHU1kPzLm9GbN8+cjqtvYBeJZOXPy0haeNW1QZhznafLFEQ@mail.gmail.com>
+
+Hi Ac?cio,
+
+That's an interesting question. Let's discuss it off-list. (We can
+summarize to the list if anyone is interested.)
+
+-- Eelco
+
+> Hello,
+>
+> I'm willing to write a DSL that should be interpreted on a production
+> environment. I was reading Fowler's book about the subject and googling for
+> some tools when I found out Spoofax.
+>
+> I found Spoofax's eclipse integration awesome and would be really helpfull
+> in our project, in which sysadmins would manipulate the DSL. So, having a
+> complete IDE to help them, with syntax highlighting, integrated
+> error-handling, etc would be a lot easier then editing with vi and applying
+> an external tool for validation.
+>
+> Reading through the documentation, I've found out that stratego could be
+> used to generate C code, and as the system we're trying to add this DSL to
+> is written in C, that is a must.
+>
+> However, given our project's nature, in which sysadmins will use the DSL,
+> I'd really like to interpret the language and not use it to generate some C
+> code that would need to be compiled on a development environment and then
+> deployed.
+>
+> So my question is if it's possible to use Spoofax/Stratego to create DSL
+> interpreters instead of code generators. If so, is there any documentation
+> about how to do it?
+>
+> Thanks in advance.
+>
+> --
+> Atenciosamente,
+> Luiz Ac?cio Centeno Cordeiro Jr
+> (51) 8118-9947
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group: ? ? ? ? ?Software Language Design and Engineering
+Email: ? ? ? ? ?e.visser at tudelft.nl
+Homepage: ? http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News: ? ? ? ? ? http://twitter.com/eelcovisser
+
+
+From scott.finnie at gmail.com  Tue May 29 22:34:30 2012
+From: scott.finnie at gmail.com (Scott Finnie)
+Date: Tue, 29 May 2012 21:34:30 +0100
+Subject: [Stratego Users] Help figuring out if Stratego/Spoofax is the
+ way to go
+In-Reply-To: <CAFaCHU1kPzLm9GbN8+cjqtvYBeJZOXPy0haeNW1QZhznafLFEQ@mail.gmail.com>
+References: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>
+	<CAFaCHU1kPzLm9GbN8+cjqtvYBeJZOXPy0haeNW1QZhznafLFEQ@mail.gmail.com>
+Message-ID: <4FC532D6.8030407@gmail.com>
+
+Eelco, I'd be interested in that disscussion - at the very least, a 
+summary of it...
+
+  - Scott.
+
+On 29/05/2012 20:24, Eelco Visser wrote:
+> Hi Ac?cio,
+>
+> That's an interesting question. Let's discuss it off-list. (We can
+> summarize to the list if anyone is interested.)
+>
+> -- Eelco
+>
+>> Hello,
+>>
+>> I'm willing to write a DSL that should be interpreted on a production
+>> environment. I was reading Fowler's book about the subject and googling for
+>> some tools when I found out Spoofax.
+>>
+>> I found Spoofax's eclipse integration awesome and would be really helpfull
+>> in our project, in which sysadmins would manipulate the DSL. So, having a
+>> complete IDE to help them, with syntax highlighting, integrated
+>> error-handling, etc would be a lot easier then editing with vi and applying
+>> an external tool for validation.
+>>
+>> Reading through the documentation, I've found out that stratego could be
+>> used to generate C code, and as the system we're trying to add this DSL to
+>> is written in C, that is a must.
+>>
+>> However, given our project's nature, in which sysadmins will use the DSL,
+>> I'd really like to interpret the language and not use it to generate some C
+>> code that would need to be compiled on a development environment and then
+>> deployed.
+>>
+>> So my question is if it's possible to use Spoofax/Stratego to create DSL
+>> interpreters instead of code generators. If so, is there any documentation
+>> about how to do it?
+>>
+>> Thanks in advance.
+>>
+>> --
+>> Atenciosamente,
+>> Luiz Ac?cio Centeno Cordeiro Jr
+>> (51) 8118-9947
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+
+From clonearmy at gmail.com  Wed May 30 00:38:29 2012
+From: clonearmy at gmail.com (Meredith L. Patterson)
+Date: Wed, 30 May 2012 00:38:29 +0200
+Subject: [Stratego Users] Help figuring out if Stratego/Spoofax is the
+ way to go
+In-Reply-To: <4FC532D6.8030407@gmail.com>
+References: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>
+	<CAFaCHU1kPzLm9GbN8+cjqtvYBeJZOXPy0haeNW1QZhznafLFEQ@mail.gmail.com>
+	<4FC532D6.8030407@gmail.com>
+Message-ID: <CAPxGCxc2WJM0fUXOdWfXM7Ryr4gVDPbwqEw9M9-QcjcSc6sa9w@mail.gmail.com>
+
+I'm also quite interested.
+
+Cheers,
+--mlp
+
+On Tue, May 29, 2012 at 10:34 PM, Scott Finnie <scott.finnie at gmail.com> wrote:
+> Eelco, I'd be interested in that disscussion - at the very least, a summary
+> of it...
+>
+> ?- Scott.
+>
+>
+> On 29/05/2012 20:24, Eelco Visser wrote:
+>>
+>> Hi Ac?cio,
+>>
+>> That's an interesting question. Let's discuss it off-list. (We can
+>> summarize to the list if anyone is interested.)
+>>
+>> -- Eelco
+>>
+>>> Hello,
+>>>
+>>> I'm willing to write a DSL that should be interpreted on a production
+>>> environment. I was reading Fowler's book about the subject and googling
+>>> for
+>>> some tools when I found out Spoofax.
+>>>
+>>> I found Spoofax's eclipse integration awesome and would be really
+>>> helpfull
+>>> in our project, in which sysadmins would manipulate the DSL. So, having a
+>>> complete IDE to help them, with syntax highlighting, integrated
+>>> error-handling, etc would be a lot easier then editing with vi and
+>>> applying
+>>> an external tool for validation.
+>>>
+>>> Reading through the documentation, I've found out that stratego could be
+>>> used to generate C code, and as the system we're trying to add this DSL
+>>> to
+>>> is written in C, that is a must.
+>>>
+>>> However, given our project's nature, in which sysadmins will use the DSL,
+>>> I'd really like to interpret the language and not use it to generate some
+>>> C
+>>> code that would need to be compiled on a development environment and then
+>>> deployed.
+>>>
+>>> So my question is if it's possible to use Spoofax/Stratego to create DSL
+>>> interpreters instead of code generators. If so, is there any
+>>> documentation
+>>> about how to do it?
+>>>
+>>> Thanks in advance.
+>>>
+>>> --
+>>> Atenciosamente,
+>>> Luiz Ac?cio Centeno Cordeiro Jr
+>>> (51) 8118-9947
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>
+>>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From kralikba at msn.com  Wed May 30 09:53:34 2012
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Wed, 30 May 2012 09:53:34 +0200
+Subject: [Stratego Users] Help figuring out if Stratego/Spoofax is the
+	way to go
+In-Reply-To: <4FC532D6.8030407@gmail.com>
+References: <CAPELPg2k9M8axorgrEKUjKdf9bjAuzyb2rwbp5SmF8sxGMHpnQ@mail.gmail.com>	<CAFaCHU1kPzLm9GbN8+cjqtvYBeJZOXPy0haeNW1QZhznafLFEQ@mail.gmail.com>
+	<4FC532D6.8030407@gmail.com>
+Message-ID: <COL112-DS11416E2581102AF10FCA9ED00A0@phx.gbl>
+
+Hi, I would also be happy to see at least a summary.
+
+Barnab?s Kr?lik
+
+-----Original Message-----
+From: users-bounces at strategoxt.org [mailto:users-bounces at strategoxt.org] On
+Behalf Of Scott Finnie
+Sent: Tuesday, May 29, 2012 10:35 PM
+To: users at strategoxt.org
+Subject: Re: [Stratego Users] Help figuring out if Stratego/Spoofax is the
+way to go
+
+Eelco, I'd be interested in that disscussion - at the very least, a summary
+of it...
+
+  - Scott.
+
+On 29/05/2012 20:24, Eelco Visser wrote:
+> Hi Ac?cio,
+>
+> That's an interesting question. Let's discuss it off-list. (We can 
+> summarize to the list if anyone is interested.)
+>
+> -- Eelco
+>
+>> Hello,
+>>
+>> I'm willing to write a DSL that should be interpreted on a production 
+>> environment. I was reading Fowler's book about the subject and 
+>> googling for some tools when I found out Spoofax.
+>>
+>> I found Spoofax's eclipse integration awesome and would be really 
+>> helpfull in our project, in which sysadmins would manipulate the DSL. 
+>> So, having a complete IDE to help them, with syntax highlighting, 
+>> integrated error-handling, etc would be a lot easier then editing 
+>> with vi and applying an external tool for validation.
+>>
+>> Reading through the documentation, I've found out that stratego could 
+>> be used to generate C code, and as the system we're trying to add 
+>> this DSL to is written in C, that is a must.
+>>
+>> However, given our project's nature, in which sysadmins will use the 
+>> DSL, I'd really like to interpret the language and not use it to 
+>> generate some C code that would need to be compiled on a development 
+>> environment and then deployed.
+>>
+>> So my question is if it's possible to use Spoofax/Stratego to create 
+>> DSL interpreters instead of code generators. If so, is there any 
+>> documentation about how to do it?
+>>
+>> Thanks in advance.
+>>
+>> --
+>> Atenciosamente,
+>> Luiz Ac?cio Centeno Cordeiro Jr
+>> (51) 8118-9947
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From scott.finnie at gmail.com  Thu May 31 14:41:04 2012
+From: scott.finnie at gmail.com (Scott Finnie)
+Date: Thu, 31 May 2012 13:41:04 +0100
+Subject: [Stratego Users] (re) considering spoofax - thoughts on suitability?
+Message-ID: <4FC766E0.3010905@gmail.com>
+
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120531/8f900b46/attachment.html>
+

@@ -1,0 +1,2695 @@
+From kutsia at risc.uni-linz.ac.at  Mon Jul  5 09:20:26 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Mon, 05 Jul 2010 09:20:26 +0200
+Subject: [Stratego Users] LOPSTR/PPDP 2010 Final Call for Participation
+Message-ID: <4C3187BA.7030500@risc.uni-linz.ac.at>
+
+[Apologize for multiple copies]
+====================================================================
+
+                *** CALL FOR PARTICIPATION ***
+
+                           LOPSTR 2010
+                20th International Symposium on
+        Logic-Based Program Synthesis and Transformation
+         http://www.risc.jku.at/conferences/lopstr2010/
+                       July 23-25, 2010
+
+                           PPDP 2010
+          12th International ACM SIGPLAN Symposium on
+       Principles and Practice of Declarative Programming
+          http://www.risc.jku.at/conferences/ppdp2010/
+                        July 26-28, 2010
+
+                       Hagenberg, Austria
+
+====================================================================
+
+IMPORTANT INFORMATION
+
+Early registration deadline (for both conferences): July 12, 2010
+
+--------------------------------------------------------------------
+
+LOPSTR 2010 INVITED SPEAKERS:
+
+  - Bruno Buchberger (RISC, Johannes Kepler University Linz, Austria)
+  - Olivier Danvy (University of Aarhus, Denmark)
+  - Johann Schumann (RIACS/NASA Ames Research Center, USA)
+
+LOPSTR 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/lopstr2010/program.html
+
+--------------------------------------------------------------------
+
+PPDP 2010 INVITED SPEAKERS:
+
+  - Maria Paola Bonacina (University of Verona, Italy)
+  - Sumit Gulwani (Microsoft Research)
+
+PPDP 2010 PROGRAM:
+
+http://www.risc.jku.at/conferences/ppdp2010/program.html
+
+--------------------------------------------------------------------
+
+
+
+From fcferrari at gmail.com  Mon Jul  5 17:04:49 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Mon, 5 Jul 2010 12:04:49 -0300
+Subject: [Stratego Users] [Stratego Developers] Fwd: AspectJ-front:
+	Problem for parsing and pretty-printing complex pointcut expressions
+In-Reply-To: <48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com>
+Message-ID: <AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com>
+
+Hi, Rob, all.
+
+Unfortunately using the "aspectjtree-parenthesize" tool partially solved the
+problem. However, I have noticed that the pretty-printer still overlooks
+some round brackets as we can see in the example below:
+
+> command line:
+   parse-aspectj -i LogAccountActivitiesOriginal.aj |
+/usr/local/libexec/aspectjtree-parenthesize  | pp-aspectj
+
+
+> Original pointcut expression (full code is attached):
+
+      pointcut accountActivity(Account account, float amount)    :
+          ( (execution(void Account.credit(float)) || execution(void
+Account.debit(float)))
+            && this(account) && args(amount)
+          )
+          ||
+          (execution(void CheckClearanceSystem.*(Account, float)) &&
+args(account, amount));
+
+> Pretty-printed expression:
+
+      pointcut accountActivity (Account account, float amount) :
+          (execution(void Account.credit(float)) || execution(void
+Account.debit(float))) && this(account) && args(amount)
+          ||
+          execution(void CheckClearanceSystem.*(Account, float)) &&
+args(account, amount);
+
+
+Do you think this is a problem with the grammar definition? Do you any
+suggestion on how to solve it?
+
+Cheers,
+
+  Fabiano
+
+
+On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+
+> Hi, Rob.
+>
+> Many thanks for this. I've run preliminary tests using the
+> "aspectjtree-parenthesize" tool and everything looks fine.
+>
+> The best,
+>   Fabiano
+>
+> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> > Hi Fabiano,
+> >
+> > sorry I missed your earlier message. It seems pp-aspectj misses a call
+> > to the parenthesize strategy. I will make a fix for it, but for now
+> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+> > you aspectj AST before calling the pretty-printer.
+> >
+> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+> >
+> > greetings,
+> > Rob
+> >
+> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >> Hi, everyone.
+> >>
+> >> I have posted this problem a while ago (please, see below). Is there
+> >> someone who could give me a help with this?
+> >>
+> >> Many thanks,
+> >>  Fabiano
+> >>
+> >>
+> >> ---------- Forwarded message ----------
+> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+> >> Date: 2 February 2010 10:48
+> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+> >> complex pointcut expressions
+> >> To: developers at strategoxt.org, Users at strategoxt.org
+> >>
+> >>
+> >> Hi, everybody.
+> >>
+> >> I'm facing some problems while using the parser and the pretty-printer
+> >> from AspectJ-front. For instance, when I parse a pointcut expressions
+> >> such as:
+> >>
+> >>
+> >>        protected pointcut subjectChange(Subject subject) :
+> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+> >>                        (!within(SelectStatement))) || (call(protected
+> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+> >> this(subject);
+> >>
+> >>
+> >> the pretty-printed code is as follows:
+> >>
+> >>
+> >>        protected pointcut subjectChange (Subject subject)
+> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+> >>                        !within(SelectStatement) || call(protected List
+> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+> >>
+> >>
+> >> As you can see, some surrounding round brackets are removed, what
+> >> results in inconsistent information binding. Other two examples are
+> >> shown below (the original aspects are attached).
+> >>
+> >>
+> >> Is anybody aware of a workaround for this? Is there a way to fix it
+> >> (e.g. keeping all round brackets in the pretty-printed version)?
+> >>
+> >> Many thanks!
+> >>
+> >>  Fabiano Ferrari
+> >>
+> >>
+> >> --------- other examples ---------
+> >>
+> >>  ORIGINAL EXPRESSION 1:
+> >>
+> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >>                  (
+> >>                        (
+> >>                        execution(  public void
+> >> RuntimeSQLException.setNextException(SQLException))
+> >>                        || execution(  protected static int
+> >> BaseLogProxy.getNextId())
+> >>                        || execution(  private void
+> >> Stopwatch.appendTaskTime(String,long))
+> >>                        || execution(  public void Stopwatch.reset())
+> >>                        || execution(  public void
+> >> FifoCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> FifoCacheController.getObject(CacheModel,Object))
+> >>                        || execution(  public Object
+> >> FifoCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> FifoCacheController.flush(CacheModel))
+> >>                        || execution(  public void
+> >> LruCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> LruCacheController.getObject(CacheModel, Object))
+> >>                        || execution(  public Object
+> >> LruCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> LruCacheController.flush(CacheModel))
+> >>                        || execution(  public void
+> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> MemoryCacheController.getObject(CacheModel, Object))
+> >>                        || execution(  public Object
+> >> MemoryCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> MemoryCacheController.flush(CacheModel))
+> >>                        || execution(  private  void
+> >> InvocationHandler+.loadObject())
+> >>                        || execution(  private  void
+> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >>                        || execution(  public  Object[]
+> >> AutoResultMap.getResults(RequestScope,ResultSet) throws  SQLException)
+> >>                        || execution(  public  static long
+> >> SessionScope.getNextId())
+> >>                        || execution(  public Object
+> >> OSCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  private void
+> >> CacheModel.getObjectPartTwo())
+> >>
+> >>                        ) && this(syncObj)
+> >>                );
+> >>
+> >>
+> >>  PRETTY-PRINTED EXPRESSION 1:
+> >>
+> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >>                  execution(public void
+> >> RuntimeSQLException.setNextException(SQLException))
+> >>                  || execution(protected static int
+> BaseLogProxy.getNextId())
+> >>                  || execution(private void
+> >> Stopwatch.appendTaskTime(String, long))
+> >>                  || execution(public void Stopwatch.reset())
+> >>                  || execution(public void
+> >> FifoCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> FifoCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> FifoCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> FifoCacheController.flush(CacheModel))
+> >>                  || execution(public void
+> >> LruCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> LruCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> LruCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> LruCacheController.flush(CacheModel))
+> >>                  || execution(public void
+> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> MemoryCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> MemoryCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> >> MemoryCacheController.flush(CacheModel))
+> >>                  || execution(private void
+> InvocationHandler+.loadObject())
+> >>                  || execution(private void
+> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >>                  || execution(public Object[]
+> >> AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+> >>                  || execution(public static long
+> SessionScope.getNextId())
+> >>                  || execution(public Object
+> >> OSCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(private void
+> CacheModel.getObjectPartTwo())
+> >>
+> >>                  && this(syncObj);
+> >>
+> >> ----------------------------------
+> >>
+> >>  ORIGINAL EXPRESSION 2:
+> >>
+> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >>                (
+> >>                    execution(  public static ClassInfo
+> >> ClassInfo.getInstance(Class))
+> >>                    || execution(  public void
+> >> OSCacheController.flush(CacheModel))
+> >>                    || execution( private void
+> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+> >>                    || execution( private Object
+> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> IllegalAccessException)
+> >>                    || execution(  private Object
+> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+> >> NeedsRefreshException )
+> >>                    || execution(private Object
+> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+> >> NeedsRefreshException)
+> >>                    || execution(private void
+> >> CacheModel.getObjectPartThree(Object,Object))
+> >>                    || execution(private Object
+> >>
+> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+> >> , Object , Object, CacheKey ) throws SQLException )
+> >>                    || execution(private List
+> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+> >>                )
+> >>                && args(syncObj,..);
+> >>
+> >>
+> >>  PRETTY-PRINTED EXPRESSION 2:
+> >>
+> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >>                  execution(public static ClassInfo
+> ClassInfo.getInstance(Class))
+> >>                  || execution(public void
+> OSCacheController.flush(CacheModel))
+> >>                  || execution(private void
+> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+> >>                  || execution(private Object
+> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> IllegalAccessException)
+> >>                  || execution(private Object
+> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+> >> NeedsRefreshException)
+> >>                  || execution(private Object
+> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+> >> NeedsRefreshException)
+> >>                  || execution(private void
+> >> CacheModel.getObjectPartThree(Object, Object))
+> >>                  || execution(private Object
+> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+> >> RequestScope, Connection, Object, Object, CacheKey) throws SQLException)
+> >>                  || execution(private List
+> >> CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+> >> Connection, Object, int, int, CacheKey) throws SQLException)
+> >>                  && args(syncObj, ..);
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >> --
+> >> Fabiano Cutigi Ferrari
+> >> _________________________________
+> >> PhD Candidate in Computer Science
+> >> ICMC/USP - University of S?o Paulo - Brazil
+> >> LabES - Laboratory of Software Engineering
+> >> http://www.icmc.usp.br/~ferrari/ <http://www.icmc.usp.br/%7Eferrari/>
+> >>
+> >> _______________________________________________
+> >> Developers mailing list
+> >> Developers at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >>
+> >>
+> >
+> >
+> >
+> > --
+> > Rob Vermaas
+> >
+> > [email] rob.vermaas at gmail.com
+> >
+>
+
+
+
+-- 
+Fabiano Cutigi Ferrari
+_________________________________
+PhD Candidate in Computer Science
+ICMC/USP - University of S?o Paulo - Brazil
+LabES - Laboratory of Software Engineering
+http://www.icmc.usp.br/~ferrari/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100705/87d5e70e/attachment-0001.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: LogAccountActivitiesOriginal.aj
+Type: text/x-java
+Size: 979 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100705/87d5e70e/attachment-0001.bin 
+
+From fcferrari at gmail.com  Tue Jul  6 00:42:42 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Mon, 5 Jul 2010 19:42:42 -0300
+Subject: [Stratego Users] [Stratego Developers] Fwd: AspectJ-front:
+	Problem for parsing and pretty-printing complex pointcut expressions
+In-Reply-To: <AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com> 
+	<AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com> 
+	<AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com>
+Message-ID: <AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+
+Hi, Rob, all.
+
+Thanks for you reply.
+
+> The parentheses look fine to me, as the && operator should have higher
+> precedence than the || operator. So in the original source the missing
+> parentheses where 'not really necessary'.
+
+Although I agree with you, this might be a bug in the acj compiler, since
+the second expression results in "multiple bindings" error. It seems that
+either operators have the same precedence in the current ajc implementation.
+I have tried multiple versions of ajc (e.g. 1.2, 1.5 and 1.6) and they all
+produces the same output.
+
+So, I will keep my original question: can anybody suggest a workaround (or a
+fix) for this? E.g. changing the grammar definition?
+
+Thanks again!
+
+  Fabiano
+
+
+
+On 5 July 2010 12:44, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi Fabiano,
+>
+> The parentheses look fine to me, as the && operator should have higher
+> precedence than the || operator. So in the original source the missing
+> parentheses where 'not really necessary'.
+>
+> greetings,
+> Rob
+>
+> On Mon, Jul 5, 2010 at 17:04, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> > Hi, Rob, all.
+> >
+> > Unfortunately using the "aspectjtree-parenthesize" tool partially solved
+> the
+> > problem. However, I have noticed that the pretty-printer still overlooks
+> > some round brackets as we can see in the example below:
+> >
+> >> command line:
+> >    parse-aspectj -i LogAccountActivitiesOriginal.aj |
+> > /usr/local/libexec/aspectjtree-parenthesize  | pp-aspectj
+> >
+> >
+> >> Original pointcut expression (full code is attached):
+> >
+> >       pointcut accountActivity(Account account, float amount)    :
+> >           ( (execution(void Account.credit(float)) || execution(void
+> Account.debit(float))) && this(account) && args(amount)
+> >           )
+> >           ||
+> >           (execution(void CheckClearanceSystem.*(Account, float)) &&
+> args(account, amount));
+> >
+> >> Pretty-printed expression:
+> >
+> >       pointcut accountActivity (Account account, float amount) :
+> >           (execution(void Account.credit(float)) || execution(void
+> Account.debit(float))) && this(account) && args(amount)
+> >           ||
+> >           execution(void CheckClearanceSystem.*(Account, float)) &&
+> > args(account, amount);
+> >
+> >
+> > Do you think this is a problem with the grammar definition? Do you any
+> > suggestion on how to solve it?
+> >
+> > Cheers,
+> >
+> >   Fabiano
+> >
+> >
+> > On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >>
+> >> Hi, Rob.
+> >>
+> >> Many thanks for this. I've run preliminary tests using the
+> >> "aspectjtree-parenthesize" tool and everything looks fine.
+> >>
+> >> The best,
+> >>  Fabiano
+> >>
+> >> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> >> > Hi Fabiano,
+> >> >
+> >> > sorry I missed your earlier message. It seems pp-aspectj misses a call
+> >> > to the parenthesize strategy. I will make a fix for it, but for now
+> >> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+> >> > you aspectj AST before calling the pretty-printer.
+> >> >
+> >> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+> >> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+> >> >
+> >> > greetings,
+> >> > Rob
+> >> >
+> >> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >> >> Hi, everyone.
+> >> >>
+> >> >> I have posted this problem a while ago (please, see below). Is there
+> >> >> someone who could give me a help with this?
+> >> >>
+> >> >> Many thanks,
+> >> >>  Fabiano
+> >> >>
+> >> >>
+> >> >> ---------- Forwarded message ----------
+> >> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+> >> >> Date: 2 February 2010 10:48
+> >> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+> >> >> complex pointcut expressions
+> >> >> To: developers at strategoxt.org, Users at strategoxt.org
+> >> >>
+> >> >>
+> >> >> Hi, everybody.
+> >> >>
+> >> >> I'm facing some problems while using the parser and the
+> pretty-printer
+> >> >> from AspectJ-front. For instance, when I parse a pointcut expressions
+> >> >> such as:
+> >> >>
+> >> >>
+> >> >>        protected pointcut subjectChange(Subject subject) :
+> >> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+> >> >>                        (!within(SelectStatement))) || (call(protected
+> >> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+> >> >> this(subject);
+> >> >>
+> >> >>
+> >> >> the pretty-printed code is as follows:
+> >> >>
+> >> >>
+> >> >>        protected pointcut subjectChange (Subject subject)
+> >> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+> >> >>                        !within(SelectStatement) || call(protected
+> List
+> >> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+> >> >>
+> >> >>
+> >> >> As you can see, some surrounding round brackets are removed, what
+> >> >> results in inconsistent information binding. Other two examples are
+> >> >> shown below (the original aspects are attached).
+> >> >>
+> >> >>
+> >> >> Is anybody aware of a workaround for this? Is there a way to fix it
+> >> >> (e.g. keeping all round brackets in the pretty-printed version)?
+> >> >>
+> >> >> Many thanks!
+> >> >>
+> >> >>  Fabiano Ferrari
+> >> >>
+> >> >>
+> >> >> --------- other examples ---------
+> >> >>
+> >> >>  ORIGINAL EXPRESSION 1:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >> >>                  (
+> >> >>                        (
+> >> >>                        execution(  public void
+> >> >> RuntimeSQLException.setNextException(SQLException))
+> >> >>                        || execution(  protected static int
+> >> >> BaseLogProxy.getNextId())
+> >> >>                        || execution(  private void
+> >> >> Stopwatch.appendTaskTime(String,long))
+> >> >>                        || execution(  public void Stopwatch.reset())
+> >> >>                        || execution(  public void
+> >> >> FifoCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> FifoCacheController.getObject(CacheModel,Object))
+> >> >>                        || execution(  public Object
+> >> >> FifoCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> FifoCacheController.flush(CacheModel))
+> >> >>                        || execution(  public void
+> >> >> LruCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> LruCacheController.getObject(CacheModel, Object))
+> >> >>                        || execution(  public Object
+> >> >> LruCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> LruCacheController.flush(CacheModel))
+> >> >>                        || execution(  public void
+> >> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> MemoryCacheController.getObject(CacheModel, Object))
+> >> >>                        || execution(  public Object
+> >> >> MemoryCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> MemoryCacheController.flush(CacheModel))
+> >> >>                        || execution(  private  void
+> >> >> InvocationHandler+.loadObject())
+> >> >>                        || execution(  private  void
+> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >> >>                        || execution(  public  Object[]
+> >> >> AutoResultMap.getResults(RequestScope,ResultSet) throws
+>  SQLException)
+> >> >>                        || execution(  public  static long
+> >> >> SessionScope.getNextId())
+> >> >>                        || execution(  public Object
+> >> >> OSCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  private void
+> >> >> CacheModel.getObjectPartTwo())
+> >> >>
+> >> >>                        ) && this(syncObj)
+> >> >>                );
+> >> >>
+> >> >>
+> >> >>  PRETTY-PRINTED EXPRESSION 1:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >> >>                  execution(public void
+> >> >> RuntimeSQLException.setNextException(SQLException))
+> >> >>                  || execution(protected static int
+> >> >> BaseLogProxy.getNextId())
+> >> >>                  || execution(private void
+> >> >> Stopwatch.appendTaskTime(String, long))
+> >> >>                  || execution(public void Stopwatch.reset())
+> >> >>                  || execution(public void
+> >> >> FifoCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> FifoCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> FifoCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> FifoCacheController.flush(CacheModel))
+> >> >>                  || execution(public void
+> >> >> LruCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> LruCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> LruCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> LruCacheController.flush(CacheModel))
+> >> >>                  || execution(public void
+> >> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> MemoryCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> MemoryCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> MemoryCacheController.flush(CacheModel))
+> >> >>                  || execution(private void
+> >> >> InvocationHandler+.loadObject())
+> >> >>                  || execution(private void
+> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >> >>                  || execution(public Object[]
+> >> >> AutoResultMap.getResults(RequestScope, ResultSet) throws
+> SQLException)
+> >> >>                  || execution(public static long
+> >> >> SessionScope.getNextId())
+> >> >>                  || execution(public Object
+> >> >> OSCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(private void
+> >> >> CacheModel.getObjectPartTwo())
+> >> >>
+> >> >>                  && this(syncObj);
+> >> >>
+> >> >> ----------------------------------
+> >> >>
+> >> >>  ORIGINAL EXPRESSION 2:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >> >>                (
+> >> >>                    execution(  public static ClassInfo
+> >> >> ClassInfo.getInstance(Class))
+> >> >>                    || execution(  public void
+> >> >> OSCacheController.flush(CacheModel))
+> >> >>                    || execution( private void
+> >> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+> >> >>                    || execution( private Object
+> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> >> IllegalAccessException)
+> >> >>                    || execution(  private Object
+> >> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+> >> >> NeedsRefreshException )
+> >> >>                    || execution(private Object
+> >> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+> >> >> NeedsRefreshException)
+> >> >>                    || execution(private void
+> >> >> CacheModel.getObjectPartThree(Object,Object))
+> >> >>                    || execution(private Object
+> >> >>
+> >> >>
+> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+> >> >> , Object , Object, CacheKey ) throws SQLException )
+> >> >>                    || execution(private List
+> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+> >> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+> >> >>                )
+> >> >>                && args(syncObj,..);
+> >> >>
+> >> >>
+> >> >>  PRETTY-PRINTED EXPRESSION 2:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >> >>                  execution(public static ClassInfo
+> >> >> ClassInfo.getInstance(Class))
+> >> >>                  || execution(public void
+> >> >> OSCacheController.flush(CacheModel))
+> >> >>                  || execution(private void
+> >> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+> >> >>                  || execution(private Object
+> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> >> IllegalAccessException)
+> >> >>                  || execution(private Object
+> >> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+> >> >> NeedsRefreshException)
+> >> >>                  || execution(private Object
+> >> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+> >> >> NeedsRefreshException)
+> >> >>                  || execution(private void
+> >> >> CacheModel.getObjectPartThree(Object, Object))
+> >> >>                  || execution(private Object
+> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+> >> >> RequestScope, Connection, Object, Object, CacheKey) throws
+> >> >> SQLException)
+> >> >>                  || execution(private List
+> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+> >> >> Connection, Object, int, int, CacheKey) throws SQLException)
+> >> >>                  && args(syncObj, ..);
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >> --
+> >> >> Fabiano Cutigi Ferrari
+> >> >> _________________________________
+> >> >> PhD Candidate in Computer Science
+> >> >> ICMC/USP - University of S?o Paulo - Brazil
+> >> >> LabES - Laboratory of Software Engineering
+> >> >> http://www.icmc.usp.br/~ferrari/<http://www.icmc.usp.br/%7Eferrari/>
+> >> >>
+> >> >> _______________________________________________
+> >> >> Developers mailing list
+> >> >> Developers at strategoxt.org
+> >> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >> >>
+> >> >>
+> >> >
+> >> >
+> >> >
+> >> > --
+> >> > Rob Vermaas
+> >> >
+> >> > [email] rob.vermaas at gmail.com
+> >> >
+> >
+> >
+> >
+> > --
+> > Fabiano Cutigi Ferrari
+> > _________________________________
+> > PhD Candidate in Computer Science
+> > ICMC/USP - University of S?o Paulo - Brazil
+> > LabES - Laboratory of Software Engineering
+> > http://www.icmc.usp.br/~ferrari/ <http://www.icmc.usp.br/%7Eferrari/>
+> >
+>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100705/3ecdd037/attachment-0001.html 
+
+From E.Visser at tudelft.nl  Sat Jul 10 01:26:07 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 10 Jul 2010 01:26:07 +0200
+Subject: [Stratego Users] [Stratego Developers] Fwd: AspectJ-front:
+	Problem for parsing and pretty-printing complex pointcut expressions
+In-Reply-To: <AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com> 
+	<AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com> 
+	<AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com> 
+	<AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+Message-ID: <AANLkTil7mSvz1naGBRqMkeLYuSl4Ewfrcfn4YqXLGGmF@mail.gmail.com>
+
+Hi Fabiano,
+
+This sounds like it requires an investigation into the syntax
+definition and parenthesize tool. The bug may be in both places. You
+can find the source here:
+
+  https://svn.strategoxt.org/repos/StrategoXT/aspectj-front/testing/
+
+cheers,
+
+-- Eelco
+
+On Tue, Jul 6, 2010 at 12:42 AM, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> Hi, Rob, all.
+>
+> Thanks for you reply.
+>
+>> The parentheses look fine to me, as the && operator should have higher
+>> precedence than the || operator. So in the original source the missing
+>> parentheses where 'not really necessary'.
+>
+> Although I agree with you, this might be a bug in the acj compiler, since
+> the second expression results in "multiple bindings" error. It seems that
+> either operators have the same precedence in the current ajc implementation.
+> I have tried multiple versions of ajc (e.g. 1.2, 1.5 and 1.6) and they all
+> produces the same output.
+>
+> So, I will keep my original question: can anybody suggest a workaround (or a
+> fix) for this? E.g. changing the grammar definition?
+>
+> Thanks again!
+>
+> ? Fabiano
+>
+>
+>
+> On 5 July 2010 12:44, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>>
+>> Hi Fabiano,
+>>
+>> The parentheses look fine to me, as the && operator should have higher
+>> precedence than the || operator. So in the original source the missing
+>> parentheses where 'not really necessary'.
+>>
+>> greetings,
+>> Rob
+>>
+>> On Mon, Jul 5, 2010 at 17:04, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> > Hi, Rob, all.
+>> >
+>> > Unfortunately using the "aspectjtree-parenthesize" tool partially solved
+>> > the
+>> > problem. However, I have noticed that the pretty-printer still overlooks
+>> > some round brackets as we can see in the example below:
+>> >
+>> >> command line:
+>> > ?? parse-aspectj -i LogAccountActivitiesOriginal.aj |
+>> > /usr/local/libexec/aspectjtree-parenthesize? | pp-aspectj
+>> >
+>> >
+>> >> Original pointcut expression (full code is attached):
+>> >
+>> > ?? ?? pointcut accountActivity(Account account, float amount)??? :
+>> > ? ? ? ??? ( (execution(void Account.credit(float)) || execution(void
+>> > Account.debit(float))) && this(account) && args(amount)
+>> > ????? ? ? )
+>> > ??? ????? ||
+>> > ????????? (execution(void CheckClearanceSystem.*(Account, float)) &&
+>> > args(account, amount));
+>> >
+>> >> Pretty-printed expression:
+>> >
+>> > ? ? ? pointcut accountActivity (Account account, float amount) :
+>> > ?? ?? ??? (execution(void Account.credit(float)) || execution(void
+>> > Account.debit(float))) && this(account) && args(amount)
+>> > ??? ?? ?? ||
+>> > ??? ? ? ? execution(void CheckClearanceSystem.*(Account, float)) &&
+>> > args(account, amount);
+>> >
+>> >
+>> > Do you think this is a problem with the grammar definition? Do you any
+>> > suggestion on how to solve it?
+>> >
+>> > Cheers,
+>> >
+>> > ? Fabiano
+>> >
+>> >
+>> > On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> >>
+>> >> Hi, Rob.
+>> >>
+>> >> Many thanks for this. I've run preliminary tests using the
+>> >> "aspectjtree-parenthesize" tool and everything looks fine.
+>> >>
+>> >> The best,
+>> >> ?Fabiano
+>> >>
+>> >> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>> >> > Hi Fabiano,
+>> >> >
+>> >> > sorry I missed your earlier message. It seems pp-aspectj misses a
+>> >> > call
+>> >> > to the parenthesize strategy. I will make a fix for it, but for now
+>> >> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+>> >> > you aspectj AST before calling the pretty-printer.
+>> >> >
+>> >> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+>> >> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+>> >> >
+>> >> > greetings,
+>> >> > Rob
+>> >> >
+>> >> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> >> >> Hi, everyone.
+>> >> >>
+>> >> >> I have posted this problem a while ago (please, see below). Is there
+>> >> >> someone who could give me a help with this?
+>> >> >>
+>> >> >> Many thanks,
+>> >> >> ?Fabiano
+>> >> >>
+>> >> >>
+>> >> >> ---------- Forwarded message ----------
+>> >> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+>> >> >> Date: 2 February 2010 10:48
+>> >> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+>> >> >> complex pointcut expressions
+>> >> >> To: developers at strategoxt.org, Users at strategoxt.org
+>> >> >>
+>> >> >>
+>> >> >> Hi, everybody.
+>> >> >>
+>> >> >> I'm facing some problems while using the parser and the
+>> >> >> pretty-printer
+>> >> >> from AspectJ-front. For instance, when I parse a pointcut
+>> >> >> expressions
+>> >> >> such as:
+>> >> >>
+>> >> >>
+>> >> >> ? ? ? ?protected pointcut subjectChange(Subject subject) :
+>> >> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?(!within(SelectStatement))) ||
+>> >> >> (call(protected
+>> >> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+>> >> >> this(subject);
+>> >> >>
+>> >> >>
+>> >> >> the pretty-printed code is as follows:
+>> >> >>
+>> >> >>
+>> >> >> ? ? ? ?protected pointcut subjectChange (Subject subject)
+>> >> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?!within(SelectStatement) || call(protected
+>> >> >> List
+>> >> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+>> >> >>
+>> >> >>
+>> >> >> As you can see, some surrounding round brackets are removed, what
+>> >> >> results in inconsistent information binding. Other two examples are
+>> >> >> shown below (the original aspects are attached).
+>> >> >>
+>> >> >>
+>> >> >> Is anybody aware of a workaround for this? Is there a way to fix it
+>> >> >> (e.g. keeping all round brackets in the pretty-printed version)?
+>> >> >>
+>> >> >> Many thanks!
+>> >> >>
+>> >> >> ?Fabiano Ferrari
+>> >> >>
+>> >> >>
+>> >> >> --------- other examples ---------
+>> >> >>
+>> >> >> ?ORIGINAL EXPRESSION 1:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> >> >> ? ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?execution( ?public void
+>> >> >> RuntimeSQLException.setNextException(SQLException))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?protected static int
+>> >> >> BaseLogProxy.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> >> >> Stopwatch.appendTaskTime(String,long))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void Stopwatch.reset())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> FifoCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> FifoCacheController.getObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> FifoCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> FifoCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> LruCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> LruCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> LruCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> LruCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> MemoryCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> MemoryCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> MemoryCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> >> >> InvocationHandler+.loadObject())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?Object[]
+>> >> >> AutoResultMap.getResults(RequestScope,ResultSet) throws
+>> >> >> ?SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?static long
+>> >> >> SessionScope.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> OSCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> >> >> CacheModel.getObjectPartTwo())
+>> >> >>
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?) && this(syncObj)
+>> >> >> ? ? ? ? ? ? ? ?);
+>> >> >>
+>> >> >>
+>> >> >> ?PRETTY-PRINTED EXPRESSION 1:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> >> >> ? ? ? ? ? ? ? ? ?execution(public void
+>> >> >> RuntimeSQLException.setNextException(SQLException))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(protected static int
+>> >> >> BaseLogProxy.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> Stopwatch.appendTaskTime(String, long))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void Stopwatch.reset())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> FifoCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> FifoCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> FifoCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> FifoCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> LruCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> LruCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> LruCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> LruCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> MemoryCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> MemoryCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> MemoryCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> InvocationHandler+.loadObject())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object[]
+>> >> >> AutoResultMap.getResults(RequestScope, ResultSet) throws
+>> >> >> SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public static long
+>> >> >> SessionScope.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> OSCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartTwo())
+>> >> >>
+>> >> >> ? ? ? ? ? ? ? ? ?&& this(syncObj);
+>> >> >>
+>> >> >> ----------------------------------
+>> >> >>
+>> >> >> ?ORIGINAL EXPRESSION 2:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> >> >> ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ?execution( ?public static ClassInfo
+>> >> >> ClassInfo.getInstance(Class))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> OSCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( private void
+>> >> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( private Object
+>> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> >> >> IllegalAccessException)
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( ?private Object
+>> >> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+>> >> >> NeedsRefreshException )
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartThree(Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >>
+>> >> >>
+>> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+>> >> >> , Object , Object, CacheKey ) throws SQLException )
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private List
+>> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+>> >> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+>> >> >> ? ? ? ? ? ? ? ?)
+>> >> >> ? ? ? ? ? ? ? ?&& args(syncObj,..);
+>> >> >>
+>> >> >>
+>> >> >> ?PRETTY-PRINTED EXPRESSION 2:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> >> >> ? ? ? ? ? ? ? ? ?execution(public static ClassInfo
+>> >> >> ClassInfo.getInstance(Class))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> OSCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> >> >> IllegalAccessException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartThree(Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+>> >> >> RequestScope, Connection, Object, Object, CacheKey) throws
+>> >> >> SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private List
+>> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,
+>> >> >> RequestScope,
+>> >> >> Connection, Object, int, int, CacheKey) throws SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?&& args(syncObj, ..);
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >> --
+>> >> >> Fabiano Cutigi Ferrari
+>> >> >> _________________________________
+>> >> >> PhD Candidate in Computer Science
+>> >> >> ICMC/USP - University of S?o Paulo - Brazil
+>> >> >> LabES - Laboratory of Software Engineering
+>> >> >> http://www.icmc.usp.br/~ferrari/
+>> >> >>
+>> >> >> _______________________________________________
+>> >> >> Developers mailing list
+>> >> >> Developers at strategoxt.org
+>> >> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>> >> >>
+>> >> >>
+>> >> >
+>> >> >
+>> >> >
+>> >> > --
+>> >> > Rob Vermaas
+>> >> >
+>> >> > [email] rob.vermaas at gmail.com
+>> >> >
+>> >
+>> >
+>> >
+>> > --
+>> > Fabiano Cutigi Ferrari
+>> > _________________________________
+>> > PhD Candidate in Computer Science
+>> > ICMC/USP - University of S?o Paulo - Brazil
+>> > LabES - Laboratory of Software Engineering
+>> > http://www.icmc.usp.br/~ferrari/
+>> >
+>>
+>>
+>>
+>> --
+>> Rob Vermaas
+>>
+>> [email] rob.vermaas at gmail.com
+>
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From mestrejoaoricardo at gmail.com  Sat Jul 10 09:54:12 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sat, 10 Jul 2010 08:54:12 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin (Windows
+	7)
+Message-ID: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+
+Hi,
+
+I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I successfully
+installed *aterm* and *sdf2-bundle* (although it took about 3/4 hours each
+to complete the installation ? is this normal?).
+
+However, when installing Stratego/XT I get stuck in the "*make*" step. The
+first step:
+
+$ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+
+ends, but for the following step:
+
+$ make
+
+The last output is always:
+
+creating xtc.exe
+or
+Making all in src
+make[2]: Entering directory
+`/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+
+I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+is 100%, executing the file:
+C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+
+
+I?ve also tried installing previous Stratego/XT versions and the same
+happens.
+
+
+Anyone has an idea of what is going on?
+Thanks.
+
+
+P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think my
+specs don't justify the time this is taking)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100710/243b915c/attachment.html 
+
+From dgroenewegen at gmail.com  Sat Jul 10 11:05:30 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sat, 10 Jul 2010 11:05:30 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+Message-ID: <AANLkTikBzCfHrijojh00EJt2OcYeAbiiV13d-X9zcKcD@mail.gmail.com>
+
+Hi,
+
+I can't help you with this particular issue, but I know that
+building/installing C-based Stratego in Cygwin is a pain. If you want to try
+Stratego on Windows I suggest downloading the Spoofax language workbench
+http://strategoxt.org/Spoofax. It includes Java versions of the Stratego
+compiler and tools.
+
+If you need to build an existing Stratego project, it will be much easier
+and faster on a Linux virtual machine (e.g. Ubuntu on Virtualbox).
+
+-- Danny
+
+On Sat, Jul 10, 2010 at 9:54 AM, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> Hi,
+>
+> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+> successfully installed *aterm* and *sdf2-bundle* (although it took about
+> 3/4 hours each to complete the installation ? is this normal?).
+>
+> However, when installing Stratego/XT I get stuck in the "*make*" step. The
+> first step:
+>
+> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>
+> ends, but for the following step:
+>
+> $ make
+>
+> The last output is always:
+>
+> creating xtc.exe
+> or
+> Making all in src
+> make[2]: Entering directory
+> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>
+> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+> is 100%, executing the file:
+> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>
+>
+> I?ve also tried installing previous Stratego/XT versions and the same
+> happens.
+>
+>
+> Anyone has an idea of what is going on?
+> Thanks.
+>
+>
+> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+> my specs don't justify the time this is taking)
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100710/f0f1d675/attachment-0001.html 
+
+From mestrejoaoricardo at gmail.com  Sat Jul 10 12:30:36 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sat, 10 Jul 2010 11:30:36 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTikBzCfHrijojh00EJt2OcYeAbiiV13d-X9zcKcD@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTikBzCfHrijojh00EJt2OcYeAbiiV13d-X9zcKcD@mail.gmail.com>
+Message-ID: <AANLkTik-zMop87qZ0h6GuBiYvlatifoQW_tBfVSJuUSY@mail.gmail.com>
+
+I'm interested in using Java-Front and AspectJ-Front. Can these be used with
+Spoofax?
+
+On 10 July 2010 10:05, Danny Groenewegen <dgroenewegen at gmail.com> wrote:
+
+> Hi,
+>
+> I can't help you with this particular issue, but I know that
+> building/installing C-based Stratego in Cygwin is a pain. If you want to try
+> Stratego on Windows I suggest downloading the Spoofax language workbench
+> http://strategoxt.org/Spoofax. It includes Java versions of the Stratego
+> compiler and tools.
+>
+> If you need to build an existing Stratego project, it will be much easier
+> and faster on a Linux virtual machine (e.g. Ubuntu on Virtualbox).
+>
+> -- Danny
+>
+> On Sat, Jul 10, 2010 at 9:54 AM, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+>> successfully installed *aterm* and *sdf2-bundle* (although it took about
+>> 3/4 hours each to complete the installation ? is this normal?).
+>>
+>> However, when installing Stratego/XT I get stuck in the "*make*" step.
+>> The first step:
+>>
+>> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>>
+>> ends, but for the following step:
+>>
+>> $ make
+>>
+>> The last output is always:
+>>
+>>  creating xtc.exe
+>> or
+>> Making all in src
+>> make[2]: Entering directory
+>> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>>
+>> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+>> is 100%, executing the file:
+>> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>>
+>>
+>> I?ve also tried installing previous Stratego/XT versions and the same
+>> happens.
+>>
+>>
+>> Anyone has an idea of what is going on?
+>> Thanks.
+>>
+>>
+>> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+>> my specs don't justify the time this is taking)
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100710/54dfdaef/attachment.html 
+
+From dgroenewegen at gmail.com  Sat Jul 10 14:56:45 2010
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sat, 10 Jul 2010 14:56:45 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTik-zMop87qZ0h6GuBiYvlatifoQW_tBfVSJuUSY@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTikBzCfHrijojh00EJt2OcYeAbiiV13d-X9zcKcD@mail.gmail.com>
+	<AANLkTik-zMop87qZ0h6GuBiYvlatifoQW_tBfVSJuUSY@mail.gmail.com>
+Message-ID: <AANLkTinRZW4zWwq_sZLPuk6iI5sYfUA8FW4acKih-0I0@mail.gmail.com>
+
+Java-Front is included in Spoofax, just add 'imports libjava-front' to a
+.str file. I'm not familiar with AspectJ-Front (Lennart or Rob?).
+
+-- Danny
+
+On Sat, Jul 10, 2010 at 12:30 PM, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> I'm interested in using Java-Front and AspectJ-Front. Can these be used
+> with Spoofax?
+>
+>
+> On 10 July 2010 10:05, Danny Groenewegen <dgroenewegen at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I can't help you with this particular issue, but I know that
+>> building/installing C-based Stratego in Cygwin is a pain. If you want to try
+>> Stratego on Windows I suggest downloading the Spoofax language workbench
+>> http://strategoxt.org/Spoofax. It includes Java versions of the Stratego
+>> compiler and tools.
+>>
+>> If you need to build an existing Stratego project, it will be much easier
+>> and faster on a Linux virtual machine (e.g. Ubuntu on Virtualbox).
+>>
+>> -- Danny
+>>
+>>  On Sat, Jul 10, 2010 at 9:54 AM, A G <mestrejoaoricardo at gmail.com>wrote:
+>>
+>>>  Hi,
+>>>
+>>> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+>>> successfully installed *aterm* and *sdf2-bundle* (although it took about
+>>> 3/4 hours each to complete the installation ? is this normal?).
+>>>
+>>> However, when installing Stratego/XT I get stuck in the "*make*" step.
+>>> The first step:
+>>>
+>>> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>>>
+>>> ends, but for the following step:
+>>>
+>>> $ make
+>>>
+>>> The last output is always:
+>>>
+>>>  creating xtc.exe
+>>> or
+>>> Making all in src
+>>> make[2]: Entering directory
+>>> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>>>
+>>> I?ve waited more than 8 hours and still nothing happens, but the CPU
+>>> usage is 100%, executing the file:
+>>> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>>>
+>>>
+>>> I?ve also tried installing previous Stratego/XT versions and the same
+>>> happens.
+>>>
+>>>
+>>> Anyone has an idea of what is going on?
+>>> Thanks.
+>>>
+>>>
+>>> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+>>> my specs don't justify the time this is taking)
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100710/fc70287c/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Sun Jul 11 13:01:56 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Sun, 11 Jul 2010 12:01:56 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+Message-ID: <AANLkTinkL94lqT52-gvJWEH32xog5Xl3P_CKUwd5PzVk@mail.gmail.com>
+
+I successfully installed stratego-libraries, instead of strategoxt, in
+cygwin. This should be enough for both AspectJ and Java Front. However, when
+installing Java Front, I get an error at the *make* step (*./configure* runs
+well):
+
+collect2: ld returned 1 exit status
+make[2]: *** [libjava-front.la] Error 1
+make[2]: Leaving directory
+`/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+make[1]: *** [all] Error 2
+make[1]: Leaving directory
+`/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+make: *** [all-recursive] Error 1
+
+Any ideas what could be wrong?
+
+
+Thanks.
+
+
+On 10 July 2010 08:54, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> Hi,
+>
+> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+> successfully installed *aterm* and *sdf2-bundle* (although it took about
+> 3/4 hours each to complete the installation ? is this normal?).
+>
+> However, when installing Stratego/XT I get stuck in the "*make*" step. The
+> first step:
+>
+> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>
+> ends, but for the following step:
+>
+> $ make
+>
+> The last output is always:
+>
+> creating xtc.exe
+> or
+> Making all in src
+> make[2]: Entering directory
+> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>
+> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+> is 100%, executing the file:
+> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>
+>
+> I?ve also tried installing previous Stratego/XT versions and the same
+> happens.
+>
+>
+> Anyone has an idea of what is going on?
+> Thanks.
+>
+>
+> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+> my specs don't justify the time this is taking)
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100711/f9d91be5/attachment.html 
+
+From karltk at strategoxt.org  Tue Jul 13 11:29:38 2010
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Tue, 13 Jul 2010 11:29:38 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+Message-ID: <AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+
+Hi
+
+> I'm trying to install Stratego/XT in Windows 7 via Cygwin. I successfully
+> installed aterm and sdf2-bundle (although it took about 3/4 hours each to
+> complete the installation ? is this normal?).
+
+Even though 45 mins sounds a bit long, I'm not that surprised.
+Stratego/XT and its build system are constructed according to the Unix
+philosophy where lots of little programs work together to accomplish a
+bigger task. The same goes for the build system of ATerm and SDF2.
+This means that for a build, your computer will spawn thousands, if
+not tens of thousands of processes. On Unix-derivates, this is really
+quick and cheap. On Windows, spawning a new process takes a lot
+longer, sometimes on the order of hundreds of milliseconds.
+
+> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+> is 100%, executing the file:
+> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>
+> Anyone has an idea of what is going on?
+
+I don't suppose you have something like strace for NT that would allow
+us to see where xtc.exe got stuck? We've seen issues with the ATerm
+library for time to time -- it comes with a very funky garbage
+collector that sometimes needs to be adjusted to the compiler you
+use:/
+
+
+-- Karl T
+
+PS. If you're only after getting something up and running, I would
+recommend Danny's suggestion.
+
+
+From rob.vermaas at gmail.com  Tue Jul 13 11:44:30 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Tue, 13 Jul 2010 11:44:30 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+Message-ID: <AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+
+Hi,
+
+> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+> > is 100%, executing the file:
+> > C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+> >
+> > Anyone has an idea of what is going on?
+>
+> I don't suppose you have something like strace for NT that would allow
+> us to see where xtc.exe got stuck? We've seen issues with the ATerm
+> library for time to time -- it comes with a very funky garbage
+> collector that sometimes needs to be adjusted to the compiler you
+> use:/
+>
+>
+This sounds more that aterm is not compiled with the required patch for
+StrategoXT:
+https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch(or
+available from
+http://strategoxt.org/Stratego/StrategoDownload). If I remember correctly
+this was issue with newer GCC versions.
+
+greetings,
+Rob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/57b04c10/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Jul 13 12:13:04 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 13 Jul 2010 11:13:04 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+Message-ID: <AANLkTikb_GwqLW7-m7vlCFZBZlWyTpaEbSpxhrAMQ1Rr@mail.gmail.com>
+
+> PS. If you're only after getting something up and running, I would
+recommend Danny's suggestion.
+
+
+As a matter of fact, I'm only interested in transforming AspectJ and Java
+programs to XML, using *aterm2xml*.
+Can this be made via Spoofax? I'd indeed prefer a Java solution.
+
+
+Thanks.
+
+
+
+On 13 July 2010 10:29, Karl Trygve Kalleberg <karltk at strategoxt.org> wrote:
+
+> Hi
+>
+> > I'm trying to install Stratego/XT in Windows 7 via Cygwin. I successfully
+> > installed aterm and sdf2-bundle (although it took about 3/4 hours each to
+> > complete the installation ? is this normal?).
+>
+> Even though 45 mins sounds a bit long, I'm not that surprised.
+> Stratego/XT and its build system are constructed according to the Unix
+> philosophy where lots of little programs work together to accomplish a
+> bigger task. The same goes for the build system of ATerm and SDF2.
+> This means that for a build, your computer will spawn thousands, if
+> not tens of thousands of processes. On Unix-derivates, this is really
+> quick and cheap. On Windows, spawning a new process takes a lot
+> longer, sometimes on the order of hundreds of milliseconds.
+>
+> > I?ve waited more than 8 hours and still nothing happens, but the CPU
+> usage
+> > is 100%, executing the file:
+> > C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+> >
+> > Anyone has an idea of what is going on?
+>
+> I don't suppose you have something like strace for NT that would allow
+> us to see where xtc.exe got stuck? We've seen issues with the ATerm
+> library for time to time -- it comes with a very funky garbage
+> collector that sometimes needs to be adjusted to the compiler you
+> use:/
+>
+>
+> -- Karl T
+>
+> PS. If you're only after getting something up and running, I would
+> recommend Danny's suggestion.
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/cd08c80a/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Jul 13 12:39:38 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 13 Jul 2010 11:39:38 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+	<AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+Message-ID: <AANLkTilo5oWnxlKAqZe_-Wr97J0eUDxyczAJJBSfQTtx@mail.gmail.com>
+
+> This sounds more that aterm is not compiled with the required patch for
+StrategoXT:
+>
+https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch
+> (or available from http://strategoxt.org/Stratego/StrategoDownload).
+>If I remember correctly this was issue with newer GCC versions.
+
+Indeed I was installing without the patch. Could be that...
+
+I'm a little lost as to how should I apply the patch. Do I apply the patch
+after the aterm installation? I tried running the patch but I get the
+following error:
+
+./max-long.patch: line 2: Heap: command not found
+./max-long.patch: line 3: ---: command not found
+./max-long.patch: line 4: Heap: command not found
+./max-long.patch: line 5: Heap: command not found
+./max-long.patch: line 6: syntax error near unexpected token `}'
+./max-long.patch: line 6: ` }'
+
+Both arguments in the first line of the patch:
+
+diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+
+should be the same hash.c file, right? (although in different locaions)
+
+
+
+
+
+On 13 July 2010 10:44, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi,
+>
+> > I?ve waited more than 8 hours and still nothing happens, but the CPU
+>> usage
+>> > is 100%, executing the file:
+>> > C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>> >
+>> > Anyone has an idea of what is going on?
+>>
+>> I don't suppose you have something like strace for NT that would allow
+>> us to see where xtc.exe got stuck? We've seen issues with the ATerm
+>> library for time to time -- it comes with a very funky garbage
+>> collector that sometimes needs to be adjusted to the compiler you
+>> use:/
+>>
+>>
+> This sounds more that aterm is not compiled with the required patch for
+> StrategoXT:
+> https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch(or available from
+> http://strategoxt.org/Stratego/StrategoDownload). If I remember correctly
+> this was issue with newer GCC versions.
+>
+> greetings,
+> Rob
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/b47079e6/attachment.html 
+
+From rob.vermaas at gmail.com  Tue Jul 13 12:48:34 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Tue, 13 Jul 2010 12:48:34 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTilo5oWnxlKAqZe_-Wr97J0eUDxyczAJJBSfQTtx@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+	<AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+	<AANLkTilo5oWnxlKAqZe_-Wr97J0eUDxyczAJJBSfQTtx@mail.gmail.com>
+Message-ID: <AANLkTil1ainyE-gTuzsbeJ3HQPZ0GIbkk73kFK2BIHGC@mail.gmail.com>
+
+Hi,
+
+> This sounds more that aterm is not compiled with the required patch for
+> StrategoXT:
+> >
+> https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch
+> > (or available from http://strategoxt.org/Stratego/StrategoDownload).
+> >If I remember correctly this was issue with newer GCC versions.
+>
+> Indeed I was installing without the patch. Could be that...
+>
+> I'm a little lost as to how should I apply the patch. Do I apply the patch
+> after the aterm installation? I tried running the patch but I get the
+> following error:
+>
+> ./max-long.patch: line 2: Heap: command not found
+> ./max-long.patch: line 3: ---: command not found
+> ./max-long.patch: line 4: Heap: command not found
+> ./max-long.patch: line 5: Heap: command not found
+> ./max-long.patch: line 6: syntax error near unexpected token `}'
+> ./max-long.patch: line 6: ` }'
+>
+> Both arguments in the first line of the patch:
+>
+> diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+>
+> should be the same hash.c file, right? (although in different locaions)
+>
+>
+The patch should be applied on the aterm source before you compile aterm.
+Run 'patch -p1 < max-long.patch' when you are in the extracted aterm source.
+
+greetings,
+Rob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/44765499/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Jul 13 13:00:43 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 13 Jul 2010 12:00:43 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTil1ainyE-gTuzsbeJ3HQPZ0GIbkk73kFK2BIHGC@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+	<AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+	<AANLkTilo5oWnxlKAqZe_-Wr97J0eUDxyczAJJBSfQTtx@mail.gmail.com>
+	<AANLkTil1ainyE-gTuzsbeJ3HQPZ0GIbkk73kFK2BIHGC@mail.gmail.com>
+Message-ID: <AANLkTikn82-oaDoPvWqsDiIeJDD_PkfpFXcAq52MCYBs@mail.gmail.com>
+
+> The patch should be applied on the aterm source before you compile aterm.
+>Run 'patch -p1 < max-long.patch' when you are in the extracted aterm
+source.
+
+Since I'm installing version 2.5, do I need to edit the paths in the first
+line of the script, before I apply the patch:
+
+diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+
+
+
+On 13 July 2010 11:48, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi,
+>
+> > This sounds more that aterm is not compiled with the required patch for
+>> StrategoXT:
+>> >
+>> https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch
+>> > (or available from http://strategoxt.org/Stratego/StrategoDownload).
+>> >If I remember correctly this was issue with newer GCC versions.
+>>
+>> Indeed I was installing without the patch. Could be that...
+>>
+>> I'm a little lost as to how should I apply the patch. Do I apply the patch
+>> after the aterm installation? I tried running the patch but I get the
+>> following error:
+>>
+>> ./max-long.patch: line 2: Heap: command not found
+>> ./max-long.patch: line 3: ---: command not found
+>> ./max-long.patch: line 4: Heap: command not found
+>> ./max-long.patch: line 5: Heap: command not found
+>> ./max-long.patch: line 6: syntax error near unexpected token `}'
+>> ./max-long.patch: line 6: ` }'
+>>
+>> Both arguments in the first line of the patch:
+>>
+>> diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+>>
+>> should be the same hash.c file, right? (although in different locaions)
+>>
+>>
+> The patch should be applied on the aterm source before you compile aterm.
+> Run 'patch -p1 < max-long.patch' when you are in the extracted aterm source.
+>
+> greetings,
+> Rob
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/236af82d/attachment-0001.html 
+
+From rob.vermaas at gmail.com  Tue Jul 13 13:02:01 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Tue, 13 Jul 2010 13:02:01 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTikn82-oaDoPvWqsDiIeJDD_PkfpFXcAq52MCYBs@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTik2Fc4kUmthe2ScLsfJc3uJ0rBPSqVWo8Jo35h7@mail.gmail.com>
+	<AANLkTilU0MYr9UvSX5jHdN8TBZ-WWRfU0j-cc-VTK9dq@mail.gmail.com>
+	<AANLkTilo5oWnxlKAqZe_-Wr97J0eUDxyczAJJBSfQTtx@mail.gmail.com>
+	<AANLkTil1ainyE-gTuzsbeJ3HQPZ0GIbkk73kFK2BIHGC@mail.gmail.com>
+	<AANLkTikn82-oaDoPvWqsDiIeJDD_PkfpFXcAq52MCYBs@mail.gmail.com>
+Message-ID: <AANLkTimzxqvM1fU1DAwn51kTS1hzEe6W8w-ZsKvgKcOB@mail.gmail.com>
+
+No, this should work as stated.
+
+gr.
+Rob
+
+On Tue, Jul 13, 2010 at 13:00, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> > The patch should be applied on the aterm source before you compile aterm.
+> >Run 'patch -p1 < max-long.patch' when you are in the extracted aterm
+> source.
+>
+> Since I'm installing version 2.5, do I need to edit the paths in the first
+> line of the script, before I apply the patch:
+>
+> diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+>
+>
+>
+> On 13 July 2010 11:48, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> > This sounds more that aterm is not compiled with the required patch for
+>>> StrategoXT:
+>>> >
+>>> https://svn.nixos.org/repos/nix/nixpkgs/trunk/pkgs/development/libraries/aterm/max-long.patch
+>>> > (or available from http://strategoxt.org/Stratego/StrategoDownload).
+>>> >If I remember correctly this was issue with newer GCC versions.
+>>>
+>>> Indeed I was installing without the patch. Could be that...
+>>>
+>>> I'm a little lost as to how should I apply the patch. Do I apply the
+>>> patch after the aterm installation? I tried running the patch but I get the
+>>> following error:
+>>>
+>>> ./max-long.patch: line 2: Heap: command not found
+>>> ./max-long.patch: line 3: ---: command not found
+>>> ./max-long.patch: line 4: Heap: command not found
+>>> ./max-long.patch: line 5: Heap: command not found
+>>> ./max-long.patch: line 6: syntax error near unexpected token `}'
+>>> ./max-long.patch: line 6: ` }'
+>>>
+>>> Both arguments in the first line of the patch:
+>>>
+>>> diff -rc aterm-2.8-orig/aterm/hash.c aterm-2.8/aterm/hash.c
+>>>
+>>> should be the same hash.c file, right? (although in different locaions)
+>>>
+>>>
+>> The patch should be applied on the aterm source before you compile aterm.
+>> Run 'patch -p1 < max-long.patch' when you are in the extracted aterm source.
+>>
+>> greetings,
+>> Rob
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100713/728640f7/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Wed Jul 14 17:15:00 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Wed, 14 Jul 2010 16:15:00 +0100
+Subject: [Stratego Users] How can I use the aterm2xml tool in Spoofax?
+Message-ID: <AANLkTimOcAxbz5GEkjBksVGJ6D6hqSgcEgQ9F3b9ZUfi@mail.gmail.com>
+
+Hi,
+
+I'm interested in using aterm2xml to convert Java and AspectJ files to XML.
+
+Can this be done via Spoofax (I'd love to be able to produce a Java
+solution)? How?
+
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100714/22e555fd/attachment.html 
+
+From L.C.L.Kats at tudelft.nl  Thu Jul 15 10:45:17 2010
+From: L.C.L.Kats at tudelft.nl (Lennart Kats)
+Date: Thu, 15 Jul 2010 10:45:17 +0200
+Subject: [Stratego Users] How can I use the aterm2xml tool in  Spoofax?
+In-Reply-To: <AANLkTimOcAxbz5GEkjBksVGJ6D6hqSgcEgQ9F3b9ZUfi@mail.gmail.c
+ om>
+References: <AANLkTimOcAxbz5GEkjBksVGJ6D6hqSgcEgQ9F3b9ZUfi@mail.gmail.com>
+Message-ID: <201007150845.o6F8jHuU018489@smtp1.infopact.nl>
+
+Hi,
+
+I'm afraid we don't currently have a Java version of AspectJ-Front. To create one, we would have to change the build files of the project to use the Stratego-Java compiler. I talked to Rob Vermaas -- one of the AspectJ-Front maintainers -- and we can probably build one somewhere next week, or earlier with a bit of luck. 
+
+I created an issue for this on our issue tracker (you can subscribe there to get progress notifications or add comments):
+
+  http://yellowgrass.org/issue/StrategoXT/832
+
+To actually convert the abstract syntax to XML, we would also need a Java version of the xml-front package. This may be a bit more involved as the package is older, but it has also been on the agenda for a while. Another issue report:
+
+  http://yellowgrass.org/issue/StrategoXT/833
+
+cheers,
+
+Lennart
+
+@ 05:15 PM 7/14/2010, U wrote:
+>Hi,
+>
+>I'm interested in using aterm2xml to convert Java and AspectJ files to XML.
+>
+>Can this be done via Spoofax (I'd love to be able to produce a Java solution)? How?
+>
+>
+>Thanks.
+>_______________________________________________
+>Users mailing list
+>Users at strategoxt.org
+>https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From mestrejoaoricardo at gmail.com  Fri Jul 16 12:34:48 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Fri, 16 Jul 2010 11:34:48 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTinkL94lqT52-gvJWEH32xog5Xl3P_CKUwd5PzVk@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTinkL94lqT52-gvJWEH32xog5Xl3P_CKUwd5PzVk@mail.gmail.com>
+Message-ID: <AANLkTimVSJF8KZ9q6UET6hiQ_3YSiQc4noEiYKykCgCg@mail.gmail.com>
+
+The aterm patch allowed strategoxt to be installed. It didn't froze in
+"creating xtc.exe" anymore. However, when installing java-front,I still get
+the same error I got before:
+
+...
+/cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62174:
+*undefined reference to `_parse_stream_pt_1_3'*
+.libs/libjava_front_la-libjava-front.o: In function `parse_java_stream_0_2':
+/cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62114:
+*undefined reference to `_strsglr_report_parse_error_0_0'*
+/cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62123:
+*undefined reference to `_parse_stream_pt_1_3'*
+/cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62127:
+*undefined reference to `_implode_asfix_0_0'*
+
+collect2: ld returned 1 exit status
+make[2]: *** [libjava-front.la] Error 1
+make[2]: Leaving directory
+`/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+make[1]: *** [all] Error 2
+make[1]: Leaving directory
+`/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+make: *** [all-recursive] Error 1
+
+
+
+On 11 July 2010 12:01, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> I successfully installed stratego-libraries, instead of strategoxt, in
+> cygwin. This should be enough for both AspectJ and Java Front. However, when
+> installing Java Front, I get an error at the *make* step (*./configure*runs well):
+>
+> collect2: ld returned 1 exit status
+> make[2]: *** [libjava-front.la] Error 1
+> make[2]: Leaving directory
+> `/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+> make[1]: *** [all] Error 2
+> make[1]: Leaving directory
+> `/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+> make: *** [all-recursive] Error 1
+>
+> Any ideas what could be wrong?
+>
+>
+> Thanks.
+>
+>
+> On 10 July 2010 08:54, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+>> successfully installed *aterm* and *sdf2-bundle* (although it took about
+>> 3/4 hours each to complete the installation ? is this normal?).
+>>
+>> However, when installing Stratego/XT I get stuck in the "*make*" step.
+>> The first step:
+>>
+>> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>>
+>> ends, but for the following step:
+>>
+>> $ make
+>>
+>> The last output is always:
+>>
+>>  creating xtc.exe
+>> or
+>> Making all in src
+>> make[2]: Entering directory
+>> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>>
+>> I?ve waited more than 8 hours and still nothing happens, but the CPU usage
+>> is 100%, executing the file:
+>> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>>
+>>
+>> I?ve also tried installing previous Stratego/XT versions and the same
+>> happens.
+>>
+>>
+>> Anyone has an idea of what is going on?
+>> Thanks.
+>>
+>>
+>> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+>> my specs don't justify the time this is taking)
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100716/0865bf44/attachment.html 
+
+From rob.vermaas at gmail.com  Fri Jul 16 13:30:33 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Fri, 16 Jul 2010 13:30:33 +0200
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTimVSJF8KZ9q6UET6hiQ_3YSiQc4noEiYKykCgCg@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTinkL94lqT52-gvJWEH32xog5Xl3P_CKUwd5PzVk@mail.gmail.com>
+	<AANLkTimVSJF8KZ9q6UET6hiQ_3YSiQc4noEiYKykCgCg@mail.gmail.com>
+Message-ID: <AANLkTilc5C9A7dT8NfgSn8wNvbbLmIbewdvZKx-h9aLD@mail.gmail.com>
+
+Hi,
+
+make sure you add the lib/ paths from the dependencies to the PATH
+environment variable. I think cygwin finds the DLLs based on the PATH.
+
+gr,
+Rob
+
+On Fri, Jul 16, 2010 at 12:34, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> The aterm patch allowed strategoxt to be installed. It didn't froze in
+> "creating xtc.exe" anymore. However, when installing java-front,I still get
+> the same error I got before:
+>
+> ...
+> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62174:
+> *undefined reference to `_parse_stream_pt_1_3'*
+> .libs/libjava_front_la-libjava-front.o: In function
+> `parse_java_stream_0_2':
+> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62114:
+> *undefined reference to `_strsglr_report_parse_error_0_0'*
+> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62123:
+> *undefined reference to `_parse_stream_pt_1_3'*
+> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62127:
+> *undefined reference to `_implode_asfix_0_0'*
+>
+> collect2: ld returned 1 exit status
+> make[2]: *** [libjava-front.la] Error 1
+> make[2]: Leaving directory
+> `/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+> make[1]: *** [all] Error 2
+> make[1]: Leaving directory
+> `/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+> make: *** [all-recursive] Error 1
+>
+>
+>
+> On 11 July 2010 12:01, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> I successfully installed stratego-libraries, instead of strategoxt, in
+>> cygwin. This should be enough for both AspectJ and Java Front. However, when
+>> installing Java Front, I get an error at the *make* step (*./configure*runs well):
+>>
+>> collect2: ld returned 1 exit status
+>> make[2]: *** [libjava-front.la] Error 1
+>> make[2]: Leaving directory
+>> `/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+>> make[1]: *** [all] Error 2
+>> make[1]: Leaving directory
+>> `/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+>> make: *** [all-recursive] Error 1
+>>
+>> Any ideas what could be wrong?
+>>
+>>
+>> Thanks.
+>>
+>>
+>> On 10 July 2010 08:54, A G <mestrejoaoricardo at gmail.com> wrote:
+>>
+>>> Hi,
+>>>
+>>> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+>>> successfully installed *aterm* and *sdf2-bundle* (although it took about
+>>> 3/4 hours each to complete the installation ? is this normal?).
+>>>
+>>> However, when installing Stratego/XT I get stuck in the "*make*" step.
+>>> The first step:
+>>>
+>>> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>>>
+>>> ends, but for the following step:
+>>>
+>>> $ make
+>>>
+>>> The last output is always:
+>>>
+>>>  creating xtc.exe
+>>> or
+>>> Making all in src
+>>> make[2]: Entering directory
+>>> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>>>
+>>> I?ve waited more than 8 hours and still nothing happens, but the CPU
+>>> usage is 100%, executing the file:
+>>> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>>>
+>>>
+>>> I?ve also tried installing previous Stratego/XT versions and the same
+>>> happens.
+>>>
+>>>
+>>> Anyone has an idea of what is going on?
+>>> Thanks.
+>>>
+>>>
+>>> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I think
+>>> my specs don't justify the time this is taking)
+>>>
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100716/20283c27/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Jul 20 15:03:14 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 20 Jul 2010 14:03:14 +0100
+Subject: [Stratego Users] Problems installing Stratego/XT in Cygwin
+	(Windows 7)
+In-Reply-To: <AANLkTilc5C9A7dT8NfgSn8wNvbbLmIbewdvZKx-h9aLD@mail.gmail.com>
+References: <AANLkTimc5hjdA8dYN6Op1lIU2qF609dCzS7yZIMNDbIU@mail.gmail.com>
+	<AANLkTinkL94lqT52-gvJWEH32xog5Xl3P_CKUwd5PzVk@mail.gmail.com>
+	<AANLkTimVSJF8KZ9q6UET6hiQ_3YSiQc4noEiYKykCgCg@mail.gmail.com>
+	<AANLkTilc5C9A7dT8NfgSn8wNvbbLmIbewdvZKx-h9aLD@mail.gmail.com>
+Message-ID: <AANLkTinLulfeiyO8fmCrYzAFLB0rufcRf0PtMwOFZUuj@mail.gmail.com>
+
+Adding the lib/ paths to the PATH environment variable didn't help.
+
+What did help was adding the location of the dependencies' lib/pkgconfig/
+paths to the variable PKG_CONFIG_PATH. Strange, as this step should be
+optional...
+
+Anyway, I was able to install Java-Front and AspectJ-Front. Not sure if
+AJFront is working, but that's another matter.
+
+
+Thanks for the help.
+
+
+On 16 July 2010 12:30, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi,
+>
+> make sure you add the lib/ paths from the dependencies to the PATH
+> environment variable. I think cygwin finds the DLLs based on the PATH.
+>
+> gr,
+> Rob
+>
+> On Fri, Jul 16, 2010 at 12:34, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> The aterm patch allowed strategoxt to be installed. It didn't froze in
+>> "creating xtc.exe" anymore. However, when installing java-front,I still get
+>> the same error I got before:
+>>
+>> ...
+>> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62174:
+>> *undefined reference to `_parse_stream_pt_1_3'*
+>> .libs/libjava_front_la-libjava-front.o: In function
+>> `parse_java_stream_0_2':
+>> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62114:
+>> *undefined reference to `_strsglr_report_parse_error_0_0'*
+>> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62123:
+>> *undefined reference to `_parse_stream_pt_1_3'*
+>> /cygdrive/c/<directory>/java-front-0.9pre18737/lib/libjava-front.c:62127:
+>> *undefined reference to `_implode_asfix_0_0'*
+>>
+>> collect2: ld returned 1 exit status
+>> make[2]: *** [libjava-front.la] Error 1
+>> make[2]: Leaving directory
+>> `/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+>> make[1]: *** [all] Error 2
+>> make[1]: Leaving directory
+>> `/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+>> make: *** [all-recursive] Error 1
+>>
+>>
+>>
+>> On 11 July 2010 12:01, A G <mestrejoaoricardo at gmail.com> wrote:
+>>
+>>> I successfully installed stratego-libraries, instead of strategoxt, in
+>>> cygwin. This should be enough for both AspectJ and Java Front. However, when
+>>> installing Java Front, I get an error at the *make* step (*./configure*runs well):
+>>>
+>>> collect2: ld returned 1 exit status
+>>> make[2]: *** [libjava-front.la] Error 1
+>>> make[2]: Leaving directory
+>>> `/cygdrive/c/<directory>/java-front-0.9pre18737/lib'
+>>> make[1]: *** [all] Error 2
+>>> make[1]: Leaving directory
+>>> `/cygdrive/c/<direcory>/java-front-0.9pre18737/lib'
+>>> make: *** [all-recursive] Error 1
+>>>
+>>> Any ideas what could be wrong?
+>>>
+>>>
+>>> Thanks.
+>>>
+>>>
+>>> On 10 July 2010 08:54, A G <mestrejoaoricardo at gmail.com> wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> I'm trying to install *Stratego/XT* in Windows 7 via Cygwin. I
+>>>> successfully installed *aterm* and *sdf2-bundle* (although it took
+>>>> about 3/4 hours each to complete the installation ? is this normal?).
+>>>>
+>>>> However, when installing Stratego/XT I get stuck in the "*make*" step.
+>>>> The first step:
+>>>>
+>>>> $ ./configure --with-aterm=/usr/local --with-sdf=/usr/local
+>>>>
+>>>> ends, but for the following step:
+>>>>
+>>>> $ make
+>>>>
+>>>> The last output is always:
+>>>>
+>>>>  creating xtc.exe
+>>>> or
+>>>> Making all in src
+>>>> make[2]: Entering directory
+>>>> `/cygdrive/c/<location>/strategoxt-0.17pre18583/xtc/src'
+>>>>
+>>>> I?ve waited more than 8 hours and still nothing happens, but the CPU
+>>>> usage is 100%, executing the file:
+>>>> C:\<location>\strategoxt-0.17pre18583\xtc\src\.libs\xtc.exe
+>>>>
+>>>>
+>>>> I?ve also tried installing previous Stratego/XT versions and the same
+>>>> happens.
+>>>>
+>>>>
+>>>> Anyone has an idea of what is going on?
+>>>> Thanks.
+>>>>
+>>>>
+>>>> P.S.: My CPU is a Core 2 Duo T7600 2,4 Ghz and I have 4GB Ram (so I
+>>>> think my specs don't justify the time this is taking)
+>>>>
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100720/22e5ec25/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Tue Jul 20 15:18:51 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Tue, 20 Jul 2010 14:18:51 +0100
+Subject: [Stratego Users] AspectJ-front isn't producing any output
+Message-ID: <AANLkTilPksas8Yk3ZuCgvRlKIlx1XyI1rdWxl9dvROPM@mail.gmail.com>
+
+Hi,
+
+I was testing the command parse-aspectj and I don't get any output (an empty
+file), even with --verbose. I tested with two examples found in the mailing
+list:
+
+echo "aspect Foo { before() : foo() {}}" | parse-aspectj
+
+echo "myClass() && execution(* *(..))" | parse-aspectj -s PointcutExpr
+
+Java-front (parse-java), however, works correctly.
+
+What could be causing this?
+
+
+Thanks.
+
+P.S.: Using aspectj-front-0.2pre17697.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100720/0da214c9/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Wed Jul 21 16:02:45 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Wed, 21 Jul 2010 15:02:45 +0100
+Subject: [Stratego Users] AspectJ-front isn't producing any output
+In-Reply-To: <AANLkTilPksas8Yk3ZuCgvRlKIlx1XyI1rdWxl9dvROPM@mail.gmail.com>
+References: <AANLkTilPksas8Yk3ZuCgvRlKIlx1XyI1rdWxl9dvROPM@mail.gmail.com>
+Message-ID: <AANLkTilOLDQp4jy19UCtMZKgbCrweWvnQZdX6TURrfY-@mail.gmail.com>
+
+I've noticed an empty file named *parse-aspectj.exe.stackdump* is created in
+the directory I invoke the command.
+
+On 20 July 2010 14:18, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> Hi,
+>
+> I was testing the command parse-aspectj and I don't get any output (an
+> empty file), even with --verbose. I tested with two examples found in the
+> mailing list:
+>
+> echo "aspect Foo { before() : foo() {}}" | parse-aspectj
+>
+> echo "myClass() && execution(* *(..))" | parse-aspectj -s PointcutExpr
+>
+> Java-front (parse-java), however, works correctly.
+>
+> What could be causing this?
+>
+>
+> Thanks.
+>
+> P.S.: Using aspectj-front-0.2pre17697.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100721/f094cc04/attachment.html 
+
+From rob.vermaas at gmail.com  Wed Jul 21 16:11:06 2010
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Wed, 21 Jul 2010 16:11:06 +0200
+Subject: [Stratego Users] AspectJ-front isn't producing any output
+In-Reply-To: <AANLkTilOLDQp4jy19UCtMZKgbCrweWvnQZdX6TURrfY-@mail.gmail.com>
+References: <AANLkTilPksas8Yk3ZuCgvRlKIlx1XyI1rdWxl9dvROPM@mail.gmail.com>
+	<AANLkTilOLDQp4jy19UCtMZKgbCrweWvnQZdX6TURrfY-@mail.gmail.com>
+Message-ID: <AANLkTinQNuF3tvLHA00L9xj5i8kA0sTpmf6Q00ZrIhDm@mail.gmail.com>
+
+Hi,
+
+This might be a problem with too limited stack size. The wiki page of
+aspectj-front mentions this:
+
+On Cygwin and MinGW you need to increase the default stack size, or the
+resulting tools will immediately produce a segmentation fault. You an do
+this by setting CFLAGS to -O2 -Wl,--stack=0x2300000.?
+
+So you should try to reconfigure and recompile aspectj-front with CFLAGS set
+that way.
+
+greetings,
+Rob
+
+On Wed, Jul 21, 2010 at 16:02, A G <mestrejoaoricardo at gmail.com> wrote:
+
+> I've noticed an empty file named *parse-aspectj.exe.stackdump* is created
+> in the directory I invoke the command.
+>
+>
+> On 20 July 2010 14:18, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I was testing the command parse-aspectj and I don't get any output (an
+>> empty file), even with --verbose. I tested with two examples found in the
+>> mailing list:
+>>
+>> echo "aspect Foo { before() : foo() {}}" | parse-aspectj
+>>
+>> echo "myClass() && execution(* *(..))" | parse-aspectj -s PointcutExpr
+>>
+>> Java-front (parse-java), however, works correctly.
+>>
+>> What could be causing this?
+>>
+>>
+>> Thanks.
+>>
+>> P.S.: Using aspectj-front-0.2pre17697.
+>>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100721/fb13c613/attachment.html 
+
+From mestrejoaoricardo at gmail.com  Wed Jul 21 22:27:59 2010
+From: mestrejoaoricardo at gmail.com (A G)
+Date: Wed, 21 Jul 2010 21:27:59 +0100
+Subject: [Stratego Users] AspectJ-front isn't producing any output
+In-Reply-To: <AANLkTinQNuF3tvLHA00L9xj5i8kA0sTpmf6Q00ZrIhDm@mail.gmail.com>
+References: <AANLkTilPksas8Yk3ZuCgvRlKIlx1XyI1rdWxl9dvROPM@mail.gmail.com>
+	<AANLkTilOLDQp4jy19UCtMZKgbCrweWvnQZdX6TURrfY-@mail.gmail.com>
+	<AANLkTinQNuF3tvLHA00L9xj5i8kA0sTpmf6Q00ZrIhDm@mail.gmail.com>
+Message-ID: <AANLkTinQ5-CSn2OJrqYqdXHykcNV7jJi98ZMknApBdib@mail.gmail.com>
+
+Yep, that was the problem.
+
+All is running smoothly now.
+
+Thanks.
+
+
+On 21 July 2010 15:11, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi,
+>
+> This might be a problem with too limited stack size. The wiki page of
+> aspectj-front mentions this:
+>
+> On Cygwin and MinGW you need to increase the default stack size, or the
+> resulting tools will immediately produce a segmentation fault. You an do
+> this by setting CFLAGS to -O2 -Wl,--stack=0x2300000.?
+>
+> So you should try to reconfigure and recompile aspectj-front with CFLAGS
+> set that way.
+>
+> greetings,
+> Rob
+>
+> On Wed, Jul 21, 2010 at 16:02, A G <mestrejoaoricardo at gmail.com> wrote:
+>
+>> I've noticed an empty file named *parse-aspectj.exe.stackdump* is created
+>> in the directory I invoke the command.
+>>
+>>
+>> On 20 July 2010 14:18, A G <mestrejoaoricardo at gmail.com> wrote:
+>>
+>>> Hi,
+>>>
+>>> I was testing the command parse-aspectj and I don't get any output (an
+>>> empty file), even with --verbose. I tested with two examples found in the
+>>> mailing list:
+>>>
+>>> echo "aspect Foo { before() : foo() {}}" | parse-aspectj
+>>>
+>>> echo "myClass() && execution(* *(..))" | parse-aspectj -s PointcutExpr
+>>>
+>>> Java-front (parse-java), however, works correctly.
+>>>
+>>> What could be causing this?
+>>>
+>>>
+>>> Thanks.
+>>>
+>>> P.S.: Using aspectj-front-0.2pre17697.
+>>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100721/4f8d9edc/attachment.html 
+

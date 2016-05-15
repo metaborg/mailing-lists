@@ -1,0 +1,2265 @@
+From Jurgen.Vinju at cwi.nl  Fri Feb  1 07:34:10 2013
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Fri, 1 Feb 2013 07:34:10 +0100
+Subject: [Stratego Users] The Language Designer's Workbench
+In-Reply-To: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+References: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+Message-ID: <CAEy4yM5opeUJOaHrbES1A1BrVnG2mCN2Ar_hc-uA1GiJm2rgkQ@mail.gmail.com>
+
+Gefeliciteerd Eelco! Hartstikke mooi. Ben benieuwd naar alle mooie dingen
+die je kan gaan doen.
+
+Groetjes,
+
+Jurgen
+
+
+On Thu, Jan 31, 2013 at 11:07 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Dear Stratego, Spoofax Community,
+>
+> It is a great honor that the dutch national science foundation NWO has
+> awarded my VICI proposal 'The Language Designer's Workbench' to
+> investigate the building blocks of the next generation of language
+> workbenches. The essence of the plan is to provide much better support
+> to language designers by means of deep analyses of language
+> definitions.
+>
+> While the VICI grant is a personal grant, I feel it is also an award
+> for the outstanding work done by theStratego/XT and Spoofax teams over
+> the last 15 years, which has provided the foundation for this new
+> work. In particular, I would like to thank my PhD students and
+> postdocs, in alphabetical order: Anya Helene Bagge,Martin Bravenboer,
+> Sander van der Burg, Eelco Dolstra, Danny Groenewegen, Zef Hemel,
+> Maartje de Jonge,Merijn de Jonge, Karl Trygve Kalleberg, Lennart Kats,
+> Gabri?l Konat, Karina Olmos, Vlad Vergu, Rob Vermaas, Sander Vermolen,
+> Guido Wachsmuth.
+>
+> With a budget of 1,500,000 Euro for five years I can compose a strong
+> team of PhD students and postdocs. If you have a strong background in
+> language engineering, compiler construction, program analysis, proof
+> assistants, and/or mechanized meta-theory, and if you are interested
+> in contributing to the future of software language engineering,
+> consider applying for a PhD or postdoc position in the project.
+>
+> cheers,
+>
+> -- Eelco Visser
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SWAT
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+  www: http://jurgen.vinju.org, http://www.rascal-mpl.org,
+http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130201/b463eae8/attachment.html>
+
+From rd.naik at tcs.com  Fri Feb  1 07:33:53 2013
+From: rd.naik at tcs.com (Rd Naik)
+Date: Fri, 1 Feb 2013 12:03:53 +0530
+Subject: [Stratego Users] The Language Designer's Workbench
+In-Reply-To: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+References: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+Message-ID: <OFD2BF34DC.1D735871-ON65257B05.0022946B-65257B05.00243A87@tcs.com>
+
+Dear Eelco
+Many Congratulations for winning the grant. The proposal sounds very 
+interesting, from the perspective of arriving at definitions of new 
+languages.
+I am curious to know whether you have general purpose (programming) 
+languages in mind, or do you have certain categories of domain specific 
+languages, or functional languages in mind as your scope of languages for 
+which you intend to define and build the designer's workbench. In my mind, 
+each such (and many other) kind of languages are sufficiently distinct 
+from each other so as to require different building elements with 
+different characteristics to help build and analyze them.
+
+I work with TCS Innovations Lab, primarily working in Software 
+engineering, focussing on program analysis for reverse engineering, 
+re-factoring, and offlate software architecture driven transformations. 
+Therefore, my core work is not in programming languages and their 
+semantics, but I obviously do need to understand multiple programming 
+languages, their structures, their paradigms, etc.
+
+With regards
+Ravindra Naik
+-----------------
+TCS Innovations Lab - Software R&D
+TRDDC-Pune
+Tata Consultancy Services
+Ph:- +91 20 66086336
+Buzz:- 4206336
+Mailto: rd.naik at tcs.com
+Website: http://www.tcs.com
+____________________________________________
+Experience certainty.   IT Services
+                        Business Solutions
+                        Outsourcing
+____________________________________________
+
+
+
+From:
+Eelco Visser <E.Visser at tudelft.nl>
+To:
+users at strategoxt.org
+Date:
+01-02-13 03:47 AM
+Subject:
+[Stratego Users] The Language Designer's Workbench
+Sent by:
+users-bounces at strategoxt.org
+
+
+
+Dear Stratego, Spoofax Community,
+
+It is a great honor that the dutch national science foundation NWO has
+awarded my VICI proposal 'The Language Designer's Workbench' to
+investigate the building blocks of the next generation of language
+workbenches. The essence of the plan is to provide much better support
+to language designers by means of deep analyses of language
+definitions.
+
+While the VICI grant is a personal grant, I feel it is also an award
+for the outstanding work done by theStratego/XT and Spoofax teams over
+the last 15 years, which has provided the foundation for this new
+work. In particular, I would like to thank my PhD students and
+postdocs, in alphabetical order: Anya Helene Bagge,Martin Bravenboer,
+Sander van der Burg, Eelco Dolstra, Danny Groenewegen, Zef Hemel,
+Maartje de Jonge,Merijn de Jonge, Karl Trygve Kalleberg, Lennart Kats,
+Gabri?l Konat, Karina Olmos, Vlad Vergu, Rob Vermaas, Sander Vermolen,
+Guido Wachsmuth.
+
+With a budget of 1,500,000 Euro for five years I can compose a strong
+team of PhD students and postdocs. If you have a strong background in
+language engineering, compiler construction, program analysis, proof
+assistants, and/or mechanized meta-theory, and if you are interested
+in contributing to the future of software language engineering,
+consider applying for a PhD or postdoc position in the project.
+
+cheers,
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+=====-----=====-----=====
+Notice: The information contained in this e-mail
+message and/or attachments to it may contain 
+confidential or privileged information. If you are 
+not the intended recipient, any dissemination, use, 
+review, distribution, printing or copying of the 
+information contained in this e-mail message 
+and/or attachments to it are strictly prohibited. If 
+you have received this communication in error, 
+please notify us by reply e-mail or telephone and 
+immediately and permanently delete the message 
+and any attachments. Thank you
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130201/3d7faad1/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Feb  4 11:50:20 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 4 Feb 2013 11:50:20 +0100
+Subject: [Stratego Users] The Language Designer's Workbench
+In-Reply-To: <CAEy4yM5opeUJOaHrbES1A1BrVnG2mCN2Ar_hc-uA1GiJm2rgkQ@mail.gmail.com>
+References: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+	<CAEy4yM5opeUJOaHrbES1A1BrVnG2mCN2Ar_hc-uA1GiJm2rgkQ@mail.gmail.com>
+Message-ID: <CAFaCHU3USGyVqYm8X8pGePsy1nKmQ3GBHyupDXFYM0icvarJ4A@mail.gmail.com>
+
+Hoi Jurgen,
+
+> Gefeliciteerd Eelco! Hartstikke mooi. Ben benieuwd naar alle mooie dingen
+> die je kan gaan doen.
+
+Dank!
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From tobivollebregt at gmail.com  Mon Feb  4 19:44:48 2013
+From: tobivollebregt at gmail.com (Tobi Vollebregt)
+Date: Mon, 4 Feb 2013 10:44:48 -0800
+Subject: [Stratego Users] The Language Designer's Workbench
+In-Reply-To: <CAFaCHU3USGyVqYm8X8pGePsy1nKmQ3GBHyupDXFYM0icvarJ4A@mail.gmail.com>
+References: <CAFaCHU0U3u7TEdNidiY-9NrShccVXRjtrmJ-JcVa36pDxTYSpg@mail.gmail.com>
+	<CAEy4yM5opeUJOaHrbES1A1BrVnG2mCN2Ar_hc-uA1GiJm2rgkQ@mail.gmail.com>
+	<CAFaCHU3USGyVqYm8X8pGePsy1nKmQ3GBHyupDXFYM0icvarJ4A@mail.gmail.com>
+Message-ID: <CAOPyLrFsRnB06+QOTYgPFth2Qk7F8quJRmnbkBM8qfs0uDPyBg@mail.gmail.com>
+
+Ook namens mij nog gefeliciteerd!
+
+-Tobi
+
+
+On 4 February 2013 02:50, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hoi Jurgen,
+>
+> > Gefeliciteerd Eelco! Hartstikke mooi. Ben benieuwd naar alle mooie dingen
+> > die je kan gaan doen.
+>
+> Dank!
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130204/7c979122/attachment.html>
+
+From ciraci at gmail.com  Fri Feb  8 00:12:44 2013
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Thu, 7 Feb 2013 15:12:44 -0800
+Subject: [Stratego Users] Longest match problem
+Message-ID: <CALq5Zdw9pwuYNCNQY2VxHc0k7BER3x7nqhzYEU06fZ1kHO_V9g@mail.gmail.com>
+
+Hi,
+
+I stumbled upon an odd ambiguity problem which I think is related to
+longest match.
+
+I have a C-like grammar.  In the lexer, I have the following definitions:
+
+"int" -> IntType
+"long" -> LongType
+IntType -> ID {reject}
+
+[a-zA-Z\_][a-zA-Z0-9\_] -> ID
+
+lexical restrictions
+
+ID -/- [a-zA-Z0-9\_] -> ID
+
+Then in the syntax
+ IntType -> PrimitiveType {cons(...)}
+PrimitiveType+ -> Type {cons(...)}
+
+Type ID ";" -> VarDecl {cons(...)}
+
+In the following statement
+
+int intleast8; I got an ambiguity. With two options:
+The correct one VarDecl(Type(Primitive(int)), ID(intleast8))
+And the wrong one VarDecl(Type(Primitive(int), PrimitiveType(int)),
+ID(least8))
+
+I thought the longest match restriction in the lexer has taken care of such
+matches. So then I'm doing something wrong. I appreciate if you can point
+out the problem causing the ambiguity,
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130207/9ca610a0/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Fri Feb  8 00:29:40 2013
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Thu, 7 Feb 2013 23:29:40 +0000
+Subject: [Stratego Users] Longest match problem
+In-Reply-To: <CALq5Zdw9pwuYNCNQY2VxHc0k7BER3x7nqhzYEU06fZ1kHO_V9g@mail.gmail.com>
+References: <CALq5Zdw9pwuYNCNQY2VxHc0k7BER3x7nqhzYEU06fZ1kHO_V9g@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C423F47D8E0@SRV364.tudelft.net>
+
+Hi Selim,
+
+you define a follow restriction for ID, which forbids to recognise an ID whenever it is followed by a letter, digit or underscore. However, this does not forbid to recognise "int" as IntType. This gives you the wrong option: "int" is recognised as IntType, and the remaining part is recognised as an identifier.  You can avoid such ambiguities by defining follow restrictions on the keyword which causes it. Actually, "int" should never be followed by a letter, digit or underscore. 
+
+	lexical restrictions 
+		
+		"int" -/- [A-Za-z0-9\_]
+
+Typically, you have more of these:
+
+	lexical restrictions 
+		
+		"int" "long" "boolean" "class" "public" -/- [A-Za-z0-9\_]
+
+-- Guido
+
+On Feb 8, 2013, at 00:12 , Selim Ciraci <ciraci at gmail.com>
+ wrote:
+
+> Hi,
+> 
+> I stumbled upon an odd ambiguity problem which I think is related to longest match.
+> 
+> I have a C-like grammar.  In the lexer, I have the following definitions:
+> 
+> "int" -> IntType
+> "long" -> LongType
+> IntType -> ID {reject}
+> 
+> [a-zA-Z\_][a-zA-Z0-9\_] -> ID
+> 
+> lexical restrictions
+> 
+> ID -/- [a-zA-Z0-9\_] -> ID
+> 
+> Then in the syntax
+>  IntType -> PrimitiveType {cons(...)}
+> PrimitiveType+ -> Type {cons(...)}
+> 
+> Type ID ";" -> VarDecl {cons(...)}
+> 
+> In the following statement
+> 
+> int intleast8; I got an ambiguity. With two options:
+> The correct one VarDecl(Type(Primitive(int)), ID(intleast8))
+> And the wrong one VarDecl(Type(Primitive(int), PrimitiveType(int)), ID(least8))
+> 
+> I thought the longest match restriction in the lexer has taken care of such matches. So then I'm doing something wrong. I appreciate if you can point out the problem causing the ambiguity,
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From ciraci at gmail.com  Fri Feb  8 00:39:17 2013
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Thu, 7 Feb 2013 15:39:17 -0800
+Subject: [Stratego Users] Longest match problem
+In-Reply-To: <39465ABECE3CBC4EA3A3DDC99D576C423F47D8E0@SRV364.tudelft.net>
+References: <CALq5Zdw9pwuYNCNQY2VxHc0k7BER3x7nqhzYEU06fZ1kHO_V9g@mail.gmail.com>
+	<39465ABECE3CBC4EA3A3DDC99D576C423F47D8E0@SRV364.tudelft.net>
+Message-ID: <CALq5ZdxYm-w30L4kfs999y-0eRX2N3kxYsGiSyPqd5NQkLudFA@mail.gmail.com>
+
+Thanks for the reply, then I have to put flow restriction to all of the
+keywords of the language. Alright this clarifies alot.
+
+
+On Thu, Feb 7, 2013 at 3:29 PM, Guido Wachsmuth - EWI <
+G.H.Wachsmuth at tudelft.nl> wrote:
+
+> Hi Selim,
+>
+> you define a follow restriction for ID, which forbids to recognise an ID
+> whenever it is followed by a letter, digit or underscore. However, this
+> does not forbid to recognise "int" as IntType. This gives you the wrong
+> option: "int" is recognised as IntType, and the remaining part is
+> recognised as an identifier.  You can avoid such ambiguities by defining
+> follow restrictions on the keyword which causes it. Actually, "int" should
+> never be followed by a letter, digit or underscore.
+>
+>         lexical restrictions
+>
+>                 "int" -/- [A-Za-z0-9\_]
+>
+> Typically, you have more of these:
+>
+>         lexical restrictions
+>
+>                 "int" "long" "boolean" "class" "public" -/- [A-Za-z0-9\_]
+>
+> -- Guido
+>
+> On Feb 8, 2013, at 00:12 , Selim Ciraci <ciraci at gmail.com>
+>  wrote:
+>
+> > Hi,
+> >
+> > I stumbled upon an odd ambiguity problem which I think is related to
+> longest match.
+> >
+> > I have a C-like grammar.  In the lexer, I have the following definitions:
+> >
+> > "int" -> IntType
+> > "long" -> LongType
+> > IntType -> ID {reject}
+> >
+> > [a-zA-Z\_][a-zA-Z0-9\_] -> ID
+> >
+> > lexical restrictions
+> >
+> > ID -/- [a-zA-Z0-9\_] -> ID
+> >
+> > Then in the syntax
+> >  IntType -> PrimitiveType {cons(...)}
+> > PrimitiveType+ -> Type {cons(...)}
+> >
+> > Type ID ";" -> VarDecl {cons(...)}
+> >
+> > In the following statement
+> >
+> > int intleast8; I got an ambiguity. With two options:
+> > The correct one VarDecl(Type(Primitive(int)), ID(intleast8))
+> > And the wrong one VarDecl(Type(Primitive(int), PrimitiveType(int)),
+> ID(least8))
+> >
+> > I thought the longest match restriction in the lexer has taken care of
+> such matches. So then I'm doing something wrong. I appreciate if you can
+> point out the problem causing the ambiguity,
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130207/dda0c8ae/attachment.html>
+
+From E.Visser at tudelft.nl  Sat Feb 16 22:14:15 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 16 Feb 2013 22:14:15 +0100
+Subject: [Stratego Users] Fwd: [planetmde] Call for Papers: SLE 2013
+In-Reply-To: <511FBCC2.9060802@york.ac.uk>
+References: <511E5C4C.5090508@york.ac.uk> <511FBCC2.9060802@york.ac.uk>
+Message-ID: <CAFaCHU1uwQtvhm9xZC9JYHBn7TuZMd961PAxfi7kC8RdtdJSJA@mail.gmail.com>
+
+---------- Forwarded message ----------
+From: Richard Paige <richard.paige at york.ac.uk>
+Date: Sat, Feb 16, 2013 at 6:07 PM
+Subject: [planetmde] Call for Papers: SLE 2013
+To: planetmde at imag.fr
+
+
+========================================================================
+CALL FOR PAPERS
+
+6th International Conference on Software Language Engineering (SLE 2013)
+Oct 26-28, 2013, Indianapolis, IN, USA
+(Co-located with SPLASH 2013 and GPCE 2013)
+
+General chair:
+        Eric Van Wyk, University of Minnesota, USA
+
+Program co-chairs:
+    Martin Erwig, Oregon State University, USA
+    Richard Paige, University of York, UK
+
+Keynote:
+    Don Batory, University of Texas at Austin, USA
+
+http://planet-sl.org/sle2013
+
+========================================================================
+
+IMPORTANT DATES
+
+Deadline for abstracts:   June    7, 2013 (Midnight UTC-8, Pacific
+Standard Time)
+Deadline for full papers: June   14, 2013 (Midnight UTC-8, Pacific
+Standard Time)
+Notification to authors:  August  3, 2013
+Camera-ready copies due:  August 16, 2013
+Conference :         October 26 -28, 2013
+
+
+TYPES OF SUBMISSIONS
+
+We solicit the following types of papers:
+
+-   Research papers: These should report a substantial research contribution
+to SLE or successful application of SLE techniques or both. Full paper
+submissions must not exceed 20 pages (in LNCS format).
+
+-   Industrial experience papers: These papers discuss practical
+applications
+of SLE technology with an emphasis on the advantages and disadvantages
+of the
+method, techniques, or tools used. These papers must not exceed 10 pages (in
+LNCS format).
+
+-   Tool demonstration papers: Because of SLE's ample interest in tools, we
+seek papers that present software tools related to the field of SLE. These
+papers will accompany a tool demonstration to be given at the conference.
+These papers must not exceed 10 pages (in LNCS format). The selection
+criteria
+include the originality of the tool, its innovative aspects, the
+relevance of
+the tool to SLE, and the maturity of the tool.
+
+Papers are submitted via the Easychair system:
+
+        https://www.easychair.org/conferences/?conf=sle2013
+
+
+SCOPE
+
+The term "software language" refers to artificial languages used in software
+development. These include general-purpose programming languages,
+domain-specific languages, modeling and metamodeling languages, data models
+and ontologies. Examples include general purpose modeling languages such as
+SysML and UML, metamodeling frameworks such as Ecore, MOF or GOPRR,
+domain-specific modeling languages for business process modeling, such as
+BPMN, or embedded systems, such as Simulink or Modelica, and specialized
+XML-based and OWL-based languages and vocabularies. The term "software
+language" is intentionally broad; besides the above categories and examples,
+it also encompasses implicit approaches to language definition, such as APIs
+and collections of design patterns.
+
+Software language engineering is the application of systematic, disciplined,
+and measurable approaches to the development (design, implementation,
+testing,
+deployment), use, deployment, and maintenance (evolution, recovery, and
+retirement) of these languages. Of special interest are (1) formal
+descriptions of languages that are used to design or generate language-based
+tools and (2) methods and tools for managing such descriptions, including
+modularization, refactoring, refinement, composition, versioning,
+co-evolution, recovery, and analysis.
+
+
+TOPICS OF INTEREST
+
+We solicit high-quality contributions in the area of SLE ranging from
+theoretical and conceptual contributions to tools, techniques, and
+frameworks
+that support the aforementioned lifecycle activities. The topics of interest
+include, but are not limited to the following:
+
+-   Formalisms used in designing and specifying languages, and tools that
+analyze language descriptions
+
+-   Language implementation techniques: compiler generator tools, attribute
+grammar systems, term-rewriting systems, functional programming-based
+combinator libraries; metamodel-based and ontology tools implementing
+constraint, rule, view, transformation, and query formalisms and engines.
+
+-   Transformations and transformation languages, as well as program and
+model
+transformation tools, and approaches for mapping between ontologies.
+
+-   Language evolution: Included are extensible languages and type
+systems and
+their supporting tools and language conversion tools, approaches for
+ontology
+evolution, approaches for impact analysis of language evolution.
+
+-   Approaches to the elicitation, specification, and verification of
+requirements for software languages: Examples include the use of
+requirements
+engineering techniques in domain engineering and in the development of
+domain-specific languages and the application of logic-based formalisms for
+verifying language and domain requirements.
+
+-   Language development frameworks, methodologies, techniques, best
+practices, and tools for the broader language lifecycle covering phases such
+as analysis, testing, and documentation. For example, frameworks for
+advanced
+type or reasoning systems, constraint mechanisms, tools for metrics
+collection
+and language usage analysis, assessing language usability, documentation
+generators, visualization backends, generation of tests for language-based
+tools, knowledge and process management approaches, as well as IDE
+support for
+many of these activities are of interest.
+
+-   Integration and interoperation between different approaches to software
+language engineering; for example, ways to integrate grammar-based and
+ontology-based approaches to language definition.
+
+-   Design challenges in SLE: Example challenges include finding a balance
+between specificity and generality in designing domain-specific languages,
+between strong static typing and weaker yet more flexible type systems, or
+between deep and shallow embedding approaches, as, for example, in the
+context
+of adding type-safe XML and database programming support to general-purpose
+programming languages.
+
+-   Applications of languages including innovative domain-specific languages
+or "little" languages: Examples include policy languages for security or
+service-oriented architectures, web-engineering with schema-based generators
+or ontology-based annotations. Of specific interest are the engineering
+aspects of domain-specific language support in all of these cases.
+
+The program committee chairs encourage potential contributors to contact
+them
+with questions about the scope and topics of interest of SLE. The overall
+principle of SLE is to be broad-minded and inclusive about relevance and
+scope, and to invest in community building when soliciting and selecting
+papers.
+
+
+PROGRAM COMMITTEE
+
+Emilie Balland, INRIA, France
+Olaf Chitil, University of Kent, UK
+James R. Cordy, Queen's University, Canada
+Davide Di Ruscio, Universit? degli Studi dell'Aquila, Italy
+Iavor Diatchki, Galois Inc., USA
+Anne Etien, LIFL - University of Lille 1, Fance
+Jean-Marie Favre, University of Grenoble, Fance
+Dragan Gasevic, Athabasca University, Canada
+Andy Gill, University of Kansas, USA
+Jeremy Gibbons, University of Oxford, UK
+Jeff Gray, University of Alabama, USA
+Giancarlo Guizzardi, Federal University of Espirito Santo, Brazil
+Gorel Hedin, Lund University, Sweden
+Markus Herrmannsdoerfer, Technische Universit?t M?nchen, Germany
+Zhenjiang Hu, NII, Japan
+Oleg Kiselyov, USA
+Paul Klint, Centrum Wiskunde & Informatica, The Netherlands
+Thomas Kuehne, Victoria University of Wellington, New Zealand
+Kim Mens, UC Louvain, Belgium
+Pierre-Etienne Moreau, Ecole des Mines Nancy, France
+Klaus Ostermann, Marburg University, Germany
+Arnd Poetzsch-Heffter, University of Kaiserslautern, Germany
+Fiona Polack, Dept of Computer Science, University of York, UK
+Lukas Renggli, University of Bern, Switzerland
+Bernhard Rumpe, RWTH Aachen University, Germany
+Jo?o Saraiva, Universidade do Minho, Portugal
+Friedrich Steimann, Fernuniversit?t in Hagen, Germany
+Gabriele Taentzer, Marburg University, Germany
+Mark Van Den Brand, TU/e, The Netherlands
+Jurgen Vinju, Centrum Wiskunde & Informatica, The Netherlands
+
+--
+Richard Paige
+Professor of Enterprise Systems
+Department of Computer Science,
+University of York,
+Deramore Lane, York,
+YO10 5GH
+United Kingdom.
++44 1904 32 5170
+richard.paige at york.ac.uk
+
+Apparently there is a UoY email disclaimer, but I disavow all
+knowledge of it.
+
+
+
+---
+http://planet-mde.org, Model Driven Engineering web portal
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+---
+http://planet-mde.org, Model Driven Engineering web portal
+
+From alex.kraas at gmx.de  Tue Feb 19 20:54:16 2013
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Tue, 19 Feb 2013 20:54:16 +0100
+Subject: [Stratego Users] Integrating an editor into a transformation
+	framework
+Message-ID: <949DB929E34A4DA8BEBCF93420D01D13@Testmachine>
+
+Hello,
+
+at the moment I implement a Spoofax-Editor for an action language that is used as a surface language for a domain-specific metamodel. I have added an OnSaveListener to the editor so that when a file is saved the editor is closed and I can retrieve the current AST by invoking editorState.getCurrentAst(). But when I invoke the method editorState.getAnalyzedAst() I always get a null value, instead of an analyzed AST. Now, my question is if a possibility exists to retrieve an analyzed AST on closing the editor. Another question is if it is possible to apply a transformation automatically and to retrieve the resulting AST, when the editor is closed or the content is saved to disc.
+
+Best regards,
+Alexander
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130219/75073952/attachment.html>
+
+From oskarvanrest at gmail.com  Tue Feb 19 22:04:49 2013
+From: oskarvanrest at gmail.com (Oskar)
+Date: Tue, 19 Feb 2013 22:04:49 +0100
+Subject: [Stratego Users] Integrating an editor into a transformation
+	framework
+In-Reply-To: <949DB929E34A4DA8BEBCF93420D01D13@Testmachine>
+References: <949DB929E34A4DA8BEBCF93420D01D13@Testmachine>
+Message-ID: <CAOyetXRbbiy6giKPYDpR83LDw8n+J5joA14C3_masi3rh4hOjA@mail.gmail.com>
+
+Hi Alexander,
+
+This is how you can get the analysed AST. It reparses and reanalyses
+the text. I'm not sure if it's possible to obtain the cached analysed
+AST a.t.m. This should be supported in the future though.
+
+Descriptor descriptor = activeEditor.getDescriptor();
+SGLRParseController parseController = activeEditor.getParseController();
+StrategoObserver observer = null;
+
+try {
+  observer = descriptor.createService(StrategoObserver.class, null);
+} catch (BadDescriptorException e) {
+  e.printStackTrace();
+}
+
+observer.getLock().lock();
+try {
+  observer.update(parseController, new NullProgressMonitor());
+} finally {
+  observer.getLock().unlock();
+}
+
+IStrategoTerm analysedAST = observer.getResultingAst(resource);
+
+About the strategy that you want to apply, do you want to apply this
+to the analysed AST? One option is to compile the strategy to Java
+(http://strategoxt.org/Stratego/STRJ). Another option is to use Java
+strategies  (http://strategoxt.org/Spoofax/Tour#Adding_Java_components).
+Possibly you can add an on-save builder that calls your strategy and
+then the Java strategy to obtain the result of your strategy in Java.
+
+Btw, is your metamodel by any chance EMF-based? I've worked on some
+Spoofax-EMF integration ;) (http://oskarvanrest.github.com/ComBE/)
+
+Regards,
+Oskar
+
+
+
+
+On 19 February 2013 20:54, Alexander Kraas <alex.kraas at gmx.de> wrote:
+
+>   Hello,
+>
+> at the moment I implement a Spoofax-Editor for an action language that is
+> used as a surface language for a domain-specific metamodel. I have added an
+> OnSaveListener to the editor so that when a file is saved the editor is
+> closed and I can retrieve the current AST by invoking
+> editorState.getCurrentAst(). But when I invoke the method
+> editorState.getAnalyzedAst() I always get a null value, instead of an
+> analyzed AST. Now, my question is if a possibility exists to retrieve an
+> analyzed AST on closing the editor. Another question is if it is possible
+> to apply a transformation automatically and to retrieve the resulting AST,
+> when the editor is closed or the content is saved to disc.
+>
+> Best regards,
+> Alexander
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130219/89af0a5d/attachment.html>
+
+From scott at rice.edu  Wed Feb 20 20:45:16 2013
+From: scott at rice.edu (Scott Warren)
+Date: Wed, 20 Feb 2013 13:45:16 -0600
+Subject: [Stratego Users]  Spoofax vs old C-based Stratego/XT
+Message-ID: <59ABCFFF-8076-4709-B82E-7606D7FFCDF5@rice.edu>
+
+Hi,
+
+We're undertaking a research project which involves integrating Stratego with a very large existing compiler infrastructure written in C++. We've had quite a bit of experience mixing Java components with C++ via JNI, not all positive. For software engineering reasons we are reluctant to commit to adding new Java components to our infrastructure.
+
+Am I correct that Spoofax's parsing and transformation subsystems are new implementations in Java and that the improvements since Stratego/XT 0.17 are only available in Java form? As much as we'd like to use the improved and currently supported system, Java is probably a deal breaker for us.
+
+Is there anywhere a concise description of the improvements in Spoofax's parsing and transformation w.r.t Stratego/XT 0.17 -- apart from the IDE support, I mean?
+
+If we decide to use the old C-based Stratego/XT, is this forum appropriate for asking technical questions about it? We understand the old C stuff is no longer supported and we're prepared to be self-reliant once we're underway, but we could use some help getting started.
+
+Thanks,
+
+Scott Warren
+Department of Computer Science
+Rice University
+
+
+
+From E.Visser at tudelft.nl  Wed Feb 20 21:30:39 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 20 Feb 2013 21:30:39 +0100
+Subject: [Stratego Users] Spoofax vs old C-based Stratego/XT
+In-Reply-To: <59ABCFFF-8076-4709-B82E-7606D7FFCDF5@rice.edu>
+References: <59ABCFFF-8076-4709-B82E-7606D7FFCDF5@rice.edu>
+Message-ID: <CAFaCHU0v+pkHzR3+4jhBSp_H7iTz5LZZ_Ce3x7P4kAMQGpdrDw@mail.gmail.com>
+
+Hi Scott,
+
+> We're undertaking a research project which involves integrating Stratego with a very large existing compiler infrastructure written in C++. We've had quite a bit of experience mixing Java components with C++ via JNI, not all positive. For software engineering reasons we are reluctant to commit to adding new Java components to our infrastructure.
+
+> Am I correct that Spoofax's parsing and transformation subsystems are new implementations in Java and that the improvements since Stratego/XT 0.17 are only available in Java form? As much as we'd like to use the improved and currently supported system, Java is probably a deal breaker for us. Is there anywhere a concise description of the improvements in Spoofax's parsing and transformation w.r.t Stratego/XT 0.17 -- apart from the IDE support, I mean?
+
+There is not really such a description. But most work since 0.17 has
+been in support of the Java migration and the integration in Eclipse.
+Some important changes:
+
+- We have rewritten the SGLR parser in Java. The improvements of SGLR
+for error recovery and layout sensitive parsing are only available in
+JSGLR.
+
+- An improvement that has been important for IDE integration is origin
+tracking in order to preserve layout information during
+transformation. This mostly affects the run-time system (in particular
+the implementation of ATerms).
+
+- The transformation subsystem, i.e. the Stratego language, has not so
+much been re-implemented. Rather we have created a new Java-based
+run-time system and added a back-end translating core Stratego to
+Java. Only recently we have started bootstrapping Stratego/XT using
+the Java-based back-end for Stratego. The Stratego language and its
+implementation have been rather stable.
+
+- Another important innovation is the recent addition of the NaBL name
+binding language, which makes revolutionary improvements to the
+definition of name resolution, making it much easier to define
+incremental type checkers and eventually compilers.
+
+- In the near future we will be rewriting the Stratego compiler itself
+using NaBL.
+
+Probably the easiest way to find out is to study the history of the
+project, which should be easier since the migration to github:
+
+    https://github.com/metaborg/strategoxt
+
+> If we decide to use the old C-based Stratego/XT, is this forum appropriate for asking technical questions about it? We understand the old C stuff is no longer supported and we're prepared to be self-reliant once we're underway, but we could use some help getting started.
+
+Yes, this would be the forum, although there is no guarantee you'd get answers.
+
+If there is demand for the C-based version of Stratego/XT, it may make
+sense to keep supporting that in a branch of the project on github,
+and perhaps keep building it in our buildfarm. Provided that you take
+responsibility for maintenance. We would have to discuss policies for
+doing this.
+
+But perhaps it would make sense to set up a skype meeting to discuss the issue.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From scott at rice.edu  Thu Feb 21 21:47:10 2013
+From: scott at rice.edu (Scott Warren)
+Date: Thu, 21 Feb 2013 14:47:10 -0600
+Subject: [Stratego Users] Spoofax vs old C-based Stratego/XT
+In-Reply-To: <mailman.0.1361444401.28308.users@strategoxt.org>
+References: <mailman.0.1361444401.28308.users@strategoxt.org>
+Message-ID: <E247B9A9-E70F-4BB5-BBE7-01A4892A2FA3@rice.edu>
+
+Eelco,
+
+Thanks for your quick reply.
+
+(1) The improvements in JSGLR are attractive enough to make me reconsider using a Java parser. We really need the origin tracking right now -- we were planning to add it ourselves, but hadn't looked into it. We'll need layout sensitivity eventually when we want to support Python, and better error recovery is always welcome. We could either adopt JSGLR despite our concerns or add the new features back into SGLR. This raises two questions:
+
+(a) Do you have a sense of how closely the Java parser's source code follows the C version? We might use the Java version initially and plan to enhance the C version to match it eventually, depending on the effort required.
+
+(b) Would we have compatibility problems using the output of JSGLR with the C runtime for Stratego? You mentioned modifications to the ATerm implementation.
+
+(2) I imagine we're not the only potential Stratego users who'll prefer a C implementation, so keeping one available on GitHub is probably a good idea. I'm not sure about our maintaining it; I need to discuss this within our group before making a commitment. It makes sense because we'll be using it heavily for at least three years, but like everyone our resources are limited. If my colleagues are receptive to the idea, I agree a Skype conversation about it would be helpful. I'll let you know.
+
+
+skw
+
+
+On Feb 21, 2013, at 5:00 AM, users-request at strategoxt.org wrote:
+
+> Send Users mailing list submissions to
+> 	users at strategoxt.org
+> 
+> To subscribe or unsubscribe via the World Wide Web, visit
+> 	https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+> 	users-request at strategoxt.org
+> 
+> You can reach the person managing the list at
+> 	users-owner at strategoxt.org
+> 
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+> 
+> 
+> !DSPAM:3697,5125fe3b77961845415820!
+> Today's Topics:
+> 
+>   1.  Spoofax vs old C-based Stratego/XT (Scott Warren)
+>   2. Re: Spoofax vs old C-based Stratego/XT (Eelco Visser)
+> 
+> 
+> !DSPAM:3697,5125fe3b77961845415820!
+> 
+> From: Scott Warren <scott at rice.edu>
+> Date: February 20, 2013 1:45:16 PM CST
+> To: users at strategoxt.org
+> Subject: [Stratego Users] Spoofax vs old C-based Stratego/XT
+> Reply-To: Stratego/XT Users <users at strategoxt.org>
+> 
+> 
+> Hi,
+> 
+> We're undertaking a research project which involves integrating Stratego with a very large existing compiler infrastructure written in C++. We've had quite a bit of experience mixing Java components with C++ via JNI, not all positive. For software engineering reasons we are reluctant to commit to adding new Java components to our infrastructure.
+> 
+> Am I correct that Spoofax's parsing and transformation subsystems are new implementations in Java and that the improvements since Stratego/XT 0.17 are only available in Java form? As much as we'd like to use the improved and currently supported system, Java is probably a deal breaker for us.
+> 
+> Is there anywhere a concise description of the improvements in Spoofax's parsing and transformation w.r.t Stratego/XT 0.17 -- apart from the IDE support, I mean?
+> 
+> If we decide to use the old C-based Stratego/XT, is this forum appropriate for asking technical questions about it? We understand the old C stuff is no longer supported and we're prepared to be self-reliant once we're underway, but we could use some help getting started.
+> 
+> Thanks,
+> 
+> Scott Warren
+> Department of Computer Science
+> Rice University
+> 
+> 
+> 
+> 
+> 
+> 
+> From: Eelco Visser <E.Visser at tudelft.nl>
+> Date: February 20, 2013 2:30:39 PM CST
+> To: "Stratego/XT Users" <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Spoofax vs old C-based Stratego/XT
+> Reply-To: Stratego/XT Users <users at strategoxt.org>
+> 
+> 
+> Hi Scott,
+> 
+>> We're undertaking a research project which involves integrating Stratego with a very large existing compiler infrastructure written in C++. We've had quite a bit of experience mixing Java components with C++ via JNI, not all positive. For software engineering reasons we are reluctant to commit to adding new Java components to our infrastructure.
+> 
+>> Am I correct that Spoofax's parsing and transformation subsystems are new implementations in Java and that the improvements since Stratego/XT 0.17 are only available in Java form? As much as we'd like to use the improved and currently supported system, Java is probably a deal breaker for us. Is there anywhere a concise description of the improvements in Spoofax's parsing and transformation w.r.t Stratego/XT 0.17 -- apart from the IDE support, I mean?
+> 
+> There is not really such a description. But most work since 0.17 has
+> been in support of the Java migration and the integration in Eclipse.
+> Some important changes:
+> 
+> - We have rewritten the SGLR parser in Java. The improvements of SGLR
+> for error recovery and layout sensitive parsing are only available in
+> JSGLR.
+> 
+> - An improvement that has been important for IDE integration is origin
+> tracking in order to preserve layout information during
+> transformation. This mostly affects the run-time system (in particular
+> the implementation of ATerms).
+> 
+> - The transformation subsystem, i.e. the Stratego language, has not so
+> much been re-implemented. Rather we have created a new Java-based
+> run-time system and added a back-end translating core Stratego to
+> Java. Only recently we have started bootstrapping Stratego/XT using
+> the Java-based back-end for Stratego. The Stratego language and its
+> implementation have been rather stable.
+> 
+> - Another important innovation is the recent addition of the NaBL name
+> binding language, which makes revolutionary improvements to the
+> definition of name resolution, making it much easier to define
+> incremental type checkers and eventually compilers.
+> 
+> - In the near future we will be rewriting the Stratego compiler itself
+> using NaBL.
+> 
+> Probably the easiest way to find out is to study the history of the
+> project, which should be easier since the migration to github:
+> 
+>    https://github.com/metaborg/strategoxt
+> 
+>> If we decide to use the old C-based Stratego/XT, is this forum appropriate for asking technical questions about it? We understand the old C stuff is no longer supported and we're prepared to be self-reliant once we're underway, but we could use some help getting started.
+> 
+> Yes, this would be the forum, although there is no guarantee you'd get answers.
+> 
+> If there is demand for the C-based version of Stratego/XT, it may make
+> sense to keep supporting that in a branch of the project on github,
+> and perhaps keep building it in our buildfarm. Provided that you take
+> responsibility for maintenance. We would have to discuss policies for
+> doing this.
+> 
+> But perhaps it would make sense to set up a skype meeting to discuss the issue.
+> 
+> cheers,
+> 
+> -- Eelco
+> 
+> Associate Professor at Delft University of Technology
+> 
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> !DSPAM:3697,5125fe3b77961845415820!
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20130221/bc028fe6/attachment.html>
+
+From alex.kraas at gmx.de  Thu Feb 21 23:09:55 2013
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Thu, 21 Feb 2013 23:09:55 +0100
+Subject: [Stratego Users] Integrating an editor into a transformation
+	framework
+In-Reply-To: <51260993.5050806@gmail.com>
+References: <949DB929E34A4DA8BEBCF93420D01D13@Testmachine>
+	<CAOyetXRbbiy6giKPYDpR83LDw8n+J5joA14C3_masi3rh4hOjA@mail.gmail.com>
+	<51260993.5050806@gmail.com>
+Message-ID: <595B14B0652746B48CDC5B9DB83E332C@Testmachine>
+
+Dear Lennart and Oskar,
+
+many thanks for your quick feedback! I think the solution proposed by Oskar 
+to use a Java Strategy is a possible solution for me.
+
+@Lennart: Unfortunately, the solution proposed by you is not working within 
+my editor, because I already use the following strategy:
+  editor-analyze:
+    (ast, path, project-path) -> (ast', errors, warnings, notes)
+    with
+      ....
+Nevertheless, when I invoke the getAnalyzedAst() method, I get a null value 
+:-( Maybe, it is caused by the fact that I use a customized disambiguator 
+where I always get an exception as follows: java.lang.RuntimeException: 
+Could not determine term corresponding to ...
+
+@Oskar: You are right, I am using a tiny EMF based model-bridge that 
+encapsulates Stratego terms. I use this as a bridge to pass information 
+extracted from a UML model to the editor and in the other direction I pass 
+the produced AST to a QVT transformation that creates corresponding UML 
+elements.
+
+Best regards,
+Alexander
+
+
+
+-----Urspr?ngliche Nachricht----- 
+From: Lennart Kats
+Sent: Thursday, February 21, 2013 12:48 PM
+To: Stratego/XT Users
+Cc: alex.kraas at gmx.de
+Subject: Re: [Stratego Users] Integrating an editor into a transformation 
+framework
+
+Hi,
+
+The getAnalyzedAst() should also work, provided that you have defined an
+analysis rule that actually returns an AST, e.g.:
+
+  editor-analyze:
+    (ast, path, project-path) -> (ast', errors, warnings, [])
+    where
+      ...
+
+(The extra ast' argument here returns the analyzed AST.)
+
+Lennart
+
+On 2/19/13 22:04 , Oskar wrote:
+> Hi Alexander,
+>
+>
+>
+> This is how you can get the analysed AST. It reparses and reanalyses the
+> text. I'm not sure if it's possible to obtain the cached analysed AST
+> a.t.m. This should be supported in the future though.
+>
+>
+>
+> Descriptor descriptor = activeEditor.getDescriptor();
+>
+>
+> SGLRParseController parseController = activeEditor.getParseController();
+>
+>
+> StrategoObserver observer = null;
+>
+>
+>
+> try {
+> observer = descriptor.createService(StrategoObserver.class, null);
+>
+>
+> } catch (BadDescriptorException e) {
+>
+>
+> e.printStackTrace();
+>
+>
+> }
+>
+>
+>
+> observer.getLock().lock();
+>
+>
+> try {
+>
+>
+> observer.update(parseController, new NullProgressMonitor());
+>
+>
+> } finally {
+>
+>
+> observer.getLock().unlock();
+>
+>
+> }
+>
+>
+>
+> IStrategoTerm analysedAST = observer.getResultingAst(resource);
+>
+> About the strategy that you want to apply, do you want to apply this to
+> the analysed AST? One option is to compile the strategy to Java
+> (http://strategoxt.org/Stratego/STRJ). Another option is to use Java
+> strategies  (http://strategoxt.org/Spoofax/Tour#Adding_Java_components).
+> Possibly you can add an on-save builder that calls your strategy and
+> then the Java strategy to obtain the result of your strategy in Java.
+>
+>
+>
+> Btw, is your metamodel by any chance EMF-based? I've worked on some
+> Spoofax-EMF integration ;) (http://oskarvanrest.github.com/ComBE/)
+>
+>
+>
+> Regards,
+>
+>
+> Oskar
+>
+>
+>
+>
+>
+>
+> On 19 February 2013 20:54, Alexander Kraas <alex.kraas at gmx.de
+> <mailto:alex.kraas at gmx.de>> wrote:
+>
+>     Hello,
+>     at the moment I implement a Spoofax-Editor for an action language
+>     that is used as a surface language for a domain-specific metamodel.
+>     I have added an OnSaveListener to the editor so that when a file is
+>     saved the editor is closed and I can retrieve the current AST by
+>     invoking editorState.getCurrentAst(). But when I invoke the method
+>     editorState.getAnalyzedAst() I always get a null value, instead of
+>     an analyzed AST. Now, my question is if a possibility exists to
+>     retrieve an analyzed AST on closing the editor. Another question is
+>     if it is possible to apply a transformation automatically and to
+>     retrieve the resulting AST, when the editor is closed or the content
+>     is saved to disc.
+>     Best regards,
+>     Alexander
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+
+
+From E.Visser at tudelft.nl  Fri Feb 22 09:48:04 2013
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 22 Feb 2013 09:48:04 +0100
+Subject: [Stratego Users] Spoofax vs old C-based Stratego/XT
+In-Reply-To: <E247B9A9-E70F-4BB5-BBE7-01A4892A2FA3@rice.edu>
+References: <mailman.0.1361444401.28308.users@strategoxt.org>
+	<E247B9A9-E70F-4BB5-BBE7-01A4892A2FA3@rice.edu>
+Message-ID: <CAFaCHU1eEJCaTL_0xuZKfU65HDkzg454v76Z379mgOBjCxjxTg@mail.gmail.com>
+
+Hi Scott,
+
+> (1) The improvements in JSGLR are attractive enough to make me reconsider
+> using a Java parser. We really need the origin tracking right now -- we were
+> planning to add it ourselves, but hadn't looked into it. We'll need layout
+> sensitivity eventually when we want to support Python, and better error
+> recovery is always welcome. We could either adopt JSGLR despite our concerns
+> or add the new features back into SGLR. This raises two questions:
+>
+> (a) Do you have a sense of how closely the Java parser's source code follows
+> the C version? We might use the Java version initially and plan to enhance
+> the C version to match it eventually, depending on the effort required.
+
+The base algorithm was translated directly from C to Java. However,
+error recovery and layout sensitive parsing are significant
+adaptations.
+
+> (b) Would we have compatibility problems using the output of JSGLR with the
+> C runtime for Stratego? You mentioned modifications to the ATerm
+> implementation.
+
+In the Java implementation of ATerms it has been much easier to extend
+the data model, for instance to store origin information. The C
+implementation of ATerms relies on conservative garbage collection.
+Changes in the data structure may require much more work than in the
+case of Java, and may be less pleasant to program against. Also, the
+ATerm library was maintained by CWI, not by the Stratego team, so we
+had little control over it. Unless we'd have forked it, which would
+have entailed more software to maintain. I think that adapting the C
+ATerm library to maintain origin information should be possible, but
+as always comes with a cost that I cannot afford.
+
+But to to answer your question: I think it should be fairly
+straightforward to use JSGLR in your setup since the parser is
+typically used as a black box function. The parse/abstract syntax tree
+produced by JSGLR can be serialized as an ATerm and fed to your C
+program. Origin information can be encoded in annotations.
+
+> (2) I imagine we're not the only potential Stratego users who'll prefer a C
+> implementation, so keeping one available on GitHub is probably a good idea.
+> I'm not sure about our maintaining it; I need to discuss this within our
+> group before making a commitment. It makes sense because we'll be using it
+> heavily for at least three years, but like everyone our resources are
+> limited. If my colleagues are receptive to the idea, I agree a Skype
+> conversation about it would be helpful. I'll let you know.
+
+Sure.
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From scott at rice.edu  Fri Feb 22 18:28:23 2013
+From: scott at rice.edu (Scott Warren)
+Date: Fri, 22 Feb 2013 11:28:23 -0600
+Subject: [Stratego Users] Spoofax vs old C-based Stratego/XT
+In-Reply-To: <CAFaCHU1eEJCaTL_0xuZKfU65HDkzg454v76Z379mgOBjCxjxTg@mail.gmail.com>
+References: <mailman.0.1361444401.28308.users@strategoxt.org>
+	<E247B9A9-E70F-4BB5-BBE7-01A4892A2FA3@rice.edu>
+	<CAFaCHU1eEJCaTL_0xuZKfU65HDkzg454v76Z379mgOBjCxjxTg@mail.gmail.com>
+Message-ID: <99D91BFC-DBF0-44D4-A677-C8103D52864B@rice.edu>
+
+Eelco, thanks for the advice. We'll look closer at using JSGLR and at taking on maintenance of the C stuff.
+
+
+On Feb 22, 2013, at 2:48 AM, Eelco Visser wrote:
+
+> Hi Scott,
+> 
+>> (1) The improvements in JSGLR are attractive enough to make me reconsider
+>> using a Java parser. We really need the origin tracking right now -- we were
+>> planning to add it ourselves, but hadn't looked into it. We'll need layout
+>> sensitivity eventually when we want to support Python, and better error
+>> recovery is always welcome. We could either adopt JSGLR despite our concerns
+>> or add the new features back into SGLR. This raises two questions:
+>> 
+>> (a) Do you have a sense of how closely the Java parser's source code follows
+>> the C version? We might use the Java version initially and plan to enhance
+>> the C version to match it eventually, depending on the effort required.
+> 
+> The base algorithm was translated directly from C to Java. However,
+> error recovery and layout sensitive parsing are significant
+> adaptations.
+> 
+>> (b) Would we have compatibility problems using the output of JSGLR with the
+>> C runtime for Stratego? You mentioned modifications to the ATerm
+>> implementation.
+> 
+> In the Java implementation of ATerms it has been much easier to extend
+> the data model, for instance to store origin information. The C
+> implementation of ATerms relies on conservative garbage collection.
+> Changes in the data structure may require much more work than in the
+> case of Java, and may be less pleasant to program against. Also, the
+> ATerm library was maintained by CWI, not by the Stratego team, so we
+> had little control over it. Unless we'd have forked it, which would
+> have entailed more software to maintain. I think that adapting the C
+> ATerm library to maintain origin information should be possible, but
+> as always comes with a cost that I cannot afford.
+> 
+> But to to answer your question: I think it should be fairly
+> straightforward to use JSGLR in your setup since the parser is
+> typically used as a black box function. The parse/abstract syntax tree
+> produced by JSGLR can be serialized as an ATerm and fed to your C
+> program. Origin information can be encoded in annotations.
+> 
+>> (2) I imagine we're not the only potential Stratego users who'll prefer a C
+>> implementation, so keeping one available on GitHub is probably a good idea.
+>> I'm not sure about our maintaining it; I need to discuss this within our
+>> group before making a commitment. It makes sense because we'll be using it
+>> heavily for at least three years, but like everyone our resources are
+>> limited. If my colleagues are receptive to the idea, I agree a Skype
+>> conversation about it would be helpful. I'll let you know.
+> 
+> Sure.
+> 
+> -- Eelco
+> 
+> Associate Professor at Delft University of Technology
+> 
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> !DSPAM:3697,5127312a324748033917825!
+> 
+> 
+
+
+
+From invitation at ira.uka.de  Thu Feb 28 16:48:16 2013
+From: invitation at ira.uka.de (ASE2013)
+Date: Thu, 28 Feb 2013 16:48:16 +0100
+Subject: [Stratego Users] Call for Papers - ASE 2013
+Message-ID: <512F7C40.204@ira.uka.de>
+
+
+
+                            CALL FOR PAPERS
+
+28th IEEE/ACM International Conference on Automated Software Engineering
+                               ASE 2013
+
+                         http://ase2013.org
+
+          November 11th - 15th 2013, Silicon Valley, California
+
+* Conference * Tool Demos * Workshops * Tutorials * Doctoral Symposium *
+
+
+
+IMPORTANT DATES
+
+Abstract Submission: May 10, 2013
+Paper Submission: May 17, 2013
+Notification: July 24, 2013
+
+Tool Demonstration Paper Submission: June 6, 2013
+Workshop Proposal Submission: April 26, 2013
+Workshop Paper Submission: August 9, 2013
+Tutorial Proposal Submission: July 5, 2013
+Doctoral Symposium Submission: July 10, 2013
+
+
+GENERAL THEME
+
+The IEEE/ACM Automated Software Engineering (ASE) Conference series is
+the premier research forum for automating software engineering. Each
+year, it brings together researchers and practitioners from academia and
+industry to discuss foundations, techniques and tools for automating the
+analysis, design, implementation, testing, and maintenance of large
+software systems.
+
+
+=== MAIN CONFERENCE PAPERS =============================================
+    [http://ase2013.org/calls.html]
+
+ASE 2013 invites high quality contributions describing significant,
+original, and unpublished results for submission in three categories:
+
+1. Technical Research Papers should describe innovative research in
+automating software development activities or automated support to users
+engaged in such activities. They should describe a novel contribution to
+the field and should carefully support claims of novelty with citations
+to the relevant literature. Where a submission builds upon previous work
+of the author(s), the novelty of the new contribution must be clearly
+described with respect to the previous work. Papers should also clearly
+discuss how the results were validated.
+
+2. Experience Papers should describe a significant experience in
+applying automated software engineering technology and should carefully
+identify and discuss important lessons learned so that other researchers
+and/or practitioners can benefit from the experience. Of special
+interest are experience papers that report on industrial applications of
+automated software engineering.
+
+3. New Ideas Papers (new category!) should describe novel research
+directions in automating software development activities or automated
+support to users engaged in such activities. New ideas submissions are
+intended to describe well- defined research ideas that are at an early
+stage of investigation and may not be fully validated.
+
+SUBMISSION
+
+All submissions must come in PDF format and conform, at time of
+submission, to the IEEE Formatting Guidelines. For details and
+templates, see:
+
+http://www.conference-publishing.com/Instructions.php?Event=ASE13
+
+Technical Research Papers and Experience Papers must not exceed 10 pages
+(including figures and appendices) plus up to 1 page that contains ONLY
+references. New Idea Papers must not exceed 6 pages (including figures,
+appendices AND references). Submissions that do not adhere to these
+limits or that violate the formatting guidelines will be desk-rejected
+without review. All submissions must be in English.
+
+The submission site will be posted on the conference website
+(http://ase2013.org).
+
+Papers submitted to ASE 2013 must not have been previously published and
+must not be under review for publication elsewhere. All papers that
+conform to submission guidelines will be peer-reviewed by members of the
+Program Committee and members of the Expert Review Panel. Submissions
+will be evaluated on the basis of originality, soundness, importance of
+contribution, evaluation, quality of presentation and appropriate
+comparison to related work. Note that the Program Committee may
+re-assign a submission into a different category than the one it is
+submitted to if it decides that it is a better fit for that category.
+All accepted papers have to be presented at the conference by one of the
+authors and will be published by IEEE.
+
+
+=== TOOL DEMONSTRATIONS ================================================
+    [http://ase2013.org/tools.html]
+
+Automated software engineering consists of automating processes related
+to requirements, design, implementation, testing, and maintenance of
+software systems. The automated processes facilitate better productivity
+and improve the overall quality of software. Tool development is an
+integral part of automated software engineering. The tool demonstrations
+track provides an opportunity for researchers and practitioners to
+present and discuss the most recent advances, experiences, and
+challenges in the field of automated software engineering.
+
+The ASE conference solicits high-quality submissions for its tool
+demonstrations track. We invite submission on tools that are
+   (a) early research prototypes or
+   (b) mature tools that have not yet been commercialized.
+The submissions should highlight the underlying scientific
+contributions, engineering ingenuity, applicability to a broader
+software engineering community, and scalability of the tool. In contrast
+to a research paper which is intended to provide details of a novel
+automated software engineering technique, a tool demonstration paper
+should provide an overview of how the technique has been implemented as
+a functioning tool. Authors of regular research papers are thus
+encouraged to submit an accompanying tool demonstration paper.
+
+EVALUATION
+
+The tool demonstration program committee will review each submission to
+assess the relevance and quality of the proposed tool demonstration in
+terms of usefulness of the tool, presentation quality, and appropriate
+discussion of related tools. Accepted tool demonstrations will be
+allocated 4 pages in the conference proceedings. Demonstrators will be
+invited to give a presentation of the tool during the conference. There
+will also be an area open to attendees at scheduled times during the
+conference during which demonstrators can present live demonstrations.
+Presentation at the conference is a requirement for publication.
+
+Prizes will be given for an overall best tool demonstration and a best
+student tool demonstration where a student is the first author on the
+paper and presents the demonstration. The prizes will be decided based
+on the votes of the conference attendees.
+
+SUBMISSION
+
+Submissions should:
+
+  *  Consist of a proposal of at most 4 pages that adheres to the ASE
+2013 proceedings format (IEEE proceedings style). The proposal should
+provide an overview of the tool, how it relates to other industrial or
+research tools, including references, and its potential impact to a
+broader software engineering community.
+
+  * Provide a link to a video, not more than 5 minutes long, that
+demonstrates the tool being used. The goal of the video is to provide
+the reviewers a usage overview of the tool that enables them to evaluate
+the tool. A screencast of the tool demo with a voice-over can be used
+for the video.
+
+  * Provide a URL from which the tool can be downloaded, with clear
+installation steps. If the tool cannot be made available, the authors
+must clearly state their reasons in the paper. Examples and scenarios
+presented in the paper should be independently replicable.
+
+  * Be submitted by June 6, 2013 via EasyChair:
+    https://www.easychair.org/conferences/?conf=ase2013tools
+
+Contact: asetools2013 at easychair.org
+
+
+=== WORKSHOPS =========================================================
+    [http://ase2013.org/workshops.html]
+
+A workshop co-located with the ASE 2013 conference should provide an
+opportunity for exchanging views, advancing ideas, and discussing
+preliminary results on topics related to Automated Software Engineering.
+Workshops may also serve as platforms to nurture new scientific
+communities. Workshops should not be seen as an alternative forum for
+presenting full research papers. The workshops co-located with the
+conference will be organized before the main conference (Monday,
+Tuesday). The organizers will decide the exact day after the proposals
+have been reviewed and accepted. A workshop may last one or two days.
+
+SUBMISSION
+
+Proposals for organizing workshops should be written in English, limited
+to 5 pages (in IEEE format), and submitted in PDF to both workshop
+co-chairs, by email at ase2013workshops at easychair.org. Workshop
+proposals should include the following information:
+
+   * Theme and goals of the workshop including its relevance to the field
+     of Automated Software Engineering
+   * Targeted audience and the expected number of participants
+     (minimum and maximum)
+   * Workshop format (e.g., paper presentations, breakout sessions,
+     panel-like discussions, combination of formats)
+   * The equipment, room capacity, and any other resource necessary for
+     the organization of the workshop
+   * Participant solicitation and selection process
+   * Workshop publicity strategy that the workshop organizers will use
+   * Brief description of the organizer's background, including relevant
+     past experience on organizing workshops and contact information
+   * Initial version of the call for papers that the workshop organizers
+     intend to use
+   * Preferences for workshop dates, duration (1 or 2 days), and any
+     other scheduling constraints
+
+Note that the workshop co-chairs will consider the preference of
+workshop dates specified by the organizers, but the acceptance of a
+workshop proposal does not guarantee adherence to the requested
+date/time. The workshop co- chairs will assume that workshop proposers
+will be able to run a workshop on the dates that ASE 2013 has reserved
+for workshops.
+
+Review Process. Workshop proposals will be reviewed by the ASE 2013
+tutorials and workshop co-chairs. Acceptance will be based on an
+evaluation of the workshop's potential for generating useful results,
+the timeliness and expected interest in the topic, the organizer's
+ability to lead a successful workshop, and the potential for attracting
+a sufficient number of participants. Accepted workshops must adhere to
+the common deadlines listed below for submissions of papers, acceptance
+of papers, and preparation of proceedings.
+
+Contact. ase2013workshops at easychair.org
+
+
+=== TUTORIALS ==========================================================
+    [http://ase2013.org/tutorials.html]
+
+Tutorials may address a wide range of mature topics from theoretical
+foundations to practical techniques and tools for automated software
+engineering. The tutorials will be organized before the main conference
+(Monday, Tuesday). The organizers will decide the exact day after the
+proposals have been reviewed and accepted. Tutorials are intended to
+provide independent instruction on a relevant theme; therefore, no
+commercial or sales-oriented proposals will be accepted.
+
+SUBMISSION
+
+Instructors are invited to submit proposals for half-day or full-day
+tutorials and, upon selection, are required to provide tutorial notes or
+a survey paper on the topic of presentation in PDF. Proposals for
+organizing tutorials should be written in English, limited to 5 pages
+(in IEEE format), and submitted in PDF to both tutorials co-chairs, by
+email at: ase2013tutorials at easychair.org. Tutorial proposals should
+include the following information:
+
+   * Name and affiliation of the proposer/organizer (including postal
+     address, phone number, fax number, e-mail address)
+   * Name and affiliation of each additional instructor
+   * Instructors' experience in the area, including other tutorials,
+     courses, etc.
+   * Title, objective, abstract, duration
+   * Outline with approximate timings
+   * Target audience, including indication of level (novice, intermediate,
+     expert)
+   * Assumed background of attendees
+   * Brief biography of each instructor (for publicity materials)
+   * Indication of whether a survey paper will be provided
+      (max. 30 IEEE-formatted pages)
+   * History of the tutorial (if it has been already presented; provide
+     location, estimated attendance, etc.)
+   * Justification for full day (if a full day is proposed)
+   * Audio-visual and technical requirements
+   * References including the proposers' papers on the subject
+   * Preferences for tutorial date, duration (half-day or full-day), and
+     any other scheduling constraints
+
+Preferences for tutorial date, duration (half-day or full-day), and any
+other scheduling constraints Note that the tutorial co-chairs will
+consider the preference of tutorial dates specified by the organizers,
+but the acceptance of a tutorial proposal does not guarantee adherence
+to the requested date/time. The tutorial co-chairs will assume that
+tutorial proposers will be able to run a tutorial on the dates that ASE
+2013 has reserved for tutorials.
+
+Review Process. Tutorial proposals will be reviewed by the ASE 2013
+tutorials and workshop co-chairs. Acceptance will be based on the
+timeliness and expected interest in the topic, the proposer's ability to
+present an interesting tutorial, and the potential for attracting a
+sufficient number of participants.
+
+Contact. ase2013tutorials at easychair.org
+
+
+=== DOCTORAL SYMPOSIUM =================================================
+    [http://ase2013.org/ds.html]
+
+The goal of the ASE 2013 Doctoral Symposium is to provide a supportive
+yet questioning setting in which the PhD students have an opportunity to
+present and discuss their research with other researchers in the ASE
+community. The Symposium aims to provide students with useful guidance
+and feedback on their research and to facilitate their networking within
+the scientific community by interacting with established researchers and
+with their peers at a similar stage in their careers.
+
+The technical scope of the Symposium is that of ASE. Students should
+consider participating in the Doctoral Symposium after they have settled
+on a dissertation topic with some initial research results. Students
+should be at least a year from completion of their dissertation (at the
+time of the Symposium), to obtain maximum benefit from participation.
+The Doctoral Symposium is open to Ph.D. students at any stage of their
+research, whereby students at the initial stage (first or second year)
+will be able to challenge their ideas and current research directions,
+while students at a more mature stage (third or fourth year) will be
+able to present their thesis and get advice for improvement and for
+better exposition of their contributions and conclusions. Attendance is
+open to students of accepted research abstracts and Doctoral Symposium
+committee members.
+
+EVALUATION
+
+The Doctoral Symposium Committee will select participants using the
+following criteria:
+
+   * The potential quality of the research and its relevance to ASE
+   * Quality of the research abstract.
+   * Diversity of background, research topics and approaches.
+
+Students should not infer that a list of prior publications is in any
+way expected or required; we welcome submissions from students for whom
+this will be their first formal submission as well as those who have
+previously published
+
+SUBMISSION
+
+To apply as a student participant in the Doctoral Symposium, you should
+prepare a submission package consisting of two parts, both of which must
+be submitted by the submission deadline.
+
+Part 1: Research Abstract (max. 4 pages). Your research abstract must
+conform to the ASE 2013 formatting and submission instructions and
+should cover:
+
+   * Your targeted research problem with justification of its importance
+   * Discussion why related and prior work has not solved the problem
+   * A sketch of the proposed approach or solution
+   * The expected contributions of your dissertation research
+   * Progress you have made so far in solving the stated problem
+   * The methods you are using or will use to carry out your research
+   * A plan for evaluating your work and presenting credible evidence of
+     your results to the research community
+   * A list of any publications either appeared, accepted or submitted
+     for which the student is an author.
+
+Students at the initial stage of their research might have some
+difficulty in addressing some of these areas, but should make their best
+attempt. The research abstract should include the title of your work,
+your name, your advisor, your email address, postal address, personal
+website, and a one paragraph short summary in the style of an abstract
+for a regular paper.
+
+Please submit your research abstract using the EasyChair submission site:
+
+   https://www.easychair.org/conferences/?conf=dsase13
+
+Part 2: Letter of Recommendation. Please ask your dissertation advisor
+for a letter of recommendation. This letter should include your name and
+a candid assessment of the current status of your dissertation research
+and an expected date for dissertation submission. The letter should be
+in Adobe Portable Document Format (PDF), and sent to: Marsha Chechik and
+Paul Gruenbacher at ase-org at cs.toronto.edu
+with the subject: ASE 2013 DOCTORAL SYMPOSIUM RECOMMENDATION.
+
+Acceptance. All accepted papers will be published by IEEE. Authors of
+accepted contributions will receive further instructions for preparing
+their camera ready versions. Authors must register for the ASE 2013
+Doctoral Symposium and present their work at the Symposium.
+
+
+=== ORGANIZATION =======================================================
+
+  General Chair
+    Ewen Denney, SGT / NASA Ames
+
+  Program Chairs
+    Tevfik Bultan, University of California, Santa Barbara
+    Andrease Zeller, Saarland University, Saarbruecken
+
+  Program Committee
+    Andrew Begel, Microsoft Research
+    Myra Cohen, University of Nebraska - Lincoln
+    Danny Dig, University of Illinois at Urbana-Champaign
+    Bernd Fischer, Stellenbosch University / University of Southampton
+    Gordon Fraser, University of Sheffield
+    Harald Gall, University of Zurich
+    Dimitra Giannakopoulou, NASA Ames Research Center
+    Alex Groce, Oregon State University
+    Paul Gruenbacher, Johannes Kepler University Linz
+    Arie Gurfinkel, Carnegie Mellon University US
+    William G.J. Halfond, University of Southern California
+    Mark Harman, University College London
+    Sunghun Kim, The Hong Kong University of Science and Technology
+    David Lo, Singapore Management University
+    Shahar Maoz, Tel Aviv University
+    Darko Marinov, University of Illinois at Urbana Champaign
+    Tim Menzies, West Virginia University
+    Mira Mezini, Technische Universitaet Darmstadt
+    Tien Nguyen, Iowa State University
+    Corina Pasareanu, CMU, NASA Ames
+    Lori Pollock, University of Delaware
+    Martin Robillard, McGill University
+    Grigore Rosu, University of Illinois at Urbana Champaign
+    Abhik Roychoudhury, National University of Singapore
+    Gabriele Taentzer, Philipps Universitaet Marburg
+    Nikolai Tillmann, Microsoft Research
+    Sebastian Uchitel, Universidad de Buenos Aires/Imperial College London
+    Willem Visser, Stellenbosch University
+    Lu Zhang, Peking University
+    Charles Zhang, Hongkong University of Science and Technology
+
+  Doctoral Symposium Co-Chairs
+    Marsha Chechik, University of Toronto
+    Paul Gruenbacher, Johannes Kepler University Linz
+
+  Doctoral Symposium Committee
+    Jamie H. Andrews, University of Western Ontario
+    Myra B. Cohen, University of Nebraska - Lincoln
+    Elisabetta Di Nitto, Politecnico di Milano
+    Darko Marinov, University of Illinois at Urbana-Champaign
+    Charles Pecheur, Universite Catholique de Louvain
+    Andrea Zisman, City University London
+
+  Workshop and Tutorial Co-Chairs
+    Marcelo d'Amorim, Federal University of Pernambuco
+    David Lo, Singapore Management University
+
+  Tool Demonstration Chairs
+    Andrew Ireland, Heriot-Watt University
+    Neha Rungta, SGT / NASA Ames
+
+  Finance & Local Arrangements
+    Ganesh Pai, SGT / NASA Ames
+
+  Publicity Chair
+    Christoph Gladisch, Karlsruhe Institute of Technology
+
+  Social Media Chair
+    Tien Nguyen, Iowa State University
+
+
+
+
+From invitation at ira.uka.de  Thu Feb 28 15:41:10 2013
+From: invitation at ira.uka.de (ASE2013)
+Date: Thu, 28 Feb 2013 15:41:10 +0100
+Subject: [Stratego Users] Call for Papers - ASE 2013
+Message-ID: <512F6C86.9040208@ira.uka.de>
+
+
+
+                            CALL FOR PAPERS
+
+28th IEEE/ACM International Conference on Automated Software Engineering
+                               ASE 2013
+
+                         http://ase2013.org
+
+          November 11th - 15th 2013, Silicon Valley, California
+
+* Conference * Tool Demos * Workshops * Tutorials * Doctoral Symposium *
+
+
+
+IMPORTANT DATES
+
+Abstract Submission: May 10, 2013
+Paper Submission: May 17, 2013
+Notification: July 24, 2013
+
+Tool Demonstration Paper Submission: June 6, 2013
+Workshop Proposal Submission: April 26, 2013
+Workshop Paper Submission: August 9, 2013
+Tutorial Proposal Submission: July 5, 2013
+Doctoral Symposium Submission: July 10, 2013
+
+
+GENERAL THEME
+
+The IEEE/ACM Automated Software Engineering (ASE) Conference series is
+the premier research forum for automating software engineering. Each
+year, it brings together researchers and practitioners from academia and
+industry to discuss foundations, techniques and tools for automating the
+analysis, design, implementation, testing, and maintenance of large
+software systems.
+
+
+=== MAIN CONFERENCE PAPERS =============================================
+    [http://ase2013.org/calls.html]
+
+ASE 2013 invites high quality contributions describing significant,
+original, and unpublished results for submission in three categories:
+
+1. Technical Research Papers should describe innovative research in
+automating software development activities or automated support to users
+engaged in such activities. They should describe a novel contribution to
+the field and should carefully support claims of novelty with citations
+to the relevant literature. Where a submission builds upon previous work
+of the author(s), the novelty of the new contribution must be clearly
+described with respect to the previous work. Papers should also clearly
+discuss how the results were validated.
+
+2. Experience Papers should describe a significant experience in
+applying automated software engineering technology and should carefully
+identify and discuss important lessons learned so that other researchers
+and/or practitioners can benefit from the experience. Of special
+interest are experience papers that report on industrial applications of
+automated software engineering.
+
+3. New Ideas Papers (new category!) should describe novel research
+directions in automating software development activities or automated
+support to users engaged in such activities. New ideas submissions are
+intended to describe well- defined research ideas that are at an early
+stage of investigation and may not be fully validated.
+
+SUBMISSION
+
+All submissions must come in PDF format and conform, at time of
+submission, to the IEEE Formatting Guidelines. For details and
+templates, see:
+
+http://www.conference-publishing.com/Instructions.php?Event=ASE13
+
+Technical Research Papers and Experience Papers must not exceed 10 pages
+(including figures and appendices) plus up to 1 page that contains ONLY
+references. New Idea Papers must not exceed 6 pages (including figures,
+appendices AND references). Submissions that do not adhere to these
+limits or that violate the formatting guidelines will be desk-rejected
+without review. All submissions must be in English.
+
+The submission site will be posted on the conference website
+(http://ase2013.org).
+
+Papers submitted to ASE 2013 must not have been previously published and
+must not be under review for publication elsewhere. All papers that
+conform to submission guidelines will be peer-reviewed by members of the
+Program Committee and members of the Expert Review Panel. Submissions
+will be evaluated on the basis of originality, soundness, importance of
+contribution, evaluation, quality of presentation and appropriate
+comparison to related work. Note that the Program Committee may
+re-assign a submission into a different category than the one it is
+submitted to if it decides that it is a better fit for that category.
+All accepted papers have to be presented at the conference by one of the
+authors and will be published by IEEE.
+
+
+=== TOOL DEMONSTRATIONS ================================================
+    [http://ase2013.org/tools.html]
+
+Automated software engineering consists of automating processes related
+to requirements, design, implementation, testing, and maintenance of
+software systems. The automated processes facilitate better productivity
+and improve the overall quality of software. Tool development is an
+integral part of automated software engineering. The tool demonstrations
+track provides an opportunity for researchers and practitioners to
+present and discuss the most recent advances, experiences, and
+challenges in the field of automated software engineering.
+
+The ASE conference solicits high-quality submissions for its tool
+demonstrations track. We invite submission on tools that are
+   (a) early research prototypes or
+   (b) mature tools that have not yet been commercialized.
+The submissions should highlight the underlying scientific
+contributions, engineering ingenuity, applicability to a broader
+software engineering community, and scalability of the tool. In contrast
+to a research paper which is intended to provide details of a novel
+automated software engineering technique, a tool demonstration paper
+should provide an overview of how the technique has been implemented as
+a functioning tool. Authors of regular research papers are thus
+encouraged to submit an accompanying tool demonstration paper.
+
+EVALUATION
+
+The tool demonstration program committee will review each submission to
+assess the relevance and quality of the proposed tool demonstration in
+terms of usefulness of the tool, presentation quality, and appropriate
+discussion of related tools. Accepted tool demonstrations will be
+allocated 4 pages in the conference proceedings. Demonstrators will be
+invited to give a presentation of the tool during the conference. There
+will also be an area open to attendees at scheduled times during the
+conference during which demonstrators can present live demonstrations.
+Presentation at the conference is a requirement for publication.
+
+Prizes will be given for an overall best tool demonstration and a best
+student tool demonstration where a student is the first author on the
+paper and presents the demonstration. The prizes will be decided based
+on the votes of the conference attendees.
+
+SUBMISSION
+
+Submissions should:
+
+  *  Consist of a proposal of at most 4 pages that adheres to the ASE
+2013 proceedings format (IEEE proceedings style). The proposal should
+provide an overview of the tool, how it relates to other industrial or
+research tools, including references, and its potential impact to a
+broader software engineering community.
+
+  * Provide a link to a video, not more than 5 minutes long, that
+demonstrates the tool being used. The goal of the video is to provide
+the reviewers a usage overview of the tool that enables them to evaluate
+the tool. A screencast of the tool demo with a voice-over can be used
+for the video.
+
+  * Provide a URL from which the tool can be downloaded, with clear
+installation steps. If the tool cannot be made available, the authors
+must clearly state their reasons in the paper. Examples and scenarios
+presented in the paper should be independently replicable.
+
+  * Be submitted by June 6, 2013 via EasyChair:
+    https://www.easychair.org/conferences/?conf=ase2013tools
+
+Contact: asetools2013 at easychair.org
+
+
+=== WORKSHOPS =========================================================
+    [http://ase2013.org/workshops.html]
+
+A workshop co-located with the ASE 2013 conference should provide an
+opportunity for exchanging views, advancing ideas, and discussing
+preliminary results on topics related to Automated Software Engineering.
+Workshops may also serve as platforms to nurture new scientific
+communities. Workshops should not be seen as an alternative forum for
+presenting full research papers. The workshops co-located with the
+conference will be organized before the main conference (Monday,
+Tuesday). The organizers will decide the exact day after the proposals
+have been reviewed and accepted. A workshop may last one or two days.
+
+SUBMISSION
+
+Proposals for organizing workshops should be written in English, limited
+to 5 pages (in IEEE format), and submitted in PDF to both workshop
+co-chairs, by email at ase2013workshops at easychair.org. Workshop
+proposals should include the following information:
+
+   * Theme and goals of the workshop including its relevance to the field
+     of Automated Software Engineering
+   * Targeted audience and the expected number of participants
+     (minimum and maximum)
+   * Workshop format (e.g., paper presentations, breakout sessions,
+     panel-like discussions, combination of formats)
+   * The equipment, room capacity, and any other resource necessary for
+     the organization of the workshop
+   * Participant solicitation and selection process
+   * Workshop publicity strategy that the workshop organizers will use
+   * Brief description of the organizer's background, including relevant
+     past experience on organizing workshops and contact information
+   * Initial version of the call for papers that the workshop organizers
+     intend to use
+   * Preferences for workshop dates, duration (1 or 2 days), and any
+     other scheduling constraints
+
+Note that the workshop co-chairs will consider the preference of
+workshop dates specified by the organizers, but the acceptance of a
+workshop proposal does not guarantee adherence to the requested
+date/time. The workshop co- chairs will assume that workshop proposers
+will be able to run a workshop on the dates that ASE 2013 has reserved
+for workshops.
+
+Review Process. Workshop proposals will be reviewed by the ASE 2013
+tutorials and workshop co-chairs. Acceptance will be based on an
+evaluation of the workshop's potential for generating useful results,
+the timeliness and expected interest in the topic, the organizer's
+ability to lead a successful workshop, and the potential for attracting
+a sufficient number of participants. Accepted workshops must adhere to
+the common deadlines listed below for submissions of papers, acceptance
+of papers, and preparation of proceedings.
+
+Contact. ase2013workshops at easychair.org
+
+
+=== TUTORIALS ==========================================================
+    [http://ase2013.org/tutorials.html]
+
+Tutorials may address a wide range of mature topics from theoretical
+foundations to practical techniques and tools for automated software
+engineering. The tutorials will be organized before the main conference
+(Monday, Tuesday). The organizers will decide the exact day after the
+proposals have been reviewed and accepted. Tutorials are intended to
+provide independent instruction on a relevant theme; therefore, no
+commercial or sales-oriented proposals will be accepted.
+
+SUBMISSION
+
+Instructors are invited to submit proposals for half-day or full-day
+tutorials and, upon selection, are required to provide tutorial notes or
+a survey paper on the topic of presentation in PDF. Proposals for
+organizing tutorials should be written in English, limited to 5 pages
+(in IEEE format), and submitted in PDF to both tutorials co-chairs, by
+email at: ase2013tutorials at easychair.org. Tutorial proposals should
+include the following information:
+
+   * Name and affiliation of the proposer/organizer (including postal
+     address, phone number, fax number, e-mail address)
+   * Name and affiliation of each additional instructor
+   * Instructors' experience in the area, including other tutorials,
+     courses, etc.
+   * Title, objective, abstract, duration
+   * Outline with approximate timings
+   * Target audience, including indication of level (novice, intermediate,
+     expert)
+   * Assumed background of attendees
+   * Brief biography of each instructor (for publicity materials)
+   * Indication of whether a survey paper will be provided
+      (max. 30 IEEE-formatted pages)
+   * History of the tutorial (if it has been already presented; provide
+     location, estimated attendance, etc.)
+   * Justification for full day (if a full day is proposed)
+   * Audio-visual and technical requirements
+   * References including the proposers' papers on the subject
+   * Preferences for tutorial date, duration (half-day or full-day), and
+     any other scheduling constraints
+
+Preferences for tutorial date, duration (half-day or full-day), and any
+other scheduling constraints Note that the tutorial co-chairs will
+consider the preference of tutorial dates specified by the organizers,
+but the acceptance of a tutorial proposal does not guarantee adherence
+to the requested date/time. The tutorial co-chairs will assume that
+tutorial proposers will be able to run a tutorial on the dates that ASE
+2013 has reserved for tutorials.
+
+Review Process. Tutorial proposals will be reviewed by the ASE 2013
+tutorials and workshop co-chairs. Acceptance will be based on the
+timeliness and expected interest in the topic, the proposer's ability to
+present an interesting tutorial, and the potential for attracting a
+sufficient number of participants.
+
+Contact. ase2013tutorials at easychair.org
+
+
+=== DOCTORAL SYMPOSIUM =================================================
+    [http://ase2013.org/ds.html]
+
+The goal of the ASE 2013 Doctoral Symposium is to provide a supportive
+yet questioning setting in which the PhD students have an opportunity to
+present and discuss their research with other researchers in the ASE
+community. The Symposium aims to provide students with useful guidance
+and feedback on their research and to facilitate their networking within
+the scientific community by interacting with established researchers and
+with their peers at a similar stage in their careers.
+
+The technical scope of the Symposium is that of ASE. Students should
+consider participating in the Doctoral Symposium after they have settled
+on a dissertation topic with some initial research results. Students
+should be at least a year from completion of their dissertation (at the
+time of the Symposium), to obtain maximum benefit from participation.
+The Doctoral Symposium is open to Ph.D. students at any stage of their
+research, whereby students at the initial stage (first or second year)
+will be able to challenge their ideas and current research directions,
+while students at a more mature stage (third or fourth year) will be
+able to present their thesis and get advice for improvement and for
+better exposition of their contributions and conclusions. Attendance is
+open to students of accepted research abstracts and Doctoral Symposium
+committee members.
+
+EVALUATION
+
+The Doctoral Symposium Committee will select participants using the
+following criteria:
+
+   * The potential quality of the research and its relevance to ASE
+   * Quality of the research abstract.
+   * Diversity of background, research topics and approaches.
+
+Students should not infer that a list of prior publications is in any
+way expected or required; we welcome submissions from students for whom
+this will be their first formal submission as well as those who have
+previously published
+
+SUBMISSION
+
+To apply as a student participant in the Doctoral Symposium, you should
+prepare a submission package consisting of two parts, both of which must
+be submitted by the submission deadline.
+
+Part 1: Research Abstract (max. 4 pages). Your research abstract must
+conform to the ASE 2013 formatting and submission instructions and
+should cover:
+
+   * Your targeted research problem with justification of its importance
+   * Discussion why related and prior work has not solved the problem
+   * A sketch of the proposed approach or solution
+   * The expected contributions of your dissertation research
+   * Progress you have made so far in solving the stated problem
+   * The methods you are using or will use to carry out your research
+   * A plan for evaluating your work and presenting credible evidence of
+     your results to the research community
+   * A list of any publications either appeared, accepted or submitted
+     for which the student is an author.
+
+Students at the initial stage of their research might have some
+difficulty in addressing some of these areas, but should make their best
+attempt. The research abstract should include the title of your work,
+your name, your advisor, your email address, postal address, personal
+website, and a one paragraph short summary in the style of an abstract
+for a regular paper.
+
+Please submit your research abstract using the EasyChair submission site:
+
+   https://www.easychair.org/conferences/?conf=dsase13
+
+Part 2: Letter of Recommendation. Please ask your dissertation advisor
+for a letter of recommendation. This letter should include your name and
+a candid assessment of the current status of your dissertation research
+and an expected date for dissertation submission. The letter should be
+in Adobe Portable Document Format (PDF), and sent to: Marsha Chechik and
+Paul Gruenbacher at ase-org at cs.toronto.edu
+with the subject: ASE 2013 DOCTORAL SYMPOSIUM RECOMMENDATION.
+
+Acceptance. All accepted papers will be published by IEEE. Authors of
+accepted contributions will receive further instructions for preparing
+their camera ready versions. Authors must register for the ASE 2013
+Doctoral Symposium and present their work at the Symposium.
+
+
+=== ORGANIZATION =======================================================
+
+  General Chair
+    Ewen Denney, SGT / NASA Ames
+
+  Program Chairs
+    Tevfik Bultan, University of California, Santa Barbara
+    Andrease Zeller, Saarland University, Saarbruecken
+
+  Program Committee
+    Andrew Begel, Microsoft Research
+    Myra Cohen, University of Nebraska - Lincoln
+    Danny Dig, University of Illinois at Urbana-Champaign
+    Bernd Fischer, Stellenbosch University / University of Southampton
+    Gordon Fraser, University of Sheffield
+    Harald Gall, University of Zurich
+    Dimitra Giannakopoulou, NASA Ames Research Center
+    Alex Groce, Oregon State University
+    Paul Gruenbacher, Johannes Kepler University Linz
+    Arie Gurfinkel, Carnegie Mellon University US
+    William G.J. Halfond, University of Southern California
+    Mark Harman, University College London
+    Sunghun Kim, The Hong Kong University of Science and Technology
+    David Lo, Singapore Management University
+    Shahar Maoz, Tel Aviv University
+    Darko Marinov, University of Illinois at Urbana Champaign
+    Tim Menzies, West Virginia University
+    Mira Mezini, Technische Universitaet Darmstadt
+    Tien Nguyen, Iowa State University
+    Corina Pasareanu, CMU, NASA Ames
+    Lori Pollock, University of Delaware
+    Martin Robillard, McGill University
+    Grigore Rosu, University of Illinois at Urbana Champaign
+    Abhik Roychoudhury, National University of Singapore
+    Gabriele Taentzer, Philipps Universitaet Marburg
+    Nikolai Tillmann, Microsoft Research
+    Sebastian Uchitel, Universidad de Buenos Aires/Imperial College London
+    Willem Visser, Stellenbosch University
+    Lu Zhang, Peking University
+    Charles Zhang, Hongkong University of Science and Technology
+
+  Doctoral Symposium Co-Chairs
+    Marsha Chechik, University of Toronto
+    Paul Gruenbacher, Johannes Kepler University Linz
+
+  Doctoral Symposium Committee
+    Jamie H. Andrews, University of Western Ontario
+    Myra B. Cohen, University of Nebraska - Lincoln
+    Elisabetta Di Nitto, Politecnico di Milano
+    Darko Marinov, University of Illinois at Urbana-Champaign
+    Charles Pecheur, Universite Catholique de Louvain
+    Andrea Zisman, City University London
+
+  Workshop and Tutorial Co-Chairs
+    Marcelo d'Amorim, Federal University of Pernambuco
+    David Lo, Singapore Management University
+
+  Tool Demonstration Chairs
+    Andrew Ireland, Heriot-Watt University
+    Neha Rungta, SGT / NASA Ames
+
+  Finance & Local Arrangements
+    Ganesh Pai, SGT / NASA Ames
+
+  Publicity Chair
+    Christoph Gladisch, Karlsruhe Institute of Technology
+
+  Social Media Chair
+    Tien Nguyen, Iowa State University
+
+
+
+

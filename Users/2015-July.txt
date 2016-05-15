@@ -1,0 +1,879 @@
+From maikschuenemann at gmail.com  Fri Jul  3 12:55:05 2015
+From: maikschuenemann at gmail.com (Maik =?utf-8?Q?Sch=C3=BCnemann?=)
+Date: Fri, 03 Jul 2015 12:55:05 +0200
+Subject: [Stratego Users] Installation of Stratego
+Message-ID: <87ioa1zf1y.fsf@gmail.com>
+
+Hi,
+I am having trouble installing Stratego.
+
+http://strategoxt.org/Stratego/StrategoDownload
+seems to be outdated, the Files won't even download and the
+nix packages can't be installed.
+
+It seems that the preferred way is to use Spoofax with eclipse, but I
+can't get it to install either
+
+I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+which is documented to work on http://strategoxt.org/Spoofax)
+
+on install new software I enter
+http://download.spoofax.org/update/stable/
+and select all components.
+
+There comes an error message that some dependencies can't be installed.
+
+Can you help me?
+For my purposes, having a running stratego shell would be all I need.
+
+thanks,
+Maik
+-- 
+Maik Sch?nemann
+Email: maikschuenemann at gmail.com
+Github: https://github.com/mschuene
+
+
+
+From G.H.Wachsmuth at tudelft.nl  Fri Jul  3 13:00:26 2015
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Fri, 3 Jul 2015 11:00:26 +0000
+Subject: [Stratego Users] Installation of Stratego
+In-Reply-To: <87ioa1zf1y.fsf@gmail.com>
+References: <87ioa1zf1y.fsf@gmail.com>
+Message-ID: <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+
+Hi Maik,
+
+you might want to try one of our pre-packed Eclipse distributions which include Spoofax already: http://metaborg.org/download/
+
+? Guido Wachsmuth
+
+On 03 Jul 2015, at 12:55, Maik Sch?nemann <maikschuenemann at gmail.com<mailto:maikschuenemann at gmail.com>> wrote:
+
+Hi,
+I am having trouble installing Stratego.
+
+http://strategoxt.org/Stratego/StrategoDownload
+seems to be outdated, the Files won't even download and the
+nix packages can't be installed.
+
+It seems that the preferred way is to use Spoofax with eclipse, but I
+can't get it to install either
+
+I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+which is documented to work on http://strategoxt.org/Spoofax)
+
+on install new software I enter
+http://download.spoofax.org/update/stable/
+and select all components.
+
+There comes an error message that some dependencies can't be installed.
+
+Can you help me?
+For my purposes, having a running stratego shell would be all I need.
+
+thanks,
+Maik
+--
+Maik Sch?nemann
+Email: maikschuenemann at gmail.com
+Github: https://github.com/mschuene
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150703/2d3d76fc/attachment.html>
+
+From eelcovis at gmail.com  Fri Jul  3 15:36:22 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Fri, 3 Jul 2015 15:36:22 +0200
+Subject: [Stratego Users] Installation of Stratego
+In-Reply-To: <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+References: <87ioa1zf1y.fsf@gmail.com>
+ <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+Message-ID: <CAFaCHU0MFjzUV_K9z=HVvxVFHCmtSC3v=YhM+=OVEOjwp3yFtQ@mail.gmail.com>
+
+Hi Maik,
+
+I understand your confusion; the notice about Spoofax redirected to the old
+Spoofax site. I have repaired that and added BIG RED BANNERS to the old
+Stratego/XT site and redirected from strategoxt.org/Spoofax to the new
+http://metaborg.org/spoofax site.
+
+-- Eelco
+
+On Fri, Jul 3, 2015 at 1:00 PM, Guido Wachsmuth - EWI <
+G.H.Wachsmuth at tudelft.nl> wrote:
+
+>  Hi Maik,
+>
+>  you might want to try one of our pre-packed Eclipse distributions which
+> include Spoofax already: http://metaborg.org/download/
+>
+>  ? Guido Wachsmuth
+>
+>  On 03 Jul 2015, at 12:55, Maik Sch?nemann <maikschuenemann at gmail.com>
+> wrote:
+>
+> Hi,
+> I am having trouble installing Stratego.
+>
+> http://strategoxt.org/Stratego/StrategoDownload
+> seems to be outdated, the Files won't even download and the
+> nix packages can't be installed.
+>
+> It seems that the preferred way is to use Spoofax with eclipse, but I
+> can't get it to install either
+>
+> I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+> which is documented to work on http://strategoxt.org/Spoofax)
+>
+> on install new software I enter
+> http://download.spoofax.org/update/stable/
+> and select all components.
+>
+> There comes an error message that some dependencies can't be installed.
+>
+> Can you help me?
+> For my purposes, having a running stratego shell would be all I need.
+>
+> thanks,
+> Maik
+> --
+> Maik Sch?nemann
+> Email: maikschuenemann at gmail.com
+> Github: https://github.com/mschuene
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Professor of Computer Science, TU Delft
+
+http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150703/d0a202ae/attachment.html>
+
+From maikschuenemann at gmail.com  Fri Jul  3 15:46:37 2015
+From: maikschuenemann at gmail.com (Maik =?utf-8?Q?Sch=C3=BCnemann?=)
+Date: Fri, 03 Jul 2015 15:46:37 +0200
+Subject: [Stratego Users] Installation of Stratego
+In-Reply-To: <CAFaCHU0MFjzUV_K9z=HVvxVFHCmtSC3v=YhM+=OVEOjwp3yFtQ@mail.gmail.com>
+ (Eelco Visser's message of "Fri, 3 Jul 2015 15:36:22 +0200")
+References: <87ioa1zf1y.fsf@gmail.com>
+ <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+ <CAFaCHU0MFjzUV_K9z=HVvxVFHCmtSC3v=YhM+=OVEOjwp3yFtQ@mail.gmail.com>
+Message-ID: <878uaxuzeq.fsf@gmail.com>
+
+Eelco Visser <eelcovis at gmail.com> writes:
+
+> Hi Maik,
+>
+> I understand your confusion; the notice about Spoofax redirected to the old
+> Spoofax site. I have repaired that and added BIG RED BANNERS to the old
+> Stratego/XT site and redirected from strategoxt.org/Spoofax to the new
+> http://metaborg.org/spoofax site.
+
+Thank you, I'll try again with the spoofax-linux-x64-jre.zip and report back.
+>
+> -- Eelco
+>
+> On Fri, Jul 3, 2015 at 1:00 PM, Guido Wachsmuth - EWI <
+> G.H.Wachsmuth at tudelft.nl> wrote:
+>
+>>  Hi Maik,
+>>
+>>  you might want to try one of our pre-packed Eclipse distributions which
+>> include Spoofax already: http://metaborg.org/download/
+>>
+>>  ? Guido Wachsmuth
+>>
+>>  On 03 Jul 2015, at 12:55, Maik Sch?nemann <maikschuenemann at gmail.com>
+>> wrote:
+>>
+>> Hi,
+>> I am having trouble installing Stratego.
+>>
+>> http://strategoxt.org/Stratego/StrategoDownload
+>> seems to be outdated, the Files won't even download and the
+>> nix packages can't be installed.
+>>
+>> It seems that the preferred way is to use Spoofax with eclipse, but I
+>> can't get it to install either
+>>
+>> I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+>> which is documented to work on http://strategoxt.org/Spoofax)
+>>
+>> on install new software I enter
+>> http://download.spoofax.org/update/stable/
+>> and select all components.
+>>
+>> There comes an error message that some dependencies can't be installed.
+>>
+>> Can you help me?
+>> For my purposes, having a running stratego shell would be all I need.
+>>
+>> thanks,
+>> Maik
+>> --
+>> Maik Sch?nemann
+>> Email: maikschuenemann at gmail.com
+>> Github: https://github.com/mschuene
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+
+-- 
+Maik Sch?nemann
+Email: maikschuenemann at gmail.com
+Github: https://github.com/mschuene
+
+
+From maikschuenemann at gmail.com  Sat Jul  4 10:48:13 2015
+From: maikschuenemann at gmail.com (=?UTF-8?Q?Maik_Sch=C3=BCnemann?=)
+Date: Sat, 4 Jul 2015 10:48:13 +0200
+Subject: [Stratego Users] Installation of Stratego
+In-Reply-To: <878uaxuzeq.fsf@gmail.com>
+References: <87ioa1zf1y.fsf@gmail.com>
+ <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+ <CAFaCHU0MFjzUV_K9z=HVvxVFHCmtSC3v=YhM+=OVEOjwp3yFtQ@mail.gmail.com>
+ <878uaxuzeq.fsf@gmail.com>
+Message-ID: <CAGXfcpwE+KOFbWLYXPtg936kkcf-GNVupye3nQmq02LY3LG9Aw@mail.gmail.com>
+
+On Fri, Jul 3, 2015 at 3:46 PM, Maik Sch?nemann <maikschuenemann at gmail.com>
+wrote:
+
+> Eelco Visser <eelcovis at gmail.com> writes:
+>
+> > Hi Maik,
+> >
+> > I understand your confusion; the notice about Spoofax redirected to the
+> old
+> > Spoofax site. I have repaired that and added BIG RED BANNERS to the old
+> > Stratego/XT site and redirected from strategoxt.org/Spoofax to the new
+> > http://metaborg.org/spoofax site.
+>
+> Thank you, I'll try again with the spoofax-linux-x64-jre.zip and report
+> back.
+>
+
+For some reasons, the linux 64 bit version was not working on my linux
+laptop, but I succeeded on Windows with the windows 64 bit version. Maybe
+there are some issues with my setup...
+
+Anyway, thanks for your help.
+Is there a way to start the stratego shell in spoofax? The tour doesn't
+show a way and the how to debug question on the faq only mentions the debug
+strategy.
+
+
+
+> >
+> > -- Eelco
+> >
+> > On Fri, Jul 3, 2015 at 1:00 PM, Guido Wachsmuth - EWI <
+> > G.H.Wachsmuth at tudelft.nl> wrote:
+> >
+> >>  Hi Maik,
+> >>
+> >>  you might want to try one of our pre-packed Eclipse distributions which
+> >> include Spoofax already: http://metaborg.org/download/
+> >>
+> >>  ? Guido Wachsmuth
+> >>
+> >>  On 03 Jul 2015, at 12:55, Maik Sch?nemann <maikschuenemann at gmail.com>
+> >> wrote:
+> >>
+> >> Hi,
+> >> I am having trouble installing Stratego.
+> >>
+> >> http://strategoxt.org/Stratego/StrategoDownload
+> >> seems to be outdated, the Files won't even download and the
+> >> nix packages can't be installed.
+> >>
+> >> It seems that the preferred way is to use Spoofax with eclipse, but I
+> >> can't get it to install either
+> >>
+> >> I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+> >> which is documented to work on http://strategoxt.org/Spoofax)
+> >>
+> >> on install new software I enter
+> >> http://download.spoofax.org/update/stable/
+> >> and select all components.
+> >>
+> >> There comes an error message that some dependencies can't be installed.
+> >>
+> >> Can you help me?
+> >> For my purposes, having a running stratego shell would be all I need.
+> >>
+> >> thanks,
+> >> Maik
+> >> --
+> >> Maik Sch?nemann
+> >> Email: maikschuenemann at gmail.com
+> >> Github: https://github.com/mschuene
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >>
+>
+> --
+> Maik Sch?nemann
+> Email: maikschuenemann at gmail.com
+> Github: https://github.com/mschuene
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150704/c091a106/attachment-0001.html>
+
+From eelcovis at gmail.com  Sat Jul  4 15:06:30 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Sat, 4 Jul 2015 15:06:30 +0200
+Subject: [Stratego Users] Installation of Stratego
+In-Reply-To: <CAGXfcpwE+KOFbWLYXPtg936kkcf-GNVupye3nQmq02LY3LG9Aw@mail.gmail.com>
+References: <87ioa1zf1y.fsf@gmail.com>
+ <149FD99F-6B54-4090-9A89-D9B5949F3B27@tudelft.nl>
+ <CAFaCHU0MFjzUV_K9z=HVvxVFHCmtSC3v=YhM+=OVEOjwp3yFtQ@mail.gmail.com>
+ <878uaxuzeq.fsf@gmail.com>
+ <CAGXfcpwE+KOFbWLYXPtg936kkcf-GNVupye3nQmq02LY3LG9Aw@mail.gmail.com>
+Message-ID: <CAFaCHU2FDzbriJr8PR3mniASbAPu7VUY22d5M_aQOUgR_oi4HA@mail.gmail.com>
+
+Hi Maik,
+
+> I understand your confusion; the notice about Spoofax redirected to the
+>> old
+>> > Spoofax site. I have repaired that and added BIG RED BANNERS to the old
+>> > Stratego/XT site and redirected from strategoxt.org/Spoofax to the new
+>> > http://metaborg.org/spoofax site.
+>>
+>> Thank you, I'll try again with the spoofax-linux-x64-jre.zip and report
+>> back.
+>>
+>
+> For some reasons, the linux 64 bit version was not working on my linux
+> laptop, but I succeeded on Windows with the windows 64 bit version. Maybe
+> there are some issues with my setup...
+>
+
+We're mostly a Mac shop these days. So our Linux build don't get tested as
+well as the mac os x builds.
+
+
+> Anyway, thanks for your help.
+> Is there a way to start the stratego shell in spoofax? The tour doesn't
+> show a way and the how to debug question on the faq only mentions the debug
+> strategy.
+>
+
+The Stratego shell was never properly migrated to Spoofax. At some point
+there was a hack that allowed use of the shell in the Spoofax console, but
+that required an additional Nix installation of the shell, if I remember
+correctly.
+
+So these days we get by with 'Spoofax builders' (see Section 4.8 of
+http://declare-your-language.metaborg.org/). It is a bit cumbersome since
+it requires a full build cycle. But the advantage is that you can apply
+transformations directly to a program in an editor.
+
+Hopefully the new Spoofax Core will make it easier to develop shell
+interfaces to languages again.
+
+cheers,
+
+-- Eelco
+
+
+
+>
+>
+>
+>> >
+>> > -- Eelco
+>> >
+>> > On Fri, Jul 3, 2015 at 1:00 PM, Guido Wachsmuth - EWI <
+>> > G.H.Wachsmuth at tudelft.nl> wrote:
+>> >
+>> >>  Hi Maik,
+>> >>
+>> >>  you might want to try one of our pre-packed Eclipse distributions
+>> which
+>> >> include Spoofax already: http://metaborg.org/download/
+>> >>
+>> >>  ? Guido Wachsmuth
+>> >>
+>> >>  On 03 Jul 2015, at 12:55, Maik Sch?nemann <maikschuenemann at gmail.com>
+>> >> wrote:
+>> >>
+>> >> Hi,
+>> >> I am having trouble installing Stratego.
+>> >>
+>> >> http://strategoxt.org/Stratego/StrategoDownload
+>> >> seems to be outdated, the Files won't even download and the
+>> >> nix packages can't be installed.
+>> >>
+>> >> It seems that the preferred way is to use Spoofax with eclipse, but I
+>> >> can't get it to install either
+>> >>
+>> >> I tried with multiple eclipse versions (4.5 the current down to 4.2.2
+>> >> which is documented to work on http://strategoxt.org/Spoofax)
+>> >>
+>> >> on install new software I enter
+>> >> http://download.spoofax.org/update/stable/
+>> >> and select all components.
+>> >>
+>> >> There comes an error message that some dependencies can't be installed.
+>> >>
+>> >> Can you help me?
+>> >> For my purposes, having a running stratego shell would be all I need.
+>> >>
+>> >> thanks,
+>> >> Maik
+>> >> --
+>> >> Maik Sch?nemann
+>> >> Email: maikschuenemann at gmail.com
+>> >> Github: https://github.com/mschuene
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >>
+>>
+>> --
+>> Maik Sch?nemann
+>> Email: maikschuenemann at gmail.com
+>> Github: https://github.com/mschuene
+>>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Professor of Computer Science, TU Delft
+
+http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150704/911ffb0b/attachment.html>
+
+From canslow at ucalgary.ca  Sat Jul 18 02:20:01 2015
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Sat, 18 Jul 2015 00:20:01 +0000
+Subject: [Stratego Users] SPLASH 2015 - Workshops Combined Call for Papers
+Message-ID: <D1CF5A3F.29CB3%canslow@ucalgary.ca>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+          Software for Humanity (SPLASH'15)
+
+      Pittsburgh, Pennsylvania, USA
+      25th-30th October, 2015
+
+      http://www.splashcon.org
+
+      Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+CALL FOR WORKSHOP PAPERS AND PARTICIPATION
+
+    Submissions Deadline: August 7, 2015
+
+/************************************************************************************/
+
+SPLASH'15 workshops address a rich variety of well-known and newly emerging research areas and provide a creative and collaborative environment to discuss and solve challenge problems with attendees from industry and research organizations from all over the world. Submission deadlines vary from workshop to workshop. Some workshops will be published in the ACM Digital Library. The current SPLASH'15 workshops program is listed below and the abstracts at the end.
+
+**************************************************************
+
+CURRENT WORKSHOP PROGRAM
+
+AGERE! - Workshop on Programming based on Actors, Agents, and Decentralized Control
+http://2015.splashcon.org/track/agere2015
+Abstracts: August 1, 2015,
+Submissions: August 7, 2015,
+Position/work-in-progress Papers and Demos: September 7, 2015
+
+DSM - Workshop on Domain-Specific Modeling
+http://2015.splashcon.org/track/dsm2015
+Submissions: August 7, 2015
+
+ETX - Eclipse Technology eXchange Workshop
+http://2015.splashcon.org/track/etx2015
+Paper Registration: July 31, 2015
+Submissions: August 7, 2015
+
+FPW - Future Programming Workshop
+http://2015.splashcon.org/track/fpw2015
+Submissions: August 7, 2015
+
+MobileDeLi - Workshop on Mobile Development Lifecycle
+http://2015.splashcon.org/track/mobiledeli2015
+Submissions: August 7, 2015
+
+PLATEAU ? Workshop on Evaluation and Usability of Programming Languages and Tools
+http://2015.splashcon.org/track/plateau2015
+Submissions: August 7, 2015
+
+PROMOTO ? Workshop on Programming for Mobile and Touch
+http://2015.splashcon.org/track/promoto2015
+Submissions: August 7, 2015
+
+Parsing at SLE - Workshop on Parsing Programming Languages
+http://2015.splashcon.org/track/ParsingAtSLE2015
+Submissions: August 7, 2015
+
+REBLS - Workshop on Reactive and Event-based Languages & Systems
+http://2015.splashcon.org/track/rebls2015
+Submissions: August 7, 2015
+
+SEPS - Workshop on Software Engineering for Parallel Systems
+http://2015.splashcon.org/track/seps2015
+Submissions: August 7, 2015
+
+SMART - Smart Software Strategies
+http://conf.researchr.org/track/SmartSoftwareStrategies2015/SmartSoftwareStrategies2015
+Submissions: October 2, 2015
+
+WODA - Workshop on Dynamic Analysis
+http://2015.splashcon.org/track/woda2015
+Submissions: August 7, 2015
+
+
+For additional information, clarification, early feedback, or answers to questions, please contact the Workshop Organizers of your favorite workshops, or the Workshops Chairs, Jan S. Rellermeyer and Du Li, at workshopsplash2015 at easychair.org
+
+
+**************************************************************
+ANNEX: WORKSHOP ABSTRACTS AND DATES
+**************************************************************
+AGERE! 5th International Workshop on Programming based on Actors, Agents, and Decentralized Control
+http://2015.splashcon.org/track/agere2015
+
+-Deadlines:
+Abstracts: August 1, 2015
+Submissions: August 7, 2015
+Position/work-in-progress Papers and Demos: September 7, 2015
+
+- Organizers:
+Elisa Gonzalez Boix, Vrije Universiteit Brussel, Belgium
+Philipp Haller, KTH Royal Institute of Technology, Sweden
+Alessandro Ricci, University of Bologna, Italy
+Carlos Varela, Rensselaer Polytechnic Institute
+
+- Abstract:
+The AGERE! workshop is aimed at focusing on programming systems, languages and applications based on actors, active/concurrent objects, agents and ? more generally ? high-level programming paradigms promoting a mindset of decentralized control in solving problems and developing software. The workshop is designed to cover both the theory and the practice of design and programming, bringing together researchers working on models, languages and technologies, and practitioners developing real-world systems and applications.
+
+
+**************************************************************
+DSM - Domain-Specific Modeling workshop
+http://2015.splashcon.org/track/dsm2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Jeff Gray, University of Alabama, USA
+Jonathan Sprinkle, University of Arizona, USA
+Juha-Pekka Tolvanen, MetaCase, Finland
+Matti Rossi, Aalto University School of Economics, Finland
+
+- Abstract:
+Domain-specific languages provide a viable and time-tested solution for continuing to raise the level of abstraction, and thus productivity, beyond coding, making systems development faster and easier. When accompanied with suitable automated modeling tools and generators it delivers to the promises of continuous delivery and devops. In Domain-Specific Modeling (DSM) the models are constructed using concepts that represent things in the application domain, not concepts of a given programming language. The modeling language follows the domain abstractions and semantics, allowing developers to perceive themselves as working directly with domain concepts. Together with frameworks and platforms, DSM can automate a large portion of software production. This automation is possible because of domain-specificity: both the modeling language and code generators fit to the requirements of a narrowly defined domain, often inside one organization only.
+
+
+**************************************************************
+ETX - Eclipse Technology eXchange Workshop
+http://2015.splashcon.org/track/etx2015
+
+- Deadlines:
+Abstracts: July 31, 2015
+Submissions: August 7, 2015
+
+- Organizers:
+Tim Verbelen, Ghent University - iMinds, Belgium
+Michael Burke, Rice University, USA
+
+- Abstract:
+The Eclipse platform (http://www.eclipse.org) was originally designed for building integrated development environments for object-oriented applications. Over the years it has developed into a vibrant ecosystem of platforms, toolkits, libraries, modeling frameworks, and tools that support various languages and programming styles. The goal of the ETX workshop is to bring together researchers and practitioners to exchange ideas about potential new uses of Eclipse and how Eclipse technology can be leveraged, improved, and/or extended for research and education. After successful editions of the ETX workshop in 2003-2007, we revived the ETX workshop in 2014 and are now up for another edition. ETX 2015 invites original and unpublished contributions about potential new uses of Eclipse and how Eclipse technology can be leveraged, improved, and/or extended for research and education.
+
+
+**************************************************************
+FPW - Future Programming Workshop
+http://2015.splashcon.org/track/fpw2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Jonathan Edwards, MIT CSAIL, USA
+Richard Gabriel, IBM Research, USA
+Alex Payne, Emerging Languages Camp, USA
+
+- Abstract:
+The Future Programming Workshop (FPW) invites ambitious visions, new approaches, and early-stage work of all kinds seeking to improve software development. Participants will present their work at SPLASH in Pittsburgh and optionally at Strange Loop in St. Louis, culminating in a writers? workshop at SPLASH. FPW fosters a supportive and inspirational community of researchers and practitioners working at the frontiers of software. We are looking for transformative ideas outside the academic and industrial mainstream - ideas with potentially large impacts on how we will build software in the future. We embrace early-stage work, when it is most in need of constructive criticism, and offer a safe and effective environment in which to receive such criticism.
+
+
+**************************************************************
+MobileDeLi - Workshop on Mobile Development Lifecycle
+http://2015.splashcon.org/track/mobiledeli2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Aharon Abadi, IBM Haifa Research Lab, Israel
+Lori Flynn, CERT, USA
+Jeff Gray, University of Alabama, USA
+
+- Abstract:
+Mobile application usage and development is experiencing exponential growth. According to Gartner, by 2016 more than 200 billion total apps will have been downloaded. The mobile domain presents new challenges to software engineering. Mobile platforms are rapidly changing, including diverse capabilities as GPS, sensors, and input modes. Applications must be omni-channel and work on all platforms.
+Activated on mobile platforms, modern applications must be elastic and scale on demand according to the hardware abilities. Applications often need to support and use third-party services. Therefore, during development, security and authorization processes for the dataflow must be applied. Bring your own device (BYOD) policies bring new security data leaks challenges. Developing such applications requires suitable practices and tools e.g., architecture techniques that relate to the complexity at hand; improved refactoring tools for hybrid applications using dynamic languages and polyglot development and applications; and testing techniques for applications that run on different devices. This workshop aims at establishing a community of researchers and practitioners to share their work and lead further research in the mobile development area.
+
+**************************************************************
+PLATEAU ? 6th Workshop on Evaluation and Usability of Programming Languages and Tools
+http://2015.splashcon.org/track/plateau2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Thomas LaToza, UC Irvine, USA
+Joshua Sunshine, Carnegie Mellon University, USA
+Craig Anslow, Middlesex University, UK
+
+- Abstract:
+Programming languages exist to enable programmers to develop software effectively. But how efficiently programmers can write software depends on the usability of the languages and tools that they develop with. The aim of this workshop is to discuss methods, metrics and techniques for evaluating the usability of languages and language tools. The supposed benefits of such languages and tools cover a large space, including making programs easier to read, write, and maintain; allowing programmers to write more flexible and powerful programs; and restricting programs to make them more safe and secure. PLATEAU gathers the intersection of researchers in the programming language, programming tool, and human-computer interaction communities to share their research and discuss the future of evaluation and usability of programming languages and tools.
+
+
+**************************************************************
+Parsing - Parsing at SLE 2015
+http://2015.splashcon.org/track/ParsingAtSLE2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Ali Afroozeh,
+Loek Cleophas, Umea University, Sweden
+
+- Abstract:
+Parsing at SLE is a workshop on parsing programming languages, now in its third edition. The intended participants are the authors of parser generation tools and parsers for programming languages and other software languages. For the purpose of this workshop ``parsing?? is a computation that takes a sequence of characters as input and produces a syntax tree or graph as output. This possibly includes tokenization using regular expressions, deriving trees using context- free grammars, and mapping to abstract syntax trees. The goal is to bring together today?s experts in the field of parsing, in order to explore open questions and possibly forge new collaborations. The topics may include algorithms, implementation and generation techniques, syntax and semantics of meta formalisms (BNF), etc.
+
+
+**************************************************************
+PROMOTO ? 3rd Workshop on Programming for Mobile and Touch
+http://2015.splashcon.org/track/promoto2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Steven D. Fraser, Innoxec, USA
+Alberto Sillitti, Center for Applied Software Engineering Bolzano, Italy
+
+- Abstract:
+Today, easy-to-use mobile devices like smartphones and tablets are becoming more prevalent than traditional PCs and laptops. New programming languages are emerging to enable programmers to develop software easily?leveraging the exciting advances in existing hardware, and providing abstractions that fit the capabilities of target platforms with multiple sensors, touch and cloud capabilities. PROMOTO brings together researchers who have been exploring new programming paradigms, embracing the new realities of always connected, touch-enabled mobile devices. PROMOTO 2015 would like to invite contributions covering technical aspects of cross-platform computing, cloud computing, social applications and security. Submissions for this event are invited in the general area of mobile and touch-oriented programming languages and programming environments, and teaching of programming for mobile devices.
+
+
+**************************************************************
+REBLS - Workshop on Reactive and Event-based Languages & Systems
+http://2015.splashcon.org/track/rebls2015
+
+- Deadlines:
+Submissions: August 7, 2015
+
+- Organizers:
+Guido Salvaneschi, TU Darmstadt, Germany
+Wolfgang De Meuter, Vrije Universiteit, Belgium
+Patrick Eugster, Purdue University, USA
+Lukasz Ziarek, State University of New York (SUNY) Buffalo, USA
+
+Reactive programming and event-based programming are two closely related programming styles that are becoming ever more important with the advent of advanced HPC technology and the ever increasing requirement for our applications to run on the web or on collaborating mobile devices. A number of publications on middleware and language design ? so-called reactive and event-based languages and systems (REBLS) ? have already seen the light, but the field still raises several questions. For example, the interaction with mainstream language concepts is poorly understood, implementation technology is in its infancy and modularity mechanisms are almost totally lacking. Moreover, large applications are still to be developed and patterns and tools for developing reactive applications is an area that is vastly unexplored.
+
+
+**************************************************************
+SEPS - 2nd Workshop on Software Engineering for Parallel Systems
+http://2015.splashcon.org/track/seps2015
+
+- Deadlines:
+Papers: August 7, 2015
+
+- Organizers:
+Ali Jannesari, Technical University of Darmstadt, Germany
+Siegfried Benkner, University of Vienna, Austria
+Xinghui Zhao, Washington State University, USA
+Ehsan Atoofian, Lakehead University, Canada
+Yukionri Sato, Tokyo Institute of Technology, Japan
+
+- Abstract:
+The increased complexity of parallel applications on modern parallel platforms (e.g. multicore/manycore, distributed or hybrid) requires more insight into development processes, and necessitates the use of advanced methods and techniques supporting developers in creating parallel applications or parallelizing and reengineering sequential legacy applications. We aim to advance the state of the art in different phases of parallel software development, covering software engineering aspects such as requirements engineering and software specification; design and implementation; program analysis, profiling and tuning; testing and debugging.
+
+
+**************************************************************
+SMART - Workshop on Smart Software Strategies
+http://conf.researchr.org/track/SmartSoftwareStrategies2015/SmartSoftwareStrategies2015
+
+- Deadlines:
+Papers: October 2, 2015
+
+- Organizers:
+Steven D. Fraser, Independent Consultant, USA
+Dennis Mancl, Alcatel-Lucent, USA
+Bill Opdyke, JP Morgan Chase & Co, USA
+
+- Abstract:
+We should learn from the past ? to use what we learn for the next problem. What can we learn from the experiences of Y2K? There are some lessons about software design and software maintenance that we might apply to the next wave of software and technology:
+
+Y2K bugs: In the late 1990s, software developers and managers were furiously working to analyze and fix potential ?Y2K bugs.? We all knew that there were software applications that might fail on January 1, 2000, but no one was sure how we would manage to fix all of these defects in time.
+Today?s ?smart? technologies: Fifteen years later, we are at the threshold of a new era of software ? smart phones, wearable technology, digital currency, smart automobiles, smart power grids, smart appliances. How should we prepare for this wave? Should we be thinking ahead, should we be anticipating some of the potential risks and latent defects in our smart applications and smart support software for a software-driven future world?
+What advances in software analysis, design, coding, and testing will we need to do reduce our exposure to defects, unintended side effects, and malicious mischief? We might look to the past ? to the biggest concentrated effort to clean up and modernize software on a worldwide scale. Are there some lessons we can learn from ?Y2K remediation activities? of the 1990s?
+
+
+**************************************************************
+WODA - 13th International Workshop on Dynamic Analysis
+http://2015.splashcon.org/track/woda2015
+
+- Deadlines:
+Papers: August 7, 2015
+
+- Organizers:
+Harry Xu, University of California, Irvine, USA
+Walter Binder, University of Lugano, Switzerland
+Yudi Zheng, University of Lugano, Switzerland
+
+- Abstract:
+Dynamic analysis is widely used in software development to understand various run-time properties of a program. Dynamic analysis includes both offline techniques, which operate on some captured representation of the program's behavior (e.g., a trace), and run-time techniques, which analyze the behavior on the fly, while the system is executing. Although inherently incomplete, dynamic analyses can be more precise than their static counterparts and show promise in aiding the understanding, development, and maintenance of robust and reliable large scale systems. Moreover, the data they provide enable statistical inferences to be made about program behavior. Dynamic analysis is playing a central role in the understanding of applications and systems as we grapple with emerging challenges such as systemic runtime bloat, high energy consumption, and the explosion of Big Data. The overall goal of WODA is to bring together researchers and practitioners working in all areas of dynamic analysis to discuss new issues, share results and ongoing work, and foster collaborations. This workshop is a forum for researchers and practitioners interested in the intersection of compilers, programming languages, architecture, software engineering, systems, high-performance computing, performance engineering, machine learning, and data mining for addressing software and system performance. The workshop focuses on developing and studying analytic technologies (e.g., program analysis, statistical analysis, machine learning, data mining, visualization) applied on various software or system artifacts (e.g., production systems, tests, program traces, system logs) to address issues in software and system reliability, dependability, performance, and scalability.
+
+ /************************************************************************************/
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150718/2f934943/attachment-0001.html>
+
+From canslow at ucalgary.ca  Fri Jul 31 12:25:02 2015
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Fri, 31 Jul 2015 10:25:02 +0000
+Subject: [Stratego Users] SPLASH 2015 - Call for Student Volunteers
+Message-ID: <D1E10B88.2A5ED%canslow@ucalgary.ca>
+
+/************************************************************************************/
+ACM Conference on Systems, Programming, Languages, and Applications:
+            Software for Humanity (SPLASH'15)
+
+       Pittsburgh, Pennsylvania, USA
+       25th-30th October, 2015
+
+       http://www.splashcon.org<http://www.splashcon.org/>
+
+       Sponsored by ACM SIGPLAN
+
+/************************************************************************************/
+Call for Student Volunteers
+/************************************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and Applications: Software for Humanity (SPLASH) embraces all aspects of software construction and delivery to make it the premier conference at the intersection of programming, languages, and software engineering. SPLASH is now accepting submissions. We invite high quality submissions describing original and unpublished work.
+
+** Student Volunteers **
+The SPLASH Student Volunteer program provides an opportunity for students from around the world to associate with some of the leading personalities in industry and research in the following areas: programming languages, object-oriented technology and software development. Student volunteers contribute to the smooth running of the conference by performing tasks such as: assisting with registration, providing information about the conference to attendees, assisting session organizers and monitoring sessions.
+
+Applications Due: 7 August, 2015
+http://2015.splashcon.org/track/splash2015-sv
+
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco Harkes (TU Delft)
+
+Information:
+SPLASH Early Registration Deadline: 25 September, 2015
+Contact: info at splashcon.org<mailto:info at splashcon.org>
+Website: http://2015.splashcon.org<http://2015.splashcon.org/>
+
+Location:
+Sheraton Station Square Hotel
+Pittsburgh, Pennsylvania, United States
+
+Organization:
+SPLASH General Chair: Jonathan Aldrich (Carnegie Mellon University)
+OOPSLA Papers Chair: Patrick Eugster (Purdue University)
+Onward! Papers Chair: Gail Murphy (University of British Columbia)
+Onward! Essays Chair: Guy Steele (Oracle Labs)
+DLS Papers Chair: Manuel Serrano (INRIA)
+
+Artifact Evaluation Co-Chairs: Robby Findler (Northwestern University) and Michael Hind (IBM Research)
+Demos Co-Chairs: Igor Peshansky (Google) and Pietro Ferrara (IBM Research)
+Inspirations Co-Chairs: Darya Kurilova (Carnegie Mellon University), Zach Tatlock (University of Washington), and Crista Lopes (UC Irvine)
+Local Arrangements Chair: Claire Le Goues (Carnegie Mellon University)
+Posters Chair: Nick Sumner (Simon Fraser University)
+Publications Chair: Alex Potanin (Victoria University of Wellington)
+Publicity and Web Co-Chairs: Craig Anslow (University of Calgary) and Tijs van der Storm (CWI)
+SPLASH-E Chair: Eli Tilevich (Virginia Tech)
+SPLASH-I Co-Chairs: Tijs van der Storm (CWI) and Jan Vitek (Northeastern University)
+Sponsorship Chair: Tony Hosking (Purdue University)
+Student Research Competition Co-Chairs: Sam Guyer (Tufts University) and Patrick Lam (University of Waterloo)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Daco Harkes (TU Delft)
+Wavefront Co-Chairs: Dennis Mancl (Alcatel-Lucent)
+Web Technology Chair: Eelco Visser (TU Delft)
+Workshops Co-Chairs: Du Li (Carnegie Mellon University) and Jan Rellermeyer (IBM Research)
+SLE General Chair: Richard Paige, University of York
+GPCE General Chair: Christian K?stner, Carnegie Mellon University
+PLoP General Chair: Filipe Correia, University of Porto
+/************************************************************************************/
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150731/218ef0a7/attachment.html>
+

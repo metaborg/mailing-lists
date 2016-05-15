@@ -1,0 +1,813 @@
+From E.Visser at tudelft.nl  Mon Jul  9 00:24:58 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 9 Jul 2012 00:24:58 +0200
+Subject: [Stratego Users] (re) considering spoofax - thoughts on
+	suitability?
+In-Reply-To: <4FC766E0.3010905@gmail.com>
+References: <4FC766E0.3010905@gmail.com>
+Message-ID: <CAFaCHU1A4sY5WLgYVNYwCWzYNMF0xLuymadjjnJpitfC8WYBww@mail.gmail.com>
+
+Hi Scott,
+
+Apologies for the late reply. We've been busy with the name binding
+language (NBL) lately.
+
+I have the impression that both features should be expressible fairly
+well with NBL. Perhaps you can send us (Gabriel, Guido; see cc) a
+complete example?
+
+NBL is now integrated as a separate DSL in Spoofax and is available in
+the nightly build release. However, details are still somewhat in flux
+and we haven't had time to write proper documentation yet.
+
+cheers,
+
+-- Eelco
+
+
+
+On Thu, May 31, 2012 at 2:41 PM, Scott Finnie <scott.finnie at gmail.com> wrote:
+> Hello all
+>
+> Apologies this is quite long: thanks in advance to anyone who sticks with
+> it!
+>
+> A good few months back I looked at Spoofax as a candidate for a DSL I'm
+> writing.  I decided to go with an alternative at that point; I'm now several
+> months on, much the richer for the experience, and considering how I should
+> move forward.  In particular I've found I needed to write far more java than
+> expected with my initial workbench selection.  I'm not averse to writing
+> java - but many of the tasks would be more elegant with appropriate DSLs
+> (e.g. scoping, errors/warnings, cross-referencing, etc.).
+>
+> On the face of it spoofax offers just such facilities.  So I'm debating
+> whether to take the learning from my initial project and 'port' it to
+> spoofax.  Before I do I'd really appreciate some pointers on a couple of key
+> questions.  These have been the source of most of the complexity in my
+> current project - so I'd like to understand how to handle them in spoofax.
+> I am happy to "try for myself" - not looking for someone to solve my
+> problems.  But I know the experienced people on the list can offer some
+> direction/opinion much more efficiently than me finding out as I climb up
+> the learning curve.
+>
+> So: thanks in advance for any help.  Here are the issues I've faced.
+>
+> 1. Cross-Referencing to Plural as well as Singular names
+>
+> Part of my language supports definition of Classes & Relationships.  For
+> example:
+>
+>     Class Party plural Parties {
+>         id: Identifier {I}
+>         //etc.
+>     }
+>
+>     Class Role {
+>         id: Identifier {I}
+>     }
+>
+>     Rel R1 {
+>         Each Party "may play" 0..* Roles
+>         Each Role "may be played by" 0..* Parties
+>     }
+>
+> Note that the relationship (R1) refers to both singular and plural forms of
+> the class names.  Where the plural form is irregular it can be specified in
+> the class declaration; if not explicitly defined it is inferred (by
+> appending 's' to class name).
+>
+> So: how easily could this be supported with spoofax?  Specifically,
+>  - correctly cross-linking either singular or plural form to the appropriate
+> class definition
+>  - using the plural name if specified, otherwise inferring automatically
+>
+> 2. Scoping among blocks and files
+>
+> I need to be able to group definitions both logically and physically.  The
+> rules are:
+>
+>  - A Domain consists of many model elements (datatypes, classes &
+> relationships)
+>  - A large Domain may be partitioned into a number of subsystems which in
+> turn contain the model elements
+>  - All model elements in a domain are visible to all others irrespective of
+> which subsystem they are in
+>  - inter-subsystem references can use 'qualified names' to refer to elements
+> in other subsystems of the same domain
+>
+> For example:
+>
+> ---- File Banking.ooa ----
+> Domain Banking {
+>     Datatype AccountNumber { /*..*/ }
+>     //...etc.
+>
+> }
+>
+> Subsystem Portfolio of Domain Banking {
+>     Class Account {
+>         number: AccountNumber  // no need for qualified name: xref to decl
+> in Domain
+>         /*..*/
+>     }
+>     // etc.
+> }
+>
+> ---- File Banking.Transactions.ooa -----
+>
+> Subsystem Transactions of Domain Banking {
+>     Class Transfer {/*..*/}
+>     Rel R1 {
+>         Each Transfer "must debit" exactly one Portfolio.Account  //Note use
+> of qualified name for Account
+>         Each Portfolio.Account "may be debited in" zero or more Transfers
+>     }
+> }
+>
+> Again, how easy would it be to achieve this in spoofax?  I am flexible on
+> the inter-file cross references, for example perhaps using explicit 'import'
+> type statements in the second file if needs be.  (Although I'd prefer a
+> wildcard style 'import Banking.*' instead of per-element imports).
+>
+> Many thanks in advance for guidance - and apologies again for length of
+> post.
+>
+>  - Scott.
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From PKU.Tian.Meng at hotmail.com  Thu Jul 12 15:11:32 2012
+From: PKU.Tian.Meng at hotmail.com (=?iso-2022-jp?B?GyRCVG0bKEIgGyRCRUQbKEI=?=)
+Date: Thu, 12 Jul 2012 21:11:32 +0800
+Subject: [Stratego Users] (no subject)
+Message-ID: <BAY153-W2067DF5A4F4E48D95AE1C4B2D00@phx.gbl>
+
+
+ http://escortenmonterrey.com/pprds.php?wn=aylhxyg 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120712/94581f0f/attachment.html>
+
+From arik.hadas1 at gmail.com  Sat Jul 14 13:51:31 2012
+From: arik.hadas1 at gmail.com (=?UTF-8?B?15DXqNeZ16cg15TXk9eh?=)
+Date: Sat, 14 Jul 2012 14:51:31 +0300
+Subject: [Stratego Users] integrating spoofax in another framework
+In-Reply-To: <CAJdsiANjNGa=-mYG=JjMmddnMDfURLggoxSMHj7yT0OXayqjqA@mail.gmail.com>
+References: <CAJdsiANjNGa=-mYG=JjMmddnMDfURLggoxSMHj7yT0OXayqjqA@mail.gmail.com>
+Message-ID: <CAJdsiAObT2HZrgQmzgrWm8XjteE49Hs1Ar4w-+q0hLXv-3J1dg@mail.gmail.com>
+
+Hey,
+
+There's a framework we're developing at the Open University of Israel
+called 'awesome' for integrating different domain-specific aspect langauges
+(DSALs) (see http://www.cslab.openu.ac.il/research/awesome/).
+
+The focus in 'awesome' framework is on the back-end - how to integrate the
+DSALs after they're compiled to java form. I'm trying to improve the
+existing front-end part using Spoofax - transforming the DSAL syntax to
+java syntax using strategoxt tools.
+
+With some help given by guys from the spoofax freenode channel, I've
+managed to implement a transformation program for 'cool' DSAL, which seems
+to be very good, even better then the current 'cool' front-end.
+
+Now I'm trying to integrate the resulting front-end which is Spoofax based
+into the awesome framework and I'm having the following problem:
+
+I'm using jsglr to convert the 'cool' source file to AST, then run my
+transformation program that produce a modified AST in 'java' syntax.
+afterwards I need to produce a java source file from the modified AST -
+in linux I've used pp-java, but it's not cross-platform thus it's not
+possible to integrate it in awesome's eclipse project.
+in spoofax project I include libjava-from and then perform
+<pp-java5-to-string> to produce the java source file, but I can't use it
+outside of spoofax project environment.
+
+Basically what I do is:
+a. create the transformation in spoofax project (transform.str)
+b. compile the transformation to java (java -Xmx1024m -Xss8m -jar
+c:\temp\strategoxt.jar -I ..\ -i transform.str)
+c. compile the transformation in java form (javac -cp
+c:\temp\strategoxt.jar transform.java)
+
+in stage 'c' I'm getting the following error:
+transform.java:5532: error: package pp_java5_to_string_0_0 does not exist
+        term = pp_java5_to_string_0_0.instance.invoke(context, term);
+
+I didn't managed to figure out how it's work on spoofax project, maybe
+someone can guide me how to use the java-front library from the
+command-line in the same way it's used in spoofax project.
+
+Thanks,
+
+You've done a really impressive job with stratego and spoofax!
+
+Arik
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120714/734603a6/attachment.html>
+
+From arik.hadas1 at gmail.com  Sat Jul 14 14:03:06 2012
+From: arik.hadas1 at gmail.com (=?UTF-8?B?15DXqNeZ16cg15TXk9eh?=)
+Date: Sat, 14 Jul 2012 15:03:06 +0300
+Subject: [Stratego Users] Integrating spoofax in another framework
+Message-ID: <CAJdsiANT4c4_PmUS4f79PCe8HrveA-5VnH7sRB7iZmOEnpdy9Q@mail.gmail.com>
+
+Hey,
+
+There's a framework we're developing at the Open University of Israel
+called 'awesome' for integrating different domain-specific aspect langauges
+(DSALs) (see http://www.cslab.openu.ac.il/research/awesome/).
+
+The focus in 'awesome' framework is on the back-end - how to integrate the
+DSALs after they're compiled to java form. I'm trying to improve the
+existing front-end part using Spoofax - transforming the DSAL syntax to
+java syntax using strategoxt tools.
+
+With some help given by guys from the spoofax freenode channel, I've
+managed to implement a transformation program for 'cool' DSAL, which seems
+to be very good, even better then the current 'cool' front-end.
+
+Now I'm trying to integrate the resulting front-end which is Spoofax based
+into the awesome framework and I'm having the following problem:
+
+I'm using jsglr to convert the 'cool' source file to AST, then run my
+transformation program that produce a modified AST in 'java' syntax.
+afterwards I need to produce a java source file from the modified AST -
+in linux I've used pp-java, but it's not cross-platform thus it's not
+possible to integrate it in awesome's eclipse project.
+in spoofax project I include libjava-from and then perform
+<pp-java5-to-string> to produce the java source file, but I can't use it
+outside of spoofax project environment.
+
+Basically what I do is:
+a. create the transformation in spoofax project (transform.str)
+b. compile the transformation to java (java -Xmx1024m -Xss8m -jar
+c:\temp\strategoxt.jar -I ..\ -i transform.str)
+c. compile the transformation in java form (javac -cp
+c:\temp\strategoxt.jar transform.java)
+
+in stage 'c' I'm getting the following error:
+transform.java:5532: error: package pp_java5_to_string_0_0 does not exist
+        term = pp_java5_to_string_0_0.instance.invoke(context, term);
+
+I didn't managed to figure out how it's work on spoofax project, maybe
+someone can guide me how to use the java-front library from the
+command-line in the same way it's used in spoofax project.
+
+Thanks,
+
+You've done a really impressive job with stratego and spoofax!
+
+Arik
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120714/c92574cd/attachment.html>
+
+From arik.hadas1 at gmail.com  Mon Jul 16 21:17:30 2012
+From: arik.hadas1 at gmail.com (=?UTF-8?B?15DXqNeZ16cg15TXk9eh?=)
+Date: Mon, 16 Jul 2012 22:17:30 +0300
+Subject: [Stratego Users] compiling pretty printer for aspectj in java
+Message-ID: <CAJdsiAPhen9cAv3KuG+MvfKXyE=pkTxdh6W3RU7=7TzhYxsGrA@mail.gmail.com>
+
+Hey All,
+
+Thanks for helping me with my previous issue, I need some help with another
+one.
+
+I need to pretty print an AST that is produced with my translation program.
+the AST is in aspectj syntax (using aspectj-front of course).
+the default pretty print table that is produced from the aspectj syntax
+doesn't include the standard formatting, so the code results in something
+like:
+public aspect Test {
+                                 pointcut
+                                 (
+                                 )
+                                 :
+                                 call
+...
+                                }
+
+of course that when I added horizontal formatting to the PointcutDec term
+it fixed that, but there're too many terms to fix them manually.
+
+I saw that there is an inner part in the aspectj-front package for pretty
+print, and I've been told that it shouldn't be difficult to compile it to
+java library so that I could use <pp-aspectj-string> from my transformation
+program.
+so I tried to compile the pretty-print.str using the java stratego compiler
+as I compile my transformation program, but it seems that it doesn't
+support the layout syntax (rule "Process() -> box |[  ... ]|" resulted in
+an error: syntax error near unexpected character '|'..).
+I guess that it caused by something similar to my previous question -
+something that I'm not including in my compilation, but I can't find it for
+couple of days already.
+
+I'll appreciate any help with this.
+
+Regards,
+Arik
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120716/015bad0a/attachment.html>
+
+From spider.vz at gmail.com  Wed Jul 18 02:30:12 2012
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Wed, 18 Jul 2012 02:30:12 +0200
+Subject: [Stratego Users] Call for Participation: SoTeSoLa, 19-23 Aug,
+	Koblenz
+Message-ID: <CAPK1G9FJZ_dHq48id94XQgh_2Lro5G1UOiFOp0gLVUeZas16-A@mail.gmail.com>
+
+                         SoTeSoLa 2012
+Summer School on Software Technologies and Software Languages
+
+The summer school SoTeSoLa 2012 is a highly discussion- and
+result-oriented Research 2.0 event on software technologies and
+software languages.
+
+http://planet-sl.org/sotesola2012
+
+SoTeSoLa 2012 takes place in Koblenz 19-23 August 2012.
+
+SoTeSoLa brings together senior and junior researchers and
+technologists interested in software science, specifically the
+foundations of software technologies and the notion of technological
+spaces as linking together software languages, technologies, and
+various resources adding up to a technological and community context.
+SoTeSoLa also hosts this time the SATToSE 2012 seminar on "Advanced
+Techniques & Tools for Software Evolution".
+
+Key topics at the school are these:
+
+- Generic language technology
+- Co-evolution of software artifacts
+- Multi-language, multi-technology problems
+- Research 2.0 applied to software engineering
+- Technological spaces: past, present, and future
+- eLearning for language engineers & technologists
+- Models of knowledge resources for software developers
+- Model-driven engineering beyond software development
+- Software re/reverse/engineering in the Semantic Web Era
+
+SoTeSoLa aims at exercising a new format for a software
+language/technology forum, i.e., a more Research 2.0-based approach so
+that much focus is on understanding each others context, integrating
+knowledge, automation thereof, and organizing future research and work
+of the participants. To this end, regular lectures are de-emphasized,
+but a more discussion- and result-oriented format will be exercised.
+
+The event maxes out at 42 participants.
+
+SoTeSoLa 2012 is supported by the ADAPT research focus at the
+University of Koblenz-Landau as part of Rhineland Palatinate's
+Research Initiative 2008--2013. SoTeSoLa 2012 is also supported by
+RainCode. SoTeSoLa is hosted by the Software Languages Team in
+Koblenz.
+
+Deadlines:
+
+- Registration deadline: 4 August 2012
+- Hotel reservation deadline: 1 August 2012
+- Deadline for SATToSE presentation proposals: 25 July 2012
+- Deadline for student grant applications: 25 July 2012
+- Deadline for hackathon and working-group proposals: none and ASAP
+- Notification for SATToSE presentation proposals: 29 July 2012
+- Summer school: 19 August (afternoon) - 23 August 2012 (noon)
+
+From E.Visser at tudelft.nl  Thu Jul 19 00:15:18 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 19 Jul 2012 01:15:18 +0300
+Subject: [Stratego Users] compiling pretty printer for aspectj in java
+In-Reply-To: <CAJdsiAPhen9cAv3KuG+MvfKXyE=pkTxdh6W3RU7=7TzhYxsGrA@mail.gmail.com>
+References: <CAJdsiAPhen9cAv3KuG+MvfKXyE=pkTxdh6W3RU7=7TzhYxsGrA@mail.gmail.com>
+Message-ID: <CAFaCHU0kL514YUskQVU3HU0BCi=fZRn6Ck23iyu5KOgwn4sTFg@mail.gmail.com>
+
+Hi Arik,
+
+Looks like you need to declare the concrete syntax of the box language
+in the '.meta' file. For an example, look at the pretty-printer of
+Java-Front:
+
+https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/
+
+e.g.
+
+https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/expression.str
+
+has
+
+https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/expression.meta
+
+cheers,
+
+-- Eelco
+
+
+On Mon, Jul 16, 2012 at 10:17 PM, ???? ??? <arik.hadas1 at gmail.com> wrote:
+> Hey All,
+>
+> Thanks for helping me with my previous issue, I need some help with another
+> one.
+>
+> I need to pretty print an AST that is produced with my translation program.
+> the AST is in aspectj syntax (using aspectj-front of course).
+> the default pretty print table that is produced from the aspectj syntax
+> doesn't include the standard formatting, so the code results in something
+> like:
+> public aspect Test {
+>                                  pointcut
+>                                  (
+>                                  )
+>                                  :
+>                                  call
+> ...
+>                                 }
+>
+> of course that when I added horizontal formatting to the PointcutDec term it
+> fixed that, but there're too many terms to fix them manually.
+>
+> I saw that there is an inner part in the aspectj-front package for pretty
+> print, and I've been told that it shouldn't be difficult to compile it to
+> java library so that I could use <pp-aspectj-string> from my transformation
+> program.
+> so I tried to compile the pretty-print.str using the java stratego compiler
+> as I compile my transformation program, but it seems that it doesn't support
+> the layout syntax (rule "Process() -> box |[  ... ]|" resulted in an error:
+> syntax error near unexpected character '|'..).
+> I guess that it caused by something similar to my previous question -
+> something that I'm not including in my compilation, but I can't find it for
+> couple of days already.
+>
+> I'll appreciate any help with this.
+>
+> Regards,
+> Arik
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From cbertolini at gmail.com  Fri Jul 20 04:23:56 2012
+From: cbertolini at gmail.com (Cristiano Bertolini)
+Date: Thu, 19 Jul 2012 23:23:56 -0300
+Subject: [Stratego Users] Hyperlinked grammar in pdf or html
+Message-ID: <CALSaTag-s-ZHs=bDG6OXayvqj7otGMUyf75B8js99H94tmAefg@mail.gmail.com>
+
+Hi All,
+Is there a way to export the Spoofax grammar to a pdf or html file
+like a hyperlinked grammar style? E.g. http://www.nongnu.org/hcb/
+
+Regards,
+Cristiano
+
+From arik.hadas1 at gmail.com  Fri Jul 20 10:09:30 2012
+From: arik.hadas1 at gmail.com (=?UTF-8?B?15DXqNeZ16cg15TXk9eh?=)
+Date: Fri, 20 Jul 2012 11:09:30 +0300
+Subject: [Stratego Users] compiling pretty printer for aspectj in java
+In-Reply-To: <CAFaCHU0kL514YUskQVU3HU0BCi=fZRn6Ck23iyu5KOgwn4sTFg@mail.gmail.com>
+References: <CAJdsiAPhen9cAv3KuG+MvfKXyE=pkTxdh6W3RU7=7TzhYxsGrA@mail.gmail.com>
+	<CAFaCHU0kL514YUskQVU3HU0BCi=fZRn6Ck23iyu5KOgwn4sTFg@mail.gmail.com>
+Message-ID: <CAJdsiANj1TiTgwVH5VB0zus_BHQSa=1mxZ5qSRjv4d_rKemJrw@mail.gmail.com>
+
+Hi,
+
+is it possible that you'll generate a java library that let us pretty print
+aspectj AST such as you did for java (in java-front) ?
+I've added a '.meta' file but then I'm getting an error that Stratego-Box
+syntax can't be found after I tried all the possibilities I could think of
+to include stratego-gpp library (-la stratego-gpp, -la
+org.strategoxt.stratego_gpp, in linux: -la /usr/lib/libstratego-gpp and -la
+/usr/lib/libstratego-gpp.la) ?
+
+Thanks,
+
+Arik
+
+2012/7/19 Eelco Visser <E.Visser at tudelft.nl>
+
+> Hi Arik,
+>
+> Looks like you need to declare the concrete syntax of the box language
+> in the '.meta' file. For an example, look at the pretty-printer of
+> Java-Front:
+>
+> https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/
+>
+> e.g.
+>
+>
+> https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/expression.str
+>
+> has
+>
+>
+> https://svn.strategoxt.org/repos/StrategoXT/java-front/trunk/lib/java/pp/expression.meta
+>
+> cheers,
+>
+> -- Eelco
+>
+>
+> On Mon, Jul 16, 2012 at 10:17 PM, ???? ??? <arik.hadas1 at gmail.com> wrote:
+> > Hey All,
+> >
+> > Thanks for helping me with my previous issue, I need some help with
+> another
+> > one.
+> >
+> > I need to pretty print an AST that is produced with my translation
+> program.
+> > the AST is in aspectj syntax (using aspectj-front of course).
+> > the default pretty print table that is produced from the aspectj syntax
+> > doesn't include the standard formatting, so the code results in something
+> > like:
+> > public aspect Test {
+> >                                  pointcut
+> >                                  (
+> >                                  )
+> >                                  :
+> >                                  call
+> > ...
+> >                                 }
+> >
+> > of course that when I added horizontal formatting to the PointcutDec
+> term it
+> > fixed that, but there're too many terms to fix them manually.
+> >
+> > I saw that there is an inner part in the aspectj-front package for pretty
+> > print, and I've been told that it shouldn't be difficult to compile it to
+> > java library so that I could use <pp-aspectj-string> from my
+> transformation
+> > program.
+> > so I tried to compile the pretty-print.str using the java stratego
+> compiler
+> > as I compile my transformation program, but it seems that it doesn't
+> support
+> > the layout syntax (rule "Process() -> box |[  ... ]|" resulted in an
+> error:
+> > syntax error near unexpected character '|'..).
+> > I guess that it caused by something similar to my previous question -
+> > something that I'm not including in my compilation, but I can't find it
+> for
+> > couple of days already.
+> >
+> > I'll appreciate any help with this.
+> >
+> > Regards,
+> > Arik
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120720/5c6302e7/attachment.html>
+
+From E.Visser at tudelft.nl  Sat Jul 21 22:53:43 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 21 Jul 2012 23:53:43 +0300
+Subject: [Stratego Users] Hyperlinked grammar in pdf or html
+In-Reply-To: <CALSaTag-s-ZHs=bDG6OXayvqj7otGMUyf75B8js99H94tmAefg@mail.gmail.com>
+References: <CALSaTag-s-ZHs=bDG6OXayvqj7otGMUyf75B8js99H94tmAefg@mail.gmail.com>
+Message-ID: <CAFaCHU2BneREZR+HVqDA21sTJJo3zqe7fni_SLXgowCKhV5-CA@mail.gmail.com>
+
+Hi Cristiano,
+
+> Is there a way to export the Spoofax grammar to a pdf or html file
+> like a hyperlinked grammar style? E.g. http://www.nongnu.org/hcb/
+
+I don't think there is such a tool that you can apply. (I've made
+similar tools in the past, but can't locate exactly this one.)
+However, combining pack-sdf with a simple analysis to gather
+productions for the same non-terminal and a pretty-printer to HTML
+should make a fine SDF-to-HTML transformation. We'll be happy to
+include it in the toolset.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From alex.kraas at gmx.de  Tue Jul 31 12:58:54 2012
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Tue, 31 Jul 2012 12:58:54 +0200
+Subject: [Stratego Users] Question concerning UnexpectedClassException by
+ invoking an external strategy
+Message-ID: <20120731105854.80050@gmx.net>
+
+Hello,
+
+at the moment, I try to implement a external java strategy for spoofax that 
+should be invoked by a custom disambiguation rule. The purpose of the 
+external strategy is to?gather some kind of required information from an 
+given UML model. During the invocation of the external java strategy an 
+UnexpectedClassException is thrown. The concerning class is a part of the 
+eclipse uml2 plug-in?that it is registered?in?the?'required plug-ins' 
+section of my project configuration.
+
+In my opinion, a java strategy is not invoked in?the same?environment 
+context as it is used for Eclipse. Now my question is, how it is possible 
+to configure the classpath in such a way so that the required uml2 package 
+is usable within a external java strategy.
+
+Best regards,
+Alexander    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120731/96fff3d4/attachment.html>
+
+From oskarvanrest at gmail.com  Tue Jul 31 14:20:07 2012
+From: oskarvanrest at gmail.com (Oskar)
+Date: Tue, 31 Jul 2012 22:20:07 +1000
+Subject: [Stratego Users] Question concerning UnexpectedClassException
+ by invoking an external strategy
+In-Reply-To: <20120731105854.80050@gmx.net>
+References: <20120731105854.80050@gmx.net>
+Message-ID: <CAOyetXR=iE0zgeEgmRujOkfgfakVSSQuwkUFQLZUpSaP_A-UCA@mail.gmail.com>
+
+Hi Alexander,
+
+I believe there are two solutions.
+
+The first one is to find the .jar's that you depend on, add these to your
+classpath, and also add providers for them in yourLanguage-Builers.esv.
+Spoofax will then dynamically load the classes when you build your editor.
+However, if the framework you're depending on is big, you'll end up adding
+a whole bunch of .jar's to your classpath and things will get messy. If the
+classes you're using (from UML2) have dependencies to other frameworks
+(e.g. EMF), you'll end up having to add .jar's from those frameworks as
+well, etc.
+
+A better solution in that case is probably to add UML2 as a dependency
+('required plug-ins'), just like you did. But then you can't dynamically
+load your editor anymore and you'll have to start working with two Eclipse
+instances: a development instance and a runtime instance.
+In that case, you also have to make sure that you're using the Spoofax
+Nightly and that your MANIFEST.MF contains the following line:
+*Eclipse-RegisterBuddy:
+org.strategoxt.imp.runtime*
+This has only recently been added to Spoofax.
+
+Regards,
+Oskar
+
+On 31 July 2012 20:58, Alexander Kraas <alex.kraas at gmx.de> wrote:
+
+>  Hello,
+>
+> at the moment, I try to implement a external java strategy for spoofax
+> that should be invoked by a custom disambiguation rule. The purpose of the
+> external strategy is to gather some kind of required information from an
+> given UML model. During the invocation of the external java strategy an
+> UnexpectedClassException is thrown. The concerning class is a part of the
+> eclipse uml2 plug-in that it is registered in the 'required plug-ins'
+> section of my project configuration.
+>
+> In my opinion, a java strategy is not invoked in the same environment
+> context as it is used for Eclipse. Now my question is, how it is possible
+> to configure the classpath in such a way so that the required uml2 package
+> is usable within a external java strategy.
+>
+> Best regards,
+> Alexander
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120731/c68c990a/attachment.html>
+
+From alex.kraas at gmx.de  Tue Jul 31 21:15:02 2012
+From: alex.kraas at gmx.de (Alexander Kraas)
+Date: Tue, 31 Jul 2012 21:15:02 +0200
+Subject: [Stratego Users] Question concerning UnexpectedClassException
+	by invoking an external strategy
+In-Reply-To: <CAOyetXR=iE0zgeEgmRujOkfgfakVSSQuwkUFQLZUpSaP_A-UCA@mail.gmail.com>
+References: <20120731105854.80050@gmx.net>
+	<CAOyetXR=iE0zgeEgmRujOkfgfakVSSQuwkUFQLZUpSaP_A-UCA@mail.gmail.com>
+Message-ID: <3CB0027E227241EE956747E9F7C4DCE5@Testmachine>
+
+Dear Oskar,
+
+thank you for the quick feedback! I have taken your second approach and it works perfect.
+
+Best regards,
+Alexander
+
+From: Oskar 
+Sent: Tuesday, July 31, 2012 2:20 PM
+To: Stratego/XT Users 
+Subject: Re: [Stratego Users] Question concerning UnexpectedClassException by invoking an external strategy
+
+Hi Alexander, 
+
+I believe there are two solutions. 
+
+The first one is to find the .jar's that you depend on, add these to your classpath, and also add providers for them in yourLanguage-Builers.esv. Spoofax will then dynamically load the classes when you build your editor. However, if the framework you're depending on is big, you'll end up adding a whole bunch of .jar's to your classpath and things will get messy. If the classes you're using (from UML2) have dependencies to other frameworks (e.g. EMF), you'll end up having to add .jar's from those frameworks as well, etc.
+
+A better solution in that case is probably to add UML2 as a dependency ('required plug-ins'), just like you did. But then you can't dynamically load your editor anymore and you'll have to start working with two Eclipse instances: a development instance and a runtime instance.
+In that case, you also have to make sure that you're using the Spoofax Nightly and that your MANIFEST.MF contains the following line: Eclipse-RegisterBuddy: org.strategoxt.imp.runtime
+This has only recently been added to Spoofax.
+
+Regards,
+Oskar
+
+
+On 31 July 2012 20:58, Alexander Kraas <alex.kraas at gmx.de> wrote:
+
+  Hello,
+
+  at the moment, I try to implement a external java strategy for spoofax that should be invoked by a custom disambiguation rule. The purpose of the external strategy is to gather some kind of required information from an given UML model. During the invocation of the external java strategy an UnexpectedClassException is thrown. The concerning class is a part of the eclipse uml2 plug-in that it is registered in the 'required plug-ins' section of my project configuration.
+
+  In my opinion, a java strategy is not invoked in the same environment context as it is used for Eclipse. Now my question is, how it is possible to configure the classpath in such a way so that the required uml2 package is usable within a external java strategy.
+
+  Best regards,
+  Alexander 
+
+  _______________________________________________
+  Users mailing list
+  Users at strategoxt.org
+  https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+
+--------------------------------------------------------------------------------
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120731/9cea365c/attachment.html>
+

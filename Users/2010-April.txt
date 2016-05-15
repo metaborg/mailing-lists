@@ -1,0 +1,549 @@
+From kutsia at risc.uni-linz.ac.at  Fri Apr  9 15:13:19 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Fri, 09 Apr 2010 15:13:19 +0200
+Subject: [Stratego Users] Last CfP: WWV'10
+Message-ID: <4BBF27EF.8020705@risc.uni-linz.ac.at>
+
+[Apologies if you receive multiple copies]
+
+     ***********************************************************
+     *                   CALL FOR PAPERS                       *
+     *                                                         *
+     *                       WWV 2010                          *
+     * Automated Specification and Verification of Web Systems *
+     *             6th International Workshop                  *
+     *                                                         *
+     *      Vienna University of Technology, Austria           *
+     *                 July 30-31, 2010                        *
+     *      http://www.complang.tuwien.ac.at/WWV2010/          *
+     ***********************************************************
+
+
+***************
+IMPORTANT DATES
+***************
+
+Abstract Submission       April 12, 2010
+Full Paper Submission     April 19, 2010
+Acceptance Notification   May 23, 2010
+Camera Ready              June 20, 2010
+Workshop                  July 30-31, 2010
+
+
+***************
+SCOPE
+***************
+
+The increased complexity of Web sites and the explosive growth of
+Web-based applications has turned their design and construction into
+a challenging problem. Nowadays, many companies have diverted their
+Web sites into interactive, completely-automated, Web-based
+applications (such as Amazon, on-line banking, or travel agencies)
+with a high complexity that requires appropriate specification and
+verification techniques and tools. Systematic, formal approaches to
+the analysis and verification can address the problems of this
+particular domain with automated and reliable tools that also
+incorporate semantic aspects.
+
+We solicit original papers on formal methods and techniques applied
+to Web sites, Web services or Web-based applications, such as:
+
+* rule-based approaches to Web system analysis,
+   certification, specification, verification,
+   and optimization
+* algebraic methods for verification and certification
+   of Web systems
+* formal models for describing and reasoning about Web sites
+* model-checking, synthesis and debugging of Web sites
+* analysis and verification of linked data
+* abstract interpretation and program transformation
+   applied to the semantic Web
+* intelligent tutoring and advisory systems for
+   Web specifications authoring
+* Web quality and Web metrics
+* Web usability and accessibility
+* Testing and evaluation of Web systems and applications
+
+The WWV series provides a forum for researchers from the communities
+of Rule-based programming, Automated Software Engineering, and
+Web-oriented research to facilitate the cross-fertilization and the
+advancement of hybrid methods that combine the three areas.
+
+The previous WWV editions were: WWV'09 (Hagenberg, Austria),
+WWV'08 (Siena, Italy), WWV'07 (Venice, Italy), WWV'06 (Paphos, Cyprus),
+and WWV'05 (Valencia, Spain).
+
+
+***************
+LOCATION
+***************
+
+WWV 2010 will be held at the Compilers and Languages Group (Complang) of
+the Faculty of Informatics at the Vienna University of Technology, Austria.
+The Complang Group is located in the center of Vienna,
+beside the Karlskirche and near the Opera.
+
+For more information about the Complang Group, please visit:
+http://www.complang.tuwien.ac.at
+
+***************
+SUBMISSION
+***************
+
+Submissions must be received by April 19, 2010.
+In addition, an ASCII version of the title and abstract
+must be submitted by April 12, 2010.
+
+
+Please submit research reports up to 15 pages in PDF,
+conforming to the format produced by LaTeX using the
+easychair.cls class file of EasyChair.
+The class style may be downloaded at:
+
+http://www.easychair.org/easychair.zip
+
+Submission is web-based via this link:
+
+http://www.easychair.org/conferences/?conf=wwv2010
+
+
+***************
+PUBLICATION
+***************
+
+We will prepare workshop pre-proceedings for the workshop participants.
+
+After the workshop, an open call for a special journal issue is envisaged.
+
+
+***************
+COMMITTEES
+***************
+
+PROGRAM CO-CHAIRS:
+Laura Kovacs, Vienna University of Technology, Austria
+Temur Kutsia, Johannes Kepler University Linz, Austria
+
+
+PROGRAM COMMITTEE
+
+Maria Alpuente Frasnedo, Technical University of Valencia, Spain
+Demis Ballis, University of Udine, Italy
+Jorge Manuel Neves Coelho,  University of Porto, Portugal
+Vicente Luque Centeno, Universidad Carlos III de Madrid, Spain
+Wlodzimierz Drabent, IPI PAN, Polish Academy of Sciences
+Santiago Escobar, Technical University of Valencia, Spain
+Moreno Falaschi, University of Siena, Italy
+Jens Knoop, Vienna University of Technology, Austria
+Laura Kovacs, Vienna University of Technology, Austria
+Temur Kutsia, Johannes Kepler University Linz, Austria
+Catherine Meadows, Naval Research Laboratory, USA
+
+
+***************
+INVITED SPEAKER
+***************
+
+Andrei Voronkov, University of Manchester, UK
+
+
+***************
+RELATED EVENTS
+***************
+WWV 2010 will take place after the RISC Summer 2010 conference series:
+
+http://www.risc.uni-linz.ac.at/about/conferences/summer2010/
+
+held in Hagenberg near Linz. There are frequent train connections of 
+about 1.5 hours between Linz and Vienna.
+
+
+
+From kutsia at risc.uni-linz.ac.at  Tue Apr 13 12:39:57 2010
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Tue, 13 Apr 2010 12:39:57 +0200
+Subject: [Stratego Users] WWV'10: Deadline extension
+Message-ID: <4BC449FD.4020609@risc.uni-linz.ac.at>
+
+[Apologies if you receive multiple copies]
+
+     ***********************************************************
+     *                   CALL FOR PAPERS                       *
+     *                                                         *
+     *                       WWV 2010                          *
+     * Automated Specification and Verification of Web Systems *
+     *             6th International Workshop                  *
+     *                                                         *
+     *      Vienna University of Technology, Austria           *
+     *                 July 30-31, 2010                        *
+     *      http://www.complang.tuwien.ac.at/WWV2010/          *
+     ***********************************************************
+
+
+***************
+EXTENDED DEADLINES
+***************
+
+Abstract Submission       April 26, 2010
+Full Paper Submission        May 3, 2010
+
+
+
+From marcoscamelo20 at gmail.com  Tue Apr 20 15:25:38 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Tue, 20 Apr 2010 10:25:38 -0300
+Subject: [Stratego Users] HSX: Stratego
+Message-ID: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+
+Hi everyone,
+I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+know I need to implement the transformation, I searched  on the Stratego/XT
+Website and found a framework called HSX to transformations, but the link is
+always unavailable. Does anyone could help me, providing me the file?
+The content I`d like to access is this :
+http://www.stratego-language.org/ftp/hsx-0.1.tar.gz , available on this
+page: http://strategoxt.org/Stratego/HSX
+
+Many thanks,
+
+Marcos Augusto
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100420/f2dc96ea/attachment.html 
+
+From E.Visser at tudelft.nl  Wed Apr 21 10:46:05 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Apr 2010 10:46:05 +0200
+Subject: [Stratego Users] HSX: Stratego
+In-Reply-To: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+Message-ID: <h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+
+Hi Marcos,
+
+The source is available in the StrategoXT svn repository
+
+   https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+
+I've updated the webpage.
+
+However, I doubt that this will be useful for you. The code is for
+Stratego 0.3 (we're now at 0.18)
+and probably uses antiquated stratego programming styles.
+
+cheers,
+
+-- Eelco
+
+
+On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+<marcoscamelo20 at gmail.com> wrote:
+> Hi everyone,
+> I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+> know I need to implement the transformation, I searched ?on the Stratego/XT
+> Website and found a framework called HSX to transformations, but the link is
+> always unavailable. Does anyone could help me, providing me the file?
+> The content I`d like to access is this
+> :?http://www.stratego-language.org/ftp/hsx-0.1.tar.gz?, available on this
+> page:?http://strategoxt.org/Stratego/HSX
+> Many thanks,
+> Marcos Augusto
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From marcoscamelo20 at gmail.com  Wed Apr 21 19:43:57 2010
+From: marcoscamelo20 at gmail.com (Marcos Augusto)
+Date: Wed, 21 Apr 2010 14:43:57 -0300
+Subject: [Stratego Users] HSX: Stratego
+In-Reply-To: <h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com>
+	<h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com>
+Message-ID: <v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+
+Ok, thanks. I`ll try it.
+Does anybody have any documentation that shows how to install/use this
+framework?
+
+
+Thank,
+
+Marcos Augusto
+
+On Wed, Apr 21, 2010 at 5:46 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Marcos,
+>
+> The source is available in the StrategoXT svn repository
+>
+>   https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+>
+> I've updated the webpage.
+>
+> However, I doubt that this will be useful for you. The code is for
+> Stratego 0.3 (we're now at 0.18)
+> and probably uses antiquated stratego programming styles.
+>
+> cheers,
+>
+> -- Eelco
+>
+>
+> On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+> <marcoscamelo20 at gmail.com> wrote:
+> > Hi everyone,
+> > I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+> > know I need to implement the transformation, I searched  on the
+> Stratego/XT
+> > Website and found a framework called HSX to transformations, but the link
+> is
+> > always unavailable. Does anyone could help me, providing me the file?
+> > The content I`d like to access is this
+> > : http://www.stratego-language.org/ftp/hsx-0.1.tar.gz , available on
+> this
+> > page: http://strategoxt.org/Stratego/HSX
+> > Many thanks,
+> > Marcos Augusto
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> http://eelcovisser.org
+> http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20100421/afb62d33/attachment.html 
+
+From E.Visser at tudelft.nl  Wed Apr 21 20:54:41 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 21 Apr 2010 20:54:41 +0200
+Subject: [Stratego Users] [Stratego Developers]  HSX: Stratego
+In-Reply-To: <v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+References: <s2nef7e22d11004200625ke3fe68ffnfaa0d897b9e2205e@mail.gmail.com> 
+	<h2wed55b7d91004210146m5777a351md0c126aebe2e2094@mail.gmail.com> 
+	<v2nef7e22d11004211043m3819a3d8xa251ef6475ee0f07@mail.gmail.com>
+Message-ID: <h2yed55b7d91004211154sa836659ej7a3f389b76ccc90a@mail.gmail.com>
+
+Hi Marcos,
+
+It can hardly be called a framework. The code was the basis for this
+publication:
+
+  http://researchr.org/publication/JohannV00
+
+which describes the implementation of the warm fusion transformation
+in Stratego.
+
+I don't think there is any documentation for installation. And it is
+not unlikely that
+the code will not compile with the current version of Stratego; for
+starters the file
+extension has been changed from .r to .str.
+
+cheers,
+
+-- Eelco
+
+On Wed, Apr 21, 2010 at 7:43 PM, Marcos Augusto
+<marcoscamelo20 at gmail.com> wrote:
+> Ok, thanks. I`ll try it.
+> Does anybody have any documentation that shows how to install/use this
+> framework?
+>
+> Thank,
+> Marcos Augusto
+> On Wed, Apr 21, 2010 at 5:46 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Marcos,
+>>
+>> The source is available in the StrategoXT svn repository
+>>
+>> ? https://svn.strategoxt.org/repos/StrategoXT/hsx/trunk/
+>>
+>> I've updated the webpage.
+>>
+>> However, I doubt that this will be useful for you. The code is for
+>> Stratego 0.3 (we're now at 0.18)
+>> and probably uses antiquated stratego programming styles.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>>
+>> On Tue, Apr 20, 2010 at 3:25 PM, Marcos Augusto
+>> <marcoscamelo20 at gmail.com> wrote:
+>> > Hi everyone,
+>> > I`m developing a DSL that extends Haskell, I`ve implemented the SDF. But
+>> > know I need to implement the transformation, I searched ?on the
+>> > Stratego/XT
+>> > Website and found a framework called HSX to transformations, but the
+>> > link is
+>> > always unavailable. Does anyone could help me, providing me the file?
+>> > The content I`d like to access is this
+>> > :?http://www.stratego-language.org/ftp/hsx-0.1.tar.gz?, available on
+>> > this
+>> > page:?http://strategoxt.org/Stratego/HSX
+>> > Many thanks,
+>> > Marcos Augusto
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> http://eelcovisser.org
+>> http://twitter.com/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+
+From lukas.jezek at gmail.com  Thu Apr 22 09:23:42 2010
+From: lukas.jezek at gmail.com (Lukas Jezek)
+Date: Thu, 22 Apr 2010 09:23:42 +0200
+Subject: [Stratego Users] Comments in parse tree
+Message-ID: <u2w5d2ff4fc1004220023ia09e40c4jb05d8faf595610ba@mail.gmail.com>
+
+Hi,
+
+I am writing a C grammar in SDF. And I would like to have the comments
+in the parse tree, so that I can pretty print them to the result C
+file (after I perform some transformations). I need the comments,
+because these might carry some useful meta-information (behavior
+protocols, etc.).
+The problem is, that the comments can be written almost everywhere
+(inside expressions, in parameter lists, between type and var name in
+declarations, etc.).
+
+Is there an easy way to get the whole parse tree before the LAYOUT is left out?
+Or do I need to insert the MultiLineComment symbol in between each of
+the symbols in all the context-free rules in my grammar? (I hope not).
+Or is there another way to handle this problem?
+
+
+Thanks for your reply,
+greetings,
+
+Lukas
+
+
+P.S. By 'comments' I refer to the MultiLineComments (/* text */). I
+transform the single-line comments to the multi-line ones before the C
+language parser gets the file.
+
+From E.Visser at tudelft.nl  Thu Apr 22 10:33:08 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 22 Apr 2010 10:33:08 +0200
+Subject: [Stratego Users] Comments in parse tree
+In-Reply-To: <u2w5d2ff4fc1004220023ia09e40c4jb05d8faf595610ba@mail.gmail.com>
+References: <u2w5d2ff4fc1004220023ia09e40c4jb05d8faf595610ba@mail.gmail.com>
+Message-ID: <k2hed55b7d91004220133i9a2e816ma193d3a07efbb3e4@mail.gmail.com>
+
+Hi Lukas,
+
+Try the following options of sglri:
+
+   Preserving options:
+   --preserve-comments
+                    Preserve source code comments as annotations of
+the abstract
+                    syntax tree. [off]
+   --preserve-positions
+                    Preserve source code positions in the input file
+as annotations
+                    of the abstract syntax tree. [off]
+   --preserve-locations
+                    Preserve source code locations in the input file
+as annotations
+                    of the abstract syntax tree. [off]
+
+(see sglri --help)
+
+-- Eelco
+
+
+On Thu, Apr 22, 2010 at 9:23 AM, Lukas Jezek <lukas.jezek at gmail.com> wrote:
+> Hi,
+>
+> I am writing a C grammar in SDF. And I would like to have the comments
+> in the parse tree, so that I can pretty print them to the result C
+> file (after I perform some transformations). I need the comments,
+> because these might carry some useful meta-information (behavior
+> protocols, etc.).
+> The problem is, that the comments can be written almost everywhere
+> (inside expressions, in parameter lists, between type and var name in
+> declarations, etc.).
+>
+> Is there an easy way to get the whole parse tree before the LAYOUT is left out?
+> Or do I need to insert the MultiLineComment symbol in between each of
+> the symbols in all the context-free rules in my grammar? (I hope not).
+> Or is there another way to handle this problem?
+>
+>
+> Thanks for your reply,
+> greetings,
+>
+> Lukas
+>
+>
+> P.S. By 'comments' I refer to the MultiLineComments (/* text */). I
+> transform the single-line comments to the multi-line ones before the C
+> language parser gets the file.
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+

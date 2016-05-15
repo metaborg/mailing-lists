@@ -1,0 +1,701 @@
+From eelcovis at gmail.com  Thu Feb  5 09:24:56 2015
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Thu, 5 Feb 2015 09:24:56 +0100
+Subject: [Stratego Users] Fwd: [SEWORLD] CFP: GPCE 2015 - ACM SIGPLAN
+ International Conference on Generative Programming: Concepts and
+ Experiences
+In-Reply-To: <54D28870.5010007@vanderbilt.edu>
+References: <54D28870.5010007@vanderbilt.edu>
+Message-ID: <CAFaCHU08wXD=KK+NNDNqG+fzW3Nt32p7RB4UziszS1Q4Rw4pPQ@mail.gmail.com>
+
+------------------------------------------------------------------------
+
+                        ACM SIGPLAN GPCE 2015
+                 14th International Conference on
+        Generative Programming: Concepts & Experiences
+
+                 Oct 26-27, 2015, Pittsburgh, PA, USA
+            http://conf.researchr.org/home/gpce2015
+
+Co-located with:
+ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH 2015)
+             and
+ACM SIGPLAN 8th International Conference on Software Language
+Engineering (SLE) 2015
+
+------------------------------------------------------------
+---------------------------------
+IMPORTANT DATES
+
+  Abstract submission   : June 8, 2015
+  Full paper submission : June 15, 2015
+  Authors notification  : July 24, 2015
+  Camera-ready          : Aug 7, 2015
+  Conference            : Oct 26-27, 2015
+
+  Workshops: Handled by SPLASH
+
+All dates are Anywhere on Earth
+
+------------------------------------------------------------
+---------------------------------------
+SCOPE
+
+GPCE is a venue for researchers and practitioners interested in techniques
+that use program generation, domain-specific languages, and component
+deployment to increase programmer productivity, improve software quality,
+and shorten the time-to-market of software products. In addition to
+exploring cutting-edge techniques of generative software, our goal is to
+foster further cross-fertilization between the software engineering and the
+programming languages research communities.
+
+------------------------------------------------------------
+------------------------------------------
+TOPICS OF INTEREST
+
+GPCE seeks contributions on all topics related to generative software and
+its properties. Topics of interest include, but are not limited to:
+
+Generative software
+* Domain-specific languages (language extension, language embedding,
+  language design, language theory, language workbenches, interpreters,
+  compilers)
+* Product lines (domain engineering, feature-oriented and
+  aspect-oriented programming, pre-processors, feature interactions)
+* Metaprogramming (reflection, staging, partial evaluation)
+* Program synthesis
+* Implementation techniques and tool support (components, plug-ins,
+  libraries, metaprogramming, macros, templates, generic programming,
+  run-time code generation, model-driven development, composition tools,
+  code-completion and code-recommendation systems)
+
+Practical Applications and Empirical evaluations
+* Empirical evaluations of all topics above (user studies, substantial case
+  studies, controlled experiments, surveys, rigorous measurements)
+* Application areas and engineering practice (Cloud Computing, Internet of
+  Things, Cyber Physical Systems, Mobile Computing, Software Defined
+  Networking, High Performance Computing, Patterns and Middleware,
+  Development methods)
+
+Properties of generative software
+* Correctness of generators and generated code (analysis, testing, formal
+  methods, domain-specific error messages, safety, security)
+* Reuse and evolution
+* Modularity, separation of concerns, understandability, and
+  maintainability
+* Performance engineering, nonfunctional properties (program optimization
+  and parallelization, GPGPUs, multicore, footprint, metrics)
+
+We particularly welcome papers that address some of the key challenges in
+the field, such as,
+* synthesizing code from declarative specifications
+* supporting extensible languages and language embedding
+* ensuring correctness and other nonfunctional properties of generated code
+* proving generators correct
+* improving error reporting with domain-specific error messages
+* reasoning about generators
+* handling variability-induced complexity in product lines
+* providing efficient interpreters and execution languages
+* human factors in developing and maintaining generators
+
+GPCE encourages submissions about empirical evaluations and applications of
+generative software, and such papers will be given special consideration
+during reviewing.
+
+------------------------------------------------------------
+-------------------------------------------------
+SUBMISSION GUIDELINES
+
+Research papers: 10 pages maximum (ACM SIGPLAN style)
+
+Research papers should report on original and unpublished results of
+theoretical, empirical, conceptual, or experimental research that
+contribute to scientific knowledge in the areas listed above (the PC chair
+can advise on appropriateness)
+
+Tool demos and short papers: 4 pages maximum (ACM SIGPLAN style).
+
+The goal of short papers is to promote current work on research and
+practice. Short papers represent an early communication of research and do
+not always require complete results as in the case of a full paper. In this
+way, authors can introduce new ideas to the community, discuss ideas and
+get early feedback. Please note that short papers are not intended to be
+position statements. Short papers are included in the proceedings and will
+be presented with a shorter time slot at the conference.
+
+Tool demonstrations should present tools that implement generative
+techniques, and are available for use. Any of the GPCE topics of interest
+are appropriate areas for tool demonstrations, although purely commercial
+tool demonstrations will not be accepted. Submissions must provide a tool
+description of 4 pages in SIGPLAN proceedings style (see above) and a
+demonstration outline including screenshots of up to 4 pages. Tool
+demonstrations must have the words "Tool Demo" or "Tool Demonstration" in
+the title, possibly appended in parenthesis. The 4-page tool description
+will, if the demonstration is accepted, be published in the proceedings.
+
+------------------------------------------------------------
+----------------------------------------
+ORGANIZERS
+
+GENERAL CHAIR
+
+  Christian Kastner, Carnegie Mellon University, Pittsburgh, PA, USA
+
+PROGRAM COMMITTEE CHAIR
+
+  Aniruddha Gokhale, Vanderbilt University, Nashville, TN, USA
+
+PUBLICITY CO-CHAIRS
+
+  Faruk Caglar, Vanderbilt University, Nashville, TN, USA
+  Tomofumi Yuki, INRIA Rhone-Alpes, France
+
+
+PROGRAM COMMITTEE
+
+  Kenichi Asai, Ochanomizu Univ, Japan
+  Emilie Balland, INRIA Bordeaux, France
+  Don Batory, Univ of Texas, USA
+  Walter Binder, Univ of Lugano, Switzerland
+  Jan Bosch, Chalmers Univ, Sweden
+  Akshay Dabholkar, Oracle, USA
+  Ewen Denney, NASA Ames, USA
+  Katrina Falkner, Univ of Adelaide, Australia
+  Bernd Fischer, Stellenbosch Univ, South Africa
+  Matthew Flatt, Univ of Utah, USA
+  Jeff Gray, Univ of Alabama, USA
+  Michael Haupt, Oracle Labs, Germany
+  James Hill, Indiana Univ Purdue Univ at Indianapolis, USA
+  Young-Woo Kwon, Utah State Univ, USA
+  Raffaela Mirandola, Politechnico di Milano, Italy
+  Hridesh Rajan, Iowa State Univ, USA
+  Marcio Ribeiro, Federal Univ of Alagaos, Brazil
+  Tiark Rompf, Purdue Univ, USA
+  Klaus Schmid, Stiftung Universitat Hildesheim, Germany
+  Norbert Siegmund, Univ of Passau, Germany
+  Yannis Smaragdakis, Univ of Athens, Greece
+  Sumant Tambe, RTI Inc, USA
+  Petr Tuma, Charles Univ, Austria
+  Nalini Venkatasubramanian, Univ of California, Irvine, USA
+  Jules White, Vanderbilt Univ, USA
+  Eric Wohlstadter, Univ of British Columbia, Canada
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20150205/3558a353/attachment.html>
+
+From spider.vz at gmail.com  Fri Feb 13 01:32:29 2015
+From: spider.vz at gmail.com (Vadim Zaytsev)
+Date: Fri, 13 Feb 2015 01:32:29 +0100
+Subject: [Stratego Users] STAF 2015: Joint Call for Papers
+Message-ID: <CAPK1G9FNARzgs1qJWJsG9EuGaKuAuuDyy=yjZR8tL=RGy8v-VQ@mail.gmail.com>
+
+????????????????????????????????????????????
+* Joint Call for Papers for STAF 2015
+* Software Technologies: Applications and Foundations
+* 20-24 July 2015, L'Aquila, Italy
+* http://www.disim.univaq.it/staf2015/
+* https://twitter.com/staf2015
+????????????????????????????????????????????
+STAF 2015 events include:
+ - ICMT'15: Eighth International Conference on Model Transformation
+ - ECMFA'15: Eleventh European Conference on Modelling Foundations and
+Applications
+ - TAP'15: Ninth International Conference on Tests and Proofs
+ - ICGT'15: Seventh International Conference on Graph Transformation
+ - TTC'15: Eighth Transformation Tool Contest
+ - BX'15: Fourth International Workshop on Bidirectional Transformations
+ - Projects Showcase
+ - Doctoral Symposium
+ - (more workshops TBA)
+????????????????????????????????????????????
+
+The deadlines coming up soon are (abstract/paper deadlines given, if
+applicable):
+ - 13/20 February: TAP
+ - 15/22 February: ICMT
+ - 27 February/6 March: ECMFA
+ - 11 March: TTC (cases)
+ - 20/27 March: ICGT
+
+We provide some brief information on each of the conferences below,
+please refer to their corresponding websites for complete calls for
+submissions, as well as more detailed explanation of each event's
+topics and priorities.
+
+????????????????????????????????????????????
+
+* 9th International Conference on Tests and Proofs (TAP 2015)
+* http://tap2015.in.tum.de/
+* http://tap2015.in.tum.de/call.shtml
+* https://www.easychair.org/conferences/?conf=tap2015
+
+The TAP conference is devoted to the synergy of proofs and tests, to
+the application of techniques from both sides and their combination
+for the advancement of software quality. TAP 2015 will accept three
+kinds of submissions: regular research papers, short papers and
+tutorial proposals.
+
+TAP 2015 keynote talk will be given by Einar Broch Johnsen.
+
+Organisation:
+ - Program Co-Chair: Jasmin C. Blanchette (TU Muenchen, Inria)
+ - Program Co-Chair: Nikolai Kosmatov (CEA LIST)
+
+????????????????????????????????????????????
+
+* 8th International Conference on Model Transformation (ICMT 2015)
+* http://www.model-transformation.org/
+* http://www.di.univaq.it/diruscio/sites/ICMT2015/?page_id=21
+* https://easychair.org/conferences/?conf=icmt2015
+
+Model transformation encompasses a variety of technical spaces
+(modelware, grammarware, dataware, ontoware), a variety of model
+representations (text, tables, trees, graphs) and a variety of
+transformation paradigms (rule-based transformations, term rewriting,
+OO manipulations, weaving, refactoring). The study of model
+transformation includes foundations, structuring mechanisms, and
+properties, such as modularity, composability and parametrisation of
+transformations, transformation languages, techniques and tools. To
+achieve impact on software engineering in general, methodologies and
+tools are required to integrate model transformation into existing
+development environments and processes. Four kinds of submissions are
+sought: research papers, application papers, exploratory papers and
+tool demo papers.
+
+Organisation:
+ - Program Co-Chair: Dimitris Kolovos (University of York, UK)
+ - Program Co-Chair: Manuel Wimmer (Vienna University of Technology, Austria)
+ - Social Chair: James R. Williams (University of York, UK)
+ - Web Chair: Javier Troya (Vienna University of Technology, Austria)
+
+????????????????????????????????????????????
+
+* 11th European Conference on Modelling Foundations and Applications
+(ECMFA 2015)
+* https://www.uni-marburg.de/fb12/swt/ecmfa2015/
+* https://www.uni-marburg.de/fb12/swt/ecmfa2015/cfp.pdf
+* https://www.easychair.org/conferences/?conf=ecmfa2015
+
+The ECMFA conference series is dedicated to advancing the state of
+knowledge and fostering the industrial application of Model-Based
+Engineering as an approach to the design, analysis and development of
+software and systems that relies on exploiting high-level models and
+computer-based automation to achieve significant boosts in both
+productivity and quality. Its focus is on engaging the key figures of
+research and industry in a dialogue which results in stronger and more
+effective practical application of MBE, hence producing more reliable
+software based on state-of-the-art research results. ECMFA has two
+distinct Paper Tracks: one for research papers (Track F) dealing with
+the foundations for MBE, and one for industrial applications papers
+(Track A) dealing with the applications of MBE, including experience
+reports on MBE tools.
+
+Organisation:
+ - Foundations Program Chair: Gabriele Taentzer (Philipps-Universitaet
+Marburg, Germany)
+ - Applications Program Chair: Francis Bordeleau (Carleton University,
+Ottawa, Canada)
+
+????????????????????????????????????????????
+
+* 8th Transformation Tool Contest (TTC 2015)
+* http://www.transformation-tool-contest.eu/
+* http://www.transformation-tool-contest.eu/cfc.html
+* https://www.easychair.org/conferences/?conf=ttc2015
+
+The aim of the Transformation Tool Contest is to evaluate and compare
+the expressiveness, the usability and the performance of
+transformation tools for structured data along a number of selected
+challenging case studies. Cases can still be submitted up to 11 March
+2015. In 2015, our special focus is on program transformations and
+bidirectional transformations. Shortly after that deadline, the best
+cases will be selected, a Call for Solutions will be issued, and then
+people have the chance to submit solutions to the selected cases until
+29 April 2015.
+
+Organisation:
+ - Tassilo Horn (University of Koblenz-Landau, Germany)
+ - Filip Krikava (University of Lille & INRIA Lille)
+ - Louis Rose (University of York, UK)
+
+????????????????????????????????????????????
+
+* 7th International Conference on Graph Transformation (ICGT 2015)
+* http://btn1x4.inf.uni-bayreuth.de/icgt2015/
+* http://btn1x4.inf.uni-bayreuth.de/icgt2015/cfp.html
+* http://www.easychair.org/conferences/?conf=icgt2015
+
+Many dynamic structures can be represented as graphs and their changes
+modeled as graph transformations. Theory and applications of graphs,
+graph grammars and graph transformation systems have been studied in
+our community for more than 40 years. This year ICGT offers two
+tracks: a Foundations Track and an Applications Track. The research
+papers (limited to 16 pages) submitted for the Foundations Track
+describe innovative contributions to current research on the
+foundations of graph transformations and are evaluated with respect to
+their originality, significance, and technical soundness. Papers for
+the applications track can be submitted in different categories:
+technical papers (limited to 16 pages), case studies (limited to 12
+pages) and tool demo papers (limited to 8 pages).
+
+Organisation:
+ - Program Co-Chair: Francesco Parisi-Presicce (University of Rome La
+Sapienza, Italy)
+ - Program Co-Chair: Bernhard Westfechtel (University of Bayreuth, Germany)
+ - Publicity Chair: Thomas Buchmann (University of Bayreuth, Germany)
+
+????????????????????????????????????????????
+
+Organisation of STAF 2015:
+ - General Chair: Alfonso Pierantonio (Universit? degli Studi
+dell?Aquila, Italy)
+ - Workshop Co-Chair: Davide Di Ruscio (Universit? degli Studi
+dell?Aquila, Italy)
+ - Workshop Co-Chair: Pieter Van Gorp (Eindhoven University of
+Technology, The Netherlands)
+ - Doctoral Symposium Co-Chair: Henry Muccini (Universit? degli Studi
+dell?Aquila, Italy)
+ - Doctoral Symposium Co-Chair: D?niel Varr? (Budapest University of
+Technology and Economics, Hungary)
+ - Doctoral Symposium Co-Chair: Martin Gogolla (University of Bremen, Germany)
+ - Projects Showcase Co-Chair: Marco Autili (Universit? degli Studi
+dell?Aquila, Italy)
+ - Projects Showcase Co-Chair: Bernhard Sch?tz (firtiss GmbH, Germany)
+ - Publication Co-Chair: Louis Rose (University of York, UK)
+ - Publication Co-Chair: Javier Troya (Technische Universit?t Wien, Austria)
+ - Social Media and Publicity Chair: Vadim Zaytsev (Universiteit van
+Amsterdam, The Netherlands)
+ - Web Chair: Francesco Basciani (Universit? degli Studi dell?Aquila, Italy)
+ - Local: Massimo Tivoli, Romina Eramo, Ludovico Iovino, Francesco
+Gallo, Juri Di Rocco, Gianni Rosa
+????????????????????????????????????????????
+
+
+From moreno.falaschi at unisi.it  Thu Feb 19 15:32:40 2015
+From: moreno.falaschi at unisi.it (FALASCHI MORENO)
+Date: Thu, 19 Feb 2015 15:32:40 +0100
+Subject: [Stratego Users] PPDP 2015: 2nd call for papers
+Message-ID: <1d67d8e2dc3f3344de9be5278a34ab03@unisi.it>
+
+======================================================================
+
+			   Call for papers
+		   17th International Symposium on
+	  Principles and Practice of Declarative Programming
+			      PPDP 2015
+
+         Special Issue of Science of Computer Programming (SCP)
+
+		    Siena, Italy, July 14-16, 2015
+		    (co-located with LOPSTR 2015)
+
+		  http://costa.ls.fi.upm.es/ppdp15
+				   
+======================================================================
+
+		  SUBMISSION DEADLINE: 20 MARCH, 2015
+
+PPDP  2015  is a  forum  that  brings  together researchers  from  the
+declarative  programming communities, including  those working  in the
+logic,  constraint  and  functional  programming paradigms,  but  also
+embracing languages, database  languages, and knowledge representation
+languages. The  goal is  to stimulate research  in the use  of logical
+formalisms  and  methods  for  specifying, performing,  and  analyzing
+computations,   including   mechanisms   for   mobility,   modularity,
+concurrency,  object-orientation,  security,  verification and  static
+analysis. Papers related to the use of declarative paradigms and tools
+in industry and education are especially solicited. Topics of interest
+include, but are not limited to
+
+* Functional programming
+* Logic programming
+* Answer-set programming
+* Functional-logic programming
+* Declarative visual languages
+* Constraint Handling Rules
+* Parallel implementation and concurrency
+* Monads, type classes and dependent type systems
+* Declarative domain-specific languages
+* Termination, resource analysis and the verification of declarative
+programs
+* Transformation and partial evaluation of declarative languages
+* Language extensions for security and tabulation
+* Probabilistic modeling in a declarative language and modeling reactivity
+* Memory management and the implementation of declarative systems
+* Practical experiences and industrial application
+
+This   year  the  conference   will  be   co-located  with   the  25th
+International   Symposium  on   Logic-Based   Program  Synthesis   and
+Transformation (LOPSTR 2015).
+
+The  conference will  be held in Siena, Italy.  Previous symposia were
+held  at Canterbury  (UK),  Madrid (Spain),  Leuven (Belgium),  Odense
+(Denmark), Hagenberg (Austria),  Coimbra (Portugal), Valencia (Spain),
+Wroclaw (Poland),  Venice (Italy), Lisboa  (Portugal), Verona (Italy),
+Uppsala  (Sweden),   Pittsburgh  (USA),  Florence   (Italy),  Montreal
+(Canada), and Paris (France). You might have a look at the contents of
+past PPDP symposia.
+
+Papers  must  describe original  work,  be  written  and presented  in
+English, and must not substantially overlap with papers that have been
+published  or   that  are  simultaneously  submitted   to  a  journal,
+conference, or  workshop with refereed proceedings.  Work that already
+appeared in  unpublished or informally  published workshop proceedings
+may be submitted (please contact the PC chair in case of questions).
+
+After the symposium, a selection of the best papers will be invited to
+extend their submissions in the light of the feedback solicited at the
+symposium.   The papers  are expected  to include  at least  30% extra
+material over and above the PPDP version. Then, after another round of
+reviewing, these revised  papers will be published in  a special issue
+of SCP with a target publication date by Elsevier of 2016.
+
+Important Dates
+
+   Abstract Submission: 	      14 March, 2015
+   Paper submission: 		      20 March, 2015
+   Notification: 		      14 May,   2015
+   Camera-ready: 		      To be announced
+   
+   Symposium:			      14-16 July, 2015
+   
+Authors  should  submit  an  electronic  copy of  the  full  paper  in
+PDF. Papers  should be  submitted to the  submission website  for PPDP
+2015. Each submission must include  on its first page the paper title;
+authors  and   their  affiliations;   abstract;  and  three   to  four
+keywords. The keywords will be used to assist the program committee in
+selecting appropriate  reviewers for the paper.  Papers should consist
+of   the   equivalent  of   12   pages   under   the  ACM   formatting
+guidelines.  These   guidelines  are  available   online,  along  with
+formatting templates  or style files. Submitted papers  will be judged
+on the basis of significance, relevance, correctness, originality, and
+clarity. They should  include a clear identification of  what has been
+accomplished and  why it is  significant. Authors who wish  to provide
+additional material to  the reviewers beyond the 12-page  limit can do
+so in  clearly marked appendices:  reviewers are not required  to read
+such appendices.
+
+-----------------------------------------------------------------------
+INVITED SPEAKERS
+
+Patrick Cousot, New York University, USA (Jointly with LOPSTR)
+Martin Hofmann, LMU Munich, Germany
+-----------------------------------------------------------------------
+Program Committee
+
+    Michael Adams, University of Utah, USA
+    Puri Arenas, Complutense University of Madrid, Spain
+    Amir Ben-Amram, Tel-Aviv Academic College, Israel
+    Ines Castro, Universidade do Porto, Portugal
+    Patrick Cousot, New York University, USA
+    Gregory Duck, National University of Singapore, Singapore
+    Fabio Fioravanti, University of Chieti-Pescara, Italy
+    Thom Fr?hwirth, University of Ulm, Germany
+    Roberto Giacobazzi, University of Verona, Italy
+    Michael Hanus, CAU Kiel, Germany
+    Andy King, University of Kent, UK
+    F. L?pez-Fraguas, Complutense University of Madrid, Spain
+    Ian Mackie, University of Sussex, UK
+    Dale Miller, INRIA and LIX/Ecole Polytechnique, France
+    Torsten Schaub, University of Potsdam, Germany
+    Tom Schrijvers KU Leuven, Belgium
+    Frank D. Valencia, CNRS and LIX, Ecole Polytechnique, France
+    German Vidal, Universitat Politecnica de Valencia, Spain
+    Marina Vos, University of Bath, UK
+    Nobuko Yoshida, Imperial College London, UK 
+
+Program Chair
+
+    Elvira Albert
+    Complutense University of Madrid
+    C/ Profesor Garcia Santesmases
+    E-28040 Madrid, Spain
+    Email: elvira at sip.ucm.es
+
+Symposium Chair
+
+    Moreno Falaschi
+    Department of information engineering and mathematics
+    University of Siena, Italy
+    Email: moreno.falaschi at unisi.it
+
+From moreno.falaschi at unisi.it  Thu Feb 19 15:28:17 2015
+From: moreno.falaschi at unisi.it (FALASCHI MORENO)
+Date: Thu, 19 Feb 2015 15:28:17 +0100
+Subject: [Stratego Users] LOPSTR 2015: 2nd Call for Papers
+Message-ID: <0a2ba023519cbde344c65d07852fe909@unisi.it>
+
+============================================================
+
+                25th International Symposium on
+       Logic-Based Program Synthesis and Transformation
+                         LOPSTR 2015
+
+         Special Issue of Formal Aspects of Computing
+
+            http://alpha.diism.unisi.it/lopstr15/
+
+        University of Siena, Siena, IT, July 13-15, 2015
+                (co-located with PPDP 2015)
+
+
+DEADLINES
+Abstract submission: April 6,  2015
+Paper/Extended abstract submission: April 13, 2015
+
+============================================================
+
+
+The aim of the LOPSTR series is to stimulate and promote international
+research and collaboration on logic-based program development.  LOPSTR
+is  open to  contributions in logic-based  program development in  any
+language  paradigm.   LOPSTR  has a  reputation for  being  a  lively,
+friendly forum for presenting and discussing work in progress.  Formal
+proceedings are produced only after the symposium so that authors  can
+incorporate this feedback in the published papers.
+
+The 25th International Symposium on Logic-based Program Synthesis  and
+Transformation (LOPSTR 2015) will be held at the University of  Siena, 
+Siena,  Italy;   previous symposia were held in  Canterbury,   Madrid, 
+Leuven, Odense, Hagenberg, Coimbra, Valencia, Lyngby, Venice,  London, 
+Verona, Uppsala, Madrid, Paphos, London, Venice,  Manchester,  Leuven, 
+Stockholm, Arnhem, Pisa, Louvain-la-Neuve, and Manchester. 
+LOPSTR 2015 will be co-located with PPDP 2015 (International Symposium 
+on Principles and Practice of Declarative Programming).
+
+Topics of interest cover all aspects of logic-based program
+development, all stages of the software life cycle, and issues of both
+programming-in-the-small and programming-in-the-large. Both full
+papers and extended abstracts describing applications in these areas
+are especially welcome. Contributions are welcome on all aspects of
+logic-based program development, including, but not limited to:
+
+    * synthesis
+    * transformation
+    * specialization
+    * composition
+    * optimization
+    * inversion
+    * specification
+    * analysis and verification
+    * testing and certification
+    * program and model manipulation
+    * transformational techniques in SE
+    * applications and tools
+
+Survey papers that present some aspects of the above topics from a new
+perspective, and application papers that describe experience with
+industrial applications are also welcome.
+
+Papers must describe original work, be written and presented in
+English, and must not substantially overlap with papers that have been
+published or that are simultaneously submitted to a journal,
+conference, or workshop with refereed proceedings. Work that already
+appeared in unpublished or informally published workshop proceedings
+may be submitted (please contact the PC chair in case of questions).
+
+
+Important Dates
+
+ Abstract submission:                                       April 6, 2015
+ Paper/Extended abstract submission:                        April 13, 2015
+ Notification:                                              May 25, 2015
+ Camera-ready (for electronic pre-proceedings):   June 15, 2015
+ Symposium:                                                 July 13-15,
+2015
+
+
+Submission Guidelines
+
+Authors should submit an electronic copy of the paper (written in 
+English) in PDF, formatted in the Lecture Notes in Computer Science 
+style. Each submission must include on its first page  the paper 
+title; authors and their  affiliations;  contact author's  email; 
+abstract; and three to four keywords which will be used to assist 
+the PC in selecting appropriate reviewers for the paper. Page numbers 
+should appear on the manuscript to help the reviewers in writing 
+their report. Submissions cannot exceed 15 pages including references 
+but excluding well-marked appendices not intended for publication. 
+Reviewers are not required to read the appendices, and thus papers 
+should be intelligible without them. 
+Papers should be submitted via the Easychair submission website for 
+LOPSTR 2015, which can be accessed through the website of LOPSTR 2015. 
+
+
+Proceedings
+
+The formal post-conference proceedings will be published by Springer 
+in the Lecture Notes in Computer Science series. 
+Full papers can be directly accepted for publication in the formal 
+proceedings, or accepted only for presentation at the symposium and 
+inclusion in informal proceedings. After the symposium, all authors 
+of extended abstracts and full papers accepted only for presentation 
+will be invited to revise and/or extend their submissions in the light 
+of the feedback solicited at the symposium. Then, after another round 
+of reviewing, these revised papers may also be published in the formal 
+proceedings. 
+
+
+Special journal issue
+
+After the symposium, a selection of the best papers will be invited to
+a  special  issue of  the  'Formal Aspects of Computing'  journal. The 
+submissions to the special issue must be substantial extensions of the 
+proceedings versions and will  undergo the usual journal reviewing 
+process.
+
+
+Invited speakers
+
+Patrick Cousot, New York University, USA (Jointly with PPDP)
+Gilles Barthe, IMDEA Software Institute, Spain
+Dale Miller, INRIA and LIX/Ecole Polytechnique, France
+
+
+Program Committee
+
+  Slim Abdennadher,  German University of Cairo, Egypt
+  Maria Alpuente,  Universitat Politecnica de Valencia, Spain
+  Demis Ballis,  University of Udine, Italy
+  Olaf Chitil,  University of Kent, UK
+  Michael Codish,  Ben-Gurion University, Israel
+  Moreno Falaschi,  University of Siena, Italy (Program Chair)
+  Jerome Feret,  INRIA and ENS, France
+  Maurizio Gabbrielli,  University of Bologna, Italy
+  Jurgen Giesl,  RWTH Aachen University, Germany
+  Miguel Gomez-Zamalloa,  Complutense University of Madrid, Spain
+  Arnaud Gotlieb,  SIMULA Research Laboratory, Norway
+  Gopal Gupta,  University of Texas at Dallas, USA
+  Manuel Hermenegildo,  IMDEA, Spain
+  Viktor Kuncak,  EPFL Lausanne, Switzerland
+  Luigi Liquori,  INRIA Sophia-Antipolis Mediterranee, France
+  Alexei Lisitsa,  University of Liverpool, UK
+  Narciso Marti-Oliet,  Universidad Complutense de Madrid, Spain
+  Jorge Navas,  NASA, USA
+  Kazuhiro Ogata,  JAIST, Japan
+  Carlos Olarte, ECT, Univ. Federal do Rio Grande do Norte, Brasil
+  Catuscia Palamidessi,  INRIA and Ecole Polytechnique, France 
+  Maurizio Proietti,  IASI-CNR, Italy 
+  Albert Rubio, Universitat Politecnica de Catalunya, Barcelona, Spain
+  Wim Vanhoof,  University of Namur, Belgium 
+     
+
+Program and Symposium Chair:
+
+Moreno Falaschi, Dept. of Information Engineering and Mathematics, 
+Univ. of Siena, Italy 
+(moreno.falaschi at unisi.it)
+
+
+Organizing Committee
+
+Monica Bianchini, DIISM, Univ. of Siena, Italy
+Sara Brunetti, DIISM, Univ. of Siena, Italy
+Andrea Machetti, DIISM, Univ. of Siena, Italy
+Simonetta Palmas, DIISM, Univ. of Siena, Italy
+Maurizio Proietti,  IASI-CNR, Italy 
+Simone Rinaldi, DIISM, Univ. of Siena, Italy
+Elisa Tiezzi, DIISM, Univ. of Siena, Italy
+Sara Ugolini, Dip. Informatica, Univ. of Pisa
+

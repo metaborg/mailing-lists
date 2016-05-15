@@ -1,0 +1,1364 @@
+From headness13 at gmail.com  Fri Nov 11 21:32:10 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Fri, 11 Nov 2011 22:32:10 +0200
+Subject: [Stratego Users] Question about Postfix expressions with guarded
+	children
+Message-ID: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+
+Hi,
+
+I've been playing with postfix expressions with guarded children and the
+only examples that I could find, are a bit restrictive:
+context-free priorities
+{
+   E "[" E "]" -> E
+} <0> > {
+   E "+" E -> E {left}
+}
+This means that <0> is applied to the productions of the entire block.
+Is there any way to specify guards only for specific rules?
+I tried writing:
+E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get weird
+errors from the editor (even though it generates table somehow).
+
+Thanks,
+Radu Mereuta
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111111/10719e80/attachment.html>
+
+From l.c.l.kats at tudelft.nl  Mon Nov 14 14:34:52 2011
+From: l.c.l.kats at tudelft.nl (Lennart Kats)
+Date: Mon, 14 Nov 2011 14:34:52 +0100
+Subject: [Stratego Users] Question about Postfix expressions with
+ guarded children
+In-Reply-To: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+Message-ID: <4EC118FC.9080206@tudelft.nl>
+
+Hi Radu,
+
+I have no firsthand experience with this notation, but I do know that 
+you can write
+
+   context-free priorities
+      E "[" E "]" -> E <0> >
+      E "+" E -> E {left}
+
+leaving out the grouping. And if you add {0} to a rule, then you're only 
+annotating it with the term '0', which has no real meaning to the parser.
+
+hth,
+
+Lennart
+
+On 11/11/11 21:32 , Radu Mereuta wrote:
+> Hi,
+>
+> I've been playing with postfix expressions with guarded children and the
+> only examples that I could find, are a bit restrictive:
+> context-free priorities
+> {
+>     E "[" E "]" -> E
+> } <0> > {
+>     E "+" E -> E {left}
+> }
+> This means that <0> is applied to the productions of the entire block.
+> Is there any way to specify guards only for specific rules?
+> I tried writing:
+> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get weird
+> errors from the editor (even though it generates table somehow).
+>
+> Thanks,
+> Radu Mereuta
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From G.H.Wachsmuth at tudelft.nl  Mon Nov 14 15:19:33 2011
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Mon, 14 Nov 2011 14:19:33 +0000
+Subject: [Stratego Users] Question about Postfix expressions with
+ guarded children
+In-Reply-To: <4EC118FC.9080206@tudelft.nl>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+Message-ID: <CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+
+Hi Radu, hi Lennart,
+
+according to http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf (Page 18) the number between the angled brackets was used to "indicates to which arguments the disambiguation should be applied (and implicitly in which not)". I'm not sure if this still holds for SDF in Spoofax.
+
+In case it does not, you can fix such things with injection rules
+
+context-free syntax
+
+  E -> IndexE
+
+context-free priorities
+    E "[" IndexE "]" -> E  >
+    E "+" E -> E {left} 
+
+Guido
+
+On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+
+> Hi Radu,
+> 
+> I have no firsthand experience with this notation, but I do know that you can write
+> 
+>  context-free priorities
+>     E "[" E "]" -> E <0> >
+>     E "+" E -> E {left}
+> 
+> leaving out the grouping. And if you add {0} to a rule, then you're only annotating it with the term '0', which has no real meaning to the parser.
+> 
+> hth,
+> 
+> Lennart
+> 
+> On 11/11/11 21:32 , Radu Mereuta wrote:
+>> Hi,
+>> 
+>> I've been playing with postfix expressions with guarded children and the
+>> only examples that I could find, are a bit restrictive:
+>> context-free priorities
+>> {
+>>    E "[" E "]" -> E
+>> } <0> > {
+>>    E "+" E -> E {left}
+>> }
+>> This means that <0> is applied to the productions of the entire block.
+>> Is there any way to specify guards only for specific rules?
+>> I tried writing:
+>> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get weird
+>> errors from the editor (even though it generates table somehow).
+>> 
+>> Thanks,
+>> Radu Mereuta
+>> 
+>> 
+>> 
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From headness13 at gmail.com  Mon Nov 14 18:41:30 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Mon, 14 Nov 2011 19:41:30 +0200
+Subject: [Stratego Users] Question about Postfix expressions with
+	guarded children
+In-Reply-To: <CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+	<CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+Message-ID: <CAFu+moKLh-_ypi8VTNxpebxb+54_NGdPN_ubisnCGksRg40DfA@mail.gmail.com>
+
+Hi again,
+
+I was actually interested in how could I apply that exception to specific
+productions, not to an entire block, but injecting new rules might do the
+trick. Thanks.
+Annotating blocks still works in Spoofax, but let me know if you can still
+annotate only specific rules. I haven't been able to find the correct
+syntax.
+
+Radu
+
+On Mon, Nov 14, 2011 at 4:19 PM, Guido Wachsmuth - EWI <
+G.H.Wachsmuth at tudelft.nl> wrote:
+
+> Hi Radu, hi Lennart,
+>
+> according to
+> http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf (Page
+> 18) the number between the angled brackets was used to "indicates to which
+> arguments the disambiguation should be applied (and implicitly in which
+> not)". I'm not sure if this still holds for SDF in Spoofax.
+>
+> In case it does not, you can fix such things with injection rules
+>
+> context-free syntax
+>
+>  E -> IndexE
+>
+> context-free priorities
+>    E "[" IndexE "]" -> E  >
+>     E "+" E -> E {left}
+>
+> Guido
+>
+> On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+>
+> > Hi Radu,
+> >
+> > I have no firsthand experience with this notation, but I do know that
+> you can write
+> >
+> >  context-free priorities
+> >     E "[" E "]" -> E <0> >
+> >     E "+" E -> E {left}
+> >
+> > leaving out the grouping. And if you add {0} to a rule, then you're only
+> annotating it with the term '0', which has no real meaning to the parser.
+> >
+> > hth,
+> >
+> > Lennart
+> >
+> > On 11/11/11 21:32 , Radu Mereuta wrote:
+> >> Hi,
+> >>
+> >> I've been playing with postfix expressions with guarded children and the
+> >> only examples that I could find, are a bit restrictive:
+> >> context-free priorities
+> >> {
+> >>    E "[" E "]" -> E
+> >> } <0> > {
+> >>    E "+" E -> E {left}
+> >> }
+> >> This means that <0> is applied to the productions of the entire block.
+> >> Is there any way to specify guards only for specific rules?
+> >> I tried writing:
+> >> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get weird
+> >> errors from the editor (even though it generates table somehow).
+> >>
+> >> Thanks,
+> >> Radu Mereuta
+> >>
+> >>
+> >>
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111114/26cdbac9/attachment.html>
+
+From headness13 at gmail.com  Mon Nov 14 20:34:45 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Mon, 14 Nov 2011 21:34:45 +0200
+Subject: [Stratego Users] Question about Postfix expressions with
+	guarded children
+In-Reply-To: <4631613682349553058@unknownmsgid>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+	<CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+	<CAFu+moKLh-_ypi8VTNxpebxb+54_NGdPN_ubisnCGksRg40DfA@mail.gmail.com>
+	<4631613682349553058@unknownmsgid>
+Message-ID: <CAFu+moJ=OBnbFDPnSqo1392YLL6+3gd5SRWLunrADYSQn3fq0w@mail.gmail.com>
+
+My problem was that I don't know how to apply the guard to this example:
+
+context-free priorities
+{
+     Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+     "if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+} > {
+     Exp "*" Exp -> Exp {left, cons("Mull")}
+} > {
+     Exp "+" Exp -> Exp {left, cons("Add")}
+}
+
+The only way I managed to make it to work was like this:
+context-free priorities
+{
+     Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+     "if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+} <0> > { %% specify the guard for the entire block
+     Exp "*" Exp -> Exp {left, cons("Mull")}
+} > {
+     Exp "+" Exp -> Exp {left, cons("Add")}
+}
+All my other tries ended up with parse errors, and I couldn't find any
+example with more than two productions.
+Should I write them in pairs? Or should I repeat only the rules where the
+priority filter is suppressed?
+
+I am trying to get a deeper understanding of the SDF syntax.
+
+Thanks,
+Radu
+
+On Mon, Nov 14, 2011 at 8:36 PM, Jurgen Vinju <jurgen at vinju.org> wrote:
+
+> Hi radu
+>
+> I designed this feature and implemented it in sdf2, but i dont get the
+> question. Why is my previous answer and lennarts answer not an answer to
+> your question?
+>
+> Cheers Jurgen
+>
+> Ps cant post to the list from my iphone for some reason.
+>
+> --
+> Jurgen Vinju
+> http://jurgen.vinju.org
+>
+> On 14 nov. 2011, at 18:43, Radu Mereuta <headness13 at gmail.com> wrote:
+>
+> Hi again,
+>
+> I was actually interested in how could I apply that exception to specific
+> productions, not to an entire block, but injecting new rules might do the
+> trick. Thanks.
+> Annotating blocks still works in Spoofax, but let me know if you can still
+> annotate only specific rules. I haven't been able to find the correct
+> syntax.
+>
+> Radu
+>
+> On Mon, Nov 14, 2011 at 4:19 PM, Guido Wachsmuth - EWI <
+> G.H.Wachsmuth at tudelft.nl> wrote:
+>
+>> Hi Radu, hi Lennart,
+>>
+>> according to
+>> http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf (Page
+>> 18) the number between the angled brackets was used to "indicates to which
+>> arguments the disambiguation should be applied (and implicitly in which
+>> not)". I'm not sure if this still holds for SDF in Spoofax.
+>>
+>> In case it does not, you can fix such things with injection rules
+>>
+>> context-free syntax
+>>
+>>  E -> IndexE
+>>
+>> context-free priorities
+>>    E "[" IndexE "]" -> E  >
+>>     E "+" E -> E {left}
+>>
+>> Guido
+>>
+>> On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+>>
+>> > Hi Radu,
+>> >
+>> > I have no firsthand experience with this notation, but I do know that
+>> you can write
+>> >
+>> >  context-free priorities
+>> >     E "[" E "]" -> E <0> >
+>> >     E "+" E -> E {left}
+>> >
+>> > leaving out the grouping. And if you add {0} to a rule, then you're
+>> only annotating it with the term '0', which has no real meaning to the
+>> parser.
+>> >
+>> > hth,
+>> >
+>> > Lennart
+>> >
+>> > On 11/11/11 21:32 , Radu Mereuta wrote:
+>> >> Hi,
+>> >>
+>> >> I've been playing with postfix expressions with guarded children and
+>> the
+>> >> only examples that I could find, are a bit restrictive:
+>> >> context-free priorities
+>> >> {
+>> >>    E "[" E "]" -> E
+>> >> } <0> > {
+>> >>    E "+" E -> E {left}
+>> >> }
+>> >> This means that <0> is applied to the productions of the entire block.
+>> >> Is there any way to specify guards only for specific rules?
+>> >> I tried writing:
+>> >> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get
+>> weird
+>> >> errors from the editor (even though it generates table somehow).
+>> >>
+>> >> Thanks,
+>> >> Radu Mereuta
+>> >>
+>> >>
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111114/01f979e6/attachment-0001.html>
+
+From Jurgen.Vinju at cwi.nl  Mon Nov 14 22:59:10 2011
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Mon, 14 Nov 2011 22:59:10 +0100
+Subject: [Stratego Users] Question about Postfix expressions with
+	guarded children
+In-Reply-To: <CAFu+moJ=OBnbFDPnSqo1392YLL6+3gd5SRWLunrADYSQn3fq0w@mail.gmail.com>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+	<CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+	<CAFu+moKLh-_ypi8VTNxpebxb+54_NGdPN_ubisnCGksRg40DfA@mail.gmail.com>
+	<4631613682349553058@unknownmsgid>
+	<CAFu+moJ=OBnbFDPnSqo1392YLL6+3gd5SRWLunrADYSQn3fq0w@mail.gmail.com>
+Message-ID: <CAEy4yM4TsWTjsUfOPUxGQ2PBRQvkjJJTJjysQJWFTFEx4P9J0w@mail.gmail.com>
+
+Hi Radu,
+
+Aha. Now I get it! This is the solution, ugly as it may be:
+
+context-free priorities
+{
+ ? ? ?Exp "[" Exp "]" -> Exp {cons("Array")}
+ ? ? ?"if" Exp "then" Exp -> Exp {cons("If")}
+} <0,3>
+> Exp "*" Exp -> Exp {left, cons("Mull")}
+> Exp "+" Exp -> Exp {left, cons("Add")}
+
+This restricts the priority filter to the first and third arguments of
+Array and If. Since Array does not have a recursive third argument and
+If does not have a  recursive first argument the restriction 0 does
+not have an effect on If and the restriction 3 does not have an effect
+on Array. (not tested!)
+
+Some unsolicited feedback on language design: I suspect people will
+find it unexpected to see Array's and If's with the same priority
+level. Also, it is still ambiguous for the input "if a then b [ c ]",
+since the array index could be applied to "if a then b" or only to b.
+Usually, "If" has the lowest priority in the (partial) ordering of
+expression operators.
+
+Cheers,
+
+Jurgen
+
+
+
+
+On Mon, Nov 14, 2011 at 8:35 PM, Radu Mereuta <headness13 at gmail.com> wrote:
+> My problem was that I don't know how to apply the guard to this example:
+> context-free priorities
+> {
+> ? ? ?Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+> ? ? ?"if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+> } > {
+> ? ? ?Exp "*" Exp -> Exp {left, cons("Mull")}
+> } > {
+> ? ? ?Exp "+" Exp -> Exp {left, cons("Add")}
+> }
+>
+> The only way I managed to make it to work was like this:
+> context-free priorities
+> {
+> ? ? ?Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+> ? ? ?"if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+> } <0> > { %% specify the guard for the entire block
+> ? ? ?Exp "*" Exp -> Exp {left, cons("Mull")}
+> } > {
+> ? ? ?Exp "+" Exp -> Exp {left, cons("Add")}
+> }
+> All my other tries ended up with parse errors, and I couldn't find any
+> example with more than two productions.
+> Should I write them in pairs? Or should I repeat only the rules where the
+> priority filter is suppressed?
+> I am trying to get a deeper understanding of the SDF syntax.
+> Thanks,
+> Radu
+> On Mon, Nov 14, 2011 at 8:36 PM, Jurgen Vinju <jurgen at vinju.org> wrote:
+>>
+>> Hi radu
+>> I designed this feature and implemented it in sdf2, but i dont get the
+>> question. Why is my previous answer and lennarts answer not an answer to
+>> your question?
+>> Cheers Jurgen
+>> Ps cant post to the list from my iphone for some reason.
+>>
+>> --
+>> Jurgen Vinju
+>> http://jurgen.vinju.org
+>> On 14 nov. 2011, at 18:43, Radu Mereuta <headness13 at gmail.com> wrote:
+>>
+>> Hi again,
+>>
+>> I was actually interested in how could I apply that exception to specific
+>> productions, not to an entire block, but injecting new rules might do the
+>> trick. Thanks.
+>> Annotating blocks still works in Spoofax, but let me know if you can still
+>> annotate only specific rules. I haven't been able to find the correct
+>> syntax.
+>> Radu
+>> On Mon, Nov 14, 2011 at 4:19 PM, Guido Wachsmuth - EWI
+>> <G.H.Wachsmuth at tudelft.nl> wrote:
+>>>
+>>> Hi Radu, hi Lennart,
+>>>
+>>> according to
+>>> http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf (Page 18)
+>>> the number between the angled brackets was used to "indicates to which
+>>> arguments the disambiguation should be applied (and implicitly in which
+>>> not)". I'm not sure if this still holds for SDF in Spoofax.
+>>>
+>>> In case it does not, you can fix such things with injection rules
+>>>
+>>> context-free syntax
+>>>
+>>> ?E -> IndexE
+>>>
+>>> context-free priorities
+>>> ? ?E "[" IndexE "]" -> E ?>
+>>> ? ?E "+" E -> E {left}
+>>>
+>>> Guido
+>>>
+>>> On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+>>>
+>>> > Hi Radu,
+>>> >
+>>> > I have no firsthand experience with this notation, but I do know that
+>>> > you can write
+>>> >
+>>> > ?context-free priorities
+>>> > ? ? E "[" E "]" -> E <0> >
+>>> > ? ? E "+" E -> E {left}
+>>> >
+>>> > leaving out the grouping. And if you add {0} to a rule, then you're
+>>> > only annotating it with the term '0', which has no real meaning to the
+>>> > parser.
+>>> >
+>>> > hth,
+>>> >
+>>> > Lennart
+>>> >
+>>> > On 11/11/11 21:32 , Radu Mereuta wrote:
+>>> >> Hi,
+>>> >>
+>>> >> I've been playing with postfix expressions with guarded children and
+>>> >> the
+>>> >> only examples that I could find, are a bit restrictive:
+>>> >> context-free priorities
+>>> >> {
+>>> >> ? ?E "[" E "]" -> E
+>>> >> } <0> > {
+>>> >> ? ?E "+" E -> E {left}
+>>> >> }
+>>> >> This means that <0> is applied to the productions of the entire block.
+>>> >> Is there any way to specify guards only for specific rules?
+>>> >> I tried writing:
+>>> >> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get
+>>> >> weird
+>>> >> errors from the editor (even though it generates table somehow).
+>>> >>
+>>> >> Thanks,
+>>> >> Radu Mereuta
+>>> >>
+>>> >>
+>>> >>
+>>> >>
+>>> >> _______________________________________________
+>>> >> Users mailing list
+>>> >> Users at strategoxt.org
+>>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>> >
+>>> > _______________________________________________
+>>> > Users mailing list
+>>> > Users at strategoxt.org
+>>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SEN1
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+? www: http://jurgen.vinju.org,
+http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+
+
+From headness13 at gmail.com  Mon Nov 14 23:11:56 2011
+From: headness13 at gmail.com (Radu Mereuta)
+Date: Tue, 15 Nov 2011 00:11:56 +0200
+Subject: [Stratego Users] Question about Postfix expressions with
+	guarded children
+In-Reply-To: <CAEy4yM4TsWTjsUfOPUxGQ2PBRQvkjJJTJjysQJWFTFEx4P9J0w@mail.gmail.com>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+	<CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+	<CAFu+moKLh-_ypi8VTNxpebxb+54_NGdPN_ubisnCGksRg40DfA@mail.gmail.com>
+	<4631613682349553058@unknownmsgid>
+	<CAFu+moJ=OBnbFDPnSqo1392YLL6+3gd5SRWLunrADYSQn3fq0w@mail.gmail.com>
+	<CAEy4yM4TsWTjsUfOPUxGQ2PBRQvkjJJTJjysQJWFTFEx4P9J0w@mail.gmail.com>
+Message-ID: <CAFu+moKUH7ennq=bgPmqT4YfV-t+xxk-zvFx3mUwhJNYiwmOuw@mail.gmail.com>
+
+This was just an example that came off the top of my head, I don't really
+have this in my language. Although we might, if the users decides to write
+something like this in our K-framework (even though weird like you just
+mentioned). I was just experimenting to see the limitations of the tool.
+
+Thanks,
+Radu
+
+On Mon, Nov 14, 2011 at 11:59 PM, Jurgen Vinju <Jurgen.Vinju at cwi.nl> wrote:
+
+> Hi Radu,
+>
+> Aha. Now I get it! This is the solution, ugly as it may be:
+>
+> context-free priorities
+> {
+>       Exp "[" Exp "]" -> Exp {cons("Array")}
+>       "if" Exp "then" Exp -> Exp {cons("If")}
+> } <0,3>
+> > Exp "*" Exp -> Exp {left, cons("Mull")}
+> > Exp "+" Exp -> Exp {left, cons("Add")}
+>
+> This restricts the priority filter to the first and third arguments of
+> Array and If. Since Array does not have a recursive third argument and
+> If does not have a  recursive first argument the restriction 0 does
+> not have an effect on If and the restriction 3 does not have an effect
+> on Array. (not tested!)
+>
+> Some unsolicited feedback on language design: I suspect people will
+> find it unexpected to see Array's and If's with the same priority
+> level. Also, it is still ambiguous for the input "if a then b [ c ]",
+> since the array index could be applied to "if a then b" or only to b.
+> Usually, "If" has the lowest priority in the (partial) ordering of
+> expression operators.
+>
+> Cheers,
+>
+> Jurgen
+>
+>
+>
+>
+> On Mon, Nov 14, 2011 at 8:35 PM, Radu Mereuta <headness13 at gmail.com>
+> wrote:
+> > My problem was that I don't know how to apply the guard to this example:
+> > context-free priorities
+> > {
+> >      Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+> >      "if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+> > } > {
+> >      Exp "*" Exp -> Exp {left, cons("Mull")}
+> > } > {
+> >      Exp "+" Exp -> Exp {left, cons("Add")}
+> > }
+> >
+> > The only way I managed to make it to work was like this:
+> > context-free priorities
+> > {
+> >      Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+> >      "if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+> > } <0> > { %% specify the guard for the entire block
+> >      Exp "*" Exp -> Exp {left, cons("Mull")}
+> > } > {
+> >      Exp "+" Exp -> Exp {left, cons("Add")}
+> > }
+> > All my other tries ended up with parse errors, and I couldn't find any
+> > example with more than two productions.
+> > Should I write them in pairs? Or should I repeat only the rules where the
+> > priority filter is suppressed?
+> > I am trying to get a deeper understanding of the SDF syntax.
+> > Thanks,
+> > Radu
+> > On Mon, Nov 14, 2011 at 8:36 PM, Jurgen Vinju <jurgen at vinju.org> wrote:
+> >>
+> >> Hi radu
+> >> I designed this feature and implemented it in sdf2, but i dont get the
+> >> question. Why is my previous answer and lennarts answer not an answer to
+> >> your question?
+> >> Cheers Jurgen
+> >> Ps cant post to the list from my iphone for some reason.
+> >>
+> >> --
+> >> Jurgen Vinju
+> >> http://jurgen.vinju.org
+> >> On 14 nov. 2011, at 18:43, Radu Mereuta <headness13 at gmail.com> wrote:
+> >>
+> >> Hi again,
+> >>
+> >> I was actually interested in how could I apply that exception to
+> specific
+> >> productions, not to an entire block, but injecting new rules might do
+> the
+> >> trick. Thanks.
+> >> Annotating blocks still works in Spoofax, but let me know if you can
+> still
+> >> annotate only specific rules. I haven't been able to find the correct
+> >> syntax.
+> >> Radu
+> >> On Mon, Nov 14, 2011 at 4:19 PM, Guido Wachsmuth - EWI
+> >> <G.H.Wachsmuth at tudelft.nl> wrote:
+> >>>
+> >>> Hi Radu, hi Lennart,
+> >>>
+> >>> according to
+> >>> http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf(Page 18)
+> >>> the number between the angled brackets was used to "indicates to which
+> >>> arguments the disambiguation should be applied (and implicitly in which
+> >>> not)". I'm not sure if this still holds for SDF in Spoofax.
+> >>>
+> >>> In case it does not, you can fix such things with injection rules
+> >>>
+> >>> context-free syntax
+> >>>
+> >>>  E -> IndexE
+> >>>
+> >>> context-free priorities
+> >>>    E "[" IndexE "]" -> E  >
+> >>>    E "+" E -> E {left}
+> >>>
+> >>> Guido
+> >>>
+> >>> On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+> >>>
+> >>> > Hi Radu,
+> >>> >
+> >>> > I have no firsthand experience with this notation, but I do know that
+> >>> > you can write
+> >>> >
+> >>> >  context-free priorities
+> >>> >     E "[" E "]" -> E <0> >
+> >>> >     E "+" E -> E {left}
+> >>> >
+> >>> > leaving out the grouping. And if you add {0} to a rule, then you're
+> >>> > only annotating it with the term '0', which has no real meaning to
+> the
+> >>> > parser.
+> >>> >
+> >>> > hth,
+> >>> >
+> >>> > Lennart
+> >>> >
+> >>> > On 11/11/11 21:32 , Radu Mereuta wrote:
+> >>> >> Hi,
+> >>> >>
+> >>> >> I've been playing with postfix expressions with guarded children and
+> >>> >> the
+> >>> >> only examples that I could find, are a bit restrictive:
+> >>> >> context-free priorities
+> >>> >> {
+> >>> >>    E "[" E "]" -> E
+> >>> >> } <0> > {
+> >>> >>    E "+" E -> E {left}
+> >>> >> }
+> >>> >> This means that <0> is applied to the productions of the entire
+> block.
+> >>> >> Is there any way to specify guards only for specific rules?
+> >>> >> I tried writing:
+> >>> >> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get
+> >>> >> weird
+> >>> >> errors from the editor (even though it generates table somehow).
+> >>> >>
+> >>> >> Thanks,
+> >>> >> Radu Mereuta
+> >>> >>
+> >>> >>
+> >>> >>
+> >>> >>
+> >>> >> _______________________________________________
+> >>> >> Users mailing list
+> >>> >> Users at strategoxt.org
+> >>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>> >
+> >>> > _______________________________________________
+> >>> > Users mailing list
+> >>> > Users at strategoxt.org
+> >>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Users mailing list
+> >>> Users at strategoxt.org
+> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+>
+>
+>
+> --
+> Jurgen Vinju
+> - Centrum Wiskunde & Informatica - SEN1
+> - INRIA Lille - ATEAMS
+> - Universiteit van Amsterdam
+>
+>   www: http://jurgen.vinju.org,
+> http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+> skype: jurgen.vinju
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20111115/4292792a/attachment.html>
+
+From Jurgen.Vinju at cwi.nl  Tue Nov 15 00:52:13 2011
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Tue, 15 Nov 2011 00:52:13 +0100
+Subject: [Stratego Users] Question about Postfix expressions with
+	guarded children
+In-Reply-To: <CAFu+moKUH7ennq=bgPmqT4YfV-t+xxk-zvFx3mUwhJNYiwmOuw@mail.gmail.com>
+References: <CAFu+mo+wDev5Fo6E53iqbKtok5SHoHAA2MA+kk7oBKqLHCT6tg@mail.gmail.com>
+	<4EC118FC.9080206@tudelft.nl>
+	<CC922F5E-2630-468A-8BBD-6070E5692181@tudelft.nl>
+	<CAFu+moKLh-_ypi8VTNxpebxb+54_NGdPN_ubisnCGksRg40DfA@mail.gmail.com>
+	<4631613682349553058@unknownmsgid>
+	<CAFu+moJ=OBnbFDPnSqo1392YLL6+3gd5SRWLunrADYSQn3fq0w@mail.gmail.com>
+	<CAEy4yM4TsWTjsUfOPUxGQ2PBRQvkjJJTJjysQJWFTFEx4P9J0w@mail.gmail.com>
+	<CAFu+moKUH7ennq=bgPmqT4YfV-t+xxk-zvFx3mUwhJNYiwmOuw@mail.gmail.com>
+Message-ID: <CAEy4yM40ViSAvkmfUOxeZ+_s9e2g-Ac17N07KVXGtFZ_ZYc3ww@mail.gmail.com>
+
+Hi Radu,
+
+Ah, in that case I should not have advised anything. My bad. Anyway, I
+hope this answer helped.
+
+Cheers,
+
+Jurgen
+
+On Mon, Nov 14, 2011 at 11:13 PM, Radu Mereuta <headness13 at gmail.com> wrote:
+> This was just an example that came off the top of my head, I don't really
+> have this in my language. Although we might, if the users decides to write
+> something like this in our K-framework (even though weird like you just
+> mentioned). I was just experimenting to see the limitations of the tool.
+>
+> Thanks,
+> Radu
+> On Mon, Nov 14, 2011 at 11:59 PM, Jurgen Vinju <Jurgen.Vinju at cwi.nl> wrote:
+>>
+>> Hi Radu,
+>>
+>> Aha. Now I get it! This is the solution, ugly as it may be:
+>>
+>> context-free priorities
+>> {
+>> ?? ? ?Exp "[" Exp "]" -> Exp {cons("Array")}
+>> ?? ? ?"if" Exp "then" Exp -> Exp {cons("If")}
+>> } <0,3>
+>> > Exp "*" Exp -> Exp {left, cons("Mull")}
+>> > Exp "+" Exp -> Exp {left, cons("Add")}
+>>
+>> This restricts the priority filter to the first and third arguments of
+>> Array and If. Since Array does not have a recursive third argument and
+>> If does not have a ?recursive first argument the restriction 0 does
+>> not have an effect on If and the restriction 3 does not have an effect
+>> on Array. (not tested!)
+>>
+>> Some unsolicited feedback on language design: I suspect people will
+>> find it unexpected to see Array's and If's with the same priority
+>> level. Also, it is still ambiguous for the input "if a then b [ c ]",
+>> since the array index could be applied to "if a then b" or only to b.
+>> Usually, "If" has the lowest priority in the (partial) ordering of
+>> expression operators.
+>>
+>> Cheers,
+>>
+>> Jurgen
+>>
+>>
+>>
+>>
+>> On Mon, Nov 14, 2011 at 8:35 PM, Radu Mereuta <headness13 at gmail.com>
+>> wrote:
+>> > My problem was that I don't know how to apply the guard to this example:
+>> > context-free priorities
+>> > {
+>> > ? ? ?Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+>> > ? ? ?"if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+>> > } > {
+>> > ? ? ?Exp "*" Exp -> Exp {left, cons("Mull")}
+>> > } > {
+>> > ? ? ?Exp "+" Exp -> Exp {left, cons("Add")}
+>> > }
+>> >
+>> > The only way I managed to make it to work was like this:
+>> > context-free priorities
+>> > {
+>> > ? ? ?Exp "[" Exp "]" -> Exp {cons("Array")} %% <0>
+>> > ? ? ?"if" Exp "then" Exp -> Exp {cons("If")} %% <1>
+>> > } <0> > { %% specify the guard for the entire block
+>> > ? ? ?Exp "*" Exp -> Exp {left, cons("Mull")}
+>> > } > {
+>> > ? ? ?Exp "+" Exp -> Exp {left, cons("Add")}
+>> > }
+>> > All my other tries ended up with parse errors, and I couldn't find any
+>> > example with more than two productions.
+>> > Should I write them in pairs? Or should I repeat only the rules where
+>> > the
+>> > priority filter is suppressed?
+>> > I am trying to get a deeper understanding of the SDF syntax.
+>> > Thanks,
+>> > Radu
+>> > On Mon, Nov 14, 2011 at 8:36 PM, Jurgen Vinju <jurgen at vinju.org> wrote:
+>> >>
+>> >> Hi radu
+>> >> I designed this feature and implemented it in sdf2, but i dont get the
+>> >> question. Why is my previous answer and lennarts answer not an answer
+>> >> to
+>> >> your question?
+>> >> Cheers Jurgen
+>> >> Ps cant post to the list from my iphone for some reason.
+>> >>
+>> >> --
+>> >> Jurgen Vinju
+>> >> http://jurgen.vinju.org
+>> >> On 14 nov. 2011, at 18:43, Radu Mereuta <headness13 at gmail.com> wrote:
+>> >>
+>> >> Hi again,
+>> >>
+>> >> I was actually interested in how could I apply that exception to
+>> >> specific
+>> >> productions, not to an entire block, but injecting new rules might do
+>> >> the
+>> >> trick. Thanks.
+>> >> Annotating blocks still works in Spoofax, but let me know if you can
+>> >> still
+>> >> annotate only specific rules. I haven't been able to find the correct
+>> >> syntax.
+>> >> Radu
+>> >> On Mon, Nov 14, 2011 at 4:19 PM, Guido Wachsmuth - EWI
+>> >> <G.H.Wachsmuth at tudelft.nl> wrote:
+>> >>>
+>> >>> Hi Radu, hi Lennart,
+>> >>>
+>> >>> according to
+>> >>> http://homepages.cwi.nl/~daybuild/daily-books/syntax/2-sdf/sdf.pdf
+>> >>> (Page 18)
+>> >>> the number between the angled brackets was used to "indicates to which
+>> >>> arguments the disambiguation should be applied (and implicitly in
+>> >>> which
+>> >>> not)". I'm not sure if this still holds for SDF in Spoofax.
+>> >>>
+>> >>> In case it does not, you can fix such things with injection rules
+>> >>>
+>> >>> context-free syntax
+>> >>>
+>> >>> ?E -> IndexE
+>> >>>
+>> >>> context-free priorities
+>> >>> ? ?E "[" IndexE "]" -> E ?>
+>> >>> ? ?E "+" E -> E {left}
+>> >>>
+>> >>> Guido
+>> >>>
+>> >>> On 14 Nov 2011, at 14:34, Lennart Kats wrote:
+>> >>>
+>> >>> > Hi Radu,
+>> >>> >
+>> >>> > I have no firsthand experience with this notation, but I do know
+>> >>> > that
+>> >>> > you can write
+>> >>> >
+>> >>> > ?context-free priorities
+>> >>> > ? ? E "[" E "]" -> E <0> >
+>> >>> > ? ? E "+" E -> E {left}
+>> >>> >
+>> >>> > leaving out the grouping. And if you add {0} to a rule, then you're
+>> >>> > only annotating it with the term '0', which has no real meaning to
+>> >>> > the
+>> >>> > parser.
+>> >>> >
+>> >>> > hth,
+>> >>> >
+>> >>> > Lennart
+>> >>> >
+>> >>> > On 11/11/11 21:32 , Radu Mereuta wrote:
+>> >>> >> Hi,
+>> >>> >>
+>> >>> >> I've been playing with postfix expressions with guarded children
+>> >>> >> and
+>> >>> >> the
+>> >>> >> only examples that I could find, are a bit restrictive:
+>> >>> >> context-free priorities
+>> >>> >> {
+>> >>> >> ? ?E "[" E "]" -> E
+>> >>> >> } <0> > {
+>> >>> >> ? ?E "+" E -> E {left}
+>> >>> >> }
+>> >>> >> This means that <0> is applied to the productions of the entire
+>> >>> >> block.
+>> >>> >> Is there any way to specify guards only for specific rules?
+>> >>> >> I tried writing:
+>> >>> >> E "[" E "]" -> E {0}, but this is not handled by Spoofax and I get
+>> >>> >> weird
+>> >>> >> errors from the editor (even though it generates table somehow).
+>> >>> >>
+>> >>> >> Thanks,
+>> >>> >> Radu Mereuta
+>> >>> >>
+>> >>> >>
+>> >>> >>
+>> >>> >>
+>> >>> >> _______________________________________________
+>> >>> >> Users mailing list
+>> >>> >> Users at strategoxt.org
+>> >>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>> >
+>> >>> > _______________________________________________
+>> >>> > Users mailing list
+>> >>> > Users at strategoxt.org
+>> >>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>>
+>> >>>
+>> >>> _______________________________________________
+>> >>> Users mailing list
+>> >>> Users at strategoxt.org
+>> >>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> Jurgen Vinju
+>> - Centrum Wiskunde & Informatica - SEN1
+>> - INRIA Lille - ATEAMS
+>> - Universiteit van Amsterdam
+>>
+>> ? www: http://jurgen.vinju.org,
+>> http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+>> skype: jurgen.vinju
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SEN1
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+? www: http://jurgen.vinju.org,
+http://www.rascal-mpl.nl,http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+
+
+From daniele.gianni at gmail.com  Wed Nov 16 22:59:33 2011
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Wed, 16 Nov 2011 22:59:33 +0100
+Subject: [Stratego Users] *** Extended deadline Dec 6 *** CfP: 2nd Workshop
+ on Model-driven Approaches for Simulation Engineering (Mod4Sim),
+ in Symposium on Theory of Modeling and Simulation, SCS Spring Sim 2012
+In-Reply-To: <CAOCNFM5N=6q0NZVLuc+7rxjV5F4Q7yQ0HeSWhE9ehjJb1Mm-tA@mail.gmail.com>
+References: <9c083a69-4215-41bb-901b-fdbfc38ce3c0@4g2000yqu.googlegroups.com>
+	<CAOCNFM4hb8UsxrLwoqZGQ76xx=SwgwBdgMovv6H4nk0xM7de-A@mail.gmail.com>
+	<CAOCNFM4mWGD0ObGFwM=wFW0q5uSsNYDEwUpgGBcxuFXhV8JLTQ@mail.gmail.com>
+	<CAOCNFM7n=t0YA5uaQWyQ46fUB4PZL=76zXDkHOni5V3wd5RyrA@mail.gmail.com>
+	<CAOCNFM6W2_gbZn16z3s_GANguGszH9BRFExBqi72-FW0jM0ARg@mail.gmail.com>
+	<CAOCNFM7QETuM3hs_-=0daKMUQ3LV0ayDLvMkixV+OuhS=31XuQ@mail.gmail.com>
+	<CAOCNFM779uR2+NnAETpVA9ku940v87iby82rouYbixgmsCianw@mail.gmail.com>
+	<CAOCNFM64DD78TR+_bnGVyC83DqhFtiwvawb6_avyVOTO0-pv+Q@mail.gmail.com>
+	<CAOCNFM5QQC4-nwve6FUqGM0L9NvR+6=J3N0ghCFcnb2SETLgGw@mail.gmail.com>
+	<CAOCNFM6y0j4SvDTCNV8Wjt65RJKaUof5w9dAFH32Xfqj5aFvZA@mail.gmail.com>
+	<CAOCNFM7Fk1xbnFBaDH9Ew7x-0gYesH+exujc=0GiiQicBbfu4w@mail.gmail.com>
+	<CAOCNFM7c8yvZ8RTDv2+DdQ57uWc51KmwRonku54WKWftR-J=mQ@mail.gmail.com>
+	<CAOCNFM4zdsd0vCN62E-KEnMTwmMuaNJ+UxKY7L6y6ASa4ZYGtA@mail.gmail.com>
+	<CAOCNFM6k28QmqWR7OMpao4A6Qdt+w9OuWpuXBbW4wESyOA5SdA@mail.gmail.com>
+	<CAOCNFM46Rucn7VdQSPnYFvY9CnpRk149GSi5YX57i9QXy56ucw@mail.gmail.com>
+	<CAOCNFM7fKW-t4EOU5Z8SuUMvQo79H5UYx8TONq8+DnW=zknhBg@mail.gmail.com>
+	<CAOCNFM5A+zV8ey=J8i1sAsh-Vt7Rd2XqrDX=WCfsiGVJdBpnFQ@mail.gmail.com>
+	<CAOCNFM4E49eZ+MfYiNDkqW5MvZ+YCpESB_XCzmLMRA-RAh8vNQ@mail.gmail.com>
+	<CAOCNFM5KTw3hiTz3xFOSVRvxwKrK2VMg7ax3PVdC41byqJtzOQ@mail.gmail.com>
+	<CAOCNFM4ZJEX+oN1ZgVjHVpweJ2eq=MMTsUa4jTjkjuKVYMmNRg@mail.gmail.com>
+	<CAOCNFM7ohWvRvZBodUdxLeE6+0kwopL6nR8RxFU=ggaGF=EqLg@mail.gmail.com>
+	<CAOCNFM7huBhjXP2WYDq2PqpV1B7Vq=nMRqTE3U=Kz-XOfvf36Q@mail.gmail.com>
+	<CAOCNFM6YcV1Sd3wu7v0KxriQPx=BwAxj-8ms8OWPi_aTqg=ufg@mail.gmail.com>
+	<CAOCNFM7g1y4JhguWJxuPZ0b0Nkcf1h0854EREk=cYwYoKcFK6w@mail.gmail.com>
+	<CAOCNFM7n-VLev0Aaiwud-vhyKp-jjO7b4in+3RM=4tzUXKoKQw@mail.gmail.com>
+	<CAOCNFM4x_f7LDHoBzODeY5aBOF1mO+WRux=voVaA8Zyk-+kXgA@mail.gmail.com>
+	<CAOCNFM5i_1=+nCbJ-YqVFu3nH98xRmKJeRzCJLHjRqA0WRcYwA@mail.gmail.com>
+	<CAOCNFM5jaWf5wfRWfY5vXZPk6Q1dny=3xw2K=8q4Mvog0aoOZg@mail.gmail.com>
+	<CAOCNFM42e-fpyoXi8As47QikRNhWgLhJz4v=hCerssarWu72yw@mail.gmail.com>
+	<CAOCNFM4v+hoP=wvd-0CzA5hf0mekt+WtzesQoLk8+MMCS+SGNw@mail.gmail.com>
+	<CAOCNFM5sQF7UWXgcjWQYiVO2Q2=MbDP86B06ReYDZynKy5oPJA@mail.gmail.com>
+	<CAOCNFM4S_=r+cjA1FdGQcMvu0id-qDA8_WGKpCdhuSHakPDPRg@mail.gmail.com>
+	<CAOCNFM5N=6q0NZVLuc+7rxjV5F4Q7yQ0HeSWhE9ehjJb1Mm-tA@mail.gmail.com>
+Message-ID: <CAOCNFM70-+q2ELC=bPBiTS0qLcrvaKDyE32GJJw8EsKv5JbX1Q@mail.gmail.com>
+
+*************** Deadline Extended to December 6, 2011 ***************
+****** Please submit your abstract before November 25, 2011 *********
+
+#####################################################################
+
+? ? ? ? ? ? ? ? ? ? ? ? CALL FOR PAPERS
+
+? ? ? ? ? ? ? ? ? 2nd International Workshop on
+? ? ? Model-driven Approaches for Simulation Engineering
+?part of the Symposium on Theory of Modeling and Simulation
+? ? ? ? ? ? ? ? ? ? ?(SCS SpringSim 2012)
+
+#####################################################################
+
+March 26-29, 2012, Orlando, FL (USA)
+http://www.sel.uniroma2.it/Mod4Sim12
+
+#####################################################################
+# Papers Due: *** December 6, 2011 ****** Extended
+# Accepted papers will be published in the conference proceedings and
+archived
+# in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital
+Library.
+# The Symposium is co-sponsored by IEEE.
+#####################################################################
+
+The workshop aims to bring together experts in model-based, model-
+driven and software engineering with experts in simulation methods and
+simulation practitioners, with the objective to advance the state of
+the art in model-driven simulation engineering.
+
+Model-driven engineering approaches provide considerable advantages to
+software systems engineering activities through the provision of
+consistent and coherent models at different abstraction levels. As
+these models are in a machine readable form, model-driven engineering
+approaches can also support the exploitation of computing capabilities
+for model reuse, programming code generation, and model checking, for
+example.
+
+The definition of a simulation model, its software implementation and
+its execution platform form what is known as simulation engineering.
+As simulation systems are mainly based on software, these systems can
+similarly benefit from model-driven approaches to support automatic
+software generation, enhance software quality, and reduce costs,
+development effort and time-to-market.
+
+Similarly to systems and software engineering, simulation engineering
+can exploit the capabilities of model-driven approaches by increasing
+the abstraction level in simulation model specifications and by
+automating the derivation of simulator code. Further advantages can be
+gained by using modeling languages, such as UML and SysML ? but not
+exclusively those. For example, modeling languages can be used for
+descriptive modeling (to describe the system to be simulated), for
+analytical modeling (to specify analytically the simulation of the
+same system), and for implementation modeling (to define the
+respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore) and
+distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms
+(discrete event simulation, multi-agent simulation, sketch-based *
+simulation, etc.)
+* model-driven methods and tools for performance engineering of
+simulation systems
+* simulation tools for model-driven software performance engineering
+* model-driven technologies for simulation verification and
+validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* Executable UML
+* Executable Architectures
+* SysML / Modelica integration
+* Simulation Model Portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider scope
+and welcomes contributions offering original perspectives on model-
+driven engineering of simulation systems.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+We invite paper submissions in three forms:
+
+1. Full paper (max 8 pages), describing innovative research results.
+These papers are eligible for the best paper award and may be invited
+for an extended version in a special issue of the SCS SIMULATION
+journal.
+2. Work-in-progress paper (max 6 pages), describing novel research
+ideas and promising work that have not yet been fully evaluated.
+3. Short paper (max 6 pages), describing industrial and hands-on
+experience on any relevant area (i.e. military, government, space,
+etc.).
+
+All the papers must be submitted through the SCS conference management
+systems (http://www.softconf.com/scs/DEVS12/), selecting the Mod4Sim
+track in the "Submission Categories" section. All the submitted papers
+must be in PDF format and must conform to the SCS conference template
+(Word template is available at
+http://www.scs.org/upload/documents/templates/ConferenceSubmissionWORDTemplate.doc
+, guidelines are available athttp://www.scs.org/PDFs/formattingkit.pdf).
+All the submitted papers must be original and not submitted else
+where. Submitted papers will be peer reviewed with respect to their
+quality, originality and relevance. The authors of the accepted papers
+must register in advance for inclusion of their paper in the
+conference proceedings. Authors of accepted papers will be invited to
+update their papers basing on the reviews, before providing the camera
+ready.
+
+All accepted papers will be included in the conference proceedings and
+archived in the ACM Digital Library, IEEE Xplorer and IEEE CS Digital
+Library. However, **only** accepted **full papers** will be printed in
+hard copy.
+
+Authors may contact the organizers for expression of interest and
+content appropriateness at any time.
+
+Due to numerous requests, we have extended the deadline for submission
+of papers. In order to expedite the review process, authors must
+submit an abstract and information about the paper/authors in the
+submission system before November 25, 2011. The paper should be
+uploaded into the system before December 6, 2011.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+Abstract Submission: ?November 25, 2011 **** Extended
+Paper Submission: ? ? December 6, 2011 **** Extended
+Notification: ? ? ? ? January 15, 2012
+Ready-Camera Paper: ? February 5, 2012
+Conference: ? ? ? ? ? March 26-29, 2012
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Daniele Gianni - European Space Agency, The Netherlands
+* Nicolas Rouquette - NASA, Jet Propulsion Laboratory, USA
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Steffen Becker - University of Paderborn, Germany
+* David Chen - Univeristy of Bordeaux I, France
+* Andrea D'Ambrogio - University of Rome TorVergata, Italy
+* Juan De Lara - Universidad Autonoma de Madrid, Spain
+* Hans-Peter De Koning - European Space Agency, The Netherlands
+* Christopher Delp - NASA, Jet Propulsion Laboratory, USA
+* Dov Dori - Israel Institute of Technology, Israel, and Massachusetts
+Institute of Technology, USA
+* Howard Eisen - NASA, Jet Propulsion Laboratory, USA
+* Huascar Espinoza - European Software Institute and Tecnalia, Spain
+* Paul A. Fishwick - University of Florida, USA
+* Joachim Fuchs - European Space Agency, The Netherlands
+* Carlos Juiz - University of Balearic Islands, Spain
+* Cristiano Leorato - Rhea, The Netherlands
+* Steve McKeever - University of Oxford, UK
+* Halit Oguzt?z?n - Middle East Technical University, Turkey
+* Chris Paredis - Georgia Institute of Technology, USA
+* Andreas Tolk - Old Dominion University, USA
+* Hans Vangheluwe - University of Antwerp, Belgium and McGill
+University, Canada
+* Anthony Walsh - European Space Agency, Germany
+* Heming Zhang - Tsinghua University, China
+
+*** Contact Information ***
+
+Daniele Gianni and Nicolas Rouquette (workshop co-chairs)
+Emails: daniele.gianni at esa.int and nicolas.f.rouquette at jpl.nasa.gov
+
+

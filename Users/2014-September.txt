@@ -1,0 +1,609 @@
+From daniele.gianni at gmail.com  Tue Sep  9 00:18:06 2014
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Tue, 9 Sep 2014 00:18:06 +0200
+Subject: [Stratego Users] [CfP] 5th International Workshop on Model-driven
+ Approaches for Simulation Engineering (Mod4Sim)
+Message-ID: <CAOCNFM4fQbhZny3Z14DvMmK2V6JqZRN11ryXjNSu8898CaNgAg@mail.gmail.com>
+
+#################################################################
+              5th International Workshop on
+     Model-driven Approaches for Simulation Engineering
+
+  part of the Symposium on Theory of Modeling and Simulation
+                    (SCS SpringSim 2015)
+
+                      CALL FOR PAPERS
+#################################################################
+
+April 12-15, 2015, Alexandria, VA (USA)
+http://www.sel.uniroma2.it/Mod4Sim15
+
+#################################################################
+# Papers Due: *** November 10, 2014 *** Accepted papers will be
+# published in the conference proceedings and archived in the ACM
+# Digital Library.
+#################################################################
+
+The workshop aims to bring together experts in model-based,
+model-driven and software engineering with experts in simulation
+methods and simulation practitioners, with the objective to
+advance the state of the art in model-driven simulation
+engineering.
+
+Model-driven engineering approaches provide considerable
+advantages to software systems engineering activities through the
+provision of consistent and coherent models at different
+abstraction levels. As these models are in a machine readable
+form, model-driven engineering approaches can also support the
+exploitation of computing capabilities for model reuse,
+programming code generation, and model checking, for example.
+
+The definition of a simulation model, its software implementation
+and its execution platform form what is known as simulation
+engineering. As simulation systems are mainly based on software,
+these systems can similarly benefit from model-driven approaches
+to support automatic software generation, enhance software
+quality, and reduce costs, development effort and time-to-market.
+
+Similarly to systems and software engineering, simulation
+engineering can exploit the capabilities of model-driven
+approaches by increasing the abstraction level in simulation
+model specifications and by automating the derivation of
+simulator code. Further advantages can be gained by using
+modeling languages, such as UML and SysML, but not exclusively
+those. For example, modeling languages can be used for
+descriptive modeling (to describe the system to be simulated),
+for analytical modeling (to specify analytically the simulation
+of the same system) and for implementation modeling (to define
+the respective simulator).
+
+A partial list of topics of interest includes:
+
+* model-driven simulation engineering processes
+* requirements modeling for simulation
+* domain specific languages for modeling and simulation
+* model transformations for simulation model building
+* model transformations for simulation model implementation
+* model-driven engineering of distributed simulation systems
+* relationship between metamodeling standards (e.g., MOF, Ecore)
+  and distributed simulation standards (e.g., HLA, DIS)
+* metamodels for simulation reuse and interoperability
+* model-driven technologies for different simulation paradigms
+  (discrete event simulation, multi-agent simulation,
+  sketch-based simulation, etc.)
+* model-driven methods and tools for performance engineering of
+  simulation systems
+* simulation tools for model-driven software performance
+  engineering
+* model-driven technologies for simulation verification and
+  validation
+* model-driven technologies for data collection and analysis
+* model-driven technologies for simulation visualization
+* executable UML
+* executable architectures
+* SysML/Modelica integration
+* simulation model portability and reuse
+* model-based systems verification and validation
+* simulation for model-based systems engineering
+
+To stimulate creativity, however, the workshop maintains a wider
+scope and welcomes contributions offering original perspectives
+on model-driven engineering of simulation systems.
+
++++++++++++++++ Important Dates +++++++++++++++
+
+ * Abstract Submission Deadline (optional): September 12, 2014
+ * Paper Submission Deadline: November 10, 2014
+ * Decision to paper authors: January 9, 2015
+ * Camera ready due: February 10, 2015
+ * Conference dates: April 12-15, 2015
+
+++++++++++++++++++++ Organizing Committee ++++++++++++++++++++
+
+* Andrea D?Ambrogio - University of Rome "Tor Vergata", Italy
+* Paolo Bocciarelli - University of Rome "Tor Vergata", Italy
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140909/1f549520/attachment.html>
+
+From izsh at fail0verflow.com  Wed Sep 10 21:59:28 2014
+From: izsh at fail0verflow.com (iZsh)
+Date: Wed, 10 Sep 2014 21:59:28 +0200
+Subject: [Stratego Users] implicit variable declaration with NaBL
+Message-ID: <F2FB8EC1-1680-4A60-ADFF-766E998C6A07@fail0verflow.com>
+
+Hello,
+
+I'd like to know how I can support implicit variable declaration with NaBL. (I'm running Spoofax 1.2)
+
+e.g.
+
+a = 42;
+a = 4242;
+b = 424242;
+b = a;
+
+In this case i'd like the first assign to "define a"
+the second line is a use-site for "a", i.e. it "refers to a"
+the 3rd line "defines b"
+and the 4th "refers to b" and "refers to a"
+
+In other words i'd like to tell NaBL that
+
+Ref(x): refers to Var x
+
+Assign(Ref(x), _): defines Var x // unless the Ref(x) rule succeeded already
+
+Is there a way to do that?
+
+Best Regards,
+-- 
+iZsh
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140910/23878966/attachment.html>
+
+From E.Visser at tudelft.nl  Wed Sep 10 23:15:54 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Wed, 10 Sep 2014 23:15:54 +0200
+Subject: [Stratego Users] implicit variable declaration with NaBL
+In-Reply-To: <F2FB8EC1-1680-4A60-ADFF-766E998C6A07@fail0verflow.com>
+References: <F2FB8EC1-1680-4A60-ADFF-766E998C6A07@fail0verflow.com>
+Message-ID: <CAFaCHU36V3Qvz2xiZ4j9Y9dxDkPDT9+085xGoLr2a4v_FR8f7Q@mail.gmail.com>
+
+Hi iszh,
+
+That is not possible in NaBL. Such an analysis requires data-flow analysis
+for which NaBL is not equipped.
+
+If the language is simple, you could achieve something like this using a
+desugaring transformation that is applied before analysis in which you
+desugar first occurrences to another constructor.
+
+What language are you analyzing?
+
+-- Eelco
+
+
+On Wed, Sep 10, 2014 at 9:59 PM, iZsh <izsh at fail0verflow.com> wrote:
+
+> Hello,
+>
+> I'd like to know how I can support implicit variable declaration with
+> NaBL. (I'm running Spoofax 1.2)
+>
+> e.g.
+>
+> a = 42;
+> a = 4242;
+> b = 424242;
+> b = a;
+>
+> In this case i'd like the first assign to "define a"
+> the second line is a use-site for "a", i.e. it "refers to a"
+> the 3rd line "defines b"
+> and the 4th "refers to b" and "refers to a"
+>
+> In other words i'd like to tell NaBL that
+>
+> Ref(x): refers to Var x
+>
+> Assign(Ref(x), _): defines Var x // unless the Ref(x) rule succeeded
+> already
+>
+> Is there a way to do that?
+>
+> Best Regards,
+> --
+> iZsh
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140910/673bf5df/attachment.html>
+
+From izsh at fail0verflow.com  Thu Sep 11 12:41:45 2014
+From: izsh at fail0verflow.com (iZsh)
+Date: Thu, 11 Sep 2014 12:41:45 +0200
+Subject: [Stratego Users] implicit variable declaration with NaBL
+In-Reply-To: <CAFaCHU36V3Qvz2xiZ4j9Y9dxDkPDT9+085xGoLr2a4v_FR8f7Q@mail.gmail.com>
+References: <F2FB8EC1-1680-4A60-ADFF-766E998C6A07@fail0verflow.com>
+ <CAFaCHU36V3Qvz2xiZ4j9Y9dxDkPDT9+085xGoLr2a4v_FR8f7Q@mail.gmail.com>
+Message-ID: <18A96F2F-AD05-4066-97F8-63541EA0CFC8@fail0verflow.com>
+
+Hello,
+
+I'm analyzing my own in-progress DSL language (a processor description language).
+Since I don't like verbosity very much, I was trying to avoid the need for a variable declaration, e.g.
+var a;
+
+I guess I'll add that syntax construction and desugar the first occurrences as suggested.
+
+Thanks for the help!
+
+On 10 Sep 2014, at 23:15, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi iszh,
+> 
+> That is not possible in NaBL. Such an analysis requires data-flow analysis for which NaBL is not equipped.
+> 
+> If the language is simple, you could achieve something like this using a desugaring transformation that is applied before analysis in which you desugar first occurrences to another constructor. 
+> 
+> What language are you analyzing?
+> 
+> -- Eelco
+> 
+> 
+> On Wed, Sep 10, 2014 at 9:59 PM, iZsh <izsh at fail0verflow.com> wrote:
+> Hello,
+> 
+> I'd like to know how I can support implicit variable declaration with NaBL. (I'm running Spoofax 1.2)
+> 
+> e.g.
+> 
+> a = 42;
+> a = 4242;
+> b = 424242;
+> b = a;
+> 
+> In this case i'd like the first assign to "define a"
+> the second line is a use-site for "a", i.e. it "refers to a"
+> the 3rd line "defines b"
+> and the 4th "refers to b" and "refers to a"
+> 
+> In other words i'd like to tell NaBL that
+> 
+> Ref(x): refers to Var x
+> 
+> Assign(Ref(x), _): defines Var x // unless the Ref(x) rule succeeded already
+> 
+> Is there a way to do that?
+> 
+
+-- 
+iZsh
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140911/fbd8e9be/attachment.html>
+
+From izsh at fail0verflow.com  Thu Sep 11 12:47:45 2014
+From: izsh at fail0verflow.com (iZsh)
+Date: Thu, 11 Sep 2014 12:47:45 +0200
+Subject: [Stratego Users] concrete syntax with SDF3
+Message-ID: <D231A6F1-B9E7-4E8B-8DD2-12D42D91CA50@fail0verflow.com>
+
+Hello (again) :-)
+
+I tried to read the ML archives and the yellowgrass tickets, but I couldn't
+find a clear answer to this question:
+is there any special support with SDF3 for concrete syntax (e.g. auto-generated
+concret syntax grammar?) or do I need to write my own concrete syntax
+grammar to be used for my transformations?
+
+-- 
+iZsh
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140911/c2b401e0/attachment.html>
+
+From abdoulla at cs.uni-bonn.de  Thu Sep 11 15:09:14 2014
+From: abdoulla at cs.uni-bonn.de (Houssam Abdoullah)
+Date: Thu, 11 Sep 2014 15:09:14 +0200
+Subject: [Stratego Users] Java front - type of a variable
+Message-ID: <54119EFA.1080903@cs.uni-bonn.de>
+
+Dear Java front developers,
+
+I'm not a Stratego expert and just writing small examples in it so sorry 
+for any mistakes.
+
+I would like to capture all calls to a specific method ("Math.ceil") 
+when the argument is an integer as it's useless. I wrote the following code:
+
+module findUselssUseMathCeil
+imports libstratego-lib libjava-front
+strategies
+
+   main =
+     io-wrap(find-calls)
+
+   find-calls =
+     topdown(try(findUselessMathCeil))
+
+rules
+	LyX Document  LyX DocumentfindUselessMathCeil: |[
+	Math.ceil((double) ~x:Parameter);
+	]|
+	->
+	Showresult(Parameter)
+	where
+		integerParameter => Parameter
+
+Is it possible to write the rule "integerParameter" which check if the 
+parameter is Integer? If yes, How?
+
+A solution for writing integerParameter will be by expressing all 
+possible cases of the Parameter  which are a filed, a local variable and 
+a parameter for the method. We can write something like this:
+
+integerParameter : |[
+	int ~x:Parameter;
+	]|
+	->
+	Showresult(Parameter)
+
+The question now is how to express the condition that the call and the 
+local variable are defined in the same method?
+final question, will the above integerParameter definition  match the 
+case where the variable is initialized  "int i = 5;" ?
+
+Thanks a lot for your help.
+
+best regards,
+Houssam
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140911/e8a2f4f0/attachment.html>
+
+From canslow at ucalgary.ca  Tue Sep 16 02:37:01 2014
+From: canslow at ucalgary.ca (Craig Anslow)
+Date: Tue, 16 Sep 2014 00:37:01 +0000
+Subject: [Stratego Users] SPLASH 2014 - Call For Participation
+Message-ID: <D03CE24B.1844B%canslow@ucalgary.ca>
+
+/*************************************************************/
+                    ACM Conference on
+     Systems, Programming, Languages, and Applications:
+                  Software for Humanity (SPLASH'14)
+
+                  Portland, Oregon, USA
+                   20-24 October, 2014
+
+                http://www.splashcon.org<http://www.splashcon.org/>
+              http://twitter.com/splashcon
+            http://www.facebook.com/SPLASHCon
+
+                Sponsored by ACM SIGPLAN
+
+/**************************************************************
+CALL FOR PARTICIPATION
+**************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and Applications: Software for Humanity (SPLASH) embraces all aspects of software construction and delivery to make it the premier conference at the intersection of programming, languages, and software engineering. SPLASH is now inviting calls for participation.
+
+
+** REGISTRATION **
+19 September 2014 (Early Deadline)
+Contact: info at splashcon.org<mailto:info at splashcon.org>
+http://2014.splashcon.org/attending/registration
+
+
+** CONFERENCE PROGRAM **
+http://2014.splashcon.org/program/program-splash2014
+
+
+** KEYNOTE Speakers **
+Gary McGraw (Cigital): Software Security ? A Study in Technology Transfer
+Peter Norvig (Google): Machine Learning for Programming
+Bret Victor (WorryDream): Humane Representation of Thought: A Trail Map for the 21st Century
+
+http://2014.splashcon.org/track/splash2014-keynotes
+
+
+** OOPSLA Research Papers**
+Papers that address any aspect of software development are welcome, including requirements, modeling, prototyping, design, implementation, generation, analysis, verification, testing, evaluation, maintenance, reuse, replacement, and retirement of software systems. Papers may address these topics in a variety of ways, including new tools (such as languages, program analyses, and runtime systems), new techniques (such as methodologies, design processes, code organization approaches, and management techniques), and new evaluations (such as formalisms and proofs, corpora analyses, user studies, and surveys).
+
+http://2014.splashcon.org/track/oopsla2014
+
+
+** Onward! Research Papers **
+Onward! is a premier multidisciplinary conference focused on everything to do with programming and software: including processes, methods, languages, communities, and applications. Onward! is more radical, more visionary, and more open than other conferences to ideas that are well-argued but not yet proven. We welcome different ways of thinking about, approaching, and reporting on programming language and software engineering research.
+
+http://2014.splashcon.org/track/onward2014-papers
+
+
+** Onward! Essays **
+Onward! Essays is looking for clear and compelling pieces of writing about topics important to the software community. An essay can be an exploration of a topic, its impact, or the circumstances of its creation; it can present a personal view of what is, explore a terrain, or lead the reader in an act of discovery; it can be a philosophical digression or a deep analysis. It can describe a personal journey, perhaps that by which the author reached an understanding of such a topic. The subject area should be interpreted broadly and can include the relationship of software to human endeavors, or its philosophical, sociological, psychological, historical, or anthropological underpinnings.
+
+http://2014.splashcon.org/track/onward2014-essays
+
+
+** Dynamic Languages Symposium (DLS) **
+DLS is the premier forum for researchers and practitioners to share knowledge and research on dynamic languages, their implementation, and applications. The influence of dynamic languages ? from Lisp to Smalltalk to Python to Javascript ? on real-world practice, and research, continues to grow. We invite high quality papers reporting original research, innovative contributions, or experience related to dynamic languages, their implementation, and applications.
+
+http://2014.splashcon.org/track/dls14-papers
+
+
+** Wavefront **
+The SPLASH Wavefront track is looking for presentations and technology talks of interest to the software community, particularly to software professionals working in companies large and small. Wavefront is a forum for presenting experience reports and tutorials about innovative tools, technologies, and software practices.
+
+http://2014.splashcon.org/track/splash2014-wavefront
+
+
+** Panels **
+The Panels track offers exciting discussion about topics related to SPLASH.
+
+http://2014.splashcon.org/track/splash2014-panels
+
+
+** SPLASH-E **
+The SPLASH-E track brings together researchers and educators to share educational results, ideas, and challenges centered in Software and Programming Languages. Submission formats vary, including papers, tool demos, lightning talks, challenge-topics for discussion, and suggested themes for "unconference" sessions.  Help us create an engaging forum for educational issues related to SPLASH!
+
+http://2014.splashcon.org/track/splash2014-splash-e
+
+
+** Artifacts **
+The Artifact Evaluation process is a service provided by the community to help authors of accepted papers provide more substantial supplements to their papers so future researchers can more effectively build on and compare with previous work. The Artifact Evaluation Committee has been formed to assess how well paper authors prepare artifacts in support of such future researchers. Roughly, authors of papers who wish to participate are invited to submit an artifact that supports the conclusions of the paper.
+
+http://2014.splashcon.org/track/splash2014-artifacts
+
+
+** Workshops **
+The SPLASH Workshops track will host a variety of high-quality workshops (14 in total), allowing their participants to meet and discuss research questions with peers, to mature new and exciting ideas, and to build up communities and start new collaborations. SPLASH workshops complement the main tracks of the conference and provide meetings in a smaller and more specialized setting. Workshops cultivate new ideas and concepts for the future, optionally recorded in formal proceedings.
+
+http://2014.splashcon.org/track/splash2014-workshops
+
+
+** Tutorials **
+The SPLASH Tutorials track will consist of prestigious tutorials on current topics in software, systems, and languages research. The scope of the tutorials is the same as the conference itself: all aspects of software construction and delivery at the intersection of programming, languages, and software engineering. The tutorials in particular focus on the nexus between research and practice, including work that takes inspiration from or builds connections to areas not commonly considered at SPLASH. Tutorials should introduce researchers to current research in an area, or show important new tools that can be used in research.
+
+http://2014.splashcon.org/track/splash2014-tutorials
+
+
+** Demos **
+The SPLASH Demonstrations track is an excellent vehicle for sharing your latest work with an experienced and technically savvy audience. Live demonstrations show the impact of software innovation. Demonstrations are not product sales pitches, but rather an opportunity to highlight, explain, and present interesting technical aspects of running applications in a dynamic and highly interactive setting. Presenters are encouraged to actively solicit feedback from the audience, which should lead to very interesting and entertaining demonstration sessions.
+
+http://2014.splashcon.org/track/splash2014-demos
+
+
+** Posters **
+The SPLASH Poster track provides an excellent forum for authors to present their recent or ongoing projects in an interactive setting, and receive feedback from the community. We invite submissions covering any aspect of programming, systems, languages and applications. The goal of the poster session is to encourage and facilitate small groups of individuals interested in a technical area to gather and interact. It is held early in the conference, to promote continued discussion among interested parties. Posters can be independent presentations or associated with one of the other parts of SPLASH.
+
+http://2014.splashcon.org/track/splash2014-posters
+
+
+** Doctoral Symposium **
+The SPLASH Doctoral Symposium provides students with useful guidance for completing their dissertation research and beginning their research careers. The Symposium will provide an interactive forum for doctoral students who have progressed far enough in their research to have a structured proposal, but will not be defending their dissertation in the next 12 months.
+
+http://2014.splashcon.org/track/splash2014-ds
+
+
+** Student Research Competition **
+The ACM SIGPLAN Student Research Competition (ACM SRC) is an internationally-recognized venue that enables undergraduate and graduate students to experience the research world, share their research results with other students and SPLASH attendees. The competition has separate categories for undergraduate and graduate students and awards prizes to the top three students in each category. The ACM SIGPLAN Student Research Competition shares the Poster session?s goal to facilitate interaction with researchers and industry practitioners; providing both sides with the opportunity to learn of ongoing, current research.
+
+http://2014.splashcon.org/track/splash2014-src
+
+** Co-located Events **
+
+ACM SIGAda?s Annual International Conference High Integrity Language Technology (HILT)
+http://sigada.org/conf/hilt2014/
+
+Multicore Parallel Programming Course:
+- Offers experienced programmers an opportunity to learn about multicore programming and gain mastery of cutting-edge parallel programming tools.
+http://eecs.oregonstate.edu/multicore-programming
+
+** Location **
+
+Portland Marriott
+Downtown Waterfront Hotel
+Portland, Oregon, USA
+
+** Organization  **
+
+SPLASH General Chair: Andrew Black (Portland State University)
+OOPSLA Papers Chair: Todd Millstein (University of California, Los Angeles)
+Onward! Papers Chair: Shriram Krishnamurthi (Brown University)
+Onward! Essays Chair: Bernd Bruegge (TU Munich)
+DLS Papers Chair: Laurence Tratt (King?s College, London)
+SPLASH-E Chair: Kathi Fisler (Worcester Polytechnic Institute)
+Wavefront Co-Chairs: David Archer (Galois) and Dennis Mancl (Alcatel-Lucent)
+Artifacts Co-Chairs: Matthias Hauswirth (university of Lugano) and Robby Findler (Northwestern University)
+Workshop Co-Chairs: Stephanie Balzer (Carnegie Mellon University) and Du Li (Carnegie Mellon University)
+Tutorials Chair: James Noble (Victoria University of Wellington)
+Demos Chair: Floreal Morandat (Enseirb-Matmeca)
+Posters Co-Chairs: K R Jayaram (IBM Research) and Nick Sumner (Simon Fraser University)
+Doctoral Symposium Chair: Lukasz Ziarek (State University of New York, Buffalo)
+Student Research Competition Co-Chairs: Isil Dillig (University of Texas, Austin) and Sam Guyer (Tufts University)
+Student Volunteer Co-Chairs: Jonathan Bell (Columbia University) and Darya Kurilova (Carnegie Mellon University)
+Publicity and Web Chair: Craig Anslow (University of Calgary)
+Web Technology Chair: Eelco Visser (Delft University of Technology)
+Publications Chair: Joseph Ruskiewicz (Portland State University)
+Student Mentoring Chair: Carlos Jensen (Oregon State University)
+Mobile App Chair: Reid Holmes (University of Waterloo)
+/*************************************************************/
+
+Kind regards,
+Craig
+
+Craig Anslow, PhD
+Postdoctoral Research Fellow
+Department of Computer Science
+University of Calgary, Canada
+T: 403 210 8159
+E: craig.anslow at ucalgary.ca<mailto:craig.anslow at ucalgary.ca>
+W: http://anslow.cpsc.ucalgary.ca/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140916/ee5d2b29/attachment-0001.html>
+
+From eelcovis at gmail.com  Wed Sep 17 15:19:40 2014
+From: eelcovis at gmail.com (Eelco Visser)
+Date: Wed, 17 Sep 2014 15:19:40 +0200
+Subject: [Stratego Users] concrete syntax with SDF3
+In-Reply-To: <D231A6F1-B9E7-4E8B-8DD2-12D42D91CA50@fail0verflow.com>
+References: <D231A6F1-B9E7-4E8B-8DD2-12D42D91CA50@fail0verflow.com>
+Message-ID: <CAFaCHU2BD1-zo5MeVqY_4dWiEn28FSXPT5-=TwDKqNa6L94kPQ@mail.gmail.com>
+
+Hi iZsh,
+
+Since SDF3 does not (yet) support module parameterization, it is not
+possible to define generic mix grammars in SDF3. Furthermore, the standard
+Stratego grammar is still defined in SDF2.
+
+You can still use the current SDF2 approach for realizing the embedding of
+your grammar into the Stratego grammar. That is, combine the Stratego mix
+grammar with the SDF2 grammar for your language that is derived from the
+SDF3 grammar.
+
+cheers,
+
+-- Eelco
+
+On Thu, Sep 11, 2014 at 12:47 PM, iZsh <izsh at fail0verflow.com> wrote:
+
+> Hello (again) :-)
+>
+> I tried to read the ML archives and the yellowgrass tickets, but I couldn't
+> find a clear answer to this question:
+> is there any special support with SDF3 for concrete syntax (e.g.
+> auto-generated
+> concret syntax grammar?) or do I need to write my own concrete syntax
+> grammar to be used for my transformations?
+>
+> --
+> iZsh
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140917/9d624801/attachment.html>
+

@@ -1,0 +1,1152 @@
+From fcferrari at gmail.com  Mon Jul  5 17:04:49 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Mon, 5 Jul 2010 12:04:49 -0300
+Subject: [Stratego Developers] Fwd: AspectJ-front: Problem for parsing
+	and pretty-printing complex pointcut expressions
+In-Reply-To: <48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com>
+Message-ID: <AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com>
+
+Hi, Rob, all.
+
+Unfortunately using the "aspectjtree-parenthesize" tool partially solved the
+problem. However, I have noticed that the pretty-printer still overlooks
+some round brackets as we can see in the example below:
+
+> command line:
+   parse-aspectj -i LogAccountActivitiesOriginal.aj |
+/usr/local/libexec/aspectjtree-parenthesize  | pp-aspectj
+
+
+> Original pointcut expression (full code is attached):
+
+      pointcut accountActivity(Account account, float amount)    :
+          ( (execution(void Account.credit(float)) || execution(void
+Account.debit(float)))
+            && this(account) && args(amount)
+          )
+          ||
+          (execution(void CheckClearanceSystem.*(Account, float)) &&
+args(account, amount));
+
+> Pretty-printed expression:
+
+      pointcut accountActivity (Account account, float amount) :
+          (execution(void Account.credit(float)) || execution(void
+Account.debit(float))) && this(account) && args(amount)
+          ||
+          execution(void CheckClearanceSystem.*(Account, float)) &&
+args(account, amount);
+
+
+Do you think this is a problem with the grammar definition? Do you any
+suggestion on how to solve it?
+
+Cheers,
+
+  Fabiano
+
+
+On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+
+> Hi, Rob.
+>
+> Many thanks for this. I've run preliminary tests using the
+> "aspectjtree-parenthesize" tool and everything looks fine.
+>
+> The best,
+>   Fabiano
+>
+> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> > Hi Fabiano,
+> >
+> > sorry I missed your earlier message. It seems pp-aspectj misses a call
+> > to the parenthesize strategy. I will make a fix for it, but for now
+> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+> > you aspectj AST before calling the pretty-printer.
+> >
+> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+> >
+> > greetings,
+> > Rob
+> >
+> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >> Hi, everyone.
+> >>
+> >> I have posted this problem a while ago (please, see below). Is there
+> >> someone who could give me a help with this?
+> >>
+> >> Many thanks,
+> >>  Fabiano
+> >>
+> >>
+> >> ---------- Forwarded message ----------
+> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+> >> Date: 2 February 2010 10:48
+> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+> >> complex pointcut expressions
+> >> To: developers at strategoxt.org, Users at strategoxt.org
+> >>
+> >>
+> >> Hi, everybody.
+> >>
+> >> I'm facing some problems while using the parser and the pretty-printer
+> >> from AspectJ-front. For instance, when I parse a pointcut expressions
+> >> such as:
+> >>
+> >>
+> >>        protected pointcut subjectChange(Subject subject) :
+> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+> >>                        (!within(SelectStatement))) || (call(protected
+> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+> >> this(subject);
+> >>
+> >>
+> >> the pretty-printed code is as follows:
+> >>
+> >>
+> >>        protected pointcut subjectChange (Subject subject)
+> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+> >>                        !within(SelectStatement) || call(protected List
+> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+> >>
+> >>
+> >> As you can see, some surrounding round brackets are removed, what
+> >> results in inconsistent information binding. Other two examples are
+> >> shown below (the original aspects are attached).
+> >>
+> >>
+> >> Is anybody aware of a workaround for this? Is there a way to fix it
+> >> (e.g. keeping all round brackets in the pretty-printed version)?
+> >>
+> >> Many thanks!
+> >>
+> >>  Fabiano Ferrari
+> >>
+> >>
+> >> --------- other examples ---------
+> >>
+> >>  ORIGINAL EXPRESSION 1:
+> >>
+> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >>                  (
+> >>                        (
+> >>                        execution(  public void
+> >> RuntimeSQLException.setNextException(SQLException))
+> >>                        || execution(  protected static int
+> >> BaseLogProxy.getNextId())
+> >>                        || execution(  private void
+> >> Stopwatch.appendTaskTime(String,long))
+> >>                        || execution(  public void Stopwatch.reset())
+> >>                        || execution(  public void
+> >> FifoCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> FifoCacheController.getObject(CacheModel,Object))
+> >>                        || execution(  public Object
+> >> FifoCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> FifoCacheController.flush(CacheModel))
+> >>                        || execution(  public void
+> >> LruCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> LruCacheController.getObject(CacheModel, Object))
+> >>                        || execution(  public Object
+> >> LruCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> LruCacheController.flush(CacheModel))
+> >>                        || execution(  public void
+> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+> >>                        || execution(  public Object
+> >> MemoryCacheController.getObject(CacheModel, Object))
+> >>                        || execution(  public Object
+> >> MemoryCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  public void
+> >> MemoryCacheController.flush(CacheModel))
+> >>                        || execution(  private  void
+> >> InvocationHandler+.loadObject())
+> >>                        || execution(  private  void
+> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >>                        || execution(  public  Object[]
+> >> AutoResultMap.getResults(RequestScope,ResultSet) throws  SQLException)
+> >>                        || execution(  public  static long
+> >> SessionScope.getNextId())
+> >>                        || execution(  public Object
+> >> OSCacheController.removeObject(CacheModel,Object))
+> >>                        || execution(  private void
+> >> CacheModel.getObjectPartTwo())
+> >>
+> >>                        ) && this(syncObj)
+> >>                );
+> >>
+> >>
+> >>  PRETTY-PRINTED EXPRESSION 1:
+> >>
+> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >>                  execution(public void
+> >> RuntimeSQLException.setNextException(SQLException))
+> >>                  || execution(protected static int
+> BaseLogProxy.getNextId())
+> >>                  || execution(private void
+> >> Stopwatch.appendTaskTime(String, long))
+> >>                  || execution(public void Stopwatch.reset())
+> >>                  || execution(public void
+> >> FifoCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> FifoCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> FifoCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> FifoCacheController.flush(CacheModel))
+> >>                  || execution(public void
+> >> LruCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> LruCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> LruCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> LruCacheController.flush(CacheModel))
+> >>                  || execution(public void
+> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+> >>                  || execution(public Object
+> >> MemoryCacheController.getObject(CacheModel, Object))
+> >>                  || execution(public Object
+> >> MemoryCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(public void
+> >> MemoryCacheController.flush(CacheModel))
+> >>                  || execution(private void
+> InvocationHandler+.loadObject())
+> >>                  || execution(private void
+> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >>                  || execution(public Object[]
+> >> AutoResultMap.getResults(RequestScope, ResultSet) throws SQLException)
+> >>                  || execution(public static long
+> SessionScope.getNextId())
+> >>                  || execution(public Object
+> >> OSCacheController.removeObject(CacheModel, Object))
+> >>                  || execution(private void
+> CacheModel.getObjectPartTwo())
+> >>
+> >>                  && this(syncObj);
+> >>
+> >> ----------------------------------
+> >>
+> >>  ORIGINAL EXPRESSION 2:
+> >>
+> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >>                (
+> >>                    execution(  public static ClassInfo
+> >> ClassInfo.getInstance(Class))
+> >>                    || execution(  public void
+> >> OSCacheController.flush(CacheModel))
+> >>                    || execution( private void
+> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+> >>                    || execution( private Object
+> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> IllegalAccessException)
+> >>                    || execution(  private Object
+> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+> >> NeedsRefreshException )
+> >>                    || execution(private Object
+> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+> >> NeedsRefreshException)
+> >>                    || execution(private void
+> >> CacheModel.getObjectPartThree(Object,Object))
+> >>                    || execution(private Object
+> >>
+> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+> >> , Object , Object, CacheKey ) throws SQLException )
+> >>                    || execution(private List
+> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+> >>                )
+> >>                && args(syncObj,..);
+> >>
+> >>
+> >>  PRETTY-PRINTED EXPRESSION 2:
+> >>
+> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >>                  execution(public static ClassInfo
+> ClassInfo.getInstance(Class))
+> >>                  || execution(public void
+> OSCacheController.flush(CacheModel))
+> >>                  || execution(private void
+> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+> >>                  || execution(private Object
+> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> IllegalAccessException)
+> >>                  || execution(private Object
+> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+> >> NeedsRefreshException)
+> >>                  || execution(private Object
+> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+> >> NeedsRefreshException)
+> >>                  || execution(private void
+> >> CacheModel.getObjectPartThree(Object, Object))
+> >>                  || execution(private Object
+> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+> >> RequestScope, Connection, Object, Object, CacheKey) throws SQLException)
+> >>                  || execution(private List
+> >> CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+> >> Connection, Object, int, int, CacheKey) throws SQLException)
+> >>                  && args(syncObj, ..);
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >> --
+> >> Fabiano Cutigi Ferrari
+> >> _________________________________
+> >> PhD Candidate in Computer Science
+> >> ICMC/USP - University of S?o Paulo - Brazil
+> >> LabES - Laboratory of Software Engineering
+> >> http://www.icmc.usp.br/~ferrari/ <http://www.icmc.usp.br/%7Eferrari/>
+> >>
+> >> _______________________________________________
+> >> Developers mailing list
+> >> Developers at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >>
+> >>
+> >
+> >
+> >
+> > --
+> > Rob Vermaas
+> >
+> > [email] rob.vermaas at gmail.com
+> >
+>
+
+
+
+-- 
+Fabiano Cutigi Ferrari
+_________________________________
+PhD Candidate in Computer Science
+ICMC/USP - University of S?o Paulo - Brazil
+LabES - Laboratory of Software Engineering
+http://www.icmc.usp.br/~ferrari/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100705/87d5e70e/attachment-0001.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: LogAccountActivitiesOriginal.aj
+Type: text/x-java
+Size: 979 bytes
+Desc: not available
+Url : https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100705/87d5e70e/attachment-0001.bin 
+
+From fcferrari at gmail.com  Tue Jul  6 00:42:42 2010
+From: fcferrari at gmail.com (Fabiano Ferrari)
+Date: Mon, 5 Jul 2010 19:42:42 -0300
+Subject: [Stratego Developers] Fwd: AspectJ-front: Problem for parsing
+	and pretty-printing complex pointcut expressions
+In-Reply-To: <AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com> 
+	<AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com> 
+	<AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com>
+Message-ID: <AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+
+Hi, Rob, all.
+
+Thanks for you reply.
+
+> The parentheses look fine to me, as the && operator should have higher
+> precedence than the || operator. So in the original source the missing
+> parentheses where 'not really necessary'.
+
+Although I agree with you, this might be a bug in the acj compiler, since
+the second expression results in "multiple bindings" error. It seems that
+either operators have the same precedence in the current ajc implementation.
+I have tried multiple versions of ajc (e.g. 1.2, 1.5 and 1.6) and they all
+produces the same output.
+
+So, I will keep my original question: can anybody suggest a workaround (or a
+fix) for this? E.g. changing the grammar definition?
+
+Thanks again!
+
+  Fabiano
+
+
+
+On 5 July 2010 12:44, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+
+> Hi Fabiano,
+>
+> The parentheses look fine to me, as the && operator should have higher
+> precedence than the || operator. So in the original source the missing
+> parentheses where 'not really necessary'.
+>
+> greetings,
+> Rob
+>
+> On Mon, Jul 5, 2010 at 17:04, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> > Hi, Rob, all.
+> >
+> > Unfortunately using the "aspectjtree-parenthesize" tool partially solved
+> the
+> > problem. However, I have noticed that the pretty-printer still overlooks
+> > some round brackets as we can see in the example below:
+> >
+> >> command line:
+> >    parse-aspectj -i LogAccountActivitiesOriginal.aj |
+> > /usr/local/libexec/aspectjtree-parenthesize  | pp-aspectj
+> >
+> >
+> >> Original pointcut expression (full code is attached):
+> >
+> >       pointcut accountActivity(Account account, float amount)    :
+> >           ( (execution(void Account.credit(float)) || execution(void
+> Account.debit(float))) && this(account) && args(amount)
+> >           )
+> >           ||
+> >           (execution(void CheckClearanceSystem.*(Account, float)) &&
+> args(account, amount));
+> >
+> >> Pretty-printed expression:
+> >
+> >       pointcut accountActivity (Account account, float amount) :
+> >           (execution(void Account.credit(float)) || execution(void
+> Account.debit(float))) && this(account) && args(amount)
+> >           ||
+> >           execution(void CheckClearanceSystem.*(Account, float)) &&
+> > args(account, amount);
+> >
+> >
+> > Do you think this is a problem with the grammar definition? Do you any
+> > suggestion on how to solve it?
+> >
+> > Cheers,
+> >
+> >   Fabiano
+> >
+> >
+> > On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >>
+> >> Hi, Rob.
+> >>
+> >> Many thanks for this. I've run preliminary tests using the
+> >> "aspectjtree-parenthesize" tool and everything looks fine.
+> >>
+> >> The best,
+> >>  Fabiano
+> >>
+> >> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> >> > Hi Fabiano,
+> >> >
+> >> > sorry I missed your earlier message. It seems pp-aspectj misses a call
+> >> > to the parenthesize strategy. I will make a fix for it, but for now
+> >> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+> >> > you aspectj AST before calling the pretty-printer.
+> >> >
+> >> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+> >> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+> >> >
+> >> > greetings,
+> >> > Rob
+> >> >
+> >> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> >> >> Hi, everyone.
+> >> >>
+> >> >> I have posted this problem a while ago (please, see below). Is there
+> >> >> someone who could give me a help with this?
+> >> >>
+> >> >> Many thanks,
+> >> >>  Fabiano
+> >> >>
+> >> >>
+> >> >> ---------- Forwarded message ----------
+> >> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+> >> >> Date: 2 February 2010 10:48
+> >> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+> >> >> complex pointcut expressions
+> >> >> To: developers at strategoxt.org, Users at strategoxt.org
+> >> >>
+> >> >>
+> >> >> Hi, everybody.
+> >> >>
+> >> >> I'm facing some problems while using the parser and the
+> pretty-printer
+> >> >> from AspectJ-front. For instance, when I parse a pointcut expressions
+> >> >> such as:
+> >> >>
+> >> >>
+> >> >>        protected pointcut subjectChange(Subject subject) :
+> >> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+> >> >>                        (!within(SelectStatement))) || (call(protected
+> >> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+> >> >> this(subject);
+> >> >>
+> >> >>
+> >> >> the pretty-printed code is as follows:
+> >> >>
+> >> >>
+> >> >>        protected pointcut subjectChange (Subject subject)
+> >> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+> >> >>                        !within(SelectStatement) || call(protected
+> List
+> >> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+> >> >>
+> >> >>
+> >> >> As you can see, some surrounding round brackets are removed, what
+> >> >> results in inconsistent information binding. Other two examples are
+> >> >> shown below (the original aspects are attached).
+> >> >>
+> >> >>
+> >> >> Is anybody aware of a workaround for this? Is there a way to fix it
+> >> >> (e.g. keeping all round brackets in the pretty-printed version)?
+> >> >>
+> >> >> Many thanks!
+> >> >>
+> >> >>  Fabiano Ferrari
+> >> >>
+> >> >>
+> >> >> --------- other examples ---------
+> >> >>
+> >> >>  ORIGINAL EXPRESSION 1:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >> >>                  (
+> >> >>                        (
+> >> >>                        execution(  public void
+> >> >> RuntimeSQLException.setNextException(SQLException))
+> >> >>                        || execution(  protected static int
+> >> >> BaseLogProxy.getNextId())
+> >> >>                        || execution(  private void
+> >> >> Stopwatch.appendTaskTime(String,long))
+> >> >>                        || execution(  public void Stopwatch.reset())
+> >> >>                        || execution(  public void
+> >> >> FifoCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> FifoCacheController.getObject(CacheModel,Object))
+> >> >>                        || execution(  public Object
+> >> >> FifoCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> FifoCacheController.flush(CacheModel))
+> >> >>                        || execution(  public void
+> >> >> LruCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> LruCacheController.getObject(CacheModel, Object))
+> >> >>                        || execution(  public Object
+> >> >> LruCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> LruCacheController.flush(CacheModel))
+> >> >>                        || execution(  public void
+> >> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+> >> >>                        || execution(  public Object
+> >> >> MemoryCacheController.getObject(CacheModel, Object))
+> >> >>                        || execution(  public Object
+> >> >> MemoryCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  public void
+> >> >> MemoryCacheController.flush(CacheModel))
+> >> >>                        || execution(  private  void
+> >> >> InvocationHandler+.loadObject())
+> >> >>                        || execution(  private  void
+> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >> >>                        || execution(  public  Object[]
+> >> >> AutoResultMap.getResults(RequestScope,ResultSet) throws
+>  SQLException)
+> >> >>                        || execution(  public  static long
+> >> >> SessionScope.getNextId())
+> >> >>                        || execution(  public Object
+> >> >> OSCacheController.removeObject(CacheModel,Object))
+> >> >>                        || execution(  private void
+> >> >> CacheModel.getObjectPartTwo())
+> >> >>
+> >> >>                        ) && this(syncObj)
+> >> >>                );
+> >> >>
+> >> >>
+> >> >>  PRETTY-PRINTED EXPRESSION 1:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >> >>                  execution(public void
+> >> >> RuntimeSQLException.setNextException(SQLException))
+> >> >>                  || execution(protected static int
+> >> >> BaseLogProxy.getNextId())
+> >> >>                  || execution(private void
+> >> >> Stopwatch.appendTaskTime(String, long))
+> >> >>                  || execution(public void Stopwatch.reset())
+> >> >>                  || execution(public void
+> >> >> FifoCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> FifoCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> FifoCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> FifoCacheController.flush(CacheModel))
+> >> >>                  || execution(public void
+> >> >> LruCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> LruCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> LruCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> LruCacheController.flush(CacheModel))
+> >> >>                  || execution(public void
+> >> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+> >> >>                  || execution(public Object
+> >> >> MemoryCacheController.getObject(CacheModel, Object))
+> >> >>                  || execution(public Object
+> >> >> MemoryCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(public void
+> >> >> MemoryCacheController.flush(CacheModel))
+> >> >>                  || execution(private void
+> >> >> InvocationHandler+.loadObject())
+> >> >>                  || execution(private void
+> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+> >> >>                  || execution(public Object[]
+> >> >> AutoResultMap.getResults(RequestScope, ResultSet) throws
+> SQLException)
+> >> >>                  || execution(public static long
+> >> >> SessionScope.getNextId())
+> >> >>                  || execution(public Object
+> >> >> OSCacheController.removeObject(CacheModel, Object))
+> >> >>                  || execution(private void
+> >> >> CacheModel.getObjectPartTwo())
+> >> >>
+> >> >>                  && this(syncObj);
+> >> >>
+> >> >> ----------------------------------
+> >> >>
+> >> >>  ORIGINAL EXPRESSION 2:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints(Object syncObj):
+> >> >>                (
+> >> >>                    execution(  public static ClassInfo
+> >> >> ClassInfo.getInstance(Class))
+> >> >>                    || execution(  public void
+> >> >> OSCacheController.flush(CacheModel))
+> >> >>                    || execution( private void
+> >> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+> >> >>                    || execution( private Object
+> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> >> IllegalAccessException)
+> >> >>                    || execution(  private Object
+> >> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+> >> >> NeedsRefreshException )
+> >> >>                    || execution(private Object
+> >> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+> >> >> NeedsRefreshException)
+> >> >>                    || execution(private void
+> >> >> CacheModel.getObjectPartThree(Object,Object))
+> >> >>                    || execution(private Object
+> >> >>
+> >> >>
+> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+> >> >> , Object , Object, CacheKey ) throws SQLException )
+> >> >>                    || execution(private List
+> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+> >> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+> >> >>                )
+> >> >>                && args(syncObj,..);
+> >> >>
+> >> >>
+> >> >>  PRETTY-PRINTED EXPRESSION 2:
+> >> >>
+> >> >>          protected pointcut synchronizationPoints (Object syncObj) :
+> >> >>                  execution(public static ClassInfo
+> >> >> ClassInfo.getInstance(Class))
+> >> >>                  || execution(public void
+> >> >> OSCacheController.flush(CacheModel))
+> >> >>                  || execution(private void
+> >> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+> >> >>                  || execution(private Object
+> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+> >> >> IllegalAccessException)
+> >> >>                  || execution(private Object
+> >> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+> >> >> NeedsRefreshException)
+> >> >>                  || execution(private Object
+> >> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+> >> >> NeedsRefreshException)
+> >> >>                  || execution(private void
+> >> >> CacheModel.getObjectPartThree(Object, Object))
+> >> >>                  || execution(private Object
+> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+> >> >> RequestScope, Connection, Object, Object, CacheKey) throws
+> >> >> SQLException)
+> >> >>                  || execution(private List
+> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel, RequestScope,
+> >> >> Connection, Object, int, int, CacheKey) throws SQLException)
+> >> >>                  && args(syncObj, ..);
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >>
+> >> >> --
+> >> >> Fabiano Cutigi Ferrari
+> >> >> _________________________________
+> >> >> PhD Candidate in Computer Science
+> >> >> ICMC/USP - University of S?o Paulo - Brazil
+> >> >> LabES - Laboratory of Software Engineering
+> >> >> http://www.icmc.usp.br/~ferrari/<http://www.icmc.usp.br/%7Eferrari/>
+> >> >>
+> >> >> _______________________________________________
+> >> >> Developers mailing list
+> >> >> Developers at strategoxt.org
+> >> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+> >> >>
+> >> >>
+> >> >
+> >> >
+> >> >
+> >> > --
+> >> > Rob Vermaas
+> >> >
+> >> > [email] rob.vermaas at gmail.com
+> >> >
+> >
+> >
+> >
+> > --
+> > Fabiano Cutigi Ferrari
+> > _________________________________
+> > PhD Candidate in Computer Science
+> > ICMC/USP - University of S?o Paulo - Brazil
+> > LabES - Laboratory of Software Engineering
+> > http://www.icmc.usp.br/~ferrari/ <http://www.icmc.usp.br/%7Eferrari/>
+> >
+>
+>
+>
+> --
+> Rob Vermaas
+>
+> [email] rob.vermaas at gmail.com
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/developers/attachments/20100705/3ecdd037/attachment-0001.html 
+
+From E.Visser at tudelft.nl  Sat Jul 10 01:26:07 2010
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sat, 10 Jul 2010 01:26:07 +0200
+Subject: [Stratego Developers] Fwd: AspectJ-front: Problem for parsing
+	and pretty-printing complex pointcut expressions
+In-Reply-To: <AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+References: <48c6964d1002020548k2413b410ic5d4f97310a60f5b@mail.gmail.com> 
+	<48c6964d1003241130wd79d0bex93840aa764aab79a@mail.gmail.com> 
+	<5a9e75b11003250904m5518c2e3id3d08620b86c76d7@mail.gmail.com> 
+	<48c6964d1003261411m4fe66ab7l139d9dd0a0ad2411@mail.gmail.com> 
+	<AANLkTimovE_nPZaqWNRnUTDkifNNtU4-EtSVsqGDoKnp@mail.gmail.com> 
+	<AANLkTil5tvCRor82Z5OP_2HTuCOFEG8EGgWT-jtbNQ1W@mail.gmail.com> 
+	<AANLkTinhZE_OFsRc4mFV4BamrwxeRpkP0grFSNSA_gOw@mail.gmail.com>
+Message-ID: <AANLkTil7mSvz1naGBRqMkeLYuSl4Ewfrcfn4YqXLGGmF@mail.gmail.com>
+
+Hi Fabiano,
+
+This sounds like it requires an investigation into the syntax
+definition and parenthesize tool. The bug may be in both places. You
+can find the source here:
+
+  https://svn.strategoxt.org/repos/StrategoXT/aspectj-front/testing/
+
+cheers,
+
+-- Eelco
+
+On Tue, Jul 6, 2010 at 12:42 AM, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+> Hi, Rob, all.
+>
+> Thanks for you reply.
+>
+>> The parentheses look fine to me, as the && operator should have higher
+>> precedence than the || operator. So in the original source the missing
+>> parentheses where 'not really necessary'.
+>
+> Although I agree with you, this might be a bug in the acj compiler, since
+> the second expression results in "multiple bindings" error. It seems that
+> either operators have the same precedence in the current ajc implementation.
+> I have tried multiple versions of ajc (e.g. 1.2, 1.5 and 1.6) and they all
+> produces the same output.
+>
+> So, I will keep my original question: can anybody suggest a workaround (or a
+> fix) for this? E.g. changing the grammar definition?
+>
+> Thanks again!
+>
+> ? Fabiano
+>
+>
+>
+> On 5 July 2010 12:44, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>>
+>> Hi Fabiano,
+>>
+>> The parentheses look fine to me, as the && operator should have higher
+>> precedence than the || operator. So in the original source the missing
+>> parentheses where 'not really necessary'.
+>>
+>> greetings,
+>> Rob
+>>
+>> On Mon, Jul 5, 2010 at 17:04, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> > Hi, Rob, all.
+>> >
+>> > Unfortunately using the "aspectjtree-parenthesize" tool partially solved
+>> > the
+>> > problem. However, I have noticed that the pretty-printer still overlooks
+>> > some round brackets as we can see in the example below:
+>> >
+>> >> command line:
+>> > ?? parse-aspectj -i LogAccountActivitiesOriginal.aj |
+>> > /usr/local/libexec/aspectjtree-parenthesize? | pp-aspectj
+>> >
+>> >
+>> >> Original pointcut expression (full code is attached):
+>> >
+>> > ?? ?? pointcut accountActivity(Account account, float amount)??? :
+>> > ? ? ? ??? ( (execution(void Account.credit(float)) || execution(void
+>> > Account.debit(float))) && this(account) && args(amount)
+>> > ????? ? ? )
+>> > ??? ????? ||
+>> > ????????? (execution(void CheckClearanceSystem.*(Account, float)) &&
+>> > args(account, amount));
+>> >
+>> >> Pretty-printed expression:
+>> >
+>> > ? ? ? pointcut accountActivity (Account account, float amount) :
+>> > ?? ?? ??? (execution(void Account.credit(float)) || execution(void
+>> > Account.debit(float))) && this(account) && args(amount)
+>> > ??? ?? ?? ||
+>> > ??? ? ? ? execution(void CheckClearanceSystem.*(Account, float)) &&
+>> > args(account, amount);
+>> >
+>> >
+>> > Do you think this is a problem with the grammar definition? Do you any
+>> > suggestion on how to solve it?
+>> >
+>> > Cheers,
+>> >
+>> > ? Fabiano
+>> >
+>> >
+>> > On 26 March 2010 18:11, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> >>
+>> >> Hi, Rob.
+>> >>
+>> >> Many thanks for this. I've run preliminary tests using the
+>> >> "aspectjtree-parenthesize" tool and everything looks fine.
+>> >>
+>> >> The best,
+>> >> ?Fabiano
+>> >>
+>> >> On 25 March 2010 13:04, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+>> >> > Hi Fabiano,
+>> >> >
+>> >> > sorry I missed your earlier message. It seems pp-aspectj misses a
+>> >> > call
+>> >> > to the parenthesize strategy. I will make a fix for it, but for now
+>> >> > you could apply the tool $prefix/libexec/aspectjtree-parenthesize to
+>> >> > you aspectj AST before calling the pretty-printer.
+>> >> >
+>> >> > parse-aspectj -i ~/ajf/ExecuteStatementObserver.aj |
+>> >> > ~/.nix-profile/libexec/aspectjtree-parenthesize| pp-aspectj
+>> >> >
+>> >> > greetings,
+>> >> > Rob
+>> >> >
+>> >> > On 24 March 2010 19:30, Fabiano Ferrari <fcferrari at gmail.com> wrote:
+>> >> >> Hi, everyone.
+>> >> >>
+>> >> >> I have posted this problem a while ago (please, see below). Is there
+>> >> >> someone who could give me a help with this?
+>> >> >>
+>> >> >> Many thanks,
+>> >> >> ?Fabiano
+>> >> >>
+>> >> >>
+>> >> >> ---------- Forwarded message ----------
+>> >> >> From: Fabiano Ferrari <fcferrari at gmail.com>
+>> >> >> Date: 2 February 2010 10:48
+>> >> >> Subject: AspectJ-front: Problem for parsing and pretty-printing
+>> >> >> complex pointcut expressions
+>> >> >> To: developers at strategoxt.org, Users at strategoxt.org
+>> >> >>
+>> >> >>
+>> >> >> Hi, everybody.
+>> >> >>
+>> >> >> I'm facing some problems while using the parser and the
+>> >> >> pretty-printer
+>> >> >> from AspectJ-front. For instance, when I parse a pointcut
+>> >> >> expressions
+>> >> >> such as:
+>> >> >>
+>> >> >>
+>> >> >> ? ? ? ?protected pointcut subjectChange(Subject subject) :
+>> >> >> (((execution(public int GeneralStatement.executeUpdate(..))) &&
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?(!within(SelectStatement))) ||
+>> >> >> (call(protected
+>> >> >> List GeneralStatement.executeQueryWithCallback(..)))) &&
+>> >> >> this(subject);
+>> >> >>
+>> >> >>
+>> >> >> the pretty-printed code is as follows:
+>> >> >>
+>> >> >>
+>> >> >> ? ? ? ?protected pointcut subjectChange (Subject subject)
+>> >> >> :execution(public int GeneralStatement.executeUpdate(..)) &&
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?!within(SelectStatement) || call(protected
+>> >> >> List
+>> >> >> GeneralStatement.executeQueryWithCallback(..)) && this(subject);
+>> >> >>
+>> >> >>
+>> >> >> As you can see, some surrounding round brackets are removed, what
+>> >> >> results in inconsistent information binding. Other two examples are
+>> >> >> shown below (the original aspects are attached).
+>> >> >>
+>> >> >>
+>> >> >> Is anybody aware of a workaround for this? Is there a way to fix it
+>> >> >> (e.g. keeping all round brackets in the pretty-printed version)?
+>> >> >>
+>> >> >> Many thanks!
+>> >> >>
+>> >> >> ?Fabiano Ferrari
+>> >> >>
+>> >> >>
+>> >> >> --------- other examples ---------
+>> >> >>
+>> >> >> ?ORIGINAL EXPRESSION 1:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> >> >> ? ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?execution( ?public void
+>> >> >> RuntimeSQLException.setNextException(SQLException))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?protected static int
+>> >> >> BaseLogProxy.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> >> >> Stopwatch.appendTaskTime(String,long))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void Stopwatch.reset())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> FifoCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> FifoCacheController.getObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> FifoCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> FifoCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> LruCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> LruCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> LruCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> LruCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> MemoryCacheController.putObject(CacheModel,Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> MemoryCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> MemoryCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> MemoryCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> >> >> InvocationHandler+.loadObject())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private ?void
+>> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?Object[]
+>> >> >> AutoResultMap.getResults(RequestScope,ResultSet) throws
+>> >> >> ?SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public ?static long
+>> >> >> SessionScope.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?public Object
+>> >> >> OSCacheController.removeObject(CacheModel,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?|| execution( ?private void
+>> >> >> CacheModel.getObjectPartTwo())
+>> >> >>
+>> >> >> ? ? ? ? ? ? ? ? ? ? ? ?) && this(syncObj)
+>> >> >> ? ? ? ? ? ? ? ?);
+>> >> >>
+>> >> >>
+>> >> >> ?PRETTY-PRINTED EXPRESSION 1:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> >> >> ? ? ? ? ? ? ? ? ?execution(public void
+>> >> >> RuntimeSQLException.setNextException(SQLException))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(protected static int
+>> >> >> BaseLogProxy.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> Stopwatch.appendTaskTime(String, long))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void Stopwatch.reset())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> FifoCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> FifoCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> FifoCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> FifoCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> LruCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> LruCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> LruCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> LruCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> MemoryCacheController.putObject(CacheModel, Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> MemoryCacheController.getObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> MemoryCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> MemoryCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> InvocationHandler+.loadObject())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> LazyResultLoader.loadObject() throws NestedRuntimeException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object[]
+>> >> >> AutoResultMap.getResults(RequestScope, ResultSet) throws
+>> >> >> SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public static long
+>> >> >> SessionScope.getNextId())
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public Object
+>> >> >> OSCacheController.removeObject(CacheModel, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartTwo())
+>> >> >>
+>> >> >> ? ? ? ? ? ? ? ? ?&& this(syncObj);
+>> >> >>
+>> >> >> ----------------------------------
+>> >> >>
+>> >> >> ?ORIGINAL EXPRESSION 2:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints(Object syncObj):
+>> >> >> ? ? ? ? ? ? ? ?(
+>> >> >> ? ? ? ? ? ? ? ? ? ?execution( ?public static ClassInfo
+>> >> >> ClassInfo.getInstance(Class))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( ?public void
+>> >> >> OSCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( private void
+>> >> >> ThrottledPool.pushPartTwo(LinkedList,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( private Object
+>> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> >> >> IllegalAccessException)
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution( ?private Object
+>> >> >> OSCacheController.getObjectPartTwo(CacheModel,String) throws
+>> >> >> NeedsRefreshException )
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.removeObjectPartTwo(CacheModel,String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartThree(Object,Object))
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >>
+>> >> >>
+>> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,RequestScope,Connection
+>> >> >> , Object , Object, CacheKey ) throws SQLException )
+>> >> >> ? ? ? ? ? ? ? ? ? ?|| execution(private List
+>> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,RequestScope,
+>> >> >> Connection, Object , int , int, CacheKey ) throws SQLException )
+>> >> >> ? ? ? ? ? ? ? ?)
+>> >> >> ? ? ? ? ? ? ? ?&& args(syncObj,..);
+>> >> >>
+>> >> >>
+>> >> >> ?PRETTY-PRINTED EXPRESSION 2:
+>> >> >>
+>> >> >> ? ? ? ? ?protected pointcut synchronizationPoints (Object syncObj) :
+>> >> >> ? ? ? ? ? ? ? ? ?execution(public static ClassInfo
+>> >> >> ClassInfo.getInstance(Class))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(public void
+>> >> >> OSCacheController.flush(CacheModel))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> ThrottledPool.pushPartTwo(LinkedList, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> ThrottledPool.popPartTwo(LinkedList) throws InstantiationException,
+>> >> >> IllegalAccessException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.getObjectPartTwo(CacheModel, String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> OSCacheController.removeObjectPartTwo(CacheModel, String) throws
+>> >> >> NeedsRefreshException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private void
+>> >> >> CacheModel.getObjectPartThree(Object, Object))
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private Object
+>> >> >> CachingStatement.executeQueryForObjectPartTwo(CacheModel,
+>> >> >> RequestScope, Connection, Object, Object, CacheKey) throws
+>> >> >> SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?|| execution(private List
+>> >> >> CachingStatement.executeQueryForListPartTwo(CacheModel,
+>> >> >> RequestScope,
+>> >> >> Connection, Object, int, int, CacheKey) throws SQLException)
+>> >> >> ? ? ? ? ? ? ? ? ?&& args(syncObj, ..);
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >>
+>> >> >> --
+>> >> >> Fabiano Cutigi Ferrari
+>> >> >> _________________________________
+>> >> >> PhD Candidate in Computer Science
+>> >> >> ICMC/USP - University of S?o Paulo - Brazil
+>> >> >> LabES - Laboratory of Software Engineering
+>> >> >> http://www.icmc.usp.br/~ferrari/
+>> >> >>
+>> >> >> _______________________________________________
+>> >> >> Developers mailing list
+>> >> >> Developers at strategoxt.org
+>> >> >> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>> >> >>
+>> >> >>
+>> >> >
+>> >> >
+>> >> >
+>> >> > --
+>> >> > Rob Vermaas
+>> >> >
+>> >> > [email] rob.vermaas at gmail.com
+>> >> >
+>> >
+>> >
+>> >
+>> > --
+>> > Fabiano Cutigi Ferrari
+>> > _________________________________
+>> > PhD Candidate in Computer Science
+>> > ICMC/USP - University of S?o Paulo - Brazil
+>> > LabES - Laboratory of Software Engineering
+>> > http://www.icmc.usp.br/~ferrari/
+>> >
+>>
+>>
+>>
+>> --
+>> Rob Vermaas
+>>
+>> [email] rob.vermaas at gmail.com
+>
+>
+> _______________________________________________
+> Developers mailing list
+> Developers at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/developers
+>
+>
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+
+

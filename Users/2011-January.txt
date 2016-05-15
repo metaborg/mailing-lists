@@ -1,0 +1,909 @@
+From lex.spoon at logicblox.com  Mon Jan  3 01:47:09 2011
+From: lex.spoon at logicblox.com (Lex Spoon)
+Date: Sun, 2 Jan 2011 19:47:09 -0500
+Subject: [Stratego Users] building outside of Eclipse
+Message-ID: <AANLkTim10c9bD=kYywfU1rDKqkFC4kM9zQGEUHpph=p1@mail.gmail.com>
+
+I used the Strategy/IMP workbench to create a plugin, and it has gone
+swimingly. Now I would like to build and test the code from a
+continuous builder, and I am running into trouble.
+
+
+The plugin has generated some Ant build files, and I tried to use
+those. However, they seem to expect that ant is run with extra jars on
+its classpath. This leads me to two questions:
+
+1. Is there any hope of building the non-Eclipse-specific parts using
+this build file, or do I have to supply all the Eclipse dependencies,
+too? I downloaded a strategoxt.jar that holds all the dependencies
+that appear necessary for the parts I'd really like to regression
+test.
+
+2. Is there any way to use the generated build files without having to
+set a CLASSPATH environment variable first? I guess I can make a
+script file to supply the environment variable, but it would be nicer
+if a simple "ant test" were possible to make work.
+
+I have written some test cases for the parser, and I can run them via
+a sequence of IDE commands, but now I'm stuck running them from the
+command line. I guess I can just write a new build file from scratch,
+but that would mean that key partss of the distributed plugin are
+built with a different build file than is used for regression testing,
+which is not ideal.
+
+Lex
+
+From rob.vermaas at gmail.com  Mon Jan  3 11:40:18 2011
+From: rob.vermaas at gmail.com (Rob Vermaas)
+Date: Mon, 3 Jan 2011 11:40:18 +0100
+Subject: [Stratego Users] building outside of Eclipse
+In-Reply-To: <AANLkTim10c9bD=kYywfU1rDKqkFC4kM9zQGEUHpph=p1@mail.gmail.com>
+References: <AANLkTim10c9bD=kYywfU1rDKqkFC4kM9zQGEUHpph=p1@mail.gmail.com>
+Message-ID: <AANLkTi=DxSiKBsKUCSQm6jEPWFnCajetnL8NvD3btW_Q@mail.gmail.com>
+
+Hi Lex,
+
+> I used the Strategy/IMP workbench to create a plugin, and it has gone
+> swimingly. Now I would like to build and test the code from a
+> continuous builder, and I am running into trouble.
+
+We have just started continuously building Spoofax and some Spoofax
+based projects in our buildfarm. I have made a description of this at
+http://strategoxt.org/Spoofax/ContinuousBuildingSpoofax
+
+It is basically a description of how to build Spoofax projects from the
+command-line. It uses Maven, Tycho and Ant.
+
+> The plugin has generated some Ant build files, and I tried to use
+> those. However, they seem to expect that ant is run with extra jars on
+> its classpath. This leads me to two questions:
+>
+> 1. Is there any hope of building the non-Eclipse-specific parts using
+> this build file, or do I have to supply all the Eclipse dependencies,
+> too? I downloaded a strategoxt.jar that holds all the dependencies
+> that appear necessary for the parts I'd really like to regression
+> test.
+
+As described on the link I posted, section 'Running ant builds'. However,
+at the moment, you will need to pass 4 jars to ant.
+
+> 2. Is there any way to use the generated build files without having to
+> set a CLASSPATH environment variable first? I guess I can make a
+> script file to supply the environment variable, but it would be nicer
+> if a simple "ant test" were possible to make work.
+
+At the moment it is not yet possible. We should look how to make this
+easier.
+
+> I have written some test cases for the parser, and I can run them via
+> a sequence of IDE commands, but now I'm stuck running them from the
+> command line. I guess I can just write a new build file from scratch,
+> but that would mean that key partss of the distributed plugin are
+> built with a different build file than is used for regression testing,
+> which is not ideal.
+
+There are also some small remarks on tests in the link. However, as we
+just started building the plugins this way, it is work in progress.
+
+Hope this gets you started, and please let us know how it works out.
+
+Rob
+
+-- 
+Rob Vermaas
+
+[email] rob.vermaas at gmail.com
+
+From lex.spoon at logicblox.com  Mon Jan  3 16:43:58 2011
+From: lex.spoon at logicblox.com (Lex Spoon)
+Date: Mon, 3 Jan 2011 10:43:58 -0500
+Subject: [Stratego Users] building outside of Eclipse
+In-Reply-To: <AANLkTi=DxSiKBsKUCSQm6jEPWFnCajetnL8NvD3btW_Q@mail.gmail.com>
+References: <AANLkTim10c9bD=kYywfU1rDKqkFC4kM9zQGEUHpph=p1@mail.gmail.com>
+	<AANLkTi=DxSiKBsKUCSQm6jEPWFnCajetnL8NvD3btW_Q@mail.gmail.com>
+Message-ID: <AANLkTi=Q7qev68vEPLgRK2VUuycwFSqwuj7whdayKNbj@mail.gmail.com>
+
+On Mon, Jan 3, 2011 at 5:40 AM, Rob Vermaas <rob.vermaas at gmail.com> wrote:
+> Hi Lex,
+>
+>> I used the Strategy/IMP workbench to create a plugin, and it has gone
+>> swimingly. Now I would like to build and test the code from a
+>> continuous builder, and I am running into trouble.
+>
+> We have just started continuously building Spoofax and some Spoofax
+> based projects in our buildfarm. I have made a description of this at
+> http://strategoxt.org/Spoofax/ContinuousBuildingSpoofax
+>
+
+Fantastic!  Thanks very much for these notes. They have just the
+pointers I need.
+
+I see that you are keeping around an Eclipse installation to deal with
+the Eclipse dependencies. That makes sense, because I suppose that's
+the easiest way to build an Eclipse plugin. I'm happy to see that the
+bulk of the build, however, only requires four jars as dependencies.
+For my needs, I'll probably check in those four jars for the main
+build and test, so as to minimize accidental dependencies.
+
+I won't immediately use the Maven part, because my group is one of the
+last Java shops on the planet not using Maven. However, it's great to
+see how straightforward it is to do so.
+
+Lex
+
+From karltk at strategoxt.org  Mon Jan  3 22:28:45 2011
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Mon, 3 Jan 2011 22:28:45 +0100
+Subject: [Stratego Users] building outside of Eclipse
+In-Reply-To: <AANLkTi=Q7qev68vEPLgRK2VUuycwFSqwuj7whdayKNbj@mail.gmail.com>
+References: <AANLkTim10c9bD=kYywfU1rDKqkFC4kM9zQGEUHpph=p1@mail.gmail.com>
+	<AANLkTi=DxSiKBsKUCSQm6jEPWFnCajetnL8NvD3btW_Q@mail.gmail.com>
+	<AANLkTi=Q7qev68vEPLgRK2VUuycwFSqwuj7whdayKNbj@mail.gmail.com>
+Message-ID: <AANLkTikuYaX1KG1mm6gHrjgwoSV6JVXLXLJNX08crb9q@mail.gmail.com>
+
+> [...] my group is one of the
+> last Java shops on the planet not using Maven.
+
+Good for you. Maven is 3vil!
+
+(Okay, so that was not very constructive, but I just had to vent my
+frustration against what must be the most hyped and at the same time
+suckiest build system I have suffered yet.)
+
+And now back to our regular programming...
+
+-- Karl T
+
+From E.Visser at tudelft.nl  Tue Jan  4 09:14:35 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 4 Jan 2011 09:14:35 +0100
+Subject: [Stratego Users] CFP: International Workshop on Intermediate
+	Representations (WIR 2011)
+In-Reply-To: <201012061325.oB6DPaDF011588@DSX4000-4.tagadab.com>
+References: <201012061325.oB6DPaDF011588@DSX4000-4.tagadab.com>
+Message-ID: <AANLkTimYjv23HmRFDErhQ5fTp2CZFfbcAtqSWy=5FaBt@mail.gmail.com>
+
+Second Call for Papers
+
+International Workshop on Intermediate Representations (WIR 2011)
+
+Co-located with CGO 2011, April 2/3 2011 in Chamonix, France
+
+http://researchr.org/conference/wir-2011
+
+Description
+===========
+
+The intermediate representation is the core of any program transformation
+tool. Its design has a significant impact on the simplicity, efficiency, and
+effectiveness of program transformations. The developments in concurrent
+programming, integrated development environments, and domain-specific
+languages pose new requirements on intermediate representations. This
+workshop provides a forum to discuss current trends and experiences in the
+design, implementation, and application of intermediate representations.
+
+Topics of Interest
+==================
+
+The list of topics includes, but is not limited to:
+
+  * intermediate representations for
+        o parallelism and concurrency
+        o instrumentation
+        o JIT compilation
+        o compiler verification
+        o domain-specific languages
+        o refactoring
+        o integrated development environments
+  * functional intermediate representations for imperative programs
+  * translation to, and code generation from an IR
+  * modeling low-level machine details in IRs
+  * impact of IR on the precision of static analyzers
+  * representing static analysis results in an IR
+  * origin tracking
+
+Submission
+==========
+
+We sollicit submission of original papers on topics relevant to intermediate
+representations. Papers should be formatted in SIGPLAN Proceedings
+Format, 9 point
+font, and be at most 8 pages in length.
+
+  * http://www.acm.org/sigs/sigplan/authorInformation.htm
+
+Selected papers will be published in the ACM digital library (to be
+confirmed).
+
+Papers should be submitted electronically with easychair:
+
+  * http://www.easychair.org/conferences/?conf=wir2011
+
+Important Dates
+===============
+
+  * Submission: January 21, 2011
+  * Notification: February 25, 2011
+  * Camera-ready: March 18, 2011
+  * Workshop: April 2/3, 2011
+
+Organizers
+==========
+
+  * Florent Bouchez
+  * Sebastian Hack
+  * Eelco Visser
+
+Program Committee
+=================
+
+   * Florent Bouchez (chair)
+   * Martin Bravenboer
+   * Albert Cohen
+   * Fran?ois de Ferri?re
+   * Robert Fuhrer
+   * Sebastian Hack (chair)
+   * Andrew Kennedy
+   * Sorin Lerner
+   * Nathaniel Nystrom
+   * Simon Peyton Jones
+   * Tijs van der Storm
+   * Eelco Visser (chair)
+
+
+
+-- 
+http://eelcovisser.org
+http://twitter.com/eelcovisser
+http://researchr.org/profile/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110104/0d5f5fcc/attachment.html 
+
+From kutsia at risc.uni-linz.ac.at  Tue Jan 11 15:39:42 2011
+From: kutsia at risc.uni-linz.ac.at (Temur Kutsia)
+Date: Tue, 11 Jan 2011 15:39:42 +0100
+Subject: [Stratego Users] 2nd CfP: JAL Special Issue on Automated
+ Specification and Verification of Web Systems
+Message-ID: <4D2C6BAE.7070207@risc.uni-linz.ac.at>
+
+[Apologies for multiple copies]
+
+========================================================================
+JOURNAL OF APPLIED LOGIC
+Special Issue on Automated Specification and Verification of Web Systems
+
+http://www.risc.uni-linz.ac.at/people/tkutsia/jal-wwv.html
+========================================================================
+
+SCOPE
+-----
+This special issue of the Journal of Applied Logic is related
+to the topics of the workshop WWV'10: Automated Specification
+and Verification of Web Systems, which took place in Vienna on
+July 30-31, 2010. Both participants of the workshop and other
+authors are invited to submit contributions.
+
+The increased complexity of Web sites and the explosive growth
+of Web-based applications has turned their design and
+construction into a challenging problem. Nowadays, many
+companies have diverted their Web sites into interactive,
+completely-automated, Web-based applications (such as Amazon,
+on-line banking, or travel agencies) with a high complexity
+that requires appropriate specification and verification
+techniques and tools. Systematic, formal approaches to the
+analysis and verification can address the problems of this
+particular domain with automated and reliable tools that also
+incorporate semantic aspects.
+
+We solicit original papers on logic-based methods and
+techniques applied to Web sites, Web services or Web-based
+applications, such as:
+
+  * Rule-based approaches to Web systems analysis, certification,
+    specification, verification, and optimization
+  * Algebraic methods for verification and certification of Web
+    systems
+  * Formal models for describing and reasoning about Web systems
+  * Model-checking, synthesis and debugging of Web systems
+  * Abstract interpretation and program transformation applied to
+    the semantic Web
+  * Intelligent tutoring and advisory systems for Web
+    specifications authoring
+  * Web quality and Web metrics
+  * Web usability and accessibility
+  * Testing and evaluation of Web systems and applications
+
+SUBMISSION
+----------
+We expect original articles (typically 15-25 pages; submission
+of larger papers will be evaluated depending on editorial
+constraints) that present high-quality contributions that have
+not been previously published and that must not be
+simultaneously submitted for publication elsewhere.
+
+Submissions must comply with JAL's author guidelines. They must
+be written in English and should be prepared using the Elsevier
+LaTeX package.
+
+Submissions are encouraged via the EasyChair submission system:
+http://www.easychair.org/conferences/?conf=jalwwv2010.
+
+IMPORTANT DATES
+---------------
+  * Submission of papers: March 7, 2011.
+  * Notification: June 6, 2011.
+
+GUEST EDITORS
+--------------
+  * Laura Kov?cs (Vienna University of Technology)
+  * Temur Kutsia (RISC, Johannes Kepler University Linz)
+
+
+From seba at informatik.uni-marburg.de  Wed Jan 12 13:17:02 2011
+From: seba at informatik.uni-marburg.de (Sebastian Erdweg)
+Date: Wed, 12 Jan 2011 13:17:02 +0100
+Subject: [Stratego Users] Problems with separate parse table compilation
+Message-ID: <14D9C2AC-B787-4E65-A09B-3B557023F051@informatik.uni-marburg.de>
+
+Hi everyone,
+
+I tried to separately compile parse tables [1] in my SugarJ project [2] using the implementation from the Stratego svn [3]. Unfortunately, I have run into several problems:
+
+1)
+Support of the Kleene star operator seems to be broken. Consider the following syntax for parsing a sequence of a's:
+>   context-free start-symbols
+>     S
+> 
+>   context-free syntax
+>     "a"  -> A
+>     A* -> S
+
+I specified another module containing the meaningless definition
+>   context-free syntax
+>     B* -> S
+
+(no productions exist for B). If I now separately compile these two definitions and link them together, all sequences of a's but the singleton one are parsed ambiguously.
+
+
+2)
+Priorities do not work across module boundaries. For instance, consider a module syntax for unit and addition
+>   context-free start-symbols
+>     S
+>   
+>   context-free syntax
+>     "u"   -> S {cons("Unit")}
+>     S "+" S -> S {cons("Plus")}
+
+and its extension by multiplication in another module
+>   context-free syntax
+>     S "*" S -> S {cons("Mul")}
+
+Adding the following priority declaration to the syntax extension should do the trick of eliminating the ambiguity in the input string "u+u*u"
+>   context-free priorities
+>     S "*" S -> S {cons("Mul")}
+>     >
+>     S "+" S -> S {cons("Plus")}
+
+With separate parse table compilation, however, the "Plus" production in the priority declaration is not identified with the "Plus" production of the base syntax definition. Therefore, two kinds of ambiguities arise for "u+u*u": First, the binding of the binary operators + and * remains ambiguous, and second there are two productions "S "+" S -> S {cons("Plus")}" available now, one from the base syntax and one from the priority declaration.
+
+
+When extensively composing language definitions as we do in SugarJ, being able to separately compile grammars is essential. Without that feature the composition of grammars requires the recompilation of all involved syntax definitions, which is expansive when, for instance, extending Java. Support for separate parse table compilation would therefore be very much appreciated.
+
+Best regards,
+Sebastian
+
+[1] http://martin.bravenboer.name/docs/sle08-pre.pdf
+[2] http://www.informatik.uni-marburg.de/~seba/projects/sugarj/
+[3] https://svn.strategoxt.org/repos/StrategoXT/parse-table-composition/trunk/
+
+From gvidal at dsic.upv.es  Thu Jan 13 01:28:53 2011
+From: gvidal at dsic.upv.es (German Vidal)
+Date: Thu, 13 Jan 2011 01:28:53 +0100
+Subject: [Stratego Users] LOPSTR 2011 - call for papers
+References: <BD853564-2C62-4E6A-A88F-3A500C411613@dsic.upv.es>
+Message-ID: <63A8C281-3209-4754-8E4D-E3A0D30C7D88@dsic.upv.es>
+
+============================================================
+
+                Preliminary Call for papers
+             21th International Symposium on
+     Logic-Based Program Synthesis and Transformation
+                       LOPSTR 2011
+
+           http://users.dsic.upv.es/~lopstr11/
+          Odense, Denmark, July 18-20, 2011
+                (co-located with PPDP 2011)
+
+============================================================
+
+Objectives:
+
+The aim of the LOPSTR series is to stimulate and promote international
+research and collaboration on logic-based program development. LOPSTR
+is open to contributions in logic-based program development in any
+language paradigm. LOPSTR has a reputation for being a lively,
+friendly forum for presenting and discussing work in progress. Formal
+proceedings are produced only after the symposium so that authors can
+incorporate this feedback in the published papers.
+
+The 21st International Symposium on Logic-based Program Synthesis and
+Transformation (LOPSTR 2011) will be held in Odense, Denmark; previous
+symposia were held in Hagenberg, Coimbra, Valencia, Lyngby, Venice,
+London, Verona, Uppsala, Madrid, Paphos, London, Venice, Manchester,
+Leuven, Stockholm, Arnhem, Pisa, Louvain-la-Neuve, and Manchester (you
+might have a look at the contents of past LOPSTR symposia). LOPSTR
+2011 will be co-located with PPDP 2011 (International ACM SIGPLAN
+Symposium on Principles and Practice of Declarative Programming).
+
+
+Topics:
+
+Topics of interest cover all aspects of logic-based program development,
+all stages of the software life cycle, and issues of both programming-
+in-the-small and programming-in-the-large. Papers describing
+applications in these areas are especially welcome. Contributions are
+welcome on all aspects of logic-based program development, including,
+but not limited to:
+
+- specification
+- synthesis
+- verification
+- transformation
+- analysis
+- optimisation
+- specialization
+- partial evaluation
+- inversion
+- composition
+- program/model manipulation
+- certification
+- security
+- transformational techniques in SE
+- applications and tools
+
+Survey papers, that present some aspect of the above topics from a new
+perspective, and application  papers, that describe experience with
+industrial applications, are also welcome. Papers must describe
+original work, be written and presented  in English, and must not
+substantially overlap with papers that have been published or that are
+simultaneously submitted to a journal or a conference with refereed
+proceedings. Work that already appeared in unpublished or informally
+published workshops proceedings may be submitted.
+
+Following past editions, the formal post-conference proceedings are
+planned to be published by Springer-Verlag in the Lecture Notes in
+Computer Science (LNCS) series.
+
+
+IMPORTANT DATES AND SUBMISSION GUIDELINES:
+
+
+- Paper submission: March 27,  2011
+- Extended abstract submission: April 3, 2011
+- Notification (for pre-proceedings): May 16, 2011
+- Camera-ready (for pre-proceedings): June 12, 2011
+- Symposium: July 18-20, 2011
+
+
+Submissions can either be (short) extended abstracts or (full) papers
+whose length should not exceed 9 and 15 pages (including references),
+respectively. Submissions must be formatted in the Lecture Notes in
+Computer Science style (excluding well-marked appendices not intended
+for publication). Referees are not required to read the appendices,
+and thus papers should be intelligible without them. Short papers may
+describe work-in-progress or tool demonstrations.
+
+Both short and full papers can be accepted for presentation at the
+symposium and will then appear in the LOPSTR 2011
+pre-proceedings. Full papers can also be immediately accepted for
+publication in the formal proceedings, which is planned to be
+published by Springer-Verlag in the LNCS series. In addition, after
+the symposium, the programme committee will select further short or
+full papers presented in LOPSTR 2011 to be considered for formal
+publication. These authors will be invited to revise and/or extend
+their submissions in the light of the feedback solicited at the
+symposium. Then after another round of reviewing, these revised papers
+can also be published in the formal proceedings.
+
+
+Program Committee:
+
+TBD
+
+Contacts
+
+Program Chair
+(contact him for additional information about papers and submissions)
+
+  German Vidal
+  Department of Computer Science (DSIC)
+  Universitat Politecnica de Valencia
+  Valencia, Spain
+  Email: lopstr11 at dsic.upv.es
+
+General Chair
+
+  Peter Schneider-Kamp
+  Dept. of Mathematics and Computer Science
+  University of Southern Denmark
+  Campusvej 55
+  DK-5230 Odense M, Denmark
+  Email: petersk at imada.sdu.dk
+
+
+From daniele.gianni at gmail.com  Mon Jan 17 23:03:30 2011
+From: daniele.gianni at gmail.com (Daniele Gianni)
+Date: Mon, 17 Jan 2011 23:03:30 +0100
+Subject: [Stratego Users] COMETS 2011 - 2nd International Track on
+ Collaborative Modeling and Simulation - Call for Papers
+Message-ID: <AANLkTinucmguBVoZ5d7eEqYv=-fit0+aBg+0eC=etKaN@mail.gmail.com>
+
+Please accept our apologies if you receive multiple copies of this CfP)
+
+#################################################################
+                 IEEE WETICE 2011
+            2nd International Track on
+       Collaborative Modeling and Simulation
+                 CALL FOR PAPERS
+#################################################################
+
+June 27 - June 29, 2011, Paris (France)
+http://www.sel.uniroma2.it/CoMetS11
+
+#################################################################
+# Papers Due: *** March 5, 2011 ***
+# Accepted papers will be published in the conference proceedings
+# by the IEEE Computer Society Press and indexed by EI.
+#################################################################
+
+Modeling and Simulation (M&S) is increasingly becoming a central
+activity in the design of new systems and in the analysis of
+existing systems because it enables designers and researchers to
+investigate systems behavior through virtual representations. For
+this reason, M&S is gaining a primary role in many industrial and
+research fields, such as space, critical infrastructures,
+manufacturing, emergency management, biomedical systems and
+sustainable future. However, as the complexity of the
+investigated systems increases and the types of investigations
+widens, the cost of M&S activities increases for the more
+complex models and for the communications among a wider number and
+variety of M&S stakeholders (e.g., sub-domain experts, simulator
+users, simulator engineers, and final system users). To address
+the increasing costs of M&S activities, collaborative
+technologies must be introduced to support these activities by
+fostering the sharing and reuse of models, by facilitating the
+communications among M&S stakeholders, and more generally by
+integrating processes, tools and platforms.
+
+Aside from seeking applications of collaborative technologies to
+M&S activities, the track seeks innovative contributions that
+deal with the application of M&S practices to the design of
+collaborative environments. These environments are continuously
+becoming more complex and therefore their design requires
+systematic approaches to meet the required quality of
+collaboration. This is important for two reasons: to reduce
+rework activities on the actual collaborative environment, and to
+maximize the productivity and the quality of the process the
+collaborative environment supports. M&S offers the methodologies
+and tools for such investigations and therefore it can be used to
+improve the quality of collaborative environments.
+
+A non?exhaustive list of topics of interest includes:
+
+* collaborative environments for M&S
+* collaborative Systems of Systems M&S
+* workflow modelling for collaborative environments and processes
+* agent-based M&S
+* collaborative distributed simulation
+* collaborative component-based M&S
+* net-centric M&S
+* web-based M&S
+* model sharing and reuse
+* model building and evaluation
+* modeling and simulation of business processes
+* modeling for collaboration
+* simulation-based performance evaluation of collaborative networks
+* model-driven simulation engineering
+* domain specific languages for the simulation of collaborative environments
+* domain specific languages for collaborative M&S
+* databases and repositories for M&S
+* distributed virtual environments
+* virtual research environment for M&S
+
+To stimulate creativity, however, the track maintains a wider
+scope and invites interested researchers to present contributions
+that offer original perspectives on collaboration and M&S.
+
++++++++++++++++++++++++++++++++++++
+On-Line Submissions and Publication
++++++++++++++++++++++++++++++++++++
+
+CoMetS'11 intends to bring together researchers and practitioners
+to discuss key issues, approaches, open problems, innovative
+applications and trends in the track research area.
+
+Papers should contain original contributions not published or
+submitted elsewhere. Papers up to six pages (including figures,
+tables and references) can be submitted. Papers should follow the
+IEEE format, which is single spaced, two columns, 10 pt
+Times/Roman font. All submissions should be electronic (in PDF)
+and will be peer-reviewed by at least three program committee
+members.
+
+Accepted full papers will be included in the proceedings and
+ published by the IEEE Computer Society Press (IEEE
+approval pending). Please note that at least one author for each
+accepted paper should register to attend WETICE 2011 to have the
+paper published in the proceedings.
+
+Authors may contact the organizers for expression of interests
+and content appropriateness at any time. Papers can be submitted
+in PDF format at the submission site
+(https://www.easychair.org/conferences/?conf=comets2011), which is
+supported by the EasyChair conference management system. Please
+contact the track chairs (comets2011 at easychair.org) if you
+experience problems with the EasyChair Web site.
+
++++++++++++++++
+Important Dates
++++++++++++++++
+
+* Submission Deadline: March 5, 2011
+* Decision to paper authors: April 4, 2011
+* Final version of accepted papers due to IEEE: April 29, 2011
+* Conference dates: June 27 - June 29, 2011
+
+
+++++++++++++++++++++
+Organizing Committee
+++++++++++++++++++++
+
+* Andrea D'Ambrogio, University of Roma TorVergata, Italy
+* Daniele Gianni, European Space Agency, The Netherlands
+* Joachim Fuchs, European Space Agency, The Netherlands
+* Giuseppe Iazeolla, University of Roma TorVergata, Italy
+
++++++++++++++++++
+Program Committee
++++++++++++++++++
+
+* Santiago Balestrini, Georgia Institute of Technology, USA
+* Torsten Bieler, European Space Agency, The Netherlands
+* Olivier Dalle, University of Nice Sophia Antipolis, CNRS & INRIA, France
+* Joseph Giampapa, SEI, Carnegie Mellon University, USA
+* Ralph Huntsinger, Beijng University of Aeronautics and Astronautics,
+China
+and California State University, USA
+* Axel Lehmann, Universitaet der Bundeswehr Muenchen, Germany
+* Cristiano Leorato, Rhea, The Netherlands
+* Brian Lewis, Vanguard Software Corporation, USA
+* Steve McKeever, University of Oxford, UK
+* David Nickerson, Auckland Bioengineering Institute, NZ
+* Alfred Park, IBM T.J. Watson Research Center, USA
+* Wolfgang Prinz, Fraunhofer FIT and RWTH Aachen, Germany
+* Jos? L. Risco-Martin, Universidad Complutense de Madrid, Spain
+* Maarten Sierhuis, NASA and Palo Alto Research Center, USA
+* Hans Vangheluwe, University of Antwerp, Belgium, and McGill University,
+Canada
+* Gabriel Wainer, Carleton University, Canada
+* Quirien Wijnands, European Space Agency, The Netherlands
+* Heming Zhang, Tsinghua University, China
+
+*** Contact Information ***
+Daniele Gianni (track co-chair)
+Email: daniele.gianni at esa.int
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110117/36ea386d/attachment.html 
+
+From E.Visser at tudelft.nl  Mon Jan 31 14:59:26 2011
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 31 Jan 2011 14:59:26 +0100
+Subject: [Stratego Users] ICMT 2011
+In-Reply-To: <201101311346.p0VDkWOA032520@DSX4000-4.tagadab.com>
+References: <201101311346.p0VDkWOA032520@DSX4000-4.tagadab.com>
+Message-ID: <AANLkTin7pADVg_u21LEZ_1Y7rfN+t_deeEdcb58jKwU7@mail.gmail.com>
+
+Note abstract submission deadline is February 4!
+
+----------------------------------------------------------------------
+INTERNATIONAL CONFERENCE ON MODEL TRANSFORMATION (ICMT) 2011
+
+Co-located with TOOLS Europe 2011
+
+Zurich - Switzerland, 27 - 28 June 2011
+
+http://www.model-transformation.org/ICMT2011/
+-----------------------------------------------------------------------
+
+Highlights
+-------------------------
+* ICMT is the premier forum for the presentation of contributions that
+advance the state-of-the-art in the field of model transformation and aims
+to bring together researchers from all areas of model transformation.
+
+* Conference proceedings will be published in the Springer LNCS series
+
+* A selection of the best papers from the conference will be published
+in the Journal of Object Technology (JOT)
+
+* Keynote speaker: Alexander Egyed
+
+Overview
+-------------------------
+
+Modelling is a key element in reducing the complexity of software
+systems during their development and maintenance. Model transformations
+are essential for elevating models from documentation elements to
+first-class artifacts of the development process. Model transformation
+includes model-to-text transformation to generate code from models,
+text-to-model transformations to parse textual representations to model
+representations, model extraction to derive higher-level models from
+legacy code, and model-to-model transformations to normalize, weave,
+optimize, and refactor models, as well as to translate between modeling
+languages.
+
+Model transformation encompasses a variety of technical spaces,
+including modelware, grammarware, and XML-ware, a variety of
+transformation representations including graphs, trees, and DAGs, and a
+variety of transformation paradigms including rule-based graph
+transformation, term rewriting, and implementations in general-purpose
+programming languages.
+
+The study of model transformation includes foundations, semantics,
+structuring mechanisms, and properties (such as modularity,
+composability, and parameterization) of transformations, transformation
+languages, techniques and tools. An important goal of the field is the
+development of high-level declarative model transformation languages,
+providing model representations of transformations that are amenable to
+'higher-order' model transformation. To achieve impact on software
+engineering practice, tools and methodologies to integrate model
+transformation into existing development environments and processes are
+required. ICMT is the premier forum for the presentation of
+contributions that advance the state-of-the-art in the field of model
+transformation and aims to bring together researchers from all areas of
+model transformation.
+
+
+Topics
+-------------------------
+
+Topics of interest include, but are not limited to:
+
+* Transformation paradigms and languages
+* graph rewriting, tree rewriting, attribute grammars
+* rule-based, declarative, imperative, functional
+* textual, graphical
+* pattern matching
+* transformation by example
+* modularity, reusability, and composition
+* comparison of transformation languages
+* theoretical foundations
+
+* Transformation algorithms and strategies
+* model representations: graphs, dags, trees
+* bidirectional transformation
+* incremental transformation
+* scalability
+* optimization
+* termination and confluence
+* higher-order transformation
+* evolution of transformations
+
+* Implementation and tools
+* design of transformations and transformation languages
+* verification, validation and testing of transformations
+
+* Applications and case studies
+* refactoring
+* aspect weaving
+* model comparison, differencing and merging
+* round-trip engineering
+* co-evolution of models and meta-models
+* reverse engineering (code-to-model)
+* code generation by model transformation
+
+* Industrial experience reports
+
+* Empirical studies
+
+Submission guidelines
+-------------------------
+
+All contributions will be subject to a rigorous selection process by the
+international Program Committee, with an emphasis on originality,
+practicality and overall quality. Papers should clearly indicate their
+contributions with respect to previous work. Each paper will be reviewed
+by at least 3 committee members. All submissions should follow the LNCS
+format and should include the authors' names, affiliations and contact
+details. Further instructions for submitting a paper will be available
+at http://www.model-transformation.org/ICMT2011/.
+
+As in previous editions of ICMT, we intend to publish proceedings in the
+Springer LNCS series. Moreover, a special issue with a selection of the
+best papers from the conference will be published in the Journal of
+Object Technology (JOT).
+
+Important dates
+-------------------------
+
+* Abstract submission: 4 February 2011
+* Paper submission: 11 February 2011
+* Notification of acceptance: 14 March 2011
+* Camera-ready version due: 28 March 2011
+* Conference dates: 27-28 June 2011
+
+Keynote Speaker
+-------------------------
+* Alexander Egyed
+
+Organization
+-------------------------
+
+PC chairs:
+* Eelco Visser
+* Jordi Cabot
+
+Publicity chair:
+* Dimitrios Kolovos
+
+Web chair:
+* Davide Di Ruscio
+
+Steering committee:
+* Jean B?zivin
+* Martin Gogolla
+* Jeff Gray
+* Richard Paige
+* Alfonso Pierantonio
+* Antonio Vallecillo
+* Laurence Tratt
+
+Program Committee:
+* Andy Sch?rr
+* Antonio Cicchetti
+* Bernhard Rumpe
+* Daniel Varro
+* Dennis Wagelaar
+* Eric Van Wyk
+* Gerti Kappel
+* Gregor Engels
+* G?nter Kniesel
+* Hans Vangheluwe
+* Ivan Kurtev
+* Janis Voigtl?nder
+* Jendrik Johannes
+* Jesus Garcia-Molina
+* Jim Cordy
+* Juan de Lara
+* Jurgen Vinju
+* Krzysztof Czarnecki
+* Marco Brambilla
+* Mark van den Brand
+* Nate Foster
+* Oscar Nierstrasz
+* Paolo Atzeni
+* Perdita Stevens
+* Pieter Van Gorp
+* Ralf Laemmel
+* Reiko Heckel
+* Simon Thompson
+* Thomas Kuehne
+* Tony Clark
+* Zhenjiang Hu
+
+
+-- Eelco Visser
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20110131/f1952bf9/attachment.html>
+

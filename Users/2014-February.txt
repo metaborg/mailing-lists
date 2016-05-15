@@ -1,0 +1,1764 @@
+From E.Visser at tudelft.nl  Thu Feb  6 09:06:04 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 6 Feb 2014 09:06:04 +0100
+Subject: [Stratego Users] Fwd: [SEWORLD] SPLASH 2014 Call for Contributions:
+ OOPSLA, Onward!, Dynamic Languages Symposium
+In-Reply-To: <4213256696806142.WA.craigecs.vuw.ac.nz@listserv.acm.org>
+References: <4213256696806142.WA.craigecs.vuw.ac.nz@listserv.acm.org>
+Message-ID: <CAFaCHU0XqnuJ3_+jWKQVwQfT8U8i7GuvWrbSScZ0M9nmMi8WcA@mail.gmail.com>
+
+/*************************************************************/
+                     ACM Conference on
+      Systems, Programming, Languages, and Applications:
+                   Software for Humanity (SPLASH'14)
+
+                   Portland, Oregon, USA
+                    20th-24th October, 2014
+
+                 http://www.splashcon.org
+               http://twitter.com/splashcon
+             http://www.facebook.com/SPLASHCon
+        http://www.linkedin.com/groups/SPLASH-Conference-2487082
+
+                 Sponsored by ACM SIGPLAN
+
+/**************************************************************
+                       COMBINED CALL FOR CONTRIBUTIONS
+**************************************************************/
+
+The ACM SIGPLAN conference on Systems, Programming, Languages and
+Applications: Software for Humanity (SPLASH) embraces all aspects of
+software construction and delivery to make it the premier conference at the
+intersection of programming, languages, and software engineering. SPLASH is
+now accepting submissions. We invite high quality submissions describing
+original and unpublished work.
+
+** OOPSLA Research Papers**
+Papers that address any aspect of software development are welcome,
+including requirements, modeling, prototyping, design, implementation,
+generation, analysis, verification, testing, evaluation, maintenance,
+reuse, replacement, and retirement of software systems. Papers may address
+these topics in a variety of ways, including new tools (such as languages,
+program analyses, and runtime systems), new techniques (such as
+methodologies, design processes, code organization approaches, and
+management techniques), and new evaluations (such as formalisms and proofs,
+corpora analyses, user studies, and surveys).
+
+  Submissions Due: 25 March, 2014
+  http://splashcon.org/2014/oopsla.html
+
+** Onward! Research Papers **
+Onward! is a premier multidisciplinary conference focused on everything to
+do with programming and software: including processes, methods, languages,
+communities, and applications. Onward! is more radical, more visionary, and
+more open than other conferences to ideas that are well-argued but not yet
+proven. We welcome different ways of thinking about, approaching, and
+reporting on programming language and software engineering research.
+
+    Submissions Due: 25 March, 2014
+    http://splashcon.org/2014/onward.html
+
+** Onward! Essays **
+Onward! Essays is looking for clear and compelling pieces of writing about
+topics important to the software community. An essay can be an exploration
+of a topic, its impact, or the circumstances of its creation; it can
+present a personal view of what is, explore a terrain, or lead the reader
+in an act of discovery; it can be a philosophical digression or a deep
+analysis. It can describe a personal journey, perhaps that by which the
+author reached an understanding of such a topic. The subject area should be
+interpreted broadly and can include the relationship of software to human
+endeavors, or its philosophical, sociological, psychological, historical,
+or anthropological underpinnings.
+
+  Submissions Due: 29 March, 2014
+  http://splashcon.org/2014/essays.html
+
+** Dynamic Languages Symposium (DLS) **
+DLS is the premier forum for researchers and practitioners to share
+knowledge and research on dynamic languages, their implementation, and
+applications. The influence of dynamic languages ? from Lisp to Smalltalk
+to Python to Javascript ? on real-world practice, and research, continues
+to grow. We invite high quality papers reporting original research,
+innovative contributions, or experience related to dynamic languages, their
+implementation, and applications.
+
+  Submissions Due: 8 June, 2014
+  http://splashcon.org/2014/dls.html
+  http://www.dynamic-languages-symposium.org/dls-14/
+
+Information:
+
+        Early Registration Deadline: 19 September, 2014
+
+        Contact: info at splashcon.org
+
+        Location:
+        Portland Marriott
+        Downtown Waterfront Hotel
+        Portland, Oregon, USA
+
+Organization:
+
+SPLASH General Chair:   Andrew Black (Portland State University)
+OOPSLA Papers Chair:    Todd Millstein (UCLA)
+Onward! Papers Chair:   Shriram Krishnamurthi (Brown University)
+Onward! Essays Chair:   Bernd Bruegge (Technische Universitat of Munchen)
+DLS Papers Chair:               Laurence Tratt (King?s College, London)
+
+/*************************************************************/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140206/d4fb8653/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Feb  6 14:10:53 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 6 Feb 2014 14:10:53 +0100
+Subject: [Stratego Users] Fwd: [TYPES/announce] GPCE 2104 - Call for Papers
+In-Reply-To: <20140206130239.950E765018E@mail-svr1.cs.utah.edu>
+References: <20140206130239.950E765018E@mail-svr1.cs.utah.edu>
+Message-ID: <CAFaCHU27MU937maPN_cnF_VkwtAtJXzwv19MtGqgDxejjjhEOA@mail.gmail.com>
+
+------------------------------------------------------------------------
+CALL FOR PAPERS
+
+13th International Conference on
+Generative Programming: Concepts & Experiences
+(GPCE 2014)
+
+September 15-16, 2014
+V?ster?s, Sweden
+(collocated with ASE 2014 and SLE 2014)
+http://www.gpce.org
+
+http://www.facebook.com/GPCEConference
+http://twitter.com/GPCECONF
+
+
+------------------------------------------------------------------------
+
+IMPORTANT DATES
+
+* Submission of papers:    May 30, 2014
+* Paper notification:      July 7, 2014
+
+
+SCOPE
+
+Generative and component approaches and domain-specific abstractions are
+revolutionizing software development just as automation and componentization
+revolutionized manufacturing. Raising the level of abstraction in software
+specification has been a fundamental goal of the computing community for
+several decades. Key technologies for automating program development and
+lifting the abstraction level closer to the problem domain are
+*Generative Programming* for program synthesis, *Domain-Specific Languages*
+(DSLs) for compact problem-oriented programming notations, and corresponding
+*Implementation Technologies* aiming at modularity, correctness, reuse, and
+evolution. As the field matures *Applications* and *Empirical Results* are
+of increasing importance.
+
+The International Conference on Generative Programming: Concepts &
+Experiences
+(GPCE) is a venue for researchers and practitioners interested in techniques
+that use program generation, domain-specific languages, and component
+deployment to increase programmer productivity, improve software quality,
+and shorten the time-to-market of software products. In addition to
+exploring
+cutting-edge techniques of generative software, our goal is to foster
+further
+cross-fertilization between the software engineering and the programming
+languages research communities.
+
+
+
+SUBMISSIONS
+
+We seek research papers of up to 10 pages in SIGPLAN proceedings style
+(sigplanconf.cls, see
+http://www.sigplan.org/authorInformation.htm) reporting original and
+unpublished results of theoretical, empirical, conceptual, or
+experimental research that contribute to scientific knowledge in the
+areas listed below (the PC chair can advise on appropriateness).
+
+4-page short papers and tool demonstrations are also accepted (see website).
+
+
+TOPICS
+
+GPCE seeks contributions on all topics related to generative software and
+its properties. As technology is maturing, this year, we are particularly
+looking for empirical evaluations in this context. Key topics include
+(but are certainly not limited too):
+
+* Generative software
+    Domain-specific languages
+    Product lines
+    Metaprogramming
+    Program synthesis
+    Implementation techniques and tool support
+* Properties of generative software
+    Correctness of generators and generated code
+    Reuse and evolution
+    Modularity, separation of concerns, understandability, and
+maintainability
+    Performance engineering, nonfunctional properties
+    Application areas and engineering practice
+* Empirical evaluations of all topics above
+
+A more detailed list of topics can be found on the website.
+
+Examples of key challenges in the field are
+*   Synthesizing code from declarative specifications
+*   Supporting extensible languages and language embedding
+*   Ensuring correctness and other nonfunctional properties of generated
+code;
+    proving generators correct
+*   Improving error reporting with domain-specific error messages
+*   Reasoning about generators; handling variability-induced complexity in
+    product lines
+*   Providing efficient interpreters and execution languages
+*   Human factors in developing and maintaining generators
+
+Note on empirical evaluations: GPCE is committed to the empirical
+evaluation of generative software. Publishing empirical papers at
+programming-language venues can be challenging. We understand the
+frustration of authors when, for example, reviews simply recommend
+repeating entire experiments with human subjects with slight
+deviations in execution. To alleviate such problems, we have recruited
+forto program committee experts who routinely work with empirical
+methods, and we will actively seek external reviews where
+appropriate. During submissions, authors can optionally indicate that
+a paper contains substantial empirical work, and we will endeavor have
+to the paper reviewed by experts familiar with the empirical research
+methods that are used in the paper. The program-committee discussions
+will reflect on both technical contributions and research methods.
+
+Policy: Incremental improvements over previously published work should
+have been evaluated through systematic, comparative, empirical, or
+experimental evaluation.  Submissions must adhere to SIGPLAN's
+republication policy (http://www.sigplan.org/republicationpolicy.htm).
+Please contact the program chair if you have any questions about how
+this policy applies to your paper (chairs at gpce.org).
+
+
+ORGANIZATION
+
+Chairs (chairs at gpce.org)
+
+General Chair:   Ulrik Pagh Schultz (University of Southern Denmark, DK)
+Program Chair:   Matthew Flatt (University of Utah, US)
+Publicity Chair: Sebastian Erdweg (Technical University of Darmstadt, DE)
+Local Organizer: Ivica Crnkovic (M?lardalen University, SE)
+
+Program Committee
+
+Kenichi Asai (Ochanomizu University, JP)
+Emilie Balland (INRIA, FR)
+Edwin Brady (University of St Andrews, UK)
+Dave Clarke (Uppsala University, SE and KU Leuven, BE)
+Ewen Denney (SGT / NASA, US)
+Sebastian Erdweg (Technical University of Darmstadt, DE)
+Martin Erwig (Oregon State University, US)
+Alessandro Garcia (Pontif?cia Universidade Cat?lica do Rio de Janeiro, BR)
+Anir?ddh? Gokh?l? (Vanderbilt University, US)
+Jeff Gray (University of Alabama, US)
+Stefan Hanenberg (Universit?t Duisburg-Essen, DE)
+Jaakko J?rvi (Texas A&M University, US)
+Jean-Marc J?z?quel (IRISA-University of Rennes, FR)
+Emerson Murphy-Hill (North Carolina State University, US)
+Nathaniel Nystrom (University of Lugano, CH)
+Bruno C. d. S. Oliveira (Hong Kong University, HK)
+Hridesh Rajan (Iowa State University, US)
+M?rcio Ribeiro (Universidade Federal de Alagoas, BR)
+Tiark Rompf (Oracle Labs and EPFL, CH)
+Grigore Rosu (University of Illinois at Urbana-Champaign, US)
+Norbert Siegmund (Universit?t Passau, DE)
+Christian Skalka (University of Vermont, US)
+Scott Smith (Johns Hopkins University, US)
+?ric Tanter (Universidad de Chile, CL)
+Emina Torlak (University of California Berkeley, US)
+Laurence Tratt (King's College, UK)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140206/dfe47fe1/attachment.html>
+
+From thewilli at googlemail.com  Tue Feb 11 15:58:36 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Tue, 11 Feb 2014 15:58:36 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with Spoofax
+	nightly
+Message-ID: <CAKj=25iyZTmc7fySMfpXp6YcuGcPOhjneCnMo3Rwjw-QYW_oGg@mail.gmail.com>
+
+Hi!
+
+I am working on a project which uses the Spoofax version retrieved using
+Eclipse Juno and the "Spoofax nightly update" site.
+
+To debug some strange errors I need to debug the strj calls triggered by
+Spoofax and some custom code. Can you tell me where I find the (right
+version of the) source code of the Java classes in the strategoxt.jar file
+bundled with Spoofax?
+
+Thanks in advance and regards,
+
+Willi
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140211/e1c1e1f5/attachment.html>
+
+From v.vergu at gmail.com  Tue Feb 11 17:09:23 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Tue, 11 Feb 2014 17:09:23 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+ Spoofax nightly
+In-Reply-To: <CAKj=25iyZTmc7fySMfpXp6YcuGcPOhjneCnMo3Rwjw-QYW_oGg@mail.gmail.com>
+References: <CAKj=25iyZTmc7fySMfpXp6YcuGcPOhjneCnMo3Rwjw-QYW_oGg@mail.gmail.com>
+Message-ID: <CADgb0fhmFt-7XT7H8xoUxDw2OpnWrcoV+QCNm5+-aip7mO0zHw@mail.gmail.com>
+
+Hi Willi,
+
+The source code of the manually implemented Java classes that are part of
+Stratego/XT are hosted at
+https://github.com/metaborg/strategoxt/tree/java-bootstrap/strategoxt/stratego-libraries/java-backend.
+Most of the Java classes in the shipped jar of Stratego/XT are actually
+generated as Stratego/XT is bootstrapped. This will make debugging the Java
+code quite inconvenient.
+
+Perhaps there is a way to avoid debugging generated code. Can you explain
+what your are trying to achieve and where you run into trouble?
+
+Regards,
+
+Vlad
+
+
+On 11 February 2014 15:58, Willi Eggeling <thewilli at googlemail.com> wrote:
+
+> Hi!
+>
+> I am working on a project which uses the Spoofax version retrieved using
+> Eclipse Juno and the "Spoofax nightly update" site.
+>
+> To debug some strange errors I need to debug the strj calls triggered by
+> Spoofax and some custom code. Can you tell me where I find the (right
+> version of the) source code of the Java classes in the strategoxt.jar file
+> bundled with Spoofax?
+>
+> Thanks in advance and regards,
+>
+> Willi
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140211/452a598d/attachment.html>
+
+From thewilli at googlemail.com  Wed Feb 12 23:40:37 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Wed, 12 Feb 2014 23:40:37 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+	Spoofax nightly
+Message-ID: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+
+Hi Vlad,
+
+> The source code of the manually implemented Java classes that are part of
+> Stratego/XT are hosted at
+> https://github.com/metaborg/strategoxt/tree/java-bootstrap/strategoxt/stratego-libraries/java-backend.
+
+Great to know, thank you!
+
+> Perhaps there is a way to avoid debugging generated code. Can you explain
+> what your are trying to achieve and where you run into trouble?
+
+Unfortunately I couldn?t create a minimal working example for my problem, but I am trying to describe it:
+
+The project I am working on is using the Stratego definition
+
+	is-layout = ?' ' + ?'\t' + ?'\n' + ?'\r?
+
+There is no other definition of this rule and everything works fine unless I import another Stratego module which does not use this rule at all. As the other module works well in another Spoofax project there shouldn?t be any problem with its content (e.g. parse errors). When invoking the ?strj? strategy an Exception is thrown (message: ?error: redefining external definition: is-layout\n giving-up?).
+
+I really don?t understand this error as ?is-layout? is not declared external. Additionally the import module doesn?t use ?is-layout? at all.
+
+Do you have any idea what could lead to such an error?
+
+Thanks and regards,
+
+Willi
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140212/1301052d/attachment.html>
+
+From v.vergu at gmail.com  Thu Feb 13 00:22:34 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 13 Feb 2014 00:22:34 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+ Spoofax nightly
+In-Reply-To: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+References: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+Message-ID: <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+
+>
+> Hi Willi,
+>
+
+The source code of the manually implemented Java classes that are part of
+> Stratego/XT are hosted at
+>
+> https://github.com/metaborg/strategoxt/tree/java-bootstrap/strategoxt/stratego-libraries/java-backend
+> .
+>
+>
+> Great to know, thank you!
+>
+> Perhaps there is a way to avoid debugging generated code. Can you explain
+> what your are trying to achieve and where you run into trouble?
+>
+>
+> Unfortunately I couldn't create a minimal working example for my problem,
+> but I am trying to describe it:
+>
+> The project I am working on is using the Stratego definition
+>
+> is-layout = ?' ' + ?'\t' + ?'\n' + ?'\r'
+>
+> There is no other definition of this rule and everything works fine unless
+> I import another Stratego module which does not use this rule at all. As
+> the other module works well in another Spoofax project there shouldn't be
+> any problem with its content (e.g. parse errors). When invoking the "strj"
+> strategy an Exception is thrown (message: "error: redefining external
+> definition: is-layout\n giving-up").
+>
+> I really don't understand this error as "is-layout" is not declared
+> external. Additionally the import module doesn't use "is-layout" at all.
+>
+> Do you have any idea what could lead to such an error?
+>
+
+I suspect that both of your modules define a strategy is-layout. In short
+in Stratego all definitions of a strategy or rule have to be compiled
+together (as in at the same time).  The underlying reason is that the
+multiple definitions need to be merged as alternatives under the same name.
+
+If your intention is to obtain a combination of the is-layout strategies
+from the two modules then you can import the second module into the first
+one (if you have access to the source code of that second module).
+
+If your intention is to obtain non-conflicting is-layout rules then you
+have to rename one set of the is-layout definitions.
+
+If you want to extend the is-layout strategy from the second module and you
+do not have access to its source code then Stratego has some strategy
+extension/override mechanism. You can find an example of that at
+https://github.com/metaborg/strategoxt/blob/java-bootstrap/strategoxt/stratego-libraries/java-backend/java/runtime/org/strategoxt/lang/compat/override/strc-compat.str?source=cc.
+It doesn't matter what the pack-stratego-parse-stratego rule does, but
+there exists another declaration in a module whose source is not available
+at compile time. The "extend" keyword indicates an extension (an additional
+definition) and the "proceed" keyword calls into the extended strategy. The
+counterpart to extend is override.
+
+I hope this helps to narrow down the problem.
+
+Regards,
+
+Vlad
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140213/fe430a2c/attachment.html>
+
+From thewilli at googlemail.com  Thu Feb 13 22:29:10 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Thu, 13 Feb 2014 22:29:10 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+	Spoofax nightly
+In-Reply-To: <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+References: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+ <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+Message-ID: <8DA34D4F-0614-47CE-8B21-EAD43618C67B@googlemail.com>
+
+Hi Vlad,
+
+> I suspect that both of your modules define a strategy is-layout. In short in Stratego all definitions of a strategy or rule have to be compiled together (as in at the same time).  The underlying reason is that the multiple definitions need to be merged as alternatives under the same name.
+
+The second module neither (re-) defines that strategy nor does it use it. That?s why I just don?t understand that error at all (and the fact why that strategy should be 'external?).
+
+Inspired by your answer I just tried to rename that strategy to something different - and everything works. Thank you! Nevertheless I still don?t understand why this happens. The invocation of strj looks like
+
+	Context ctx = org.strategoxt.strj.strj.init();
+	ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+
+where cmd just defines the main module and some input paths. If I search all files within that input path for the string 'is-layout? I just find one file - the one which defines and uses it. 
+
+While I can go on with my project I am still interested in how this can happen. Do you have any idea what can lead to that error? Maybe some "magic cache" somewhere?
+
+Regards and thank you again,
+
+Willi
+
+From thewilli at googlemail.com  Thu Feb 13 22:55:45 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Thu, 13 Feb 2014 22:55:45 +0100
+Subject: [Stratego Users] strj: invoking Java strategies from Stratego
+	strategies
+Message-ID: <5131AE5E-D915-4EC5-85FA-F41BDC6422B2@googlemail.com>
+
+Hi!
+
+I want to invoke a strategy which is implemented as a subclass of org.strategoxt.lang.Strategy from within a regular Stratego module with strj but without using Spoofax. The same strategy and module do work when using Spoofax.
+
+I already added an "external? definition for that strategy to the module where it should be invoked. When using Spoofax I need to create a subclass of org.strategoxt.lang.JavaInteropRegisterer called ?InteropRegisterer? which specifies the strategy classes to add to its parent constructor.  
+
+I tried to create such a class in my project as well, but when invoking the strj strategy like
+
+	Context ctx = org.strategoxt.strj.strj.init();
+	ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+
+a 'StrategoException? is thrown ("Not found: name-of-my-strategy?). 
+
+Is there a way to register a Java strategy by hand? How does the standard mechanism of finding and retrieving Java strategies work?
+
+Thank you in advance and regards,
+
+Willi
+
+From v.vergu at gmail.com  Thu Feb 13 23:34:15 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 13 Feb 2014 23:34:15 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+ Spoofax nightly
+In-Reply-To: <8DA34D4F-0614-47CE-8B21-EAD43618C67B@googlemail.com>
+References: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+ <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+ <8DA34D4F-0614-47CE-8B21-EAD43618C67B@googlemail.com>
+Message-ID: <CADgb0fhTnkKoTZvm6dYG4=N4ShqiaktKwJf_GQvsH8rG7MhUTQ@mail.gmail.com>
+
+Hi Willi,
+
+I'm glad that you've found a solution. To my knowledge this can only happen
+if there exists another module that defines a strategy with the same and
+that module is not available in source code form. Perhaps that second
+module itself imported a module which defined the is-layout strategy.
+
+Just to clarify, the error you are getting does not mean that there is a
+strategy defined as "external", but just that it is defined in an external
+module (i.e. not available in source form at compile time).
+
+Regards,
+
+Vlad
+
+
+On 13 February 2014 22:29, Willi Eggeling <thewilli at googlemail.com> wrote:
+
+> Hi Vlad,
+>
+> > I suspect that both of your modules define a strategy is-layout. In
+> short in Stratego all definitions of a strategy or rule have to be compiled
+> together (as in at the same time).  The underlying reason is that the
+> multiple definitions need to be merged as alternatives under the same name.
+>
+> The second module neither (re-) defines that strategy nor does it use it.
+> That's why I just don't understand that error at all (and the fact why that
+> strategy should be 'external').
+>
+> Inspired by your answer I just tried to rename that strategy to something
+> different - and everything works. Thank you! Nevertheless I still don't
+> understand why this happens. The invocation of strj looks like
+>
+>         Context ctx = org.strategoxt.strj.strj.init();
+>         ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+>
+> where cmd just defines the main module and some input paths. If I search
+> all files within that input path for the string 'is-layout' I just find one
+> file - the one which defines and uses it.
+>
+> While I can go on with my project I am still interested in how this can
+> happen. Do you have any idea what can lead to that error? Maybe some "magic
+> cache" somewhere?
+>
+> Regards and thank you again,
+>
+> Willi
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Vlad Vergu
+
+GSM: +31640227013
+Tel: +40318106222
+Korvezeestraat 448
+2628DV Delft
+Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140213/86e77dcd/attachment.html>
+
+From v.vergu at gmail.com  Thu Feb 13 23:39:13 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Thu, 13 Feb 2014 23:39:13 +0100
+Subject: [Stratego Users] strj: invoking Java strategies from Stratego
+	strategies
+In-Reply-To: <5131AE5E-D915-4EC5-85FA-F41BDC6422B2@googlemail.com>
+References: <5131AE5E-D915-4EC5-85FA-F41BDC6422B2@googlemail.com>
+Message-ID: <CADgb0fi1w6gH4Ox3YvefY_iRTo-j2wiNwxufgxo7evHTMZipGg@mail.gmail.com>
+
+Hi Willi,
+
+Perhaps http://metaborg.org/wiki/stratego/external-strategies can help.
+
+The Jar file containing all of the external (Java) strategies and the
+InteropRegisterer needs to be loaded in the Stratego runtime
+(HybridInterpreter) prior to the strategy becoming available. As far as i
+know (1) this needs to happen through a Jar and (2) there is no easy
+straightforward way of manually registering the external strategy.
+
+In short you need to a reference to the HybridInterpreter and ask it to
+load your Jar containing your externals.
+
+Regards,
+
+Vlad
+
+
+On 13 February 2014 22:55, Willi Eggeling <thewilli at googlemail.com> wrote:
+
+> Hi!
+>
+> I want to invoke a strategy which is implemented as a subclass of
+> org.strategoxt.lang.Strategy from within a regular Stratego module with
+> strj but without using Spoofax. The same strategy and module do work when
+> using Spoofax.
+>
+> I already added an "external" definition for that strategy to the module
+> where it should be invoked. When using Spoofax I need to create a subclass
+> of org.strategoxt.lang.JavaInteropRegisterer called 'InteropRegisterer'
+> which specifies the strategy classes to add to its parent constructor.
+>
+> I tried to create such a class in my project as well, but when invoking
+> the strj strategy like
+>
+>         Context ctx = org.strategoxt.strj.strj.init();
+>         ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+>
+> a 'StrategoException' is thrown ("Not found: name-of-my-strategy").
+>
+> Is there a way to register a Java strategy by hand? How does the standard
+> mechanism of finding and retrieving Java strategies work?
+>
+> Thank you in advance and regards,
+>
+> Willi
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+Vlad Vergu
+
+GSM: +31640227013
+Tel: +40318106222
+Korvezeestraat 448
+2628DV Delft
+Netherlands
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140213/8c35dddd/attachment.html>
+
+From thewilli at googlemail.com  Fri Feb 14 20:25:39 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Fri, 14 Feb 2014 20:25:39 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+	Spoofax nightly
+In-Reply-To: <CADgb0fhTnkKoTZvm6dYG4=N4ShqiaktKwJf_GQvsH8rG7MhUTQ@mail.gmail.com>
+References: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+ <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+ <8DA34D4F-0614-47CE-8B21-EAD43618C67B@googlemail.com>
+ <CADgb0fhTnkKoTZvm6dYG4=N4ShqiaktKwJf_GQvsH8rG7MhUTQ@mail.gmail.com>
+Message-ID: <072DF002-635D-4C34-9F65-7651E7B62A0E@googlemail.com>
+
+Hi Vlad,
+
+that was new to me. I always thought that a strategy which is defined in another module just overrides the original one. 
+
+Is there any chance to trace that error down to a single line of code or at least to a module file? 
+
+Regards,
+
+Willi
+
+Am 13.02.2014 um 23:34 schrieb Vlad Vergu <v.vergu at gmail.com>:
+
+> Hi Willi,
+> 
+> I'm glad that you've found a solution. To my knowledge this can only happen if there exists another module that defines a strategy with the same and that module is not available in source code form. Perhaps that second module itself imported a module which defined the is-layout strategy.
+> 
+> Just to clarify, the error you are getting does not mean that there is a strategy defined as "external", but just that it is defined in an external module (i.e. not available in source form at compile time).
+> 
+> Regards,
+> 
+> Vlad
+> 
+> 
+> On 13 February 2014 22:29, Willi Eggeling <thewilli at googlemail.com> wrote:
+> Hi Vlad,
+> 
+> > I suspect that both of your modules define a strategy is-layout. In short in Stratego all definitions of a strategy or rule have to be compiled together (as in at the same time).  The underlying reason is that the multiple definitions need to be merged as alternatives under the same name.
+> 
+> The second module neither (re-) defines that strategy nor does it use it. That?s why I just don?t understand that error at all (and the fact why that strategy should be 'external?).
+> 
+> Inspired by your answer I just tried to rename that strategy to something different - and everything works. Thank you! Nevertheless I still don?t understand why this happens. The invocation of strj looks like
+> 
+>         Context ctx = org.strategoxt.strj.strj.init();
+>         ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+> 
+> where cmd just defines the main module and some input paths. If I search all files within that input path for the string 'is-layout? I just find one file - the one which defines and uses it.
+> 
+> While I can go on with my project I am still interested in how this can happen. Do you have any idea what can lead to that error? Maybe some "magic cache" somewhere?
+> 
+> Regards and thank you again,
+> 
+> Willi
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> -- 
+> Vlad Vergu
+> 
+> GSM: +31640227013
+> Tel: +40318106222
+> Korvezeestraat 448
+> 2628DV Delft
+> Netherlands
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140214/7700033f/attachment.html>
+
+From thewilli at googlemail.com  Fri Feb 14 20:51:42 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Fri, 14 Feb 2014 20:51:42 +0100
+Subject: [Stratego Users] strj: invoking Java strategies from Stratego
+	strategies
+In-Reply-To: <CADgb0fi1w6gH4Ox3YvefY_iRTo-j2wiNwxufgxo7evHTMZipGg@mail.gmail.com>
+References: <5131AE5E-D915-4EC5-85FA-F41BDC6422B2@googlemail.com>
+ <CADgb0fi1w6gH4Ox3YvefY_iRTo-j2wiNwxufgxo7evHTMZipGg@mail.gmail.com>
+Message-ID: <84AA7678-C1BA-4B57-8FDE-2699BE6665B8@googlemail.com>
+
+Hi Vlad,
+
+using the loadJars() method of the HybridInterpreter class worked for me, thank you!
+
+Regards,
+
+Willi
+
+Am 13.02.2014 um 23:39 schrieb Vlad Vergu <v.vergu at gmail.com>:
+
+> Hi Willi,
+> 
+> Perhaps http://metaborg.org/wiki/stratego/external-strategies can help.
+> 
+> The Jar file containing all of the external (Java) strategies and the InteropRegisterer needs to be loaded in the Stratego runtime (HybridInterpreter) prior to the strategy becoming available. As far as i know (1) this needs to happen through a Jar and (2) there is no easy straightforward way of manually registering the external strategy.
+> 
+> In short you need to a reference to the HybridInterpreter and ask it to load your Jar containing your externals.
+> 
+> Regards,
+> 
+> Vlad
+> 
+> 
+> On 13 February 2014 22:55, Willi Eggeling <thewilli at googlemail.com> wrote:
+> Hi!
+> 
+> I want to invoke a strategy which is implemented as a subclass of org.strategoxt.lang.Strategy from within a regular Stratego module with strj but without using Spoofax. The same strategy and module do work when using Spoofax.
+> 
+> I already added an "external? definition for that strategy to the module where it should be invoked. When using Spoofax I need to create a subclass of org.strategoxt.lang.JavaInteropRegisterer called ?InteropRegisterer? which specifies the strategy classes to add to its parent constructor.
+> 
+> I tried to create such a class in my project as well, but when invoking the strj strategy like
+> 
+>         Context ctx = org.strategoxt.strj.strj.init();
+>         ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+> 
+> a 'StrategoException? is thrown ("Not found: name-of-my-strategy?).
+> 
+> Is there a way to register a Java strategy by hand? How does the standard mechanism of finding and retrieving Java strategies work?
+> 
+> Thank you in advance and regards,
+> 
+> Willi
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> 
+> 
+> -- 
+> Vlad Vergu
+> 
+> GSM: +31640227013
+> Tel: +40318106222
+> Korvezeestraat 448
+> 2628DV Delft
+> Netherlands
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140214/cb7fa8fc/attachment.html>
+
+From v.vergu at gmail.com  Fri Feb 14 21:26:23 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Fri, 14 Feb 2014 21:26:23 +0100
+Subject: [Stratego Users] Sourcecode of strategoxt.jar bundled with
+	Spoofax nightly
+In-Reply-To: <072DF002-635D-4C34-9F65-7651E7B62A0E@googlemail.com>
+References: <BE9F72F3-75C4-4272-A779-C0EEC4E0B1C8@googlemail.com>
+ <CADgb0fgFfNjr4MobBgO4aCbP9sFVnVjC+m7+-YpVTt-byNvT2g@mail.gmail.com>
+ <8DA34D4F-0614-47CE-8B21-EAD43618C67B@googlemail.com>
+ <CADgb0fhTnkKoTZvm6dYG4=N4ShqiaktKwJf_GQvsH8rG7MhUTQ@mail.gmail.com>
+ <072DF002-635D-4C34-9F65-7651E7B62A0E@googlemail.com>
+Message-ID: <70E3B435-D6A1-4BA4-9189-563101015C4C@gmail.com>
+
+Hi Willi,
+
+As far as i know there is no way of knowing which module defined the strategy (because the definition may already have originated from the merging of multiple definitions), but i may be wrong.
+
+Regards,
+
+Vlad
+
+On 14 Feb 2014, at 20:25, Willi Eggeling <thewilli at googlemail.com> wrote:
+
+> Hi Vlad,
+> 
+> that was new to me. I always thought that a strategy which is defined in another module just overrides the original one. 
+> 
+> Is there any chance to trace that error down to a single line of code or at least to a module file? 
+> 
+> Regards,
+> 
+> Willi
+> 
+> Am 13.02.2014 um 23:34 schrieb Vlad Vergu <v.vergu at gmail.com>:
+> 
+>> Hi Willi,
+>> 
+>> I'm glad that you've found a solution. To my knowledge this can only happen if there exists another module that defines a strategy with the same and that module is not available in source code form. Perhaps that second module itself imported a module which defined the is-layout strategy.
+>> 
+>> Just to clarify, the error you are getting does not mean that there is a strategy defined as "external", but just that it is defined in an external module (i.e. not available in source form at compile time).
+>> 
+>> Regards,
+>> 
+>> Vlad
+>> 
+>> 
+>> On 13 February 2014 22:29, Willi Eggeling <thewilli at googlemail.com> wrote:
+>> Hi Vlad,
+>> 
+>> > I suspect that both of your modules define a strategy is-layout. In short in Stratego all definitions of a strategy or rule have to be compiled together (as in at the same time).  The underlying reason is that the multiple definitions need to be merged as alternatives under the same name.
+>> 
+>> The second module neither (re-) defines that strategy nor does it use it. That?s why I just don?t understand that error at all (and the fact why that strategy should be 'external?).
+>> 
+>> Inspired by your answer I just tried to rename that strategy to something different - and everything works. Thank you! Nevertheless I still don?t understand why this happens. The invocation of strj looks like
+>> 
+>>         Context ctx = org.strategoxt.strj.strj.init();
+>>         ctx.invokeStrategyCLI(main_strj_0_0.instance, "strj", cmd);
+>> 
+>> where cmd just defines the main module and some input paths. If I search all files within that input path for the string 'is-layout? I just find one file - the one which defines and uses it.
+>> 
+>> While I can go on with my project I am still interested in how this can happen. Do you have any idea what can lead to that error? Maybe some "magic cache" somewhere?
+>> 
+>> Regards and thank you again,
+>> 
+>> Willi
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> 
+>> 
+>> 
+>> -- 
+>> Vlad Vergu
+>> 
+>> GSM: +31640227013
+>> Tel: +40318106222
+>> Korvezeestraat 448
+>> 2628DV Delft
+>> Netherlands
+>> 
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140214/eba82955/attachment-0001.html>
+
+From thewilli at googlemail.com  Sun Feb 16 20:57:56 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Sun, 16 Feb 2014 20:57:56 +0100
+Subject: [Stratego Users] strj: WriteToBinaryFile does not output ATerm in
+	BAF
+Message-ID: <D849ED0D-49ED-4483-8BD9-5DD5C0F3446E@googlemail.com>
+
+Hi,
+
+please consider the following two lines of Stratego code.
+	
+	!Id("SomeId?)
+	<WriteToBinaryFile>("id.bin?,<id>)
+
+While this outputs the ATerm in Binary ATerm Format (BAF) when used with the stratego shell or strc, the ATerm is written as-is in plain text when it is being run using strj (the version bundled with the current ?nightly? Spoofax version).
+
+Should this work with strj? Do you know if there is any possibility to output the term in BAF using strj? The baffle tool seems not be available in the Java environment either. 
+
+Thank you in advance and regards,
+
+Willi
+
+From v.vergu at gmail.com  Sun Feb 16 22:44:58 2014
+From: v.vergu at gmail.com (Vlad Vergu)
+Date: Sun, 16 Feb 2014 22:44:58 +0100
+Subject: [Stratego Users] strj: WriteToBinaryFile does not output ATerm
+	in BAF
+In-Reply-To: <D849ED0D-49ED-4483-8BD9-5DD5C0F3446E@googlemail.com>
+References: <D849ED0D-49ED-4483-8BD9-5DD5C0F3446E@googlemail.com>
+Message-ID: <DA7D1CE1-D200-414F-9B24-1F8E33FDC007@gmail.com>
+
+Hi Willi,
+
+The BAF format is deprecated.
+
+While i have never used the WriteToBinaryFile strategy myself, i had a quick look at the source code for the Java version (http://codefinder.org/viewFile/SSL_write_term_to_stream_baf/https%3A%5Es%5Esgithub.com%5Esmetaborg%5Esmb-exec%5Esblob%5Esmaster%5Esorg.spoofax.interpreter.core%5Essrc%5Esmain%5Esjava%5Esorg%5Esspoofax%5Esinterpreter%5Eslibrary%5Esssl%5EsSSL_write_term_to_stream_baf.java/Spoofax#18) and the FIXME explains what is happening in Java.
+
+We use SAF instead of BAF now. 
+
+You should really have a look at https://github.com/metaborg/spt/blob/master/org.strategoxt.imp.testing/editor/java/org/strategoxt/imp/testing/SpoofaxTestingJSGLRI.java#L202, while the use of that method is quite obscure, it is probably the most concise example of term -> stream -> term conversion.
+
+There are multiple ways you can get this done.
+
+One is to implement your own two external Java strategies for serializing and deserializing using that example. You can also look at the two primitives https://github.com/metaborg/mb-exec/blob/master/org.spoofax.interpreter.core/src/main/java/org/spoofax/interpreter/library/ssl/SSL_write_term_to_stream_saf.java and https://github.com/metaborg/mb-exec/blob/master/org.spoofax.interpreter.core/src/main/java/org/spoofax/interpreter/library/ssl/SSL_read_term_from_stream.java, they basically do the same thing. 
+
+Unfortunately the two primitives are not visible from Stratego directly, but they are registered and you can call probably call them with PRIM. Example at https://github.com/metaborg/strategoxt/blob/java-bootstrap/strategoxt/stratego-libraries/java-backend/trans/s2j.str?source=cc#L982
+
+Having mentioned these options, i would personally write my own strategies in Java based on the cloneTerm example.
+
+Regards,
+
+Vlad
+
+
+On 16 Feb 2014, at 20:57, Willi Eggeling <thewilli at googlemail.com> wrote:
+
+> WriteToBinaryFile
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140216/a98ccd2f/attachment.html>
+
+From thewilli at googlemail.com  Mon Feb 17 11:30:12 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Mon, 17 Feb 2014 11:30:12 +0100
+Subject: [Stratego Users] strj: WriteToBinaryFile does not output ATerm
+	in BAF
+In-Reply-To: <DA7D1CE1-D200-414F-9B24-1F8E33FDC007@gmail.com>
+References: <D849ED0D-49ED-4483-8BD9-5DD5C0F3446E@googlemail.com>
+ <DA7D1CE1-D200-414F-9B24-1F8E33FDC007@gmail.com>
+Message-ID: <CAAF614F-1AB0-42CC-87D4-596C4C17C076@googlemail.com>
+
+Hi Vlad,
+
+> Having mentioned these options, i would personally write my own strategies in Java based on the cloneTerm example.
+
+
+That?s what I?ll do with the help of the links you provided, thank you again!
+
+Best regards,
+
+Willi
+
+Am 16.02.2014 um 22:44 schrieb Vlad Vergu <v.vergu at gmail.com>:
+
+> Hi Willi,
+> 
+> The BAF format is deprecated.
+> 
+> While i have never used the WriteToBinaryFile strategy myself, i had a quick look at the source code for the Java version (http://codefinder.org/viewFile/SSL_write_term_to_stream_baf/https%3A%5Es%5Esgithub.com%5Esmetaborg%5Esmb-exec%5Esblob%5Esmaster%5Esorg.spoofax.interpreter.core%5Essrc%5Esmain%5Esjava%5Esorg%5Esspoofax%5Esinterpreter%5Eslibrary%5Esssl%5EsSSL_write_term_to_stream_baf.java/Spoofax#18) and the FIXME explains what is happening in Java.
+> 
+> We use SAF instead of BAF now. 
+> 
+> You should really have a look at https://github.com/metaborg/spt/blob/master/org.strategoxt.imp.testing/editor/java/org/strategoxt/imp/testing/SpoofaxTestingJSGLRI.java#L202, while the use of that method is quite obscure, it is probably the most concise example of term -> stream -> term conversion.
+> 
+> There are multiple ways you can get this done.
+> 
+> One is to implement your own two external Java strategies for serializing and deserializing using that example. You can also look at the two primitives https://github.com/metaborg/mb-exec/blob/master/org.spoofax.interpreter.core/src/main/java/org/spoofax/interpreter/library/ssl/SSL_write_term_to_stream_saf.java and https://github.com/metaborg/mb-exec/blob/master/org.spoofax.interpreter.core/src/main/java/org/spoofax/interpreter/library/ssl/SSL_read_term_from_stream.java, they basically do the same thing. 
+> 
+> Unfortunately the two primitives are not visible from Stratego directly, but they are registered and you can call probably call them with PRIM. Example at https://github.com/metaborg/strategoxt/blob/java-bootstrap/strategoxt/stratego-libraries/java-backend/trans/s2j.str?source=cc#L982
+> 
+> Having mentioned these options, i would personally write my own strategies in Java based on the cloneTerm example.
+> 
+> Regards,
+> 
+> Vlad
+> 
+> 
+> On 16 Feb 2014, at 20:57, Willi Eggeling <thewilli at googlemail.com> wrote:
+> 
+>> WriteToBinaryFile
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140217/381227e1/attachment.html>
+
+From thewilli at googlemail.com  Mon Feb 17 12:21:48 2014
+From: thewilli at googlemail.com (Willi Eggeling)
+Date: Mon, 17 Feb 2014 12:21:48 +0100
+Subject: [Stratego Users] dryad / aterm2class: possible bug in build
+	transformation process?
+Message-ID: <2D937F01-E013-46E9-ABD1-ABE6CEAB106F@googlemail.com>
+
+Hi!
+
+I am trying to use dryad in order to write Java class files which were transformed using strj and the dryad library.
+
+Dryad uses the Java class ATerm2Class for writing class files. That class parses the passed file and converts it into an ATerm. The term is then passed to the convert(ATerm) method of the class ClassClassifier (source: see below) which returns a Java representation of the ?termified" class.
+
+Unfortunately this doesn?t work as the method always fails with "Cannot match ClassFile? (else branch of pattern matching at the top). As the output term seemed well-formed for me, I decompiled the class ClassClassifier (see below for full source). 
+
+The shortened conde looks like
+
+	public JavaClass convert(ATerm aterm){
+		bool flag = false;
+		if(aterm.getType() == 3){
+			//some code
+			flag = true;
+		}
+		if(flag){
+			//some code
+		}else{
+			error: "Cannot match ClassFile"
+		}
+		return _;
+	}
+
+The type of the provided ATerm therefore need to be ?3? which is "REAL" according to the ATerm code and documentation. Shouldn?t this be "1" (APPL / Application)?
+
+Do you know how I can get this working or where I can find a working version of this code?
+
+Sources:
+ClassClassifier (original source before build process): https://svn.strategoxt.org/repos/StrategoXT/dryad/trunk/classtree/bridge/str/classtree/classify/ClassClassifier.javaterm
+ClassClassifier (decompiled version): https://gist.github.com/anonymous/9048592
+Sample ATerm representation of a Java class: https://gist.github.com/anonymous/9048866
+Contents of the last successful dryad build (aterm2class.jar): http://hydra.nixos.org/build/7643006/contents/1
+
+Thanks in advance and regards,
+
+Willi
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140217/3e8cc224/attachment.html>
+
+From kralikba at msn.com  Tue Feb 25 22:10:04 2014
+From: kralikba at msn.com (=?iso-8859-2?Q?Kr=E1lik_Barnab=E1s?=)
+Date: Tue, 25 Feb 2014 22:10:04 +0100
+Subject: [Stratego Users] Concrete syntax - unexpected whitespace?
+Message-ID: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+
+Hi, 
+
+I'm having some problems with concrete syntax; I'm getting the following
+error:
+
+stratego.jvm.helper:
+        [java] [ Main | error ]
+D:/eclipse-workspaces/operla/operla/trans/operators.str: Syntax error near
+unexpected character ' ' at line 200, column 25
+
+operators.str:200 is:
+
+    opspec: $|[ ~A_attr( ~a_name, ~i_prec) ]| ->
+
+Column 25 is the one before the second ~.
+
+I have a populated operators.meta file and a relevant sdf module; some
+excerpts from which are as follows:
+
+	context-free syntax
+		"$|[" Expr "]|" -> Term [[StrategoHost]] {
+cons("ToMetaExpr"), prefer }
+
+	variables
+		"~a_" [A-Za-z0-9]+ -> Atom { prefer }
+
+I import LAYOUT-rules only from StrategoMix.
+Do you have any ideas about what might be going wrong?
+
+Regards
+Barnab?s Kr?lik
+
+
+From E.Visser at tudelft.nl  Thu Feb 27 14:16:03 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 27 Feb 2014 14:16:03 +0100
+Subject: [Stratego Users] Concrete syntax - unexpected whitespace?
+In-Reply-To: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+References: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+Message-ID: <CAFaCHU36WMPXesG5UFoOXOdt4zNY_aoABtcaR2JFqnf3Fvm5DQ@mail.gmail.com>
+
+Hi Kr?lik,
+
+I think we need to see more of the syntax definition to understand what is
+going on.
+
+-- Eelco
+
+
+On Tue, Feb 25, 2014 at 10:10 PM, Kr?lik Barnab?s <kralikba at msn.com> wrote:
+
+> Hi,
+>
+> I'm having some problems with concrete syntax; I'm getting the following
+> error:
+>
+> stratego.jvm.helper:
+>         [java] [ Main | error ]
+> D:/eclipse-workspaces/operla/operla/trans/operators.str: Syntax error near
+> unexpected character ' ' at line 200, column 25
+>
+> operators.str:200 is:
+>
+>     opspec: $|[ ~A_attr( ~a_name, ~i_prec) ]| ->
+>
+> Column 25 is the one before the second ~.
+>
+> I have a populated operators.meta file and a relevant sdf module; some
+> excerpts from which are as follows:
+>
+>         context-free syntax
+>                 "$|[" Expr "]|" -> Term [[StrategoHost]] {
+> cons("ToMetaExpr"), prefer }
+>
+>         variables
+>                 "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+>
+> I import LAYOUT-rules only from StrategoMix.
+> Do you have any ideas about what might be going wrong?
+>
+> Regards
+> Barnab?s Kr?lik
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140227/628fa38c/attachment.html>
+
+From kralikba at msn.com  Fri Feb 28 09:02:19 2014
+From: kralikba at msn.com (=?UTF-8?Q?Kr=C3=A1lik_Barnab=C3=A1s?=)
+Date: Fri, 28 Feb 2014 09:02:19 +0100
+Subject: [Stratego Users] Concrete syntax - unexpected whitespace?
+In-Reply-To: <CAFaCHU36WMPXesG5UFoOXOdt4zNY_aoABtcaR2JFqnf3Fvm5DQ@mail.gmail.com>
+References: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+ <CAFaCHU36WMPXesG5UFoOXOdt4zNY_aoABtcaR2JFqnf3Fvm5DQ@mail.gmail.com>
+Message-ID: <DUB406-EAS434C9CDF89FE652910B217BD0820@phx.gbl>
+
+Hi Eelco,
+
+ 
+
+Which part of the syntax would be interesting? The SDF module that creates the mix and is included through the .meta file is:
+
+ 
+
+module Stratego-operla
+
+ 
+
+imports 
+
+       StrategoMix[StrategoHost]
+
+       operlasyn
+
+       
+
+exports      
+
+       context-free start-symbols Module[[StrategoHost]]
+
+       
+
+       context-free syntax
+
+             "$|[" Expr "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             "$f|[" Form "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             "$m|[" Module "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             
+
+       variables
+
+             "~"    [A-Za-z0-9]+ -> Expr { prefer }
+
+             
+
+             "~f_" [A-Za-z0-9]+ -> Form { prefer }
+
+             "~A_" [A-Za-z0-9]+ -> ATOM { prefer }
+
+             "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+
+             "~V_" [A-Za-z0-9]+ -> VAR  { prefer }
+
+             "~v_" [A-Za-z0-9]+ -> Var  { prefer }
+
+             "~I_" [A-Za-z0-9]+ -> INT  { prefer }
+
+             "~i_" [A-Za-z0-9]+ -> Integer { prefer }
+
+ 
+
+The main module of my language is the imported ?operlasyn?; approx. 350 lines of SDF3. This module does not include LAYOUT-rules and the ?~? character is not allowed in any of the rules outside a string literal?s quotes.
+
+What intrigues me the most is that the mentioned operators.str has once (!) been successfully parsed after clicking ?show abstract syntax? ? ?successfully? meaning that the subterm corresponding to $|[ ? ]| has been a correct piece of AST from my language. However, the build still failed. I have cleaned and rebuilt the project, and everything is failing since then.
+
+ 
+
+Regards
+
+Barnab?s
+
+ 
+
+From: Users [mailto:users-bounces at strategoxt.org] On Behalf Of Eelco Visser
+Sent: Thursday, February 27, 2014 2:16 PM
+To: Stratego/XT Users; Stratego/XT Users
+Subject: Re: [Stratego Users] Concrete syntax - unexpected whitespace?
+
+ 
+
+Hi Kr?lik,
+
+I think we need to see more of the syntax definition to understand what is going on.
+
+-- Eelco
+
+ 
+
+On Tue, Feb 25, 2014 at 10:10 PM, Kr?lik Barnab?s <kralikba at msn.com <mailto:kralikba at msn.com> > wrote:
+
+Hi,
+
+I'm having some problems with concrete syntax; I'm getting the following
+error:
+
+stratego.jvm.helper:
+        [java] [ Main | error ]
+D:/eclipse-workspaces/operla/operla/trans/operators.str: Syntax error near
+unexpected character ' ' at line 200, column 25
+
+operators.str:200 is:
+
+    opspec: $|[ ~A_attr( ~a_name, ~i_prec) ]| ->
+
+Column 25 is the one before the second ~.
+
+I have a populated operators.meta file and a relevant sdf module; some
+excerpts from which are as follows:
+
+        context-free syntax
+                "$|[" Expr "]|" -> Term [[StrategoHost]] {
+cons("ToMetaExpr"), prefer }
+
+        variables
+                "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+
+I import LAYOUT-rules only from StrategoMix.
+Do you have any ideas about what might be going wrong?
+
+Regards
+Barnab?s Kr?lik
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org <mailto:Users at strategoxt.org> 
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl <mailto:e.visser at tudelft.nl> 
+Web: http://eelcovisser.org  
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/175caa39/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Fri Feb 28 09:18:06 2014
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 28 Feb 2014 09:18:06 +0100
+Subject: [Stratego Users] Concrete syntax - unexpected whitespace?
+In-Reply-To: <DUB406-EAS434C9CDF89FE652910B217BD0820@phx.gbl>
+References: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+ <CAFaCHU36WMPXesG5UFoOXOdt4zNY_aoABtcaR2JFqnf3Fvm5DQ@mail.gmail.com>
+ <DUB406-EAS434C9CDF89FE652910B217BD0820@phx.gbl>
+Message-ID: <CAFaCHU13XLVxSsAOGTmcRMRZDJdCrDAfRvS9X8B5S1n10_+Tog@mail.gmail.com>
+
+Hi Kr?lik,
+
+Can you send me the entire syntax definition, or even the entire project.
+That is easier than speculating what might be wrong.
+
+-- Eelco
+
+
+On Fri, Feb 28, 2014 at 9:02 AM, Kr?lik Barnab?s <kralikba at msn.com> wrote:
+
+> Hi Eelco,
+>
+>
+>
+> Which part of the syntax would be interesting? The SDF module that creates
+> the mix and is included through the .meta file is:
+>
+>
+>
+> *module* Stratego-operla
+>
+>
+>
+> *imports*
+>
+>        StrategoMix[StrategoHost]
+>
+>        operlasyn
+>
+>
+>
+> *exports*
+>
+>        *context-free* *start-symbols* Module[[StrategoHost]]
+>
+>
+>
+>        *context-free* *syntax*
+>
+>              "$|[" Expr "]|" -> Term [[StrategoHost]] { *cons*(
+> "ToMetaExpr"), *prefer* }
+>
+>              "$f|[" Form "]|" -> Term [[StrategoHost]] { *cons*(
+> "ToMetaExpr"), *prefer* }
+>
+>              "$m|[" Module "]|" -> Term [[StrategoHost]] { *cons*(
+> "ToMetaExpr"), *prefer* }
+>
+>
+>
+>        *variables*
+>
+>              "~"    [A-Za-z0-9]+ -> Expr { *prefer* }
+>
+>
+>
+>              "~f_" [A-Za-z0-9]+ -> Form { *prefer* }
+>
+>              "~A_" [A-Za-z0-9]+ -> ATOM { *prefer* }
+>
+>              "~a_" [A-Za-z0-9]+ -> Atom { *prefer* }
+>
+>              "~V_" [A-Za-z0-9]+ -> VAR  { *prefer* }
+>
+>              "~v_" [A-Za-z0-9]+ -> Var  { *prefer* }
+>
+>              "~I_" [A-Za-z0-9]+ -> INT  { *prefer* }
+>
+>              "~i_" [A-Za-z0-9]+ -> Integer { *prefer* }
+>
+>
+>
+> The main module of my language is the imported ?operlasyn?; approx. 350
+> lines of SDF3. This module does not include LAYOUT-rules and the ?~?
+> character is not allowed in any of the rules outside a string literal?s
+> quotes.
+>
+> What intrigues me the most is that the mentioned operators.str has once
+> (!) been successfully parsed after clicking ?show abstract syntax? ?
+> ?successfully? meaning that the subterm corresponding to $|[ ? ]| has been
+> a correct piece of AST from my language. However, the build still failed. I
+> have cleaned and rebuilt the project, and everything is failing since then.
+>
+>
+>
+> Regards
+>
+> Barnab?s
+>
+>
+>
+> *From:* Users [mailto:users-bounces at strategoxt.org] *On Behalf Of *Eelco
+> Visser
+> *Sent:* Thursday, February 27, 2014 2:16 PM
+> *To:* Stratego/XT Users; Stratego/XT Users
+> *Subject:* Re: [Stratego Users] Concrete syntax - unexpected whitespace?
+>
+>
+>
+> Hi Kr?lik,
+>
+> I think we need to see more of the syntax definition to understand what is
+> going on.
+>
+> -- Eelco
+>
+>
+>
+> On Tue, Feb 25, 2014 at 10:10 PM, Kr?lik Barnab?s <kralikba at msn.com>
+> wrote:
+>
+> Hi,
+>
+> I'm having some problems with concrete syntax; I'm getting the following
+> error:
+>
+> stratego.jvm.helper:
+>         [java] [ Main | error ]
+> D:/eclipse-workspaces/operla/operla/trans/operators.str: Syntax error near
+> unexpected character ' ' at line 200, column 25
+>
+> operators.str:200 is:
+>
+>     opspec: $|[ ~A_attr( ~a_name, ~i_prec) ]| ->
+>
+> Column 25 is the one before the second ~.
+>
+> I have a populated operators.meta file and a relevant sdf module; some
+> excerpts from which are as follows:
+>
+>         context-free syntax
+>                 "$|[" Expr "]|" -> Term [[StrategoHost]] {
+> cons("ToMetaExpr"), prefer }
+>
+>         variables
+>                 "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+>
+> I import LAYOUT-rules only from StrategoMix.
+> Do you have any ideas about what might be going wrong?
+>
+> Regards
+> Barnab?s Kr?lik
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+>
+> --
+>
+> Professor of Computer Science at Delft University of Technology
+>
+> Email: e.visser at tudelft.nl
+> Web: http://eelcovisser.org
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl
+Web: http://eelcovisser.org
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/8ff16091/attachment-0001.html>
+
+From kralikba at msn.com  Fri Feb 28 09:38:41 2014
+From: kralikba at msn.com (=?UTF-8?Q?Kr=C3=A1lik_Barnab=C3=A1s?=)
+Date: Fri, 28 Feb 2014 09:38:41 +0100
+Subject: [Stratego Users] Concrete syntax - unexpected whitespace?
+In-Reply-To: <CAFaCHU13XLVxSsAOGTmcRMRZDJdCrDAfRvS9X8B5S1n10_+Tog@mail.gmail.com>
+References: <DUB406-EAS971EF8C5E23304A0F1E5D0D0810@phx.gbl>
+ <CAFaCHU36WMPXesG5UFoOXOdt4zNY_aoABtcaR2JFqnf3Fvm5DQ@mail.gmail.com>
+ <DUB406-EAS434C9CDF89FE652910B217BD0820@phx.gbl>
+ <CAFaCHU13XLVxSsAOGTmcRMRZDJdCrDAfRvS9X8B5S1n10_+Tog@mail.gmail.com>
+Message-ID: <DUB406-EAS20BEC44B735E036034FDDED0820@phx.gbl>
+
+Pardon me; in my earlier e-mail I have accidentally sent an older version of the files.
+
+ 
+
+Regards
+
+Barnab?s
+
+ 
+
+ 
+
+From: Users [mailto:users-bounces at strategoxt.org] On Behalf Of Eelco Visser
+Sent: Friday, February 28, 2014 9:18 AM
+To: Stratego/XT Users; Stratego/XT Users
+Subject: Re: [Stratego Users] Concrete syntax - unexpected whitespace?
+
+ 
+
+Hi Kr?lik,
+
+Can you send me the entire syntax definition, or even the entire project. That is easier than speculating what might be wrong.
+
+-- Eelco
+
+ 
+
+On Fri, Feb 28, 2014 at 9:02 AM, Kr?lik Barnab?s <kralikba at msn.com <mailto:kralikba at msn.com> > wrote:
+
+Hi Eelco,
+
+ 
+
+Which part of the syntax would be interesting? The SDF module that creates the mix and is included through the .meta file is:
+
+ 
+
+module Stratego-operla
+
+ 
+
+imports 
+
+       StrategoMix[StrategoHost]
+
+       operlasyn
+
+       
+
+exports      
+
+       context-free start-symbols Module[[StrategoHost]]
+
+       
+
+       context-free syntax
+
+             "$|[" Expr "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             "$f|[" Form "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             "$m|[" Module "]|" -> Term [[StrategoHost]] { cons("ToMetaExpr"), prefer }
+
+             
+
+       variables
+
+             "~"    [A-Za-z0-9]+ -> Expr { prefer }
+
+             
+
+             "~f_" [A-Za-z0-9]+ -> Form { prefer }
+
+             "~A_" [A-Za-z0-9]+ -> ATOM { prefer }
+
+             "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+
+             "~V_" [A-Za-z0-9]+ -> VAR  { prefer }
+
+             "~v_" [A-Za-z0-9]+ -> Var  { prefer }
+
+             "~I_" [A-Za-z0-9]+ -> INT  { prefer }
+
+             "~i_" [A-Za-z0-9]+ -> Integer { prefer }
+
+ 
+
+The main module of my language is the imported ?operlasyn?; approx. 350 lines of SDF3. This module does not include LAYOUT-rules and the ?~? character is not allowed in any of the rules outside a string literal?s quotes.
+
+What intrigues me the most is that the mentioned operators.str has once (!) been successfully parsed after clicking ?show abstract syntax? ? ?successfully? meaning that the subterm corresponding to $|[ ? ]| has been a correct piece of AST from my language. However, the build still failed. I have cleaned and rebuilt the project, and everything is failing since then.
+
+ 
+
+Regards
+
+Barnab?s
+
+ 
+
+From: Users [mailto:users-bounces at strategoxt.org <mailto:users-bounces at strategoxt.org> ] On Behalf Of Eelco Visser
+Sent: Thursday, February 27, 2014 2:16 PM
+To: Stratego/XT Users; Stratego/XT Users
+Subject: Re: [Stratego Users] Concrete syntax - unexpected whitespace?
+
+ 
+
+Hi Kr?lik,
+
+I think we need to see more of the syntax definition to understand what is going on.
+
+-- Eelco
+
+ 
+
+On Tue, Feb 25, 2014 at 10:10 PM, Kr?lik Barnab?s <kralikba at msn.com <mailto:kralikba at msn.com> > wrote:
+
+Hi,
+
+I'm having some problems with concrete syntax; I'm getting the following
+error:
+
+stratego.jvm.helper:
+        [java] [ Main | error ]
+D:/eclipse-workspaces/operla/operla/trans/operators.str: Syntax error near
+unexpected character ' ' at line 200, column 25
+
+operators.str:200 is:
+
+    opspec: $|[ ~A_attr( ~a_name, ~i_prec) ]| ->
+
+Column 25 is the one before the second ~.
+
+I have a populated operators.meta file and a relevant sdf module; some
+excerpts from which are as follows:
+
+        context-free syntax
+                "$|[" Expr "]|" -> Term [[StrategoHost]] {
+cons("ToMetaExpr"), prefer }
+
+        variables
+                "~a_" [A-Za-z0-9]+ -> Atom { prefer }
+
+I import LAYOUT-rules only from StrategoMix.
+Do you have any ideas about what might be going wrong?
+
+Regards
+Barnab?s Kr?lik
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org <mailto:Users at strategoxt.org> 
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl <mailto:e.visser at tudelft.nl> 
+Web: http://eelcovisser.org  
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org <mailto:Users at strategoxt.org> 
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+-- 
+
+Professor of Computer Science at Delft University of Technology
+
+Email: e.visser at tudelft.nl <mailto:e.visser at tudelft.nl> 
+Web: http://eelcovisser.org  
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/9b41cc6f/attachment-0001.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Stratego-operla.sdf
+Type: application/octet-stream
+Size: 723 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/9b41cc6f/attachment-0004.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: operlasyn.sdf3
+Type: application/octet-stream
+Size: 9030 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/9b41cc6f/attachment-0005.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: operators.str
+Type: application/octet-stream
+Size: 7014 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/9b41cc6f/attachment-0006.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: operators.meta
+Type: application/octet-stream
+Size: 33 bytes
+Desc: not available
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20140228/9b41cc6f/attachment-0007.obj>
+

@@ -1,0 +1,3963 @@
+From dobesv at gmail.com  Mon Dec  3 07:07:31 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Sun, 2 Dec 2012 22:07:31 -0800
+Subject: [Stratego Users] Best practices for error handling/reporting?
+In-Reply-To: <CAFaCHU12+Y37zjwr4qyfuxpGWCp1SMvMNQUBUMuf2gzakNapDQ@mail.gmail.com>
+References: <CADbG_jZPtkQWbj7HTzesuc3Nwmk6q8E1M6L3A-e+wb-sfeCHoA@mail.gmail.com>
+	<CAFaCHU12+Y37zjwr4qyfuxpGWCp1SMvMNQUBUMuf2gzakNapDQ@mail.gmail.com>
+Message-ID: <CADbG_jZJjjB2+VH_Dws9p7-JTNN7oWqzfeaeifE2HLM3zh2JLw@mail.gmail.com>
+
+Thanks, that is very helpful.
+
+Do you have a download link for the NBL paper?  I seem to be having trouble
+finding one.
+
+
+On Thu, Nov 22, 2012 at 1:08 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Dobbes,
+>
+> > I've been struggling a bit with what to do when I get a compiler error.
+>
+> We used to struggle with this problem as well. We have developed a
+> nice paradigm for dealing with errors. This was prompted by the
+> interactive IDE setting that we're addressing with Spoofax. The idea
+> is to separate name resolution, type analysis, and constraint
+> checking, so that the IDE can find as many errors as possible.
+>
+> The Spoofax paper explains how it is done:
+> http://researchr.org/publication/KatsV10. Another example is the paper
+> "Static consistency checking of web applications with WebDSL"
+> (http://researchr.org/publication/HemelGKV11). The "Code generation by
+> model transformation" (http://researchr.org/publication/HemelKGV-2010)
+> paper explains how to combine type checking/analysis with
+> transformation.
+>
+> Note that the name resolution stage in these papers is now replaced
+> with NBL definitions
+>
+>     http://researchr.org/publication/KonatKWV13
+>
+> To answer your question more specifically: type analysis is defined by
+> means of a type-of strategy that computes the type of an expression.
+> If an expression has not type, type-of just fails.
+>
+> cheers,
+>
+> -- Eelco
+>
+> > Some kinds of error I can kind of "recover" from - for example, if
+> there's a
+> > type error I just report it (using a dynamic rule to store it for later)
+> and
+> > continue as if the type was correct.
+> >
+> > Sometimes things kind of pile up, though - if a variable is not defined I
+> > return the "bottom" type which seems OK in theory - until I try to use
+> it as
+> > the target of a function call (Bottom has no information about
+> parameters or
+> > return types) or some other operation that requires a particular kind of
+> > type.  I *think* can continue to handle this Bottom type approach without
+> > going insane, but the fun doesn't stop there.
+> >
+> > Now I run into a case where a function is passed the wrong number of
+> > parameters.  Clearly I just want to "bail out" of the whole function
+> calling
+> > process and return nothing from that expression but I am not sure how to
+> > best to "unwind" out of the strategy that is calculating the values of
+> > arguments back to the root of where we're computing the call while
+> reporting
+> > an error.  It almost seems like some sort of "exception" system would be
+> > appropriate.
+> >
+> > On the other hand, it may be that you've already found a comfortable way
+> to
+> > handle errors ... so here I am asking for any helpful tips or pointers
+> you
+> > might have!
+> >
+> > Thanks,
+> >
+> > Dobes
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121202/20995a47/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Dec  3 08:29:14 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 3 Dec 2012 08:29:14 +0100
+Subject: [Stratego Users] Best practices for error handling/reporting?
+In-Reply-To: <CADbG_jZJjjB2+VH_Dws9p7-JTNN7oWqzfeaeifE2HLM3zh2JLw@mail.gmail.com>
+References: <CADbG_jZPtkQWbj7HTzesuc3Nwmk6q8E1M6L3A-e+wb-sfeCHoA@mail.gmail.com>
+	<CAFaCHU12+Y37zjwr4qyfuxpGWCp1SMvMNQUBUMuf2gzakNapDQ@mail.gmail.com>
+	<CADbG_jZJjjB2+VH_Dws9p7-JTNN7oWqzfeaeifE2HLM3zh2JLw@mail.gmail.com>
+Message-ID: <CAFaCHU1Ngp0jjNz98ReKmo=fnZ7Oo=1CiCsd8zJabexJKd1-cQ@mail.gmail.com>
+
+http://www.lclnet.nl/publications/name-binding-language.pdf
+
+On Mon, Dec 3, 2012 at 7:07 AM, Dobes Vandermeer <dobesv at gmail.com> wrote:
+> Thanks, that is very helpful.
+>
+> Do you have a download link for the NBL paper?  I seem to be having trouble
+> finding one.
+>
+>
+> On Thu, Nov 22, 2012 at 1:08 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Dobbes,
+>>
+>> > I've been struggling a bit with what to do when I get a compiler error.
+>>
+>> We used to struggle with this problem as well. We have developed a
+>> nice paradigm for dealing with errors. This was prompted by the
+>> interactive IDE setting that we're addressing with Spoofax. The idea
+>> is to separate name resolution, type analysis, and constraint
+>> checking, so that the IDE can find as many errors as possible.
+>>
+>> The Spoofax paper explains how it is done:
+>> http://researchr.org/publication/KatsV10. Another example is the paper
+>> "Static consistency checking of web applications with WebDSL"
+>> (http://researchr.org/publication/HemelGKV11). The "Code generation by
+>> model transformation" (http://researchr.org/publication/HemelKGV-2010)
+>> paper explains how to combine type checking/analysis with
+>> transformation.
+>>
+>> Note that the name resolution stage in these papers is now replaced
+>> with NBL definitions
+>>
+>>     http://researchr.org/publication/KonatKWV13
+>>
+>> To answer your question more specifically: type analysis is defined by
+>> means of a type-of strategy that computes the type of an expression.
+>> If an expression has not type, type-of just fails.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> > Some kinds of error I can kind of "recover" from - for example, if
+>> > there's a
+>> > type error I just report it (using a dynamic rule to store it for later)
+>> > and
+>> > continue as if the type was correct.
+>> >
+>> > Sometimes things kind of pile up, though - if a variable is not defined
+>> > I
+>> > return the "bottom" type which seems OK in theory - until I try to use
+>> > it as
+>> > the target of a function call (Bottom has no information about
+>> > parameters or
+>> > return types) or some other operation that requires a particular kind of
+>> > type.  I *think* can continue to handle this Bottom type approach
+>> > without
+>> > going insane, but the fun doesn't stop there.
+>> >
+>> > Now I run into a case where a function is passed the wrong number of
+>> > parameters.  Clearly I just want to "bail out" of the whole function
+>> > calling
+>> > process and return nothing from that expression but I am not sure how to
+>> > best to "unwind" out of the strategy that is calculating the values of
+>> > arguments back to the root of where we're computing the call while
+>> > reporting
+>> > an error.  It almost seems like some sort of "exception" system would be
+>> > appropriate.
+>> >
+>> > On the other hand, it may be that you've already found a comfortable way
+>> > to
+>> > handle errors ... so here I am asking for any helpful tips or pointers
+>> > you
+>> > might have!
+>> >
+>> > Thanks,
+>> >
+>> > Dobes
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>>
+>>
+>>
+>> --
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From dobesv at gmail.com  Mon Dec  3 20:02:36 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Mon, 3 Dec 2012 11:02:36 -0800
+Subject: [Stratego Users] C++ Backend?
+Message-ID: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+
+Hi,
+
+I want to generate C++ code so that I can pass that along to the various
+platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+looking at doing this myself but I wondered if there's already a good
+mapping from terms to C++ code somewhere.
+
+Or, if it is better / simpler to just generate text from an annotated AST
+myself.
+
+Any tips / experience to share on this?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/ef642469/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Mon Dec  3 20:22:49 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Mon, 03 Dec 2012 20:22:49 +0100
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+Message-ID: <50BCFC09.3030008@student.tudelft.nl>
+
+Hi Dobbes,
+
+IMHO you can solve it by using the following approaches:
+
+- generate strings (quick & dirty way) by using string interpolation. I 
+would recommend this as it is easy to implement.
+
+- use a model2model transformation in which you rewrite your DSL AST to 
+a CPP AST, and then run a pretty printer at the result. (But abstract 
+CPP syntax fragments might become very big even for small DSL programs)
+
+- use concrete CPP syntax in stratego, but I think this is complicated 
+as you have to mix your DSL grammar with the Stratego grammar
+http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+(I have no experience with this approach but it should be possible)
+
+Hope this helps.
+
+Kind Regards,
+
+Wouter
+
+
+On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+> Hi,
+>
+> I want to generate C++ code so that I can pass that along to the 
+> various platform specific compilers (ARM C compiler, MSVC, gcc, 
+> clang).  I was looking at doing this myself but I wondered if there's 
+> already a good mapping from terms to C++ code somewhere.
+>
+> Or, if it is better / simpler to just generate text from an annotated 
+> AST myself.
+>
+> Any tips / experience to share on this?
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/2973b009/attachment.html>
+
+From dobesv at gmail.com  Mon Dec  3 20:27:44 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Mon, 3 Dec 2012 11:27:44 -0800
+Subject: [Stratego Users] SDF: {"Foo"} instead of {cons("Foo")} in
+	production rule
+Message-ID: <CADbG_jZUXpEJQM+ovARJ=J4x=Jg117cX-nDaTb0C4VXRU1FUkw@mail.gmail.com>
+
+In the NBL paper it shows example rules where it says {"Foo"} instead of
+{cons("Foo")}.  It seems like a nice syntax but the version of Spoofax I'm
+using doesn't support it.  Is that syntax supported in a newer build of
+Spoofax?  If so, where would I get it?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/9ff7110e/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Mon Dec  3 20:31:35 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Mon, 3 Dec 2012 19:31:35 +0000
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <50BCFC09.3030008@student.tudelft.nl>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+
+Hi Dobbes,
+
+there is no general way "to transform terms to C++ code", because this transformation heavily depends on your source language (your terms represent ASTs of programs in this source language). Wouter's answer already sketched the general options for code generation.
+
+In addition to Wouter's answer:
+
+- use a model2model transformation in which you rewrite your DSL AST to a CPP AST, and then run a pretty printer at the result. (But abstract CPP syntax fragments might become very big even for small DSL programs)
+
+- use concrete CPP syntax in stratego, but I think this is complicated as you have to mix your DSL grammar with the Stratego grammar
+http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+(I have no experience with this approach but it should be possible)
+
+Both approaches require an SDF grammar for C++ (or a relevant subset). The interesting question here is, if and where such a grammar exists.
+
+Regards, Guido Wachsmuth
+
+On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+Hi,
+
+I want to generate C++ code so that I can pass that along to the various platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was looking at doing this myself but I wondered if there's already a good mapping from terms to C++ code somewhere.
+
+Or, if it is better / simpler to just generate text from an annotated AST myself.
+
+Any tips / experience to share on this?
+
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/7e70da45/attachment.html>
+
+From gabrielkonat at gmail.com  Mon Dec  3 20:31:04 2012
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Mon, 3 Dec 2012 20:31:04 +0100
+Subject: [Stratego Users] SDF: {"Foo"} instead of {cons("Foo")} in
+ production rule
+In-Reply-To: <CADbG_jZUXpEJQM+ovARJ=J4x=Jg117cX-nDaTb0C4VXRU1FUkw@mail.gmail.com>
+References: <CADbG_jZUXpEJQM+ovARJ=J4x=Jg117cX-nDaTb0C4VXRU1FUkw@mail.gmail.com>
+Message-ID: <CAOipTuiDxjovXiei-da01L-HOV_6wFv_QkbZmDe7gM9P=5K5Qg@mail.gmail.com>
+
+The unstable version of Spoofax supports that, plus a preliminary version
+of NBL. Use http://spoofax.org/update/unstable as update URL.
+
+On 3 December 2012 20:27, Dobes Vandermeer <dobesv at gmail.com> wrote:
+> In the NBL paper it shows example rules where it says {"Foo"} instead of
+> {cons("Foo")}.  It seems like a nice syntax but the version of Spoofax I'm
+> using doesn't support it.  Is that syntax supported in a newer build of
+> Spoofax?  If so, where would I get it?
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/6e4657e9/attachment.html>
+
+From gabrielkonat at gmail.com  Mon Dec  3 20:34:08 2012
+From: gabrielkonat at gmail.com (=?UTF-8?Q?Gabri=C3=ABl_Konat?=)
+Date: Mon, 3 Dec 2012 20:34:08 +0100
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <50BCFC09.3030008@student.tudelft.nl>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+Message-ID: <CAOipTugAYJb4sw5J4-PQpRfG+eEcy9u-AtJ4ZbCF=TNnxBxp3Q@mail.gmail.com>
+
+There's a C++ grammar in SDF at
+http://www.lrde.epita.fr/cgi-bin/twiki/view/Transformers/CxxTransformers(and
+a pretty printer as well I think), but I've never tried it myself.
+You could use that for model to model transformations, maybe using concrete
+syntax.
+
+On 3 December 2012 20:22, Wouter van Koppen <
+w.p.vankoppen at student.tudelft.nl> wrote:
+
+> **
+> Hi Dobbes,
+>
+> IMHO you can solve it by using the following approaches:
+>
+> - generate strings (quick & dirty way) by using string interpolation. I
+> would recommend this as it is easy to implement.
+>
+> - use a model2model transformation in which you rewrite your DSL AST to a
+> CPP AST, and then run a pretty printer at the result. (But abstract CPP
+> syntax fragments might become very big even for small DSL programs)
+>
+> - use concrete CPP syntax in stratego, but I think this is complicated as
+> you have to mix your DSL grammar with the Stratego grammar
+> http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+> (I have no experience with this approach but it should be possible)
+>
+> Hope this helps.
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+>
+> Hi,
+>
+>  I want to generate C++ code so that I can pass that along to the various
+> platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+> looking at doing this myself but I wondered if there's already a good
+> mapping from terms to C++ code somewhere.
+>
+>  Or, if it is better / simpler to just generate text from an annotated
+> AST myself.
+>
+>  Any tips / experience to share on this?
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing listUsers at strategoxt.orghttps://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/915e2c88/attachment-0001.html>
+
+From chrismelman at hotmail.com  Mon Dec  3 20:37:44 2012
+From: chrismelman at hotmail.com (Chris Melman)
+Date: Mon, 3 Dec 2012 20:37:44 +0100
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>,
+	<50BCFC09.3030008@student.tudelft.nl>,
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+Message-ID: <BAY146-W3098A3EC25AF912CE7F456AA400@phx.gbl>
+
+
+
+ There is a list of sdf grammers which mensions C++ grammerhttp://www.program-transformation.org/Sdf/SdfGrammars however don't have a clue what the state might be of the list / grammerFrom: G.H.Wachsmuth at tudelft.nl
+To: users at strategoxt.org
+Date: Mon, 3 Dec 2012 19:31:35 +0000
+Subject: Re: [Stratego Users] C++ Backend?
+
+
+
+
+
+
+Hi Dobbes,
+
+
+
+there is no general way "to transform terms to C++ code", because this transformation heavily depends on your source language (your terms represent ASTs of programs in this source language). Wouter's answer already sketched the general options for code
+ generation.
+
+
+
+In addition to Wouter's answer:
+
+
+
+
+- use a model2model transformation in which you rewrite your DSL AST to a CPP AST, and then run a pretty printer at the result. (But abstract CPP syntax fragments might become very big even for small DSL programs)
+
+
+
+- use concrete CPP syntax in stratego, but I think this is complicated as you have to mix your DSL grammar with the Stratego grammar
+
+
+http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+
+(I have no experience with this approach but it should be possible)
+
+
+
+
+
+
+Both approaches require an SDF grammar for C++ (or a relevant subset). The interesting question here is, if and where such a grammar exists.
+
+
+
+Regards, Guido Wachsmuth
+
+
+
+On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+
+
+Hi,
+
+
+
+I want to generate C++ code so that I can pass that along to the various platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was looking at doing this myself but I wondered if there's already a good mapping from terms to C++ code somewhere.
+
+
+
+Or, if it is better / simpler to just generate text from an annotated AST myself.
+
+
+
+Any tips / experience to share on this?
+
+
+
+
+
+
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+  
+
+
+_______________________________________________
+
+Users mailing list
+
+Users at strategoxt.org
+
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+
+
+
+
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org
+https://mailman.st.ewi.tudelft.nl/listinfo/users 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121203/29b94d3f/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Dec  4 14:23:47 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 4 Dec 2012 07:23:47 -0600
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+Message-ID: <CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+
+Several C++ grammars have been constructed with SDF in building
+transformation systems for that language. The problem with those
+endevours is that that the syntax of C++ is context-sensitive and
+complicated. (And the semantics (with templates) is even hairier.) I
+would not recommend building a transformation system for C++ again.
+
+However, for generating programs the situation is a bit simpler. You
+can make an SDF definition for a reasonable subset of C++, perhaps
+ignoring some of the hairy issues. A starting point might be the
+grammar from the CodeBoost project:
+
+    http://codeboost.org/
+
+-- Eelco
+
+
+
+On Mon, Dec 3, 2012 at 8:31 PM, Guido Wachsmuth - EWI
+<G.H.Wachsmuth at tudelft.nl> wrote:
+> Hi Dobbes,
+>
+> there is no general way "to transform terms to C++ code", because this
+> transformation heavily depends on your source language (your terms represent
+> ASTs of programs in this source language). Wouter's answer already sketched
+> the general options for code generation.
+>
+> In addition to Wouter's answer:
+>
+> - use a model2model transformation in which you rewrite your DSL AST to a
+> CPP AST, and then run a pretty printer at the result. (But abstract CPP
+> syntax fragments might become very big even for small DSL programs)
+>
+> - use concrete CPP syntax in stratego, but I think this is complicated as
+> you have to mix your DSL grammar with the Stratego grammar
+> http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+> (I have no experience with this approach but it should be possible)
+>
+>
+> Both approaches require an SDF grammar for C++ (or a relevant subset). The
+> interesting question here is, if and where such a grammar exists.
+>
+> Regards, Guido Wachsmuth
+>
+> On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+>
+> Hi,
+>
+> I want to generate C++ code so that I can pass that along to the various
+> platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+> looking at doing this myself but I wondered if there's already a good
+> mapping from terms to C++ code somewhere.
+>
+> Or, if it is better / simpler to just generate text from an annotated AST
+> myself.
+>
+> Any tips / experience to share on this?
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From anya at anyanka.org  Tue Dec  4 15:06:51 2012
+From: anya at anyanka.org (Anya Helene Bagge)
+Date: Tue, 04 Dec 2012 15:06:51 +0100
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+	<CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+Message-ID: <50BE037B.7070605@anyanka.org>
+
+On 12/04/2012 02:23 PM, Eelco Visser wrote:
+> Several C++ grammars have been constructed with SDF in building
+> transformation systems for that language. The problem with those
+> endevours is that that the syntax of C++ is context-sensitive and
+> complicated. (And the semantics (with templates) is even hairier.) I
+> would not recommend building a transformation system for C++ again.
+>
+> However, for generating programs the situation is a bit simpler. You
+> can make an SDF definition for a reasonable subset of C++, perhaps
+> ignoring some of the hairy issues. A starting point might be the
+> grammar from the CodeBoost project:
+>
+>      http://codeboost.org/
+
+Dobes,
+
+Actually, for generating C++, I think maybe the string template approach 
+might be good ? or possibly defining a simple abstract syntax covering what 
+is needed, and then a pretty-printer for that. Any attempt to describe full 
+C++ in SDF is bound to fail ? though if you have very restricted version 
+C++, you might be able to make an SDF grammar for it and use that for 
+concrete syntax transformations and pretty-printing.
+
+Transformers (as mentioned in a previous email) does have an SDF grammar for 
+C++, but it relies on computationally expensive disambiguation as a separate 
+pass after parsing. Also, it follows the standard C++ grammar closely (e.g., 
+with operator priorities encoded as productions), which makes the AST look 
+horrible.
+
+CodeBoost doesn't have a C++ grammar, but uses an old version of the OpenC++ 
+tool for parsing. It outputs C++ code from an AST using a hand-written 
+pretty-printer. You might be able to reuse the C++ pretty-printer, and 
+transform your code into CodeBoost's AST format.
+
+But, I somewhat doubt you'll be able to get either Transformers or CodeBoost 
+to compile without a lot of work. Which leads us back to the string 
+templates / generating text, and spending some of the time saved on extra 
+testing.
+
+-anya
+> -- Eelco
+>
+>
+>
+> On Mon, Dec 3, 2012 at 8:31 PM, Guido Wachsmuth - EWI
+> <G.H.Wachsmuth at tudelft.nl> wrote:
+>> Hi Dobbes,
+>>
+>> there is no general way "to transform terms to C++ code", because this
+>> transformation heavily depends on your source language (your terms represent
+>> ASTs of programs in this source language). Wouter's answer already sketched
+>> the general options for code generation.
+>>
+>> In addition to Wouter's answer:
+>>
+>> - use a model2model transformation in which you rewrite your DSL AST to a
+>> CPP AST, and then run a pretty printer at the result. (But abstract CPP
+>> syntax fragments might become very big even for small DSL programs)
+>>
+>> - use concrete CPP syntax in stratego, but I think this is complicated as
+>> you have to mix your DSL grammar with the Stratego grammar
+>> http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax
+>> (I have no experience with this approach but it should be possible)
+>>
+>>
+>> Both approaches require an SDF grammar for C++ (or a relevant subset). The
+>> interesting question here is, if and where such a grammar exists.
+>>
+>> Regards, Guido Wachsmuth
+>>
+>> On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+>>
+>> Hi,
+>>
+>> I want to generate C++ code so that I can pass that along to the various
+>> platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+>> looking at doing this myself but I wondered if there's already a good
+>> mapping from terms to C++ code somewhere.
+>>
+>> Or, if it is better / simpler to just generate text from an annotated AST
+>> myself.
+>>
+>> Any tips / experience to share on this?
+>
+>
+>
+
+
+From dobesv at gmail.com  Tue Dec  4 18:28:15 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 4 Dec 2012 09:28:15 -0800
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <50BE037B.7070605@anyanka.org>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+	<CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+	<50BE037B.7070605@anyanka.org>
+Message-ID: <CADbG_jZvOFrsXaeX-R-bhJ1idaoKduxWr3F3PTXf-FCqxaD8gw@mail.gmail.com>
+
+Thanks everyone. I think the string templates will probably be the best
+choice for me right now.
+ On Dec 4, 2012 6:07 AM, "Anya Helene Bagge" <anya at anyanka.org> wrote:
+
+> On 12/04/2012 02:23 PM, Eelco Visser wrote:
+>
+>> Several C++ grammars have been constructed with SDF in building
+>> transformation systems for that language. The problem with those
+>> endevours is that that the syntax of C++ is context-sensitive and
+>> complicated. (And the semantics (with templates) is even hairier.) I
+>> would not recommend building a transformation system for C++ again.
+>>
+>> However, for generating programs the situation is a bit simpler. You
+>> can make an SDF definition for a reasonable subset of C++, perhaps
+>> ignoring some of the hairy issues. A starting point might be the
+>> grammar from the CodeBoost project:
+>>
+>>      http://codeboost.org/
+>>
+>
+> Dobes,
+>
+> Actually, for generating C++, I think maybe the string template approach
+> might be good ? or possibly defining a simple abstract syntax covering what
+> is needed, and then a pretty-printer for that. Any attempt to describe full
+> C++ in SDF is bound to fail ? though if you have very restricted version
+> C++, you might be able to make an SDF grammar for it and use that for
+> concrete syntax transformations and pretty-printing.
+>
+> Transformers (as mentioned in a previous email) does have an SDF grammar
+> for C++, but it relies on computationally expensive disambiguation as a
+> separate pass after parsing. Also, it follows the standard C++ grammar
+> closely (e.g., with operator priorities encoded as productions), which
+> makes the AST look horrible.
+>
+> CodeBoost doesn't have a C++ grammar, but uses an old version of the
+> OpenC++ tool for parsing. It outputs C++ code from an AST using a
+> hand-written pretty-printer. You might be able to reuse the C++
+> pretty-printer, and transform your code into CodeBoost's AST format.
+>
+> But, I somewhat doubt you'll be able to get either Transformers or
+> CodeBoost to compile without a lot of work. Which leads us back to the
+> string templates / generating text, and spending some of the time saved on
+> extra testing.
+>
+> -anya
+>
+>> -- Eelco
+>>
+>>
+>>
+>> On Mon, Dec 3, 2012 at 8:31 PM, Guido Wachsmuth - EWI
+>> <G.H.Wachsmuth at tudelft.nl> wrote:
+>>
+>>> Hi Dobbes,
+>>>
+>>> there is no general way "to transform terms to C++ code", because this
+>>> transformation heavily depends on your source language (your terms
+>>> represent
+>>> ASTs of programs in this source language). Wouter's answer already
+>>> sketched
+>>> the general options for code generation.
+>>>
+>>> In addition to Wouter's answer:
+>>>
+>>> - use a model2model transformation in which you rewrite your DSL AST to a
+>>> CPP AST, and then run a pretty printer at the result. (But abstract CPP
+>>> syntax fragments might become very big even for small DSL programs)
+>>>
+>>> - use concrete CPP syntax in stratego, but I think this is complicated as
+>>> you have to mix your DSL grammar with the Stratego grammar
+>>> http://strategoxt.org/**Stratego/**MetaProgrammingWithConcreteObj**
+>>> ectSyntax<http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax>
+>>> (I have no experience with this approach but it should be possible)
+>>>
+>>>
+>>> Both approaches require an SDF grammar for C++ (or a relevant subset).
+>>> The
+>>> interesting question here is, if and where such a grammar exists.
+>>>
+>>> Regards, Guido Wachsmuth
+>>>
+>>> On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+>>>
+>>> Hi,
+>>>
+>>> I want to generate C++ code so that I can pass that along to the various
+>>> platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+>>> looking at doing this myself but I wondered if there's already a good
+>>> mapping from terms to C++ code somewhere.
+>>>
+>>> Or, if it is better / simpler to just generate text from an annotated AST
+>>> myself.
+>>>
+>>> Any tips / experience to share on this?
+>>>
+>>
+>>
+>>
+>>
+> ______________________________**_________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121204/96cd9c58/attachment.html>
+
+From dobesv at gmail.com  Tue Dec  4 18:35:25 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 4 Dec 2012 09:35:25 -0800
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <CADbG_jZvOFrsXaeX-R-bhJ1idaoKduxWr3F3PTXf-FCqxaD8gw@mail.gmail.com>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+	<CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+	<50BE037B.7070605@anyanka.org>
+	<CADbG_jZvOFrsXaeX-R-bhJ1idaoKduxWr3F3PTXf-FCqxaD8gw@mail.gmail.com>
+Message-ID: <CADbG_jYU+JE0BJ0npq3T0JVMfPuWaE2XMx98g7f3GO5v5FT=QA@mail.gmail.com>
+
+Another approach is might try is outputting to Scheme and use Chicken
+Scheme to output C++ code.
+ On Dec 4, 2012 9:28 AM, "Dobes Vandermeer" <dobesv at gmail.com> wrote:
+
+> Thanks everyone. I think the string templates will probably be the best
+> choice for me right now.
+>  On Dec 4, 2012 6:07 AM, "Anya Helene Bagge" <anya at anyanka.org> wrote:
+>
+>> On 12/04/2012 02:23 PM, Eelco Visser wrote:
+>>
+>>> Several C++ grammars have been constructed with SDF in building
+>>> transformation systems for that language. The problem with those
+>>> endevours is that that the syntax of C++ is context-sensitive and
+>>> complicated. (And the semantics (with templates) is even hairier.) I
+>>> would not recommend building a transformation system for C++ again.
+>>>
+>>> However, for generating programs the situation is a bit simpler. You
+>>> can make an SDF definition for a reasonable subset of C++, perhaps
+>>> ignoring some of the hairy issues. A starting point might be the
+>>> grammar from the CodeBoost project:
+>>>
+>>>      http://codeboost.org/
+>>>
+>>
+>> Dobes,
+>>
+>> Actually, for generating C++, I think maybe the string template approach
+>> might be good ? or possibly defining a simple abstract syntax covering what
+>> is needed, and then a pretty-printer for that. Any attempt to describe full
+>> C++ in SDF is bound to fail ? though if you have very restricted version
+>> C++, you might be able to make an SDF grammar for it and use that for
+>> concrete syntax transformations and pretty-printing.
+>>
+>> Transformers (as mentioned in a previous email) does have an SDF grammar
+>> for C++, but it relies on computationally expensive disambiguation as a
+>> separate pass after parsing. Also, it follows the standard C++ grammar
+>> closely (e.g., with operator priorities encoded as productions), which
+>> makes the AST look horrible.
+>>
+>> CodeBoost doesn't have a C++ grammar, but uses an old version of the
+>> OpenC++ tool for parsing. It outputs C++ code from an AST using a
+>> hand-written pretty-printer. You might be able to reuse the C++
+>> pretty-printer, and transform your code into CodeBoost's AST format.
+>>
+>> But, I somewhat doubt you'll be able to get either Transformers or
+>> CodeBoost to compile without a lot of work. Which leads us back to the
+>> string templates / generating text, and spending some of the time saved on
+>> extra testing.
+>>
+>> -anya
+>>
+>>> -- Eelco
+>>>
+>>>
+>>>
+>>> On Mon, Dec 3, 2012 at 8:31 PM, Guido Wachsmuth - EWI
+>>> <G.H.Wachsmuth at tudelft.nl> wrote:
+>>>
+>>>> Hi Dobbes,
+>>>>
+>>>> there is no general way "to transform terms to C++ code", because this
+>>>> transformation heavily depends on your source language (your terms
+>>>> represent
+>>>> ASTs of programs in this source language). Wouter's answer already
+>>>> sketched
+>>>> the general options for code generation.
+>>>>
+>>>> In addition to Wouter's answer:
+>>>>
+>>>> - use a model2model transformation in which you rewrite your DSL AST to
+>>>> a
+>>>> CPP AST, and then run a pretty printer at the result. (But abstract CPP
+>>>> syntax fragments might become very big even for small DSL programs)
+>>>>
+>>>> - use concrete CPP syntax in stratego, but I think this is complicated
+>>>> as
+>>>> you have to mix your DSL grammar with the Stratego grammar
+>>>> http://strategoxt.org/**Stratego/**MetaProgrammingWithConcreteObj**
+>>>> ectSyntax<http://strategoxt.org/Stratego/MetaProgrammingWithConcreteObjectSyntax>
+>>>> (I have no experience with this approach but it should be possible)
+>>>>
+>>>>
+>>>> Both approaches require an SDF grammar for C++ (or a relevant subset).
+>>>> The
+>>>> interesting question here is, if and where such a grammar exists.
+>>>>
+>>>> Regards, Guido Wachsmuth
+>>>>
+>>>> On 12/03/2012 08:02 PM, Dobes Vandermeer wrote:
+>>>>
+>>>> Hi,
+>>>>
+>>>> I want to generate C++ code so that I can pass that along to the various
+>>>> platform specific compilers (ARM C compiler, MSVC, gcc, clang).  I was
+>>>> looking at doing this myself but I wondered if there's already a good
+>>>> mapping from terms to C++ code somewhere.
+>>>>
+>>>> Or, if it is better / simpler to just generate text from an annotated
+>>>> AST
+>>>> myself.
+>>>>
+>>>> Any tips / experience to share on this?
+>>>>
+>>>
+>>>
+>>>
+>>>
+>> ______________________________**_________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.**tudelft.nl/listinfo/users<https://mailman.st.ewi.tudelft.nl/listinfo/users>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121204/90a8477a/attachment-0001.html>
+
+From ciraci at gmail.com  Wed Dec  5 01:50:34 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 4 Dec 2012 16:50:34 -0800
+Subject: [Stratego Users] Grammar definition question
+In-Reply-To: <EF8B49F1-CF94-46DC-AA7C-AE6C621080C5@oracle.com>
+References: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+	<E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+	<CAGzthGst7Rb2AUMwL=UUuii_Yxe-kHWG0etOgZ7Pm0j5VU5C4w@mail.gmail.com>
+	<EF8B49F1-CF94-46DC-AA7C-AE6C621080C5@oracle.com>
+Message-ID: <CALq5Zdz_BS0NxwdMgEu5o5OObAe4Q0MmSMyECb1i6eV=ibSAuw@mail.gmail.com>
+
+Hi,
+
+Thanks for the help! Does rejecting work also with LAYOUT? I have tired it
+ans seems like it does not work. What I have is comments that start with
+"#" and a pragma def #pragma.
+
+For the comment I simply copied the rule for "//" as
+ "#" ~[\n\r]* ([\n\r] | EOF) -> Comment
+Comment -> LAYOUT
+
+Then defined the rule for pragma:
+"#pragma" -> Pragma
+Pragma -> Comment {reject}
+
+I have also defined a grammar rule for pragma:
+Pragma "gmt" Statement -> PragmaStatement {cons...}
+
+Though, stratego says the following is ambiguous:
+#pragma gmt
+getFoo();
+
+-> it is either statement(getFoo) or pragmastatement(statement(getFoo).
+What can I do here?
+
+Thanks alot!
+
+
+
+On Wed, Nov 28, 2012 at 1:03 PM, Sven Stork <sven.stork at oracle.com> wrote:
+
+> That works too, but if you have more than one keyword it makes sense to
+> group them. You can find a more detailed description here:
+>
+>
+> http://releases.strategoxt.org/strategoxt-manual/unstable/manual/chunk-chapter/tutorial-sdf.html#section-sdf-lexical-identifiers
+>
+> -- Sven
+>
+> On Nov 28, 2012, at 3:23 AM, Andre Vieira wrote:
+>
+> > Shouldnt it be "int" -> ID {Reject} ? ( its a a good idea to reject
+> keywords for ID like lexical sorts )
+> >
+> > On Tue, Nov 27, 2012 at 9:34 PM, Sven Stork <sven.stork at oracle.com>
+> wrote:
+> > Hi,
+> >
+> > you have to explicitly disallow keywords to be parsed as ID. You can do
+> this by using the "reject" annotation:
+> >
+> > "int"                           -> IntType
+> > IntType                 -> ID {reject}
+> >
+> > -- Sven
+> >
+> > On Nov 27, 2012, at 12:28 PM, Selim Ciraci wrote:
+> >
+> > > Hi,
+> > >
+> > > I'm new to spoofax. I'm trying to define a grammar for a C like
+> language. The problem is I'm having a ambiguity problem, which is a bit
+> strange. I have the following lexer rules:
+> > > "int" -> IntType
+> > > ...
+> > >  [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+> > >
+> > > And some rules describing types:
+> > > PrimitiveType -> Type {cons("Type")}
+> > > TypeDefName -> Type {cons("Type")}
+> > > IntType -> PrimitiveType {cons("PrimitiveType")}
+> > > ID -> TypeDefName {cons("TypeDefName")}
+> > >
+> > > According to these rules "int" can be either parsed as
+> PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType
+> comes before the rule ID, so the lexer should detect "int" as IntType not
+> ID. Is that so? If not, how can I fix this error?
+> > >
+> > > Thanks for your help.
+> > > _______________________________________________
+> > > Users mailing list
+> > > Users at strategoxt.org
+> > > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121204/0faf36d1/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Wed Dec  5 02:09:27 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Wed, 5 Dec 2012 01:09:27 +0000
+Subject: [Stratego Users] Grammar definition question
+In-Reply-To: <CALq5Zdz_BS0NxwdMgEu5o5OObAe4Q0MmSMyECb1i6eV=ibSAuw@mail.gmail.com>
+References: <CALq5ZdwzRFP-LRwhob8sJHoNaB-_y1twmUG7V4DZv421-gs9qA@mail.gmail.com>
+	<E5F449C9-A75C-4DE1-97A9-B9B8B169A943@oracle.com>
+	<CAGzthGst7Rb2AUMwL=UUuii_Yxe-kHWG0etOgZ7Pm0j5VU5C4w@mail.gmail.com>
+	<EF8B49F1-CF94-46DC-AA7C-AE6C621080C5@oracle.com>
+	<CALq5Zdz_BS0NxwdMgEu5o5OObAe4Q0MmSMyECb1i6eV=ibSAuw@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8D60C2@SRV364.tudelft.net>
+
+Hi Selim,
+
+the fragment is ambiguous, because "#pragma gmt" can be parsed as a comment. You're rejection rule does not match this. Instead, you can try:
+
+"#" ~[\n\r]* ([\n\r] | EOF) -> Comment
+"#pragma" ~[\n\r]* ([\n\r] | EOF)  -> Comment {reject}
+Comment -> LAYOUT
+
+-- Guido Wachsmuth
+
+On Wed, Nov 28, 2012 at 1:03 PM, Sven Stork <sven.stork at oracle.com<mailto:sven.stork at oracle.com>> wrote:
+That works too, but if you have more than one keyword it makes sense to group them. You can find a more detailed description here:
+
+http://releases.strategoxt.org/strategoxt-manual/unstable/manual/chunk-chapter/tutorial-sdf.html#section-sdf-lexical-identifiers
+
+-- Sven
+
+On Nov 28, 2012, at 3:23 AM, Andre Vieira wrote:
+
+> Shouldnt it be "int" -> ID {Reject} ? ( its a a good idea to reject keywords for ID like lexical sorts )
+>
+> On Tue, Nov 27, 2012 at 9:34 PM, Sven Stork <sven.stork at oracle.com<mailto:sven.stork at oracle.com>> wrote:
+> Hi,
+>
+> you have to explicitly disallow keywords to be parsed as ID. You can do this by using the "reject" annotation:
+>
+> "int"                           -> IntType
+> IntType                 -> ID {reject}
+>
+> -- Sven
+>
+> On Nov 27, 2012, at 12:28 PM, Selim Ciraci wrote:
+>
+> > Hi,
+> >
+> > I'm new to spoofax. I'm trying to define a grammar for a C like language. The problem is I'm having a ambiguity problem, which is a bit strange. I have the following lexer rules:
+> > "int" -> IntType
+> > ...
+> >  [a-zA-Z\_][a-zA-Z0-9\_]* -> ID
+> >
+> > And some rules describing types:
+> > PrimitiveType -> Type {cons("Type")}
+> > TypeDefName -> Type {cons("Type")}
+> > IntType -> PrimitiveType {cons("PrimitiveType")}
+> > ID -> TypeDefName {cons("TypeDefName")}
+> >
+> > According to these rules "int" can be either parsed as PrimitiveType(intType) or TypdeDefName("int"). However, the rule IntType comes before the rule ID, so the lexer should detect "int" as IntType not ID. Is that so? If not, how can I fix this error?
+> >
+> > Thanks for your help.
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org<mailto:Users at strategoxt.org>
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org<mailto:Users at strategoxt.org>
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org<mailto:Users at strategoxt.org>
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121205/375292e5/attachment.html>
+
+From ciraci at gmail.com  Thu Dec  6 19:26:03 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Thu, 6 Dec 2012 10:26:03 -0800
+Subject: [Stratego Users] How to define a counter?
+Message-ID: <CALq5ZdzbRAi+AqDo8jEhP5RbqSrsxy2DeE1bNwPmA_uCtre0wg@mail.gmail.com>
+
+Hi,
+
+I'm trying to rewrite some function names pp -> pp_(i+1). I got a list of
+functions [Function("pp",st*), Function("pp",st*),...]. These are created
+by another rule. I would like rewrite this list such that it becomes
+[Function("pp1",st*), Function("pp2",st*),...].
+
+I tried to create strategies:
+
+iterateCount=
+?funcs*; !"1"=>count; <map(try(increment(|count)))>funcs*
+
+increment(|count)=
+?Function(name,st*); <addS>(count,"1")=>count; <strcat>(name,count)=>name';
+!Function(name',st*)
+
+Though this fails in <addS>(count,"1")=>count; so somehow I cannot rewrite
+count. I tried to write a rule to replace it but that also failed. Such as:
+rewriteCount:
+        s -> s'
+        with
+            s':=<addS>(s,"1")
+
+Any ideas on how to implement a counter?
+
+Best,
+Selim
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121206/52f03313/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Thu Dec  6 20:33:28 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Thu, 6 Dec 2012 19:33:28 +0000
+Subject: [Stratego Users] How to define a counter?
+In-Reply-To: <CALq5ZdzbRAi+AqDo8jEhP5RbqSrsxy2DeE1bNwPmA_uCtre0wg@mail.gmail.com>
+References: <CALq5ZdzbRAi+AqDo8jEhP5RbqSrsxy2DeE1bNwPmA_uCtre0wg@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8D92D9@SRV364.tudelft.net>
+
+Hi Selim,
+
+you can do the following:
+
+1. Get the number of functions in your list:
+	
+	no-of-funs := <length> your-functions
+
+2. Get a list of numbers from 0 to no-of-funs. Use <upto> from the Stratego library.
+
+	numbers := <upto> no-of-funs 
+
+3. Get a list of numbers from 1 to no-of-funs by getting the tail of the previous list of numbers:
+
+	numbers' := <Tl> numbers
+
+4. Zip the list with your functions and the numbers:
+
+	your-new-functions := <zip(add-number-to-fun)> (your-functions, numbers')
+
+	add-number-to-fun: (Function(name, stmts), number) -> Function(name', stmts) where name' := <conc-strings> (name, <int-to-string> num)
+
+You can combine steps 1-3 into a single
+
+	[_|numbers'] := <length; upto> your-functions
+
+On the right-hand side, upto is applied to the result of length. On the left-hand side, numbers' binds to the tail of the resulting list of numbers, dropping the zero.
+
+-- Guido Wachsmuth 
+
+On Dec 6, 2012, at 19:26 , Selim Ciraci <ciraci at gmail.com> wrote:
+
+> Hi,
+> 
+> I'm trying to rewrite some function names pp -> pp_(i+1). I got a list of functions [Function("pp",st*), Function("pp",st*),...]. These are created by another rule. I would like rewrite this list such that it becomes [Function("pp1",st*), Function("pp2",st*),...].
+> 
+> I tried to create strategies: 
+> 
+> iterateCount=
+> ?funcs*; !"1"=>count; <map(try(increment(|count)))>funcs*
+> 
+> increment(|count)=
+> ?Function(name,st*); <addS>(count,"1")=>count; <strcat>(name,count)=>name'; !Function(name',st*)
+> 
+> Though this fails in <addS>(count,"1")=>count; so somehow I cannot rewrite count. I tried to write a rule to replace it but that also failed. Such as:
+> rewriteCount:
+>         s -> s'
+>         with
+>             s':=<addS>(s,"1") 
+> 
+> Any ideas on how to implement a counter?
+> 
+> Best,
+> Selim
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From dobesv at gmail.com  Thu Dec  6 21:11:27 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Thu, 6 Dec 2012 12:11:27 -0800
+Subject: [Stratego Users] How to define a counter?
+In-Reply-To: <CALq5ZdzbRAi+AqDo8jEhP5RbqSrsxy2DeE1bNwPmA_uCtre0wg@mail.gmail.com>
+References: <CALq5ZdzbRAi+AqDo8jEhP5RbqSrsxy2DeE1bNwPmA_uCtre0wg@mail.gmail.com>
+Message-ID: <CADbG_jZ28wG37wbZPTSYNqpjK03Jut0=ZFgGX2VyFERW0q_Png@mail.gmail.com>
+
+Hi Selim,
+
+If you are just trying to generate new unique names and don't care too much
+about the exact numbers appended, you can use
+newname<http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/html/term/string.html#area-in-file("term/string.str",area(50,2,50,48,1642,46))>
+:
+
+rename-funcs = map( \ Function(name,st*) -> Function(<newname> name, st*) \
+)
+
+If you do care what number to put on, try the nmap
+<http://releases.strategoxt.org/docs/api/libstratego-lib/stable/docs/html/collection/list/index.html#area-in-file("collection/list/index.str",area(146,2,147,36,2810,65))>
+strategy:
+
+rename-funcs = nmap( \ (n, Function(name,st*)) -> Function($[[name]_[n]],
+st*) \ | 1)
+
+(Note: there may be bugs in the above examples).
+
+Regards,
+
+Dobes
+
+
+On Thu, Dec 6, 2012 at 10:26 AM, Selim Ciraci <ciraci at gmail.com> wrote:
+
+> Hi,
+>
+> I'm trying to rewrite some function names pp -> pp_(i+1). I got a list of
+> functions [Function("pp",st*), Function("pp",st*),...]. These are created
+> by another rule. I would like rewrite this list such that it becomes
+> [Function("pp1",st*), Function("pp2",st*),...].
+>
+> I tried to create strategies:
+>
+> iterateCount=
+> ?funcs*; !"1"=>count; <map(try(increment(|count)))>funcs*
+>
+> increment(|count)=
+> ?Function(name,st*); <addS>(count,"1")=>count;
+> <strcat>(name,count)=>name'; !Function(name',st*)
+>
+> Though this fails in <addS>(count,"1")=>count; so somehow I cannot rewrite
+> count. I tried to write a rule to replace it but that also failed. Such as:
+> rewriteCount:
+>         s -> s'
+>         with
+>             s':=<addS>(s,"1")
+>
+> Any ideas on how to implement a counter?
+>
+> Best,
+> Selim
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121206/f836a85b/attachment.html>
+
+From sven.stork at oracle.com  Thu Dec  6 23:33:51 2012
+From: sven.stork at oracle.com (Sven Stork)
+Date: Thu, 6 Dec 2012 14:33:51 -0800
+Subject: [Stratego Users] pack-sdf packing depth
+Message-ID: <17585C02-4243-4718-8FDA-E08DC6F69566@oracle.com>
+
+Hi,
+
+I'm just looking into some example grammars which have several level include statement (A includes B, B includes C, etc). I ran the Spoofax in the IDE and the unpack-sdf tool from the command line and it seems that it only include file from the first level but files which have been included transitively. Is there a way to support deep packing with pack-sdf?
+
+Thanks,
+    Sven 
+
+From E.Visser at tudelft.nl  Thu Dec  6 23:55:25 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 6 Dec 2012 23:55:25 +0100
+Subject: [Stratego Users] pack-sdf packing depth
+In-Reply-To: <17585C02-4243-4718-8FDA-E08DC6F69566@oracle.com>
+References: <17585C02-4243-4718-8FDA-E08DC6F69566@oracle.com>
+Message-ID: <CAFaCHU3V8ccttww7mj8LudirUJDzrTwZLiiZ3PaY9cU9X+UZbg@mail.gmail.com>
+
+Hi Sven,
+
+pack-sdf should do transitive imports; are you sure you're not getting that?
+
+-- Eelco
+
+On Thu, Dec 6, 2012 at 11:33 PM, Sven Stork <sven.stork at oracle.com> wrote:
+> I'm just looking into some example grammars which have several level include statement (A includes B, B includes C, etc). I ran the Spoofax in the IDE and the unpack-sdf tool from the command line and it seems that it only include file from the first level but files which have been included transitively. Is there a way to support deep packing with pack-sdf?
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From sven.stork at oracle.com  Fri Dec  7 00:51:52 2012
+From: sven.stork at oracle.com (Sven Stork)
+Date: Thu, 6 Dec 2012 15:51:52 -0800
+Subject: [Stratego Users] pack-sdf packing depth
+In-Reply-To: <CAFaCHU3V8ccttww7mj8LudirUJDzrTwZLiiZ3PaY9cU9X+UZbg@mail.gmail.com>
+References: <17585C02-4243-4718-8FDA-E08DC6F69566@oracle.com>
+	<CAFaCHU3V8ccttww7mj8LudirUJDzrTwZLiiZ3PaY9cU9X+UZbg@mail.gmail.com>
+Message-ID: <E10F2314-1CDF-4BD6-8FB2-7F0CE92CD069@oracle.com>
+
+I think you are right, I just used the wrong start file .
+
+-- Sven 
+
+On Dec 6, 2012, at 2:55 PM, Eelco Visser wrote:
+
+> Hi Sven,
+> 
+> pack-sdf should do transitive imports; are you sure you're not getting that?
+> 
+> -- Eelco
+> 
+> On Thu, Dec 6, 2012 at 11:33 PM, Sven Stork <sven.stork at oracle.com> wrote:
+>> I'm just looking into some example grammars which have several level include statement (A includes B, B includes C, etc). I ran the Spoofax in the IDE and the unpack-sdf tool from the command line and it seems that it only include file from the first level but files which have been included transitively. Is there a way to support deep packing with pack-sdf?
+> 
+> 
+> 
+> -- 
+> 
+> Associate Professor at Delft University of Technology
+> 
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> 
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+From valentin.david at gmail.com  Sun Dec  9 14:13:41 2012
+From: valentin.david at gmail.com (Valentin David)
+Date: Sun, 9 Dec 2012 14:13:41 +0100
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <50BE037B.7070605@anyanka.org>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+	<CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+	<50BE037B.7070605@anyanka.org>
+Message-ID: <CAM06Q5RZxZRb48cjP2HQK2mVsNNR27xg84VBcwwSN+ECcSTZEQ@mail.gmail.com>
+
+The point of Transformers is that you SHOULD NOT know to know the AST.
+C++ is too complex for you to remember its AST. It is also unstable
+since C++ is a language that evolves.
+
+Transformers allows disambiguation of concrete syntax C++ patterns.
+You can feed the context with header files for disambiguation, which
+is quite easy. To generate C++, that comes quite handy.
+
+On Tue, Dec 4, 2012 at 3:06 PM, Anya Helene Bagge <anya at anyanka.org> wrote:
+> Transformers (as mentioned in a previous email) does have an SDF grammar for
+> C++, but it relies on computationally expensive disambiguation as a separate
+> pass after parsing. Also, it follows the standard C++ grammar closely (e.g.,
+> with operator priorities encoded as productions), which makes the AST look
+> horrible.
+
+-- 
+Valentin David
+valentin.david at gmail.com
+
+From dobesv at gmail.com  Sun Dec  9 22:06:44 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Sun, 9 Dec 2012 13:06:44 -0800
+Subject: [Stratego Users] C++ Backend?
+In-Reply-To: <CAM06Q5RZxZRb48cjP2HQK2mVsNNR27xg84VBcwwSN+ECcSTZEQ@mail.gmail.com>
+References: <CADbG_ja_a=pvcuvrGf-L-fbXCd2N=Y-XvV64BoXQ6Zf4vqfYNQ@mail.gmail.com>
+	<50BCFC09.3030008@student.tudelft.nl>
+	<39465ABECE3CBC4EA3A3DDC99D576C422D8D4544@SRV364.tudelft.net>
+	<CAFaCHU3_YCi37sVXd0kW7kUYA_1oeedC1LWYe6O4T46Fe=ydOg@mail.gmail.com>
+	<50BE037B.7070605@anyanka.org>
+	<CAM06Q5RZxZRb48cjP2HQK2mVsNNR27xg84VBcwwSN+ECcSTZEQ@mail.gmail.com>
+Message-ID: <CADbG_jaA4h-qcMhbgGKAnSLXHTcs_5=dLM=2ZEMqegPv8RPwbA@mail.gmail.com>
+
+Valentin,
+
+That sounds very cool. I haven't figured out how to use the concrete syntax
+stuff yet but I should.
+
+Have you used cpp transformers in an eclipse Spoofax project before? It
+seems to be using a bunch of make files and stuff which I'm not very
+familiar with for using with my Spoofax project.
+ On Dec 9, 2012 5:14 AM, "Valentin David" <valentin.david at gmail.com> wrote:
+
+> The point of Transformers is that you SHOULD NOT know to know the AST.
+> C++ is too complex for you to remember its AST. It is also unstable
+> since C++ is a language that evolves.
+>
+> Transformers allows disambiguation of concrete syntax C++ patterns.
+> You can feed the context with header files for disambiguation, which
+> is quite easy. To generate C++, that comes quite handy.
+>
+> On Tue, Dec 4, 2012 at 3:06 PM, Anya Helene Bagge <anya at anyanka.org>
+> wrote:
+> > Transformers (as mentioned in a previous email) does have an SDF grammar
+> for
+> > C++, but it relies on computationally expensive disambiguation as a
+> separate
+> > pass after parsing. Also, it follows the standard C++ grammar closely
+> (e.g.,
+> > with operator priorities encoded as productions), which makes the AST
+> look
+> > horrible.
+>
+> --
+> Valentin David
+> valentin.david at gmail.com
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121209/5c86dc4d/attachment.html>
+
+From emmanuel.castro at laposte.net  Mon Dec 10 00:28:01 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Mon, 10 Dec 2012 00:28:01 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+Message-ID: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+
+Here is a syntactic problem with if-then-else, but not the traditional else
+ambiguity.
+
+When parsing ' a + if(b) c else d + e ', I would like it to be
+parenthesized ' a + (if(b) c else (d + e)) '.
+I.e if-then-else has highest priority on the left, and lower priority on
+the right.
+
+Has anybody got any clue about with problem?
+
+Emmanuel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121210/075c72b6/attachment.html>
+
+From dobesv at gmail.com  Mon Dec 10 04:06:42 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Sun, 9 Dec 2012 19:06:42 -0800
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+Message-ID: <CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+
+I think making the conditional a lower precedence than arithmetic might
+solve it.  It almost seems too easy but I can't see how the parser would
+group things incorrectly, at least in your example.  It can only do:
+
+a + (if(b) c else (d + e)) // if/else has lower precedence than +
+
+or
+
+a + ((if(b) c else d) + e) // if/else has higher precedence then +
+
+right?
+
+It's likely I'm missing something here, though.  Perhaps there's another
+example where this would not work out any more.  In dypgen you can control
+precedence more closely because each time you refer to a symbol you can
+specify a precedence level constraint on it.
+
+
+On Sun, Dec 9, 2012 at 3:28 PM, Emmanuel Castro <emmanuel.castro at laposte.net
+> wrote:
+
+> Here is a syntactic problem with if-then-else, but not the traditional
+> else ambiguity.
+>
+> When parsing ' a + if(b) c else d + e ', I would like it to be
+> parenthesized ' a + (if(b) c else (d + e)) '.
+> I.e if-then-else has highest priority on the left, and lower priority on
+> the right.
+>
+> Has anybody got any clue about with problem?
+>
+> Emmanuel
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121209/bf90cbd9/attachment.html>
+
+From Jurgen.Vinju at cwi.nl  Mon Dec 10 08:29:04 2012
+From: Jurgen.Vinju at cwi.nl (Jurgen Vinju)
+Date: Mon, 10 Dec 2012 08:29:04 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+Message-ID: <CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+
+Hi!
+
+It's not per se an operator priority problem you have here (the nesting is
+deeper than the priority mechanism can handle). To me it looks like the
+standard dangling else problem which I usually solve as follows in SDF2:
+
+context-free syntax
+
+"if" "(" Exp ")" Stat NoElseMayFollow -> Stat
+"if" "(" Exp ")" Stat "else" Stat -> Stat
+
+ -> NoElseMayFollow
+
+context-free restrictions
+
+NoElseMayFollow -/- [e].[l].[s].[e].[\t\n\ \r]
+
+See also:
+http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html#id1217229
+
+Cheers!
+
+Jurgen
+
+
+On Mon, Dec 10, 2012 at 4:08 AM, Dobes Vandermeer <dobesv at gmail.com> wrote:
+
+> I think making the conditional a lower precedence than arithmetic might
+> solve it.  It almost seems too easy but I can't see how the parser would
+> group things incorrectly, at least in your example.  It can only do:
+>
+> a + (if(b) c else (d + e)) // if/else has lower precedence than +
+>
+> or
+>
+> a + ((if(b) c else d) + e) // if/else has higher precedence then +
+>
+> right?
+>
+> It's likely I'm missing something here, though.  Perhaps there's another
+> example where this would not work out any more.  In dypgen you can control
+> precedence more closely because each time you refer to a symbol you can
+> specify a precedence level constraint on it.
+>
+>
+> On Sun, Dec 9, 2012 at 3:28 PM, Emmanuel Castro <
+> emmanuel.castro at laposte.net> wrote:
+>
+>> Here is a syntactic problem with if-then-else, but not the traditional
+>> else ambiguity.
+>>
+>> When parsing ' a + if(b) c else d + e ', I would like it to be
+>> parenthesized ' a + (if(b) c else (d + e)) '.
+>> I.e if-then-else has highest priority on the left, and lower priority on
+>> the right.
+>>
+>> Has anybody got any clue about with problem?
+>>
+>> Emmanuel
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Jurgen Vinju
+- Centrum Wiskunde & Informatica - SEN1
+- INRIA Lille - ATEAMS
+- Universiteit van Amsterdam
+
+  www: http://jurgen.vinju.org, http://www.rascal-mpl.org,
+http://twitter.com/jurgenvinju
+skype: jurgen.vinju
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121210/5e5caebc/attachment-0001.html>
+
+From emmanuel.castro at laposte.net  Mon Dec 10 10:23:55 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Mon, 10 Dec 2012 10:23:55 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+Message-ID: <CAEXdecndsChtpH9KT+ySV0ppj_sfT-HA3sCt5dUCj+qMBgwQzQ@mail.gmail.com>
+
+Making the conditional a lower precedence fails because, even if
+if (b) c else d + e parses to if (b) c else (d+e),
+a + if (b) c else d fails not parse. It only parse if it is written with
+parentheses a + (if (b) c else d)
+
+You can try it :
+
+exports
+sorts E
+lexical syntax
+[\ \t\n] -> LAYOUT
+ context-free start-symbols
+Start
+
+context-free syntax
+E -> Start
+"e" -> E { cons("E") }
+ "if" "(" E ")" E "else" E -> E { cons("Bracket") }
+E "+" E -> E     { cons("Plus") }
+"(" E ")" -> E  { bracket }
+
+context-free priorities
+E "+" E -> E {left} >
+"if" "(" E ")" E "else" E -> E
+
+
+2012/12/10 Dobes Vandermeer <dobesv at gmail.com>
+
+> I think making the conditional a lower precedence than arithmetic might
+> solve it.  It almost seems too easy but I can't see how the parser would
+> group things incorrectly, at least in your example.  It can only do:
+>
+> a + (if(b) c else (d + e)) // if/else has lower precedence than +
+>
+> or
+>
+> a + ((if(b) c else d) + e) // if/else has higher precedence then +
+>
+> right?
+>
+> It's likely I'm missing something here, though.  Perhaps there's another
+> example where this would not work out any more.  In dypgen you can control
+> precedence more closely because each time you refer to a symbol you can
+> specify a precedence level constraint on it.
+>
+>
+> On Sun, Dec 9, 2012 at 3:28 PM, Emmanuel Castro <
+> emmanuel.castro at laposte.net> wrote:
+>
+>> Here is a syntactic problem with if-then-else, but not the traditional
+>> else ambiguity.
+>>
+>> When parsing ' a + if(b) c else d + e ', I would like it to be
+>> parenthesized ' a + (if(b) c else (d + e)) '.
+>> I.e if-then-else has highest priority on the left, and lower priority on
+>> the right.
+>>
+>> Has anybody got any clue about with problem?
+>>
+>> Emmanuel
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121210/2e4abb38/attachment.html>
+
+From emmanuel.castro at laposte.net  Mon Dec 10 12:23:12 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Mon, 10 Dec 2012 12:23:12 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+	<CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+Message-ID: <CAEXdecnmukdXaZLzc_LGp2SpDJ7tSrQeYCmrakQ=sK7TvPWF1Q@mail.gmail.com>
+
+You're right. It seems that the priority ordering scheme was a wrong track.
+Just putting a 'prefer' on the if-then-else clause works.
+
+Merci.
+
+
+
+2012/12/10 Jurgen Vinju <Jurgen.Vinju at cwi.nl>
+
+> Hi!
+>
+> It's not per se an operator priority problem you have here (the nesting is
+> deeper than the priority mechanism can handle). To me it looks like the
+> standard dangling else problem which I usually solve as follows in SDF2:
+>
+> context-free syntax
+>
+> "if" "(" Exp ")" Stat NoElseMayFollow -> Stat
+> "if" "(" Exp ")" Stat "else" Stat -> Stat
+>
+>  -> NoElseMayFollow
+>
+> context-free restrictions
+>
+> NoElseMayFollow -/- [e].[l].[s].[e].[\t\n\ \r]
+>
+> See also:
+> http://www.meta-environment.org/doc/books/syntax/sdf-disambiguation/sdf-disambiguation.html#id1217229
+>
+> Cheers!
+>
+> Jurgen
+>
+>
+> On Mon, Dec 10, 2012 at 4:08 AM, Dobes Vandermeer <dobesv at gmail.com>wrote:
+>
+>> I think making the conditional a lower precedence than arithmetic might
+>> solve it.  It almost seems too easy but I can't see how the parser would
+>> group things incorrectly, at least in your example.  It can only do:
+>>
+>> a + (if(b) c else (d + e)) // if/else has lower precedence than +
+>>
+>> or
+>>
+>> a + ((if(b) c else d) + e) // if/else has higher precedence then +
+>>
+>> right?
+>>
+>> It's likely I'm missing something here, though.  Perhaps there's another
+>> example where this would not work out any more.  In dypgen you can control
+>> precedence more closely because each time you refer to a symbol you can
+>> specify a precedence level constraint on it.
+>>
+>>
+>> On Sun, Dec 9, 2012 at 3:28 PM, Emmanuel Castro <
+>> emmanuel.castro at laposte.net> wrote:
+>>
+>>> Here is a syntactic problem with if-then-else, but not the traditional
+>>> else ambiguity.
+>>>
+>>> When parsing ' a + if(b) c else d + e ', I would like it to be
+>>> parenthesized ' a + (if(b) c else (d + e)) '.
+>>> I.e if-then-else has highest priority on the left, and lower priority on
+>>> the right.
+>>>
+>>> Has anybody got any clue about with problem?
+>>>
+>>> Emmanuel
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>
+>
+> --
+> Jurgen Vinju
+> - Centrum Wiskunde & Informatica - SEN1
+> - INRIA Lille - ATEAMS
+> - Universiteit van Amsterdam
+>
+>   www: http://jurgen.vinju.org, http://www.rascal-mpl.org,
+> http://twitter.com/jurgenvinju
+> skype: jurgen.vinju
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121210/213581ff/attachment.html>
+
+From dobesv at gmail.com  Wed Dec 12 03:23:10 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 11 Dec 2012 18:23:10 -0800
+Subject: [Stratego Users] Spurious ambiguity report?
+Message-ID: <CADbG_jYD2Oxsk8-UfUc_hqvGvSW0Fbgrgc9q191ydczKCPE2Hw@mail.gmail.com>
+
+Recently I updated to the version from the snapshots update site and I'm
+getting a strange ambiguity report:
+
+Object(
+  [ amb(
+      [ MethodDef(
+          CallSignature("main", [Parameter("f", None(), None())], None())
+        , Id("f")
+        )
+      , MethodDef(
+          CallSignature("main", [Parameter("f", None(), None())], None())
+        , Id("f")
+        )
+      ]
+    )
+  ]
+)
+
+For input:
+
+{
+
+main(f) = f
+
+}
+
+
+My grammar is here: https://gist.github.com/a4954c2ffdd73d41705f
+
+Unfortunately, I haven't test this on the latest unstable since I'm
+starting to use some of the newer improvements to SDF.
+
+Has anyone seen something like this before?  Any hints about what I might
+have done wrong?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121211/cd9eeb61/attachment.html>
+
+From ciraci at gmail.com  Wed Dec 12 03:56:27 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 11 Dec 2012 18:56:27 -0800
+Subject: [Stratego Users] Spurious ambiguity report?
+In-Reply-To: <CADbG_jYD2Oxsk8-UfUc_hqvGvSW0Fbgrgc9q191ydczKCPE2Hw@mail.gmail.com>
+References: <CADbG_jYD2Oxsk8-UfUc_hqvGvSW0Fbgrgc9q191ydczKCPE2Hw@mail.gmail.com>
+Message-ID: <CALq5ZdzuVWiat5jjS85sS9A-FdOkqLVdqbtgKuUpFCRDva89eQ@mail.gmail.com>
+
+Hi,
+
+I got similar ambiguities. It happened when I have a rule for a statement
+that starts with A* B->c or A? B->c. it went away when I changed the rules
+to B->c and A+ B ->c . I hope it helps.
+On Dec 11, 2012 6:24 PM, "Dobes Vandermeer" <dobesv at gmail.com> wrote:
+
+> Recently I updated to the version from the snapshots update site and I'm
+> getting a strange ambiguity report:
+>
+> Object(
+>   [ amb(
+>       [ MethodDef(
+>           CallSignature("main", [Parameter("f", None(), None())], None())
+>         , Id("f")
+>         )
+>       , MethodDef(
+>           CallSignature("main", [Parameter("f", None(), None())], None())
+>         , Id("f")
+>         )
+>       ]
+>     )
+>   ]
+> )
+>
+> For input:
+>
+> {
+>
+> main(f) = f
+>
+> }
+>
+>
+> My grammar is here: https://gist.github.com/a4954c2ffdd73d41705f
+>
+> Unfortunately, I haven't test this on the latest unstable since I'm
+> starting to use some of the newer improvements to SDF.
+>
+> Has anyone seen something like this before?  Any hints about what I might
+> have done wrong?
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121211/babdab89/attachment.html>
+
+From dobesv at gmail.com  Wed Dec 12 04:26:26 2012
+From: dobesv at gmail.com (Dobes Vandermeer)
+Date: Tue, 11 Dec 2012 19:26:26 -0800
+Subject: [Stratego Users] Spurious ambiguity report?
+In-Reply-To: <CALq5ZdzuVWiat5jjS85sS9A-FdOkqLVdqbtgKuUpFCRDva89eQ@mail.gmail.com>
+References: <CADbG_jYD2Oxsk8-UfUc_hqvGvSW0Fbgrgc9q191ydczKCPE2Hw@mail.gmail.com>
+	<CALq5ZdzuVWiat5jjS85sS9A-FdOkqLVdqbtgKuUpFCRDva89eQ@mail.gmail.com>
+Message-ID: <CADbG_ja-QHCiFdfr9r59TYWQ-4A8Md=NMo19KB8pjX30NkunCQ@mail.gmail.com>
+
+Indeed, it seems the use of ? was the cause of the ambiguity.  Thanks!
+
+
+On Tue, Dec 11, 2012 at 6:56 PM, Selim Ciraci <ciraci at gmail.com> wrote:
+
+> Hi,
+>
+> I got similar ambiguities. It happened when I have a rule for a statement
+> that starts with A* B->c or A? B->c. it went away when I changed the rules
+> to B->c and A+ B ->c . I hope it helps.
+> On Dec 11, 2012 6:24 PM, "Dobes Vandermeer" <dobesv at gmail.com> wrote:
+>
+>> Recently I updated to the version from the snapshots update site and I'm
+>> getting a strange ambiguity report:
+>>
+>> Object(
+>>   [ amb(
+>>       [ MethodDef(
+>>           CallSignature("main", [Parameter("f", None(), None())], None())
+>>         , Id("f")
+>>         )
+>>       , MethodDef(
+>>           CallSignature("main", [Parameter("f", None(), None())], None())
+>>         , Id("f")
+>>         )
+>>       ]
+>>     )
+>>   ]
+>> )
+>>
+>> For input:
+>>
+>> {
+>>
+>> main(f) = f
+>>
+>> }
+>>
+>>
+>> My grammar is here: https://gist.github.com/a4954c2ffdd73d41705f
+>>
+>> Unfortunately, I haven't test this on the latest unstable since I'm
+>> starting to use some of the newer improvements to SDF.
+>>
+>> Has anyone seen something like this before?  Any hints about what I might
+>> have done wrong?
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121211/942430e1/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Dec 13 23:35:34 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 13 Dec 2012 23:35:34 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CAEXdecnmukdXaZLzc_LGp2SpDJ7tSrQeYCmrakQ=sK7TvPWF1Q@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+	<CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+	<CAEXdecnmukdXaZLzc_LGp2SpDJ7tSrQeYCmrakQ=sK7TvPWF1Q@mail.gmail.com>
+Message-ID: <CAFaCHU2ogCyL9-EsXR=yzQkq6Pu9pwXMNZi7AreGdKfbRSyT1w@mail.gmail.com>
+
+Hi Emmanuel et al.,
+
+I wrote a blog post about the problem with a solution:
+
+Disambiguating If Expressions in SDF http://bit.ly/ifdisamb
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From emmanuel.castro at laposte.net  Sat Dec 15 18:27:00 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sat, 15 Dec 2012 18:27:00 +0100
+Subject: [Stratego Users] Non-toplevel strategies
+Message-ID: <CAEXdecmRQsRh_2Xa-d2i2HooGSKK3TzU8+X3W+XqxUUf6Wb8NA@mail.gmail.com>
+
+Is it possible to write non top-level strategies? i.e. expressions like
+that :
+
+topStrategy(a|b) = {
+    subStrategy = ?(x,b); ... ; someOtherStrategy(a)
+
+    ...;
+    map(subStrategy)
+}
+
+The idea behind this is that it is more readable than:
+
+topStrategy(a|b) = ...; map(subStrategy = ?(x,b); ... ;
+someOtherStrategy(a))
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121215/d825d23e/attachment.html>
+
+From emmanuel.castro at laposte.net  Sun Dec 16 00:02:15 2012
+From: emmanuel.castro at laposte.net (Emmanuel Castro)
+Date: Sun, 16 Dec 2012 00:02:15 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CAFaCHU2ogCyL9-EsXR=yzQkq6Pu9pwXMNZi7AreGdKfbRSyT1w@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+	<CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+	<CAEXdecnmukdXaZLzc_LGp2SpDJ7tSrQeYCmrakQ=sK7TvPWF1Q@mail.gmail.com>
+	<CAFaCHU2ogCyL9-EsXR=yzQkq6Pu9pwXMNZi7AreGdKfbRSyT1w@mail.gmail.com>
+Message-ID: <CAEXdeckp0+CRVO=1wB8Dkd+2D_FmQEsEMveo85-ZRBZDASB+kg@mail.gmail.com>
+
+You right, I missed important test cases to my grammar and 'prefer' does
+not help.
+
+
+2012/12/13 Eelco Visser <E.Visser at tudelft.nl>
+
+> Hi Emmanuel et al.,
+>
+> I wrote a blog post about the problem with a solution:
+>
+> Disambiguating If Expressions in SDF http://bit.ly/ifdisamb
+>
+> cheers,
+>
+> -- Eelco
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121216/7edda705/attachment.html>
+
+From seba at Mathematik.Uni-Marburg.de  Sun Dec 16 08:53:07 2012
+From: seba at Mathematik.Uni-Marburg.de (Sebastian Erdweg)
+Date: Sun, 16 Dec 2012 08:53:07 +0100
+Subject: [Stratego Users] ANN: SGLR parser web service
+In-Reply-To: <6C1B5B4B-955F-4FBF-9B7C-F2884F76B81B@st.informatik.tu-darmstadt.de>
+References: <6C1B5B4B-955F-4FBF-9B7C-F2884F76B81B@st.informatik.tu-darmstadt.de>
+Message-ID: <D9C41F67-DBA2-44E4-A70D-A9907E64E66F@informatik.uni-marburg.de>
+
+I am glad to announce a web service for SGLR parsing:
+	http://parser.sugarj.org/
+
+The workflow is as follows:
+1) You submit an SDF *.def file containing your grammar.
+2) You receive an ID for the parser that our service generates on the server.
+3) You use that ID to submit text to the server, which parses the text returns an abstract syntax tree.
+
+The web service is based on layout-sensitive SGLR parsing [1,2], which is part of SugarJ. The support for layout-sensitive parsing will soon be merged with Spoofax's original JSGLR parser.
+The web interface is available as part of the tree decorations project. Feel free to report bugs and request features on its github page [3], or on this mailing list.
+
+Best regards,
+Sebastian
+
+[1] https://github.com/seba--/layout-parsing/
+[2] Sebastian Erdweg, Tillmann Rendel, Christian K?stner and Klaus Ostermann. Layout-sensitive Generalized Parsing. In Proceedings of Software Language Engineering (SLE), volume 7745 of LNCS, pages 244?263. Springer, 2012.
+[3] https://github.com/seba--/treedecor
+
+-- 
+http://www.informatik.uni-marburg.de/~seba/
+
+
+
+From dgroenewegen at gmail.com  Sun Dec 16 11:38:40 2012
+From: dgroenewegen at gmail.com (Danny Groenewegen)
+Date: Sun, 16 Dec 2012 11:38:40 +0100
+Subject: [Stratego Users] Non-toplevel strategies
+In-Reply-To: <CAEXdecmRQsRh_2Xa-d2i2HooGSKK3TzU8+X3W+XqxUUf6Wb8NA@mail.gmail.com>
+References: <CAEXdecmRQsRh_2Xa-d2i2HooGSKK3TzU8+X3W+XqxUUf6Wb8NA@mail.gmail.com>
+Message-ID: <CA+JOw5UFEJn_Z6GOQ3iMn4V=cTb7hmtR97HCbY07HDQid8eTOA@mail.gmail.com>
+
+Hi Emmanuel,
+
+You can use a let construct:
+
+    let subStrategy = debug in
+      map(subStrategy)
+    end
+
+
+Regards,
+Danny
+
+On Sat, Dec 15, 2012 at 6:27 PM, Emmanuel Castro <
+emmanuel.castro at laposte.net> wrote:
+
+> Is it possible to write non top-level strategies? i.e. expressions like
+> that :
+>
+> topStrategy(a|b) = {
+>     subStrategy = ?(x,b); ... ; someOtherStrategy(a)
+>
+>     ...;
+>     map(subStrategy)
+> }
+>
+> The idea behind this is that it is more readable than:
+>
+> topStrategy(a|b) = ...; map(subStrategy = ?(x,b); ... ;
+> someOtherStrategy(a))
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121216/1cc054d3/attachment.html>
+
+From E.Visser at tudelft.nl  Sun Dec 16 22:29:00 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Sun, 16 Dec 2012 22:29:00 +0100
+Subject: [Stratego Users] SDF syntax problem with if-then-else
+In-Reply-To: <CAEXdeckp0+CRVO=1wB8Dkd+2D_FmQEsEMveo85-ZRBZDASB+kg@mail.gmail.com>
+References: <CAEXdecm2wPe27-c0DVHKEMm5GnNSvo3H10XTtv3aLgG2NnQZHw@mail.gmail.com>
+	<CADbG_jY0Tt14US_0Fpdu1WEhxVb3P8ccUC4aoZDxJMLHohHSvw@mail.gmail.com>
+	<CAEy4yM5r2R7f6+mOAwOLM_UdQxDjQ+LjW0Dxjt3rjCixNoqgrQ@mail.gmail.com>
+	<CAEXdecnmukdXaZLzc_LGp2SpDJ7tSrQeYCmrakQ=sK7TvPWF1Q@mail.gmail.com>
+	<CAFaCHU2ogCyL9-EsXR=yzQkq6Pu9pwXMNZi7AreGdKfbRSyT1w@mail.gmail.com>
+	<CAEXdeckp0+CRVO=1wB8Dkd+2D_FmQEsEMveo85-ZRBZDASB+kg@mail.gmail.com>
+Message-ID: <CAFaCHU2WV1NQv8LRn7dugrHp_ANTDVdFY+2Vu3ieWPXeEQ515g@mail.gmail.com>
+
+Hi,
+
+I updated the blog post with some references to relevant (and some not
+well known) papers:
+
+  http://eelcovisser.org/post/244/disambiguating-if-expressions-in-sdf
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From hilalks at gmail.com  Mon Dec 17 22:09:55 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 17 Dec 2012 23:09:55 +0200
+Subject: [Stratego Users] Getting string expressions in SDF
+Message-ID: <CACLuXbJPv0jQrnaCyvohPMzv18_2aUOTJf--bEsFcNB=jXFghQ@mail.gmail.com>
+
+Hi all,
+
+I have a problem. I'm trying to write a generation rule for the following
+sdf. In my DSL "first" and "best" are keywords but when my code sees an
+AdjExpr, I need to know what is it. Is it "first" or "best"?
+
+         "first" -> AdjExpr {cons("First")}
+         "best" -> AdjExpr {cons("Best")}
+"solution" -> ExprType {cons("Solution")}
+ID "=" "select" AdjExpr ExprType -> Stm  {cons("Assignment")}
+
+Below is my generate.str file, but when I write something like
+* a = select first solution*
+
+and trying to generate it to java, I get the
+error org.spoofax.interpreter.core.InterpreterErrorExit: Internal error:
+escaped term in string quotation is not a string in rule 'to-java'
+First
+
+
+to-java:
+Assignment(var, adjExp, expType) -> $[
+Adj: [adjExp']
+Type: [expType']
+]
+with
+adjExp' := <to-java> adjExp
+with
+expType' := <to-java> expType
+
+
+to-java:
+First() ->$[first]
+
+to-java:
+Best() ->$[best]
+
+to-java:
+Solution() ->$[solution]
+
+Can you help me with this?
+Thank you,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121217/b2a06833/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Mon Dec 17 22:32:15 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Mon, 17 Dec 2012 22:32:15 +0100
+Subject: [Stratego Users] Getting string expressions in SDF
+In-Reply-To: <CACLuXbJPv0jQrnaCyvohPMzv18_2aUOTJf--bEsFcNB=jXFghQ@mail.gmail.com>
+References: <CACLuXbJPv0jQrnaCyvohPMzv18_2aUOTJf--bEsFcNB=jXFghQ@mail.gmail.com>
+Message-ID: <50CF8F5F.2070103@student.tudelft.nl>
+
+Hi Hilal,
+
+Your stratego code looks good.
+Usually this error occurs when you are using an ATerm directly in a 
+string concatenation, but this does not seem to be the case now.
+
+Maybe something else is wrong.
+If you run the code below with debug statements, what does it output to 
+the console?
+==========================================================
+to-java:
+Assignment(var, adjExp, expType) -> $[
+Adj: [adjExp']
+Type: [expType']
+]
+where <debug>a
+with
+adjExp' := <to-java> adjExp
+where <debug>b
+with
+expType' := <to-java> expType
+where <debug>c
+
+
+to-java:
+First() ->$[first] where <debug>1
+
+to-java:
+Best() ->$[best] where <debug>2
+
+to-java:
+Solution() ->$[solution] where <debug>3
+
+
+
+
+
+Kind Regards,
+
+Wouter
+
+
+On 12/17/2012 10:09 PM, Hilal Kevser wrote:
+> Hi all,
+>
+>
+> I have a problem. I'm trying to write a generation rule for the 
+> following sdf. In my DSL "first" and "best" are keywords but when my 
+> code sees an AdjExpr, I need to know what is it. Is it "first" or "best"?
+>
+>          "first" -> AdjExpr {cons("First")}
+>          "best" -> AdjExpr {cons("Best")}
+> "solution" -> ExprType {cons("Solution")}
+> ID "=" "select" AdjExpr ExprType -> Stm {cons("Assignment")}
+>
+> Below is my generate.str file, but when I write something like
+> * a = select first solution*
+>
+> and trying to generate it to java, I get the 
+> error org.spoofax.interpreter.core.InterpreterErrorExit: Internal 
+> error: escaped term in string quotation is not a string in rule 'to-java'
+> First
+>
+>
+> to-java:
+> Assignment(var, adjExp, expType) -> $[
+> Adj: [adjExp']
+> Type: [expType']
+> ]
+> with
+> adjExp' := <to-java> adjExp
+> with
+> expType' := <to-java> expType
+>
+>
+> to-java:
+> First() ->$[first]
+>
+> to-java:
+> Best() ->$[best]
+>
+> to-java:
+> Solution() ->$[solution]
+>
+> Can you help me with this?
+> Thank you,
+> Hilal
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121217/b284b61a/attachment.html>
+
+From hilalks at gmail.com  Tue Dec 18 12:18:15 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Tue, 18 Dec 2012 13:18:15 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 14
+In-Reply-To: <mailman.1.1355828402.4362.users@strategoxt.org>
+References: <mailman.1.1355828402.4362.users@strategoxt.org>
+Message-ID: <CACLuXbJKfyL=f8wjU+Tp++V-JEDBtsp7Af99s9TeMaSpRQaviQ@mail.gmail.com>
+
+Hi Wouter,
+
+Thanks for your help. The output is:
+a
+1
+b
+3
+c
+
+
+2012/12/18 <users-request at strategoxt.org>
+
+> Send Users mailing list submissions to
+>         users at strategoxt.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+>         users-request at strategoxt.org
+>
+> You can reach the person managing the list at
+>         users-owner at strategoxt.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Getting string expressions in SDF (Hilal Kevser)
+>    2. Re: Getting string expressions in SDF (Wouter van Koppen)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Mon, 17 Dec 2012 23:09:55 +0200
+> From: Hilal Kevser <hilalks at gmail.com>
+> To: users at strategoxt.org
+> Subject: [Stratego Users] Getting string expressions in SDF
+> Message-ID:
+>         <CACLuXbJPv0jQrnaCyvohPMzv18_2aUOTJf--bEsFcNB=
+> jXFghQ at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Hi all,
+>
+> I have a problem. I'm trying to write a generation rule for the following
+> sdf. In my DSL "first" and "best" are keywords but when my code sees an
+> AdjExpr, I need to know what is it. Is it "first" or "best"?
+>
+>          "first" -> AdjExpr {cons("First")}
+>          "best" -> AdjExpr {cons("Best")}
+> "solution" -> ExprType {cons("Solution")}
+> ID "=" "select" AdjExpr ExprType -> Stm  {cons("Assignment")}
+>
+> Below is my generate.str file, but when I write something like
+> * a = select first solution*
+>
+> and trying to generate it to java, I get the
+> error org.spoofax.interpreter.core.InterpreterErrorExit: Internal error:
+> escaped term in string quotation is not a string in rule 'to-java'
+> First
+>
+>
+> to-java:
+> Assignment(var, adjExp, expType) -> $[
+> Adj: [adjExp']
+> Type: [expType']
+> ]
+> with
+> adjExp' := <to-java> adjExp
+> with
+> expType' := <to-java> expType
+>
+>
+> to-java:
+> First() ->$[first]
+>
+> to-java:
+> Best() ->$[best]
+>
+> to-java:
+> Solution() ->$[solution]
+>
+> Can you help me with this?
+> Thank you,
+> Hilal
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121217/b2a06833/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Mon, 17 Dec 2012 22:32:15 +0100
+> From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl>
+> To: Stratego/XT Users <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Getting string expressions in SDF
+> Message-ID: <50CF8F5F.2070103 at student.tudelft.nl>
+> Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+>
+> Hi Hilal,
+>
+> Your stratego code looks good.
+> Usually this error occurs when you are using an ATerm directly in a
+> string concatenation, but this does not seem to be the case now.
+>
+> Maybe something else is wrong.
+> If you run the code below with debug statements, what does it output to
+> the console?
+> ==========================================================
+> to-java:
+> Assignment(var, adjExp, expType) -> $[
+> Adj: [adjExp']
+> Type: [expType']
+> ]
+> where <debug>a
+> with
+> adjExp' := <to-java> adjExp
+> where <debug>b
+> with
+> expType' := <to-java> expType
+> where <debug>c
+>
+>
+> to-java:
+> First() ->$[first] where <debug>1
+>
+> to-java:
+> Best() ->$[best] where <debug>2
+>
+> to-java:
+> Solution() ->$[solution] where <debug>3
+>
+>
+>
+>
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 12/17/2012 10:09 PM, Hilal Kevser wrote:
+> > Hi all,
+> >
+> >
+> > I have a problem. I'm trying to write a generation rule for the
+> > following sdf. In my DSL "first" and "best" are keywords but when my
+> > code sees an AdjExpr, I need to know what is it. Is it "first" or "best"?
+> >
+> >          "first" -> AdjExpr {cons("First")}
+> >          "best" -> AdjExpr {cons("Best")}
+> > "solution" -> ExprType {cons("Solution")}
+> > ID "=" "select" AdjExpr ExprType -> Stm {cons("Assignment")}
+> >
+> > Below is my generate.str file, but when I write something like
+> > * a = select first solution*
+> >
+> > and trying to generate it to java, I get the
+> > error org.spoofax.interpreter.core.InterpreterErrorExit: Internal
+> > error: escaped term in string quotation is not a string in rule 'to-java'
+> > First
+> >
+> >
+> > to-java:
+> > Assignment(var, adjExp, expType) -> $[
+> > Adj: [adjExp']
+> > Type: [expType']
+> > ]
+> > with
+> > adjExp' := <to-java> adjExp
+> > with
+> > expType' := <to-java> expType
+> >
+> >
+> > to-java:
+> > First() ->$[first]
+> >
+> > to-java:
+> > Best() ->$[best]
+> >
+> > to-java:
+> > Solution() ->$[solution]
+> >
+> > Can you help me with this?
+> > Thank you,
+> > Hilal
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121217/b284b61a/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> End of Users Digest, Vol 46, Issue 14
+> *************************************
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121218/8b345599/attachment.html>
+
+From hilalks at gmail.com  Tue Dec 18 13:29:02 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Tue, 18 Dec 2012 14:29:02 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 14
+In-Reply-To: <CACLuXbJKfyL=f8wjU+Tp++V-JEDBtsp7Af99s9TeMaSpRQaviQ@mail.gmail.com>
+References: <mailman.1.1355828402.4362.users@strategoxt.org>
+	<CACLuXbJKfyL=f8wjU+Tp++V-JEDBtsp7Af99s9TeMaSpRQaviQ@mail.gmail.com>
+Message-ID: <CACLuXb+Hgs=8N0c7rAB-deY8HskGH3es2xifma_-TRM5LqbLQg@mail.gmail.com>
+
+Hi again Wouter,
+
+I didn' t change anything but I don't get the error now :) My code works as
+I wish now. I have another question if you don't mind.
+
+I want to write a rule. I want expType to be generated when adjExp is equal
+to "best". Otherwise my code will not generate expType, It will only
+generate adjExp.
+When adjExp is equal to "best", it will generate int [var] =
+[adjExp'][expType']; otherwise, it will generate int [var] = [adjExp'];
+
+Is it possible?
+
+to-java:
+Assignment(var, adjExp, expType) -> $[
+int [var] = [adjExp'][expType'];
+]
+with
+adjExp' := <to-java> adjExp
+
+with
+expType' := (<to-java> expType where <to-java> adjExp == "best")
+
+
+2012/12/18 Hilal Kevser <hilalks at gmail.com>
+
+> Hi Wouter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121218/1fbe89a8/attachment.html>
+
+From G.H.Wachsmuth at tudelft.nl  Tue Dec 18 15:54:41 2012
+From: G.H.Wachsmuth at tudelft.nl (Guido Wachsmuth - EWI)
+Date: Tue, 18 Dec 2012 14:54:41 +0000
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 14
+In-Reply-To: <CACLuXb+Hgs=8N0c7rAB-deY8HskGH3es2xifma_-TRM5LqbLQg@mail.gmail.com>
+References: <mailman.1.1355828402.4362.users@strategoxt.org>
+	<CACLuXbJKfyL=f8wjU+Tp++V-JEDBtsp7Af99s9TeMaSpRQaviQ@mail.gmail.com>
+	<CACLuXb+Hgs=8N0c7rAB-deY8HskGH3es2xifma_-TRM5LqbLQg@mail.gmail.com>
+Message-ID: <39465ABECE3CBC4EA3A3DDC99D576C422D8ED446@SRV364.tudelft.net>
+
+Hi Hilal,
+
+you should make such a comparison based on the input, not on the generated string.
+
+For example, you can have one rule for best:
+
+to-java: Assignment(var, Best(), expType) -> ?
+
+And another rule for the other cases:
+
+to-java: Assignment(var, adjExp, expType) -> ?
+where
+<not(?Best()> adjExp
+
+-- Guido Wachsmuth
+
+On Dec 18, 2012, at 13:29 , Hilal Kevser <hilalks at gmail.com<mailto:hilalks at gmail.com>>
+ wrote:
+
+Hi again Wouter,
+
+I didn' t change anything but I don't get the error now :) My code works as I wish now. I have another question if you don't mind.
+
+I want to write a rule. I want expType to be generated when adjExp is equal to "best". Otherwise my code will not generate expType, It will only generate adjExp.
+When adjExp is equal to "best", it will generate int [var] = [adjExp'][expType']; otherwise, it will generate int [var] = [adjExp'];
+
+Is it possible?
+
+to-java:
+Assignment(var, adjExp, expType) -> $[
+int [var] = [adjExp'][expType'];
+]
+with
+adjExp' := <to-java> adjExp
+
+with
+expType' := (<to-java> expType where <to-java> adjExp == "best")
+
+
+2012/12/18 Hilal Kevser <hilalks at gmail.com<mailto:hilalks at gmail.com>>
+Hi Wouter
+
+_______________________________________________
+Users mailing list
+Users at strategoxt.org<mailto:Users at strategoxt.org>
+https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121218/1a242183/attachment-0001.html>
+
+From hilalks at gmail.com  Tue Dec 18 16:03:10 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Tue, 18 Dec 2012 17:03:10 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 15
+In-Reply-To: <mailman.597.1355842663.17298.users@strategoxt.org>
+References: <mailman.597.1355842663.17298.users@strategoxt.org>
+Message-ID: <CACLuXbLQTmvG+mF-ducnO9mUmJzmj+BjMOF6PdpArZVuwGW8Gg@mail.gmail.com>
+
+Thank you very much Guido. This really helps me!
+
+Best regards,
+Hilal
+
+2012/12/18 <users-request at strategoxt.org>
+
+> Guido
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121218/73c3ec37/attachment.html>
+
+From hilalks at gmail.com  Mon Dec 24 07:39:06 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 24 Dec 2012 08:39:06 +0200
+Subject: [Stratego Users] Defining Optional Syntax
+Message-ID: <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=jPLg@mail.gmail.com>
+
+Hi,
+
+I want to define the following syntax where B is optional, but I couldn't
+be able to write to-java rule in generate.str fie
+
+ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+
+Should I write two rules like below?
+
+to-java:
+Assignment(var, a, b, c) ->$[
+...
+]
+
+
+to-java:
+Assignment(var, a, None(), c) ->$[
+...
+]
+
+Thanks for your help!
+Best regards,
+Hilal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/8efffd17/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Mon Dec 24 10:39:59 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Mon, 24 Dec 2012 10:39:59 +0100
+Subject: [Stratego Users] Defining Optional Syntax
+In-Reply-To: <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=jPLg@mail.gmail.com>
+References: <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=jPLg@mail.gmail.com>
+Message-ID: <50D822EF.2070405@student.tudelft.nl>
+
+Hello Hilal,
+
+You can write 2 rules, but you should take into account that each rule 
+should excludes the other, such that only one rule can match:
+If you use a question mark in the grammar the part of the program will 
+either parse to a None() or a Some(...).
+
+to-java:
+Assignment(var, a, *Some(b)*, c) ->$[
+...
+]
+
+to-java:
+Assignment(var, a, None(), c) ->$[
+...
+]
+
+
+
+Kind Regards,
+
+Wouter
+
+
+On 12/24/2012 07:39 AM, Hilal Kevser wrote:
+> Hi,
+>
+> I want to define the following syntax where B is optional, but I 
+> couldn't be able to write to-java rule in generate.str fie
+>
+> ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+>
+> Should I write two rules like below?
+>
+> to-java:
+> Assignment(var, a, b, c) ->$[
+> ...
+> ]
+>
+> to-java:
+> Assignment(var, a, None(), c) ->$[
+> ...
+> ]
+>
+> Thanks for your help!
+> Best regards,
+> Hilal
+>
+>
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/11bfcde3/attachment.html>
+
+From hilalks at gmail.com  Mon Dec 24 13:34:34 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 24 Dec 2012 14:34:34 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 17
+In-Reply-To: <mailman.1.1356346802.10224.users@strategoxt.org>
+References: <mailman.1.1356346802.10224.users@strategoxt.org>
+Message-ID: <CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ@mail.gmail.com>
+
+Thank you Wouter. I want to ask a specific question if you don't mind.
+
+Here is my sdf and to-java rules.
+"replace" generates what I want but "replace a with b" generates nothing.
+What I miss?
+
+"replace" A* -> Stm   {cons("Replace")}
+ID "with" ID -> A          {cons("A")}
+
+to-java:
+Replace(A(ID1, ID2)) -> $[
+
+x([ID1], [ID2]);
+]
+
+to-java:
+Replace(None()) -> $[
+
+....
+
+]
+
+Thank you!
+Hilal
+
+2012/12/24 <users-request at strategoxt.org>
+
+> Send Users mailing list submissions to
+>         users at strategoxt.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+>         users-request at strategoxt.org
+>
+> You can reach the person managing the list at
+>         users-owner at strategoxt.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Defining Optional Syntax (Hilal Kevser)
+>    2. Re: Defining Optional Syntax (Wouter van Koppen)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Mon, 24 Dec 2012 08:39:06 +0200
+> From: Hilal Kevser <hilalks at gmail.com>
+> To: users at strategoxt.org
+> Subject: [Stratego Users] Defining Optional Syntax
+> Message-ID:
+>         <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=
+> jPLg at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Hi,
+>
+> I want to define the following syntax where B is optional, but I couldn't
+> be able to write to-java rule in generate.str fie
+>
+> ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+>
+> Should I write two rules like below?
+>
+> to-java:
+> Assignment(var, a, b, c) ->$[
+> ...
+> ]
+>
+>
+> to-java:
+> Assignment(var, a, None(), c) ->$[
+> ...
+> ]
+>
+> Thanks for your help!
+> Best regards,
+> Hilal
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/8efffd17/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Mon, 24 Dec 2012 10:39:59 +0100
+> From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl>
+> To: users at strategoxt.org
+> Subject: Re: [Stratego Users] Defining Optional Syntax
+> Message-ID: <50D822EF.2070405 at student.tudelft.nl>
+> Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+>
+> Hello Hilal,
+>
+> You can write 2 rules, but you should take into account that each rule
+> should excludes the other, such that only one rule can match:
+> If you use a question mark in the grammar the part of the program will
+> either parse to a None() or a Some(...).
+>
+> to-java:
+> Assignment(var, a, *Some(b)*, c) ->$[
+> ...
+> ]
+>
+> to-java:
+> Assignment(var, a, None(), c) ->$[
+> ...
+> ]
+>
+>
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 12/24/2012 07:39 AM, Hilal Kevser wrote:
+> > Hi,
+> >
+> > I want to define the following syntax where B is optional, but I
+> > couldn't be able to write to-java rule in generate.str fie
+> >
+> > ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+> >
+> > Should I write two rules like below?
+> >
+> > to-java:
+> > Assignment(var, a, b, c) ->$[
+> > ...
+> > ]
+> >
+> > to-java:
+> > Assignment(var, a, None(), c) ->$[
+> > ...
+> > ]
+> >
+> > Thanks for your help!
+> > Best regards,
+> > Hilal
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/11bfcde3/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> End of Users Digest, Vol 46, Issue 17
+> *************************************
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/c678c7a9/attachment.html>
+
+From hilalks at gmail.com  Mon Dec 24 13:37:33 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 24 Dec 2012 14:37:33 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 17
+In-Reply-To: <CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ@mail.gmail.com>
+References: <mailman.1.1356346802.10224.users@strategoxt.org>
+	<CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ@mail.gmail.com>
+Message-ID: <CACLuXb+K2isULY5WqTKnjyURmEyPKO0mXeFzAk5U-L07h_hK_g@mail.gmail.com>
+
+Edit: My SDF contains"replace" A?, it is not "replace" A*
+
+2012/12/24 Hilal Kevser <hilalks at gmail.com>
+
+> "replace" A*
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/16cb5fb1/attachment.html>
+
+From w.p.vankoppen at student.tudelft.nl  Mon Dec 24 13:53:04 2012
+From: w.p.vankoppen at student.tudelft.nl (Wouter van Koppen)
+Date: Mon, 24 Dec 2012 13:53:04 +0100
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 17
+In-Reply-To: <CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ@mail.gmail.com>
+References: <mailman.1.1356346802.10224.users@strategoxt.org>
+	<CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ@mail.gmail.com>
+Message-ID: <50D85030.8090301@student.tudelft.nl>
+
+I think you should use a map construct in Stratego as you are rewriting 
+an ATerm list:
+
+Something like this (not tested it):
+
+to-java:
+Replace(stuff) -> $[
+
+         [<map(to-java)>stuff]
+]
+
+to-java: A(ID1, ID2) -> $[x([ID1], [ID2]);
+]
+
+You can omit the second rule as the empty list is also handled by the 
+first rule.
+
+
+
+Kind Regards,
+
+Wouter
+
+
+On 12/24/2012 01:34 PM, Hilal Kevser wrote:
+> Thank you Wouter. I want to ask a specific question if you don't mind.
+>
+> Here is my sdf and to-java rules.
+> "replace" generates what I want but "replace a with b" generates 
+> nothing. What I miss?
+>
+> "replace" A* -> Stm {cons("Replace")}
+> ID "with" ID -> A          {cons("A")}
+>
+> to-java:
+> Replace(A(ID1, ID2)) -> $[
+>
+> x([ID1], [ID2]);
+> ]
+>
+> to-java:
+> Replace(None()) -> $[
+>
+> ....
+>
+> ]
+>
+> Thank you!
+> Hilal
+>
+> 2012/12/24 <users-request at strategoxt.org 
+> <mailto:users-request at strategoxt.org>>
+>
+>     Send Users mailing list submissions to
+>     users at strategoxt.org <mailto:users at strategoxt.org>
+>
+>     To subscribe or unsubscribe via the World Wide Web, visit
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>     or, via email, send a message with subject or body 'help' to
+>     users-request at strategoxt.org <mailto:users-request at strategoxt.org>
+>
+>     You can reach the person managing the list at
+>     users-owner at strategoxt.org <mailto:users-owner at strategoxt.org>
+>
+>     When replying, please edit your Subject line so it is more specific
+>     than "Re: Contents of Users digest..."
+>
+>
+>     Today's Topics:
+>
+>        1. Defining Optional Syntax (Hilal Kevser)
+>        2. Re: Defining Optional Syntax (Wouter van Koppen)
+>
+>
+>     ----------------------------------------------------------------------
+>
+>     Message: 1
+>     Date: Mon, 24 Dec 2012 08:39:06 +0200
+>     From: Hilal Kevser <hilalks at gmail.com <mailto:hilalks at gmail.com>>
+>     To: users at strategoxt.org <mailto:users at strategoxt.org>
+>     Subject: [Stratego Users] Defining Optional Syntax
+>     Message-ID:
+>     <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=jPLg at mail.gmail.com <mailto:jPLg at mail.gmail.com>>
+>     Content-Type: text/plain; charset="iso-8859-1"
+>
+>     Hi,
+>
+>     I want to define the following syntax where B is optional, but I
+>     couldn't
+>     be able to write to-java rule in generate.str fie
+>
+>     ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+>
+>     Should I write two rules like below?
+>
+>     to-java:
+>     Assignment(var, a, b, c) ->$[
+>     ...
+>     ]
+>
+>
+>     to-java:
+>     Assignment(var, a, None(), c) ->$[
+>     ...
+>     ]
+>
+>     Thanks for your help!
+>     Best regards,
+>     Hilal
+>     -------------- next part --------------
+>     An HTML attachment was scrubbed...
+>     URL:
+>     <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/8efffd17/attachment-0001.html>
+>
+>     ------------------------------
+>
+>     Message: 2
+>     Date: Mon, 24 Dec 2012 10:39:59 +0100
+>     From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl
+>     <mailto:w.p.vankoppen at student.tudelft.nl>>
+>     To: users at strategoxt.org <mailto:users at strategoxt.org>
+>     Subject: Re: [Stratego Users] Defining Optional Syntax
+>     Message-ID: <50D822EF.2070405 at student.tudelft.nl
+>     <mailto:50D822EF.2070405 at student.tudelft.nl>>
+>     Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+>
+>     Hello Hilal,
+>
+>     You can write 2 rules, but you should take into account that each rule
+>     should excludes the other, such that only one rule can match:
+>     If you use a question mark in the grammar the part of the program will
+>     either parse to a None() or a Some(...).
+>
+>     to-java:
+>     Assignment(var, a, *Some(b)*, c) ->$[
+>     ...
+>     ]
+>
+>     to-java:
+>     Assignment(var, a, None(), c) ->$[
+>     ...
+>     ]
+>
+>
+>
+>     Kind Regards,
+>
+>     Wouter
+>
+>
+>     On 12/24/2012 07:39 AM, Hilal Kevser wrote:
+>     > Hi,
+>     >
+>     > I want to define the following syntax where B is optional, but I
+>     > couldn't be able to write to-java rule in generate.str fie
+>     >
+>     > ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+>     >
+>     > Should I write two rules like below?
+>     >
+>     > to-java:
+>     > Assignment(var, a, b, c) ->$[
+>     > ...
+>     > ]
+>     >
+>     > to-java:
+>     > Assignment(var, a, None(), c) ->$[
+>     > ...
+>     > ]
+>     >
+>     > Thanks for your help!
+>     > Best regards,
+>     > Hilal
+>     >
+>     >
+>     >
+>     >
+>     >
+>     > _______________________________________________
+>     > Users mailing list
+>     > Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>     >
+>     -------------- next part --------------
+>     An HTML attachment was scrubbed...
+>     URL:
+>     <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/11bfcde3/attachment-0001.html>
+>
+>     ------------------------------
+>
+>     _______________________________________________
+>     Users mailing list
+>     Users at strategoxt.org <mailto:Users at strategoxt.org>
+>     https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>     End of Users Digest, Vol 46, Issue 17
+>     *************************************
+>
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>    
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/4dfe4531/attachment-0001.html>
+
+From hilalks at gmail.com  Mon Dec 24 20:06:12 2012
+From: hilalks at gmail.com (Hilal Kevser)
+Date: Mon, 24 Dec 2012 21:06:12 +0200
+Subject: [Stratego Users] Users Digest, Vol 46, Issue 18
+In-Reply-To: <mailman.614.1356353596.17298.users@strategoxt.org>
+References: <mailman.614.1356353596.17298.users@strategoxt.org>
+Message-ID: <CACLuXbJDBY4Jhb5uuq=VUyU9QtpJfz0a4d8CcwEBjV+RrN2wuQ@mail.gmail.com>
+
+Thank you Wouter. I'm new to Stratego, sorry if I ask simple questions but
+I appreciate your help.
+
+I have another problem. I define the following syntax and generation rule.
+
+
+ListOfId "=" "select" -> Stm {cons("Select")}
+{ID ","}+ -> ListOfId {cons("ListOfId")}
+
+to-java:
+Select(var) ->$[
+[var']
+]
+with
+var' := <to-java> var
+
+to-java:
+ListOfId(s*) -> $[
+  [s'*]
+
+     ]
+    with
+      s'* := <to-java> s*
+
+I want to execute following lines, but my to-java rule does not generate
+anything.
+a, b = select
+a = select
+
+Best regards,
+Hilal
+
+
+
+2012/12/24 <users-request at strategoxt.org>
+
+> Send Users mailing list submissions to
+>         users at strategoxt.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> or, via email, send a message with subject or body 'help' to
+>         users-request at strategoxt.org
+>
+> You can reach the person managing the list at
+>         users-owner at strategoxt.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Re: Users Digest, Vol 46, Issue 17 (Hilal Kevser)
+>    2. Re: Users Digest, Vol 46, Issue 17 (Hilal Kevser)
+>    3. Re: Users Digest, Vol 46, Issue 17 (Wouter van Koppen)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Mon, 24 Dec 2012 14:34:34 +0200
+> From: Hilal Kevser <hilalks at gmail.com>
+> To: users at strategoxt.org
+> Subject: Re: [Stratego Users] Users Digest, Vol 46, Issue 17
+> Message-ID:
+>         <
+> CACLuXb+nVcabq0XuaH-5p_C0XthLYG537zwMdu1dsjywt5pToQ at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Thank you Wouter. I want to ask a specific question if you don't mind.
+>
+> Here is my sdf and to-java rules.
+> "replace" generates what I want but "replace a with b" generates nothing.
+> What I miss?
+>
+> "replace" A* -> Stm   {cons("Replace")}
+> ID "with" ID -> A          {cons("A")}
+>
+> to-java:
+> Replace(A(ID1, ID2)) -> $[
+>
+> x([ID1], [ID2]);
+> ]
+>
+> to-java:
+> Replace(None()) -> $[
+>
+> ....
+>
+> ]
+>
+> Thank you!
+> Hilal
+>
+> 2012/12/24 <users-request at strategoxt.org>
+>
+> > Send Users mailing list submissions to
+> >         users at strategoxt.org
+> >
+> > To subscribe or unsubscribe via the World Wide Web, visit
+> >         https://mailman.st.ewi.tudelft.nl/listinfo/users
+> > or, via email, send a message with subject or body 'help' to
+> >         users-request at strategoxt.org
+> >
+> > You can reach the person managing the list at
+> >         users-owner at strategoxt.org
+> >
+> > When replying, please edit your Subject line so it is more specific
+> > than "Re: Contents of Users digest..."
+> >
+> >
+> > Today's Topics:
+> >
+> >    1. Defining Optional Syntax (Hilal Kevser)
+> >    2. Re: Defining Optional Syntax (Wouter van Koppen)
+> >
+> >
+> > ----------------------------------------------------------------------
+> >
+> > Message: 1
+> > Date: Mon, 24 Dec 2012 08:39:06 +0200
+> > From: Hilal Kevser <hilalks at gmail.com>
+> > To: users at strategoxt.org
+> > Subject: [Stratego Users] Defining Optional Syntax
+> > Message-ID:
+> >         <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=
+> > jPLg at mail.gmail.com>
+> > Content-Type: text/plain; charset="iso-8859-1"
+> >
+> > Hi,
+> >
+> > I want to define the following syntax where B is optional, but I couldn't
+> > be able to write to-java rule in generate.str fie
+> >
+> > ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+> >
+> > Should I write two rules like below?
+> >
+> > to-java:
+> > Assignment(var, a, b, c) ->$[
+> > ...
+> > ]
+> >
+> >
+> > to-java:
+> > Assignment(var, a, None(), c) ->$[
+> > ...
+> > ]
+> >
+> > Thanks for your help!
+> > Best regards,
+> > Hilal
+> > -------------- next part --------------
+> > An HTML attachment was scrubbed...
+> > URL: <
+> >
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/8efffd17/attachment-0001.html
+> > >
+> >
+> > ------------------------------
+> >
+> > Message: 2
+> > Date: Mon, 24 Dec 2012 10:39:59 +0100
+> > From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl>
+> > To: users at strategoxt.org
+> > Subject: Re: [Stratego Users] Defining Optional Syntax
+> > Message-ID: <50D822EF.2070405 at student.tudelft.nl>
+> > Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+> >
+> > Hello Hilal,
+> >
+> > You can write 2 rules, but you should take into account that each rule
+> > should excludes the other, such that only one rule can match:
+> > If you use a question mark in the grammar the part of the program will
+> > either parse to a None() or a Some(...).
+> >
+> > to-java:
+> > Assignment(var, a, *Some(b)*, c) ->$[
+> > ...
+> > ]
+> >
+> > to-java:
+> > Assignment(var, a, None(), c) ->$[
+> > ...
+> > ]
+> >
+> >
+> >
+> > Kind Regards,
+> >
+> > Wouter
+> >
+> >
+> > On 12/24/2012 07:39 AM, Hilal Kevser wrote:
+> > > Hi,
+> > >
+> > > I want to define the following syntax where B is optional, but I
+> > > couldn't be able to write to-java rule in generate.str fie
+> > >
+> > > ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+> > >
+> > > Should I write two rules like below?
+> > >
+> > > to-java:
+> > > Assignment(var, a, b, c) ->$[
+> > > ...
+> > > ]
+> > >
+> > > to-java:
+> > > Assignment(var, a, None(), c) ->$[
+> > > ...
+> > > ]
+> > >
+> > > Thanks for your help!
+> > > Best regards,
+> > > Hilal
+> > >
+> > >
+> > >
+> > >
+> > >
+> > > _______________________________________________
+> > > Users mailing list
+> > > Users at strategoxt.org
+> > > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> > >
+> > -------------- next part --------------
+> > An HTML attachment was scrubbed...
+> > URL: <
+> >
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/11bfcde3/attachment-0001.html
+> > >
+> >
+> > ------------------------------
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> > End of Users Digest, Vol 46, Issue 17
+> > *************************************
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/c678c7a9/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Mon, 24 Dec 2012 14:37:33 +0200
+> From: Hilal Kevser <hilalks at gmail.com>
+> To: users at strategoxt.org
+> Subject: Re: [Stratego Users] Users Digest, Vol 46, Issue 17
+> Message-ID:
+>         <
+> CACLuXb+K2isULY5WqTKnjyURmEyPKO0mXeFzAk5U-L07h_hK_g at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Edit: My SDF contains"replace" A?, it is not "replace" A*
+>
+> 2012/12/24 Hilal Kevser <hilalks at gmail.com>
+>
+> > "replace" A*
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/16cb5fb1/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 3
+> Date: Mon, 24 Dec 2012 13:53:04 +0100
+> From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl>
+> To: Stratego/XT Users <users at strategoxt.org>
+> Subject: Re: [Stratego Users] Users Digest, Vol 46, Issue 17
+> Message-ID: <50D85030.8090301 at student.tudelft.nl>
+> Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+>
+> I think you should use a map construct in Stratego as you are rewriting
+> an ATerm list:
+>
+> Something like this (not tested it):
+>
+> to-java:
+> Replace(stuff) -> $[
+>
+>          [<map(to-java)>stuff]
+> ]
+>
+> to-java: A(ID1, ID2) -> $[x([ID1], [ID2]);
+> ]
+>
+> You can omit the second rule as the empty list is also handled by the
+> first rule.
+>
+>
+>
+> Kind Regards,
+>
+> Wouter
+>
+>
+> On 12/24/2012 01:34 PM, Hilal Kevser wrote:
+> > Thank you Wouter. I want to ask a specific question if you don't mind.
+> >
+> > Here is my sdf and to-java rules.
+> > "replace" generates what I want but "replace a with b" generates
+> > nothing. What I miss?
+> >
+> > "replace" A* -> Stm {cons("Replace")}
+> > ID "with" ID -> A          {cons("A")}
+> >
+> > to-java:
+> > Replace(A(ID1, ID2)) -> $[
+> >
+> > x([ID1], [ID2]);
+> > ]
+> >
+> > to-java:
+> > Replace(None()) -> $[
+> >
+> > ....
+> >
+> > ]
+> >
+> > Thank you!
+> > Hilal
+> >
+> > 2012/12/24 <users-request at strategoxt.org
+> > <mailto:users-request at strategoxt.org>>
+> >
+> >     Send Users mailing list submissions to
+> >     users at strategoxt.org <mailto:users at strategoxt.org>
+> >
+> >     To subscribe or unsubscribe via the World Wide Web, visit
+> >     https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >     or, via email, send a message with subject or body 'help' to
+> >     users-request at strategoxt.org <mailto:users-request at strategoxt.org>
+> >
+> >     You can reach the person managing the list at
+> >     users-owner at strategoxt.org <mailto:users-owner at strategoxt.org>
+> >
+> >     When replying, please edit your Subject line so it is more specific
+> >     than "Re: Contents of Users digest..."
+> >
+> >
+> >     Today's Topics:
+> >
+> >        1. Defining Optional Syntax (Hilal Kevser)
+> >        2. Re: Defining Optional Syntax (Wouter van Koppen)
+> >
+> >
+> >
+> ----------------------------------------------------------------------
+> >
+> >     Message: 1
+> >     Date: Mon, 24 Dec 2012 08:39:06 +0200
+> >     From: Hilal Kevser <hilalks at gmail.com <mailto:hilalks at gmail.com>>
+> >     To: users at strategoxt.org <mailto:users at strategoxt.org>
+> >     Subject: [Stratego Users] Defining Optional Syntax
+> >     Message-ID:
+> >     <CACLuXb++Bfmnew2PkVOkcaZ5aAfpaWQk8vSc-3uq0O=SG=jPLg at mail.gmail.com<mailto:
+> jPLg at mail.gmail.com>>
+> >     Content-Type: text/plain; charset="iso-8859-1"
+> >
+> >     Hi,
+> >
+> >     I want to define the following syntax where B is optional, but I
+> >     couldn't
+> >     be able to write to-java rule in generate.str fie
+> >
+> >     ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+> >
+> >     Should I write two rules like below?
+> >
+> >     to-java:
+> >     Assignment(var, a, b, c) ->$[
+> >     ...
+> >     ]
+> >
+> >
+> >     to-java:
+> >     Assignment(var, a, None(), c) ->$[
+> >     ...
+> >     ]
+> >
+> >     Thanks for your help!
+> >     Best regards,
+> >     Hilal
+> >     -------------- next part --------------
+> >     An HTML attachment was scrubbed...
+> >     URL:
+> >     <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/8efffd17/attachment-0001.html
+> >
+> >
+> >     ------------------------------
+> >
+> >     Message: 2
+> >     Date: Mon, 24 Dec 2012 10:39:59 +0100
+> >     From: Wouter van Koppen <w.p.vankoppen at student.tudelft.nl
+> >     <mailto:w.p.vankoppen at student.tudelft.nl>>
+> >     To: users at strategoxt.org <mailto:users at strategoxt.org>
+> >     Subject: Re: [Stratego Users] Defining Optional Syntax
+> >     Message-ID: <50D822EF.2070405 at student.tudelft.nl
+> >     <mailto:50D822EF.2070405 at student.tudelft.nl>>
+> >     Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+> >
+> >     Hello Hilal,
+> >
+> >     You can write 2 rules, but you should take into account that each
+> rule
+> >     should excludes the other, such that only one rule can match:
+> >     If you use a question mark in the grammar the part of the program
+> will
+> >     either parse to a None() or a Some(...).
+> >
+> >     to-java:
+> >     Assignment(var, a, *Some(b)*, c) ->$[
+> >     ...
+> >     ]
+> >
+> >     to-java:
+> >     Assignment(var, a, None(), c) ->$[
+> >     ...
+> >     ]
+> >
+> >
+> >
+> >     Kind Regards,
+> >
+> >     Wouter
+> >
+> >
+> >     On 12/24/2012 07:39 AM, Hilal Kevser wrote:
+> >     > Hi,
+> >     >
+> >     > I want to define the following syntax where B is optional, but I
+> >     > couldn't be able to write to-java rule in generate.str fie
+> >     >
+> >     > ID        "="  A   B?  C      -> Stm {cons("Assignment")}
+> >     >
+> >     > Should I write two rules like below?
+> >     >
+> >     > to-java:
+> >     > Assignment(var, a, b, c) ->$[
+> >     > ...
+> >     > ]
+> >     >
+> >     > to-java:
+> >     > Assignment(var, a, None(), c) ->$[
+> >     > ...
+> >     > ]
+> >     >
+> >     > Thanks for your help!
+> >     > Best regards,
+> >     > Hilal
+> >     >
+> >     >
+> >     >
+> >     >
+> >     >
+> >     > _______________________________________________
+> >     > Users mailing list
+> >     > Users at strategoxt.org <mailto:Users at strategoxt.org>
+> >     > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >     >
+> >     -------------- next part --------------
+> >     An HTML attachment was scrubbed...
+> >     URL:
+> >     <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/11bfcde3/attachment-0001.html
+> >
+> >
+> >     ------------------------------
+> >
+> >     _______________________________________________
+> >     Users mailing list
+> >     Users at strategoxt.org <mailto:Users at strategoxt.org>
+> >     https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> >
+> >     End of Users Digest, Vol 46, Issue 17
+> >     *************************************
+> >
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/4dfe4531/attachment.html
+> >
+>
+> ------------------------------
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+> End of Users Digest, Vol 46, Issue 18
+> *************************************
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121224/fdc5c200/attachment-0001.html>
+
+From ciraci at gmail.com  Tue Dec 25 23:52:04 2012
+From: ciraci at gmail.com (Selim Ciraci)
+Date: Tue, 25 Dec 2012 14:52:04 -0800
+Subject: [Stratego Users] Calling a java method or c function from a rule
+Message-ID: <003b01cde2f2$76e89750$64b9c5f0$@com>
+
+Hi,
+
+ 
+
+Is there a possibility to call a java method from a rule and use it's return
+values on the rule? I can try to add such an extension but I need some
+guidance on where to modify.
+
+ 
+
+Happy holidays,
+
+Selim Ciraci
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20121225/35620a84/attachment.html>
+
+From sven.stork at oracle.com  Wed Dec 26 18:52:20 2012
+From: sven.stork at oracle.com (Sven Stork)
+Date: Wed, 26 Dec 2012 09:52:20 -0800
+Subject: [Stratego Users] Calling a java method or c function from a rule
+In-Reply-To: <003b01cde2f2$76e89750$64b9c5f0$@com>
+References: <003b01cde2f2$76e89750$64b9c5f0$@com>
+Message-ID: <03C7C127-2A0B-4C46-96BE-79832A15ED8E@oracle.com>
+
+Hi Selim,
+
+yes there is a way to use external strategies (the default project comes with a 'hello world' example). The following wiki page explains it step-by-step:
+
+http://webdsl.org/spoofaxwiki/wiki/external%20strategies
+
+Cheers,
+   Sven 
+
+On Dec 25, 2012, at 2:52 PM, Selim Ciraci wrote:
+
+> Hi,
+>  
+> Is there a possibility to call a java method from a rule and use it?s return values on the rule? I can try to add such an extension but I need some guidance on where to modify.
+>  
+> Happy holidays,
+> Selim Ciraci
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+

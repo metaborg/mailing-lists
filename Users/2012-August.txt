@@ -1,0 +1,1780 @@
+From mrocklin at cs.uchicago.edu  Fri Aug  3 14:37:26 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Fri, 3 Aug 2012 07:37:26 -0500
+Subject: [Stratego Users] Concrete syntax Hello World
+Message-ID: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+
+I am very new to Spoofax. I'm having difficulty using concrete syntax to
+write rules. I've tried following the instructions I've found online on the
+hello world example formed at startup. This hasn't worked for me so far. I
+do the following:
+
+Fire up Eclipse.
+File : New Project : Spoofax Project - Name it test
+
+Build it, confirm that it runs.
+
+Inside test.str I create a small rule using concrete syntax
+  rl1:
+   |[entity x{y : String}]| -> |[entity x{y : Int}]|
+
+build and receive the following error (this is expected)
+Syntax error, not expected here: |[
+
+I then try to follow the instructions here
+http://yellowgrass.org/issue/Spoofax/55
+
+I add the files
+syntax/Stratego-Test.sdf
+trans/test.meta
+
+I add the following text into trans/test.meta
+Meta([Syntax("Stratego-Test")])
+
+I add the following lines to build.main.xml under build.stratego.arms just
+under --library
+         -I &quot;${include}&quot;
+         -I &quot;${lib}&quot;
+
+I build and receive the following error
+cannot find the parse table for syntax "Stratego-Test" in the include path
+
+I assume I need to fill Stratego-Test with my syntax (is copying ok or
+should I have renamed my file Test.sdf to Stratego-Test.sdf?
+I build and this error goes away but I continue to receive the error
+Syntax error, not expected here: |[
+
+There are other instructions on the mailing list about adding meta-syntax
+to the main target in build.main.xml . This causes more errors. What am I
+missing?
+
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120803/ecd97d39/attachment.html>
+
+From mrocklin at cs.uchicago.edu  Fri Aug  3 14:39:51 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Fri, 3 Aug 2012 07:39:51 -0500
+Subject: [Stratego Users] Non-confluence
+Message-ID: <CAJ8oX-F3Qi2==abmznOaEndHy9Rb-cZWL3NX+hw07Sv06Phm+Q@mail.gmail.com>
+
+I have a set of rewrite rules that are not confluent. I.e. depending on the
+order I can obtain many equally valid results. I would like to see all
+possible outcomes (my rules do terminate). Is there a standard way to do
+this using Stratego?
+
+I'm looking for the equivalent of the `search` command in Maude.
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120803/217e5130/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Aug  7 14:06:12 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 7 Aug 2012 15:06:12 +0300
+Subject: [Stratego Users] Non-confluence
+In-Reply-To: <CAJ8oX-F3Qi2==abmznOaEndHy9Rb-cZWL3NX+hw07Sv06Phm+Q@mail.gmail.com>
+References: <CAJ8oX-F3Qi2==abmznOaEndHy9Rb-cZWL3NX+hw07Sv06Phm+Q@mail.gmail.com>
+Message-ID: <CAFaCHU2yNFnYoeEfYJhryC9PuAh1QmWZ2EQcYsQ2iD44dQ4bjg@mail.gmail.com>
+
+Hi Matthew,
+
+> I have a set of rewrite rules that are not confluent. I.e. depending on the
+> order I can obtain many equally valid results. I would like to see all
+> possible outcomes (my rules do terminate). Is there a standard way to do
+> this using Stratego?
+>
+> I'm looking for the equivalent of the `search` command in Maude.
+
+There is not an out-of-the-box method to do that. You'd need to define
+your own strategy. A basic building block in such a strategy could be
+the following combinators:
+
+  alt(r) = ![<r>] <+ ![]
+  alt(r, s) = ![<r> | <s>] <+ s
+
+which you can use to retrieve all possible one-step rewrites from a
+set of rewrite rules r1, ..., rn:
+
+  one-step = alt(r1, alt(r2, ... alt(rn) ... ))
+
+You can combine that with some traversal strategy. For example,
+
+  alt-td(r) = ![<r>] <+ ![]
+  alt-td(r, s) = ![<oncetd(r)> | <s>] <+ s
+
+would not just apply a rule at the top, but find a redex anywhere in the term.
+
+  one-step-td = alt-td(r1, alt(r2, ... alt(rn) ... ))
+
+To repeatedly apply rules, you'd do something like:
+
+  all-rewrites0 = ![<id>]; repeat(mapconcat(one-step-td))
+
+That is, repeatedly apply one-step-td to the terms in a list and
+concatenate the resulting lists.
+
+Unfortunately, this will eventually return the empty list, since if
+<one-step-td> t returns [], the term t is in normal form. So you need
+to collect normal forms along the way.
+
+  one-step-td-nf :
+     t -> (nfs, ts)
+     where ts := <one-step-td> t;
+              nfs := <if ?[] then [t] else []> ts
+
+  one-step-list :
+    (nfs1, ts1@[_|_]) -> (<concat>(nfs1,nfs2), ts')
+    where (nfs2, ts2) := <map(one-step-nf); unzip; (concat, concat)> ts1
+
+  all-rewrites1 :
+    t -> nfs
+    where (nfs, []) := <repeat(one-step-list)> ([], [t])
+
+This should give you all the normal forms for a set of rewrite rules.
+You may want to experiment with alternative strategies if you also
+want all intermediate terms. In addition, you may want to look into
+the traversal strategy used; oncetd will deterministically find the
+topmost-leftmost redex, hiding other redexes. Depending on your rules,
+you may need a strategy that produces all possible rewrites for a
+single rule as well.
+
+Disclaimer: I did not test any of the code above; consider it an email sketch.
+
+cheers,
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From cbertolini at gmail.com  Thu Aug  9 03:53:29 2012
+From: cbertolini at gmail.com (Cristiano Bertolini)
+Date: Wed, 8 Aug 2012 22:53:29 -0300
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+Message-ID: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+
+Hi All,
+I got some ambiguities in my grammar when I use keywords. I have the
+following type definition:
+
+BasicType		-> Type {cons("basicType")}
+TypeName		-> Type {cons("typeName")}
+"int"			-> BasicType {cons("basicTypeInt")}
+"nat"			-> BasicType {cons("basicTypeNat")}
+?
+Name			-> TypeName {cons("typeNameDef")}
+ID 	 		-> Name {cons("name")}
+?
+
+In the lexical part I defined a list of reject keywords:
+"int"			-> Keyword
+"nat"			-> Keyword
+Keyword		-> ID {reject}
+
+And also some lexical restrictions:
+  lexical restrictions
+    "nat" "int" -/- [A-Za-z0-9\_]	
+
+But my grammar still with ambiguities and I don?t know if I?m missing
+something or there is another way to prioritize the keywords.  Any
+idea?
+
+Regards,
+Cristiano
+
+
+From E.Visser at tudelft.nl  Thu Aug  9 09:09:18 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 9 Aug 2012 09:09:18 +0200
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+In-Reply-To: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+References: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+Message-ID: <CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+
+Hi Cristiano,
+
+I can't spot an ambiguity in this fragment. Perhaps it is somewhere
+else? It would be useful to see an example of an ambiguity, i.e. the
+string that caused it and the ATerm produced by the parser.
+
+cheers,
+
+-- Eelco
+
+On Thu, Aug 9, 2012 at 3:53 AM, Cristiano Bertolini
+<cbertolini at gmail.com> wrote:
+> Hi All,
+> I got some ambiguities in my grammar when I use keywords. I have the
+> following type definition:
+>
+> BasicType               -> Type {cons("basicType")}
+> TypeName                -> Type {cons("typeName")}
+> "int"                   -> BasicType {cons("basicTypeInt")}
+> "nat"                   -> BasicType {cons("basicTypeNat")}
+> ?
+> Name                    -> TypeName {cons("typeNameDef")}
+> ID                      -> Name {cons("name")}
+> ?
+>
+> In the lexical part I defined a list of reject keywords:
+> "int"                   -> Keyword
+> "nat"                   -> Keyword
+> Keyword         -> ID {reject}
+>
+> And also some lexical restrictions:
+>   lexical restrictions
+>     "nat" "int" -/- [A-Za-z0-9\_]
+>
+> But my grammar still with ambiguities and I don?t know if I?m missing
+> something or there is another way to prioritize the keywords.  Any
+> idea?
+>
+> Regards,
+> Cristiano
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From cbertolini at gmail.com  Thu Aug  9 16:38:29 2012
+From: cbertolini at gmail.com (Cristiano Bertolini)
+Date: Thu, 9 Aug 2012 11:38:29 -0300
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+In-Reply-To: <CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+References: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+	<CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+Message-ID: <CALSaTagW-VjQi5cXGVBWE8PdhTLFsP0VrMgzPVFF2s4_6btQcw@mail.gmail.com>
+
+Hi Eelco,
+Consider the follow example:
+
+ types
+    public Byte = nat
+
+The problem is that "nat" is not recognized as a keyword and then it
+can be a basic type or a name type. I expected that "nat" is a basic
+type only because is a keyword, which was defined in the lexical part.
+The generated ATerm for this small example is:
+
+programParagraph(
+  globalDeclaration(
+    typeDeclaration(
+      types(
+        amb(
+          [ typeDef1(Some(qualifierPublic()), "Byte",
+basicType(basicTypeNat()), None())
+          , typeDef1(
+              Some(qualifierPublic())
+            , "Byte"
+            , typeName(typeNameDef(name("at", None())))
+            , None()
+            )
+          ]
+        )
+      , []
+      )
+    )
+  )
+, []
+)
+
+
+I guess I'm doing something wrong when I define the keywords.
+Thanks in advanced,
+Regards,
+Cristiano
+
+
+On Thu, Aug 9, 2012 at 4:09 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+> Hi Cristiano,
+>
+> I can't spot an ambiguity in this fragment. Perhaps it is somewhere
+> else? It would be useful to see an example of an ambiguity, i.e. the
+> string that caused it and the ATerm produced by the parser.
+>
+> cheers,
+>
+> -- Eelco
+>
+> On Thu, Aug 9, 2012 at 3:53 AM, Cristiano Bertolini
+> <cbertolini at gmail.com> wrote:
+>> Hi All,
+>> I got some ambiguities in my grammar when I use keywords. I have the
+>> following type definition:
+>>
+>> BasicType               -> Type {cons("basicType")}
+>> TypeName                -> Type {cons("typeName")}
+>> "int"                   -> BasicType {cons("basicTypeInt")}
+>> "nat"                   -> BasicType {cons("basicTypeNat")}
+>> ?
+>> Name                    -> TypeName {cons("typeNameDef")}
+>> ID                      -> Name {cons("name")}
+>> ?
+>>
+>> In the lexical part I defined a list of reject keywords:
+>> "int"                   -> Keyword
+>> "nat"                   -> Keyword
+>> Keyword         -> ID {reject}
+>>
+>> And also some lexical restrictions:
+>>   lexical restrictions
+>>     "nat" "int" -/- [A-Za-z0-9\_]
+>>
+>> But my grammar still with ambiguities and I don?t know if I?m missing
+>> something or there is another way to prioritize the keywords.  Any
+>> idea?
+>>
+>> Regards,
+>> Cristiano
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From sumsel2000-mailinglist at yahoo.de  Thu Aug  9 17:16:16 2012
+From: sumsel2000-mailinglist at yahoo.de (Daniel)
+Date: Thu, 09 Aug 2012 17:16:16 +0200
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+In-Reply-To: <CALSaTagW-VjQi5cXGVBWE8PdhTLFsP0VrMgzPVFF2s4_6btQcw@mail.gmail.com>
+References: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+	<CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+	<CALSaTagW-VjQi5cXGVBWE8PdhTLFsP0VrMgzPVFF2s4_6btQcw@mail.gmail.com>
+Message-ID: <5023D440.4030704@yahoo.de>
+
+Hi Cristiano,
+
+when I had a look at your example ATerm I noticed that in the second 
+case of the ambiguity the "n" of "nat" was not part of name(...).
+
+I would guess, that the rule which produces the ATerm types(...) is a 
+context-free rule R. As a consequence of this there are automatically 
+inserted <LAYOUT?-CF> between all terms in the body of R. Perhaps you 
+have defined n instead of \n as a LAYOUT character. This would explain 
+the ambiguity: in the first case "n" is part of "nat" and in the second 
+case it is recognized as LAYOUT.
+
+Regards
+Daniel
+
+Am 09.08.2012 16:38, schrieb Cristiano Bertolini:
+> Hi Eelco,
+> Consider the follow example:
+>
+>   types
+>      public Byte = nat
+>
+> The problem is that "nat" is not recognized as a keyword and then it
+> can be a basic type or a name type. I expected that "nat" is a basic
+> type only because is a keyword, which was defined in the lexical part.
+> The generated ATerm for this small example is:
+>
+> programParagraph(
+>    globalDeclaration(
+>      typeDeclaration(
+>        types(
+>          amb(
+>            [ typeDef1(Some(qualifierPublic()), "Byte",
+> basicType(basicTypeNat()), None())
+>            , typeDef1(
+>                Some(qualifierPublic())
+>              , "Byte"
+>              , typeName(typeNameDef(name("at", None())))
+>              , None()
+>              )
+>            ]
+>          )
+>        , []
+>        )
+>      )
+>    )
+> , []
+> )
+>
+>
+> I guess I'm doing something wrong when I define the keywords.
+> Thanks in advanced,
+> Regards,
+> Cristiano
+>
+>
+> On Thu, Aug 9, 2012 at 4:09 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>> Hi Cristiano,
+>>
+>> I can't spot an ambiguity in this fragment. Perhaps it is somewhere
+>> else? It would be useful to see an example of an ambiguity, i.e. the
+>> string that caused it and the ATerm produced by the parser.
+>>
+>> cheers,
+>>
+>> -- Eelco
+>>
+>> On Thu, Aug 9, 2012 at 3:53 AM, Cristiano Bertolini
+>> <cbertolini at gmail.com> wrote:
+>>> Hi All,
+>>> I got some ambiguities in my grammar when I use keywords. I have the
+>>> following type definition:
+>>>
+>>> BasicType               -> Type {cons("basicType")}
+>>> TypeName                -> Type {cons("typeName")}
+>>> "int"                   -> BasicType {cons("basicTypeInt")}
+>>> "nat"                   -> BasicType {cons("basicTypeNat")}
+>>> ?
+>>> Name                    -> TypeName {cons("typeNameDef")}
+>>> ID                      -> Name {cons("name")}
+>>> ?
+>>>
+>>> In the lexical part I defined a list of reject keywords:
+>>> "int"                   -> Keyword
+>>> "nat"                   -> Keyword
+>>> Keyword         -> ID {reject}
+>>>
+>>> And also some lexical restrictions:
+>>>    lexical restrictions
+>>>      "nat" "int" -/- [A-Za-z0-9\_]
+>>>
+>>> But my grammar still with ambiguities and I don?t know if I?m missing
+>>> something or there is another way to prioritize the keywords.  Any
+>>> idea?
+>>>
+>>> Regards,
+>>> Cristiano
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>>
+>> --
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+From mrocklin at cs.uchicago.edu  Thu Aug  9 17:35:07 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Thu, 9 Aug 2012 10:35:07 -0500
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+Message-ID: <CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+
+I'm trying to get concrete object syntax to work in a small project. I've
+compiled all of the changes I've made into a commit and posted it to
+Github.
+
+https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+
+I'm getting an error in
+simplify.str<https://github.com/mrocklin/mx/blob/dcb69ac517c88a8cfc106d440207b3b1060675e8/trans/simplify.str>that
+it doesn't like the line `include/mx` in the imports. It seems to not
+like anything that comes after a slash in this file. I've also lost syntax
+highlighting in this file. Perhaps by adding my syntax file I've removed
+the standard one?
+
+My hope is that because all of the changes are clearly shown in the above
+commit it will be easy to locate the error.
+
+Thank you for your time,
+-Matthew
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120809/89b70490/attachment.html>
+
+From cbertolini at gmail.com  Thu Aug  9 18:14:20 2012
+From: cbertolini at gmail.com (Cristiano Bertolini)
+Date: Thu, 9 Aug 2012 13:14:20 -0300
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+In-Reply-To: <5023D440.4030704@yahoo.de>
+References: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+	<CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+	<CALSaTagW-VjQi5cXGVBWE8PdhTLFsP0VrMgzPVFF2s4_6btQcw@mail.gmail.com>
+	<5023D440.4030704@yahoo.de>
+Message-ID: <CALSaTajM8Yn6QC482UcAzOB_c0ebCM8Pd0Wqtrs_bGSXa_adug@mail.gmail.com>
+
+Hi Daniel,
+You are right, the problem was with the layout character. It works now :-)
+Thanks a lot.
+Regards,
+Cristiano
+
+On Thu, Aug 9, 2012 at 12:16 PM, Daniel <sumsel2000-mailinglist at yahoo.de> wrote:
+> Hi Cristiano,
+>
+> when I had a look at your example ATerm I noticed that in the second case of
+> the ambiguity the "n" of "nat" was not part of name(...).
+>
+> I would guess, that the rule which produces the ATerm types(...) is a
+> context-free rule R. As a consequence of this there are automatically
+> inserted <LAYOUT?-CF> between all terms in the body of R. Perhaps you have
+> defined n instead of \n as a LAYOUT character. This would explain the
+> ambiguity: in the first case "n" is part of "nat" and in the second case it
+> is recognized as LAYOUT.
+>
+> Regards
+> Daniel
+>
+> Am 09.08.2012 16:38, schrieb Cristiano Bertolini:
+>
+>> Hi Eelco,
+>> Consider the follow example:
+>>
+>>   types
+>>      public Byte = nat
+>>
+>> The problem is that "nat" is not recognized as a keyword and then it
+>> can be a basic type or a name type. I expected that "nat" is a basic
+>> type only because is a keyword, which was defined in the lexical part.
+>> The generated ATerm for this small example is:
+>>
+>> programParagraph(
+>>    globalDeclaration(
+>>      typeDeclaration(
+>>        types(
+>>          amb(
+>>            [ typeDef1(Some(qualifierPublic()), "Byte",
+>> basicType(basicTypeNat()), None())
+>>            , typeDef1(
+>>                Some(qualifierPublic())
+>>              , "Byte"
+>>              , typeName(typeNameDef(name("at", None())))
+>>              , None()
+>>              )
+>>            ]
+>>          )
+>>        , []
+>>        )
+>>      )
+>>    )
+>> , []
+>> )
+>>
+>>
+>> I guess I'm doing something wrong when I define the keywords.
+>> Thanks in advanced,
+>> Regards,
+>> Cristiano
+>>
+>>
+>> On Thu, Aug 9, 2012 at 4:09 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>>
+>>> Hi Cristiano,
+>>>
+>>> I can't spot an ambiguity in this fragment. Perhaps it is somewhere
+>>> else? It would be useful to see an example of an ambiguity, i.e. the
+>>> string that caused it and the ATerm produced by the parser.
+>>>
+>>> cheers,
+>>>
+>>> -- Eelco
+>>>
+>>> On Thu, Aug 9, 2012 at 3:53 AM, Cristiano Bertolini
+>>> <cbertolini at gmail.com> wrote:
+>>>>
+>>>> Hi All,
+>>>> I got some ambiguities in my grammar when I use keywords. I have the
+>>>> following type definition:
+>>>>
+>>>> BasicType               -> Type {cons("basicType")}
+>>>> TypeName                -> Type {cons("typeName")}
+>>>> "int"                   -> BasicType {cons("basicTypeInt")}
+>>>> "nat"                   -> BasicType {cons("basicTypeNat")}
+>>>> ?
+>>>> Name                    -> TypeName {cons("typeNameDef")}
+>>>> ID                      -> Name {cons("name")}
+>>>> ?
+>>>>
+>>>> In the lexical part I defined a list of reject keywords:
+>>>> "int"                   -> Keyword
+>>>> "nat"                   -> Keyword
+>>>> Keyword         -> ID {reject}
+>>>>
+>>>> And also some lexical restrictions:
+>>>>    lexical restrictions
+>>>>      "nat" "int" -/- [A-Za-z0-9\_]
+>>>>
+>>>> But my grammar still with ambiguities and I don?t know if I?m missing
+>>>> something or there is another way to prioritize the keywords.  Any
+>>>> idea?
+>>>>
+>>>> Regards,
+>>>> Cristiano
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>>
+>>>
+>>> --
+>>>
+>>> Associate Professor at Delft University of Technology
+>>>
+>>> Group:          Software Language Design and Engineering
+>>> Email:          e.visser at tudelft.nl
+>>> Homepage:   http://eelcovisser.org
+>>> Publications: http://researchr.org/profile/eelcovisser
+>>> News:           http://twitter.com/eelcovisser
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+From E.Visser at tudelft.nl  Thu Aug  9 18:23:16 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 9 Aug 2012 18:23:16 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+Message-ID: <CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+
+Hi Matthew,
+
+Looks like you forgot to add the .project file
+
+-- Eelco
+
+On Thu, Aug 9, 2012 at 5:35 PM, Matthew Rocklin
+<mrocklin at cs.uchicago.edu> wrote:
+> I'm trying to get concrete object syntax to work in a small project. I've
+> compiled all of the changes I've made into a commit and posted it to Github.
+>
+> https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+>
+> I'm getting an error in simplify.str that it doesn't like the line
+> `include/mx` in the imports. It seems to not like anything that comes after
+> a slash in this file. I've also lost syntax highlighting in this file.
+> Perhaps by adding my syntax file I've removed the standard one?
+>
+> My hope is that because all of the changes are clearly shown in the above
+> commit it will be easy to locate the error.
+>
+> Thank you for your time,
+> -Matthew
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From mrocklin at cs.uchicago.edu  Thu Aug  9 18:27:16 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Thu, 9 Aug 2012 11:27:16 -0500
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+Message-ID: <CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+
+Added and pushed.
+
+https://github.com/mrocklin/mx/blob/concrete-object-syntax/.project
+On Thu, Aug 9, 2012 at 11:23 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Matthew,
+>
+> Looks like you forgot to add the .project file
+>
+> -- Eelco
+>
+> On Thu, Aug 9, 2012 at 5:35 PM, Matthew Rocklin
+> <mrocklin at cs.uchicago.edu> wrote:
+> > I'm trying to get concrete object syntax to work in a small project. I've
+> > compiled all of the changes I've made into a commit and posted it to
+> Github.
+> >
+> >
+> https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+> >
+> > I'm getting an error in simplify.str that it doesn't like the line
+> > `include/mx` in the imports. It seems to not like anything that comes
+> after
+> > a slash in this file. I've also lost syntax highlighting in this file.
+> > Perhaps by adding my syntax file I've removed the standard one?
+> >
+> > My hope is that because all of the changes are clearly shown in the above
+> > commit it will be easy to locate the error.
+> >
+> > Thank you for your time,
+> > -Matthew
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120809/f0d783fd/attachment.html>
+
+From E.Visser at tudelft.nl  Thu Aug  9 18:30:40 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Thu, 9 Aug 2012 18:30:40 +0200
+Subject: [Stratego Users] Ambiguities in Reserving Keywords
+In-Reply-To: <CALSaTajM8Yn6QC482UcAzOB_c0ebCM8Pd0Wqtrs_bGSXa_adug@mail.gmail.com>
+References: <CALSaTaj=cYTi5Lya0ewidT=EOYy-SYACCjECQpOFp+wDJv+=zw@mail.gmail.com>
+	<CAFaCHU3hk-a++_xq_Byy2YgBQdhaQa1r-gycfxkZS0UrabvKAA@mail.gmail.com>
+	<CALSaTagW-VjQi5cXGVBWE8PdhTLFsP0VrMgzPVFF2s4_6btQcw@mail.gmail.com>
+	<5023D440.4030704@yahoo.de>
+	<CALSaTajM8Yn6QC482UcAzOB_c0ebCM8Pd0Wqtrs_bGSXa_adug@mail.gmail.com>
+Message-ID: <CAFaCHU2PoqW613V4dLZ-9Dk3MzZmYaTWJ2EsGyFHbVh-fN1miw@mail.gmail.com>
+
+Wow, that was a tricky one. Nice catch Daniel.
+
+-- Eelco
+
+On Thu, Aug 9, 2012 at 6:14 PM, Cristiano Bertolini
+<cbertolini at gmail.com> wrote:
+> Hi Daniel,
+> You are right, the problem was with the layout character. It works now :-)
+> Thanks a lot.
+> Regards,
+> Cristiano
+>
+> On Thu, Aug 9, 2012 at 12:16 PM, Daniel <sumsel2000-mailinglist at yahoo.de> wrote:
+>> Hi Cristiano,
+>>
+>> when I had a look at your example ATerm I noticed that in the second case of
+>> the ambiguity the "n" of "nat" was not part of name(...).
+>>
+>> I would guess, that the rule which produces the ATerm types(...) is a
+>> context-free rule R. As a consequence of this there are automatically
+>> inserted <LAYOUT?-CF> between all terms in the body of R. Perhaps you have
+>> defined n instead of \n as a LAYOUT character. This would explain the
+>> ambiguity: in the first case "n" is part of "nat" and in the second case it
+>> is recognized as LAYOUT.
+>>
+>> Regards
+>> Daniel
+>>
+>> Am 09.08.2012 16:38, schrieb Cristiano Bertolini:
+>>
+>>> Hi Eelco,
+>>> Consider the follow example:
+>>>
+>>>   types
+>>>      public Byte = nat
+>>>
+>>> The problem is that "nat" is not recognized as a keyword and then it
+>>> can be a basic type or a name type. I expected that "nat" is a basic
+>>> type only because is a keyword, which was defined in the lexical part.
+>>> The generated ATerm for this small example is:
+>>>
+>>> programParagraph(
+>>>    globalDeclaration(
+>>>      typeDeclaration(
+>>>        types(
+>>>          amb(
+>>>            [ typeDef1(Some(qualifierPublic()), "Byte",
+>>> basicType(basicTypeNat()), None())
+>>>            , typeDef1(
+>>>                Some(qualifierPublic())
+>>>              , "Byte"
+>>>              , typeName(typeNameDef(name("at", None())))
+>>>              , None()
+>>>              )
+>>>            ]
+>>>          )
+>>>        , []
+>>>        )
+>>>      )
+>>>    )
+>>> , []
+>>> )
+>>>
+>>>
+>>> I guess I'm doing something wrong when I define the keywords.
+>>> Thanks in advanced,
+>>> Regards,
+>>> Cristiano
+>>>
+>>>
+>>> On Thu, Aug 9, 2012 at 4:09 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>>>
+>>>> Hi Cristiano,
+>>>>
+>>>> I can't spot an ambiguity in this fragment. Perhaps it is somewhere
+>>>> else? It would be useful to see an example of an ambiguity, i.e. the
+>>>> string that caused it and the ATerm produced by the parser.
+>>>>
+>>>> cheers,
+>>>>
+>>>> -- Eelco
+>>>>
+>>>> On Thu, Aug 9, 2012 at 3:53 AM, Cristiano Bertolini
+>>>> <cbertolini at gmail.com> wrote:
+>>>>>
+>>>>> Hi All,
+>>>>> I got some ambiguities in my grammar when I use keywords. I have the
+>>>>> following type definition:
+>>>>>
+>>>>> BasicType               -> Type {cons("basicType")}
+>>>>> TypeName                -> Type {cons("typeName")}
+>>>>> "int"                   -> BasicType {cons("basicTypeInt")}
+>>>>> "nat"                   -> BasicType {cons("basicTypeNat")}
+>>>>> ?
+>>>>> Name                    -> TypeName {cons("typeNameDef")}
+>>>>> ID                      -> Name {cons("name")}
+>>>>> ?
+>>>>>
+>>>>> In the lexical part I defined a list of reject keywords:
+>>>>> "int"                   -> Keyword
+>>>>> "nat"                   -> Keyword
+>>>>> Keyword         -> ID {reject}
+>>>>>
+>>>>> And also some lexical restrictions:
+>>>>>    lexical restrictions
+>>>>>      "nat" "int" -/- [A-Za-z0-9\_]
+>>>>>
+>>>>> But my grammar still with ambiguities and I don?t know if I?m missing
+>>>>> something or there is another way to prioritize the keywords.  Any
+>>>>> idea?
+>>>>>
+>>>>> Regards,
+>>>>> Cristiano
+>>>>>
+>>>>> _______________________________________________
+>>>>> Users mailing list
+>>>>> Users at strategoxt.org
+>>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> --
+>>>>
+>>>> Associate Professor at Delft University of Technology
+>>>>
+>>>> Group:          Software Language Design and Engineering
+>>>> Email:          e.visser at tudelft.nl
+>>>> Homepage:   http://eelcovisser.org
+>>>> Publications: http://researchr.org/profile/eelcovisser
+>>>> News:           http://twitter.com/eelcovisser
+>>>>
+>>>> _______________________________________________
+>>>> Users mailing list
+>>>> Users at strategoxt.org
+>>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>>>
+>>> _______________________________________________
+>>> Users mailing list
+>>> Users at strategoxt.org
+>>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>>
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+
+From E.Visser at tudelft.nl  Fri Aug 10 00:48:03 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Fri, 10 Aug 2012 00:48:03 +0200
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+Message-ID: <CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+
+Hi Matthew,
+
+There's a couple of more things missing to make the project buildable:
+
+.classpath
+.externalToolBuilders/
+.settings/
+build.generated.xml
+
+-- Eelco
+
+> Added and pushed.
+>
+> https://github.com/mrocklin/mx/blob/concrete-object-syntax/.project
+
+> On Thu, Aug 9, 2012 at 11:23 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+>>
+>> Hi Matthew,
+>>
+>> Looks like you forgot to add the .project file
+>>
+>> -- Eelco
+>>
+>> On Thu, Aug 9, 2012 at 5:35 PM, Matthew Rocklin
+>> <mrocklin at cs.uchicago.edu> wrote:
+>> > I'm trying to get concrete object syntax to work in a small project.
+>> > I've
+>> > compiled all of the changes I've made into a commit and posted it to
+>> > Github.
+>> >
+>> >
+>> > https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+>> >
+>> > I'm getting an error in simplify.str that it doesn't like the line
+>> > `include/mx` in the imports. It seems to not like anything that comes
+>> > after
+>> > a slash in this file. I've also lost syntax highlighting in this file.
+>> > Perhaps by adding my syntax file I've removed the standard one?
+>> >
+>> > My hope is that because all of the changes are clearly shown in the
+>> > above
+>> > commit it will be easy to locate the error.
+>> >
+>> > Thank you for your time,
+>> > -Matthew
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>>
+>>
+>>
+>> --
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+> --
+> Matthew Rocklin
+> University of Chicago
+> Computer Science PhD Student
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From mrocklin at cs.uchicago.edu  Fri Aug 10 00:54:29 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Thu, 9 Aug 2012 22:54:29 +0000
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+Message-ID: <CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+
+Added. Thanks for taking the time.
+
+On Thu, Aug 9, 2012 at 10:48 PM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Matthew,
+>
+> There's a couple of more things missing to make the project buildable:
+>
+> .classpath
+> .externalToolBuilders/
+> .settings/
+> build.generated.xml
+>
+> -- Eelco
+>
+> > Added and pushed.
+> >
+> > https://github.com/mrocklin/mx/blob/concrete-object-syntax/.project
+>
+> > On Thu, Aug 9, 2012 at 11:23 AM, Eelco Visser <E.Visser at tudelft.nl>
+> wrote:
+> >>
+> >> Hi Matthew,
+> >>
+> >> Looks like you forgot to add the .project file
+> >>
+> >> -- Eelco
+> >>
+> >> On Thu, Aug 9, 2012 at 5:35 PM, Matthew Rocklin
+> >> <mrocklin at cs.uchicago.edu> wrote:
+> >> > I'm trying to get concrete object syntax to work in a small project.
+> >> > I've
+> >> > compiled all of the changes I've made into a commit and posted it to
+> >> > Github.
+> >> >
+> >> >
+> >> >
+> https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+> >> >
+> >> > I'm getting an error in simplify.str that it doesn't like the line
+> >> > `include/mx` in the imports. It seems to not like anything that comes
+> >> > after
+> >> > a slash in this file. I've also lost syntax highlighting in this file.
+> >> > Perhaps by adding my syntax file I've removed the standard one?
+> >> >
+> >> > My hope is that because all of the changes are clearly shown in the
+> >> > above
+> >> > commit it will be easy to locate the error.
+> >> >
+> >> > Thank you for your time,
+> >> > -Matthew
+> >> >
+> >> > _______________________________________________
+> >> > Users mailing list
+> >> > Users at strategoxt.org
+> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >> >
+> >>
+> >>
+> >>
+> >> --
+> >>
+> >> Associate Professor at Delft University of Technology
+> >>
+> >> Group:          Software Language Design and Engineering
+> >> Email:          e.visser at tudelft.nl
+> >> Homepage:   http://eelcovisser.org
+> >> Publications: http://researchr.org/profile/eelcovisser
+> >> News:           http://twitter.com/eelcovisser
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >
+> > --
+> > Matthew Rocklin
+> > University of Chicago
+> > Computer Science PhD Student
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120809/4d216482/attachment-0001.html>
+
+From mrocklin at cs.uchicago.edu  Mon Aug 13 14:17:28 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Mon, 13 Aug 2012 07:17:28 -0500
+Subject: [Stratego Users] Broken SVN link for Tiger language repository
+Message-ID: <CAJ8oX-E953XsfYRtqj7TsvRd_D0vc451kT2TDDe1HmYBJebMQA@mail.gmail.com>
+
+I wanted to see some example code for a working Stratego/XT project. I
+decided to checkout the svn repository for the Tiger language. You have
+some links listed here
+http://strategoxt.org/Tiger/DownloadAndInstallation
+
+These links appear to be broken. Is this repository still available
+someplace else?
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+
+
+
+$ svn co https://svn.cs.uu.nl:12443/repos/StrategoXT/trunk/tiger/
+svn: OPTIONS of 'https://svn.cs.uu.nl:12443/repos/StrategoXT/trunk/tiger':
+Could not resolve hostname `svn.cs.uu.nl': No address associated with
+hostname (https://svn.cs.uu.nl:12443)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120813/9cdcc604/attachment.html>
+
+From E.Visser at tudelft.nl  Mon Aug 13 15:24:43 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 13 Aug 2012 16:24:43 +0300
+Subject: [Stratego Users] Broken SVN link for Tiger language repository
+In-Reply-To: <CAJ8oX-E953XsfYRtqj7TsvRd_D0vc451kT2TDDe1HmYBJebMQA@mail.gmail.com>
+References: <CAJ8oX-E953XsfYRtqj7TsvRd_D0vc451kT2TDDe1HmYBJebMQA@mail.gmail.com>
+Message-ID: <CAFaCHU0h2QcCD-mFahAdtfPyzP9oHSHa4o2Yc0eRJMbfZ2z8Lg@mail.gmail.com>
+
+Hi Matthew,
+
+> I wanted to see some example code for a working Stratego/XT project. I
+> decided to checkout the svn repository for the Tiger language. You have some
+> links listed here
+> http://strategoxt.org/Tiger/DownloadAndInstallation
+>
+> These links appear to be broken. Is this repository still available
+> someplace else?
+
+Have a look at these:
+
+  https://svn.strategoxt.org/repos/StrategoXT/tiger/
+  https://svn.strategoxt.org/repos/StrategoXT/tiger-spoofax/
+
+In general, we tend to collect most Spoofax/Stratego related work in
+this big repository:
+
+  https://svn.strategoxt.org/repos/StrategoXT
+
+Feel free to browse around. But note that the tools are under
+development and that not all example projects work with the latest
+version of Spoofax.
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From E.Visser at tudelft.nl  Mon Aug 13 15:26:46 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 13 Aug 2012 16:26:46 +0300
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+Message-ID: <CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+
+Hi Matthew,
+
+The (or at least one) problem is that your Stratego-mx.sdf does not
+actually import the Stratego syntax definition and inject your
+expression syntax as Term's into the Stratego grammar.
+
+I haven't had time yet to fix example so that it does.
+
+cheers,
+
+-- Eelco
+
+>> >> > I'm trying to get concrete object syntax to work in a small project.
+>> >> > I've
+>> >> > compiled all of the changes I've made into a commit and posted it to
+>> >> > Github.
+>> >> >
+>> >> >
+>> >> >
+>> >> > https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+>> >> >
+>> >> > I'm getting an error in simplify.str that it doesn't like the line
+>> >> > `include/mx` in the imports. It seems to not like anything that comes
+>> >> > after
+>> >> > a slash in this file. I've also lost syntax highlighting in this
+>> >> > file.
+>> >> > Perhaps by adding my syntax file I've removed the standard one?
+>> >> >
+>> >> > My hope is that because all of the changes are clearly shown in the
+>> >> > above
+>> >> > commit it will be easy to locate the error.
+>> >> >
+>> >> > Thank you for your time,
+>> >> > -Matthew
+>> >> >
+>> >> > _______________________________________________
+>> >> > Users mailing list
+>> >> > Users at strategoxt.org
+>> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >> >
+>> >>
+>> >>
+>> >>
+>> >> --
+>> >>
+>> >> Associate Professor at Delft University of Technology
+>> >>
+>> >> Group:          Software Language Design and Engineering
+>> >> Email:          e.visser at tudelft.nl
+>> >> Homepage:   http://eelcovisser.org
+>> >> Publications: http://researchr.org/profile/eelcovisser
+>> >> News:           http://twitter.com/eelcovisser
+>> >> _______________________________________________
+>> >> Users mailing list
+>> >> Users at strategoxt.org
+>> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >>
+>> >
+>> >
+>> >
+>> > --
+>> > Matthew Rocklin
+>> > University of Chicago
+>> > Computer Science PhD Student
+>> >
+>> >
+>> > _______________________________________________
+>> > Users mailing list
+>> > Users at strategoxt.org
+>> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+>> >
+>>
+>>
+>>
+>> --
+>>
+>> Associate Professor at Delft University of Technology
+>>
+>> Group:          Software Language Design and Engineering
+>> Email:          e.visser at tudelft.nl
+>> Homepage:   http://eelcovisser.org
+>> Publications: http://researchr.org/profile/eelcovisser
+>> News:           http://twitter.com/eelcovisser
+>> _______________________________________________
+>> Users mailing list
+>> Users at strategoxt.org
+>> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>>
+>
+>
+>
+> --
+> Matthew Rocklin
+> University of Chicago
+> Computer Science PhD Student
+>
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From mrocklin at cs.uchicago.edu  Mon Aug 13 15:36:02 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Mon, 13 Aug 2012 08:36:02 -0500
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+Message-ID: <CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+
+This is a case of a novice (me) attempting to follow instructions without
+understanding what is going on. The solutions that I see to this problem
+are the following
+
+1) More explicit step-by-step instructions than what exist in issue 55 or
+the associated e-mail thread. (perhaps an example project?)
+2) I learn more about what is really happening. Can you point me to
+specific documentation that would give me sufficient understanding so that
+I can solve this problem on my own? I'm going through your manual and
+tutorial. Are there specific sections that I could read that would provide
+sufficient information to solve this problem?
+
+I'll look again at the documentation and see if I can get this to work. If
+I can I'll put up an example repo on github that can hopefully serve as a
+clear example for the future.
+
+On Mon, Aug 13, 2012 at 8:26 AM, Eelco Visser <E.Visser at tudelft.nl> wrote:
+
+> Hi Matthew,
+>
+> The (or at least one) problem is that your Stratego-mx.sdf does not
+> actually import the Stratego syntax definition and inject your
+> expression syntax as Term's into the Stratego grammar.
+>
+> I haven't had time yet to fix example so that it does.
+>
+> cheers,
+>
+> -- Eelco
+>
+> >> >> > I'm trying to get concrete object syntax to work in a small
+> project.
+> >> >> > I've
+> >> >> > compiled all of the changes I've made into a commit and posted it
+> to
+> >> >> > Github.
+> >> >> >
+> >> >> >
+> >> >> >
+> >> >> >
+> https://github.com/mrocklin/mx/commit/dcb69ac517c88a8cfc106d440207b3b1060675e8
+> >> >> >
+> >> >> > I'm getting an error in simplify.str that it doesn't like the line
+> >> >> > `include/mx` in the imports. It seems to not like anything that
+> comes
+> >> >> > after
+> >> >> > a slash in this file. I've also lost syntax highlighting in this
+> >> >> > file.
+> >> >> > Perhaps by adding my syntax file I've removed the standard one?
+> >> >> >
+> >> >> > My hope is that because all of the changes are clearly shown in the
+> >> >> > above
+> >> >> > commit it will be easy to locate the error.
+> >> >> >
+> >> >> > Thank you for your time,
+> >> >> > -Matthew
+> >> >> >
+> >> >> > _______________________________________________
+> >> >> > Users mailing list
+> >> >> > Users at strategoxt.org
+> >> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >> >> >
+> >> >>
+> >> >>
+> >> >>
+> >> >> --
+> >> >>
+> >> >> Associate Professor at Delft University of Technology
+> >> >>
+> >> >> Group:          Software Language Design and Engineering
+> >> >> Email:          e.visser at tudelft.nl
+> >> >> Homepage:   http://eelcovisser.org
+> >> >> Publications: http://researchr.org/profile/eelcovisser
+> >> >> News:           http://twitter.com/eelcovisser
+> >> >> _______________________________________________
+> >> >> Users mailing list
+> >> >> Users at strategoxt.org
+> >> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >> >>
+> >> >
+> >> >
+> >> >
+> >> > --
+> >> > Matthew Rocklin
+> >> > University of Chicago
+> >> > Computer Science PhD Student
+> >> >
+> >> >
+> >> > _______________________________________________
+> >> > Users mailing list
+> >> > Users at strategoxt.org
+> >> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >> >
+> >>
+> >>
+> >>
+> >> --
+> >>
+> >> Associate Professor at Delft University of Technology
+> >>
+> >> Group:          Software Language Design and Engineering
+> >> Email:          e.visser at tudelft.nl
+> >> Homepage:   http://eelcovisser.org
+> >> Publications: http://researchr.org/profile/eelcovisser
+> >> News:           http://twitter.com/eelcovisser
+> >> _______________________________________________
+> >> Users mailing list
+> >> Users at strategoxt.org
+> >> https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >>
+> >
+> >
+> >
+> > --
+> > Matthew Rocklin
+> > University of Chicago
+> > Computer Science PhD Student
+> >
+> >
+> > _______________________________________________
+> > Users mailing list
+> > Users at strategoxt.org
+> > https://mailman.st.ewi.tudelft.nl/listinfo/users
+> >
+>
+>
+>
+> --
+>
+> Associate Professor at Delft University of Technology
+>
+> Group:          Software Language Design and Engineering
+> Email:          e.visser at tudelft.nl
+> Homepage:   http://eelcovisser.org
+> Publications: http://researchr.org/profile/eelcovisser
+> News:           http://twitter.com/eelcovisser
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+>
+
+
+-- 
+Matthew Rocklin <http://matthewrocklin.com>
+University of Chicago
+Computer Science PhD Student
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120813/8f1b07f9/attachment-0001.html>
+
+From E.Visser at tudelft.nl  Mon Aug 13 17:01:19 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Mon, 13 Aug 2012 18:01:19 +0300
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+Message-ID: <CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+
+Hi Matthew,
+
+> This is a case of a novice (me) attempting to follow instructions without
+> understanding what is going on. The solutions that I see to this problem are
+> the following
+>
+> 1) More explicit step-by-step instructions than what exist in issue 55 or
+> the associated e-mail thread. (perhaps an example project?)
+
+Yes. And we need better integration in Spoofax.
+
+> 2) I learn more about what is really happening. Can you point me to specific
+> documentation that would give me sufficient understanding so that I can
+> solve this problem on my own? I'm going through your manual and tutorial.
+> Are there specific sections that I could read that would provide sufficient
+> information to solve this problem?
+
+The GPCE 2002 paper (Meta-Programming with Concrete Object Syntax)
+explains the idea.
+
+    http://researchr.org/publication/Visser02
+
+> I'll look again at the documentation and see if I can get this to work. If I
+> can I'll put up an example repo on github that can hopefully serve as a
+> clear example for the future.
+
+Yes, your expression example should be useful.
+
+-- Eelco
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+
+From mrocklin at cs.uchicago.edu  Tue Aug 14 15:42:03 2012
+From: mrocklin at cs.uchicago.edu (Matthew Rocklin)
+Date: Tue, 14 Aug 2012 08:42:03 -0500
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+Message-ID: <CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+
+>
+> The GPCE 2002 paper (Meta-Programming with Concrete Object Syntax)
+> explains the idea.
+>
+>     http://researchr.org/publication/Visser02
+>
+>
+I took a look at this and now I have a better idea of what is going on.
+Thanks for the link. I'm still not able to structure my project in such a
+way that the relevant str file parses. My Stratego-mx.sdf file now looks
+like this
+https://github.com/mrocklin/mx/blob/concrete-object-syntax/syntax/Stratego-mx.sdf
+
+Which I think is the minimal example in my case.
+
+I still get basic parsing errors with simplify.str though. It still doesn't
+appear to recognize Stratego syntax. Is there a simple working example
+somewhere to which I could refer?
+
+In my ideal world I could look at a simple and intuitive example like
+calculang<https://github.com/mrocklin/mx/blob/concrete-object-syntax/syntax/Stratego-mx.sdf>
+and
+see how this feature is properly used.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://mailman.st.ewi.tudelft.nl/pipermail/users/attachments/20120814/86f5cc67/attachment.html>
+
+From E.Visser at tudelft.nl  Tue Aug 14 16:04:44 2012
+From: E.Visser at tudelft.nl (Eelco Visser)
+Date: Tue, 14 Aug 2012 17:04:44 +0300
+Subject: [Stratego Users] Concrete syntax Hello World
+In-Reply-To: <CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+References: <CAJ8oX-F6aNHEHxO7t1zOdgHx-g=sJVXJyM0zcf2uAxSrKG6dPQ@mail.gmail.com>
+	<CAJ8oX-EQWPz3s5Fri4jBvwNT=q9yghVZc5WG64jw6nheWEQ_SQ@mail.gmail.com>
+	<CAFaCHU2JV-0bPyTo7UcMnoGBQ8-zcKB47_cpj3Vdf-EZcs0_uw@mail.gmail.com>
+	<CAJ8oX-HVQn8uANSO3m-rviSU9j9mZqoC5HMOhhNvfS37d8-uVQ@mail.gmail.com>
+	<CAFaCHU25nScu2zuT6o44HrcvZLhQoR03wL8Bu2D_zQuL0-rtuw@mail.gmail.com>
+	<CAJ8oX-ESXdKv1jaZtJupCZ58Cbfn4f4m23Ak5dTeN3MieKRAUg@mail.gmail.com>
+	<CAFaCHU0FirCGTkqK37GtkyP53wGL6+VZ9dN2DVO49yR1oPyG4A@mail.gmail.com>
+	<CAJ8oX-H3XK3BHjA4QC_pzjCgOzR7vDXPWQrMTU=21MDo6dpgWg@mail.gmail.com>
+	<CAFaCHU3nPET9tj8Nc3c3AAjqROG5t8xuYuSS9ODib4x5czDSiA@mail.gmail.com>
+	<CAJ8oX-EFD7EpfsmnHyYpJk7merOBBe0y-GcgjQWmA4brGB1SGw@mail.gmail.com>
+Message-ID: <CAFaCHU3gyKQ+L8t=U0xLJitQEHsy-+Lam2evJOeMzUzxX3JWyw@mail.gmail.com>
+
+Hi Matthew,
+
+> Is there a simple working example somewhere to which I could refer?
+
+WebDSL uses concrete object syntax (but it is not simple). The syntax
+definition is here:
+
+   https://svn.strategoxt.org/repos/WebDSL/webdsls/trunk/src/org/webdsl/dsl/syntax/
+
+A good starting point is
+
+   https://svn.strategoxt.org/repos/WebDSL/webdsls/trunk/src/org/webdsl/dsl/syntax/StrategoWebDSL.sdf
+
+And some Stratego files that use the syntax:
+
+   https://svn.strategoxt.org/repos/WebDSL/webdsls/trunk/src/org/webdsl/dsl/to-java-servlet/data-validation/
+
+-- Eelco
+
+On Tue, Aug 14, 2012 at 4:42 PM, Matthew Rocklin
+<mrocklin at cs.uchicago.edu> wrote:
+>> The GPCE 2002 paper (Meta-Programming with Concrete Object Syntax)
+>> explains the idea.
+>>
+>>     http://researchr.org/publication/Visser02
+>>
+>
+> I took a look at this and now I have a better idea of what is going on.
+> Thanks for the link. I'm still not able to structure my project in such a
+> way that the relevant str file parses. My Stratego-mx.sdf file now looks
+> like this
+> https://github.com/mrocklin/mx/blob/concrete-object-syntax/syntax/Stratego-mx.sdf
+>
+> Which I think is the minimal example in my case.
+>
+> I still get basic parsing errors with simplify.str though. It still doesn't
+> appear to recognize Stratego syntax. Is there a simple working example
+> somewhere to which I could refer?
+>
+> In my ideal world I could look at a simple and intuitive example like
+> calculang and see how this feature is properly used.
+>
+> _______________________________________________
+> Users mailing list
+> Users at strategoxt.org
+> https://mailman.st.ewi.tudelft.nl/listinfo/users
+>
+
+
+
+-- 
+
+Associate Professor at Delft University of Technology
+
+Group:          Software Language Design and Engineering
+Email:          e.visser at tudelft.nl
+Homepage:   http://eelcovisser.org
+Publications: http://researchr.org/profile/eelcovisser
+News:           http://twitter.com/eelcovisser
+

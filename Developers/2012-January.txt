@@ -1,0 +1,38 @@
+From karltk at strategoxt.org  Wed Jan 18 21:10:33 2012
+From: karltk at strategoxt.org (Karl Trygve Kalleberg)
+Date: Wed, 18 Jan 2012 21:10:33 +0100
+Subject: [Stratego Developers] Building the strategies into the .jar for
+	org.spoofax.interpreter.library.xml
+Message-ID: <CAGxSwVXP3QprdufPrfvPTV6iCfkQWYyr_JGTRzjVW5a=wKDgsA@mail.gmail.com>
+
+Hi Tobi,
+
+as you might have seen from the -commits list, I am in the process of
+breaking the world these days. The next target I've not managed to
+sufficiently destroy yet, is your XML library.
+
+Since I do try to exercise some etiquette in these matters, I was
+wondering if you objected to me breaking your XML library a little
+bit?
+
+Specifically, this is what I want to do:
+
+ 1) Add an Ant file so that all of it, including the Stratego code,
+compiles inside of Eclipse.
+ 2) Build the strategies (.str files) into a .ctree file, and bundle
+this .ctree file inside the resulting .jar.
+ 3) Separate the unit tests from the actual API inside parse-xml-test.str
+ 4) Slap on a license/copyright notice, with your name + an LGPL v2.1
+statement (unless you had another license in mind).
+
+
+
+Cheers,
+
+-- Karl T
+
+PS. I could be convinced to leave your library alone, and even protect
+it from other evil-doers. My fee for this would be reasonable.
+PPS. Given the current economic crisis, I will only be able to accept
+your token contribution in the form of gold-pressed latinum.
+
